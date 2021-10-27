@@ -18,15 +18,19 @@ jobs:
     runs-on: ubuntu-20.04
     steps:
       - uses: actions/checkout@v2
+
+      - name: Prepare tests settings
+        run: |
+          cp .env.tests.dist .env
+
       - name: Set up Docker Buildx
         id: buildx
+
         uses: docker/setup-buildx-action@v1
       - name: Build Docker image
         run: |
           docker-compose build
-      - name: Prepare tests settings
-        run: |
-          cp .env.tests.dist .env
+
       - name: Run tests
         run: |
           docker-compose run --rm django coverage run ./manage.py test
