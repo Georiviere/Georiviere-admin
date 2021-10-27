@@ -39,7 +39,7 @@ RUN  /code/venv/bin/pip install django==2.2.*
 RUN  /code/venv/bin/pip install --no-cache-dir -r /code/requirements.txt
 
 COPY .docker/entrypoint.sh /usr/local/bin/entrypoint.sh
-COPY src /code/src
+COPY src /code/
 
 WORKDIR /code/src
 VOLUME /code/public
