@@ -33,9 +33,12 @@ USER django
 
 RUN python3.6 -m venv /code/venv
 RUN  /code/venv/bin/pip install --no-cache-dir pip setuptools wheel -U
+COPY requirements.txt /code/requirements.txt
+RUN  /code/venv/bin/pip install --no-cache-dir -r /code/requirements.txt
 
 COPY .docker/entrypoint.sh /usr/local/bin/entrypoint.sh
 COPY src /code/src
+
 WORKDIR /code/src
 VOLUME /code/public
 
