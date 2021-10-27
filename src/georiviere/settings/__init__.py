@@ -17,7 +17,7 @@ from georiviere import __version__
 from geotrek import __version__ as __geotrek_version__
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
-BASE_DIR = Path(__file__).resolve().parent.parent.parent
+BASE_DIR = Path(__file__).resolve().parent.parent.parent.parent
 
 PUBLIC_DIR = BASE_DIR / "public"
 PRIVATE_DIR = BASE_DIR / "private"
