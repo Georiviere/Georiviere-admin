@@ -33,4 +33,4 @@ jobs:
 
       - name: Run tests
         run: |
-          docker-compose run --rm django coverage run ./manage.py test
+          docker-compose run --rm web coverage run ./manage.py test
