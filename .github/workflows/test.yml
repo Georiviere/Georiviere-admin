@@ -24,6 +24,9 @@ jobs:
       - name: Build Docker image
         run: |
           docker-compose build
+      - name: Prepare tests settings
+        run: |
+          cp .env.tests.dist .env
       - name: Run tests
         run: |
           docker-compose run --rm django coverage run ./manage.py test

@@ -145,9 +145,9 @@ WSGI_APPLICATION = 'georiviere.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.contrib.gis.db.backends.postgis',
-        'NAME': os.getenv('POSTGRES_DB', 'travis_ci_test'),
-        'USER': os.getenv('POSTGRES_USER', 'travis_ci_test'),
-        'PASSWORD': os.getenv('POSTGRES_PASSWORD', 'travis_ci_test'),
+        'NAME': os.getenv('POSTGRES_DB'),
+        'USER': os.getenv('POSTGRES_USER'),
+        'PASSWORD': os.getenv('POSTGRES_PASSWORD'),
         'HOST': os.getenv('POSTGRES_HOST', 'postgres'),
         'PORT': os.getenv('POSTGRES_PORT', '5432'),
     }
@@ -263,7 +263,3 @@ LAND_BBOX_AREAS_ENABLED = True
 AUTHENT_DATABASE = None
 AUTHENT_TABLENAME = None
 DEFAULT_STRUCTURE_NAME = os.getenv('DEFAULT_STRUCTURE', 'My structure')
-try:
-    from .custom_pnrhj import *  # NOQA
-except ImportError:
-    pass

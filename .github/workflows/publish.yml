@@ -4,19 +4,11 @@ on:
   workflow_run:
     workflows: [ "lint", "test" ]
     branches:
-    types:
-      - completed
-  push:
-    # Publish `master` as Docker `latest` image.
-    branches:
       - master
-
-    # Publish `v1.2.3` tags as releases.
     tags:
       - '*'
-
-  # Run tests for any PRs.
-  pull_request:
+    types:
+      - completed
 
 env:
   REGISTRY: ghcr.io
