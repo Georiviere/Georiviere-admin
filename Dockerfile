@@ -3,9 +3,13 @@ FROM makinacorpus/geodjango:bionic-3.6
 ENV SERVER_NAME localhost
 ENV CONVERSION_HOST convertit
 ENV CAPTURE_HOST screamshotter
+ENV POSTGRES_HOST postgres
+ENV PGPORT 5432
 ENV CACHE 00
 
 RUN apt-get update -qq && apt-get install -y -qq \
+    # manage \
+    netcat \
     # mapentity
     iproute2 \
     # weasyprint
@@ -35,7 +39,7 @@ RUN python3.6 -m venv /code/venv
 RUN  /code/venv/bin/pip install --no-cache-dir pip setuptools wheel -U
 COPY requirements.txt /code/requirements.txt
 # geotrek setup fix : it required django before being installed... TODO: fix it in geotrek setup.py
-RUN  /code/venv/bin/pip install django==2.2.*
+RUN  /code/venv/bin/pip install --no-cache-dir django==2.2.*
 RUN  /code/venv/bin/pip install --no-cache-dir -r /code/requirements.txt
 
 COPY .docker/entrypoint.sh /usr/local/bin/entrypoint.sh

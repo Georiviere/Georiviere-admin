@@ -149,7 +149,7 @@ DATABASES = {
         'USER': os.getenv('POSTGRES_USER'),
         'PASSWORD': os.getenv('POSTGRES_PASSWORD'),
         'HOST': os.getenv('POSTGRES_HOST', 'postgres'),
-        'PORT': os.getenv('POSTGRES_PORT', '5432'),
+        'PORT': os.getenv('PGPORT', '5432'),
     }
 }
 
@@ -221,6 +221,32 @@ LANGUAGES = (
     ('en', 'English'),
     ('fr', 'French'),
 )
+
+MAPENTITY_CONFIG = {
+    'TITLE': TITLE,
+    'ROOT_URL': ROOT_URL,
+    'CONVERSION_SERVER': 'http://{}:{}'.format(os.getenv('CONVERSION_HOST', 'convertit'),
+                                               os.getenv('CONVERSION_PORT', '6543')),
+    'CAPTURE_SERVER': 'http://{}:{}'.format(os.getenv('CAPTURE_HOST', 'screamshotter'),
+                                            os.getenv('CAPTURE_PORT', '8000')),
+    'SENDFILE_HTTP_HEADER': 'X-Accel-Redirect',
+    'GEOJSON_PRECISION': 7,
+    'TEMP_DIR': '/tmp',
+    'MAPENTITY_WEASYPRINT': False,
+    'GPX_FIELD_NAME': 'geom_3d',
+    'GEOJSON_LAYERS_CACHE_BACKEND': 'default',
+    'MAP_STYLES': {
+        'city': {'weight': 4, 'color': '#FF9700', 'opacity': 0.3, 'fillOpacity': 0.0},
+        'district': {'weight': 6, 'color': '#FF9700', 'opacity': 0.3, 'fillOpacity': 0.0, 'dashArray': '12, 12'},
+        'restrictedarea': {'weight': 2, 'color': '#00008B', 'fillColor': '#1E90FF', 'opacity': 0.9, 'fillOpacity': 0.2},
+        'watershed': {'weight': 2, 'color': '#aa0000', 'fillColor': '#aa0000', 'opacity': 0.9, 'fillOpacity': 0.2},
+        'usage': {'weight': 4, 'color': 'lime', 'opacity': 0.5},
+        'morphology': {'weight': 4, 'color': 'brown', 'opacity': 0.5},
+        'status': {'weight': 4, 'color': 'grey', 'opacity': 0.5},
+        'land': {'weight': 4, 'color': 'red', 'opacity': 0.5},
+        'stream': {'weight': 4, 'color': 'red', 'opacity': 0.5},
+    }
+}
 
 LEAFLET_CONFIG = {
     'SRID': 3857,
