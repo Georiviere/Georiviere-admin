@@ -14,7 +14,7 @@ License
 
 ----
 
-.. image:: https://images.parc-haut-jura.fr/upload/images/Logos/2017-02-01_LogoPNR_(JPG).jpg
+.. image:: http://images.parc-haut-jura.fr/upload/images/Logos/2017-02-01_LogoPNR_(JPG).jpg
     :target: https://www.parc-haut-jura.fr/
 
 
