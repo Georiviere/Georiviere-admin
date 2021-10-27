@@ -1,6 +1,11 @@
 name: Docker
 
 on:
+  workflow_run:
+    workflows: [ "test" ]
+    branches:
+    types:
+      - completed
   push:
     # Publish `master` as Docker `latest` image.
     branches:

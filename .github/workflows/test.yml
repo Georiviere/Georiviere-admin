@@ -58,7 +58,3 @@ jobs:
       - name: Run tests
         run: |
           docker-compose run --rm django coverage run ./manage.py test
-#      - name: Upload image
-#        uses: ishworkh/docker-image-artifact-upload@v1
-#        with:
-#          image: "screamshotter_ci:latest"

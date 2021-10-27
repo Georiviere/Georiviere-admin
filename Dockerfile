@@ -34,13 +34,14 @@ USER django
 RUN python3.6 -m venv /code/venv
 RUN  /code/venv/bin/pip install --no-cache-dir pip setuptools wheel -U
 
-COPY . /code/src
+COPY .docker/entrypoint.sh /usr/local/bin/entrypoint.sh
+COPY src /code/src
 WORKDIR /code/src
 VOLUME /code/public
 
 RUN /code/venv/bin/pip3 install --no-cache-dir django>=2.2
 RUN /code/venv/bin/pip3 install --no-cache-dir -r requirements.txt -U
 
-ENTRYPOINT ["/bin/sh", "-e", "/code/src/.docker/entrypoint.sh"]
+ENTRYPOINT ["entrypoint.sh"]
 
 CMD ["gunicorn", "georiviere.wsgi:application", "--workers", "1", "--timeout", "3600", "--bind", "0.0.0.0:8000", "--timeout", "3600"]
