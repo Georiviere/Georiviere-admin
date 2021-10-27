@@ -34,3 +34,7 @@ jobs:
       - name: Run tests
         run: |
           docker-compose run --rm web coverage run ./manage.py test
+
+      - name: Show report
+        run: |
+          docker-compose run --rm web coverage report -m
