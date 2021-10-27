@@ -35,6 +35,7 @@ jobs:
         run: |
           docker-compose run --rm web coverage run ./manage.py test
 
-      - name: Show report
+      - name: Upload report to codecov
         run: |
-          docker-compose run --rm web coverage report -m
+          pip install codecov
+          codecov
