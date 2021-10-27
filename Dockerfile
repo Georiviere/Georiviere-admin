@@ -42,9 +42,6 @@ COPY src /code/src
 WORKDIR /code/src
 VOLUME /code/public
 
-RUN /code/venv/bin/pip3 install --no-cache-dir django>=2.2
-RUN /code/venv/bin/pip3 install --no-cache-dir -r requirements.txt -U
-
 ENTRYPOINT ["entrypoint.sh"]
 
 CMD ["gunicorn", "georiviere.wsgi:application", "--workers", "1", "--timeout", "3600", "--bind", "0.0.0.0:8000", "--timeout", "3600"]
