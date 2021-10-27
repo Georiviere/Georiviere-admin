@@ -1,0 +1,10 @@
+/venv/
+*.pyc
+*.mo
+__pycache__/
+.env
+var/
+.idea
+.coverage
+/public/media/
+!/public/media/.gitempty

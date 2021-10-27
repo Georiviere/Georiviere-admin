@@ -1,0 +1,200 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# Makina Corpus <makina@makina-corpus.com>, 2021.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2021-10-20 10:10+0000\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n > 1);\n"
+
+msgid "Finances and administration"
+msgstr "Finances et administratif"
+
+msgid "Name"
+msgstr "Nom"
+
+msgid "Operation on"
+msgstr "Opération sur"
+
+msgid "Cancel"
+msgstr "Annuler"
+
+msgid "Save changes"
+msgstr "Sauvegarder"
+
+msgid "General information"
+msgstr "Informations générales"
+
+msgid "Stakeholders"
+msgstr "Parties prenantes"
+
+msgid "Financing"
+msgstr "Financements"
+
+msgid "Operations"
+msgstr "Opérations"
+
+msgid "Organism"
+msgstr "Organisme"
+
+msgid "Organisms"
+msgstr "Organismes"
+
+msgid "Label"
+msgstr "Libellé"
+
+msgid "Admin file type"
+msgstr "Type de dossier administratif"
+
+msgid "Admin file types"
+msgstr "Types de dossier administratif"
+
+msgid "Admin file domain"
+msgstr "Domaine de dossier administratif"
+
+msgid "Admin file domains"
+msgstr "Domaines de dossier administratif"
+
+msgid "Description"
+msgstr "Description"
+
+msgid "Begin date"
+msgstr "Date de début"
+
+msgid "End date"
+msgstr "Date de fin"
+
+msgid "Project owners"
+msgstr "Maîtres d'ouvrage"
+
+msgid "Project managers"
+msgstr "Maîtres d'oeuvre"
+
+msgid "Funders"
+msgstr "Financeurs"
+
+msgid "Contractors"
+msgstr "Prestataires"
+
+msgid "Constraints"
+msgstr "Contraintes"
+
+msgid "Specific conditions, etc."
+msgstr "Conditions particulières, etc."
+
+msgid "Global cost"
+msgstr "Coût global"
+
+msgid "External id"
+msgstr "Id externe"
+
+msgid "Administrative file"
+msgstr "Dossier administratif"
+
+msgid "Administrative files"
+msgstr "Dossiers administratif"
+
+msgid "Add a new admin file"
+msgstr "Ajouter un dossier administratif"
+
+msgid "Status"
+msgstr "Statut"
+
+msgid "Estimated cost"
+msgstr "Coût estimé"
+
+msgid "Material cost"
+msgstr "Coût matériel"
+
+msgid "Subcontract cost"
+msgstr "Coût sous-traitance"
+
+msgid "Administrative operation"
+msgstr "Opération du dossier administratif"
+
+msgid "Administrative operations"
+msgstr "Opérations du dossier administratif"
+
+msgid "Amount"
+msgstr "Montant"
+
+msgid "Funding"
+msgstr "Financement"
+
+msgid "Fundings"
+msgstr "Financements"
+
+msgid "Cost of man-day"
+msgstr "Coût jour-homme"
+
+msgid "Active"
+msgstr "Actif"
+
+msgid "Job category"
+msgstr "Catégorie d'emploi"
+
+msgid "Job categories"
+msgstr "Catégories d'emploi"
+
+msgid "Man-days"
+msgstr "Jours-homme"
+
+msgid "Operation"
+msgstr "Opération"
+
+msgid "Man-day"
+msgstr "Jour-homme"
+
+msgid "None"
+msgstr "Aucun(e)"
+
+msgid "Actual cost"
+msgstr "Coût réel"
+
+msgid "Edit costs"
+msgstr "Éditer les coûts"
+
+msgid "Totals"
+msgstr "Totaux"
+
+msgid "Edit"
+msgstr "Éditer"
+
+msgid "No operation is created"
+msgstr "Pas d'opération créée"
+
+msgid "Edit administrative file to add new operations."
+msgstr ""
+"Modifier le dossier administratif pour ajouter des opérations"
+
+msgid "Add an operation"
+msgstr "Ajouter une opération"
+
+msgid "Remove"
+msgstr "Supprimer"
+
+msgid "Add funding"
+msgstr "Ajouter un financement"
+
+msgid "Edit costs for"
+msgstr "Éditer les coûts pour"
+
+msgid "Add manday"
+msgstr "Ajouter des jours-homme"
+
+msgid "Related administrative files"
+msgstr "Dossiers administratif reliés"
+
+msgid "Add a new administrative file"
+msgstr "Ajouter un dossier administratif"

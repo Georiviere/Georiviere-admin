@@ -1,0 +1,123 @@
+{% extends "mapentity/mapentity_detail_attributes.html" %}
+{% load i18n mapentity_tags %}
+
+{% block attributes %}
+    <table class="table-striped table-bordered table">
+        <tr>
+            <th>{{ object|verbose:"name" }}</th>
+            <td>{{ object.name }}</td>
+        </tr>
+        <tr>
+            <th>{{ object|verbose:"knowledge_type" }}</th>
+            <td>{{ object.knowledge_type }}</td>
+        </tr>
+        <tr>
+            <th>{{ object|verbose:"description" }}</th>
+            <td>{{ object.description|linebreaks }}</td>
+        </tr>
+        {% if object.vegetation %}
+        <tr>
+            <th colspan="2">{% trans "Vegetation" %}</th>
+        </tr>
+        <tr>
+            <th>{{ object.vegetation|verbose:"vegetation_type" }}</th>
+            <td> {{ object.vegetation.vegetation_type }}</td>
+        </tr>
+        <tr>
+            <th>{{ object.vegetation|verbose:"state" }}</th>
+            <td> {{ object.vegetation.state|default:"-" }}</td>
+        </tr>
+        <tr>
+            <th>{{ object.vegetation|verbose:"thickness" }}</th>
+            <td> {{ object.vegetation.thickness|default:"-" }}</td>
+        </tr>
+        <tr>
+            <th>{{ object.vegetation|verbose:"strata" }}</th>
+            <td> {{ object.vegetation.strata|default:"-" }}</td>
+        </tr>
+        <tr>
+            <th>{{ object.vegetation|verbose:"age_class_diversity" }}</th>
+            <td> {{ object.vegetation.age_class_diversity|default:"-" }}</td>
+        </tr>
+        <tr>
+            <th>{{ object.vegetation|verbose:"specific_diversity" }}</th>
+            <td> {{ object.vegetation.specific_diversity|default:"-" }}</td>
+        </tr>
+        <tr>
+            <th>{{ object.vegetation|verbose:"other_information" }}</th>
+            <td> {{ object.vegetation.other_information|linebreaks }}</td>
+        </tr>
+        {% elif object.work %}
+        <tr>
+            <th colspan="2">{% trans "Work" %}</th>
+        </tr>
+        <tr>
+            <th>{{ object.work|verbose:"work_type" }}</th>
+            <td> {{ object.work.work_type }}</td>
+        </tr>
+        <tr>
+            <th>{{ object.work|verbose:"material" }}</th>
+            <td> {{ object.work.material }}</td>
+        </tr>
+        <tr>
+            <th>{{ object.work|verbose:"state" }}</th>
+            <td> {{ object.work.state|default:"-" }}</td>
+        </tr>
+        <tr>
+            <th>{{ object.work|verbose:"downstream_bank_effect" }}</th>
+            <td> {{ object.work.downstream_bank_effect|default:"-" }}</td>
+        </tr>
+        <tr>
+            <th>{{ object.work|verbose:"upstream_bank_effect" }}</th>
+            <td> {{ object.work.upstream_bank_effect|default:"-" }}</td>
+        </tr>
+        <tr>
+            <th>{{ object.work|verbose:"downstream_influence" }}</th>
+            <td> {{ object.work.downstream_influence|default:"-" }}</td>
+        </tr>
+        <tr>
+            <th>{{ object.work|verbose:"upstream_influence" }}</th>
+            <td> {{ object.work.upstream_influence|default:"-" }}</td>
+        </tr>
+        <tr>
+            <th>{{ object.work|verbose:"sediment_effect" }}</th>
+            <td> {{ object.work.sediment_effect|default:"-" }}</td>
+        </tr>
+        <tr>
+            <th>{{ object.work|verbose:"fish_continuity_effect" }}</th>
+            <td> {{ object.work.fish_continuity_effect|default:"-" }}</td>
+        </tr>
+        <tr>
+            <th>{{ object.work|verbose:"usage" }}</th>
+            <td> {{ object.work.usage|linebreaks }}</td>
+        </tr>
+        <tr>
+            <th>{{ object.work|verbose:"width" }}</th>
+            <td> {{ object.work.width }}</td>
+        </tr>
+        <tr>
+            <th>{{ object.work|verbose:"height" }}</th>
+            <td> {{ object.work.height }}</td>
+        </tr>
+        <tr>
+            <th>{{ object.work|verbose:"length" }}</th>
+            <td> {{ object.work.length }}</td>
+        </tr>
+        <tr>
+            <th>{{ object.work|verbose:"drop_height" }}</th>
+            <td> {{ object.work.drop_height }}</td>
+        </tr>
+        <tr>
+            <th>{{ object.work|verbose:"filling" }}</th>
+            <td> {{ object.work.filling }}</td>
+        </tr>
+        {% endif %}
+    </table>
+
+    {% if object.followups %}
+    <h3>{% trans "Follow-ups" %}</h3>
+    {% include "knowledge/_followup_table.html" with followup_list=object.followups.all %}
+    {% endif %}
+
+    {{ block.super }}
+{% endblock attributes %}

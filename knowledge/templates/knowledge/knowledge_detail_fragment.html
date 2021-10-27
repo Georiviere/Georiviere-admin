@@ -1,0 +1,21 @@
+{% load i18n mapentity_tags %}
+
+{% if modelname != "knowledge" and modelname != "followup" %}
+<h3>{% trans "Knowledge" %}</h3>
+<table class="table">
+    <tr>
+        <th>{% trans "Knowledges" %}</th>
+        <td>
+            {% if perms.knowledge.knowledge %}
+            <p class="autohide">
+                <a href="{% url 'knowledge:knowledge_add' %}"
+                   class="btn btn-sm btn-success">
+                <i class="bi bi-plus-circle-fill"></i> {% trans "Add a new knowledge" %}</a>
+            </p>
+            {% endif %}
+
+            {% valuelist object.knowledges field='name' %}
+        </td>
+    </tr>
+</table>
+{% endif %}

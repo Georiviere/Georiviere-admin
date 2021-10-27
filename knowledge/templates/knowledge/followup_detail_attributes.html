@@ -1,0 +1,39 @@
+{% extends "mapentity/mapentity_detail_attributes.html" %}
+{% load i18n mapentity_tags %}
+
+{% block attributes %}
+    <table class="table-striped table-bordered table">
+        <tr>
+            <th>{{ object|verbose:"structure" }}</th>
+            <td>{{ object.structure }}</td>
+        </tr>
+        <tr>
+            <th>{{ object|verbose:"name" }}</th>
+            <td>{{ object.name }}</td>
+        </tr>
+        <tr>
+            <th>{{ object|verbose:"date" }}</th>
+            <td>{{ object.date }}</td>
+        </tr>
+        <tr>
+            <th>{{ object|verbose:"followup_type" }}</th>
+            <td>{{ object.followup_type }}</td>
+        </tr>
+        <tr>
+            <th>{{ object|verbose:"description" }}</th>
+            <td>{{ object.description|linebreaks }}</td>
+        </tr>
+        <tr>
+            <th>{% trans "Knowledge" %}</th>
+            <td>{{ object.knowledge_display|safe }}</td>
+        </tr>
+        {% include "mapentity/trackinfo_fragment.html" %}
+    </table>
+
+    {% if object.knowledge %}
+    <h3>{% trans "Other follow-ups on this knowledge" %}</h3>
+    {% include "knowledge/_followup_table.html" with followup_list=object.knowledge.followups.all %}
+    {% endif %}
+
+    {{ block.super }}
+{% endblock attributes %}

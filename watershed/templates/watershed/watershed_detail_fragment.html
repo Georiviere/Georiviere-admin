@@ -1,0 +1,9 @@
+{% load i18n mapentity_tags %}
+
+<h3>{% trans "Watershed" %}</h3>
+<table class="table">
+    <tr>
+        <th>{% trans "Watersheds" %}</th>
+        <td>{% valuelist object.watersheds %}</td>
+    </tr>
+</table>

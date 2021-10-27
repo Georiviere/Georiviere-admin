@@ -1,0 +1,19 @@
+{% load static i18n geojson_tags %}
+<script type="text/javascript">
+    MapEntity.i18n['Streams'] = "{% trans "Streams" %}";
+
+    window.SETTINGS.urls['stream_layer'] = "{% url "river:stream_layer" %}";
+</script>
+<script type="text/javascript" src="{% static "river/js/main.js" %}"></script>
+
+{% if object.topology %}
+    <div hidden="true" id="form_topology">
+        <form method="POST" action="{% url 'river:cut_topology' %}">
+            {% csrf_token %}
+            <input type="submit" class="btn btn-danger" value="{% trans "Cut topology" %}"></input>
+            <input type="hidden" id="topology" name="topology" value="{{object.topology.id}}">
+            <input type="hidden" id="lat" name="lat">
+            <input type="hidden" id="lng" name="lng">
+        </form>
+    </div>
+{% endif %}

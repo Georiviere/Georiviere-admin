@@ -1,0 +1,37 @@
+ /* Enabled controls */
+
+a.leaflet-draw-toolbar-button-enabled, .leaflet-control.enabled a {
+    background-color: #ffa;
+}
+
+.leaflet-control.control-disabled a {
+    cursor: default;
+    background-color: #B4B4B4;
+    color: #bbb;
+}
+
+/* Line editing */
+
+.leaflet-editing-icon.marker-snapped {
+    background-image: none;
+    background-color: yellow;
+}
+
+/* Point topology */
+.marker-point {
+    padding-left: 25px;
+    padding-top: 41px;
+    background-image: url('images/marker-add.png') ;
+    background-repeat: no-repeat;
+    height: 0px !important;
+    width: 0px !important;
+
+}
+
+.marker-point.marker-snapped {
+    background-image: url('images/marker-snap.png');
+}
+
+.pointtopology-control {
+    background-image: url(images/scissor.png);
+}

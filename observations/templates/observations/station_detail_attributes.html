@@ -1,0 +1,86 @@
+{% extends "mapentity/mapentity_detail_attributes.html" %}
+{% load i18n mapentity_tags %}
+
+{% block attributes %}
+    <table class="table-striped table-bordered table">
+        <tr>
+            <th>{{ object|verbose:"code" }}</th>
+            <td>{% if object.station_uri %}
+                    <a href="{{ object.station_uri }}">{{ object.code }}</a>
+                {% else %}
+                    {{ object.code }}
+                {% endif %}
+            </td>
+        </tr>
+        <tr>
+            <th>{{ object|verbose:"structure" }}</th>
+            <td>{{ object.structure }}</td>
+        </tr>
+        <tr>
+            <th>{{ object|verbose:"label" }}</th>
+            <td>{{ object.label }}</td>
+        </tr>
+        <tr>
+            <th>{{ object|verbose:"site_code" }}</th>
+            <td>{{ object.site_code }}</td>
+        </tr>
+        <tr>
+            <th>{{ object|verbose:"station_profiles" }}</th>
+            <td>
+                {% valuelist object.station_profiles.all %}
+            </td>
+        </tr>
+        <tr>
+            <th>{{ object|verbose:"in_service" }}</th>
+            <td>{{ object.in_service|yesno:_("Yes,No,Unknown") }}</td>
+        </tr>
+        <tr>
+            <th>{{ object|verbose:"purpose_code" }}</th>
+            <td>{{ object.purpose_code }}</td>
+        </tr>
+        <tr>
+            <th>{{ object|verbose:"description" }}</th>
+            <td>{{ object.description }}</td>
+        </tr>
+        <tr>
+            <th>{{ object|verbose:"local_influence" }}</th>
+            <td>{{ object.get_local_influence_display }}</td>
+        </tr>
+        <tr>
+            <th>{{ object|verbose:"hardness" }}</th>
+            <td>{{ object.hardness|default:_("Unknown") }}</td>
+        </tr>
+
+        {% include "mapentity/trackinfo_fragment.html" %}
+    </table>
+
+    <h3>{% trans "Tracked parameters" %}</h3>
+    {% if object.parametertracking_set.exists %}
+    <table class="table parametertracking">
+        <tr>
+            <th>{% trans "Label" %}</th>
+            <th>{% trans "Parameter" %}</th>
+            <th>{% trans "Measure frequency" %}</th>
+            <th>{% trans "Transmission frequency" %}</th>
+            <th>{% trans "Data availability" %}</th>
+            <th>{% trans "Measure start date" %}</th>
+            <th>{% trans "Measure end date" %}</th>
+        </tr>
+        {% for parametertracking in object.get_parameters_tracked %}
+            <tr>
+                <td>{{ parametertracking.label }}</td>
+                <td>{{ parametertracking.parameter }}</td>
+                <td>{{ parametertracking.measure_frequency }}</td>
+                <td>{{ parametertracking.transmission_frequency }}</td>
+                <td>{{ parametertracking.get_data_availability_display }}</td>
+                <td>{{ parametertracking.measure_start_date|default_if_none:"-" }}</td>
+                <td>{{ parametertracking.measure_end_date|default_if_none:"-" }}</td>
+            </tr>
+        {% endfor %}
+    </table>
+    {% else %}
+    {% trans "No parameter tracked" %}
+    {% endif %}
+    <p><em>{% trans "Edit station to add parameter to track" %}</em></p>
+    {{ block.super }}
+{% endblock attributes %}

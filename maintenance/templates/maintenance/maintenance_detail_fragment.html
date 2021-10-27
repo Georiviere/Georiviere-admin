@@ -1,0 +1,19 @@
+{% load i18n mapentity_tags %}
+
+{% if modelname != "intervention" %}
+<h3>{% trans "Maintenance" %}</h3>
+<div class="fragment-wrapper">
+    <strong>{% trans "Related interventions" %}</strong>
+    {% if perms.maintenance.intervention %}
+    <p class="autohide">
+        <a href="{% url 'maintenance:intervention_add' %}"
+           class="btn btn-sm btn-success">
+        <i class="bi bi-plus-circle-fill"></i> {% trans "Add a new intervention" %}</a>
+    </p>
+    {% endif %}
+
+    {% with columns="name,intervention_status,date" %}
+        {% valuetable object.interventions.all columns=columns %}
+    {% endwith %}
+</div>
+{% endif %}

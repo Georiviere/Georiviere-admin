@@ -1,0 +1,217 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2021-10-12 09:06+0000\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n > 1);\n"
+
+msgid "Knowledge"
+msgstr "Connaissance"
+
+msgid "Name"
+msgstr "Nom"
+
+msgid "Code"
+msgstr "Code"
+
+msgid "Vegetation details"
+msgstr "Détails végétation"
+
+msgid "Work details"
+msgstr "Détail l'ouvrage"
+
+msgid "Label"
+msgstr "Libellé"
+
+msgid "Knowledge type"
+msgstr "Type de connaissance"
+
+msgid "Knowledge types"
+msgstr "Types de connaissance"
+
+msgid "Age class diversity"
+msgstr "Diversité de classe d'âge"
+
+msgid "Age class diversities"
+msgstr "Diversités de classe d'âge"
+
+msgid "Specific diversity"
+msgstr "Diversité spécifique"
+
+msgid "Specific diversities"
+msgstr "Diversités spécifique"
+
+msgid "Vegetation state"
+msgstr "État de végétation"
+
+msgid "Vegetation states"
+msgstr "États de végétation"
+
+msgid "Vegetation strata"
+msgstr "Strate de végétation"
+
+msgid "Vegetation stratas"
+msgstr "Strates de végétation"
+
+msgid "Vegetation thickness type"
+msgstr "Type d'épaisseur végétation"
+
+msgid "Vegetation thickness types"
+msgstr "Types d'épaisseur de végétation"
+
+msgid "Vegetation type"
+msgstr "Type de végétation"
+
+msgid "Vegetation types"
+msgstr "Types de végétation"
+
+msgid "Work type"
+msgstr "Type d'ouvrage"
+
+msgid "Work types"
+msgstr "Types d'ouvrage"
+
+msgid "Work material"
+msgstr "Matériau"
+
+msgid "Work materials"
+msgstr "Matériaux"
+
+msgid "Work state"
+msgstr "État de l'ouvrage"
+
+msgid "Work states"
+msgstr "États de l'ouvrage"
+
+msgid "Work bank effect"
+msgstr "Impact berge"
+
+msgid "Work bank effects"
+msgstr "Impacts berge"
+
+msgid "Work stream influence"
+msgstr "Influence courant"
+
+msgid "Work stream influences"
+msgstr "Influences courant"
+
+msgid "Work sediment effect"
+msgstr "Impact sédiment de l'ouvrage"
+
+msgid "Work sediment effects"
+msgstr "Impacts sédiment de l'ouvrage"
+
+msgid "Work fish continuity effect"
+msgstr "Impact continuité piscicole"
+
+msgid "Work fish continuity effects"
+msgstr "Impacts continuité piscicole"
+
+msgid "Description"
+msgstr "Description"
+
+msgid "Knowledges"
+msgstr "Connaissances"
+
+msgid "Add a new knowledge"
+msgstr "Ajouter une connaissance"
+
+msgid "Thickness type"
+msgstr "Type d'épaisseur"
+
+msgid "Vegetation Strata"
+msgstr "Strate de végétation"
+
+msgid "Other information"
+msgstr "Autre information"
+
+msgid "Vegetation"
+msgstr "Végétation"
+
+msgid "Vegetations"
+msgstr "Végétation"
+
+msgid "Downstream bank effect"
+msgstr "Impact berge aval"
+
+msgid "Upstream bank effect"
+msgstr "Impact berge amont"
+
+msgid "Downstream influence"
+msgstr "Influence aval"
+
+msgid "Upstream influence"
+msgstr "Influence amont"
+
+msgid "Sediment effect"
+msgstr "Impact sédiment"
+
+msgid "Fish Continuity effect"
+msgstr "Impact continuité piscicole"
+
+msgid "Usage"
+msgstr "Usage"
+
+msgid "Width"
+msgstr "Largeur"
+
+msgid "Height"
+msgstr "Hauteur"
+
+msgid "Length"
+msgstr "Longueur"
+
+msgid "Drop height"
+msgstr "Hauteur de chute"
+
+msgid "Pit height"
+msgstr "Profondeur de fosse appel"
+
+msgid "Work"
+msgstr "Ouvrage"
+
+msgid "Works"
+msgstr "Ouvrages"
+
+msgid "Follow-up type"
+msgstr "Type de suivi"
+
+msgid "Follow-up types"
+msgstr "Types de suivi"
+
+msgid "Date"
+msgstr "Date"
+
+msgid "Measure frequency"
+msgstr "Fréquence des relevés"
+
+msgid "Follow-up"
+msgstr "Suivi"
+
+msgid "Follow-ups"
+msgstr "Suivis"
+
+msgid "Add a new follow-up"
+msgstr "Ajouter un suivi"
+
+msgid "Results"
+msgstr "Résultats"
+
+msgid "Other follow-ups on this knowledge"
+msgstr "Autres suivis sur cet objet connaissance"
+
+#~ msgid "Bank effect"
+#~ msgstr "Impact berge"

@@ -1,0 +1,29 @@
+{% load static geojson_tags %}
+
+<script src="{% static "js/leaflet-ant-path.min.js" %}"></script>
+
+<script type="text/javascript">
+    $(window).on('detailmap:ready', function (e, data) {
+        var geom = {{object.geom|geojsonfeature|safe}};
+
+        var map = data.map;
+
+        var geojson = geom.geometry.coordinates.map(item => item.reverse());
+
+        var antPolyline = L.polyline.antPath(geojson, {
+            "delay": 3000,
+            "dashArray": [
+                10,
+                20,
+            ],
+            "weight": 5,
+            "color": "#0000FF",
+            "pulseColor": "#FFFFFF",
+            "paused": false,
+
+        });
+        antPolyline.addTo(map);
+        antPolyline.bringToFront();
+        map.removeLayer(data.layer);
+    });
+</script>

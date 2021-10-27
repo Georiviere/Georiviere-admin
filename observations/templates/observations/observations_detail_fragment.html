@@ -1,0 +1,21 @@
+{% load i18n mapentity_tags %}
+
+{% if modelname != "station" %}
+<h3>{% trans "Stations" %}</h3>
+<table class="table">
+    <tr>
+        <th>{% trans "Stations" %}</th>
+        <td>
+            {% if perms.observations.station %}
+            <p class="autohide">
+                <a href="{% url 'observations:station_add' %}"
+                   class="btn btn-sm btn-success">
+                <i class="bi bi-plus-circle-fill"></i> {% trans "Add a new station" %}</a>
+            </p>
+            {% endif %}
+
+            {% valuelist object.stations field='label' %}
+        </td>
+    </tr>
+</table>
+{% endif %}

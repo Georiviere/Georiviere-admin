@@ -1,0 +1,23 @@
+{% load i18n mapentity_tags %}
+
+{% if modelname != "proceeding" %}
+
+<h3>{% trans "Proceeding" %}</h3>
+<table class="table">
+    <tr>
+        <th>{% trans "Proceedings" %}</th>
+        <td>
+            {% if perms.proceeding.proceeding %}
+            <p class="autohide">
+                <a href="{% url 'proceeding:proceeding_add' %}"
+                   class="btn btn-sm btn-success">
+                <i class="bi bi-plus-circle-fill"></i> {% trans "Add a new proceeding" %}</a>
+            </p>
+            {% endif %}
+
+            {% valuelist object.proceedings field='name' %}
+        </td>
+    </tr>
+</table>
+
+{% endif %}

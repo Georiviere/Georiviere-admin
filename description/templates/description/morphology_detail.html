@@ -1,0 +1,82 @@
+{% extends "mapentity/mapentity_detail.html" %}
+{% load i18n mapentity_tags %}
+
+{% block detailspanel %}
+    <table class="table-striped table-bordered table">
+        <tr>
+            <th>{{ morphology|verbose:"structure" }}</th>
+            <td>{{ morphology.topology.stream.structure }}</td>
+        </tr>
+        {% if morphology.topology.qualified %}
+            <tr>
+                <th>{{ morphology|verbose:"good_working_space_left" }}</th>
+                <td>{{ morphology.good_working_space_left|default_if_none:"-" }}</td>
+            </tr>
+            <tr>
+                <th>{{ morphology|verbose:"good_working_space_right" }}</th>
+                <td>{{ morphology.good_working_space_right|default_if_none:"-" }}</td>
+            </tr>
+            <tr>
+                <th>{{ morphology|verbose:"facies_diversity" }}</th>
+                <td>{{ morphology.facies_diversity|default_if_none:"-" }}</td>
+            </tr>
+            <tr>
+                <th>{{ morphology|verbose:"main_flow" }}</th>
+                <td>{{ morphology.main_flow|default_if_none:"-" }}</td>
+            </tr>
+            <tr>
+                <th>{{ morphology|verbose:"secondary_flow" }}</th>
+                <td>{{ morphology.secondary_flow|default_if_none:"-" }}</td>
+            </tr>
+            <tr>
+                <th>{{ morphology|verbose:"granulometric_diversity" }}</th>
+                <td>{{ morphology.granulometric_diversity|default_if_none:"-" }}</td>
+            </tr>
+            <tr>
+                <th>{{ morphology|verbose:"full_edge_height" }}</th>
+                <td>{{ morphology.full_edge_height|default_if_none:"-" }}</td>
+            </tr>
+            <tr>
+                <th>{{ morphology|verbose:"full_edge_width" }}</th>
+                <td>{{ morphology.full_edge_width|default_if_none:"-" }}</td>
+            </tr>
+            <tr>
+                <th>{{ morphology|verbose:"sediment_dynamic" }}</th>
+                <td>{{ morphology.sediment_dynamic|default_if_none:"-" }}</td>
+            </tr>
+            <tr>
+                <th>{{ morphology|verbose:"bank_state_left" }}</th>
+                <td>{{ morphology.bank_state_left|default_if_none:"-" }}</td>
+            </tr>
+            <tr>
+                <th>{{ morphology|verbose:"bank_state_right" }}</th>
+                <td>{{ morphology.bank_state_right|default_if_none:"-" }}</td>
+            </tr>
+            <tr>
+                <th>{{ morphology|verbose:"habitats_diversity" }}</th>
+                <td>{{ morphology.habitats_diversity|default_if_none:"-" }}</td>
+            </tr>
+            <tr>
+                <th>{{ morphology|verbose:"main_habitat" }}</th>
+                <td>{{ morphology.main_habitat|default_if_none:"-" }}</td>
+            </tr>
+            <tr>
+                <th>{{ morphology|verbose:"secondary_habitat" }}</th>
+                <td>{{ morphology.secondary_habitat|default_if_none:"-" }}</td>
+            </tr>
+            <tr>
+                <th>{{ morphology|verbose:"plan_layout" }}</th>
+                <td>{{ morphology.plan_layout|default_if_none:"-" }}</td>
+            </tr>
+            <tr>
+                <th>{{ morphology|verbose:"description" }}</th>
+                <td>{{ morphology.description|linebreaks }}</td>
+            </tr>
+        {% else %}
+            {% include "river/topology_not_qualified.html" %}
+        {% endif %}
+        {% include "mapentity/trackinfo_fragment.html" %}
+        {% include "altimetry/elevationinfo_fragment.html" %}
+    </table>
+    {{ block.super }}
+{% endblock detailspanel %}

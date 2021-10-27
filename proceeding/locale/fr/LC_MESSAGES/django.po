@@ -1,0 +1,67 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2021-09-23 12:43+0000\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n > 1);\n"
+
+msgid "Proceeding"
+msgstr "Contentieux"
+
+msgid "Related events type"
+msgstr "Type des événements reliés"
+
+msgid "Main fields"
+msgstr "Attributs principaux"
+
+msgid "Events"
+msgstr "Événement"
+
+msgid "Name"
+msgstr "Nom"
+
+msgid "Event type"
+msgstr "Type d'événement"
+
+msgid "Event types"
+msgstr "Type d'événements"
+
+msgid "Date"
+msgstr "Date"
+
+msgid "External id"
+msgstr "Identifiant externe"
+
+msgid "Description"
+msgstr "Description"
+
+msgid "Add a new proceeding"
+msgstr "Ajouter un nouveau contentieux"
+
+msgid "Proceedings"
+msgstr "Contentieux"
+
+msgid "Event"
+msgstr "Événement"
+
+msgid "No events"
+msgstr "Pas d'événements"
+
+msgid "Add a line"
+msgstr "Ajouter une ligne "
+
+msgid "Remove"
+msgstr "Supprimer"

@@ -1,0 +1,63 @@
+{% load i18n mapentity_tags %}
+<h3>{% trans "Description" %}</h3>
+<table class="table">
+    {% if modelname != "land" %}
+    <tr>
+        <th>{% trans "Land" %}</th>
+        <td>
+            {% if perms.description.add_land %}
+            <p class="autohide">
+                <a href="{% url 'description:land_add' %}"
+                   class="btn btn-sm btn-success">
+                <i class="bi bi-plus-circle-fill"></i> {% trans "Add a new land" %}</a>
+            </p>
+            {% endif %}
+
+            {% valuelist object.lands field='name' %}
+        </td>
+    </tr>
+    {% endif %}
+
+    {% if modelname != "usage" %}
+    <tr>
+        <th>{% trans "Usage" %}</th>
+        <td>
+            {% if perms.description.add_usage %}
+            <p class="autohide">
+                <a href="{% url 'description:usage_add' %}"
+                   class="btn btn-sm btn-success">
+                <i class="bi bi-plus-circle-fill"></i> {% trans "Add a new usage" %}</a>
+            </p>
+            {% endif %}
+
+            {% valuelist object.usages field='usage_types' %}
+        </td>
+    </tr>
+    {% endif %}
+
+    {% if modelname != "status" %}
+        <tr>
+            <th>{% trans "Status" %}</th>
+            <td>
+            {% if object.status %}
+                {% valuelist object.status field="status_types" %}
+            {% else %}
+                {% valuelist object.statuses field="status_types" %}
+            {% endif %}
+            </td>
+        </tr>
+    {% endif %}
+
+    {% if modelname != "morphology" %}
+        <tr>
+            <th>{% trans "Morphology" %}</th>
+            <td>
+            {% if object.morphology %}
+                {% valuelist object.morphology field="name" %}
+            {% else %}
+                {% valuelist object.morphologies field="name" %}
+            {% endif %}
+            </td>
+        </tr>
+    {% endif %}
+</table>

@@ -1,0 +1,37 @@
+{% load i18n %}
+
+{% if appname == "description" %}
+<div class="btn-group mr-2">
+    <a class="btn btn-light dropdown-toggle" data-toggle="dropdown" href="#">
+        <strong>
+            {% if modelname == 'land' %}{% trans "Lands" %}{% endif %}
+            {% if modelname == 'status' %}{% trans "Status" %}{% endif %}
+            {% if modelname == 'morphology' %}{% trans "Morphologies" %}{% endif %}
+            {% if modelname == 'usage' %}{% trans "Usages" %}{% endif %}
+        </strong>
+    </a>
+    <ul class="dropdown-menu">
+        <li class="dropdown-item">
+            {% if modelname != 'land' %}
+            <a href="{% url 'description:land_list' %}">{% trans "Lands" %}</a>
+            {% endif %}
+        </li>
+        <li class="dropdown-item">
+            {% if modelname != 'status' %}
+            <a href="{% url 'description:status_list' %}">{% trans "Status" %}</a>
+            {% endif %}
+        </li>
+        <li class="dropdown-item">
+            {% if modelname != 'morphology' %}
+            <a href="{% url 'description:morphology_list' %}">{% trans "Morphologies" %}</a>
+            {% endif %}
+        </li>
+        <li class="dropdown-item">
+            {% if modelname != 'usage' %}
+            <a href="{% url 'description:usage_list' %}">{% trans "Usages" %}</a>
+            {% endif %}
+        </li>
+
+    </ul>
+</div>
+{% endif %}

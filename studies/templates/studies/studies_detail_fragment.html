@@ -1,0 +1,23 @@
+{% load i18n mapentity_tags %}
+
+{% if modelname != "study" %}
+
+<h3>{% trans "Studies" %}</h3>
+<table class="table">
+    <tr>
+        <th>{% trans "Studies" %}</th>
+        <td>
+            {% if perms.observations.study %}
+            <p class="autohide">
+                <a href="{% url 'studies:study_add' %}"
+                   class="btn btn-sm btn-success">
+                <i class="bi bi-plus-circle-fill"></i> {% trans "Add a new study" %}</a>
+            </p>
+            {% endif %}
+
+            {% valuelist object.studies field='title' %}
+        </td>
+    </tr>
+</table>
+
+{% endif %}

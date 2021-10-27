@@ -1,0 +1,7 @@
+{% load static i18n %}
+<script type="text/javascript">
+    MapEntity.i18n['Knowledges'] = "{% trans "Knowledges" %}";
+
+    window.SETTINGS.urls['knowledge_layer'] = "{% url "knowledge:knowledge_layer" %}";
+</script>
+<script type="text/javascript" src="{% static "knowledge/js/main.js" %}"></script>

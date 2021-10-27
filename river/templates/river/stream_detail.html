@@ -1,0 +1,19 @@
+{% extends "mapentity/mapentity_detail.html" %}
+
+{% load static geojson_tags %}
+
+{% block mappanel %}
+
+    {{ block.super }}
+
+    {% include "altimetry/altimetric_profile_fragment.html" with profile_url="river:stream_profile_svg" %}
+
+{% endblock mappanel %}
+
+{% block extrabody %}
+
+    {{ block.super }}
+
+    {% include "georiviere/javascript_detail_river.html" with object=object %}
+
+{% endblock extrabody %}

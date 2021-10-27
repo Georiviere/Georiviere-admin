@@ -1,0 +1,202 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2021-09-23 12:43+0000\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+msgid "Description"
+msgstr "Description"
+
+msgid "Status cannot be qualified but without type"
+msgstr "Un statut ne peut pas être qualifié sans type de statut"
+
+msgid "Label"
+msgstr ""
+
+msgid "Plan layout type"
+msgstr "Type de tracé en plan"
+
+msgid "Plan layout types"
+msgstr "Types de tracé en plan"
+
+msgid "Habitat type"
+msgstr "Type d'habitat"
+
+msgid "Habitat types"
+msgstr "Types d'habitat"
+
+msgid "Habitats diversity"
+msgstr "Diversité des habitats"
+
+msgid "Habitats diversities"
+msgstr "Diversités des habitats"
+
+msgid "Bank state"
+msgstr "Etat des berges"
+
+msgid "Bank states"
+msgstr "Etats des berges"
+
+msgid "Sediment dynamic"
+msgstr "Dynamique sédimentaire"
+
+msgid "Sediment dynamics"
+msgstr "Dynamiques sédimentaire"
+
+msgid "Granulometric diversity"
+msgstr "Diversité granulométrique"
+
+msgid "Granulometric diversities"
+msgstr "Diversités granulométrique"
+
+msgid "Facies diversity"
+msgstr "Diversité des faciès"
+
+msgid "Facies diversities"
+msgstr "Diversités des faciès"
+
+msgid "Working space type"
+msgstr "Type d'espace de bon fonctionnement"
+
+msgid "Working space types"
+msgstr "Types d'espace de bon fonctionnement"
+
+msgid "Flow type"
+msgstr "Type d'écoulement"
+
+msgid "Flow types"
+msgstr "Types d'écoulement"
+
+msgid "Left good Working space"
+msgstr "Espace de bon fonctionnement rive gauche"
+
+msgid "Right good Working space"
+msgstr "Espace de bon fonctionnement rive droite"
+
+msgid "Main flow"
+msgstr "Faciès écoulement principale"
+
+msgid "Secondary flow"
+msgstr "Faciès écoulement secondaire"
+
+msgid "Full edge height"
+msgstr "Hauteur plein bord"
+
+msgid "Full edge width"
+msgstr "Largeur plein bord"
+
+msgid "Bank state left"
+msgstr "Etat des berges rive gauche"
+
+msgid "Bank state right"
+msgstr "Etat des berges rive droite"
+
+msgid "Main habitat"
+msgstr "Habitat principal"
+
+msgid "Secondary habitat"
+msgstr "Habitat secondaire"
+
+msgid "Plan layout"
+msgstr "Tracé en plan"
+
+msgid "Morphology"
+msgstr "Morphologie"
+
+msgid "Morphologies"
+msgstr "Morphologies"
+
+msgid "Name"
+msgstr "Nom"
+
+msgid "Add a new morphology"
+msgstr "Ajouter une nouvelle morphologie"
+
+msgid "Status"
+msgstr "Statut"
+
+msgid "Land type"
+msgstr "Type foncier"
+
+msgid "Land types"
+msgstr "Types foncier"
+
+msgid "Owner"
+msgstr "Propriétaire"
+
+msgid "Agreement"
+msgstr "Conventionné"
+
+msgid "Identifier"
+msgstr "Identifiant"
+
+msgid "Land"
+msgstr "Foncier"
+
+msgid "Lands"
+msgstr "Fonciers"
+
+msgid "Usage type"
+msgstr "Type d'usage"
+
+msgid "Usage types"
+msgstr "Types d'usage"
+
+msgid "Usage"
+msgstr "Usage"
+
+msgid "Usages"
+msgstr "Usages"
+
+msgid "Status type"
+msgstr "Type de statut"
+
+msgid "Status types"
+msgstr "Types de statut"
+
+msgid "Your status is a regulation status"
+msgstr "Votre statut est un statut de régulation"
+
+msgid "Regulation"
+msgstr "Régulation"
+
+msgid "Your status is a referencial status"
+msgstr "Votre statut est un statut référentiel"
+
+msgid "Referencial"
+msgstr "Référentiel"
+
+msgid "Statuses"
+msgstr "Statuts"
+
+msgid "Add a new status"
+msgstr "Ajouter un nouveau statut réglementaire"
+
+msgid "Descriptions"
+msgstr "Descriptions"
+
+msgid "Add a new land"
+msgstr "Ajouter un nouveau statut foncier"
+
+msgid "Add a new usage"
+msgstr "Ajouter un nouvel usage"
+
+#~ msgid "Comment"
+#~ msgstr "Commentaire"
+
+#~ msgid "Morphology types"
+#~ msgstr "Types de morphologie"

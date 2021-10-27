@@ -1,0 +1,77 @@
+{% extends "mapentity/mapentity_form.html" %}
+{% load i18n crispy_forms_tags %}
+
+{% block mainform %}
+    <form id="mainform"
+          action="{% if object.pk %}{{ object.get_update_url }}{% else %}{{ object.get_add_url }}{% endif %}"
+          class="form-horizontal" method="POST">
+
+    {% crispy form %}
+
+    <fieldset id="fundingFormset" class="formset">
+        <legend>{% trans "Funders" %}</legend>
+        {{ funding_formset.non_field_errors }}
+        {{ funding_formset.management_form }}
+        {% for funding_form in funding_formset %}
+            <div class="form-row inline controls controls-row {{ funding_formset.prefix }}">
+                {% crispy funding_form %}
+            </div>
+        {% endfor %}
+    </fieldset>
+
+    <fieldset id="adminoperationFormset" class="formset">
+        <legend>{% trans "Operations" %}</legend>
+        {{ adminoperation_formset.non_field_errors }}
+        {{ adminoperation_formset.management_form }}
+        {% for adminoperation_form in adminoperation_formset %}
+            <div class="form-row inline controls controls-row {{ adminoperation_formset.prefix }}">
+                {% crispy adminoperation_form %}
+            </div>
+        {% endfor %}
+    </fieldset>
+
+    </form>
+{% endblock mainform %}
+
+{% block extrabody %}
+    {{ block.super }}
+    <script type="text/javascript">
+
+    function enableChosen(context) {
+        $('.chosen-select', context || null).chosen({width: "95%"});
+    }
+
+    $(window).ready(function () {
+
+        // Initialize formset for admin_operations and funding_set
+        // TODO: do this with crispyforms !
+        $("#adminoperationFormset").detach().appendTo('#adminoperationWrapper');
+        $("#fundingFormset").detach().appendTo('#fundingWrapper');
+
+        $('.form-row.inline.{{ adminoperation_formset.prefix }}').formset({
+            prefix: '{{ adminoperation_formset.prefix }}',
+            keepFieldValues: "[name='csrfmiddlewaretoken']",
+            addCssClass: 'btn btn-primary add-row',
+            formCssClass: 'dynamic-form-operations',
+            deleteCssClass: 'delete-row',
+            addText: '{% trans "Add an operation" %}',
+            deleteText: '{% trans "Remove" %}',
+            added: enableChosen,
+        })
+
+        $('.form-row.inline.{{ funding_formset.prefix }}').formset({
+            prefix: '{{ funding_formset.prefix }}',
+            keepFieldValues: "[name='csrfmiddlewaretoken']",
+            addCssClass: 'btn btn-primary add-row',
+            formCssClass: 'dynamic-form-funding',
+            deleteCssClass: 'delete-row',
+            addText: '{% trans "Add funding" %}',
+            deleteText: '{% trans "Remove" %}',
+        })
+
+        enableChosen();
+    });
+
+    </script>
+
+{% endblock extrabody %}

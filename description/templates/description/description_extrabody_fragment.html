@@ -1,0 +1,14 @@
+{% load static i18n %}
+<script type="text/javascript">
+    MapEntity.i18n['Descriptions'] = "{% trans "Descriptions" %}";
+    MapEntity.i18n['Lands'] = "{% trans "Lands" %}";
+    MapEntity.i18n['Usages'] = "{% trans "Usages" %}";
+    MapEntity.i18n['Morphologies'] = "{% trans "Morphologies" %}";
+    MapEntity.i18n['Statuses'] = "{% trans "Statuses" %}";
+
+    window.SETTINGS.urls['usage_layer'] = "{% url "description:usage_layer" %}";
+    window.SETTINGS.urls['land_layer'] = "{% url "description:land_layer" %}";
+    window.SETTINGS.urls['morphology_layer'] = "{% url "description:morphology_layer" %}";
+    window.SETTINGS.urls['status_layer'] = "{% url "description:status_layer" %}";
+</script>
+<script type="text/javascript" src="{% static "description/main.js" %}"></script>

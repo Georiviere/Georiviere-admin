@@ -1,0 +1,43 @@
+{% extends "mapentity/mapentity_form.html" %}
+{% load i18n crispy_forms_tags mapentity_tags static %}
+
+{% block mainform %}
+    <form id="mainform"
+          action="{% if object.pk %}{{ object.get_update_url }}{% else %}{{ object.get_add_url }}{% endif %}"
+          class="form-horizontal" method="POST">
+
+        {% crispy form %}
+
+        <fieldset class="formset">
+            {{ event_formset.non_field_errors }}
+            {{ event_formset.management_form }}
+            {% for event_form in event_formset %}
+                <div class="form-row inline controls controls-row {{ event_formset.prefix }}">
+                    {% crispy event_form %}
+                </div>
+            {% endfor %}
+        </fieldset>
+    </form>
+{% endblock mainform %}
+
+
+{% block extrabody %}
+    {{ block.super }}
+    <script type="text/javascript">
+
+        $(".clearfix").removeClass("clearfix");
+
+        $(window).ready(function () {
+            $("fieldset.formset").detach().appendTo('#mainform fieldset');
+            $('.form-row.inline.{{ event_formset.prefix }}').formset({
+                prefix: '{{ event_formset.prefix }}',
+                keepFieldValues: "[name='csrfmiddlewaretoken']",
+                addCssClass: 'btn btn-primary add-row',
+                deleteCssClass: 'delete-row',
+                addText: '{% trans "Add a line" %}',
+                deleteText: '{% trans "Remove" %}'
+
+            });
+        });
+    </script>
+{% endblock extrabody %}

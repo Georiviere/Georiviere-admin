@@ -1,0 +1,45 @@
+version: "3"
+services:
+  memcached:
+    image: memcached:1.5-alpine
+
+  convertit:
+    image: makinacorpus/convertit:latest
+
+  screamshotter:
+    image: makinacorpus/screamshotter:v2
+
+  postgres:
+    image: postgis/postgis:10-2.5
+    volumes:
+      - postgres:/var/lib/postgresql/data
+    environment:
+      - POSTGRES_PASSWORD=travis_ci_test
+      - POSTGRES_USER=travis_ci_test
+      - POSTGRES_DB=travis_ci_test
+    ports:
+      - "5432:5432"
+
+  web:
+    image: georiviere:latest
+    build:
+      context: .
+    depends_on:
+      - screamshotter
+      - convertit
+      - postgres
+      - memcached
+    env_file:
+      - .env
+    volumes:
+      - .:/code/src
+    ports:
+      - "8000:8000"
+    command: ./manage.py runserver 0.0.0.0:8000
+    networks:
+      default:
+        aliases:
+          - ${SERVER_NAME}
+
+volumes:
+  postgres:

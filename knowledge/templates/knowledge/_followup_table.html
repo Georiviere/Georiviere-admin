@@ -1,0 +1,16 @@
+{% load i18n %}
+
+<table class="table followups">
+    <tr>
+        <th>{% trans "Name" %}</th>
+        <th>{% trans "Follow-up type" %}</th>
+    </tr>
+    {% for followup in followup_list %}
+    <tr>
+        <td>
+          <a href="{{ followup.get_detail_url }}">{{ followup.name }}</a>
+        </td>
+        <td>{{ followup.followup_type }}</td>
+    </tr>
+    {% endfor %}
+</table>

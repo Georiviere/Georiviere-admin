@@ -1,0 +1,47 @@
+{% extends "mapentity/mapentity_detail_attributes.html" %}
+{% load i18n mapentity_tags %}
+
+{% block attributes %}
+    <table class="table-striped table-bordered table">
+        <tr>
+            <th>{{ object|verbose:"structure" }}</th>
+            <td>{{ object.structure }}</td>
+        </tr>
+        <tr>
+            <th>{{ object|verbose:"name" }}</th>
+            <td>{{ object.name }}</td>
+        </tr>
+        <tr>
+            <th>{{ object|verbose:"date" }}</th>
+            <td>{{ object.date }}</td>
+        </tr>
+        <tr>
+            <th>{{ object|verbose:"intervention_type" }}</th>
+            <td>{{ object.intervention_type }}</td>
+        </tr>
+        <tr>
+            <th>{{ object|verbose:"stake" }}</th>
+            <td>{{ object.stake }}</td>
+        </tr>
+        <tr>
+            <th>{{ object|verbose:"intervention_status" }}</th>
+            <td>{{ object.intervention_status }}</td>
+        </tr>
+        <tr>
+            <th>{% trans 'Disorders' %}</th>
+            <td>
+                {% valuelist object.disorders.all %}
+            </td>
+        </tr>
+        <tr>
+            <th>{{ object|verbose:"description" }}</th>
+            <td>{{ object.description|linebreaks }}</td>
+        </tr>
+        <tr>
+            <th>{% trans "Target" %}</th>
+            <td>{{ object.target_display|safe }}</td>
+        </tr>
+        {% include "mapentity/trackinfo_fragment.html" %}
+    </table>
+    {{ block.super }}
+{% endblock attributes %}

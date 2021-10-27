@@ -1,0 +1,55 @@
+{% extends "mapentity/mapentity_form.html" %}
+{% load i18n crispy_forms_tags mapentity_tags static %}
+
+{% block mainform %}
+    <form id="mainform"
+          action="{% if object.pk %}{{ object.get_update_url }}{% else %}{{ object.get_add_url }}{% endif %}"
+          class="form-horizontal" method="POST">
+
+    {% crispy form %}
+
+    </form>
+
+    <div id="parkedFormsets" class="d-none">
+        <div class="vegetation-form">
+        {% crispy vegetation_form %}
+        </div>
+        <div class="work-form">
+        {% crispy work_form %}
+        </div>
+    </div>
+{% endblock mainform %}
+
+{% block extrabody %}
+    {{ block.super }}
+    <script type="text/javascript">
+    function toggleKnowledgeSpecificFields() {
+        let knowledgeType = $("select#id_knowledge_type").val();
+        if (knowledgeType === "1") {
+            $(".vegetation-form").detach().appendTo("#vegetationFieldset");
+            $(".work-form").detach().appendTo("#parkedFormsets");
+            $("#vegetationFieldset").removeClass("d-none");
+            $("#workFieldset").addClass("d-none");
+        } else if (knowledgeType === "2") {
+            $(".work-form").detach().appendTo("#workFieldset");
+            $(".vegetation-form").detach().appendTo("#parkedFormsets");
+            $("#vegetationFieldset").addClass("d-none");
+            $("#workFieldset").removeClass("d-none");
+        } else {
+            $(".work-form").detach().appendTo("#parkedFormsets");
+            $(".vegetation-form").detach().appendTo("#parkedFormsets");
+            $("#vegetationFieldset").addClass("d-none");
+            $("#workFieldset").addClass("d-none");
+        }
+    }
+
+    $(window).ready(function () {
+        // TODO: do this with crispyforms !
+        toggleKnowledgeSpecificFields();
+
+        $("select#id_knowledge_type").on("change", function() {
+            toggleKnowledgeSpecificFields();
+        });
+    });
+    </script>
+{% endblock extrabody %}

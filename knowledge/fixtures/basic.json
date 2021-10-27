@@ -1,0 +1,401 @@
+[
+{
+    "model": "knowledge.knowledgetype",
+    "pk": 1,
+    "fields": {
+        "label": "Vegetation"
+    }
+},
+{
+    "model": "knowledge.knowledgetype",
+    "pk": 2,
+    "fields": {
+        "label": "Work"
+    }
+},
+{
+    "model": "knowledge.knowledgetype",
+    "pk": 3,
+    "fields": {
+        "label": "Autre"
+    }
+},
+{
+    "model": "knowledge.vegetationageclassdiversity",
+    "pk": 1,
+    "fields": {
+        "label": "Homogène"
+    }
+},
+{
+    "model": "knowledge.vegetationageclassdiversity",
+    "pk": 2,
+    "fields": {
+        "label": "Diversifiée"
+    }
+},
+{
+    "model": "knowledge.vegetationageclassdiversity",
+    "pk": 3,
+    "fields": {
+        "label": "Très diversifiée"
+    }
+},
+{
+    "model": "knowledge.vegetationstate",
+    "pk": 1,
+    "fields": {
+        "label": "Individus sains"
+    }
+},
+{
+    "model": "knowledge.vegetationspecificdiversity",
+    "pk": 1,
+    "fields": {
+        "label": "<5"
+    }
+},
+{
+    "model": "knowledge.vegetationspecificdiversity",
+    "pk": 2,
+    "fields": {
+        "label": "5-10"
+    }
+},
+{
+    "model": "knowledge.vegetationspecificdiversity",
+    "pk": 3,
+    "fields": {
+        "label": ">10"
+    }
+},
+{
+    "model": "knowledge.vegetationstate",
+    "pk": 2,
+    "fields": {
+        "label": "Quelques individus malades"
+    }
+},
+{
+    "model": "knowledge.vegetationstate",
+    "pk": 3,
+    "fields": {
+        "label": "Nombreux individus malades"
+    }
+},
+{
+    "model": "knowledge.vegetationstrata",
+    "pk": 1,
+    "fields": {
+        "label": "Arborée"
+    }
+},
+{
+    "model": "knowledge.vegetationstrata",
+    "pk": 2,
+    "fields": {
+        "label": "Arbustive"
+    }
+},
+{
+    "model": "knowledge.vegetationstrata",
+    "pk": 3,
+    "fields": {
+        "label": "Herbacée"
+    }
+},
+{
+    "model": "knowledge.vegetationthicknesstype",
+    "pk": 1,
+    "fields": {
+        "label": "<5m"
+    }
+},
+{
+    "model": "knowledge.vegetationthicknesstype",
+    "pk": 2,
+    "fields": {
+        "label": "5-10m"
+    }
+},
+{
+    "model": "knowledge.vegetationthicknesstype",
+    "pk": 3,
+    "fields": {
+        "label": "10-30m"
+    }
+},
+{
+    "model": "knowledge.vegetationthicknesstype",
+    "pk": 4,
+    "fields": {
+        "label": "Forêt"
+    }
+},
+{
+    "model": "knowledge.vegetationtype",
+    "pk": 1,
+    "fields": {
+        "label": "Absence"
+    }
+},
+{
+    "model": "knowledge.vegetationtype",
+    "pk": 2,
+    "fields": {
+        "label": "Isolée"
+    }
+},
+{
+    "model": "knowledge.vegetationtype",
+    "pk": 3,
+    "fields": {
+        "label": "Espacée / régulière"
+    }
+},
+{
+    "model": "knowledge.vegetationtype",
+    "pk": 4,
+    "fields": {
+        "label": "Continue"
+    }
+},
+{
+    "model": "knowledge.worktype",
+    "pk": 1,
+    "fields": {
+        "label": "Pont"
+    }
+},
+{
+    "model": "knowledge.worktype",
+    "pk": 2,
+    "fields": {
+        "label": "Barrage"
+    }
+},
+{
+    "model": "knowledge.worktype",
+    "pk": 5,
+    "fields": {
+        "label": "Vannage"
+    }
+},
+{
+    "model": "knowledge.worktype",
+    "pk": 6,
+    "fields": {
+        "label": "Passage busé"
+    }
+},
+{
+    "model": "knowledge.worktype",
+    "pk": 7,
+    "fields": {
+        "label": "Seuil artificiel"
+    }
+},
+{
+    "model": "knowledge.worktype",
+    "pk": 9,
+    "fields": {
+        "label": "Batardeau"
+    }
+},
+{
+    "model": "knowledge.worktype",
+    "pk": 10,
+    "fields": {
+        "label": "Bonde d’étang"
+    }
+},
+{
+    "model": "knowledge.worktype",
+    "pk": 11,
+    "fields": {
+        "label": "Déversoir"
+    }
+},
+{
+    "model": "knowledge.worktype",
+    "pk": 13,
+    "fields": {
+        "label": "Gué"
+    }
+},
+{
+    "model": "knowledge.worktype",
+    "pk": 14,
+    "fields": {
+        "label": "Radier de pont"
+    }
+},
+{
+    "model": "knowledge.workmaterial",
+    "pk": 2,
+    "fields": {
+        "label": "Béton"
+    }
+},
+{
+    "model": "knowledge.workmaterial",
+    "pk": 3,
+    "fields": {
+        "label": "Bois"
+    }
+},
+{
+    "model": "knowledge.workmaterial",
+    "pk": 4,
+    "fields": {
+        "label": "Pierre"
+    }
+},
+{
+    "model": "knowledge.workmaterial",
+    "pk": 5,
+    "fields": {
+        "label": "Acier"
+    }
+},
+{
+    "model": "knowledge.workstate",
+    "pk": 4,
+    "fields": {
+        "label": "Bon"
+    }
+},
+{
+    "model": "knowledge.workstate",
+    "pk": 5,
+    "fields": {
+        "label": "Partiellement détérioré"
+    }
+},
+{
+    "model": "knowledge.workstate",
+    "pk": 6,
+    "fields": {
+        "label": "Détérioré"
+    }
+},
+{
+    "model": "knowledge.workbankeffect",
+    "pk": 1,
+    "fields": {
+        "label": "Érosion amont"
+    }
+},
+{
+    "model": "knowledge.workbankeffect",
+    "pk": 2,
+    "fields": {
+        "label": "Dépôt amont"
+    }
+},
+{
+    "model": "knowledge.workbankeffect",
+    "pk": 3,
+    "fields": {
+        "label": "Érosion aval"
+    }
+},
+{
+    "model": "knowledge.workbankeffect",
+    "pk": 4,
+    "fields": {
+        "label": "Dépôt aval"
+    }
+},
+{
+    "model": "knowledge.workstreaminfluence",
+    "pk": 3,
+    "fields": {
+        "label": "<5m"
+    }
+},
+{
+    "model": "knowledge.workstreaminfluence",
+    "pk": 4,
+    "fields": {
+        "label": "5-10m"
+    }
+},
+{
+    "model": "knowledge.workstreaminfluence",
+    "pk": 5,
+    "fields": {
+        "label": "10-50m"
+    }
+},
+{
+    "model": "knowledge.workstreaminfluence",
+    "pk": 6,
+    "fields": {
+        "label": ">50m"
+    }
+},
+{
+    "model": "knowledge.worksedimenteffect",
+    "pk": 3,
+    "fields": {
+        "label": "Oui"
+    }
+},
+{
+    "model": "knowledge.worksedimenteffect",
+    "pk": 4,
+    "fields": {
+        "label": "Non"
+    }
+},
+{
+    "model": "knowledge.worksedimenteffect",
+    "pk": 5,
+    "fields": {
+        "label": "Partielle"
+    }
+},
+{
+    "model": "knowledge.workfishcontinuityeffect",
+    "pk": 3,
+    "fields": {
+        "label": "0"
+    }
+},
+{
+    "model": "knowledge.workfishcontinuityeffect",
+    "pk": 4,
+    "fields": {
+        "label": "1"
+    }
+},
+{
+    "model": "knowledge.workfishcontinuityeffect",
+    "pk": 5,
+    "fields": {
+        "label": "2"
+    }
+},
+{
+    "model": "knowledge.workfishcontinuityeffect",
+    "pk": 6,
+    "fields": {
+        "label": "3"
+    }
+},
+{
+    "model": "knowledge.workfishcontinuityeffect",
+    "pk": 7,
+    "fields": {
+        "label": "4"
+    }
+},
+{
+    "model": "knowledge.workfishcontinuityeffect",
+    "pk": 8,
+    "fields": {
+        "label": "5"
+    }
+}
+]

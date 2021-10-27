@@ -1,0 +1,8 @@
+{% extends "mapentity/base.html" %}
+{% load static %}
+{% block extrabody %}
+
+    <link rel="stylesheet" href="{% static 'css/style.css' %}" />
+    {{ block.super }}
+    <script type="text/javascript" src="{% url 'javascript-catalog' %}"></script>
+{% endblock %}

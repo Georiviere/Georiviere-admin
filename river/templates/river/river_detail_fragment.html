@@ -1,0 +1,22 @@
+{% load i18n mapentity_tags %}
+
+{% if modelname != "stream" %}
+
+<h3>{% trans "River" %}</h3>
+<table class="table">
+    {% if modelname != "stream" %}
+    <tr>
+        <th>{% trans "Stream" %}</th>
+        <td>
+            {% if object.topology %}
+            <a href="{{ object.topology.stream.get_detail_url }}">{{ object.topology.stream.name }}</a>
+            {% else %}
+            {% valuelist object.streams field='name' %}
+            {% endif %}
+
+        </td>
+    </tr>
+    {% endif %}
+</table>
+
+{% endif %}

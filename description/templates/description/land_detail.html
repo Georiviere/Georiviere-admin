@@ -1,0 +1,26 @@
+{% extends "mapentity/mapentity_detail.html" %}
+{% load i18n mapentity_tags %}
+
+{% block detailspanel %}
+    <table class="table-striped table-bordered table">
+        <tr>
+            <th>{{ land|verbose:"structure" }}</th>
+            <td>{{ land.structure }}</td>
+        </tr>
+        <tr>
+            <th>{{ land|verbose:"land_type" }}</th>
+            <td>{{ land.land_type }}</td>
+        </tr>
+        <tr>
+            <th>{{ land|verbose:"owner" }}</th>
+            <td>{{ land.owner }}</td>
+        </tr>
+        <tr>
+            <th>{{ land|verbose:"description" }}</th>
+            <td>{{ land.description|linebreaks }}</td>
+        </tr>
+        {% include "mapentity/trackinfo_fragment.html" %}
+        {% include "altimetry/elevationinfo_fragment.html" %}
+    </table>
+    {{ block.super }}
+{% endblock detailspanel %}

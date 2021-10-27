@@ -1,0 +1,214 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2021-10-12 09:06+0000\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+msgid "Knowledge"
+msgstr ""
+
+msgid "Name"
+msgstr ""
+
+msgid "Code"
+msgstr ""
+
+msgid "Vegetation details"
+msgstr ""
+
+msgid "Work details"
+msgstr ""
+
+msgid "Label"
+msgstr ""
+
+msgid "Knowledge type"
+msgstr ""
+
+msgid "Knowledge types"
+msgstr ""
+
+msgid "Age class diversity"
+msgstr ""
+
+msgid "Age class diversities"
+msgstr ""
+
+msgid "Specific diversity"
+msgstr ""
+
+msgid "Specific diversities"
+msgstr ""
+
+msgid "Vegetation state"
+msgstr ""
+
+msgid "Vegetation states"
+msgstr ""
+
+msgid "Vegetation strata"
+msgstr ""
+
+msgid "Vegetation stratas"
+msgstr ""
+
+msgid "Vegetation thickness type"
+msgstr ""
+
+msgid "Vegetation thickness types"
+msgstr ""
+
+msgid "Vegetation type"
+msgstr ""
+
+msgid "Vegetation types"
+msgstr ""
+
+msgid "Work type"
+msgstr ""
+
+msgid "Work types"
+msgstr ""
+
+msgid "Work material"
+msgstr ""
+
+msgid "Work materials"
+msgstr ""
+
+msgid "Work state"
+msgstr ""
+
+msgid "Work states"
+msgstr ""
+
+msgid "Work bank effect"
+msgstr ""
+
+msgid "Work bank effects"
+msgstr ""
+
+msgid "Work stream influence"
+msgstr ""
+
+msgid "Work stream influences"
+msgstr ""
+
+msgid "Work sediment effect"
+msgstr ""
+
+msgid "Work sediment effects"
+msgstr ""
+
+msgid "Work fish continuity effect"
+msgstr ""
+
+msgid "Work fish continuity effects"
+msgstr ""
+
+msgid "Description"
+msgstr ""
+
+msgid "Knowledges"
+msgstr ""
+
+msgid "Add a new knowledge"
+msgstr ""
+
+msgid "Thickness type"
+msgstr ""
+
+msgid "Vegetation Strata"
+msgstr ""
+
+msgid "Other information"
+msgstr ""
+
+msgid "Vegetation"
+msgstr ""
+
+msgid "Vegetations"
+msgstr ""
+
+msgid "Downstream bank effect"
+msgstr ""
+
+msgid "Upstream bank effect"
+msgstr ""
+
+msgid "Downstream influence"
+msgstr ""
+
+msgid "Upstream influence"
+msgstr ""
+
+msgid "Sediment effect"
+msgstr ""
+
+msgid "Fish Continuity effect"
+msgstr ""
+
+msgid "Usage"
+msgstr ""
+
+msgid "Width"
+msgstr ""
+
+msgid "Height"
+msgstr ""
+
+msgid "Length"
+msgstr ""
+
+msgid "Drop height"
+msgstr ""
+
+msgid "Pit height"
+msgstr ""
+
+msgid "Work"
+msgstr ""
+
+msgid "Works"
+msgstr ""
+
+msgid "Follow-up type"
+msgstr ""
+
+msgid "Follow-up types"
+msgstr ""
+
+msgid "Date"
+msgstr ""
+
+msgid "Measure frequency"
+msgstr ""
+
+msgid "Follow-up"
+msgstr ""
+
+msgid "Follow-ups"
+msgstr ""
+
+msgid "Add a new follow-up"
+msgstr ""
+
+msgid "Results"
+msgstr ""
+
+msgid "Other follow-ups on this knowledge"
+msgstr ""

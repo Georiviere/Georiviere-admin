@@ -1,0 +1,21 @@
+psycopg2
+django>=2.2
+django-autocomplete-light[gfk]
+git+https://github.com/GeotrekCE/Geotrek-admin.git@2.61.1#egg=geotrek
+git+https://github.com/GeotrekCE/django-leaflet.git@0.19+geotrek8#egg=django-leaflet
+paperclip
+
+# dev
+coverage
+django-debug-toolbar
+factory-boy
+flake8
+
+# prod
+django-compressor
+gunicorn
+python-memcached
+sentry-sdk
+
+# to fix in geotrek
+freezegun

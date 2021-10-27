@@ -1,0 +1,19 @@
+.chosen-container {
+    max-width: 100%;
+}
+
+.formset .form-row > .form-group {
+    flex-basis: auto;
+    max-width: 50%;
+}
+
+/* Fragment when objects are not in a table */
+.fragment-wrapper {
+    margin-bottom: 1rem;
+}
+.fragment-wrapper .autohide {
+    float: right;
+}
+.fragment-wrapper:hover .autohide {
+    opacity: 1;
+}

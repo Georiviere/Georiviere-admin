@@ -1,0 +1,49 @@
+{% load i18n %}
+
+<!-- begin watershed/bbox.html -->
+{% if bbox_watersheds %}
+    {% for key, value in bbox_watersheds.items %}
+
+        <select id="bbox_watersheds_{{ key }}" class="input-medium chzn-select">
+            <option value="" selected>{{ value.0 }}</option>
+            {% for bbox in value.1 %}
+                <option value="{{ bbox.1|join:',' }}">{{ bbox.0 }}</option>
+            {% endfor %}
+
+        </select>
+    {% endfor %}
+{% endif %}
+
+{% if bbox_watersheds %}
+<script type="text/javascript">
+    $(document).ready(function() {
+        $('{% for key in bbox_watersheds.keys %}#bbox_watersheds_{{ key }}{% if not forloop.last %}, {% endif %}{% endfor %}').on('change', function() {
+            var mainmap = window.maps[0],
+                bboxval = $(this).val();
+
+            // Clear other filters, but keep this one of course
+            var self = this;
+            $('{% for key in bbox_watersheds.keys %}#bbox_watersheds_{{ key }}{% if not forloop.last %}, {% endif %}{% endfor %}').each(function() {
+                if (self != this) {
+                    $(this).val('');
+                    $(this).removeClass('filter-set');
+                }
+            });
+
+            // Fit selected bbox, or whole map
+            if (bboxval) {
+                var bbox = $.map(bboxval.split(','), parseFloat); // minx,miny,maxx,maxy
+                mainmap.fitBounds([ [bbox[1], bbox[0]], [bbox[3], bbox[2]] ]);
+                $(this).addClass('filter-set');
+            }
+            else {
+                if(mainmap.options.maxBounds) {
+                    mainmap.fitBounds(mainmap.options.maxBounds);
+                }
+                $(this).removeClass('filter-set');
+            }
+        });
+    });
+</script>
+{% endif %}
+<!-- end land/bbox.html -->

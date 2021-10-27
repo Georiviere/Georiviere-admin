@@ -1,0 +1,23 @@
+{% extends "mapentity/mapentity_detail.html" %}
+{% load i18n mapentity_tags %}
+
+{% block detailspanel %}
+    <table class="table-striped table-bordered table">
+        <tr>
+            <th>{{ usage|verbose:"usage_types" }}</th>
+            <td>{% valuelist usage.usage_types.all %}</td>
+        </tr>
+        <tr>
+
+            <th>{{ usage|verbose:"structure" }}</th>
+            <td>{{ usage.structure }}</td>
+        </tr>
+        <tr>
+            <th>{{ usage|verbose:"description" }}</th>
+            <td>{{ usage.description|linebreaks }}</td>
+        </tr>
+        {% include "mapentity/trackinfo_fragment.html" %}
+        {% include "altimetry/elevationinfo_fragment.html" %}
+    </table>
+    {{ block.super }}
+{% endblock detailspanel %}

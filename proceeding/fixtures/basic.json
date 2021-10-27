@@ -1,0 +1,23 @@
+[
+    {
+        "pk": 1,
+        "model": "proceeding.eventtype",
+        "fields": {
+            "name": "Constat"
+        }
+    },
+    {
+        "pk": 2,
+        "model": "proceeding.eventtype",
+        "fields": {
+            "name": "Dépôt de plainte"
+        }
+    },
+    {
+        "pk": 3,
+        "model": "proceeding.eventtype",
+        "fields": {
+            "name": "Jugement"
+        }
+    }
+]

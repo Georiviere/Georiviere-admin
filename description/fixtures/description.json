@@ -1,0 +1,360 @@
+[
+    {
+        "pk": 1,
+        "model": "description.flowtype",
+        "fields": {
+            "label": "Plat/chenal lotique"
+        }
+    },
+    {
+        "pk": 2,
+        "model": "description.flowtype",
+        "fields": {
+            "label": "Plat/chenal lentique"
+        }
+    },
+    {
+        "pk": 3,
+        "model": "description.flowtype",
+        "fields": {
+            "label": "Rapide"
+        }
+    },
+    {
+        "pk": 4,
+        "model": "description.flowtype",
+        "fields": {
+            "label": "Cascade"
+        }
+    },
+    {
+        "pk": 5,
+        "model": "description.flowtype",
+        "fields": {
+            "label": "Radier"
+        }
+    },
+    {
+        "pk": 6,
+        "model": "description.flowtype",
+        "fields": {
+            "label": "Mouille de concavité"
+        }
+    },
+    {
+        "pk": 7,
+        "model": "description.flowtype",
+        "fields": {
+            "label": "Fosse d'affouillement"
+        }
+    },
+    {
+        "pk": 8,
+        "model": "description.flowtype",
+        "fields": {
+            "label": "Fosse de dissipation"
+        }
+    },
+    {
+        "pk": 1,
+        "model": "description.usagetype",
+        "fields": {
+            "label": "Canyoning"
+        }
+    },
+    {
+        "pk": 2,
+        "model": "description.usagetype",
+        "fields": {
+            "label": "Canoë de loisir"
+        }
+    },
+    {
+        "pk": 3,
+        "model": "description.usagetype",
+        "fields": {
+            "label": "Prélèvement d’eau"
+        }
+    },
+    {
+        "pk": 4,
+        "model": "description.usagetype",
+        "fields": {
+            "label": "Hydroélectricité"
+        }
+    },
+    {
+        "pk": 1,
+        "model": "description.workingspacetype",
+        "fields": {
+            "label": "Libre"
+        }
+    },
+    {
+        "pk": 2,
+        "model": "description.workingspacetype",
+        "fields": {
+            "label": "Contrainte"
+        }
+    },
+    {
+        "pk": 1,
+        "model": "description.faciesdiversity",
+        "fields": {
+            "label": "Homogène"
+        }
+    },
+    {
+        "pk": 2,
+        "model": "description.faciesdiversity",
+        "fields": {
+            "label": "Peu diversifié"
+        }
+    },
+    {
+        "pk": 3,
+        "model": "description.faciesdiversity",
+        "fields": {
+            "label": "Diversifié"
+        }
+    },
+    {
+        "pk": 1,
+        "model": "description.granulometricdiversity",
+        "fields": {
+            "label": "Homogène"
+        }
+    },
+    {
+        "pk": 2,
+        "model": "description.granulometricdiversity",
+        "fields": {
+            "label": "Peu diversifié"
+        }
+    },
+    {
+        "pk": 3,
+        "model": "description.granulometricdiversity",
+        "fields": {
+            "label": "Diversifié"
+        }
+    },
+    {
+        "pk": 1,
+        "model": "description.sedimentdynamic",
+        "fields": {
+            "label": "Équilibre"
+        }
+    },
+    {
+        "pk": 2,
+        "model": "description.sedimentdynamic",
+        "fields": {
+            "label": "Stabilisé"
+        }
+    },
+    {
+        "pk": 3,
+        "model": "description.sedimentdynamic",
+        "fields": {
+            "label": "Incision"
+        }
+    },
+    {
+        "pk": 4,
+        "model": "description.sedimentdynamic",
+        "fields": {
+            "label": "Exhaussement"
+        }
+    },
+    {
+        "pk": 1,
+        "model": "description.landtype",
+        "fields": {
+            "label": "Communes"
+        }
+    },
+    {
+        "pk": 2,
+        "model": "description.landtype",
+        "fields": {
+            "label": "Autre collectivité"
+        }
+    },
+    {
+        "pk": 3,
+        "model": "description.landtype",
+        "fields": {
+            "label": "Établissement public"
+        }
+    },
+    {
+        "pk": 4,
+        "model": "description.landtype",
+        "fields": {
+            "label": "État"
+        }
+    },
+    {
+        "pk": 5,
+        "model": "description.landtype",
+        "fields": {
+            "label": "Propriétaire privé"
+        }
+    },
+    {
+        "pk": 6,
+        "model": "description.landtype",
+        "fields": {
+            "label": "Association"
+        }
+    },
+    {
+        "pk": 7,
+        "model": "description.landtype",
+        "fields": {
+            "label": "Non connu"
+
+        }
+    },
+    {
+        "pk": 1,
+        "model": "description.bankstate",
+        "fields": {
+            "label": "Stable"
+        }
+    },
+    {
+        "pk": 2,
+        "model": "description.bankstate",
+        "fields": {
+            "label": "Érosion (évolution du tracé)"
+        }
+    },
+    {
+        "pk": 3,
+        "model": "description.bankstate",
+        "fields": {
+            "label": "Érosion (incision)"
+        }
+    },
+    {
+        "pk": 4,
+        "model": "description.bankstate",
+        "fields": {
+            "label": "Instable"
+        }
+    },
+    {
+        "pk": 1,
+        "model": "description.habitatsdiversity",
+        "fields": {
+            "label": "Homogène"
+        }
+    },
+    {
+        "pk": 2,
+        "model": "description.habitatsdiversity",
+        "fields": {
+            "label": "Peu diversifié"
+        }
+    },
+    {
+        "pk": 3,
+        "model": "description.habitatsdiversity",
+        "fields": {
+            "label": "Diversifié"
+        }
+    },
+    {
+        "pk": 1,
+        "model": "description.habitattype",
+        "fields": {
+            "label": "Sous berge"
+        }
+    },
+    {
+        "pk": 2,
+        "model": "description.habitattype",
+        "fields": {
+            "label": "Chevelure racinaire"
+        }
+    },
+    {
+        "pk": 3,
+        "model": "description.habitattype",
+        "fields": {
+            "label": "Matériaux alluvionnaire"
+        }
+    },
+    {
+        "pk": 4,
+        "model": "description.habitattype",
+        "fields": {
+            "label": "Végétation aquatique"
+        }
+    },
+    {
+        "pk": 5,
+        "model": "description.habitattype",
+        "fields": {
+            "label": "Débris ligneux"
+        }
+    },
+    {
+        "pk": 1,
+        "model": "description.planlayouttype",
+        "fields": {
+            "label": "Rectiligne"
+        }
+    },
+    {
+        "pk": 2,
+        "model": "description.planlayouttype",
+        "fields": {
+            "label": "Sinueux"
+        }
+    },
+    {
+        "pk": 1,
+        "model": "description.statustype",
+        "fields": {
+            "label": "Réservoir biologique"
+        }
+    },
+    {
+        "pk": 2,
+        "model": "description.statustype",
+        "fields": {
+            "label": "Continuité écologique liste 1"
+        }
+    },
+    {
+        "pk": 3,
+        "model": "description.statustype",
+        "fields": {
+            "label": "Continuité écologique liste 2"
+        }
+    },
+    {
+        "pk": 4,
+        "model": "description.statustype",
+        "fields": {
+            "label": "1ère catégorie piscicole"
+        }
+    },
+    {
+        "pk": 5,
+        "model": "description.statustype",
+        "fields": {
+            "label": "2ième catégorie piscicole"
+        }
+    },
+    {
+        "pk": 6,
+        "model": "description.statustype",
+        "fields": {
+            "label": "APPB Écrevisses"
+        }
+    }
+]

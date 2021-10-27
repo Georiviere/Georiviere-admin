@@ -1,0 +1,27 @@
+{% extends "mapentity/mapentity_detail.html" %}
+{% load i18n mapentity_tags %}
+
+{% block detailspanel %}
+    <table class="table-striped table-bordered table">
+        <tr>
+            <th>{{ status|verbose:"structure" }}</th>
+            <td>{{ status.structure }}</td>
+        </tr>
+        <tr>
+            <th>{{ status|verbose:"description" }}</th>
+            <td>{{ status.description|linebreaks }}</td>
+        </tr>
+        {% if status.topology.qualified %}
+        <tr>
+            <th>{{ status|verbose:"status_types" }}</th>
+            <td>{% valuelist status.status_types.all %}</td>
+        </tr>
+        {% else %}
+            {% include "river/topology_not_qualified.html" %}
+        {% endif %}
+        {% include "mapentity/trackinfo_fragment.html" %}
+        {% include "altimetry/elevationinfo_fragment.html" %}
+    </table>
+
+    {{ block.super }}
+{% endblock detailspanel %}

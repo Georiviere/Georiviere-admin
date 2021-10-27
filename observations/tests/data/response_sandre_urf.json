@@ -1,0 +1,66 @@
+{
+  "REFERENTIELS@attributes": {
+    "xmlns": "http://xml.sandre.eaufrance.fr/scenario/referentiel/2",
+    "xmlns:xsi": "http://www.w3.org/2001/XMLSchema-instance",
+    "xmlns:cct": "http://xml.sandre.eaufrance.fr/Composants/5",
+    "xsi:schemaLocation": "http://xml.sandre.eaufrance.fr/scenario/referentiel/2 http://xml.sandre.eaufrance.fr/scenario/referentiel/2/sandre_sc_referentiel.xsd"
+  },
+  "REFERENTIELS": {
+    "Scenario": {
+      "CodeScenario": "REFERENTIEL",
+      "VersionScenario": "2",
+      "NomScenario": "Diffusion de listes de référence par le Sandre",
+      "DateCreationFichier": "2021-05-04",
+      "DateDebutReference": "1987-03-20",
+      "DateFinReference": "2021-05-04",
+      "Emetteur": {
+        "CdIntervenant@attributes": {
+          "schemeAgencyID": "SANDRE"
+        },
+        "CdIntervenant": "1470",
+        "NomIntervenant": "Service d'Administration Nationale des Données et Référentiels sur l'Eau"
+      }
+    },
+    "Referentiel": {
+      "CdReferentiel@attributes": {
+        "schemeAgencyID": "SANDRE"
+      },
+      "CdReferentiel": "URF",
+      "NomReferentiel": "Unités de référence",
+      "TypeReferentiel": "1",
+      "NbOccurrences": "633",
+      "UniteReference": [
+        {
+          "CdUniteReference@attributes": {
+            "schemeAgencyID": "SANDRE"
+          },
+          "CdUniteReference": "165",
+          "LbUniteReference": "milligramme de dichlore par litre",
+          "SymUniteReference": "mg(Cl2)/L",
+          "StUniteReference": "Validé",
+          "DateCreUniteReference": "2004-05-04",
+          "DateMajUniteReference": "2004-05-04T00:00:00",
+          "DsUniteReference": "",
+          "AuteurUniteReference": "SANDRE",
+          "RefUniteReference": "",
+          "NomIntUniteReference": ""
+        },
+        {
+          "CdUniteReference@attributes": {
+            "schemeAgencyID": "SANDRE"
+          },
+          "CdUniteReference": "141",
+          "LbUniteReference": "micromole par litre",
+          "SymUniteReference": "µmol/L",
+          "StUniteReference": "Validé",
+          "DateCreUniteReference": "2004-05-04",
+          "DateMajUniteReference": "2004-05-04T00:00:00",
+          "DsUniteReference": "",
+          "AuteurUniteReference": "SANDRE",
+          "RefUniteReference": "",
+          "NomIntUniteReference": ""
+        }
+      ]
+    }
+  }
+}

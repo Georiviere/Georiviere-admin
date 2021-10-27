@@ -1,0 +1,190 @@
+# OBSERVATION MODULE FR TRANSLATIONS.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# Emmanuelle Helly <ehe@makina-corpus.com>, 2021.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2021-09-27 14:39+0000\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n > 1);\n"
+
+msgid "Observations"
+msgstr "Stations"
+
+msgid "Yes"
+msgstr "Oui"
+
+msgid "No"
+msgstr "Non"
+
+msgid "Label"
+msgstr "Libellé"
+
+msgid "Code"
+msgstr "Code"
+
+msgid "Tracked parameters"
+msgstr "Paramètres suivis"
+
+msgid "Unknown"
+msgstr "Inconnue"
+
+msgid "Main fields"
+msgstr "Attributs principaux"
+
+msgid "Specific profiles"
+msgstr "Profils spécifiques"
+
+msgid "Parameters tracking"
+msgstr "Suivi de paramètres"
+
+msgid "Station profile code"
+msgstr "Code profil station"
+
+msgid "Station profile label"
+msgstr "Libellé de profil station"
+
+msgid "Station profile"
+msgstr "Profil de station"
+
+msgid "Station profiles"
+msgstr "Profils de station"
+
+msgid "Null"
+msgstr "Nulle"
+
+msgid "Low water only"
+msgstr "Etiage seulement"
+
+msgid "Strong"
+msgstr "Forte"
+
+msgid "High water only"
+msgstr "Hautes eaux seulement"
+
+msgid "Station code"
+msgstr "Code station"
+
+msgid "Station label"
+msgstr "Libellé station"
+
+msgid "Station description"
+msgstr "Descriptif station"
+
+msgid "Site code"
+msgstr "Code site"
+
+msgid "Station URI"
+msgstr "URI station"
+
+msgid "Station purpose"
+msgstr "Finalité station"
+
+msgid "In service"
+msgstr "En service"
+
+msgid "Local influence"
+msgstr "Influence locale"
+
+msgid "For hydrometric station profile"
+msgstr "Pour un profil de station hydrométrique"
+
+msgid "Hardness"
+msgstr "Dureté"
+
+msgid "For physico-chemical station profile"
+msgstr "Pour un profil de station qualité physico-chimique"
+
+msgid "Station"
+msgstr "Station"
+
+msgid "Stations"
+msgstr "Stations"
+
+msgid "Add a new station"
+msgstr "Ajouter une station"
+
+msgid "Symbol"
+msgstr "Symbole"
+
+msgid "Unit"
+msgstr "Unité"
+
+msgid "Units"
+msgstr "Unités"
+
+msgid "Definition"
+msgstr "Définition"
+
+msgid "Parameter category"
+msgstr "Catégorie de paramètre"
+
+msgid "Parameter categories"
+msgstr "Catégories de paramètre"
+
+msgid "Qualitative"
+msgstr "Qualitatif"
+
+msgid "Quantitative"
+msgstr "Quantitatif"
+
+msgid "Parameter type"
+msgstr "Type de paramètre"
+
+msgid "Parameter"
+msgstr "Paramètre"
+
+msgid "Parameters"
+msgstr "Paramètres"
+
+msgid "Online"
+msgstr "En ligne"
+
+msgid "On demand"
+msgstr "Sur demande"
+
+msgid "Measure frequency"
+msgstr "Fréquence des mesures"
+
+msgid "Transmission frequency"
+msgstr "Fréquence de transmission"
+
+msgid "Data availability"
+msgstr "Disponibilité de la donnée"
+
+msgid "Measure start date"
+msgstr "Date de début des mesures"
+
+msgid "Measure end date"
+msgstr "Date de fin des mesures"
+
+msgid "Parameter tracking"
+msgstr "Suivi de paramètre"
+
+msgid "Parameter trackings"
+msgstr "Suivis de paramètre"
+
+msgid "Yes,No,Unknown"
+msgstr "Oui,Non,Inconnu"
+
+msgid "No parameter tracked"
+msgstr "Pas de paramètre suivi"
+
+msgid "Edit station to add parameter to track"
+msgstr "Modifier la station pour ajouter un paramètre à suivre"
+
+msgid "Add a line"
+msgstr "Ajouter une ligne"
+
+msgid "Remove"
+msgstr "Supprimer"

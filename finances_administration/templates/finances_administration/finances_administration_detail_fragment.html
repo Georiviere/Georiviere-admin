@@ -1,0 +1,19 @@
+{% load i18n mapentity_tags %}
+
+{% if modelname != "administrativefile" %}
+<h3>{% trans "Finances and administration" %}</h3>
+<div class="fragment-wrapper">
+    <strong>{% trans "Related administrative files" %}</strong>
+    {% if perms.finances_administration.administrativefile %}
+    <p class="autohide">
+        <a href="{% url 'finances_administration:administrativefile_add' %}"
+           class="btn btn-sm btn-success">
+        <i class="bi bi-plus-circle-fill"></i> {% trans "Add a new administrative file" %}</a>
+    </p>
+    {% endif %}
+
+    {% with columns="name,begin_date" %}
+        {% valuetable object.administrative_files columns=columns %}
+    {% endwith %}
+</div>
+{% endif %}

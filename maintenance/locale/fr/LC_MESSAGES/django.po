@@ -1,0 +1,104 @@
+# SOME DESCRIPTIVE TITLE.
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2021-09-23 12:43+0000\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n > 1);\n"
+
+msgid "Maintenance"
+msgstr "Maintenance"
+
+msgid "Name"
+msgstr "Nom"
+
+msgid "Target"
+msgstr "Cible"
+
+msgid "Date"
+msgstr "Date"
+
+msgid "Status"
+msgstr "Statut"
+
+msgid "Type"
+msgstr "Type"
+
+msgid "Stake"
+msgstr "Enjeu"
+
+msgid "Disorders"
+msgstr "Désordres"
+
+msgid "Description"
+msgstr "Description"
+
+msgid "Remarks and notes"
+msgstr "Remarques et notes"
+
+msgid "Width"
+msgstr "Largeur"
+
+msgid "Height"
+msgstr "Hauteur"
+
+msgid "Area"
+msgstr "Surface"
+
+msgid "Intervention"
+msgstr "Intervention"
+
+msgid "Interventions"
+msgstr "Interventions"
+
+msgid "Add a new intervention"
+msgstr "Ajouter une Intervention"
+
+msgid "On"
+msgstr "Sur"
+
+msgid "Label"
+msgstr "Libellé"
+
+msgid "Display order"
+msgstr "Ordre d'affichage"
+
+msgid "Intervention's status"
+msgstr "Statut"
+
+msgid "Intervention's statuses"
+msgstr "Statuts"
+
+msgid "Intervention's type"
+msgstr "Type d'intervention"
+
+msgid "Intervention's types"
+msgstr "Types d'intervention"
+
+msgid "Intervention's stake"
+msgstr "Enjeu"
+
+msgid "Intervention's stakes"
+msgstr "Enjeux"
+
+msgid "Intervention's disorder"
+msgstr "Désordre"
+
+msgid "Intervention's disorders"
+msgstr "Désordres"
+
+msgid "Related interventions"
+msgstr "Interventions reliées"

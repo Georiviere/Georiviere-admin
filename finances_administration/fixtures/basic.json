@@ -1,0 +1,114 @@
+[
+{
+    "model": "finances_administration.organism",
+    "pk": 1,
+    "fields": {
+        "structure": null,
+        "name": "Organisme A"
+    }
+},
+{
+    "model": "finances_administration.organism",
+    "pk": 2,
+    "fields": {
+        "structure": null,
+        "name": "Organisme B"
+    }
+},
+{
+    "model": "finances_administration.organism",
+    "pk": 3,
+    "fields": {
+        "structure": null,
+        "name": "Organisme C"
+    }
+},
+{
+    "model": "finances_administration.administrativefiletype",
+    "pk": 1,
+    "fields": {
+        "structure": null,
+        "label": "GEMAPI"
+    }
+},
+{
+    "model": "finances_administration.administrativefiletype",
+    "pk": 2,
+    "fields": {
+        "structure": null,
+        "label": "HorsGEMAPI"
+    }
+},
+{
+    "model": "finances_administration.administrativefiletype",
+    "pk": 3,
+    "fields": {
+        "structure": null,
+        "label": "Postes"
+    }
+},
+{
+    "model": "finances_administration.administrativefiledomain",
+    "pk": 1,
+    "fields": {
+        "structure": null,
+        "label": "Continuité"
+    }
+},
+{
+    "model": "finances_administration.administrativefiledomain",
+    "pk": 2,
+    "fields": {
+        "structure": null,
+        "label": "Hydromorphologie  Restauration ZH"
+    }
+},
+{
+    "model": "finances_administration.administrativefiledomain",
+    "pk": 3,
+    "fields": {
+        "structure": null,
+        "label": "Aménagements agricoles"
+    }
+},
+{
+    "model": "finances_administration.administrativefiledomain",
+    "pk": 4,
+    "fields": {
+        "structure": null,
+        "label": "Entretien de ripisylve"
+    }
+},
+{
+    "model": "finances_administration.administrativefiledomain",
+    "pk": 5,
+    "fields": {
+        "structure": null,
+        "label": "Gestion des invasives"
+    }
+},
+{
+    "model": "finances_administration.administrativefiledomain",
+    "pk": 6,
+    "fields": {
+        "structure": null,
+        "label": "Plantation"
+    }
+},
+{
+    "model": "finances_administration.administrativefiledomain",
+    "pk": 7,
+    "fields": {
+        "structure": null,
+        "label": "Protection de berges"
+    }
+},
+{
+    "model": "finances_administration.administrativefiledomain",
+    "pk": 8,
+    "fields": {
+        "structure": null,
+        "label": "Fonctionnement"
+    }
+}
+]

@@ -1,0 +1,8 @@
+{% load static i18n watershed_tags %}
+<script type="text/javascript">
+    MapEntity.i18n['Watershed'] = "{% trans "Watershed" %}";
+
+    {% watershed_types as all_watershed_types %}
+    window.SETTINGS.map['watershed_types'] = {{ all_watershed_types|safe }};
+</script>
+<script type="text/javascript" src="{% static 'watershed/main.js' %}"></script>

@@ -1,0 +1,64 @@
+# This workflow will install Python dependencies, run tests and lint with a variety of Python versions
+# For more information see: https://help.github.com/actions/language-and-framework-guides/using-python-with-github-actions
+
+name: Test CI
+
+on:
+  pull_request:
+  push:
+    branches:
+      - master
+
+env:
+  DEBIAN_FRONTEND: noninteractive
+
+jobs:
+  test:
+    name: Python Unittests
+    runs-on: ubuntu-20.04
+    needs: [flake8, eslint]
+    strategy:
+      matrix:
+        python-version: ['3.6', '3.8']  # should match default versions in supported LTS (now 3.6 for 18.04 and 3.8 for 20.04)
+    steps:
+    - uses: actions/checkout@v2
+    - name: Set up Python ${{ matrix.python-version }}
+      uses: actions/setup-python@v2
+      with:
+        python-version: ${{ matrix.python-version }}
+    - name: Install dependencies
+      run: |
+        sudo apt-get update -q
+        sudo apt-get -q -y install nodejs npm ca-certificates
+        python -m pip install --upgrade pip setuptools wheel
+        pip install -r dev-requirements.txt -U
+        npm ci
+    - name: Test with coverage
+      run: |
+        cd src
+        coverage run ./manage.py test
+    - name: Coverage upload
+      run: |
+        pip install codecov
+        cd src
+        codecov
+
+  build_docker_image:
+    name: Build docker image
+    runs-on: ubuntu-20.04
+    needs: [test]
+    steps:
+      - uses: actions/checkout@v2
+      - name: Set up Docker Buildx
+        id: buildx
+        uses: docker/setup-buildx-action@v1
+      - name: Build Docker image
+        run: |
+          docker-compose build
+      - name: Run tests
+        run: |
+          docker-compose run --rm django coverage run ./manage.py test
+#      - name: Upload image
+#        uses: ishworkh/docker-image-artifact-upload@v1
+#        with:
+#          image: "screamshotter_ci:latest"

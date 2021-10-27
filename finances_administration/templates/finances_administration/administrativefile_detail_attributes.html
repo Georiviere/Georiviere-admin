@@ -1,0 +1,125 @@
+{% extends "mapentity/mapentity_detail_attributes.html" %}
+{% load i18n mapentity_tags %}
+
+{% block attributes %}
+    <table class="table-striped table-bordered table">
+        <tr>
+            <th>{{ object|verbose:"structure" }}</th>
+            <td>{{ object.structure }}</td>
+        </tr>
+        <tr>
+            <th>{{ object|verbose:"name" }}</th>
+            <td>{{ object.name }}</td>
+        </tr>
+        <tr>
+            <th>{{ object|verbose:"begin_date" }} / {{ object|verbose:"end_date" }}</th>
+            <td>{{ object.begin_date }} / {{ object.end_date|default:"-" }}</td>
+        </tr>
+        <tr>
+            <th>{{ object|verbose:"description" }}</th>
+            <td>{{ object.description|linebreaks }}</td>
+        </tr>
+        <tr>
+            <th>{{ object|verbose:"global_cost" }}</th>
+            <td>{{ object.global_cost }}&nbsp;&euro;</td>
+        </tr>
+        <tr>
+            <th>{{ object|verbose:"adminfile_type" }}</th>
+            <td>{% if object.adminfile_type %}{{ project.adminfile_type }}
+                {% else %}<span class="none">{% trans "None" %}</span>{% endif %}
+            </td>
+        </tr>
+        <tr>
+            <th>{{ object|verbose:"domain" }}</th>
+            <td>{% if object.domain %}{{ project.domain }}
+                {% else %}<span class="none">{% trans "None" %}</span>{% endif %}
+            </td>
+        </tr>
+        <tr>
+            <th>{{ object|verbose:"constraints" }}</th>
+            <td>{% if object.constraints %}{{ project.constraints|safe }}
+                {% else %}<span class="none">{% trans "None" %}</span>{% endif %}
+            </td>
+        </tr>
+        <tr>
+            <th>{{ object|verbose:"project_owners" }}</th>
+            <td>{% if object.project_owners %}
+                {% valuelist object.project_owners.all %}
+                {% else %}<span class="none">{% trans "None" %}</span>{% endif %}
+            </td>
+        </tr>
+        <tr>
+            <th>{{ object|verbose:"project_managers" }}</th>
+            <td>{% if object.project_managers %}
+                {% valuelist object.project_managers.all %}
+                {% else %}<span class="none">{% trans "None" %}</span>{% endif %}
+            </td>
+        </tr>
+        <tr>
+            <th>{{ object|verbose:"contractors" }}</th>
+            <td>
+                {% valuelist object.contractors.all %}
+            </td>
+        </tr>
+        <tr>
+            <th>{% trans "Fundings" %}</th>
+            <td>
+                {% valuelist object.funding_set.all %}
+            </td>
+        </tr>
+        {% include "mapentity/trackinfo_fragment.html" %}
+    </table>
+
+    <h3>{% trans "Operations" %}</h3>
+    {% if object.operations.exists %}
+    <table class="table operations">
+        <thead>
+            <tr>
+                <th>{% trans "Name" %}</th>
+                <th>{% trans "Estimated cost" %}</th>
+                <th>{% trans "Actual cost" %}</th>
+                <th>{% trans "Edit costs" %}</th>
+            </tr>
+        </thead>
+        <tfoot>
+            <tr>
+                <th>{% trans "Totals" %}</th>
+                <td><strong>{{ object.total_costs.estimated }}&nbsp;&euro;</strong></td>
+                <td><strong>{{ object.total_costs.actual }}&nbsp;&euro;</strong></td>
+                <td>&nbsp;</td>
+            </tr>
+        </tfoot>
+        <tbody>
+        {% for operation in object.operations.all %}
+            <tr>
+                <td>{{ operation.content_object_display|safe }}</td>
+                <td>{{ operation.estimated_cost }}&nbsp;&euro;</td>
+                <td>
+                    {{ operation.actual_cost }}&nbsp;&euro;
+                      <button class="btn btn-sm btn-outline-primary" type="button"
+                              data-toggle="collapse" data-target="#detailCosts{{ operation.pk }}"
+                              aria-expanded="false" aria-controls="detailCosts{{ operation.pk }}">
+                        Costs details
+                      </button>
+                    <div class="collapse" id="detailCosts{{ operation.pk }}"><small>
+                        {% trans "Material cost" %} &rightarrow; {{ operation.material_cost }}&nbsp;&euro;<br>
+                        {% trans "Subcontract cost" %} &rightarrow; {{ operation.subcontract_cost }}&nbsp;&euro;<br>
+                        {% trans "Cost of man-day" %} &rightarrow; {{ operation.manday_cost }}&nbsp;&euro;<br>
+                    </small></div>
+                </td>
+                <td>
+                    <a href="{% url 'finances_administration:administrativeoperation-update' operation.pk %}">
+                        <i class="bi bi-pencil-square"></i> <span class="sr-only">{% trans "Edit" %}</span>
+                    </a>
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+    {% else %}
+    {% trans "No operation is created" %}
+    {% endif %}
+    <p><em>{% trans "Edit administrative file to add new operations." %}</em></p>
+
+    {{ block.super }}
+{% endblock attributes %}
