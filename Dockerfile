@@ -34,6 +34,8 @@ USER django
 RUN python3.6 -m venv /code/venv
 RUN  /code/venv/bin/pip install --no-cache-dir pip setuptools wheel -U
 COPY requirements.txt /code/requirements.txt
+# geotrek setup fix : it required django before being installed... TODO: fix it in geotrek setup.py
+RUN  /code/venv/bin/pip install django>=2.2
 RUN  /code/venv/bin/pip install --no-cache-dir -r /code/requirements.txt
 
 COPY .docker/entrypoint.sh /usr/local/bin/entrypoint.sh
