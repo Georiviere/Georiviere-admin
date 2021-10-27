@@ -1,6 +1,7 @@
 **Georiviere**, *river* management for *Territories*.
 
 .. image:: https://github.com/Georiviere.png
+     :height: 200
 
 
 License
@@ -16,6 +17,7 @@ License
 
 .. image:: http://images.parc-haut-jura.fr/upload/images/Logos/2017-02-01_LogoPNR_(JPG).jpg
     :target: https://www.parc-haut-jura.fr/
+    :height: 200
 
 
 Status of sub-projects
