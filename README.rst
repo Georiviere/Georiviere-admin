@@ -4,6 +4,10 @@
      :height: 200
 
 
+.. image:: https://codecov.io/gh/Georiviere/Georiviere-admin/branch/master/graph/badge.svg?token=UE1LM2RJIO
+     :target: https://codecov.io/gh/Georiviere/Georiviere-admin
+
+
 License
 -------
 
@@ -25,5 +29,4 @@ Status of sub-projects
 
 * |geotrek| `geotrek <https://github.com/GeotrekCE/Geotrek-admin>`_
 
-.. |geotrek| image:: https://travis-ci.org/makinacorpus/django-mapentity.png?branch=master
-    :target: https://circleci.com/gh/GeotrekCE/Geotrek-admin.svg?style=shield
+.. |geotrek| image:: https://circleci.com/gh/GeotrekCE/Geotrek-admin.svg?style=shield
