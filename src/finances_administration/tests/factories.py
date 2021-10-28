@@ -1,11 +1,10 @@
 import factory
-from factory import fuzzy
-
 from django.contrib.contenttypes.models import ContentType
+from factory import fuzzy
+from maintenance.tests.factories import InterventionStatusFactory
+from observations.tests.factories import StationFactory
+from studies.tests.factories import StudyFactory
 
-from maintenance.factories import InterventionStatusFactory
-from observations.factories import StationFactory
-from studies.factories import StudyFactory
 from finances_administration import models
 
 

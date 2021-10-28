@@ -1,11 +1,8 @@
 from django.test import TestCase
-
 from geotrek.authent.factories import StructureFactory
 
-from observations.factories import (
-    StationFactory, ParameterTrackingFactory, ParameterFactory
-)
 from observations.filters import StationFilterSet
+from observations.tests.factories import StationFactory, ParameterFactory, ParameterTrackingFactory
 
 
 class StationFilterTestCase(TestCase):

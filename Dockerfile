@@ -28,7 +28,7 @@ RUN apt-get update -qq && apt-get install -y -qq \
     apt-get -y -qq full-upgrade && \
     apt-get clean all && rm -rf /var/lib/apt/lists/* && rm -rf /var/cache/apt/*
 
-RUN mkdir -p /code/src /code/public/media /code/public/static /code/private/cache
+RUN mkdir -p /code/public/media /code/public/static /code/private/cache
 
 RUN useradd -ms /bin/bash django
 RUN chown -R django:django /code

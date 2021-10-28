@@ -1,8 +1,8 @@
 from django.test import TestCase
 
 from georiviere.tests.factories import UserAllPermsFactory
-from observations import factories
-from observations.forms import StationForm
+from . import factories
+from ..forms import StationForm
 
 
 class StationFormTestCase(TestCase):

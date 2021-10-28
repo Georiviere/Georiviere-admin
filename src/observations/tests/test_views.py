@@ -3,10 +3,10 @@ from collections import OrderedDict
 from geotrek.authent.factories import StructureFactory
 
 from georiviere.tests import CommonRiverTest
-from observations.factories import (
+from observations.models import Station, ParameterTracking
+from .factories import (
     StationFactory, StationProfileFactory, ParameterFactory
 )
-from observations.models import Station, ParameterTracking
 
 
 class StationViewTestCase(CommonRiverTest):

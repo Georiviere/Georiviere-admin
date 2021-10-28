@@ -1,12 +1,12 @@
 import json
-import requests
 from io import StringIO
 from unittest import mock
 
+import requests
+from django.conf import settings
 from django.core.management import call_command
 from django.core.management.base import CommandError
 from django.test import TestCase
-from django.conf import settings
 
 from observations.models import Station, StationProfile, Unit
 

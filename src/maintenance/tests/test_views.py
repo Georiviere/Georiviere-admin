@@ -1,16 +1,15 @@
 from collections import OrderedDict
 
 from django.contrib.contenttypes.models import ContentType
-
 from geotrek.authent.factories import StructureFactory
 
 from georiviere.tests import CommonRiverTest
-from observations.factories import StationFactory
-from maintenance.factories import (
+from maintenance.models import Intervention
+from maintenance.tests.factories import (
     InterventionFactory, InterventionStatusFactory,
     InterventionDisorderFactory, InterventionStakeFactory
 )
-from maintenance.models import Intervention
+from observations.tests.factories import StationFactory
 
 
 class InterventionViewsTest(CommonRiverTest):

@@ -1,11 +1,11 @@
 from collections import OrderedDict
+
 from django.core.exceptions import ObjectDoesNotExist
-
 from geotrek.authent.factories import StructureFactory
-from georiviere.tests import CommonRiverTest
 
-from knowledge import factories
-from knowledge.models import Knowledge, Vegetation, Work, FollowUp
+from georiviere.tests import CommonRiverTest
+from . import factories
+from ..models import Knowledge, Vegetation, Work, FollowUp
 
 
 class KnowledgeViewTestCase(CommonRiverTest):

@@ -1,9 +1,9 @@
 from django.test import TestCase
 
+from description.forms import MorphologyForm, StatusForm
+from description.models import Morphology, Status
 from georiviere.tests.factories import UserAllPermsFactory
 from river.tests.factories import StreamFactory
-from description.models import Morphology, Status
-from description.forms import MorphologyForm, StatusForm
 
 
 class StatusTest(TestCase):

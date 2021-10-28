@@ -1,10 +1,10 @@
 from collections import OrderedDict
 
 from geotrek.authent.factories import StructureFactory
-from georiviere.tests import CommonRiverTest
 
-from studies.factories import StudyFactory, StudyTypeFactory
-from studies.models import Study
+from georiviere.tests import CommonRiverTest
+from .factories import StudyFactory, StudyTypeFactory
+from ..models import Study
 
 
 class StudyViewTestCase(CommonRiverTest):

@@ -1,7 +1,6 @@
 from factory import django, Sequence, SubFactory
+
 from georiviere.tests.factories import BaseLineStringFactory
-
-
 from proceeding import models
 
 

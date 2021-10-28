@@ -1,6 +1,6 @@
 from django.test import TestCase
 
-from knowledge import factories
+from . import factories
 
 
 class KnowledgeTest(TestCase):

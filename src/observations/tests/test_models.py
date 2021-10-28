@@ -1,6 +1,6 @@
 from django.test import TestCase
 
-from observations import factories
+from . import factories
 
 
 class StationTest(TestCase):

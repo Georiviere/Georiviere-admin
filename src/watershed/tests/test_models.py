@@ -1,6 +1,6 @@
 from django.test import TestCase
 
-from watershed import factories
+from watershed.tests import factories
 
 
 class StationTest(TestCase):

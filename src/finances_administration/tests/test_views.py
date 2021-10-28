@@ -3,12 +3,12 @@ from collections import OrderedDict
 from django.contrib.contenttypes.models import ContentType
 from geotrek.authent.factories import StructureFactory
 
-from georiviere.tests import CommonRiverTest
-from studies.factories import StudyFactory
-from observations.factories import StationFactory
-from maintenance.factories import InterventionStatusFactory, InterventionFactory
-from finances_administration.factories import AdministrativeFileFactory, OrganismFactory
 from finances_administration.models import AdministrativeFile
+from finances_administration.tests.factories import AdministrativeFileFactory, OrganismFactory
+from georiviere.tests import CommonRiverTest
+from maintenance.tests.factories import InterventionStatusFactory, InterventionFactory
+from observations.tests.factories import StationFactory
+from studies.tests.factories import StudyFactory
 
 
 class AdministrativeFileViewTestCase(CommonRiverTest):

@@ -1,12 +1,9 @@
-from factory import django, fuzzy, Sequence, SubFactory
-
-from mapentity.helpers import bbox_split_srid_2154
-
 from django.conf import settings
 from django.contrib.gis.geos import Polygon, MultiPolygon
+from factory import django, fuzzy, Sequence, SubFactory
+from mapentity.helpers import bbox_split_srid_2154
 
-from . import models
-
+from .. import models
 
 geom_watershed_iter = bbox_split_srid_2154(settings.SPATIAL_EXTENT, by_x=4, by_y=4, cycle=True)
 

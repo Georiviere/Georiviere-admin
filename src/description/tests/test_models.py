@@ -1,8 +1,8 @@
 from django.core.exceptions import ValidationError
 from django.test import TestCase
 
-from river.tests.factories import TopologyFactory
 from description.tests import factories
+from river.tests.factories import TopologyFactory
 
 
 class DescriptionTest(TestCase):

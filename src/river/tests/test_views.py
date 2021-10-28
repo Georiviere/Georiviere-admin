@@ -1,17 +1,17 @@
+from tempfile import TemporaryDirectory
+
 from django.conf import settings
 from django.contrib.gis.geos import GEOSGeometry
 from django.test import override_settings, TestCase
 from django.urls import reverse
 from django.utils.translation import gettext_lazy as _
-from tempfile import TemporaryDirectory
+from geotrek.authent.factories import StructureFactory, UserFactory
 
-from georiviere.tests import CommonRiverTest
-from description.tests.factories import StatusOnStreamFactory
 from description.models import Status
+from description.tests.factories import StatusOnStreamFactory
+from georiviere.tests import CommonRiverTest
 from river.models import Stream
 from river.tests.factories import StreamFactory
-
-from geotrek.authent.factories import StructureFactory, UserFactory
 
 
 @override_settings(MEDIA_ROOT=TemporaryDirectory().name)

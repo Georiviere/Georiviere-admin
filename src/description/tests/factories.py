@@ -1,11 +1,11 @@
-from factory import django, fuzzy, enums, post_generation, SubFactory, Sequence
-from georiviere.tests.factories import BaseLineStringFactory
-
 from string import ascii_letters
 
-from description import models
-from river.tests.factories import TopologyFactory
+from factory import django, fuzzy, enums, post_generation, SubFactory, Sequence
+
+from georiviere.tests.factories import BaseLineStringFactory
 from river.models import Stream
+from river.tests.factories import TopologyFactory
+from .. import models
 
 
 class UsageFactory(BaseLineStringFactory):

@@ -1,6 +1,6 @@
 from django.test import TestCase
 
-from studies import factories
+from . import factories
 
 
 class StudyTest(TestCase):

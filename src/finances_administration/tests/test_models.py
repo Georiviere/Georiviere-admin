@@ -1,11 +1,10 @@
-from django.test import TestCase
 from django.contrib.gis.geos import GeometryCollection
-
+from django.test import TestCase
 from geotrek.authent.factories import StructureFactory
 
-from finances_administration import factories
-from studies.factories import StudyFactory
-from observations.factories import StationFactory
+from observations.tests.factories import StationFactory
+from studies.tests.factories import StudyFactory
+from . import factories
 
 
 class AdministrativeFileTest(TestCase):

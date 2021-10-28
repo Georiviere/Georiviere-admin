@@ -1,8 +1,8 @@
 import factory
+from geotrek.authent.factories import StructureFactory
 
 from georiviere.tests.factories import BaseLineStringFactory
 from river.models import Stream, Topology
-from geotrek.authent.factories import StructureFactory
 
 
 class StreamFactory(BaseLineStringFactory):

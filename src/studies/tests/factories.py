@@ -1,7 +1,7 @@
 from factory import django, fuzzy, post_generation
 
 from georiviere.tests.factories import PointFactory
-from studies import models
+from .. import models
 
 
 class StudyTypeFactory(django.DjangoModelFactory):

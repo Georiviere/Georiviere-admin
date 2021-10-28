@@ -1,14 +1,12 @@
 from collections import OrderedDict
-
-from django.test import override_settings
 from tempfile import TemporaryDirectory
 
-from georiviere.tests import CommonRiverTest
+from django.test import override_settings
+from geotrek.authent.factories import StructureFactory
 
+from georiviere.tests import CommonRiverTest
 from proceeding.models import Proceeding
 from proceeding.tests.factories import ProceedingFactory, EventTypeFactory
-
-from geotrek.authent.factories import StructureFactory
 
 
 @override_settings(MEDIA_ROOT=TemporaryDirectory().name)

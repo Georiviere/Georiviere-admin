@@ -1,7 +1,7 @@
 from django.test import TestCase
 
-from observations import factories
 from observations.models import Parameter, ParameterTracking
+from . import factories
 
 
 class PerformanceTest(TestCase):

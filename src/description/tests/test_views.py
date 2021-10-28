@@ -1,15 +1,14 @@
-from django.test import override_settings
 from tempfile import TemporaryDirectory
 
-from georiviere.tests import CommonRiverTest
+from django.test import override_settings
+from geotrek.authent.factories import StructureFactory
 
 from description.models import Land, Status, Usage
 from description.tests.factories import (LandFactory, LandTypeFactory, StatusOnStreamFactory, StatusTypeFactory,
                                          UsageFactory, UsageTypeFactory)
+from georiviere.tests import CommonRiverTest
 from river.tests import TopologyTestCase
 from river.tests.factories import StreamFactory
-
-from geotrek.authent.factories import StructureFactory
 
 
 @override_settings(MEDIA_ROOT=TemporaryDirectory().name)

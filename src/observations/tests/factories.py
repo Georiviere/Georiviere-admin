@@ -1,10 +1,9 @@
 from datetime import date, timedelta
 
+from django.contrib.gis.geos import Point
 from factory import post_generation, django, fuzzy, Sequence, SubFactory
 
-from django.contrib.gis.geos import Point
-
-from . import models
+from .. import models
 
 
 class StationProfileFactory(django.DjangoModelFactory):
