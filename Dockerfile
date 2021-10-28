@@ -45,7 +45,7 @@ RUN  /code/venv/bin/pip install --no-cache-dir django==2.2.*
 RUN  /code/venv/bin/pip install --no-cache-dir -r /code/requirements.txt
 
 COPY .docker/entrypoint.sh /usr/local/bin/entrypoint.sh
-COPY src /code/
+COPY src /code/src
 RUN chown -R django:django /code/src
 
 WORKDIR /code/src
