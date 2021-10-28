@@ -33,6 +33,7 @@ jobs:
 
       - name: Run tests
         run: |
+          echo $UID
           docker-compose run --rm web coverage run ./manage.py test
 
       - name: Upload report to codecov
