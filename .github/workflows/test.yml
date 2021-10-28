@@ -37,6 +37,6 @@ jobs:
 
       - name: Upload report to codecov
         run: |
-          pip install codecov
+          pip install codecov==5.*  # seems to be a breaking change in 6.x
           cd src
           codecov

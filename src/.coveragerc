@@ -3,8 +3,7 @@ omit =
     */tests*
     */migrations*
     */settings*
-    */dist-packages*
-    */src*
+    */venv*
 
 [report]
 ignore_errors = true
