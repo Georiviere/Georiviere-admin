@@ -33,7 +33,6 @@ services:
       - ./src:/code/src
     ports:
       - "8000:8000"
-    user: ${UID:-1000}:${GID:-1000}
     command: ./manage.py runserver 0.0.0.0:8000
     networks:
       default:

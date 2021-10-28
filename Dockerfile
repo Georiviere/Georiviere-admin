@@ -1,5 +1,7 @@
 FROM makinacorpus/geodjango:bionic-3.6
 
+ARG UID=1000
+
 ENV SERVER_NAME localhost
 ENV CONVERSION_HOST convertit
 ENV CAPTURE_HOST screamshotter
@@ -30,7 +32,7 @@ RUN apt-get update -qq && apt-get install -y -qq \
 
 RUN mkdir -p /code/public/media /code/public/static /code/private/cache
 
-RUN useradd -ms /bin/bash django
+RUN useradd -ms /bin/bash django --uid ${UID}
 RUN chown -R django:django /code
 
 USER django
@@ -44,6 +46,7 @@ RUN  /code/venv/bin/pip install --no-cache-dir -r /code/requirements.txt
 
 COPY .docker/entrypoint.sh /usr/local/bin/entrypoint.sh
 COPY src /code/
+RUN chown -R django:django /code/src
 
 WORKDIR /code/src
 VOLUME /code/public
