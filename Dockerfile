@@ -46,8 +46,9 @@ RUN  /code/venv/bin/pip install --no-cache-dir -r /code/requirements.txt
 
 COPY .docker/entrypoint.sh /usr/local/bin/entrypoint.sh
 COPY src /code/src
+USER root
 RUN chown -R django:django /code/src
-
+USER django
 WORKDIR /code/src
 VOLUME /code/public
 
