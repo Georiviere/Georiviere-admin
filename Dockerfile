@@ -24,8 +24,7 @@ RUN apt-get update -qq && apt-get install -y -qq \
     libpangocairo-1.0-0 \
     libssl-dev \
     libxml2-dev \
-    libxslt-dev \
-    libffi-dev && \
+    libxslt-dev && \
     apt-get install -y --no-install-recommends postgis && \
     apt-get -y -qq full-upgrade && \
     apt-get clean all && rm -rf /var/lib/apt/lists/* && rm -rf /var/cache/apt/*
@@ -45,10 +44,8 @@ RUN  /code/venv/bin/pip install --no-cache-dir django==2.2.*
 RUN  /code/venv/bin/pip install --no-cache-dir -r /code/requirements.txt
 
 COPY .docker/entrypoint.sh /usr/local/bin/entrypoint.sh
-COPY src /code/src
-USER root
-RUN chown -R django:django /code/src
-USER django
+COPY --chown=django:django src /code/src
+
 WORKDIR /code/src
 VOLUME /code/public
 
