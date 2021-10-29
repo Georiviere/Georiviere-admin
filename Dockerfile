@@ -3,13 +3,14 @@ FROM ubuntu:focal as base
 ARG UID=1000
 
 ENV DEBIAN_FRONTEND noninteractive
+ENV PYTHONUNBUFFERED 1
+ENV TZ UTC
+
 ENV SERVER_NAME localhost
 ENV CONVERSION_HOST convertit
 ENV CAPTURE_HOST screamshotter
 ENV POSTGRES_HOST postgres
 ENV PGPORT 5432
-ENV CACHE 00
-ENV TZ UTC
 
 RUN mkdir -p /opt/georiviere-admin/public/media /opt/georiviere-admin/public/static /opt/georiviere-admin/private/cache
 
@@ -23,7 +24,7 @@ WORKDIR /opt/georiviere-admin
 VOLUME /opt/georiviere-admin/public
 
 RUN apt-get update -qq && apt-get install -y -qq \
-    python3.8 \
+    python3.9 \
     gettext \
     # geodjango \
     binutils \
@@ -50,8 +51,8 @@ ARG REQUIREMENTS=requirements.txt
 
 RUN apt-get update -qq && apt-get install -y -qq \
     git \
-    python3.8-dev \
-    python3.8-venv \
+    python3.9-dev \
+    python3.9-venv \
     build-essential \
     libffi-dev \
     libfreetype6-dev \
@@ -64,7 +65,7 @@ RUN apt-get update -qq && apt-get install -y -qq \
 
 USER django
 
-RUN python3.8 -m venv /opt/venv
+RUN python3.9 -m venv /opt/venv
 RUN  /opt/venv/bin/pip install --no-cache-dir pip setuptools wheel -U
 COPY ${REQUIREMENTS} /opt/requirements.txt
 
@@ -83,5 +84,7 @@ RUN apt-get update -qq && \
 COPY --chown=django:django --from=build /opt/venv /opt/venv
 COPY --chown=django:django georiviere /opt/georiviere-admin/georiviere
 COPY --chown=django:django manage.py /opt/georiviere-admin/manage.py
+
+RUN SECRET_KEY=temp /opt/venv/bin/python ./manage.py compilemessages
 
 CMD ["gunicorn", "georiviere.wsgi:application"]
