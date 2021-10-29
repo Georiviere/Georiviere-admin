@@ -1,0 +1,15 @@
+-r requirements.txt
+
+# to fix in geotrek
+freezegun
+
+# dev
+pip-tools
+coverage
+django-debug-toolbar
+factory-boy
+flake8  # WARNING : CI always use last flake8 published version
+
+# doc
+sphinx
+sphinx-rtd-theme
