@@ -38,6 +38,4 @@ jobs:
       - name: Upload report to codecov
         run: |
           pip install codecov
-          cd src
-          ls -als
           codecov

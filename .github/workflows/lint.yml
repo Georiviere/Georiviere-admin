@@ -32,5 +32,4 @@ jobs:
         python -m pip install flake8
     - name: Lint with flake8
       run: |
-        cd src
-        flake8 .
+        flake8 georiviere
