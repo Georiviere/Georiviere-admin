@@ -1,7 +1,6 @@
 FROM ubuntu:focal as base
 
 ARG UID=1000
-ARG REQUIREMENTS=requirements.txt
 
 ENV DEBIAN_FRONTEND noninteractive
 ENV SERVER_NAME localhost
@@ -47,6 +46,8 @@ RUN apt-get update -qq && apt-get install -y -qq \
 
 FROM base as build
 
+ARG REQUIREMENTS=requirements.txt
+
 RUN apt-get update -qq && apt-get install -y -qq \
     git \
     python3.8-dev \
@@ -65,11 +66,7 @@ USER django
 
 RUN python3.8 -m venv /opt/venv
 RUN  /opt/venv/bin/pip install --no-cache-dir pip setuptools wheel -U
-RUN ls -als /opt
 COPY ${REQUIREMENTS} /opt/requirements.txt
-RUN echo ${REQUIREMENTS}
-RUN ls -als /opt
-RUN ls -als /opt/requirements.txt
 
 # geotrek setup fix : it required django before being installed... TODO: fix it in geotrek setup.py
 RUN  /opt/venv/bin/pip install --no-cache-dir django==2.2.*
