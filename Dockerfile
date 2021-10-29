@@ -52,7 +52,7 @@ RUN apt-get update -qq && apt-get install -y -qq \
     python3.8-dev \
     python3.8-venv \
     build-essential \
-    libffi-dev  \
+    libffi-dev \
     libfreetype6-dev \
     libgdk-pixbuf2.0-dev \
     libssl-dev \
@@ -66,7 +66,7 @@ USER django
 RUN python3.8 -m venv /opt/venv
 RUN  /opt/venv/bin/pip install --no-cache-dir pip setuptools wheel -U
 COPY ${REQUIREMENTS} /opt/requirements.txt
-RUN ls -als /opt
+RUN ls -als /opt/requirements.txt
 # geotrek setup fix : it required django before being installed... TODO: fix it in geotrek setup.py
 RUN  /opt/venv/bin/pip install --no-cache-dir django==2.2.*
 RUN  /opt/venv/bin/pip install --no-cache-dir -r /opt/requirements.txt
