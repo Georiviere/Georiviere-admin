@@ -28,7 +28,7 @@ jobs:
         uses: docker/setup-buildx-action@v1
       - name: Build Docker image
         run: |
-          docker-compose build --build-arg UID=$UID
+          docker-compose build --build-arg UID=$UID --build-arg REQUIREMENTS=dev-requirements.txt
 
       - name: Run tests
         run: |
