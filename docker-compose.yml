@@ -30,7 +30,7 @@ services:
     env_file:
       - .env
     volumes:
-      - ./src:/code/src
+      - .:/opt/georiviere-admin
     ports:
       - "8000:8000"
     command: ./manage.py runserver 0.0.0.0:8000

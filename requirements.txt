@@ -90,7 +90,7 @@ django-celery-results==2.0.1
     # via geotrek
 django-colorfield==0.4.1
     # via geotrek
-django-compressor==2.4
+django-compressor==2.4.1
     # via
     #   -r requirements.in
     #   geotrek
