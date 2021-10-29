@@ -2,10 +2,10 @@
 
 set -e
 
-cd /code/src
+cd /opt/georiviere-admin
 
 # Activate venv
-. /code/venv/bin/activate
+. /opt/venv/bin/activate
 
 echo "Waiting for postgres..."
 while ! nc -z $POSTGRES_HOST $PGPORT; do

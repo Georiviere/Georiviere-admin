@@ -1,0 +1,10 @@
+[run]
+omit =
+    */tests*
+    */migrations*
+    */settings*
+    */venv*
+    manage.py
+
+[report]
+ignore_errors = true

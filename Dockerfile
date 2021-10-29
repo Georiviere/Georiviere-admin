@@ -29,25 +29,26 @@ RUN apt-get update -qq && apt-get install -y -qq \
     apt-get -y -qq full-upgrade && \
     apt-get clean all && rm -rf /var/lib/apt/lists/* && rm -rf /var/cache/apt/*
 
-RUN mkdir -p /code/public/media /code/public/static /code/private/cache
+RUN mkdir -p /opt/georiviere-admin/public/media /opt/georiviere-admin/public/static /opt/georiviere-admin/private/cache
 
 RUN useradd -ms /bin/bash django --uid ${UID}
-RUN chown -R django:django /code
+RUN chown -R django:django /opt
 
 USER django
 
-RUN python3.6 -m venv /code/venv
-RUN  /code/venv/bin/pip install --no-cache-dir pip setuptools wheel -U
+RUN python3.6 -m venv /opt/venv
+RUN  /opt/venv/bin/pip install --no-cache-dir pip setuptools wheel -U
 COPY requirements.txt /code/requirements.txt
 # geotrek setup fix : it required django before being installed... TODO: fix it in geotrek setup.py
-RUN  /code/venv/bin/pip install --no-cache-dir django==2.2.*
-RUN  /code/venv/bin/pip install --no-cache-dir -r /code/requirements.txt
+RUN  /opt/venv/bin/pip install --no-cache-dir django==2.2.*
+RUN  /opt/venv/bin/pip install --no-cache-dir -r /code/requirements.txt
 
 COPY .docker/entrypoint.sh /usr/local/bin/entrypoint.sh
-COPY --chown=django:django src /code/src
+COPY --chown=django:django georiviere /opt/georiviere-admin/georiviere
+COPY --chown=django:django manage.py /opt/georiviere-admin/manage.py
 
-WORKDIR /code/src
-VOLUME /code/public
+WORKDIR /opt/georiviere-admin
+VOLUME /opt/georiviere-admin/public
 
 ENTRYPOINT ["entrypoint.sh"]
 

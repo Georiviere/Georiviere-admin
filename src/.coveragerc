@@ -1,9 +1,0 @@
-[run]
-omit =
-    */tests*
-    */migrations*
-    */settings*
-    */venv*
-
-[report]
-ignore_errors = true
