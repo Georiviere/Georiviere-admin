@@ -13,15 +13,14 @@ License
 * OpenSource - BSD
 * Copyright (c) 2021 - Makina Corpus / Parc National du Haut Jura
 
+|logo-makina| |logo-pnrhj|
+
 .. |logo-makina| image:: https://github.com/MakinaCorpus.png
    :target: http://www.makina-corpus.com
-   :width: 50%
-
+   :width: 200px
 .. |logo-pnrhj| image:: http://images.parc-haut-jura.fr/upload/images/Logos/2017-02-01_LogoPNR_(JPG).jpg
    :target: https://www.parc-haut-jura.fr/
-   :height: 50%
-
-|logo-makina| any text |logo-pnrhj|
+   :width: 200px
 
 
 Status of sub-projects
