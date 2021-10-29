@@ -1,4 +1,4 @@
-version: "3"
+version: "3.7"
 services:
   memcached:
     image: memcached:1.5-alpine
@@ -22,11 +22,16 @@ services:
     image: georiviere:latest
     build:
       context: .
+      target: build
+      args:
+        - REQUIREMENTS=dev-requirements.txt
     depends_on:
       - screamshotter
       - convertit
       - postgres
       - memcached
+    environment:
+      - DJANGO_SETTINGS_MODULE=georiviere.settings.dev
     env_file:
       - .env
     volumes:
