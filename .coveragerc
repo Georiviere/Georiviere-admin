@@ -4,6 +4,7 @@ omit =
     */migrations*
     */settings*
     */venv*
+    manage.py
 
 [report]
 ignore_errors = true
