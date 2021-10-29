@@ -3,8 +3,7 @@ name: Docker publish
 on:
   workflow_run:
     workflows: [ "lint", "test" ]
-    branches:
-      - master
+    branches: [master]
     tags:
       - '*'
     types:
