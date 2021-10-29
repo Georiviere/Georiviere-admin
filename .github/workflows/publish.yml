@@ -1,13 +1,10 @@
 name: Docker publish
 
 on:
-  workflow_run:
-    workflows: [ "lint", "test" ]
-    branches: [master]
-    tags:
-      - '*'
-    types:
-      - completed
+  release:
+  push:
+    branches:
+      - master
 
 env:
   REGISTRY: ghcr.io
