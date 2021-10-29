@@ -10,6 +10,7 @@ ENV CAPTURE_HOST screamshotter
 ENV POSTGRES_HOST postgres
 ENV PGPORT 5432
 ENV CACHE 00
+ENV TZ UTC
 
 RUN mkdir -p /opt/georiviere-admin/public/media /opt/georiviere-admin/public/static /opt/georiviere-admin/private/cache
 
@@ -64,10 +65,10 @@ USER django
 
 RUN python3.8 -m venv /opt/venv
 RUN  /opt/venv/bin/pip install --no-cache-dir pip setuptools wheel -U
-COPY ${REQUIREMENTS} /code/requirements.txt
+COPY ${REQUIREMENTS} /opt/requirements.txt
 # geotrek setup fix : it required django before being installed... TODO: fix it in geotrek setup.py
 RUN  /opt/venv/bin/pip install --no-cache-dir django==2.2.*
-RUN  /opt/venv/bin/pip install --no-cache-dir -r /code/requirements.txt
+RUN  /opt/venv/bin/pip install --no-cache-dir -r /opt/requirements.txt
 
 FROM base as prod
 
