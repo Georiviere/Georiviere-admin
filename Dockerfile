@@ -66,7 +66,7 @@ USER django
 RUN python3.8 -m venv /opt/venv
 RUN  /opt/venv/bin/pip install --no-cache-dir pip setuptools wheel -U
 COPY ${REQUIREMENTS} /opt/requirements.txt
-RUN echo "${REQUIREMENTS}"
+RUN echo "$REQUIREMENTS"
 RUN ls -als /opt
 RUN ls -als /opt/requirements.txt
 
