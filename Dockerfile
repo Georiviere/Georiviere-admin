@@ -66,7 +66,7 @@ USER django
 RUN python3.8 -m venv /opt/venv
 RUN  /opt/venv/bin/pip install --no-cache-dir pip setuptools wheel -U
 COPY ${REQUIREMENTS} /opt/requirements.txt
-RUN cat /opt/requirements.txt
+RUN ls -als /opt
 # geotrek setup fix : it required django before being installed... TODO: fix it in geotrek setup.py
 RUN  /opt/venv/bin/pip install --no-cache-dir django==2.2.*
 RUN  /opt/venv/bin/pip install --no-cache-dir -r /opt/requirements.txt
