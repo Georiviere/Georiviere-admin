@@ -23,8 +23,6 @@ services:
     build:
       context: .
       target: build
-      args:
-        - REQUIREMENTS=dev-requirements.txt
     depends_on:
       - screamshotter
       - convertit
