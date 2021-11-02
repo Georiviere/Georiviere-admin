@@ -7,8 +7,6 @@ on:
 #    branches:
 #      - master
 
-permissions:
-  contents: write
 
 env:
   REGISTRY: ghcr.io
@@ -18,7 +16,6 @@ jobs:
   build-and-push-image:
     runs-on: ubuntu-latest
     permissions:
-      contents: read
       packages: write
 
     steps:
