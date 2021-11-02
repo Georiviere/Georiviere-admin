@@ -2,9 +2,9 @@ name: Docker publish
 
 on:
   release:
-  push:
-    branches:
-      - master
+#  push:
+#    branches:
+#      - master
 
 env:
   REGISTRY: ghcr.io
@@ -44,7 +44,7 @@ jobs:
 
       - name: Prepare install.zip
         run: |
-          zip install.zip install /
+          zip install.zip install/
 
       - name: Attach zip archive as release binary
         uses: skx/github-action-publish-binaries@master
