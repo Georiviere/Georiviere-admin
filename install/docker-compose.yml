@@ -1,0 +1,34 @@
+version: "3.7"
+services:
+  memcached:
+    image: memcached:1.5-alpine
+
+  convertit:
+    image: makinacorpus/convertit:latest
+
+  screamshotter:
+    image: makinacorpus/screamshotter:v2
+
+  postgres:
+    image: postgis/postgis:13-3.1
+    volumes:
+      - postgres:/var/lib/postgresql/data
+    env_file:
+      - .env
+
+  web:
+    image: ghcr.io/georiviere/georiviere-admin:${version|latest}
+    depends_on:
+      - screamshotter
+      - convertit
+      - postgres
+      - memcached
+    env_file:
+      - .env
+    volumes:
+      - var:/opt/georiviere-admin/var
+    ports:
+      - "${WEB_PORT|8000}:8000"
+
+volumes:
+  postgres:

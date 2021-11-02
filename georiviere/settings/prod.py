@@ -7,7 +7,7 @@ from . import *  # NOQA
 # MAIL SETTINGS
 # ..........................
 DEFAULT_FROM_EMAIL = os.getenv('SERVER_EMAIL', 'root@localhost')
-# address will be set for sended emails (ex: noreply@yourdomain.net)
+# address will be set for sent emails (ex: noreply@yourdomain.net)
 SERVER_EMAIL = DEFAULT_FROM_EMAIL
 
 EMAIL_HOST = os.getenv('EMAIL_HOST', 'localhost')
@@ -47,20 +47,12 @@ CSRF_COOKIE_SECURE = True
 SESSION_COOKIE_SECURE = True
 SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
 
-PRIVATE_DIR = BASE_DIR.parent / "private"
-CACHE_ROOT = os.path.join(PRIVATE_DIR, 'cache')
-
 CACHES['fat'] = {
     'BACKEND': 'django.core.cache.backends.filebased.FileBasedCache',
-    'LOCATION': CACHE_ROOT,
+    'LOCATION': VAR_DIR / "cache",
     'TIMEOUT': 28800,  # 8 hours
 }
 
 SESSION_ENGINE = "django.contrib.sessions.backends.cache"
 
 MAPENTITY_CONFIG['GEOJSON_LAYERS_CACHE_BACKEND'] = 'fat'
-
-# Public files
-PUBLIC_DIR = os.path.join(BASE_DIR.parent, 'public')
-STATIC_ROOT = os.path.join(PUBLIC_DIR, 'static')
-MEDIA_ROOT = os.path.join(PUBLIC_DIR, 'media')
