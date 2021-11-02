@@ -13,7 +13,7 @@ ENV CAPTURE_HOST screamshotter
 ENV POSTGRES_HOST postgres
 ENV PGPORT 5432
 
-RUN mkdir -p /opt/georiviere-admin/public/media /opt/georiviere-admin/public/static /opt/georiviere-admin/private/cache
+RUN mkdir -p /opt/georiviere-admin/var
 
 RUN useradd -ms /bin/bash django --uid ${UID}
 RUN chown -R django:django /opt
@@ -22,7 +22,7 @@ COPY .docker/entrypoint.sh /usr/local/bin/entrypoint.sh
 ENTRYPOINT ["entrypoint.sh"]
 
 WORKDIR /opt/georiviere-admin
-VOLUME /opt/georiviere-admin/public
+VOLUME /opt/georiviere-admin/var
 
 RUN apt-get update -qq && apt-get install -y -qq \
     python3.9 \

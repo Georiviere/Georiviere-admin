@@ -19,9 +19,8 @@ from geotrek import __version__ as __geotrek_version__
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent.parent
 
-PUBLIC_DIR = BASE_DIR / "public"
-PRIVATE_DIR = BASE_DIR / "private"
 PROJECT_DIR = BASE_DIR / "georiviere"
+VAR_DIR = BASE_DIR / 'var'
 
 ROOT_URL = ""
 TITLE = "Georivière"
@@ -170,8 +169,6 @@ ALTIMETRIC_AREA_MARGIN = 0.15
 
 BASE_INTERSECTION_MARGIN = 2000
 
-VAR_DIR = 'var'
-
 # Password validation
 # https://docs.djangoproject.com/en/3.1/ref/settings/#auth-password-validators
 
@@ -208,8 +205,8 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/3.1/howto/static-files/
 
-STATIC_ROOT = os.path.join(PUBLIC_DIR, 'static')
-MEDIA_ROOT = os.path.join(PUBLIC_DIR, 'media')
+STATIC_ROOT = VAR_DIR / "static"
+MEDIA_ROOT = VAR_DIR / "media"
 MEDIA_URL = '/media/'
 STATIC_URL = '/static/'
 
@@ -231,7 +228,7 @@ MAPENTITY_CONFIG = {
                                             os.getenv('CAPTURE_PORT', '8000')),
     'SENDFILE_HTTP_HEADER': 'X-Accel-Redirect',
     'GEOJSON_PRECISION': 7,
-    'TEMP_DIR': '/tmp',
+    'TEMP_DIR': VAR_DIR / "tmp",
     'MAPENTITY_WEASYPRINT': False,
     'GPX_FIELD_NAME': 'geom_3d',
     'GEOJSON_LAYERS_CACHE_BACKEND': 'default',
