@@ -47,8 +47,8 @@ jobs:
           zip install.zip install /
 
       - name: Attach zip archive as release binary
-          uses: skx/github-action-publish-binaries@master
-          env:
-            GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          with:
-            args: 'install.zip'
+        uses: skx/github-action-publish-binaries@master
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          args: 'install.zip'
