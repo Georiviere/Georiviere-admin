@@ -17,7 +17,7 @@ services:
       - .env
 
   web:
-    image: ghcr.io/georiviere/georiviere-admin:${version|latest}
+    image: ghcr.io/georiviere/georiviere-admin:latest
     depends_on:
       - screamshotter
       - convertit
@@ -28,7 +28,7 @@ services:
     volumes:
       - var:/opt/georiviere-admin/var
     ports:
-      - "${WEB_PORT|8000}:8000"
+      - "${GUNICORN_PORT}:8000"
 
 volumes:
   postgres:
