@@ -2,6 +2,7 @@ name: Docker publish
 
 on:
   release:
+    types: [created]
 #  push:
 #    branches:
 #      - master
