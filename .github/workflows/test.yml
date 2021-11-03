@@ -24,12 +24,14 @@ jobs:
 
       - name: Build Docker image
         run: |
-          docker -v
-          docker-compose -v
-          docker-compose build --build-arg UID=$UID --build-arg REQUIREMENTS=dev-requirements.txt
+          docker-compose build --build-arg UID=$UID
 
       - name: Run tests
         run: |
+          cp .env.dist .env
+          sed -i 's/^\(POSTGRES_PASSWORD=\).*/\1postgres/' .env
+          sed -i 's/^\(POSTGRES_DB=\).*/\1postgres/' .env
+          sed -i 's/^\(POSTGRES_USER=\).*/\1postgres/' .env
           docker-compose run --rm web coverage run ./manage.py test
           docker-compose run --rm web coverage xml
 
