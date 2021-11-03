@@ -49,7 +49,8 @@ jobs:
           cd install
           mkdir georiviere
           cp * ./georiviere 2>/dev/null || :
-          zip ../install.zip georiviere/ .*
+          cp .env.dist ./georiviere
+          zip -r ../install.zip georiviere/
 
       - name: Attach zip archive as release binary
         uses: skx/github-action-publish-binaries@master
