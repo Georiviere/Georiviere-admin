@@ -1,13 +1,28 @@
-.. image:: https://github.com/Georiviere/Georiviere-admin/actions/workflows/test.yml/badge.svg
-
-.. image:: https://codecov.io/gh/Georiviere/Georiviere-admin/branch/master/graph/badge.svg?token=UE1LM2RJIO
-     :target: https://codecov.io/gh/Georiviere/Georiviere-admin
-
 **Georiviere**
 --------------
 
 .. image:: https://github.com/Georiviere.png
-     :height: 200
+    :height: 200
+
+:master: |master-status| |master-coverage|
+
+.. |master-status| image:: https://github.com/Georiviere/Georiviere-admin/actions/workflows/test.yml/badge.svg
+
+.. |master-coverage| image:: https://codecov.io/gh/Georiviere/Georiviere-admin/branch/master/graph/badge.svg?token=UE1LM2RJIO
+    :target: https://codecov.io/gh/Georiviere/Georiviere-admin
+
+
+Install
+-------
+
+Download https://github.com/Georiviere/Georiviere-admin/releases/latest/download/install.zip
+Read the README.rst file
+
+
+Documentation
+-------------
+
+https://geotrek.readthedocs.io/en/
 
 
 License
@@ -20,10 +35,11 @@ License
 
 .. |logo-makina| image:: https://github.com/MakinaCorpus.png
    :target: http://www.makina-corpus.com
-   :width: 200px
+   :max-width: 200px
+   :max-height: 250px
 .. |logo-pnrhj| image:: http://images.parc-haut-jura.fr/upload/images/Logos/2017-02-01_LogoPNR_(JPG).jpg
    :target: https://www.parc-haut-jura.fr/
-   :width: 200px
+   :max-height: 250px
 
 
 Status of sub-projects

@@ -38,3 +38,7 @@ jobs:
       - uses: codecov/codecov-action@v2
         with:
           verbose: true
+
+      - name: Doc is building.
+        run: |
+          docker-compose run --workdir /opt/georiviere-admin/docs --rm web make html
