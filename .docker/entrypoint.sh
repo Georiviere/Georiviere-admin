@@ -5,18 +5,18 @@ set -e
 # Activate venv
 . /opt/venv/bin/activate
 
-mkdir -p /opt/georiviere-adminvar/static \
-         /opt/georiviere-adminvar/conf/extra_static \
-         /opt/georiviere-adminvar/media/upload \
-         /opt/georiviere-adminvar/data \
-         /opt/georiviere-adminvar/cache \
-         /opt/georiviere-adminvar/log \
-         /opt/georiviere-adminvar/conf/extra_templates \
-         /opt/georiviere-adminvar/conf/extra_locale \
-         /opt/georiviere-adminvar/tmp
+mkdir -p /opt/georiviere-admin/var/static \
+         /opt/georiviere-admin/var/conf/extra_static \
+         /opt/georiviere-admin/var/media/upload \
+         /opt/georiviere-admin/var/data \
+         /opt/georiviere-admin/var/cache \
+         /opt/georiviere-admin/var/log \
+         /opt/georiviere-admin/var/conf/extra_templates \
+         /opt/georiviere-admin/var/conf/extra_locale \
+         /opt/georiviere-admin/var/tmp
 
 # if not custom.py present, create it
-if [ ! -f var/conf/custom.py ]; then
+if [ ! -f /opt/georiviere-admin/var/conf/custom.py ]; then
     cp /opt/georiviere-admin/georiviere/settings/custom.py.dist /opt/georiviere-admin/var/conf/custom.py
 fi
 
