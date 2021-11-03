@@ -2,28 +2,26 @@
 
 set -e
 
-cd /opt/georiviere-admin
-
 # Activate venv
 . /opt/venv/bin/activate
 
-mkdir -p var/static \
-         var/conf/extra_static \
-         var/media/upload \
-         var/data \
-         var/cache \
-         var/log \
-         var/conf/extra_templates \
-         var/conf/extra_locale \
-         var/tmp
+mkdir -p /opt/georiviere-admin/var/static \
+         /opt/georiviere-admin/var/conf/extra_static \
+         /opt/georiviere-admin/var/media/upload \
+         /opt/georiviere-admin/var/data \
+         /opt/georiviere-admin/var/cache \
+         /opt/georiviere-admin/var/log \
+         /opt/georiviere-admin/var/conf/extra_templates \
+         /opt/georiviere-admin/var/conf/extra_locale \
+         /opt/georiviere-admin/var/tmp
 
 # if not custom.py present, create it
-if [ ! -f var/conf/custom.py ]; then
-    cp georiviere/settings/custom.py.dist var/conf/custom.py
+if [ ! -f /opt/georiviere-admin/var/conf/custom.py ]; then
+    cp /opt/georiviere-admin/georiviere/settings/custom.py.dist /opt/georiviere-admin/var/conf/custom.py
 fi
 
 # Defaults SECRET_KEY to a random value
-SECRET_KEY_FILE=var/conf/secret_key
+SECRET_KEY_FILE=/opt/georiviere-admin/var/conf/secret_key
 if [ -z $SECRET_KEY ]; then
     if [ ! -f $SECRET_KEY_FILE ]; then
         echo "Generate a secret key"

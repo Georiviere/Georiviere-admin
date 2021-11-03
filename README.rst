@@ -1,7 +1,10 @@
+.. image:: https://github.com/Georiviere/Georiviere-admin/actions/workflows/test.yml/badge.svg
+
 .. image:: https://codecov.io/gh/Georiviere/Georiviere-admin/branch/master/graph/badge.svg?token=UE1LM2RJIO
      :target: https://codecov.io/gh/Georiviere/Georiviere-admin
 
-**Georiviere**, *river* management for *Territories*.
+**Georiviere**
+--------------
 
 .. image:: https://github.com/Georiviere.png
      :height: 200
@@ -30,5 +33,7 @@ Status of sub-projects
 
 * |geotrek| `geotrek <https://github.com/GeotrekCE/Geotrek-admin>`_
 
+.. image:: https://github.com/GeotrekCE.png
+     :height: 200
 
 .. include:: install/README.rst
