@@ -16,8 +16,8 @@ jobs:
   build-and-push-image:
     runs-on: ubuntu-latest
     permissions:
-      contents: write
-      packages: write
+      contents: write  # required to attach zip to release
+      packages: write  # required to publish docker image
 
     steps:
       - name: Checkout repository
@@ -46,7 +46,10 @@ jobs:
 
       - name: Prepare install.zip
         run: |
-          zip install.zip install/
+          cd install
+          mkdir georiviere
+          cp * ./georiviere
+          zip ../install.zip georiviere/ .*
 
       - name: Attach zip archive as release binary
         uses: skx/github-action-publish-binaries@master

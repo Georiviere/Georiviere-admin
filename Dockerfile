@@ -18,6 +18,7 @@ RUN mkdir -p /opt/georiviere-admin/var
 RUN useradd -ms /bin/bash django --uid ${UID}
 RUN chown -R django:django /opt
 
+COPY .docker/update.sh /usr/local/bin/update.sh
 COPY .docker/entrypoint.sh /usr/local/bin/entrypoint.sh
 ENTRYPOINT ["entrypoint.sh"]
 
@@ -86,6 +87,6 @@ COPY --chown=django:django --from=build /opt/venv /opt/venv
 COPY --chown=django:django georiviere /opt/georiviere-admin/georiviere
 COPY --chown=django:django manage.py /opt/georiviere-admin/manage.py
 
-RUN SECRET_KEY=temp /opt/venv/bin/python ./manage.py compilemessages
+RUN /opt/venv/bin/python ./manage.py compilemessages
 
 CMD ["gunicorn", "georiviere.wsgi:application"]
