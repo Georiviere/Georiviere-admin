@@ -12,10 +12,9 @@ Requirements
 Install
 -------
 
-* Go to https://github.com/Georiviere/Georiviere-admin/releases and download last release install.zip asset
+* Download `zip package <https://github.com/Georiviere/Georiviere-admin/releases/latest/download/install.zip>`
 * Unzip it where you want and enter it
   * unzip install.zip
-  * mv install georiviere
   * cd georiviere
 * Prepare environment variables
   * cp .env.dist .env
