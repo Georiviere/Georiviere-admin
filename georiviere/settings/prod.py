@@ -26,8 +26,6 @@ EMAIL_USE_SSL = bool(os.getenv('EMAIL_USE_SSL', False))
 #     ('manager1', 'manager1@geotrek.fr'), # change with tuple ('your name', 'your@address.mail')
 # )
 
-ALLOWED_HOSTS = os.getenv('DOMAIN_NAME').split(',')
-
 sentry_sdk.init(
     dsn=os.getenv('SENTRY_DSN'),
     environment=os.getenv('SENTRY_ENVIRONMENT'),

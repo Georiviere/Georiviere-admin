@@ -41,7 +41,7 @@ SECRET_KEY = os.getenv('SECRET_KEY')
 DEBUG = False
 TEST = 'test' in sys.argv
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = os.getenv('SERVER_NAME').split(',')
 
 # Application definition
 
