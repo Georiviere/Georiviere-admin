@@ -9,6 +9,7 @@ services:
   screamshotter:
     image: makinacorpus/screamshotter:v2
 
+  # delete postgres section if you use external database.
   postgres:
     image: postgis/postgis:13-3.1
     volumes:
@@ -26,9 +27,10 @@ services:
     env_file:
       - .env
     volumes:
-      - var:/opt/georiviere-admin/var
+      - ./var:/opt/georiviere-admin/var
     ports:
-      - "${GUNICORN_PORT}:8000"
+      - "127.0.0.1:${GUNICORN_PORT}:8000"
 
 volumes:
+  # delete postgres section if you use external database.
   postgres:
