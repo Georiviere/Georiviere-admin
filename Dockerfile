@@ -20,10 +20,8 @@ RUN chown -R django:django /opt
 
 COPY .docker/update.sh /usr/local/bin/update.sh
 COPY .docker/entrypoint.sh /usr/local/bin/entrypoint.sh
-ENTRYPOINT ["entrypoint.sh"]
 
 WORKDIR /opt/georiviere-admin
-VOLUME /opt/georiviere-admin/var
 
 RUN apt-get update -qq && apt-get install -y -qq \
     python3.9 \
@@ -47,9 +45,15 @@ RUN apt-get update -qq && apt-get install -y -qq \
     libpq5 &&\
     apt-get clean all && rm -rf /var/lib/apt/lists/* && rm -rf /var/cache/apt/*
 
+USER django
+ENTRYPOINT ["entrypoint.sh"]
+EXPOSE 8000
+
 FROM base as build
 
 ARG REQUIREMENTS=requirements.txt
+
+USER root
 
 RUN apt-get update -qq && apt-get install -y -qq \
     git \
@@ -75,9 +79,13 @@ COPY ${REQUIREMENTS} /opt/requirements.txt
 RUN  /opt/venv/bin/pip install --no-cache-dir django==2.2.*
 RUN  /opt/venv/bin/pip install --no-cache-dir -r /opt/requirements.txt
 
+CMD ./manage.py runserver 0.0.0.0:8000
+
 FROM base as prod
 
 ENV GUNICORN_CMD_ARGS "--workers 1 --timeout 3600 --bind 0.0.0.0:8000 --timeout 3600"
+
+USER root
 
 RUN apt-get update -qq && \
     apt-get full-upgrade && \

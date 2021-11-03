@@ -38,11 +38,10 @@ services:
       - .:/opt/georiviere-admin
     ports:
       - "8000:8000"
-    command: ./manage.py runserver 0.0.0.0:8000
     networks:
       default:
         aliases:
-          - ${SERVER_NAME}
+          - ${SERVER_NAME}  # services should access web container with browser url domain used (georiviere.local)
 
 volumes:
   postgres:
