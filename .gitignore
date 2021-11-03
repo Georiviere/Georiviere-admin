@@ -8,3 +8,4 @@ var/
 .coverage
 /public/media/
 !/public/media/.gitempty
+/docs/_build/
