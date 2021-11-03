@@ -23,7 +23,7 @@ Extract, and read the README.rst file
 Documentation
 -------------
 
-https://georiviere.readthedocs.io/en/latest/
+https://georiviere.readthedocs.io/en/stable/
 
 
 License

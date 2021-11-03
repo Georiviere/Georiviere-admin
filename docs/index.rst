@@ -16,6 +16,13 @@ Welcome to Georiviere's documentation!
     publication
 
 
+.. toctree::
+    :caption: Changelog & authors
+    :maxdepth: 2
+
+    changelog
+    authors
+
 
 Indices and tables
 ==================
