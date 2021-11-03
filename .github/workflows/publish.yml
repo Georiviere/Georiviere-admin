@@ -48,7 +48,7 @@ jobs:
         run: |
           cd install
           mkdir georiviere
-          cp * ./georiviere
+          cp * ./georiviere 2>/dev/null || :
           zip ../install.zip georiviere/ .*
 
       - name: Attach zip archive as release binary
