@@ -35,11 +35,11 @@ License
 
 .. |logo-makina| image:: https://github.com/MakinaCorpus.png
    :target: http://www.makina-corpus.com
-   :max-width: 200px
-   :max-height: 250px
+   :height: 200
+
 .. |logo-pnrhj| image:: http://images.parc-haut-jura.fr/upload/images/Logos/2017-02-01_LogoPNR_(JPG).jpg
    :target: https://www.parc-haut-jura.fr/
-   :max-height: 250px
+   :height: 200
 
 
 Status of sub-projects
