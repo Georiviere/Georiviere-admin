@@ -15,8 +15,9 @@
 Install
 -------
 
-Download https://github.com/Georiviere/Georiviere-admin/releases/latest/download/install.zip
-Read the README.rst file
+Download `zip archive <https://github.com/Georiviere/Georiviere-admin/releases/latest/download/install.zip>`
+
+Extract, and read the README.rst file
 
 
 Documentation
