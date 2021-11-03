@@ -30,3 +30,5 @@ Status of sub-projects
 
 * |geotrek| `geotrek <https://github.com/GeotrekCE/Geotrek-admin>`_
 
+
+.. include:: install/README.rst

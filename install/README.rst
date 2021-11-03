@@ -1,16 +1,13 @@
-INSTALL
-=======
-
 Requirements
-------------
-* You need docker, docker-compose and nginx
+============
+* You need docker installed. Docker-compose is recommended in the configuration below.
 * Optional : if you want to use external database, prepare a postresql database with postgis enable and dedicated user.
 
 * You can use external database by commenting postgres references in docker-compose.yml
   * set POSTGRES_HOST, POSTGRES_USER and POSTGRES_DATABASE variables in .env
 
 Install
--------
+=======
 
 * Download `zip package <https://github.com/Georiviere/Georiviere-admin/releases/latest/download/install.zip>`
 * Unzip it where you want and enter it
@@ -30,7 +27,7 @@ Install
   * docker-compose up
 
 Update
-------
+============
 
 * Read `release notes <https://github.com/Georiviere/Georiviere-admin/releases>` about bugfix, news and breaking changes.
 * Backup your data (database and var folder)
