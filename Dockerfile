@@ -87,6 +87,8 @@ COPY --chown=django:django --from=build /opt/venv /opt/venv
 COPY --chown=django:django georiviere /opt/georiviere-admin/georiviere
 COPY --chown=django:django manage.py /opt/georiviere-admin/manage.py
 
+USER django
+
 RUN SECRET_KEY=temp-secret-key /opt/venv/bin/python ./manage.py compilemessages
 
 CMD ["gunicorn", "georiviere.wsgi:application"]
