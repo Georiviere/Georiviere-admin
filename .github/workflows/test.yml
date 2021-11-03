@@ -20,7 +20,10 @@ jobs:
       - uses: actions/checkout@v2
       - name: Prepare tests settings
         run: |
-          cp .env.tests.dist .env
+          cp .env.dist .env
+          sed -i 's/^\(POSTGRES_PASSWORD=\).*/\1postgres/' .env
+          sed -i 's/^\(POSTGRES_DB=\).*/\1postgres/' .env
+          sed -i 's/^\(POSTGRES_USER=\).*/\1postgres/' .env
 
       - name: Build Docker image
         run: |
@@ -28,10 +31,6 @@ jobs:
 
       - name: Run tests
         run: |
-          cp .env.dist .env
-          sed -i 's/^\(POSTGRES_PASSWORD=\).*/\1postgres/' .env
-          sed -i 's/^\(POSTGRES_DB=\).*/\1postgres/' .env
-          sed -i 's/^\(POSTGRES_USER=\).*/\1postgres/' .env
           docker-compose run --rm web coverage run ./manage.py test
           docker-compose run --rm web coverage xml
 
