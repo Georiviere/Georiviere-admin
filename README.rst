@@ -23,7 +23,7 @@ Extract, and read the README.rst file
 Documentation
 -------------
 
-https://geotrek.readthedocs.io/en/
+https://georiviere.readthedocs.io/en/latest/
 
 
 License
