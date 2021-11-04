@@ -5,9 +5,13 @@ name: Test CI
 
 on:
   pull_request:
+    paths-ignore:
+      - docs/*
   push:
     branches:
       - master
+    paths-ignore:
+      - docs/*
 
 env:
   DEBIAN_FRONTEND: noninteractive
@@ -31,6 +35,7 @@ jobs:
 
       - name: Run tests
         run: |
+          docker-compose down -v
           docker-compose run --rm web coverage run ./manage.py test
           docker-compose run --rm web coverage xml
 
