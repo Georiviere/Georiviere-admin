@@ -11,7 +11,7 @@ services:
 
   # delete postgres section if you use external database.
   postgres:
-    image: postgis/postgis:12-2.5
+    image: juank/postgis:14-3.1
     volumes:
       - postgres:/var/lib/postgresql/data
     env_file:
