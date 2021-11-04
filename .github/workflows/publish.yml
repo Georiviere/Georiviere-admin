@@ -47,7 +47,7 @@ jobs:
       - name: Prepare install.zip
         run: |
           cd install
-          mkdir georiviere
+          mkdir -p georiviere/var
           cp * ./georiviere 2>/dev/null || :
           cp .env.dist ./georiviere
           zip -r ../install.zip georiviere/

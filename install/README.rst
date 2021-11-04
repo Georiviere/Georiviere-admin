@@ -30,16 +30,15 @@ Install
 
 .. code-block :: bash
 
-    cp .env.dist .env
+    mv .env.dist .env
 
 
--> Set all required values
+**-> Set all required values**
 
-* Set default var folder
+* Init default var folder
 
 .. code-block :: bash
 
-    mkdir var
     docker-compose run --rm web bash -c "exit"
 
 
