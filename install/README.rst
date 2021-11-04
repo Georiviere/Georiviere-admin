@@ -6,35 +6,71 @@ Requirements
 * You can use external database by commenting postgres references in docker-compose.yml
   * set POSTGRES_HOST, POSTGRES_USER and POSTGRES_DATABASE variables in .env
 
+* You can use external nginx proxy. Use and edit provided nginx conf file.
+
+
 Install
 =======
 
-* Download `zip package <https://github.com/Georiviere/Georiviere-admin/releases/latest/download/install.zip>`
+* Download `zip package <https://github.com/Georiviere/Georiviere-admin/releases/latest/download/install.zip>`_
 * Unzip it where you want and enter it
-  * unzip install.zip
-  * cd georiviere
+
+.. code-block :: bash
+
+    unzip install.zip
+    cd georiviere
+
 * Prepare environment variables
-  * cp .env.dist .env
-  * -> Set all required values
+
+.. code-block :: bash
+    cp .env.dist .env
+
+* -> Set all required values
+
 * Set default var folder
-  * docker-compose run --rm web exit
+
+.. code-block :: bash
+    mkdir var
+    docker-compose run --rm web bash -c "exit"
+
 * Set your var/conf/custom.py if required (as geotrek overlay, some settings should be set BEFORE database initialization)
+
 * Init database and project config
-  * docker-compose run --rm web update.sh
+
+  .. code-block :: bash
+      docker-compose run --rm web update.sh
+
 * Create your super user
-  * docker-compose run --rm web ./manage.py createsuperuser
-* Launch
-  * docker-compose up
+
+  .. code-block :: bash
+      docker-compose run --rm web ./manage.py createsuperuser
+
+
+* Launch stack
+
+  .. code-block :: bash
+      docker-compose up
+
 
 Update
 ============
 
-* Read `release notes <https://github.com/Georiviere/Georiviere-admin/releases>` about bugfix, news and breaking changes.
+* Read `release notes <https://github.com/Georiviere/Georiviere-admin/releases>`_ about bugfix, news and breaking changes.
+
 * Backup your data (database and var folder)
+
 * Pull latest image
-  * docker-compose pull
+
+  .. code-block :: bash
+      docker-compose pull
+
 * Run post update script
-  * docker-compose run --rm web update.sh
+
+  .. code-block :: bash
+      docker-compose run --rm web update.sh
+
 * Relaunch you docker-compose stack
-  * docker-compose down
-  * docker-compose up
+
+  .. code-block :: bash
+      docker-compose down
+      docker-compose up
