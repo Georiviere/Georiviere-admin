@@ -10,3 +10,5 @@ var/
 !/public/media/.gitempty
 /docs/_build/
 /georiviere/settings/custom.py
+/install/georiviere/
+/install.zip
