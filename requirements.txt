@@ -169,11 +169,11 @@ geojson==2.5.0
     # via
     #   geotrek
     #   tif2geojson
-geotrek @ git+https://github.com/GeotrekCE/Geotrek-admin.git@2.61.1
+geotrek @ git+https://github.com/GeotrekCE/Geotrek-admin.git@2.71.0
     # via -r requirements.in
 gpxpy==1.4.2
     # via geotrek
-gunicorn==20.0.4
+gunicorn==20.1.0
     # via -r requirements.in
 html5lib==1.1
     # via weasyprint
