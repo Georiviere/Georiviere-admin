@@ -26,7 +26,7 @@ Set required values, for postgres database access
 
 .. code-block :: bash
 
-    docker-compose run ./manage.py test
+    docker-compose run --rm web ./manage.py test
 
 
 * With coverage :
