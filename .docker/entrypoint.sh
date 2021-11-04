@@ -17,7 +17,7 @@ mkdir -p /opt/georiviere-admin/var/static \
 
 # if not custom.py present, create it
 if [ ! -f /opt/georiviere-admin/var/conf/custom.py ]; then
-    cp /opt/georiviere-admin/georiviere/settings/custom.py.dist /opt/georiviere-admin/var/conf/custom.py
+    cp /opt/georiviere-admin/georiviere/settings/custom.dist.py /opt/georiviere-admin/var/conf/custom.py
 fi
 
 # Defaults SECRET_KEY to a random value

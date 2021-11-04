@@ -231,7 +231,7 @@ MAPENTITY_CONFIG = {
     'TEMP_DIR': VAR_DIR / "tmp",
     'MAPENTITY_WEASYPRINT': False,
     'GPX_FIELD_NAME': 'geom_3d',
-    'GEOJSON_LAYERS_CACHE_BACKEND': 'default',
+    'GEOJSON_LAYERS_CACHE_BACKEND': 'fat',
     'MAP_STYLES': {
         'city': {'weight': 4, 'color': '#FF9700', 'opacity': 0.3, 'fillOpacity': 0.0},
         'district': {'weight': 6, 'color': '#FF9700', 'opacity': 0.3, 'fillOpacity': 0.0, 'dashArray': '12, 12'},
@@ -264,6 +264,11 @@ CACHES = {
         'BACKEND': 'django.core.cache.backends.memcached.MemcachedCache',
         'LOCATION': os.getenv('MEMCACHED_URL', 'memcached:11211').replace('memcached://', ''),
     },
+    'fat': {
+        'BACKEND': 'django.core.cache.backends.filebased.FileBasedCache',
+        'LOCATION': VAR_DIR / "cache",
+        'TIMEOUT': 28800,  # 8 hours
+    }
 }
 
 PATHS_LINE_MARKER = 'dotL'
@@ -286,3 +291,32 @@ LAND_BBOX_AREAS_ENABLED = True
 AUTHENT_DATABASE = None
 AUTHENT_TABLENAME = None
 DEFAULT_STRUCTURE_NAME = os.getenv('DEFAULT_STRUCTURE', 'My structure')
+
+#
+# MAIL SETTINGS
+# ..........................
+DEFAULT_FROM_EMAIL = os.getenv('SERVER_EMAIL', 'root@localhost')
+# address will be set for sent emails (ex: noreply@yourdomain.net)
+SERVER_EMAIL = DEFAULT_FROM_EMAIL
+
+EMAIL_HOST = os.getenv('EMAIL_HOST', 'localhost')
+EMAIL_HOST_USER = os.getenv('EMAIL_HOST_USER', '')
+EMAIL_HOST_PASSWORD = os.getenv('EMAIL_HOST_PASSWORD', '')
+EMAIL_PORT = os.getenv('EMAIL_HOST_PORT', 25)
+EMAIL_USE_TLS = bool(os.getenv('EMAIL_USE_TLS', False))
+EMAIL_USE_SSL = bool(os.getenv('EMAIL_USE_SSL', False))
+
+if os.getenv('SSL_ENABLED', default=0):
+    # SECURITY
+    SECURE_CONTENT_TYPE_NOSNIFF = True
+    SECURE_BROWSER_XSS_FILTER = True
+    CSRF_COOKIE_HTTPONLY = True
+    CSRF_COOKIE_SECURE = True
+    SESSION_COOKIE_SECURE = True
+    SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
+
+# Override with custom settings
+custom_settings_file = os.getenv('CUSTOM_SETTINGS_FILE')
+if custom_settings_file and os.path.exists(custom_settings_file) and not TEST:
+    with open(custom_settings_file, 'r') as f:
+        exec(f.read())
