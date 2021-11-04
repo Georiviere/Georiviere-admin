@@ -28,7 +28,10 @@ services:
       - .env
     volumes:
       - ./var:/opt/georiviere-admin/var
+#    ports:
+#      - "127.0.0.1:8000:8000"  # uncomment to use with external nginx proxy
 
+  # delete nginx section if you want to use external nginx proxy
   nginx:
     image: nginx:latest
     depends_on:
