@@ -1,5 +1,4 @@
-from django.contrib.gis.db.models.functions import GeoFunc
-from django.contrib.gis.db.models import GeometryField
+from django.contrib.gis.db.models.functions import GeoFunc, GeomOutputGeoFunc
 from django.db.models import FloatField
 
 from georiviere.fields import ElevationInfosField
@@ -17,7 +16,5 @@ class Length3D(GeoFunc):
     output_field = FloatField()
 
 
-class LineSubString(GeoFunc):
-    function = 'ST_Line_Substring'
+class LineSubString(GeomOutputGeoFunc):
     geom_param_pos = (0, )
-    output_field = GeometryField()

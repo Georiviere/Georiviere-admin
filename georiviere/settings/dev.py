@@ -23,3 +23,6 @@ AUTH_PASSWORD_VALIDATORS = []
 
 # Disable cache
 MAPENTITY_CONFIG['GEOJSON_LAYERS_CACHE_BACKEND'] = 'default'
+
+# Use postgis image template to make postgres/postgis extensions available in test database (postgres_raster)
+DATABASES['default'].setdefault('TEST', {'TEMPLATE': 'template_postgis'})
