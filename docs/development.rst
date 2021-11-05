@@ -15,6 +15,20 @@ Copy the env dist file
 Set required values, for postgres database access
 
 
+* Init database:
+
+.. code-block :: bash
+
+    docker-compose run --rm web ./manage.py migrate
+
+
+* Create user:
+
+.. code-block :: bash
+
+    docker-compose run --rm web ./manage.py createsuperuser
+
+
 * Run:
 
 .. code-block :: bash
