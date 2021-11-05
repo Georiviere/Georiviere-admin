@@ -1,7 +1,8 @@
 -r requirements.txt
 
-# to fix in geotrek
+# tests
 freezegun
+tblib
 
 # dev
 pip-tools

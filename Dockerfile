@@ -74,10 +74,10 @@ USER django
 
 RUN python3.9 -m venv /opt/venv
 RUN  /opt/venv/bin/pip install --no-cache-dir pip setuptools wheel -U
-COPY ${REQUIREMENTS} /opt/requirements.txt
-
 # geotrek setup fix : it required django before being installed... TODO: fix it in geotrek setup.py
 RUN  /opt/venv/bin/pip install --no-cache-dir django==2.2.*
+
+COPY ${REQUIREMENTS} /opt/requirements.txt
 RUN  /opt/venv/bin/pip install --no-cache-dir -r /opt/requirements.txt
 
 CMD ./manage.py runserver 0.0.0.0:8000

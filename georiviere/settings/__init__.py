@@ -169,6 +169,9 @@ ALTIMETRIC_AREA_MARGIN = 0.15
 
 BASE_INTERSECTION_MARGIN = 2000
 
+HIDDEN_FORM_FIELDS = {}
+COLUMNS_LISTS = {}
+
 # Password validation
 # https://docs.djangoproject.com/en/3.1/ref/settings/#auth-password-validators
 
