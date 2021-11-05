@@ -103,7 +103,7 @@ msgid "Administrative file"
 msgstr "Dossier administratif"
 
 msgid "Administrative files"
-msgstr "Dossiers administratif"
+msgstr "Dossiers administratifs"
 
 msgid "Add a new admin file"
 msgstr "Ajouter un dossier administratif"
