@@ -1,6 +1,3 @@
-# This workflow will install Python dependencies, run tests and lint with a variety of Python versions
-# For more information see: https://help.github.com/actions/language-and-framework-guides/using-python-with-github-actions
-
 name: Georiviere CI & publication
 
 on:
@@ -68,6 +65,10 @@ jobs:
       - name: Build Docker image
         run: |
           docker-compose build --build-arg UID=$UID
+
+      - name: Check no pending migrations
+        run: |
+          docker-compose run --rm web ./manage.py makemigrations --check
 
       - name: Run tests
         run: |
