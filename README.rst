@@ -1,4 +1,4 @@
-:master: |master-status| |master-coverage| |master-rtd|
+:Build status (master): |master-status| |master-coverage| |master-rtd|
 
 .. |master-status| image:: https://github.com/Georiviere/Georiviere-admin/actions/workflows/test.yml/badge.svg
 
@@ -17,7 +17,7 @@
 
 * **Georiviere**, community software available under Open Source license.
 * Trademark is registered to **Institut National de la Propriété Intellectuelle** as a word mark under n°4691040.
-* `Brand policy <https://github.com/Georiviere/Georiviere-admin/releases/latest/download/install.zip>`_
+* `Brand policy <./docs/Georiviere-politiquemarque--1.0.pdf>`_
 
 Install
 -------
