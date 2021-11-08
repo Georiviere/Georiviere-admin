@@ -39,11 +39,13 @@ License
 -------
 
 * OpenSource - License BSD 3-Clause
-* Copyright (c) 2021 - Makina Corpus / Parc National du Haut-Jura
 
 
 Maintainers
 -----------
+
+* Parc National du Haut-Jura
+* Makina Corpus
 
 |logo-pnrhj| |logo-makina|
 
