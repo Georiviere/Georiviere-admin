@@ -15,9 +15,9 @@
 .. image:: https://github.com/Georiviere.png
     :height: 150
 
-* Georiviere, logiciel communautaire disponible sous licence Open Source
-* La marque « GEORIVIERE » est enregistrée auprès de l’Institut National de la Propriété Intellectuelle en tant que marque verbale sous le n°4691040
-* `Politique de marque <https://github.com/Georiviere/Georiviere-admin/releases/latest/download/install.zip>`_
+* **Georiviere**, community software available under Open Source license.
+* Trademark is registered to **Institut National de la Propriété Intellectuelle** as a word mark under n°4691040.
+* `Brand policy <https://github.com/Georiviere/Georiviere-admin/releases/latest/download/install.zip>`_
 
 Install
 -------
@@ -41,7 +41,7 @@ License
 Maintainers
 -----------
 
-* Copyright (c) 2021 - Makina Corpus / Parc National du Haut Jura
+* Copyright (c) 2021 - Makina Corpus / Parc National du Haut-Jura
 
 |logo-pnrhj| |logo-makina|
 
