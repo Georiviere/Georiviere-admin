@@ -9,6 +9,7 @@
     :alt: Documentation
     :target: https://georiviere.readthedocs.io
 
+
 **Georiviere**
 --------------
 
@@ -18,6 +19,7 @@
 * **Georiviere**, community software available under Open Source licence.
 * Trademark is registered to **Institut National de la Propriété Intellectuelle** as a word mark under n°4691040.
 * `Brand policy <./docs/Georiviere-politiquemarque--1.0.pdf>`_
+
 
 Install
 -------
@@ -37,11 +39,11 @@ License
 -------
 
 * OpenSource - License BSD 3-Clause
+* Copyright (c) 2021 - Makina Corpus / Parc National du Haut-Jura
+
 
 Maintainers
 -----------
-
-* Copyright (c) 2021 - Makina Corpus / Parc National du Haut-Jura
 
 |logo-pnrhj| |logo-makina|
 
@@ -52,6 +54,7 @@ Maintainers
 .. |logo-makina| image:: https://github.com/MakinaCorpus.png
    :target: http://www.makina-corpus.com
    :height: 200
+
 
 Status of sub-projects
 ----------------------
