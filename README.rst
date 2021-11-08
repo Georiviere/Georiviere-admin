@@ -52,7 +52,7 @@ Maintainers
    :height: 200
 
 .. |logo-makina| image:: https://github.com/MakinaCorpus.png
-   :target: http://www.makina-corpus.com
+   :target: https://www.makina-corpus.com
    :height: 200
 
 
