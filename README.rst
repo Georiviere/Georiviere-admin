@@ -1,6 +1,6 @@
 :Build status (master): |master-status| |master-coverage| |master-rtd|
 
-.. |master-status| image:: https://github.com/Georiviere/Georiviere-admin/actions/workflows/test.yml/badge.svg
+.. |master-status| image:: https://github.com/Georiviere/Georiviere-admin/actions/workflows/ci.yml/badge.svg
 
 .. |master-coverage| image:: https://codecov.io/gh/Georiviere/Georiviere-admin/branch/master/graph/badge.svg?token=UE1LM2RJIO
     :target: https://codecov.io/gh/Georiviere/Georiviere-admin

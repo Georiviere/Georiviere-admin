@@ -1,4 +1,4 @@
-name: Georiviere CI & publication
+name: CI
 
 on:
   pull_request:
