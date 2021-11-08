@@ -7,6 +7,7 @@ Welcome to Georiviere's documentation!
 
     install
     configuration
+    import_data
 
 .. toctree::
     :caption: Development & publication
