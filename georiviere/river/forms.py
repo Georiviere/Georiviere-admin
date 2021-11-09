@@ -1,3 +1,5 @@
+from copy import deepcopy
+
 from django import forms
 from django.contrib.gis.geos import Point
 
@@ -12,9 +14,16 @@ class StreamForm(CommonForm):
 
     geomfields = ['geom']
 
-    class Meta:
+    class Meta(CommonForm):
         fields = "__all__"
         model = Stream
+
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        self.fieldslayout = deepcopy(self.fieldslayout)
+        self.fields['source_location'].label = ''
+        self.fields['source_location'].widget.target_map = 'geom'
+        self.fields['source_location'].widget.geometry_field_class = 'SourceLocationField'
 
     def save(self, commit=True):
         """Set source_location on creation with stream geom first point, if it is not set in form"""
