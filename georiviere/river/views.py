@@ -47,6 +47,12 @@ class StreamDocumentWeasyprint(mapentity_views.MapEntityDocumentWeasyprint):
 class StreamDetail(mapentity_views.MapEntityDetail):
     queryset = Stream.objects.all()
 
+    @property
+    def icon_sizes(self):
+        return {
+            'source': settings.ICON_SIZES['river_source'],
+        }
+
     def get_context_data(self, *args, **kwargs):
         context = super(StreamDetail, self).get_context_data(*args, **kwargs)
         context['can_edit'] = self.get_object().same_structure(self.request.user)

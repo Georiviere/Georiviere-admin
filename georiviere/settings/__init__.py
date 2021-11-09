@@ -278,6 +278,10 @@ CACHES = {
 PATHS_LINE_MARKER = 'dotL'
 SNAP_DISTANCE = 30
 
+ICON_SIZES = {
+    'river_source': 18,
+}
+
 LOGIN_REDIRECT_URL = '/'
 LOGOUT_REDIRECT_URL = '/'
 

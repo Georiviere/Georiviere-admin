@@ -1,20 +1,8 @@
 {% extends "mapentity/mapentity_detail.html" %}
-
-{% load static geojson_tags %}
-
-{% block mappanel %}
-
-    {{ block.super }}
-
-    {% include "altimetry/altimetric_profile_fragment.html" with profile_url="river:stream_profile_svg" %}
-
-{% endblock mappanel %}
+{% load i18n l10n static geojson_tags thumbnail %}
 
 {% block extrabody %}
-
     {{ block.super }}
-
-    {% include "georiviere/javascript_detail_river.html" with object=object %}
 
     <script type="text/javascript">
         $(window).on('detailmap:ready', function (e, data) {
@@ -24,14 +12,15 @@
             // Source
             console.log('pouet')
             {% if object.source_location %}
+            /*
                 var sourceIcon = L.icon({
-                    iconUrl: "{% static "images/source.svg" %}",
+                    iconUrl: "{% static "river/source.png" %}",
                     iconSize: [{{ view.icon_sizes.source }}, {{ view.icon_sizes.source }}],
                     iconAnchor: [{{ view.icon_sizes.source }}/2, {{ view.icon_sizes.source }}/2],
-                });
+                });*/
                 var point = {{object.source_location|geojsonfeature|safe}};
                 var location = point.geometry.coordinates.reverse();
-                L.marker(location, {icon: sourceIcon})
+                L.marker(location)
                  .bindPopup("Source")
                  .addTo(map);
 
@@ -40,7 +29,5 @@
                 bounds.extend(location);
                 map.fitBounds(bounds);
             {% endif %}
-        });
     </script>
-
 {% endblock extrabody %}
