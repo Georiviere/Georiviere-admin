@@ -1,4 +1,4 @@
-name: Georiviere CI & publication
+name: CI
 
 on:
   pull_request:
@@ -88,7 +88,7 @@ jobs:
     env:
       REGISTRY: ghcr.io
       IMAGE_NAME: ${{ github.repository }}
-    if: ${{ github.event_name == 'release' && github.event.action == 'created' }}
+    if: ${{ (github.event_name == 'release' && github.event.action == 'created') || (github.ref == 'refs/heads/master' && github.event_name != 'pull_request') }}
     steps:
       - name: Checkout repository
         uses: actions/checkout@v2
