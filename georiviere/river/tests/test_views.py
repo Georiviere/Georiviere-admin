@@ -1,15 +1,15 @@
-from tempfile import TemporaryDirectory
-
 from django.conf import settings
-from django.contrib.gis.geos import GEOSGeometry
+from django.contrib.gis.geos import GEOSGeometry, Point
 from django.test import override_settings, TestCase
 from django.urls import reverse
 from django.utils.translation import gettext_lazy as _
+from tempfile import TemporaryDirectory
+
 from geotrek.authent.factories import StructureFactory, UserFactory
 
-from georiviere.description.models import Status
-from georiviere.description.tests.factories import StatusOnStreamFactory
 from georiviere.tests import CommonRiverTest
+from georiviere.description.tests.factories import StatusOnStreamFactory
+from georiviere.description.models import Status
 from georiviere.river.models import Stream
 from georiviere.river.tests.factories import StreamFactory
 
@@ -32,6 +32,7 @@ class StreamViewTestCase(CommonRiverTest):
             'min_elevation': self.obj.min_elevation,
             'max_elevation': self.obj.max_elevation,
             'slope': self.obj.slope,
+            'source_location': self.obj.source_location,
             'name': self.obj.name,
             'geom': self.obj.geom.ewkt,
         }
@@ -49,6 +50,54 @@ class StreamViewTestCase(CommonRiverTest):
             'geom': '{"geom": "%s", "snap": [%s]}' % (geom_transform.ewkt,
                                                       ','.join(['null'] * len(geom_transform.coords))),
         }
+
+    def test_create_stream_default_source_location(self):
+        """
+        Check if source_location is set on stream creation
+        """
+        self.login()
+
+        self.client.post(self._get_add_url(), self.get_good_data())
+        stream = self.model.objects.last()
+        self.assertEqual(stream.source_location.coords, stream.geom[0])
+
+        # Set source_location using geom last point, then check if it's not modified on update
+        stream.source_location = Point(stream.geom[-1][0], stream.geom[-1][1], srid=2154)
+        stream.save()
+        self._post_update_form(stream)
+        self.assertNotEqual(stream.source_location.coords, stream.geom[0])
+
+    def test_update_stream_source_location_unmodified(self):
+        """
+        Check if source_location is unmodified on stream update
+        """
+        self.login()
+
+        self.client.post(self._get_add_url(), self.get_good_data())
+        stream = self.model.objects.last()
+        self.assertEqual(stream.source_location.coords, stream.geom[0])
+
+        # Set source_location using geom last point, then check if it's not modified on form update
+        new_source_location = Point(stream.geom[-1][0], stream.geom[-1][1], srid=2154)
+        stream.source_location = new_source_location
+        stream.save()
+        self._post_update_form(stream)
+        self.assertNotEqual(stream.source_location.coords, stream.geom[0])
+        self.assertEqual(stream.source_location.coords, new_source_location.coords)
+
+    def test_create_stream_with_source_location(self):
+        """
+        Check if source_location is unmodified on stream creation if it is set
+        """
+        self.login()
+
+        stream_data = self.get_good_data()
+        point_data = Point(400000, 6000000, srid=2154)
+        stream_data['source_location'] = point_data.ewkt
+        self.client.post(self._get_add_url(), stream_data)
+        stream = self.model.objects.last()
+        self.assertNotEqual(stream.source_location.coords, stream.geom[0])
+        self.assertEqual(stream.source_location.coords, point_data.coords)
 
 
 class CutTopologyTestCase(TestCase):
@@ -73,7 +122,7 @@ class CutTopologyTestCase(TestCase):
         self.assertEqual(Status.objects.count(), 2)
         self.assertAlmostEqual(obj.geom.transform(4326, clone=True).coords[0][0], 4)
 
-    def test_canot_cut_topology_locatepoint_beginning(self):
+    def test_cannot_cut_topology_locatepoint_beginning(self):
         geom = GEOSGeometry('SRID=4326;LINESTRING(3 40, 4 40, 5 40)')
         obj = StatusOnStreamFactory.create(geom=geom.transform(2154, clone=True))
         self.assertEqual(Status.objects.count(), 1)
@@ -86,7 +135,7 @@ class CutTopologyTestCase(TestCase):
         self.assertEqual(Status.objects.count(), 1)
         self.assertEqual(str([msg for msg in response.context['messages']][0]), 'Topology could not be cut')
 
-    def test_canot_cut_topology_locatepoint_ending(self):
+    def test_cannot_cut_topology_locatepoint_ending(self):
         geom = GEOSGeometry('SRID=4326;LINESTRING(3 40, 4 40, 5 40)')
         obj = StatusOnStreamFactory.create(geom=geom.transform(2154, clone=True))
         self.assertEqual(Status.objects.count(), 1)
