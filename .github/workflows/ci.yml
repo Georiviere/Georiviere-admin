@@ -83,7 +83,6 @@ jobs:
     runs-on: ubuntu-latest
     needs: [flake8, doc_build, unittests]
     permissions:
-      contents: write  # required to attach zip to release
       packages: write  # required to publish docker image
     env:
       REGISTRY: ghcr.io
@@ -114,6 +113,15 @@ jobs:
           tags: ${{ steps.meta.outputs.tags }}
           labels: ${{ steps.meta.outputs.labels }}
 
+  attach_install_release:
+    runs-on: ubuntu-latest
+    needs: [ build-and-push-image ]
+    permissions:
+      contents: write  # required to attach zip to release
+    if: ${{ github.event_name == 'release' && github.event.action == 'created' }}
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v2
       - name: Prepare install.zip
         run: |
           cd install
