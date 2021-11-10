@@ -33,5 +33,5 @@ a.leaflet-draw-toolbar-button-enabled, .leaflet-control.enabled a {
 }
 
 .pointtopology-control {
-    background-image: url(images/scissor.png);
+    background-image: url('images/scissor.png');
 }
