@@ -102,7 +102,6 @@ L.Control.PointTopology = L.Control.extend({
     }
 });
 
-
 L.Handler.PointTopology = L.Draw.Marker.extend({
     initialize: function (map, guidesLayer, options) {
         L.Draw.Marker.prototype.initialize.call(this, map, options);
@@ -110,6 +109,8 @@ L.Handler.PointTopology = L.Draw.Marker.extend({
         this._topoMarker = null;
         this._partTopo = null;
         this._guidesLayer = guidesLayer;
+        map.addGuideLayer(guidesLayer);
+        map.togglePin();
         map.on('draw:created', this._onDrawn, this);
     },
 
@@ -131,9 +132,6 @@ L.Handler.PointTopology = L.Draw.Marker.extend({
     restoreTopology: function (topo) {
         this._topoMarker = L.marker([topo.lat, topo.lng]);
         this._splitTopology(this._topoMarker);
-        if (topo.snap) {
-            this._topoMarker.fire('move');  // snap to closest
-        }
     },
 
     _onDrawn: function (e) {
@@ -150,36 +148,33 @@ L.Handler.PointTopology = L.Draw.Marker.extend({
 
     _splitTopology: function (marker) {
         marker.addTo(this._map);
-        L.DomUtil.addClass(marker._icon, 'marker-point');
-        marker.editing = new L.Handler.MarkerSnap(this._map, marker);
-        marker.editing.addGuideLayer(this._guidesLayer);
-        marker.editing.enable();
-        marker.on('snap', function (e) {
-            var content = $('#form_topology');
-            $('#lat').val(e.latlng.lat);
-            $('#lng').val(e.latlng.lng);
-            if (this._partTopo === null){
-                var partTopo = new L.Polyline(L.GeometryUtil.extract(
-                    this._map,
-                    this._guidesLayer,
-                    L.GeometryUtil.locateOnLine(this._map, this._guidesLayer, e.latlng),
-                    0),
+        L.DomUtil.addClass(marker._icon, 'scissor-point');
+
+        var content = $('#form_topology');
+        $('#lat').val(marker._latlng.lat);
+        $('#lng').val(marker._latlng.lng);
+        if (this._partTopo === null) {
+            var partTopo = new L.Polyline(L.GeometryUtil.extract(
+                this._map,
+                this._guidesLayer,
+                L.GeometryUtil.locateOnLine(this._map, this._guidesLayer, marker._latlng), 0),
                 {color: 'red', weight: 5, opacity: 0.5});
-                this._partTopo = partTopo;
-                partTopo.addTo(this._map);
-                this._map.on('layeradd', function (e) {
-                    partTopo.bringToFront();
-                });
-            }
-            this._partTopo.setLatLngs(
-                L.GeometryUtil.extract(this._map,
-                    this._guidesLayer,
-                    L.GeometryUtil.locateOnLine(this._map, this._guidesLayer, e.latlng), 0));
-            marker.bindPopup(content.html()).openPopup();
+            this._partTopo = partTopo;
+            partTopo.addTo(this._map);
+            this._map.on('layeradd', function (e) {
+                partTopo.bringToFront();
+            });
+        }
+        this._partTopo.setLatLngs(L.GeometryUtil.extract(
+            this._map,
+            this._guidesLayer,
+            L.GeometryUtil.locateOnLine(this._map, this._guidesLayer, marker._latlng), 0));
+        marker.bindPopup(content.html()).openPopup();
+
+        this._map.on('click', function (e) {
+            marker.closePopup();
+            this.reset()
         }, this);
-        marker.on('unsnap', function (e) {
-                  marker.closePopup();
-              }, this);
     },
 });
 
