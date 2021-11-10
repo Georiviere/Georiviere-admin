@@ -336,7 +336,10 @@ class Status(TopologyMixin, AddPropertyBufferMixin, TimeStampedModelMixin, Water
         verbose_name_plural = _("Statuses")
 
     def __str__(self):
-        return ', '.join([value.label for value in self.status_types.all()])
+        if self.status_types.count():
+            return ', '.join([value.label for value in self.status_types.all()])
+        else:
+            return "{}".format(self.pk)
 
     def clean(self):
         if hasattr(self, 'topology') and self.topology is not None:

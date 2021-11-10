@@ -74,6 +74,14 @@ class Topology(models.Model):
     end_position = models.FloatField(verbose_name=_("End position"), db_index=True, default=1)
     qualified = models.BooleanField(verbose_name=_("Qualified"), null=False, default=False)
 
+    def __str__(self):
+        if hasattr(self, 'status'):
+            return "Status {}".format(self.status)
+        elif hasattr(self, 'morphology'):
+            return "Morpho {}".format(self.morphology)
+        else:
+            return _("Topology")
+
     def save(self, *args, **kwargs):
         super().save(*args, **kwargs)
         geom_topology = self._meta.model.objects.filter(pk=self.pk) \

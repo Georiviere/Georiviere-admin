@@ -76,7 +76,7 @@ L.Control.PointTopology = L.Control.extend({
     includes: L.Mixin.ActivableControl,
 
     statics: {
-        TITLE: 'Cut',
+        TITLE: 'Cut topology',
     },
 
     options: {
