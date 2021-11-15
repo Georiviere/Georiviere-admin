@@ -258,7 +258,8 @@ LEAFLET_CONFIG = {
     'NO_GLOBALS': False,
     'PLUGINS': {
         'topofields': {'js': ['river/js/georiviere.forms.snap.js',
-                              'river/js/topology.js']}
+                              'river/js/cut-topology.js'],
+                       'css': ['river/css/cut-topology.css']}
     }
 }
 
