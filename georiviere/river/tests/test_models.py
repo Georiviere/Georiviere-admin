@@ -18,14 +18,20 @@ class TopologyTest(TestCase):
         self.assertEqual(str(lonely_topology), "Topology {}".format(lonely_topology.pk))
 
 
-class MapImageExtentTest(TestCase):
+class StreamSourceLocationTest(TestCase):
     def setUp(self):
         self.stream = StreamFactory.create(
             geom=LineString((10000, 10000), (50000, 50000)),
-            source_location=Point(0, 0, srid=settings.SRID),
         )
 
+    def test_source_location_default(self):
+        """Test if source_location is set on save()"""
+        self.assertAlmostEqual(self.stream.source_location.coords, (10000, 10000))
+
     def test_get_map_image_extent(self):
+        """Test get_map_image_extent method with source location not in bbox"""
+        self.stream.source_location = Point(0, 0, srid=settings.SRID)
+        self.stream.save()
         lng_min, lat_min, lng_max, lat_max = self.stream.get_map_image_extent()
         self.assertAlmostEqual(lng_min, -1.363081210117898)
         self.assertAlmostEqual(lat_min, -5.9838563092087576)

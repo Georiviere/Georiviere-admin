@@ -1,5 +1,6 @@
 from django.conf import settings
 from django.contrib.gis.db import models
+from django.contrib.gis.geos import Point
 from django.db.models import Q
 from django.utils.translation import gettext_lazy as _
 
@@ -53,6 +54,11 @@ class Stream(AddPropertyBufferMixin, TimeStampedModelMixin, WatershedPropertiesM
 
     def __str__(self):
         return self.name
+
+    def save(self, *args, **kwargs):
+        if not self.source_location:
+            self.source_location = Point(self.geom[0])
+        super().save(*args, **kwargs)
 
     @classmethod
     def get_create_label(cls):

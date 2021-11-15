@@ -51,6 +51,18 @@ class StreamViewTestCase(CommonRiverTest):
                                                       ','.join(['null'] * len(geom_transform.coords))),
         }
 
+    @override_settings(ICON_SIZES={'river_source': 18})
+    def test_icon_size_source_location(self):
+        """
+        Check icon_sizes method in detail view
+        """
+        self.login()
+
+        obj = self.modelfactory()
+
+        response = self.client.get(obj.get_detail_url())
+        self.assertContains(response, "iconSize: [18, 18]")
+
     def test_create_stream_default_source_location(self):
         """
         Check if source_location is set on stream creation
