@@ -73,15 +73,9 @@ class StreamViewTestCase(CommonRiverTest):
         stream = self.model.objects.last()
         self.assertEqual(stream.source_location.coords, stream.geom[0])
 
-        # Set source_location using geom last point, then check if it's not modified on update
-        stream.source_location = Point(stream.geom[-1][0], stream.geom[-1][1], srid=2154)
-        stream.save()
-        self._post_update_form(stream)
-        self.assertNotEqual(stream.source_location.coords, stream.geom[0])
-
     def test_update_stream_source_location_unmodified(self):
         """
-        Check if source_location is unmodified on stream update
+        Check if source_location is not modified on stream update
         """
         self.login()
 
@@ -90,8 +84,7 @@ class StreamViewTestCase(CommonRiverTest):
         self.assertEqual(stream.source_location.coords, stream.geom[0])
 
         # Set source_location using geom last point, then check if it's not modified on form update
-        new_source_location = Point(stream.geom[-1][0], stream.geom[-1][1], srid=2154)
-        stream.source_location = new_source_location
+        stream.source_location = Point(stream.geom[-1][0], stream.geom[-1][1], srid=2154)
         stream.save()
         self._post_update_form(stream)
         self.assertNotEqual(stream.source_location.coords, stream.geom[0])
