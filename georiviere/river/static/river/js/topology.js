@@ -135,11 +135,11 @@ L.Handler.PointTopology = L.Draw.Marker.extend({
 
             this.fire('topo:created');
             this._topoMarker = L.marker(e.layer.getLatLng());
-            this._initMarker(this._topoMarker);
+            this._splitTopology(this._topoMarker);
         }
     },
 
-    _initMarker: function (marker) {
+    _splitTopology: function (marker) {
         marker.addTo(this._map);
         L.DomUtil.addClass(marker._icon, 'marker-point');
         marker.editing = new L.Handler.MarkerSnap(this._map, marker);
@@ -150,7 +150,11 @@ L.Handler.PointTopology = L.Draw.Marker.extend({
             $('#lat').val(e.latlng.lat);
             $('#lng').val(e.latlng.lng);
             if (this._partTopo === null){
-                var partTopo = new L.Polyline(L.GeometryUtil.extract(this._map, this._guidesLayer, L.GeometryUtil.locateOnLine(this._map, this._guidesLayer, e.latlng), 0),
+                var partTopo = new L.Polyline(L.GeometryUtil.extract(
+                    this._map,
+                    this._guidesLayer,
+                    L.GeometryUtil.locateOnLine(this._map, this._guidesLayer, e.latlng),
+                    0),
                 {color: 'red', weight: 5, opacity: 0.5});
                 this._partTopo = partTopo;
                 partTopo.addTo(this._map);
