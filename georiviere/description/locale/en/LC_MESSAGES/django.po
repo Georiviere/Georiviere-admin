@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-05-05 11:58+0000\n"
+"POT-Creation-Date: 2021-11-15 09:24+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -24,7 +24,7 @@ msgstr ""
 msgid "Status cannot be qualified but without type"
 msgstr ""
 
-msgid "Name"
+msgid "Label"
 msgstr ""
 
 msgid "Plan layout type"
@@ -120,6 +120,12 @@ msgstr ""
 msgid "Morphologies"
 msgstr ""
 
+msgid "Name"
+msgstr ""
+
+msgid "Add a new morphology"
+msgstr ""
+
 msgid "Land type"
 msgstr ""
 
@@ -130,9 +136,6 @@ msgid "Owner"
 msgstr ""
 
 msgid "Agreement"
-msgstr ""
-
-msgid "Comment"
 msgstr ""
 
 msgid "Identifier"
@@ -180,6 +183,24 @@ msgstr ""
 msgid "Statuses"
 msgstr ""
 
+msgid "Add a new status"
+msgstr ""
+
+msgid "Stream"
+msgstr ""
+
+msgid "Station"
+msgstr ""
+
+msgid "Study"
+msgstr ""
+
+msgid "Proceeding"
+msgstr ""
+
+msgid "Knowledge"
+msgstr ""
+
 msgid "Descriptions"
 msgstr ""
 
@@ -187,7 +208,4 @@ msgid "Add a new land"
 msgstr ""
 
 msgid "Add a new usage"
-msgstr ""
-
-msgid "Morphology types"
 msgstr ""
