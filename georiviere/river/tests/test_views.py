@@ -84,7 +84,8 @@ class StreamViewTestCase(CommonRiverTest):
         self.assertEqual(stream.source_location.coords, stream.geom[0])
 
         # Set source_location using geom last point, then check if it's not modified on form update
-        stream.source_location = Point(stream.geom[-1][0], stream.geom[-1][1], srid=2154)
+        new_source_location = Point(stream.geom[-1][0], stream.geom[-1][1], srid=2154)
+        stream.source_location = new_source_location
         stream.save()
         self._post_update_form(stream)
         self.assertNotEqual(stream.source_location.coords, stream.geom[0])
