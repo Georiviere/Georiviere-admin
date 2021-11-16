@@ -26,6 +26,9 @@ class UsageTypeFactory(django.DjangoModelFactory):
 
 
 class MorphologyFactory(BaseLineStringFactory):
+    topology = SubFactory(TopologyFactory)
+    description = fuzzy.FuzzyText(length=200)
+
     class Meta:
         model = models.Morphology
 
