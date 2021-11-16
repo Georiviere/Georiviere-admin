@@ -5,24 +5,24 @@ from django.core import validators
 from django.core.exceptions import ValidationError
 from django.utils.translation import gettext_lazy as _
 from django.conf import settings
-from django.contrib.gis.forms.fields import LineStringField
+from django.contrib.gis.forms.fields import GeometryField, LineStringField
 from django.contrib.gis.geos import fromstr, Point, LineString
 
 from .models import Stream
-from .widgets import SnappedLineStringWidget
+from .widgets import SnappedGeometryWidget
 
 
 logger = logging.getLogger(__name__)
 
 
-class SnappedLineStringField(LineStringField):
+class SnappedFieldMixin(object):
     """
     It's a LineString field, with additional information about snapped vertices.
     """
-    widget = SnappedLineStringWidget
+    widget = SnappedGeometryWidget
 
     default_error_messages = {
-        'invalid_snap_line': _('Linestring invalid snapping.'),
+        'invalid_snap_line': _('Geometry invalid snapping.'),
     }
 
     def clean(self, value):
@@ -65,3 +65,13 @@ class SnappedLineStringField(LineStringField):
         except (TypeError, Stream.DoesNotExist, ValueError) as e:
             logger.warning("User input error: %s" % e)
             raise ValidationError(self.error_messages['invalid_snap_line'])
+
+
+class SnappedGeometryField(SnappedFieldMixin, GeometryField):
+    pass
+
+
+class SnappedLineStringField(SnappedFieldMixin, LineStringField):
+    default_error_messages = {
+        'invalid_snap_line': _('Linestring invalid snapping.'),
+    }

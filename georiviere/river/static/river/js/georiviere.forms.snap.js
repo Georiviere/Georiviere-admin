@@ -16,8 +16,16 @@ L.FieldStore.LineSnapStore = L.FieldStore.extend({
         layer = edited[0];
 
         // Store snaplist
-        var n = layer.getLatLngs().length,
-            snaplist = new Array(n);
+        if (layer.hasOwnProperty('_latlng')) {
+            var n = 1;
+        }
+        else {
+            var n = layer.getLatLngs().length;
+        }
+        var snaplist = new Array(n);
+        if (layer.editing._poly === undefined) {
+            return {geom: str, snap: []}
+        }
         if (layer.editing._poly.snapediting) {
             for (var i=0; i<n; i++) {
                 var marker = layer.editing._poly.snapediting._markers[i];
@@ -149,6 +157,10 @@ MapEntity.GeometryField.GeometryFieldSnap = MapEntity.GeometryField.extend({
             setTimeout(function () {
                 if (!layer.editing) {
                     console.warn('Layer has no snap editing');
+                    return;  // should never happen ;)
+                }
+                if (layer.editing._enabled === false) {
+                    console.warn('Layer was not enable editing');
                     return;  // should never happen ;)
                 }
                 var markers = layer.editing._markers;

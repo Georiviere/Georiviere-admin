@@ -7,10 +7,13 @@ from geotrek.common.forms import CommonForm
 
 from georiviere.knowledge.models import Knowledge, Vegetation, Work, FollowUp
 from georiviere.main.widgets import DatePickerInput
+from georiviere.river.fields import SnappedGeometryField
 
 
 class KnowledgeForm(CommonForm):
     """Knowledge form"""
+    geom = SnappedGeometryField()
+
     geomfields = ['geom']
 
     fieldslayout = [
@@ -76,6 +79,8 @@ class WorkForm(ModelForm):
 
 class FollowUpForm(CommonForm):
     """FollowUp form"""
+    _geom = SnappedGeometryField()
+
     geomfields = ['_geom']
 
     fieldslayout = [

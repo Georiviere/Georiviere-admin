@@ -3,7 +3,7 @@ import json
 from mapentity.widgets import MapWidget
 
 
-class SnappedLineStringWidget(MapWidget):
+class SnappedGeometryWidget(MapWidget):
     geometry_field_class = 'MapEntity.GeometryField.GeometryFieldSnap'
 
     def serialize(self, value):
