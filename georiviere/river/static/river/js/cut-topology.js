@@ -106,10 +106,19 @@ L.Control.PointTopology = L.Control.extend({
 L.Handler.PointTopology = L.Draw.Marker.extend({
     initialize: function (map, guidesLayer, options) {
         L.Draw.Marker.prototype.initialize.call(this, map, options);
+        this._helpText = 'Click map to place marker, then move it to snap with the topology.';
         this._topoMarker = null;
         this._partTopo = null;
         this._guidesLayer = guidesLayer;
         map.on('draw:created', this._onDrawn, this);
+    },
+
+    /* Update tooltip */
+	addHooks: function () {
+		L.Draw.Marker.prototype.addHooks.call(this);
+		if (this._map) {
+			this._tooltip.updateContent({ text: this._helpText });
+        }
     },
 
     reset: function() {
@@ -121,7 +130,7 @@ L.Handler.PointTopology = L.Draw.Marker.extend({
 
     restoreTopology: function (topo) {
         this._topoMarker = L.marker([topo.lat, topo.lng]);
-        this._initMarker(this._topoMarker);
+        this._splitTopology(this._topoMarker);
         if (topo.snap) {
             this._topoMarker.fire('move');  // snap to closest
         }
