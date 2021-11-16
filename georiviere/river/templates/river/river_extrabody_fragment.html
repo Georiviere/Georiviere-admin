@@ -10,8 +10,8 @@
     <div hidden="true" id="form_topology">
         <form method="POST" action="{% url 'river:cut_topology' %}">
             {% csrf_token %}
-            <p>{{ object.topology }}</p>
-            <input type="submit" class="btn btn-danger" value="{% trans "Cut topology" %}"></input>
+            <p>Topology {{ object.topology }}</p>
+            <input type="submit" class="btn btn-danger" value="{% trans 'Cut topology' %}"></input>
             <input type="hidden" id="topology" name="topology" value="{{object.topology.id}}">
             <input type="hidden" id="lat" name="lat">
             <input type="hidden" id="lng" name="lng">
