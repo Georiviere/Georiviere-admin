@@ -88,16 +88,15 @@ class FollowUpForm(CommonForm):
             "length",
             "width",
             "height",
+            "measure_frequency",
             "description",
         )]
 
     class Meta:
         model = FollowUp
         fields = [
-            "structure", "name", "date",
-            "followup_type", "knowledge",
-            "length", "width", "height",
-            "description", "_geom"
+            "structure", "name", "date", "followup_type", "knowledge",
+            "length", "width", "height", "measure_frequency", "description", "_geom"
         ]
         widgets = {
             'date': DatePickerInput(),
