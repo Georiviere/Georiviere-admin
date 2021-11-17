@@ -7,7 +7,6 @@ from geotrek.common.forms import CommonForm
 from georiviere.knowledge.models import Knowledge
 from georiviere.main.widgets import DatePickerInput
 from georiviere.maintenance.models import Intervention
-from georiviere.observations.models import Station
 
 
 class InterventionForm(autocomplete.FutureModelForm, CommonForm):
