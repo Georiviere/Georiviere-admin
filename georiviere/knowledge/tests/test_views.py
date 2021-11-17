@@ -193,7 +193,7 @@ class FollowUpViewsTest(CommonRiverTest):
         return good_data
 
     def test_creation_form_on_knowledge(self):
-        """Test if form is intialised with knowledge when its id is passed in url"""
+        """Test if form is initialized with knowledge when its id is passed in url"""
         self.login()
         knowledge = factories.KnowledgeFactory.create(geom='SRID=2154;POINT (700000 6600000)')
 
