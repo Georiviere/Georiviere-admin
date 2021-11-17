@@ -24,6 +24,18 @@
             <td>{{ object.description|linebreaks }}</td>
         </tr>
         <tr>
+            <th>{{ object|verbose:"length" }}</th>
+            <td>{{ object.length }}</td>
+        </tr>
+        <tr>
+            <th>{{ object|verbose:"width" }}</th>
+            <td>{{ object.width }}</td>
+        </tr>
+        <tr>
+            <th>{{ object|verbose:"height" }}</th>
+            <td>{{ object.height }}</td>
+        </tr>
+        <tr>
             <th>{% trans "Knowledge" %}</th>
             <td>{{ object.knowledge_display|safe }}</td>
         </tr>
