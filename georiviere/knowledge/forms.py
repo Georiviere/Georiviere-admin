@@ -109,6 +109,5 @@ class FollowUpForm(CommonForm):
             # New followup, set its knowledge from knowledge_id
             if knowledge_id:
                 knowledge = Knowledge.objects.get(id=knowledge_id)
-                self.instance.knowledge = knowledge
                 self.fields['knowledge'].initial = knowledge
                 self.helper.form_action += '?knowledge_id={}'.format(knowledge_id)
