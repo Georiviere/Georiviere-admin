@@ -16,10 +16,9 @@ class InterventionForm(autocomplete.FutureModelForm, CommonForm):
 
     target = autocomplete.Select2GenericForeignKeyModelField(
         model_choice=[
-            (Station, 'label',),
             (Knowledge, 'name')
         ],
-        label=_('Target'),
+        label=_('Knowledge'),
         required=False,
     )
 
