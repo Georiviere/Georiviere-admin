@@ -76,11 +76,11 @@ class Topology(models.Model):
 
     def __str__(self):
         if hasattr(self, 'status'):
-            return "Status {}".format(self.status)
+            return _("Status {}").format(self.status)
         elif hasattr(self, 'morphology'):
-            return "Morpho {}".format(self.morphology)
+            return _("Morphology {}").format(self.morphology)
         else:
-            return _("Topology")
+            return _("Topology {}").format(self.pk)
 
     def save(self, *args, **kwargs):
         super().save(*args, **kwargs)

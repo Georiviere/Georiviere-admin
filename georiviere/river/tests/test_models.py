@@ -1,12 +1,15 @@
 from django.test import TestCase
 
-from georiviere.description.tests import factories as description_factories
+from georiviere.description.tests.factories import MorphologyFactory, StatusFactory
+from georiviere.river.tests.factories import TopologyFactory
 
 
 class TopologyTest(TestCase):
 
     def test_str(self):
-        morphology = description_factories.MorphologyFactory.create()
-        status = description_factories.StatusFactory.create()
+        morphology = MorphologyFactory.create()
+        status = StatusFactory.create()
+        lonely_topology = TopologyFactory()
         self.assertEqual(str(status.topology), "Status {}".format(status.pk))
-        self.assertEqual(str(morphology.topology), "Morpho {}".format(morphology.pk))
+        self.assertEqual(str(morphology.topology), "Morphology {}".format(morphology.pk))
+        self.assertEqual(str(lonely_topology), "Topology {}".format(lonely_topology.pk))
