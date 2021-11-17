@@ -34,6 +34,7 @@ class InterventionForm(autocomplete.FutureModelForm, CommonForm):
             "stake",
             "disorders",
             "description",
+            "length",
             "width",
             "height",
         )]
@@ -44,7 +45,7 @@ class InterventionForm(autocomplete.FutureModelForm, CommonForm):
             "structure", "target", "name", "date",
             "intervention_status", "intervention_type",
             "stake", "disorders", "description",
-            "width", "height", "_geom"
+            "length", "width", "height", "_geom"
         ]
         widgets = {
             'date': DatePickerInput(),
