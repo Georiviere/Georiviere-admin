@@ -192,6 +192,16 @@ class FollowUpViewsTest(CommonRiverTest):
         }
         return good_data
 
+    def test_creation_form_on_knowledge(self):
+        """Test if form is intialised with knowledge when its id is passed in url"""
+        self.login()
+        knowledge = factories.KnowledgeFactory.create(geom='SRID=2154;POINT (700000 6600000)')
+
+        response = self.client.get('{}?knowledge_id={}'.format(self.model.get_add_url(),
+                                                               knowledge.pk,))
+        self.assertEqual(response.status_code, 200)
+        self.assertContains(response, knowledge)
+
     def test_listing_number_queries(self):
         """Test number queries when get list object"""
         self.login()
