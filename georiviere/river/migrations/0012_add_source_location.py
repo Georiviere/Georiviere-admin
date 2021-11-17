@@ -12,14 +12,6 @@ def add_source_location_every_stream(apps, schema_editor):
             stream.save()
 
 
-def remove_source_location_every_stream(apps, schema_editor):
-    StreamModel = apps.get_model('river', 'Stream')
-    for stream in StreamModel.objects.all():
-        if stream.source_location:
-            stream.source_location = None
-            stream.save()
-
-
 class Migration(migrations.Migration):
 
     dependencies = [
@@ -27,5 +19,5 @@ class Migration(migrations.Migration):
     ]
 
     operations = [
-        migrations.RunPython(add_source_location_every_stream, remove_source_location_every_stream)
+        migrations.RunPython(add_source_location_every_stream, migrations.RunPython.noop)
     ]
