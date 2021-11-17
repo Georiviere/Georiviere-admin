@@ -20,8 +20,8 @@
             <td>{{ object.followup_type|default_if_none:"-" }}</td>
         </tr>
         <tr>
-            <th>{{ object|verbose:"description" }}</th>
-            <td>{{ object.description|linebreaks }}</td>
+            <th>{% trans "Knowledge" %}</th>
+            <td>{{ object.knowledge_display|safe }}</td>
         </tr>
         <tr>
             <th>{{ object|verbose:"length" }}</th>
@@ -36,8 +36,12 @@
             <td>{{ object.height }}</td>
         </tr>
         <tr>
-            <th>{% trans "Knowledge" %}</th>
-            <td>{{ object.knowledge_display|safe }}</td>
+            <th>{{ object|verbose:"measure_frequency" }}</th>
+            <td>{{ object.measure_frequency }}</td>
+        </tr>
+        <tr>
+            <th>{{ object|verbose:"description" }}</th>
+            <td>{{ object.description|linebreaks }}</td>
         </tr>
         {% include "mapentity/trackinfo_fragment.html" %}
     </table>
