@@ -169,6 +169,13 @@ class FollowUpCreate(mapentity_views.MapEntityCreate):
     model = FollowUp
     form_class = FollowUpForm
 
+    def get_form_kwargs(self):
+        kwargs = super().get_form_kwargs()
+        if 'knowledge_id' in self.request.GET:
+            # Create follow-up on an existing knowledge
+            kwargs['knowledge_id'] = self.request.GET['knowledge_id']
+        return kwargs
+
 
 class FollowUpUpdate(mapentity_views.MapEntityUpdate):
     model = FollowUp

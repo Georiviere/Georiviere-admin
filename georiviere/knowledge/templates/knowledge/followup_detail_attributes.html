@@ -24,16 +24,11 @@
             <td>{{ object.knowledge_display|safe }}</td>
         </tr>
         <tr>
-            <th>{{ object|verbose:"length" }}</th>
-            <td>{{ object.length }}</td>
-        </tr>
-        <tr>
-            <th>{{ object|verbose:"width" }}</th>
-            <td>{{ object.width }}</td>
-        </tr>
-        <tr>
-            <th>{{ object|verbose:"height" }}</th>
-            <td>{{ object.height }}</td>
+            <th>{% trans "Dimensions" %}</th>
+            <td>{% trans "H:" %} {{ object.height|stringformat:".2f" }}m ,
+                {% trans "L:" %} {{ object.length|stringformat:".2f" }}m ,
+                {% trans "W:" %} {{ object.width|stringformat:".2f" }}m
+            </td>
         </tr>
         <tr>
             <th>{{ object|verbose:"measure_frequency" }}</th>
@@ -47,8 +42,10 @@
     </table>
 
     {% if object.knowledge %}
-    <h3>{% trans "Other follow-ups on this knowledge" %}</h3>
-    {% include "knowledge/_followup_table.html" with followup_list=object.knowledge.followups.all %}
+    <div class="fragment-wrapper">
+        <h3>{% trans "Other follow-ups on this knowledge" %}</h3>
+        {% include "knowledge/_followup_table.html" with followup_list=object.knowledge.followups.all %}
+    </div>
     {% endif %}
 
     {{ block.super }}

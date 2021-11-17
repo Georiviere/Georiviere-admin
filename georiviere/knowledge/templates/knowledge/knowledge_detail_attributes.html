@@ -114,10 +114,17 @@
         {% endif %}
     </table>
 
-    {% if object.followups %}
+    <div class="fragment-wrapper">
     <h3>{% trans "Follow-ups" %}</h3>
-    {% include "knowledge/_followup_table.html" with followup_list=object.followups.all %}
+    <p class="autohide">
+        <a href="{% url 'knowledge:followup_add' %}?knowledge={{ object.pk }}"
+        class="btn btn-sm btn-success">
+        <i class="bi bi-plus-circle-fill"></i> {% trans "Add a new follow-up" %}</a>
+    </p>
+    {% if object.followups %}
+        {% include "knowledge/_followup_table.html" with followup_list=object.followups.all %}
     {% endif %}
+    </div>
 
     {{ block.super }}
 {% endblock attributes %}
