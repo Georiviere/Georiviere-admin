@@ -17,7 +17,7 @@
         </tr>
         <tr>
             <th>{{ object|verbose:"followup_type" }}</th>
-            <td>{{ object.followup_type }}</td>
+            <td>{{ object.followup_type|default_if_none:"-" }}</td>
         </tr>
         <tr>
             <th>{{ object|verbose:"description" }}</th>
