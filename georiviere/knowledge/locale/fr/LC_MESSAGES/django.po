@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-10-12 09:06+0000\n"
+"POT-Creation-Date: 2021-11-17 13:20+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -210,8 +210,17 @@ msgstr "Ajouter un suivi"
 msgid "Results"
 msgstr "Résultats"
 
+msgid "Dimensions"
+msgstr "Dimensions"
+
+msgid "H:"
+msgstr "H :"
+
+msgid "L:"
+msgstr "L :"
+
+msgid "W:"
+msgstr "W :"
+
 msgid "Other follow-ups on this knowledge"
 msgstr "Autres suivis sur cet objet connaissance"
-
-#~ msgid "Bank effect"
-#~ msgstr "Impact berge"

@@ -117,7 +117,7 @@
     <div class="fragment-wrapper">
     <h3>{% trans "Follow-ups" %}</h3>
     <p class="autohide">
-        <a href="{% url 'knowledge:followup_add' %}?knowledge={{ object.pk }}"
+        <a href="{% url 'knowledge:followup_add' %}?knowledge_id={{ object.pk }}"
         class="btn btn-sm btn-success">
         <i class="bi bi-plus-circle-fill"></i> {% trans "Add a new follow-up" %}</a>
     </p>

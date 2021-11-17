@@ -197,7 +197,7 @@ class FollowUpViewsTest(CommonRiverTest):
         self.login()
         self.modelfactory.create_batch(100)
 
-        with self.assertNumQueries(30):
+        with self.assertNumQueries(32):
             self.client.get(self.model.get_list_url())
 
         with self.assertNumQueries(6):
