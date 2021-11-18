@@ -2,8 +2,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: geotrek\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-05-05 11:58+0000\n"
-"PO-Revision-Date: 2021-11-18 17:32\n"
+"POT-Creation-Date: 2021-09-27 14:39+0000\n"
+"PO-Revision-Date: 2021-11-18 17:35\n"
 "Last-Translator: \n"
 "Language-Team: Spanish\n"
 "Language: es_ES\n"
@@ -14,180 +14,177 @@ msgstr ""
 "X-Crowdin-Project: geotrek\n"
 "X-Crowdin-Project-ID: 485941\n"
 "X-Crowdin-Language: es-ES\n"
-"X-Crowdin-File: /master/georiviere/description/locale/en/LC_MESSAGES/django.po\n"
-"X-Crowdin-File-ID: 85\n"
+"X-Crowdin-File: /master/georiviere/observations/locale/fr/LC_MESSAGES/django.po\n"
+"X-Crowdin-File-ID: 155\n"
 
-msgid "Description"
+msgid "Observations"
 msgstr ""
 
-msgid "Status cannot be qualified but without type"
+msgid "Yes"
 msgstr ""
 
-msgid "Name"
+msgid "No"
 msgstr ""
 
-msgid "Plan layout type"
+msgid "Label"
 msgstr ""
 
-msgid "Plan layout types"
+msgid "Code"
 msgstr ""
 
-msgid "Habitat type"
+msgid "Tracked parameters"
 msgstr ""
 
-msgid "Habitat types"
+msgid "Unknown"
 msgstr ""
 
-msgid "Habitats diversity"
+msgid "Main fields"
 msgstr ""
 
-msgid "Habitats diversities"
+msgid "Specific profiles"
 msgstr ""
 
-msgid "Bank state"
+msgid "Parameters tracking"
 msgstr ""
 
-msgid "Bank states"
+msgid "Station profile code"
 msgstr ""
 
-msgid "Sediment dynamic"
+msgid "Station profile label"
 msgstr ""
 
-msgid "Sediment dynamics"
+msgid "Station profile"
 msgstr ""
 
-msgid "Granulometric diversity"
+msgid "Station profiles"
 msgstr ""
 
-msgid "Granulometric diversities"
+msgid "Null"
 msgstr ""
 
-msgid "Facies diversity"
+msgid "Low water only"
 msgstr ""
 
-msgid "Facies diversities"
+msgid "Strong"
 msgstr ""
 
-msgid "Working space type"
+msgid "High water only"
 msgstr ""
 
-msgid "Working space types"
+msgid "Station code"
 msgstr ""
 
-msgid "Flow type"
+msgid "Station label"
 msgstr ""
 
-msgid "Flow types"
+msgid "Station description"
 msgstr ""
 
-msgid "Left good Working space"
+msgid "Site code"
 msgstr ""
 
-msgid "Right good Working space"
+msgid "Station URI"
 msgstr ""
 
-msgid "Main flow"
+msgid "Station purpose"
 msgstr ""
 
-msgid "Secondary flow"
+msgid "In service"
 msgstr ""
 
-msgid "Full edge height"
+msgid "Local influence"
 msgstr ""
 
-msgid "Full edge width"
+msgid "For hydrometric station profile"
 msgstr ""
 
-msgid "Bank state left"
+msgid "Hardness"
 msgstr ""
 
-msgid "Bank state right"
+msgid "For physico-chemical station profile"
 msgstr ""
 
-msgid "Main habitat"
+msgid "Station"
 msgstr ""
 
-msgid "Secondary habitat"
+msgid "Stations"
 msgstr ""
 
-msgid "Plan layout"
+msgid "Add a new station"
 msgstr ""
 
-msgid "Morphology"
+msgid "Symbol"
 msgstr ""
 
-msgid "Morphologies"
+msgid "Unit"
 msgstr ""
 
-msgid "Land type"
+msgid "Units"
 msgstr ""
 
-msgid "Land types"
+msgid "Definition"
 msgstr ""
 
-msgid "Owner"
+msgid "Parameter category"
 msgstr ""
 
-msgid "Agreement"
+msgid "Parameter categories"
 msgstr ""
 
-msgid "Comment"
+msgid "Qualitative"
 msgstr ""
 
-msgid "Identifier"
+msgid "Quantitative"
 msgstr ""
 
-msgid "Land"
+msgid "Parameter type"
 msgstr ""
 
-msgid "Lands"
+msgid "Parameter"
 msgstr ""
 
-msgid "Usage type"
+msgid "Parameters"
 msgstr ""
 
-msgid "Usage types"
+msgid "Online"
 msgstr ""
 
-msgid "Usage"
+msgid "On demand"
 msgstr ""
 
-msgid "Usages"
+msgid "Measure frequency"
 msgstr ""
 
-msgid "Status type"
+msgid "Transmission frequency"
 msgstr ""
 
-msgid "Status types"
+msgid "Data availability"
 msgstr ""
 
-msgid "Your status is a regulation status"
+msgid "Measure start date"
 msgstr ""
 
-msgid "Regulation"
+msgid "Measure end date"
 msgstr ""
 
-msgid "Your status is a referencial status"
+msgid "Parameter tracking"
 msgstr ""
 
-msgid "Referencial"
+msgid "Parameter trackings"
 msgstr ""
 
-msgid "Status"
+msgid "Yes,No,Unknown"
 msgstr ""
 
-msgid "Statuses"
+msgid "No parameter tracked"
 msgstr ""
 
-msgid "Descriptions"
+msgid "Edit station to add parameter to track"
 msgstr ""
 
-msgid "Add a new land"
+msgid "Add a line"
 msgstr ""
 
-msgid "Add a new usage"
-msgstr ""
-
-msgid "Morphology types"
+msgid "Remove"
 msgstr ""
 
