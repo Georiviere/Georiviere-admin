@@ -1,10 +1,10 @@
 from copy import deepcopy
 
 from django import forms
-from django.contrib.gis.geos import Point
 
 from geotrek.common.forms import CommonForm
 
+from georiviere.river.widgets import SourceLocationWidget
 from georiviere.river.fields import SnappedLineStringField
 from georiviere.river.models import Stream, Topology
 
@@ -21,9 +21,7 @@ class StreamForm(CommonForm):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
         self.fieldslayout = deepcopy(self.fieldslayout)
-        self.fields['source_location'].label = ''
-        self.fields['source_location'].widget.target_map = 'geom'
-        self.fields['source_location'].widget.geometry_field_class = 'SourceLocationField'
+        self.fields['source_location'].widget = SourceLocationWidget()
 
 
 class TopologyRiverForm(CommonForm):

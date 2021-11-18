@@ -1,6 +1,7 @@
 import json
 
 from mapentity.widgets import MapWidget
+from leaflet.forms.widgets import LeafletWidget
 
 
 class SnappedLineStringWidget(MapWidget):
@@ -19,3 +20,11 @@ class SnappedLineStringWidget(MapWidget):
             value = json.loads(value)
             value = value['geom']
         return super().deserialize(value)
+
+
+class SourceLocationWidget(LeafletWidget):
+    """Widget for source location"""
+
+    geometry_field_class = 'SourceLocationField'
+    target_map = 'geom'
+    geom_type = 'POINT'
