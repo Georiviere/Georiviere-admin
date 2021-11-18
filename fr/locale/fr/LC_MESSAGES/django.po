@@ -14,27 +14,75 @@ msgstr ""
 "X-Crowdin-Project: geotrek\n"
 "X-Crowdin-Project-ID: 485941\n"
 "X-Crowdin-Language: fr\n"
-"X-Crowdin-File: /master/georiviere/watershed/locale/fr/LC_MESSAGES/django.po\n"
-"X-Crowdin-File-ID: 165\n"
+"X-Crowdin-File: /master/georiviere/river/locale/fr/LC_MESSAGES/django.po\n"
+"X-Crowdin-File-ID: 159\n"
 
-msgid "Watershed"
+msgid "River"
 msgstr ""
 
-msgid "Watersheds"
+msgid "Access to the requested resource is restricted by structure. You have been redirected."
+msgstr ""
+
+msgid "Linestring invalid snapping."
+msgstr ""
+
+msgid "Length"
 msgstr ""
 
 msgid "Name"
 msgstr ""
 
-msgid "Color"
+msgid "Qualified"
 msgstr ""
 
-msgid "Color shown on map"
+msgid "Structure"
 msgstr ""
 
-msgid "Watershed type"
+msgid "Stream"
 msgstr ""
 
-msgid "External id"
+msgid "Add a new stream"
+msgstr ""
+
+msgid "Streams"
+msgstr ""
+
+msgid "Start position"
+msgstr ""
+
+msgid "End position"
+msgstr ""
+
+msgid "Topology"
+msgstr ""
+
+msgid "Topologies"
+msgstr ""
+
+msgid "Stations"
+msgstr ""
+
+msgid "Knowledge"
+msgstr ""
+
+msgid "Proceedings"
+msgstr ""
+
+msgid "Studies"
+msgstr ""
+
+msgid "Knowledges"
+msgstr ""
+
+msgid "Cut topology"
+msgstr ""
+
+msgid "Topology is not qualified"
+msgstr ""
+
+msgid "Topology could not be cut"
+msgstr ""
+
+msgid "Topology has been cut"
 msgstr ""
 
