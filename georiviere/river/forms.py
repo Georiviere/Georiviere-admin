@@ -25,12 +25,6 @@ class StreamForm(CommonForm):
         self.fields['source_location'].widget.target_map = 'geom'
         self.fields['source_location'].widget.geometry_field_class = 'SourceLocationField'
 
-    def save(self, commit=True):
-        """Set source_location on creation with stream geom first point, if it is not set in form"""
-        if not self.update and not self.cleaned_data['source_location']:
-            self.instance.source_location = Point(self.instance.geom[0])
-        return super().save(commit)
-
 
 class TopologyRiverForm(CommonForm):
     class Media:
