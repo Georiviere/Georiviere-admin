@@ -14,75 +14,90 @@ msgstr ""
 "X-Crowdin-Project: geotrek\n"
 "X-Crowdin-Project-ID: 485941\n"
 "X-Crowdin-Language: fr\n"
-"X-Crowdin-File: /master/georiviere/river/locale/fr/LC_MESSAGES/django.po\n"
-"X-Crowdin-File-ID: 159\n"
+"X-Crowdin-File: /master/georiviere/maintenance/locale/fr/LC_MESSAGES/django.po\n"
+"X-Crowdin-File-ID: 153\n"
 
-msgid "River"
-msgstr ""
-
-msgid "Access to the requested resource is restricted by structure. You have been redirected."
-msgstr ""
-
-msgid "Linestring invalid snapping."
-msgstr ""
-
-msgid "Length"
+msgid "Maintenance"
 msgstr ""
 
 msgid "Name"
 msgstr ""
 
-msgid "Qualified"
+msgid "Target"
 msgstr ""
 
-msgid "Structure"
+msgid "Date"
 msgstr ""
 
-msgid "Stream"
+msgid "Status"
 msgstr ""
 
-msgid "Add a new stream"
+msgid "Type"
 msgstr ""
 
-msgid "Streams"
+msgid "Stake"
 msgstr ""
 
-msgid "Start position"
+msgid "Disorders"
 msgstr ""
 
-msgid "End position"
+msgid "Description"
 msgstr ""
 
-msgid "Topology"
+msgid "Remarks and notes"
 msgstr ""
 
-msgid "Topologies"
+msgid "Width"
 msgstr ""
 
-msgid "Stations"
+msgid "Height"
 msgstr ""
 
-msgid "Knowledge"
+msgid "Area"
 msgstr ""
 
-msgid "Proceedings"
+msgid "Intervention"
 msgstr ""
 
-msgid "Studies"
+msgid "Interventions"
 msgstr ""
 
-msgid "Knowledges"
+msgid "Add a new intervention"
 msgstr ""
 
-msgid "Cut topology"
+msgid "On"
 msgstr ""
 
-msgid "Topology is not qualified"
+msgid "Label"
 msgstr ""
 
-msgid "Topology could not be cut"
+msgid "Display order"
 msgstr ""
 
-msgid "Topology has been cut"
+msgid "Intervention's status"
+msgstr ""
+
+msgid "Intervention's statuses"
+msgstr ""
+
+msgid "Intervention's type"
+msgstr ""
+
+msgid "Intervention's types"
+msgstr ""
+
+msgid "Intervention's stake"
+msgstr ""
+
+msgid "Intervention's stakes"
+msgstr ""
+
+msgid "Intervention's disorder"
+msgstr ""
+
+msgid "Intervention's disorders"
+msgstr ""
+
+msgid "Related interventions"
 msgstr ""
 
