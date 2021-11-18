@@ -2,8 +2,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: geotrek\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-09-23 12:43+0000\n"
-"PO-Revision-Date: 2021-11-18 17:36\n"
+"POT-Creation-Date: 2021-10-20 10:10+0000\n"
+"PO-Revision-Date: 2021-11-18 17:32\n"
 "Last-Translator: \n"
 "Language-Team: French\n"
 "Language: fr_FR\n"
@@ -14,189 +14,186 @@ msgstr ""
 "X-Crowdin-Project: geotrek\n"
 "X-Crowdin-Project-ID: 485941\n"
 "X-Crowdin-Language: fr\n"
-"X-Crowdin-File: /master/georiviere/description/locale/fr/LC_MESSAGES/django.po\n"
-"X-Crowdin-File-ID: 145\n"
+"X-Crowdin-File: /master/georiviere/finances_administration/locale/en/LC_MESSAGES/django.po\n"
+"X-Crowdin-File-ID: 87\n"
 
-msgid "Description"
-msgstr ""
-
-msgid "Status cannot be qualified but without type"
-msgstr ""
-
-msgid "Label"
-msgstr ""
-
-msgid "Plan layout type"
-msgstr ""
-
-msgid "Plan layout types"
-msgstr ""
-
-msgid "Habitat type"
-msgstr ""
-
-msgid "Habitat types"
-msgstr ""
-
-msgid "Habitats diversity"
-msgstr ""
-
-msgid "Habitats diversities"
-msgstr ""
-
-msgid "Bank state"
-msgstr ""
-
-msgid "Bank states"
-msgstr ""
-
-msgid "Sediment dynamic"
-msgstr ""
-
-msgid "Sediment dynamics"
-msgstr ""
-
-msgid "Granulometric diversity"
-msgstr ""
-
-msgid "Granulometric diversities"
-msgstr ""
-
-msgid "Facies diversity"
-msgstr ""
-
-msgid "Facies diversities"
-msgstr ""
-
-msgid "Working space type"
-msgstr ""
-
-msgid "Working space types"
-msgstr ""
-
-msgid "Flow type"
-msgstr ""
-
-msgid "Flow types"
-msgstr ""
-
-msgid "Left good Working space"
-msgstr ""
-
-msgid "Right good Working space"
-msgstr ""
-
-msgid "Main flow"
-msgstr ""
-
-msgid "Secondary flow"
-msgstr ""
-
-msgid "Full edge height"
-msgstr ""
-
-msgid "Full edge width"
-msgstr ""
-
-msgid "Bank state left"
-msgstr ""
-
-msgid "Bank state right"
-msgstr ""
-
-msgid "Main habitat"
-msgstr ""
-
-msgid "Secondary habitat"
-msgstr ""
-
-msgid "Plan layout"
-msgstr ""
-
-msgid "Morphology"
-msgstr ""
-
-msgid "Morphologies"
+msgid "Finances and administration"
 msgstr ""
 
 msgid "Name"
 msgstr ""
 
-msgid "Add a new morphology"
+msgid "Operation on"
+msgstr ""
+
+msgid "Cancel"
+msgstr ""
+
+msgid "Save changes"
+msgstr ""
+
+msgid "General information"
+msgstr ""
+
+msgid "Stakeholders"
+msgstr ""
+
+msgid "Financing"
+msgstr ""
+
+msgid "Operations"
+msgstr ""
+
+msgid "Organism"
+msgstr ""
+
+msgid "Organisms"
+msgstr ""
+
+msgid "Label"
+msgstr ""
+
+msgid "Admin file type"
+msgstr ""
+
+msgid "Admin file types"
+msgstr ""
+
+msgid "Admin file domain"
+msgstr ""
+
+msgid "Admin file domains"
+msgstr ""
+
+msgid "Description"
+msgstr ""
+
+msgid "Begin date"
+msgstr ""
+
+msgid "End date"
+msgstr ""
+
+msgid "Project owners"
+msgstr ""
+
+msgid "Project managers"
+msgstr ""
+
+msgid "Funders"
+msgstr ""
+
+msgid "Contractors"
+msgstr ""
+
+msgid "Constraints"
+msgstr ""
+
+msgid "Specific conditions, etc."
+msgstr ""
+
+msgid "Global cost"
+msgstr ""
+
+msgid "External id"
+msgstr ""
+
+msgid "Administrative file"
+msgstr ""
+
+msgid "Administrative files"
+msgstr ""
+
+msgid "Add a new admin file"
 msgstr ""
 
 msgid "Status"
 msgstr ""
 
-msgid "Land type"
+msgid "Estimated cost"
 msgstr ""
 
-msgid "Land types"
+msgid "Material cost"
 msgstr ""
 
-msgid "Owner"
+msgid "Subcontract cost"
 msgstr ""
 
-msgid "Agreement"
+msgid "Administrative operation"
 msgstr ""
 
-msgid "Identifier"
+msgid "Administrative operations"
 msgstr ""
 
-msgid "Land"
+msgid "Amount"
 msgstr ""
 
-msgid "Lands"
+msgid "Funding"
 msgstr ""
 
-msgid "Usage type"
+msgid "Fundings"
 msgstr ""
 
-msgid "Usage types"
+msgid "Cost of man-day"
 msgstr ""
 
-msgid "Usage"
+msgid "Active"
 msgstr ""
 
-msgid "Usages"
+msgid "Job category"
 msgstr ""
 
-msgid "Status type"
+msgid "Job categories"
 msgstr ""
 
-msgid "Status types"
+msgid "Man-days"
 msgstr ""
 
-msgid "Your status is a regulation status"
+msgid "Operation"
 msgstr ""
 
-msgid "Regulation"
+msgid "Man-day"
 msgstr ""
 
-msgid "Your status is a referencial status"
+msgid "None"
 msgstr ""
 
-msgid "Referencial"
+msgid "Actual cost"
 msgstr ""
 
-msgid "Statuses"
+msgid "Edit costs"
 msgstr ""
 
-msgid "Add a new status"
+msgid "Totals"
 msgstr ""
 
-msgid "Descriptions"
+msgid "Edit"
 msgstr ""
 
-msgid "Add a new land"
+msgid "No operation is created"
 msgstr ""
 
-msgid "Add a new usage"
+msgid "Edit administrative file to add new operations."
 msgstr ""
 
-#~ msgid "Comment"
-#~ msgstr "Commentaire"
+msgid "Add an operation"
+msgstr ""
 
-#~ msgid "Morphology types"
-#~ msgstr "Types de morphologie"
+msgid "Remove"
+msgstr ""
+
+msgid "Add funding"
+msgstr ""
+
+msgid "Edit costs for"
+msgstr ""
+
+msgid "Add manday"
+msgstr ""
+
+msgid "Related administrative files"
+msgstr ""
+
+msgid "Add a new administrative file"
+msgstr ""
 
