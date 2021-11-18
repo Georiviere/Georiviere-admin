@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: geotrek\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-04-12 15:24+0000\n"
+"POT-Creation-Date: 2021-05-05 13:51+0000\n"
 "PO-Revision-Date: 2021-11-18 17:32\n"
 "Last-Translator: \n"
 "Language-Team: Spanish\n"
@@ -14,42 +14,36 @@ msgstr ""
 "X-Crowdin-Project: geotrek\n"
 "X-Crowdin-Project-ID: 485941\n"
 "X-Crowdin-Language: es-ES\n"
-"X-Crowdin-File: /master/georiviere/studies/locale/en/LC_MESSAGES/django.po\n"
-"X-Crowdin-File-ID: 101\n"
+"X-Crowdin-File: /master/georiviere/river/locale/en/LC_MESSAGES/django.po\n"
+"X-Crowdin-File-ID: 99\n"
 
-msgid "Studies"
+msgid "River"
 msgstr ""
 
-msgid "Title"
+msgid "Length"
 msgstr ""
 
-msgid "Start year"
+msgid "Width"
 msgstr ""
 
-msgid "End year"
+msgid "Name"
 msgstr ""
 
-msgid "Label"
+msgid "Stream"
 msgstr ""
 
-msgid "Study type"
+msgid "Start position"
 msgstr ""
 
-msgid "Study types"
+msgid "End position"
 msgstr ""
 
-msgid "Year"
+msgid "In meters"
 msgstr ""
 
-msgid "Authors"
+msgid "Add a new stream"
 msgstr ""
 
-msgid "Description"
-msgstr ""
-
-msgid "Study"
-msgstr ""
-
-msgid "Add a new study"
+msgid "Streams"
 msgstr ""
 
