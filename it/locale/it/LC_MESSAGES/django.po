@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: geotrek\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-05-05 13:51+0000\n"
+"POT-Creation-Date: 2021-08-04 09:41+0000\n"
 "PO-Revision-Date: 2021-11-18 17:32\n"
 "Last-Translator: \n"
 "Language-Team: Italian\n"
@@ -14,36 +14,54 @@ msgstr ""
 "X-Crowdin-Project: geotrek\n"
 "X-Crowdin-Project-ID: 485941\n"
 "X-Crowdin-Language: it\n"
-"X-Crowdin-File: /master/georiviere/river/locale/en/LC_MESSAGES/django.po\n"
-"X-Crowdin-File-ID: 99\n"
+"X-Crowdin-File: /master/georiviere/proceeding/locale/en/LC_MESSAGES/django.po\n"
+"X-Crowdin-File-ID: 97\n"
 
-msgid "River"
+msgid "Proceeding"
 msgstr ""
 
-msgid "Length"
+msgid "Related events type"
 msgstr ""
 
-msgid "Width"
+msgid "Main fields"
+msgstr ""
+
+msgid "Events"
 msgstr ""
 
 msgid "Name"
 msgstr ""
 
-msgid "Stream"
+msgid "Event type"
 msgstr ""
 
-msgid "Start position"
+msgid "Event types"
 msgstr ""
 
-msgid "End position"
+msgid "Date"
 msgstr ""
 
-msgid "In meters"
+msgid "External id"
 msgstr ""
 
-msgid "Add a new stream"
+msgid "Description"
 msgstr ""
 
-msgid "Streams"
+msgid "Add a new proceeding"
+msgstr ""
+
+msgid "Proceedings"
+msgstr ""
+
+msgid "Event"
+msgstr ""
+
+msgid "No events"
+msgstr ""
+
+msgid "Add a line"
+msgstr ""
+
+msgid "Remove"
 msgstr ""
 
