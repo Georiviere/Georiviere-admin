@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: geotrek\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-08-04 09:41+0000\n"
+"POT-Creation-Date: 2021-05-05 11:58+0000\n"
 "PO-Revision-Date: 2021-11-18 17:32\n"
 "Last-Translator: \n"
 "Language-Team: Spanish\n"
@@ -14,54 +14,180 @@ msgstr ""
 "X-Crowdin-Project: geotrek\n"
 "X-Crowdin-Project-ID: 485941\n"
 "X-Crowdin-Language: es-ES\n"
-"X-Crowdin-File: /master/georiviere/proceeding/locale/en/LC_MESSAGES/django.po\n"
-"X-Crowdin-File-ID: 97\n"
+"X-Crowdin-File: /master/georiviere/description/locale/en/LC_MESSAGES/django.po\n"
+"X-Crowdin-File-ID: 85\n"
 
-msgid "Proceeding"
+msgid "Description"
 msgstr ""
 
-msgid "Related events type"
-msgstr ""
-
-msgid "Main fields"
-msgstr ""
-
-msgid "Events"
+msgid "Status cannot be qualified but without type"
 msgstr ""
 
 msgid "Name"
 msgstr ""
 
-msgid "Event type"
+msgid "Plan layout type"
 msgstr ""
 
-msgid "Event types"
+msgid "Plan layout types"
 msgstr ""
 
-msgid "Date"
+msgid "Habitat type"
 msgstr ""
 
-msgid "External id"
+msgid "Habitat types"
 msgstr ""
 
-msgid "Description"
+msgid "Habitats diversity"
 msgstr ""
 
-msgid "Add a new proceeding"
+msgid "Habitats diversities"
 msgstr ""
 
-msgid "Proceedings"
+msgid "Bank state"
 msgstr ""
 
-msgid "Event"
+msgid "Bank states"
 msgstr ""
 
-msgid "No events"
+msgid "Sediment dynamic"
 msgstr ""
 
-msgid "Add a line"
+msgid "Sediment dynamics"
 msgstr ""
 
-msgid "Remove"
+msgid "Granulometric diversity"
+msgstr ""
+
+msgid "Granulometric diversities"
+msgstr ""
+
+msgid "Facies diversity"
+msgstr ""
+
+msgid "Facies diversities"
+msgstr ""
+
+msgid "Working space type"
+msgstr ""
+
+msgid "Working space types"
+msgstr ""
+
+msgid "Flow type"
+msgstr ""
+
+msgid "Flow types"
+msgstr ""
+
+msgid "Left good Working space"
+msgstr ""
+
+msgid "Right good Working space"
+msgstr ""
+
+msgid "Main flow"
+msgstr ""
+
+msgid "Secondary flow"
+msgstr ""
+
+msgid "Full edge height"
+msgstr ""
+
+msgid "Full edge width"
+msgstr ""
+
+msgid "Bank state left"
+msgstr ""
+
+msgid "Bank state right"
+msgstr ""
+
+msgid "Main habitat"
+msgstr ""
+
+msgid "Secondary habitat"
+msgstr ""
+
+msgid "Plan layout"
+msgstr ""
+
+msgid "Morphology"
+msgstr ""
+
+msgid "Morphologies"
+msgstr ""
+
+msgid "Land type"
+msgstr ""
+
+msgid "Land types"
+msgstr ""
+
+msgid "Owner"
+msgstr ""
+
+msgid "Agreement"
+msgstr ""
+
+msgid "Comment"
+msgstr ""
+
+msgid "Identifier"
+msgstr ""
+
+msgid "Land"
+msgstr ""
+
+msgid "Lands"
+msgstr ""
+
+msgid "Usage type"
+msgstr ""
+
+msgid "Usage types"
+msgstr ""
+
+msgid "Usage"
+msgstr ""
+
+msgid "Usages"
+msgstr ""
+
+msgid "Status type"
+msgstr ""
+
+msgid "Status types"
+msgstr ""
+
+msgid "Your status is a regulation status"
+msgstr ""
+
+msgid "Regulation"
+msgstr ""
+
+msgid "Your status is a referencial status"
+msgstr ""
+
+msgid "Referencial"
+msgstr ""
+
+msgid "Status"
+msgstr ""
+
+msgid "Statuses"
+msgstr ""
+
+msgid "Descriptions"
+msgstr ""
+
+msgid "Add a new land"
+msgstr ""
+
+msgid "Add a new usage"
+msgstr ""
+
+msgid "Morphology types"
 msgstr ""
 
