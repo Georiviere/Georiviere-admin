@@ -2,8 +2,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: geotrek\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-10-20 10:10+0000\n"
-"PO-Revision-Date: 2021-11-18 17:36\n"
+"POT-Creation-Date: 2021-10-12 09:06+0000\n"
+"PO-Revision-Date: 2021-11-18 17:32\n"
 "Last-Translator: \n"
 "Language-Team: Italian\n"
 "Language: it_IT\n"
@@ -14,186 +14,201 @@ msgstr ""
 "X-Crowdin-Project: geotrek\n"
 "X-Crowdin-Project-ID: 485941\n"
 "X-Crowdin-Language: it\n"
-"X-Crowdin-File: /master/georiviere/finances_administration/locale/fr/LC_MESSAGES/django.po\n"
-"X-Crowdin-File-ID: 147\n"
+"X-Crowdin-File: /master/georiviere/knowledge/locale/en/LC_MESSAGES/django.po\n"
+"X-Crowdin-File-ID: 89\n"
 
-msgid "Finances and administration"
+msgid "Knowledge"
 msgstr ""
 
 msgid "Name"
 msgstr ""
 
-msgid "Operation on"
+msgid "Code"
 msgstr ""
 
-msgid "Cancel"
+msgid "Vegetation details"
 msgstr ""
 
-msgid "Save changes"
-msgstr ""
-
-msgid "General information"
-msgstr ""
-
-msgid "Stakeholders"
-msgstr ""
-
-msgid "Financing"
-msgstr ""
-
-msgid "Operations"
-msgstr ""
-
-msgid "Organism"
-msgstr ""
-
-msgid "Organisms"
+msgid "Work details"
 msgstr ""
 
 msgid "Label"
 msgstr ""
 
-msgid "Admin file type"
+msgid "Knowledge type"
 msgstr ""
 
-msgid "Admin file types"
+msgid "Knowledge types"
 msgstr ""
 
-msgid "Admin file domain"
+msgid "Age class diversity"
 msgstr ""
 
-msgid "Admin file domains"
+msgid "Age class diversities"
+msgstr ""
+
+msgid "Specific diversity"
+msgstr ""
+
+msgid "Specific diversities"
+msgstr ""
+
+msgid "Vegetation state"
+msgstr ""
+
+msgid "Vegetation states"
+msgstr ""
+
+msgid "Vegetation strata"
+msgstr ""
+
+msgid "Vegetation stratas"
+msgstr ""
+
+msgid "Vegetation thickness type"
+msgstr ""
+
+msgid "Vegetation thickness types"
+msgstr ""
+
+msgid "Vegetation type"
+msgstr ""
+
+msgid "Vegetation types"
+msgstr ""
+
+msgid "Work type"
+msgstr ""
+
+msgid "Work types"
+msgstr ""
+
+msgid "Work material"
+msgstr ""
+
+msgid "Work materials"
+msgstr ""
+
+msgid "Work state"
+msgstr ""
+
+msgid "Work states"
+msgstr ""
+
+msgid "Work bank effect"
+msgstr ""
+
+msgid "Work bank effects"
+msgstr ""
+
+msgid "Work stream influence"
+msgstr ""
+
+msgid "Work stream influences"
+msgstr ""
+
+msgid "Work sediment effect"
+msgstr ""
+
+msgid "Work sediment effects"
+msgstr ""
+
+msgid "Work fish continuity effect"
+msgstr ""
+
+msgid "Work fish continuity effects"
 msgstr ""
 
 msgid "Description"
 msgstr ""
 
-msgid "Begin date"
+msgid "Knowledges"
 msgstr ""
 
-msgid "End date"
+msgid "Add a new knowledge"
 msgstr ""
 
-msgid "Project owners"
+msgid "Thickness type"
 msgstr ""
 
-msgid "Project managers"
+msgid "Vegetation Strata"
 msgstr ""
 
-msgid "Funders"
+msgid "Other information"
 msgstr ""
 
-msgid "Contractors"
+msgid "Vegetation"
 msgstr ""
 
-msgid "Constraints"
+msgid "Vegetations"
 msgstr ""
 
-msgid "Specific conditions, etc."
+msgid "Downstream bank effect"
 msgstr ""
 
-msgid "Global cost"
+msgid "Upstream bank effect"
 msgstr ""
 
-msgid "External id"
+msgid "Downstream influence"
 msgstr ""
 
-msgid "Administrative file"
+msgid "Upstream influence"
 msgstr ""
 
-msgid "Administrative files"
+msgid "Sediment effect"
 msgstr ""
 
-msgid "Add a new admin file"
+msgid "Fish Continuity effect"
 msgstr ""
 
-msgid "Status"
+msgid "Usage"
 msgstr ""
 
-msgid "Estimated cost"
+msgid "Width"
 msgstr ""
 
-msgid "Material cost"
+msgid "Height"
 msgstr ""
 
-msgid "Subcontract cost"
+msgid "Length"
 msgstr ""
 
-msgid "Administrative operation"
+msgid "Drop height"
 msgstr ""
 
-msgid "Administrative operations"
+msgid "Pit height"
 msgstr ""
 
-msgid "Amount"
+msgid "Work"
 msgstr ""
 
-msgid "Funding"
+msgid "Works"
 msgstr ""
 
-msgid "Fundings"
+msgid "Follow-up type"
 msgstr ""
 
-msgid "Cost of man-day"
+msgid "Follow-up types"
 msgstr ""
 
-msgid "Active"
+msgid "Date"
 msgstr ""
 
-msgid "Job category"
+msgid "Measure frequency"
 msgstr ""
 
-msgid "Job categories"
+msgid "Follow-up"
 msgstr ""
 
-msgid "Man-days"
+msgid "Follow-ups"
 msgstr ""
 
-msgid "Operation"
+msgid "Add a new follow-up"
 msgstr ""
 
-msgid "Man-day"
+msgid "Results"
 msgstr ""
 
-msgid "None"
-msgstr ""
-
-msgid "Actual cost"
-msgstr ""
-
-msgid "Edit costs"
-msgstr ""
-
-msgid "Totals"
-msgstr ""
-
-msgid "Edit"
-msgstr ""
-
-msgid "No operation is created"
-msgstr ""
-
-msgid "Edit administrative file to add new operations."
-msgstr ""
-
-msgid "Add an operation"
-msgstr ""
-
-msgid "Remove"
-msgstr ""
-
-msgid "Add funding"
-msgstr ""
-
-msgid "Edit costs for"
-msgstr ""
-
-msgid "Add manday"
-msgstr ""
-
-msgid "Related administrative files"
-msgstr ""
-
-msgid "Add a new administrative file"
+msgid "Other follow-ups on this knowledge"
 msgstr ""
 
