@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: geotrek\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-10-20 10:10+0000\n"
+"POT-Creation-Date: 2021-08-04 09:41+0000\n"
 "PO-Revision-Date: 2021-11-18 17:32\n"
 "Last-Translator: \n"
 "Language-Team: Spanish\n"
@@ -14,186 +14,54 @@ msgstr ""
 "X-Crowdin-Project: geotrek\n"
 "X-Crowdin-Project-ID: 485941\n"
 "X-Crowdin-Language: es-ES\n"
-"X-Crowdin-File: /master/georiviere/finances_administration/locale/en/LC_MESSAGES/django.po\n"
-"X-Crowdin-File-ID: 87\n"
+"X-Crowdin-File: /master/georiviere/proceeding/locale/en/LC_MESSAGES/django.po\n"
+"X-Crowdin-File-ID: 97\n"
 
-msgid "Finances and administration"
+msgid "Proceeding"
+msgstr ""
+
+msgid "Related events type"
+msgstr ""
+
+msgid "Main fields"
+msgstr ""
+
+msgid "Events"
 msgstr ""
 
 msgid "Name"
 msgstr ""
 
-msgid "Operation on"
+msgid "Event type"
 msgstr ""
 
-msgid "Cancel"
+msgid "Event types"
 msgstr ""
 
-msgid "Save changes"
-msgstr ""
-
-msgid "General information"
-msgstr ""
-
-msgid "Stakeholders"
-msgstr ""
-
-msgid "Financing"
-msgstr ""
-
-msgid "Operations"
-msgstr ""
-
-msgid "Organism"
-msgstr ""
-
-msgid "Organisms"
-msgstr ""
-
-msgid "Label"
-msgstr ""
-
-msgid "Admin file type"
-msgstr ""
-
-msgid "Admin file types"
-msgstr ""
-
-msgid "Admin file domain"
-msgstr ""
-
-msgid "Admin file domains"
-msgstr ""
-
-msgid "Description"
-msgstr ""
-
-msgid "Begin date"
-msgstr ""
-
-msgid "End date"
-msgstr ""
-
-msgid "Project owners"
-msgstr ""
-
-msgid "Project managers"
-msgstr ""
-
-msgid "Funders"
-msgstr ""
-
-msgid "Contractors"
-msgstr ""
-
-msgid "Constraints"
-msgstr ""
-
-msgid "Specific conditions, etc."
-msgstr ""
-
-msgid "Global cost"
+msgid "Date"
 msgstr ""
 
 msgid "External id"
 msgstr ""
 
-msgid "Administrative file"
+msgid "Description"
 msgstr ""
 
-msgid "Administrative files"
+msgid "Add a new proceeding"
 msgstr ""
 
-msgid "Add a new admin file"
+msgid "Proceedings"
 msgstr ""
 
-msgid "Status"
+msgid "Event"
 msgstr ""
 
-msgid "Estimated cost"
+msgid "No events"
 msgstr ""
 
-msgid "Material cost"
-msgstr ""
-
-msgid "Subcontract cost"
-msgstr ""
-
-msgid "Administrative operation"
-msgstr ""
-
-msgid "Administrative operations"
-msgstr ""
-
-msgid "Amount"
-msgstr ""
-
-msgid "Funding"
-msgstr ""
-
-msgid "Fundings"
-msgstr ""
-
-msgid "Cost of man-day"
-msgstr ""
-
-msgid "Active"
-msgstr ""
-
-msgid "Job category"
-msgstr ""
-
-msgid "Job categories"
-msgstr ""
-
-msgid "Man-days"
-msgstr ""
-
-msgid "Operation"
-msgstr ""
-
-msgid "Man-day"
-msgstr ""
-
-msgid "None"
-msgstr ""
-
-msgid "Actual cost"
-msgstr ""
-
-msgid "Edit costs"
-msgstr ""
-
-msgid "Totals"
-msgstr ""
-
-msgid "Edit"
-msgstr ""
-
-msgid "No operation is created"
-msgstr ""
-
-msgid "Edit administrative file to add new operations."
-msgstr ""
-
-msgid "Add an operation"
+msgid "Add a line"
 msgstr ""
 
 msgid "Remove"
-msgstr ""
-
-msgid "Add funding"
-msgstr ""
-
-msgid "Edit costs for"
-msgstr ""
-
-msgid "Add manday"
-msgstr ""
-
-msgid "Related administrative files"
-msgstr ""
-
-msgid "Add a new administrative file"
 msgstr ""
 
