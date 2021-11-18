@@ -14,12 +14,90 @@ msgstr ""
 "X-Crowdin-Project: geotrek\n"
 "X-Crowdin-Project-ID: 485941\n"
 "X-Crowdin-Language: fr\n"
-"X-Crowdin-File: /master/georiviere/main/locale/fr/LC_MESSAGES/django.po\n"
-"X-Crowdin-File-ID: 151\n"
+"X-Crowdin-File: /master/georiviere/maintenance/locale/fr/LC_MESSAGES/django.po\n"
+"X-Crowdin-File-ID: 153\n"
 
-msgid "Main"
+msgid "Maintenance"
 msgstr ""
 
-msgid "Restricted area"
+msgid "Name"
+msgstr ""
+
+msgid "Target"
+msgstr ""
+
+msgid "Date"
+msgstr ""
+
+msgid "Status"
+msgstr ""
+
+msgid "Type"
+msgstr ""
+
+msgid "Stake"
+msgstr ""
+
+msgid "Disorders"
+msgstr ""
+
+msgid "Description"
+msgstr ""
+
+msgid "Remarks and notes"
+msgstr ""
+
+msgid "Width"
+msgstr ""
+
+msgid "Height"
+msgstr ""
+
+msgid "Area"
+msgstr ""
+
+msgid "Intervention"
+msgstr ""
+
+msgid "Interventions"
+msgstr ""
+
+msgid "Add a new intervention"
+msgstr ""
+
+msgid "On"
+msgstr ""
+
+msgid "Label"
+msgstr ""
+
+msgid "Display order"
+msgstr ""
+
+msgid "Intervention's status"
+msgstr ""
+
+msgid "Intervention's statuses"
+msgstr ""
+
+msgid "Intervention's type"
+msgstr ""
+
+msgid "Intervention's types"
+msgstr ""
+
+msgid "Intervention's stake"
+msgstr ""
+
+msgid "Intervention's stakes"
+msgstr ""
+
+msgid "Intervention's disorder"
+msgstr ""
+
+msgid "Intervention's disorders"
+msgstr ""
+
+msgid "Related interventions"
 msgstr ""
 
