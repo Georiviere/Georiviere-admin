@@ -14,54 +14,42 @@ msgstr ""
 "X-Crowdin-Project: geotrek\n"
 "X-Crowdin-Project-ID: 485941\n"
 "X-Crowdin-Language: fr\n"
-"X-Crowdin-File: /master/georiviere/proceeding/locale/fr/LC_MESSAGES/django.po\n"
-"X-Crowdin-File-ID: 157\n"
+"X-Crowdin-File: /master/georiviere/studies/locale/fr/LC_MESSAGES/django.po\n"
+"X-Crowdin-File-ID: 163\n"
 
-msgid "Proceeding"
+msgid "Studies"
 msgstr ""
 
-msgid "Related events type"
+msgid "Title"
 msgstr ""
 
-msgid "Main fields"
+msgid "Start year"
 msgstr ""
 
-msgid "Events"
+msgid "End year"
 msgstr ""
 
-msgid "Name"
+msgid "Label"
 msgstr ""
 
-msgid "Event type"
+msgid "Study type"
 msgstr ""
 
-msgid "Event types"
+msgid "Study types"
 msgstr ""
 
-msgid "Date"
+msgid "Year"
 msgstr ""
 
-msgid "External id"
+msgid "Authors"
 msgstr ""
 
 msgid "Description"
 msgstr ""
 
-msgid "Add a new proceeding"
+msgid "Study"
 msgstr ""
 
-msgid "Proceedings"
-msgstr ""
-
-msgid "Event"
-msgstr ""
-
-msgid "No events"
-msgstr ""
-
-msgid "Add a line"
-msgstr ""
-
-msgid "Remove"
+msgid "Add a new study"
 msgstr ""
 
