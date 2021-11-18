@@ -1,8 +1,8 @@
 Publication
------------
+===========
 
 CI
-==
+--
 
 * Each edition runs a CI build.
 * All Georiviere-admin maintainers can review or merge Pull Requests.
@@ -10,7 +10,7 @@ CI
 
 
 Release
-=======
+-------
 
 To release a new version :
 
@@ -25,6 +25,6 @@ To release a new version :
 
 
 Docker image
-============
+------------
 
 * Docker image is published after each release in Georiviere github repository: ghcr.io/georiviere/georiviere-admin:latest
