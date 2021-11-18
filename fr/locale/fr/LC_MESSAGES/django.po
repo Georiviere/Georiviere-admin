@@ -2,8 +2,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: geotrek\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-10-20 10:10+0000\n"
-"PO-Revision-Date: 2021-11-18 17:36\n"
+"POT-Creation-Date: 2021-08-03 11:14+0000\n"
+"PO-Revision-Date: 2021-11-18 17:32\n"
 "Last-Translator: \n"
 "Language-Team: French\n"
 "Language: fr_FR\n"
@@ -14,186 +14,87 @@ msgstr ""
 "X-Crowdin-Project: geotrek\n"
 "X-Crowdin-Project-ID: 485941\n"
 "X-Crowdin-Language: fr\n"
-"X-Crowdin-File: /master/georiviere/finances_administration/locale/fr/LC_MESSAGES/django.po\n"
-"X-Crowdin-File-ID: 147\n"
+"X-Crowdin-File: /master/georiviere/maintenance/locale/en/LC_MESSAGES/django.po\n"
+"X-Crowdin-File-ID: 93\n"
 
-msgid "Finances and administration"
+msgid "Maintenance"
 msgstr ""
 
 msgid "Name"
 msgstr ""
 
-msgid "Operation on"
-msgstr ""
-
-msgid "Cancel"
-msgstr ""
-
-msgid "Save changes"
-msgstr ""
-
-msgid "General information"
-msgstr ""
-
-msgid "Stakeholders"
-msgstr ""
-
-msgid "Financing"
-msgstr ""
-
-msgid "Operations"
-msgstr ""
-
-msgid "Organism"
-msgstr ""
-
-msgid "Organisms"
-msgstr ""
-
-msgid "Label"
-msgstr ""
-
-msgid "Admin file type"
-msgstr ""
-
-msgid "Admin file types"
-msgstr ""
-
-msgid "Admin file domain"
-msgstr ""
-
-msgid "Admin file domains"
-msgstr ""
-
-msgid "Description"
-msgstr ""
-
-msgid "Begin date"
-msgstr ""
-
-msgid "End date"
-msgstr ""
-
-msgid "Project owners"
-msgstr ""
-
-msgid "Project managers"
-msgstr ""
-
-msgid "Funders"
-msgstr ""
-
-msgid "Contractors"
-msgstr ""
-
-msgid "Constraints"
-msgstr ""
-
-msgid "Specific conditions, etc."
-msgstr ""
-
-msgid "Global cost"
-msgstr ""
-
-msgid "External id"
-msgstr ""
-
-msgid "Administrative file"
-msgstr ""
-
-msgid "Administrative files"
-msgstr ""
-
-msgid "Add a new admin file"
+msgid "Date"
 msgstr ""
 
 msgid "Status"
 msgstr ""
 
-msgid "Estimated cost"
+msgid "Type"
 msgstr ""
 
-msgid "Material cost"
+msgid "Stake"
 msgstr ""
 
-msgid "Subcontract cost"
+msgid "Disorders"
 msgstr ""
 
-msgid "Administrative operation"
+msgid "Description"
 msgstr ""
 
-msgid "Administrative operations"
+msgid "Remarks and notes"
 msgstr ""
 
-msgid "Amount"
+msgid "Width"
 msgstr ""
 
-msgid "Funding"
+msgid "Height"
 msgstr ""
 
-msgid "Fundings"
+msgid "Area"
 msgstr ""
 
-msgid "Cost of man-day"
+msgid "Intervention"
 msgstr ""
 
-msgid "Active"
+msgid "Interventions"
 msgstr ""
 
-msgid "Job category"
+msgid "Add a new intervention"
 msgstr ""
 
-msgid "Job categories"
+msgid "On"
 msgstr ""
 
-msgid "Man-days"
+msgid "Display order"
 msgstr ""
 
-msgid "Operation"
+msgid "Intervention's status"
 msgstr ""
 
-msgid "Man-day"
+msgid "Intervention's statuses"
 msgstr ""
 
-msgid "None"
+msgid "Intervention's type"
 msgstr ""
 
-msgid "Actual cost"
+msgid "Intervention's types"
 msgstr ""
 
-msgid "Edit costs"
+msgid "Intervention's stake"
 msgstr ""
 
-msgid "Totals"
+msgid "Intervention's stakes"
 msgstr ""
 
-msgid "Edit"
+msgid "Disorder"
 msgstr ""
 
-msgid "No operation is created"
+msgid "Intervention's disorder"
 msgstr ""
 
-msgid "Edit administrative file to add new operations."
+msgid "Intervention's disorders"
 msgstr ""
 
-msgid "Add an operation"
-msgstr ""
-
-msgid "Remove"
-msgstr ""
-
-msgid "Add funding"
-msgstr ""
-
-msgid "Edit costs for"
-msgstr ""
-
-msgid "Add manday"
-msgstr ""
-
-msgid "Related administrative files"
-msgstr ""
-
-msgid "Add a new administrative file"
+msgid "Target"
 msgstr ""
 
