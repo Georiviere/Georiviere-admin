@@ -1,3 +1,3 @@
 files:
-  - source: locale/en/**/*.po
+  - source: locale/**/**/*.po
     translation: locale/%two_letters_code%/LC_MESSAGES/%original_file_name%
