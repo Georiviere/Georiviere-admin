@@ -2,8 +2,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: geotrek\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-09-23 12:43+0000\n"
-"PO-Revision-Date: 2021-11-18 17:36\n"
+"POT-Creation-Date: 2021-10-12 09:06+0000\n"
+"PO-Revision-Date: 2021-11-18 17:32\n"
 "Last-Translator: \n"
 "Language-Team: French\n"
 "Language: fr_FR\n"
@@ -14,37 +14,154 @@ msgstr ""
 "X-Crowdin-Project: geotrek\n"
 "X-Crowdin-Project-ID: 485941\n"
 "X-Crowdin-Language: fr\n"
-"X-Crowdin-File: /master/georiviere/maintenance/locale/fr/LC_MESSAGES/django.po\n"
-"X-Crowdin-File-ID: 153\n"
+"X-Crowdin-File: /master/georiviere/knowledge/locale/en/LC_MESSAGES/django.po\n"
+"X-Crowdin-File-ID: 89\n"
 
-msgid "Maintenance"
+msgid "Knowledge"
 msgstr ""
 
 msgid "Name"
 msgstr ""
 
-msgid "Target"
+msgid "Code"
 msgstr ""
 
-msgid "Date"
+msgid "Vegetation details"
 msgstr ""
 
-msgid "Status"
+msgid "Work details"
 msgstr ""
 
-msgid "Type"
+msgid "Label"
 msgstr ""
 
-msgid "Stake"
+msgid "Knowledge type"
 msgstr ""
 
-msgid "Disorders"
+msgid "Knowledge types"
+msgstr ""
+
+msgid "Age class diversity"
+msgstr ""
+
+msgid "Age class diversities"
+msgstr ""
+
+msgid "Specific diversity"
+msgstr ""
+
+msgid "Specific diversities"
+msgstr ""
+
+msgid "Vegetation state"
+msgstr ""
+
+msgid "Vegetation states"
+msgstr ""
+
+msgid "Vegetation strata"
+msgstr ""
+
+msgid "Vegetation stratas"
+msgstr ""
+
+msgid "Vegetation thickness type"
+msgstr ""
+
+msgid "Vegetation thickness types"
+msgstr ""
+
+msgid "Vegetation type"
+msgstr ""
+
+msgid "Vegetation types"
+msgstr ""
+
+msgid "Work type"
+msgstr ""
+
+msgid "Work types"
+msgstr ""
+
+msgid "Work material"
+msgstr ""
+
+msgid "Work materials"
+msgstr ""
+
+msgid "Work state"
+msgstr ""
+
+msgid "Work states"
+msgstr ""
+
+msgid "Work bank effect"
+msgstr ""
+
+msgid "Work bank effects"
+msgstr ""
+
+msgid "Work stream influence"
+msgstr ""
+
+msgid "Work stream influences"
+msgstr ""
+
+msgid "Work sediment effect"
+msgstr ""
+
+msgid "Work sediment effects"
+msgstr ""
+
+msgid "Work fish continuity effect"
+msgstr ""
+
+msgid "Work fish continuity effects"
 msgstr ""
 
 msgid "Description"
 msgstr ""
 
-msgid "Remarks and notes"
+msgid "Knowledges"
+msgstr ""
+
+msgid "Add a new knowledge"
+msgstr ""
+
+msgid "Thickness type"
+msgstr ""
+
+msgid "Vegetation Strata"
+msgstr ""
+
+msgid "Other information"
+msgstr ""
+
+msgid "Vegetation"
+msgstr ""
+
+msgid "Vegetations"
+msgstr ""
+
+msgid "Downstream bank effect"
+msgstr ""
+
+msgid "Upstream bank effect"
+msgstr ""
+
+msgid "Downstream influence"
+msgstr ""
+
+msgid "Upstream influence"
+msgstr ""
+
+msgid "Sediment effect"
+msgstr ""
+
+msgid "Fish Continuity effect"
+msgstr ""
+
+msgid "Usage"
 msgstr ""
 
 msgid "Width"
@@ -53,51 +170,45 @@ msgstr ""
 msgid "Height"
 msgstr ""
 
-msgid "Area"
+msgid "Length"
 msgstr ""
 
-msgid "Intervention"
+msgid "Drop height"
 msgstr ""
 
-msgid "Interventions"
+msgid "Pit height"
 msgstr ""
 
-msgid "Add a new intervention"
+msgid "Work"
 msgstr ""
 
-msgid "On"
+msgid "Works"
 msgstr ""
 
-msgid "Label"
+msgid "Follow-up type"
 msgstr ""
 
-msgid "Display order"
+msgid "Follow-up types"
 msgstr ""
 
-msgid "Intervention's status"
+msgid "Date"
 msgstr ""
 
-msgid "Intervention's statuses"
+msgid "Measure frequency"
 msgstr ""
 
-msgid "Intervention's type"
+msgid "Follow-up"
 msgstr ""
 
-msgid "Intervention's types"
+msgid "Follow-ups"
 msgstr ""
 
-msgid "Intervention's stake"
+msgid "Add a new follow-up"
 msgstr ""
 
-msgid "Intervention's stakes"
+msgid "Results"
 msgstr ""
 
-msgid "Intervention's disorder"
-msgstr ""
-
-msgid "Intervention's disorders"
-msgstr ""
-
-msgid "Related interventions"
+msgid "Other follow-ups on this knowledge"
 msgstr ""
 
