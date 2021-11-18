@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: geotrek\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-08-03 11:14+0000\n"
+"POT-Creation-Date: 2021-03-29 15:54+0000\n"
 "PO-Revision-Date: 2021-11-18 17:32\n"
 "Last-Translator: \n"
 "Language-Team: Italian\n"
@@ -14,87 +14,27 @@ msgstr ""
 "X-Crowdin-Project: geotrek\n"
 "X-Crowdin-Project-ID: 485941\n"
 "X-Crowdin-Language: it\n"
-"X-Crowdin-File: /master/georiviere/maintenance/locale/en/LC_MESSAGES/django.po\n"
-"X-Crowdin-File-ID: 93\n"
+"X-Crowdin-File: /master/georiviere/watershed/locale/en/LC_MESSAGES/django.po\n"
+"X-Crowdin-File-ID: 103\n"
 
-msgid "Maintenance"
+msgid "Watershed"
 msgstr ""
 
 msgid "Name"
 msgstr ""
 
-msgid "Date"
+msgid "Color"
 msgstr ""
 
-msgid "Status"
+msgid "Color shown on map"
 msgstr ""
 
-msgid "Type"
+msgid "Watershed type"
 msgstr ""
 
-msgid "Stake"
+msgid "External id"
 msgstr ""
 
-msgid "Disorders"
-msgstr ""
-
-msgid "Description"
-msgstr ""
-
-msgid "Remarks and notes"
-msgstr ""
-
-msgid "Width"
-msgstr ""
-
-msgid "Height"
-msgstr ""
-
-msgid "Area"
-msgstr ""
-
-msgid "Intervention"
-msgstr ""
-
-msgid "Interventions"
-msgstr ""
-
-msgid "Add a new intervention"
-msgstr ""
-
-msgid "On"
-msgstr ""
-
-msgid "Display order"
-msgstr ""
-
-msgid "Intervention's status"
-msgstr ""
-
-msgid "Intervention's statuses"
-msgstr ""
-
-msgid "Intervention's type"
-msgstr ""
-
-msgid "Intervention's types"
-msgstr ""
-
-msgid "Intervention's stake"
-msgstr ""
-
-msgid "Intervention's stakes"
-msgstr ""
-
-msgid "Disorder"
-msgstr ""
-
-msgid "Intervention's disorder"
-msgstr ""
-
-msgid "Intervention's disorders"
-msgstr ""
-
-msgid "Target"
+msgid "Watersheds"
 msgstr ""
 
