@@ -2,8 +2,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: geotrek\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-10-12 09:06+0000\n"
-"PO-Revision-Date: 2021-11-18 17:32\n"
+"POT-Creation-Date: 2021-09-23 12:43+0000\n"
+"PO-Revision-Date: 2021-11-18 17:36\n"
 "Last-Translator: \n"
 "Language-Team: French\n"
 "Language: fr_FR\n"
@@ -14,201 +14,189 @@ msgstr ""
 "X-Crowdin-Project: geotrek\n"
 "X-Crowdin-Project-ID: 485941\n"
 "X-Crowdin-Language: fr\n"
-"X-Crowdin-File: /master/georiviere/knowledge/locale/en/LC_MESSAGES/django.po\n"
-"X-Crowdin-File-ID: 89\n"
+"X-Crowdin-File: /master/georiviere/description/locale/fr/LC_MESSAGES/django.po\n"
+"X-Crowdin-File-ID: 145\n"
 
-msgid "Knowledge"
+msgid "Description"
 msgstr ""
 
-msgid "Name"
-msgstr ""
-
-msgid "Code"
-msgstr ""
-
-msgid "Vegetation details"
-msgstr ""
-
-msgid "Work details"
+msgid "Status cannot be qualified but without type"
 msgstr ""
 
 msgid "Label"
 msgstr ""
 
-msgid "Knowledge type"
+msgid "Plan layout type"
 msgstr ""
 
-msgid "Knowledge types"
+msgid "Plan layout types"
 msgstr ""
 
-msgid "Age class diversity"
+msgid "Habitat type"
 msgstr ""
 
-msgid "Age class diversities"
+msgid "Habitat types"
 msgstr ""
 
-msgid "Specific diversity"
+msgid "Habitats diversity"
 msgstr ""
 
-msgid "Specific diversities"
+msgid "Habitats diversities"
 msgstr ""
 
-msgid "Vegetation state"
+msgid "Bank state"
 msgstr ""
 
-msgid "Vegetation states"
+msgid "Bank states"
 msgstr ""
 
-msgid "Vegetation strata"
+msgid "Sediment dynamic"
 msgstr ""
 
-msgid "Vegetation stratas"
+msgid "Sediment dynamics"
 msgstr ""
 
-msgid "Vegetation thickness type"
+msgid "Granulometric diversity"
 msgstr ""
 
-msgid "Vegetation thickness types"
+msgid "Granulometric diversities"
 msgstr ""
 
-msgid "Vegetation type"
+msgid "Facies diversity"
 msgstr ""
 
-msgid "Vegetation types"
+msgid "Facies diversities"
 msgstr ""
 
-msgid "Work type"
+msgid "Working space type"
 msgstr ""
 
-msgid "Work types"
+msgid "Working space types"
 msgstr ""
 
-msgid "Work material"
+msgid "Flow type"
 msgstr ""
 
-msgid "Work materials"
+msgid "Flow types"
 msgstr ""
 
-msgid "Work state"
+msgid "Left good Working space"
 msgstr ""
 
-msgid "Work states"
+msgid "Right good Working space"
 msgstr ""
 
-msgid "Work bank effect"
+msgid "Main flow"
 msgstr ""
 
-msgid "Work bank effects"
+msgid "Secondary flow"
 msgstr ""
 
-msgid "Work stream influence"
+msgid "Full edge height"
 msgstr ""
 
-msgid "Work stream influences"
+msgid "Full edge width"
 msgstr ""
 
-msgid "Work sediment effect"
+msgid "Bank state left"
 msgstr ""
 
-msgid "Work sediment effects"
+msgid "Bank state right"
 msgstr ""
 
-msgid "Work fish continuity effect"
+msgid "Main habitat"
 msgstr ""
 
-msgid "Work fish continuity effects"
+msgid "Secondary habitat"
 msgstr ""
 
-msgid "Description"
+msgid "Plan layout"
 msgstr ""
 
-msgid "Knowledges"
+msgid "Morphology"
 msgstr ""
 
-msgid "Add a new knowledge"
+msgid "Morphologies"
 msgstr ""
 
-msgid "Thickness type"
+msgid "Name"
 msgstr ""
 
-msgid "Vegetation Strata"
+msgid "Add a new morphology"
 msgstr ""
 
-msgid "Other information"
+msgid "Status"
 msgstr ""
 
-msgid "Vegetation"
+msgid "Land type"
 msgstr ""
 
-msgid "Vegetations"
+msgid "Land types"
 msgstr ""
 
-msgid "Downstream bank effect"
+msgid "Owner"
 msgstr ""
 
-msgid "Upstream bank effect"
+msgid "Agreement"
 msgstr ""
 
-msgid "Downstream influence"
+msgid "Identifier"
 msgstr ""
 
-msgid "Upstream influence"
+msgid "Land"
 msgstr ""
 
-msgid "Sediment effect"
+msgid "Lands"
 msgstr ""
 
-msgid "Fish Continuity effect"
+msgid "Usage type"
+msgstr ""
+
+msgid "Usage types"
 msgstr ""
 
 msgid "Usage"
 msgstr ""
 
-msgid "Width"
+msgid "Usages"
 msgstr ""
 
-msgid "Height"
+msgid "Status type"
 msgstr ""
 
-msgid "Length"
+msgid "Status types"
 msgstr ""
 
-msgid "Drop height"
+msgid "Your status is a regulation status"
 msgstr ""
 
-msgid "Pit height"
+msgid "Regulation"
 msgstr ""
 
-msgid "Work"
+msgid "Your status is a referencial status"
 msgstr ""
 
-msgid "Works"
+msgid "Referencial"
 msgstr ""
 
-msgid "Follow-up type"
+msgid "Statuses"
 msgstr ""
 
-msgid "Follow-up types"
+msgid "Add a new status"
 msgstr ""
 
-msgid "Date"
+msgid "Descriptions"
 msgstr ""
 
-msgid "Measure frequency"
+msgid "Add a new land"
 msgstr ""
 
-msgid "Follow-up"
+msgid "Add a new usage"
 msgstr ""
 
-msgid "Follow-ups"
-msgstr ""
+#~ msgid "Comment"
+#~ msgstr "Commentaire"
 
-msgid "Add a new follow-up"
-msgstr ""
-
-msgid "Results"
-msgstr ""
-
-msgid "Other follow-ups on this knowledge"
-msgstr ""
+#~ msgid "Morphology types"
+#~ msgstr "Types de morphologie"
 
