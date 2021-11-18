@@ -2,8 +2,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: geotrek\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-08-03 11:14+0000\n"
-"PO-Revision-Date: 2021-11-18 17:32\n"
+"POT-Creation-Date: 2021-09-23 12:43+0000\n"
+"PO-Revision-Date: 2021-11-18 17:35\n"
 "Last-Translator: \n"
 "Language-Team: Spanish\n"
 "Language: es_ES\n"
@@ -14,13 +14,16 @@ msgstr ""
 "X-Crowdin-Project: geotrek\n"
 "X-Crowdin-Project-ID: 485941\n"
 "X-Crowdin-Language: es-ES\n"
-"X-Crowdin-File: /master/georiviere/maintenance/locale/en/LC_MESSAGES/django.po\n"
-"X-Crowdin-File-ID: 93\n"
+"X-Crowdin-File: /master/georiviere/maintenance/locale/fr/LC_MESSAGES/django.po\n"
+"X-Crowdin-File-ID: 153\n"
 
 msgid "Maintenance"
 msgstr ""
 
 msgid "Name"
+msgstr ""
+
+msgid "Target"
 msgstr ""
 
 msgid "Date"
@@ -65,6 +68,9 @@ msgstr ""
 msgid "On"
 msgstr ""
 
+msgid "Label"
+msgstr ""
+
 msgid "Display order"
 msgstr ""
 
@@ -86,15 +92,12 @@ msgstr ""
 msgid "Intervention's stakes"
 msgstr ""
 
-msgid "Disorder"
-msgstr ""
-
 msgid "Intervention's disorder"
 msgstr ""
 
 msgid "Intervention's disorders"
 msgstr ""
 
-msgid "Target"
+msgid "Related interventions"
 msgstr ""
 
