@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: geotrek\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-09-27 14:39+0000\n"
+"POT-Creation-Date: 2021-08-03 11:14+0000\n"
 "PO-Revision-Date: 2021-11-18 17:32\n"
 "Last-Translator: \n"
 "Language-Team: Italian\n"
@@ -14,177 +14,87 @@ msgstr ""
 "X-Crowdin-Project: geotrek\n"
 "X-Crowdin-Project-ID: 485941\n"
 "X-Crowdin-Language: it\n"
-"X-Crowdin-File: /master/georiviere/observations/locale/en/LC_MESSAGES/django.po\n"
-"X-Crowdin-File-ID: 95\n"
+"X-Crowdin-File: /master/georiviere/maintenance/locale/en/LC_MESSAGES/django.po\n"
+"X-Crowdin-File-ID: 93\n"
 
-msgid "Observations"
+msgid "Maintenance"
 msgstr ""
 
-msgid "Yes"
+msgid "Name"
 msgstr ""
 
-msgid "No"
+msgid "Date"
 msgstr ""
 
-msgid "Label"
+msgid "Status"
 msgstr ""
 
-msgid "Code"
+msgid "Type"
 msgstr ""
 
-msgid "Tracked parameters"
+msgid "Stake"
 msgstr ""
 
-msgid "Unknown"
+msgid "Disorders"
 msgstr ""
 
-msgid "Main fields"
+msgid "Description"
 msgstr ""
 
-msgid "Specific profiles"
+msgid "Remarks and notes"
 msgstr ""
 
-msgid "Parameters tracking"
+msgid "Width"
 msgstr ""
 
-msgid "Station profile code"
+msgid "Height"
 msgstr ""
 
-msgid "Station profile label"
+msgid "Area"
 msgstr ""
 
-msgid "Station profile"
+msgid "Intervention"
 msgstr ""
 
-msgid "Station profiles"
+msgid "Interventions"
 msgstr ""
 
-msgid "Null"
+msgid "Add a new intervention"
 msgstr ""
 
-msgid "Low water only"
+msgid "On"
 msgstr ""
 
-msgid "Strong"
+msgid "Display order"
 msgstr ""
 
-msgid "High water only"
+msgid "Intervention's status"
 msgstr ""
 
-msgid "Station code"
+msgid "Intervention's statuses"
 msgstr ""
 
-msgid "Station label"
+msgid "Intervention's type"
 msgstr ""
 
-msgid "Station description"
+msgid "Intervention's types"
 msgstr ""
 
-msgid "Site code"
+msgid "Intervention's stake"
 msgstr ""
 
-msgid "Station URI"
+msgid "Intervention's stakes"
 msgstr ""
 
-msgid "Station purpose"
+msgid "Disorder"
 msgstr ""
 
-msgid "In service"
+msgid "Intervention's disorder"
 msgstr ""
 
-msgid "Local influence"
+msgid "Intervention's disorders"
 msgstr ""
 
-msgid "For hydrometric station profile"
-msgstr ""
-
-msgid "Hardness"
-msgstr ""
-
-msgid "For physico-chemical station profile"
-msgstr ""
-
-msgid "Station"
-msgstr ""
-
-msgid "Stations"
-msgstr ""
-
-msgid "Add a new station"
-msgstr ""
-
-msgid "Symbol"
-msgstr ""
-
-msgid "Unit"
-msgstr ""
-
-msgid "Units"
-msgstr ""
-
-msgid "Definition"
-msgstr ""
-
-msgid "Parameter category"
-msgstr ""
-
-msgid "Parameter categories"
-msgstr ""
-
-msgid "Qualitative"
-msgstr ""
-
-msgid "Quantitative"
-msgstr ""
-
-msgid "Parameter type"
-msgstr ""
-
-msgid "Parameter"
-msgstr ""
-
-msgid "Parameters"
-msgstr ""
-
-msgid "Online"
-msgstr ""
-
-msgid "On demand"
-msgstr ""
-
-msgid "Measure frequency"
-msgstr ""
-
-msgid "Transmission frequency"
-msgstr ""
-
-msgid "Data availability"
-msgstr ""
-
-msgid "Measure start date"
-msgstr ""
-
-msgid "Measure end date"
-msgstr ""
-
-msgid "Parameter tracking"
-msgstr ""
-
-msgid "Parameter trackings"
-msgstr ""
-
-msgid "Yes,No,Unknown"
-msgstr ""
-
-msgid "No parameter tracked"
-msgstr ""
-
-msgid "Edit station to add parameter to track"
-msgstr ""
-
-msgid "Add a line"
-msgstr ""
-
-msgid "Remove"
+msgid "Target"
 msgstr ""
 
