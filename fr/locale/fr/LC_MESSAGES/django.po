@@ -2,8 +2,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: geotrek\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-09-27 14:39+0000\n"
-"PO-Revision-Date: 2021-11-18 17:35\n"
+"POT-Creation-Date: 2021-10-12 09:06+0000\n"
+"PO-Revision-Date: 2021-11-18 17:36\n"
 "Last-Translator: \n"
 "Language-Team: French\n"
 "Language: fr_FR\n"
@@ -14,177 +14,204 @@ msgstr ""
 "X-Crowdin-Project: geotrek\n"
 "X-Crowdin-Project-ID: 485941\n"
 "X-Crowdin-Language: fr\n"
-"X-Crowdin-File: /master/georiviere/observations/locale/fr/LC_MESSAGES/django.po\n"
-"X-Crowdin-File-ID: 155\n"
+"X-Crowdin-File: /master/georiviere/knowledge/locale/fr/LC_MESSAGES/django.po\n"
+"X-Crowdin-File-ID: 149\n"
 
-msgid "Observations"
+msgid "Knowledge"
 msgstr ""
 
-msgid "Yes"
-msgstr ""
-
-msgid "No"
-msgstr ""
-
-msgid "Label"
+msgid "Name"
 msgstr ""
 
 msgid "Code"
 msgstr ""
 
-msgid "Tracked parameters"
+msgid "Vegetation details"
 msgstr ""
 
-msgid "Unknown"
+msgid "Work details"
 msgstr ""
 
-msgid "Main fields"
+msgid "Label"
 msgstr ""
 
-msgid "Specific profiles"
+msgid "Knowledge type"
 msgstr ""
 
-msgid "Parameters tracking"
+msgid "Knowledge types"
 msgstr ""
 
-msgid "Station profile code"
+msgid "Age class diversity"
 msgstr ""
 
-msgid "Station profile label"
+msgid "Age class diversities"
 msgstr ""
 
-msgid "Station profile"
+msgid "Specific diversity"
 msgstr ""
 
-msgid "Station profiles"
+msgid "Specific diversities"
 msgstr ""
 
-msgid "Null"
+msgid "Vegetation state"
 msgstr ""
 
-msgid "Low water only"
+msgid "Vegetation states"
 msgstr ""
 
-msgid "Strong"
+msgid "Vegetation strata"
 msgstr ""
 
-msgid "High water only"
+msgid "Vegetation stratas"
 msgstr ""
 
-msgid "Station code"
+msgid "Vegetation thickness type"
 msgstr ""
 
-msgid "Station label"
+msgid "Vegetation thickness types"
 msgstr ""
 
-msgid "Station description"
+msgid "Vegetation type"
 msgstr ""
 
-msgid "Site code"
+msgid "Vegetation types"
 msgstr ""
 
-msgid "Station URI"
+msgid "Work type"
 msgstr ""
 
-msgid "Station purpose"
+msgid "Work types"
 msgstr ""
 
-msgid "In service"
+msgid "Work material"
 msgstr ""
 
-msgid "Local influence"
+msgid "Work materials"
 msgstr ""
 
-msgid "For hydrometric station profile"
+msgid "Work state"
 msgstr ""
 
-msgid "Hardness"
+msgid "Work states"
 msgstr ""
 
-msgid "For physico-chemical station profile"
+msgid "Work bank effect"
 msgstr ""
 
-msgid "Station"
+msgid "Work bank effects"
 msgstr ""
 
-msgid "Stations"
+msgid "Work stream influence"
 msgstr ""
 
-msgid "Add a new station"
+msgid "Work stream influences"
 msgstr ""
 
-msgid "Symbol"
+msgid "Work sediment effect"
 msgstr ""
 
-msgid "Unit"
+msgid "Work sediment effects"
 msgstr ""
 
-msgid "Units"
+msgid "Work fish continuity effect"
 msgstr ""
 
-msgid "Definition"
+msgid "Work fish continuity effects"
 msgstr ""
 
-msgid "Parameter category"
+msgid "Description"
 msgstr ""
 
-msgid "Parameter categories"
+msgid "Knowledges"
 msgstr ""
 
-msgid "Qualitative"
+msgid "Add a new knowledge"
 msgstr ""
 
-msgid "Quantitative"
+msgid "Thickness type"
 msgstr ""
 
-msgid "Parameter type"
+msgid "Vegetation Strata"
 msgstr ""
 
-msgid "Parameter"
+msgid "Other information"
 msgstr ""
 
-msgid "Parameters"
+msgid "Vegetation"
 msgstr ""
 
-msgid "Online"
+msgid "Vegetations"
 msgstr ""
 
-msgid "On demand"
+msgid "Downstream bank effect"
+msgstr ""
+
+msgid "Upstream bank effect"
+msgstr ""
+
+msgid "Downstream influence"
+msgstr ""
+
+msgid "Upstream influence"
+msgstr ""
+
+msgid "Sediment effect"
+msgstr ""
+
+msgid "Fish Continuity effect"
+msgstr ""
+
+msgid "Usage"
+msgstr ""
+
+msgid "Width"
+msgstr ""
+
+msgid "Height"
+msgstr ""
+
+msgid "Length"
+msgstr ""
+
+msgid "Drop height"
+msgstr ""
+
+msgid "Pit height"
+msgstr ""
+
+msgid "Work"
+msgstr ""
+
+msgid "Works"
+msgstr ""
+
+msgid "Follow-up type"
+msgstr ""
+
+msgid "Follow-up types"
+msgstr ""
+
+msgid "Date"
 msgstr ""
 
 msgid "Measure frequency"
 msgstr ""
 
-msgid "Transmission frequency"
+msgid "Follow-up"
 msgstr ""
 
-msgid "Data availability"
+msgid "Follow-ups"
 msgstr ""
 
-msgid "Measure start date"
+msgid "Add a new follow-up"
 msgstr ""
 
-msgid "Measure end date"
+msgid "Results"
 msgstr ""
 
-msgid "Parameter tracking"
+msgid "Other follow-ups on this knowledge"
 msgstr ""
 
-msgid "Parameter trackings"
-msgstr ""
-
-msgid "Yes,No,Unknown"
-msgstr ""
-
-msgid "No parameter tracked"
-msgstr ""
-
-msgid "Edit station to add parameter to track"
-msgstr ""
-
-msgid "Add a line"
-msgstr ""
-
-msgid "Remove"
-msgstr ""
+#~ msgid "Bank effect"
+#~ msgstr "Impact berge"
 
