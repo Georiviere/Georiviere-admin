@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: geotrek\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-03-29 15:54+0000\n"
+"POT-Creation-Date: 2021-04-12 15:24+0000\n"
 "PO-Revision-Date: 2021-11-18 17:32\n"
 "Last-Translator: \n"
 "Language-Team: Spanish\n"
@@ -14,27 +14,42 @@ msgstr ""
 "X-Crowdin-Project: geotrek\n"
 "X-Crowdin-Project-ID: 485941\n"
 "X-Crowdin-Language: es-ES\n"
-"X-Crowdin-File: /master/georiviere/watershed/locale/en/LC_MESSAGES/django.po\n"
-"X-Crowdin-File-ID: 103\n"
+"X-Crowdin-File: /master/georiviere/studies/locale/en/LC_MESSAGES/django.po\n"
+"X-Crowdin-File-ID: 101\n"
 
-msgid "Watershed"
+msgid "Studies"
 msgstr ""
 
-msgid "Name"
+msgid "Title"
 msgstr ""
 
-msgid "Color"
+msgid "Start year"
 msgstr ""
 
-msgid "Color shown on map"
+msgid "End year"
 msgstr ""
 
-msgid "Watershed type"
+msgid "Label"
 msgstr ""
 
-msgid "External id"
+msgid "Study type"
 msgstr ""
 
-msgid "Watersheds"
+msgid "Study types"
+msgstr ""
+
+msgid "Year"
+msgstr ""
+
+msgid "Authors"
+msgstr ""
+
+msgid "Description"
+msgstr ""
+
+msgid "Study"
+msgstr ""
+
+msgid "Add a new study"
 msgstr ""
 
