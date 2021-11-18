@@ -54,6 +54,7 @@ class Intervention(TimeStampedModelMixin, WatershedPropertiesMixin, ZoningProper
                                    help_text=_("Remarks and notes"))
 
     # Technical information
+    length = models.FloatField(default=0.0, blank=True, null=True, verbose_name=_("Length"))
     width = models.FloatField(default=0.0, blank=True, null=True, verbose_name=_("Width"))
     height = models.FloatField(default=0.0, blank=True, null=True, verbose_name=_("Height"))
     area = models.FloatField(editable=False, default=0, blank=True, null=True, verbose_name=_("Area"))

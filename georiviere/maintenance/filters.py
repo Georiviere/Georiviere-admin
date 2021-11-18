@@ -17,5 +17,5 @@ class InterventionFilterSet(WatershedFilterSet, RestrictedAreaFilterSet,
     class Meta(MapEntityFilterSet.Meta):
         model = Intervention
         fields = MapEntityFilterSet.Meta.fields + [
-            'name'
+            'name', 'intervention_type', 'disorders', 'stake', 'intervention_status'
         ]

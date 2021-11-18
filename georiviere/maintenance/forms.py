@@ -7,7 +7,6 @@ from geotrek.common.forms import CommonForm
 from georiviere.knowledge.models import Knowledge
 from georiviere.main.widgets import DatePickerInput
 from georiviere.maintenance.models import Intervention
-from georiviere.observations.models import Station
 
 
 class InterventionForm(autocomplete.FutureModelForm, CommonForm):
@@ -16,10 +15,9 @@ class InterventionForm(autocomplete.FutureModelForm, CommonForm):
 
     target = autocomplete.Select2GenericForeignKeyModelField(
         model_choice=[
-            (Station, 'label',),
             (Knowledge, 'name')
         ],
-        label=_('Target'),
+        label=_('Knowledge'),
         required=False,
     )
 
@@ -34,6 +32,7 @@ class InterventionForm(autocomplete.FutureModelForm, CommonForm):
             "stake",
             "disorders",
             "description",
+            "length",
             "width",
             "height",
         )]
@@ -44,7 +43,7 @@ class InterventionForm(autocomplete.FutureModelForm, CommonForm):
             "structure", "target", "name", "date",
             "intervention_status", "intervention_type",
             "stake", "disorders", "description",
-            "width", "height", "_geom"
+            "length", "width", "height", "_geom"
         ]
         widgets = {
             'date': DatePickerInput(),

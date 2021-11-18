@@ -24,6 +24,7 @@ class StationFilterSet(WatershedFilterSet, ZoningFilterSet, MapEntityFilterSet):
     )
     in_service = ChoiceFilter(
         null_label=_('Unknown'),
+        empty_label=_('Unknown'),
         choices=choices
     )
 
