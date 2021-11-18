@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: geotrek\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-10-20 10:10+0000\n"
+"POT-Creation-Date: 2021-09-23 12:43+0000\n"
 "PO-Revision-Date: 2021-11-18 17:36\n"
 "Last-Translator: \n"
 "Language-Team: French\n"
@@ -14,186 +14,12 @@ msgstr ""
 "X-Crowdin-Project: geotrek\n"
 "X-Crowdin-Project-ID: 485941\n"
 "X-Crowdin-Language: fr\n"
-"X-Crowdin-File: /master/georiviere/finances_administration/locale/fr/LC_MESSAGES/django.po\n"
-"X-Crowdin-File-ID: 147\n"
+"X-Crowdin-File: /master/georiviere/main/locale/fr/LC_MESSAGES/django.po\n"
+"X-Crowdin-File-ID: 151\n"
 
-msgid "Finances and administration"
+msgid "Main"
 msgstr ""
 
-msgid "Name"
-msgstr ""
-
-msgid "Operation on"
-msgstr ""
-
-msgid "Cancel"
-msgstr ""
-
-msgid "Save changes"
-msgstr ""
-
-msgid "General information"
-msgstr ""
-
-msgid "Stakeholders"
-msgstr ""
-
-msgid "Financing"
-msgstr ""
-
-msgid "Operations"
-msgstr ""
-
-msgid "Organism"
-msgstr ""
-
-msgid "Organisms"
-msgstr ""
-
-msgid "Label"
-msgstr ""
-
-msgid "Admin file type"
-msgstr ""
-
-msgid "Admin file types"
-msgstr ""
-
-msgid "Admin file domain"
-msgstr ""
-
-msgid "Admin file domains"
-msgstr ""
-
-msgid "Description"
-msgstr ""
-
-msgid "Begin date"
-msgstr ""
-
-msgid "End date"
-msgstr ""
-
-msgid "Project owners"
-msgstr ""
-
-msgid "Project managers"
-msgstr ""
-
-msgid "Funders"
-msgstr ""
-
-msgid "Contractors"
-msgstr ""
-
-msgid "Constraints"
-msgstr ""
-
-msgid "Specific conditions, etc."
-msgstr ""
-
-msgid "Global cost"
-msgstr ""
-
-msgid "External id"
-msgstr ""
-
-msgid "Administrative file"
-msgstr ""
-
-msgid "Administrative files"
-msgstr ""
-
-msgid "Add a new admin file"
-msgstr ""
-
-msgid "Status"
-msgstr ""
-
-msgid "Estimated cost"
-msgstr ""
-
-msgid "Material cost"
-msgstr ""
-
-msgid "Subcontract cost"
-msgstr ""
-
-msgid "Administrative operation"
-msgstr ""
-
-msgid "Administrative operations"
-msgstr ""
-
-msgid "Amount"
-msgstr ""
-
-msgid "Funding"
-msgstr ""
-
-msgid "Fundings"
-msgstr ""
-
-msgid "Cost of man-day"
-msgstr ""
-
-msgid "Active"
-msgstr ""
-
-msgid "Job category"
-msgstr ""
-
-msgid "Job categories"
-msgstr ""
-
-msgid "Man-days"
-msgstr ""
-
-msgid "Operation"
-msgstr ""
-
-msgid "Man-day"
-msgstr ""
-
-msgid "None"
-msgstr ""
-
-msgid "Actual cost"
-msgstr ""
-
-msgid "Edit costs"
-msgstr ""
-
-msgid "Totals"
-msgstr ""
-
-msgid "Edit"
-msgstr ""
-
-msgid "No operation is created"
-msgstr ""
-
-msgid "Edit administrative file to add new operations."
-msgstr ""
-
-msgid "Add an operation"
-msgstr ""
-
-msgid "Remove"
-msgstr ""
-
-msgid "Add funding"
-msgstr ""
-
-msgid "Edit costs for"
-msgstr ""
-
-msgid "Add manday"
-msgstr ""
-
-msgid "Related administrative files"
-msgstr ""
-
-msgid "Add a new administrative file"
+msgid "Restricted area"
 msgstr ""
 
