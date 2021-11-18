@@ -14,75 +14,54 @@ msgstr ""
 "X-Crowdin-Project: geotrek\n"
 "X-Crowdin-Project-ID: 485941\n"
 "X-Crowdin-Language: fr\n"
-"X-Crowdin-File: /master/georiviere/river/locale/fr/LC_MESSAGES/django.po\n"
-"X-Crowdin-File-ID: 159\n"
+"X-Crowdin-File: /master/georiviere/proceeding/locale/fr/LC_MESSAGES/django.po\n"
+"X-Crowdin-File-ID: 157\n"
 
-msgid "River"
+msgid "Proceeding"
 msgstr ""
 
-msgid "Access to the requested resource is restricted by structure. You have been redirected."
+msgid "Related events type"
 msgstr ""
 
-msgid "Linestring invalid snapping."
+msgid "Main fields"
 msgstr ""
 
-msgid "Length"
+msgid "Events"
 msgstr ""
 
 msgid "Name"
 msgstr ""
 
-msgid "Qualified"
+msgid "Event type"
 msgstr ""
 
-msgid "Structure"
+msgid "Event types"
 msgstr ""
 
-msgid "Stream"
+msgid "Date"
 msgstr ""
 
-msgid "Add a new stream"
+msgid "External id"
 msgstr ""
 
-msgid "Streams"
+msgid "Description"
 msgstr ""
 
-msgid "Start position"
-msgstr ""
-
-msgid "End position"
-msgstr ""
-
-msgid "Topology"
-msgstr ""
-
-msgid "Topologies"
-msgstr ""
-
-msgid "Stations"
-msgstr ""
-
-msgid "Knowledge"
+msgid "Add a new proceeding"
 msgstr ""
 
 msgid "Proceedings"
 msgstr ""
 
-msgid "Studies"
+msgid "Event"
 msgstr ""
 
-msgid "Knowledges"
+msgid "No events"
 msgstr ""
 
-msgid "Cut topology"
+msgid "Add a line"
 msgstr ""
 
-msgid "Topology is not qualified"
-msgstr ""
-
-msgid "Topology could not be cut"
-msgstr ""
-
-msgid "Topology has been cut"
+msgid "Remove"
 msgstr ""
 
