@@ -1,7 +1,6 @@
 import json
 
 from mapentity.widgets import MapWidget
-from leaflet.forms.widgets import LeafletWidget
 
 
 class SnappedLineStringWidget(MapWidget):
