@@ -2,8 +2,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: geotrek\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-05-05 11:58+0000\n"
-"PO-Revision-Date: 2021-11-18 17:31\n"
+"POT-Creation-Date: 2021-03-29 15:54+0000\n"
+"PO-Revision-Date: 2021-11-18 17:32\n"
 "Last-Translator: \n"
 "Language-Team: French\n"
 "Language: fr_FR\n"
@@ -14,180 +14,27 @@ msgstr ""
 "X-Crowdin-Project: geotrek\n"
 "X-Crowdin-Project-ID: 485941\n"
 "X-Crowdin-Language: fr\n"
-"X-Crowdin-File: /master/georiviere/description/locale/en/LC_MESSAGES/django.po\n"
-"X-Crowdin-File-ID: 85\n"
+"X-Crowdin-File: /master/georiviere/watershed/locale/en/LC_MESSAGES/django.po\n"
+"X-Crowdin-File-ID: 103\n"
 
-msgid "Description"
-msgstr ""
-
-msgid "Status cannot be qualified but without type"
+msgid "Watershed"
 msgstr ""
 
 msgid "Name"
 msgstr ""
 
-msgid "Plan layout type"
+msgid "Color"
 msgstr ""
 
-msgid "Plan layout types"
+msgid "Color shown on map"
 msgstr ""
 
-msgid "Habitat type"
+msgid "Watershed type"
 msgstr ""
 
-msgid "Habitat types"
+msgid "External id"
 msgstr ""
 
-msgid "Habitats diversity"
-msgstr ""
-
-msgid "Habitats diversities"
-msgstr ""
-
-msgid "Bank state"
-msgstr ""
-
-msgid "Bank states"
-msgstr ""
-
-msgid "Sediment dynamic"
-msgstr ""
-
-msgid "Sediment dynamics"
-msgstr ""
-
-msgid "Granulometric diversity"
-msgstr ""
-
-msgid "Granulometric diversities"
-msgstr ""
-
-msgid "Facies diversity"
-msgstr ""
-
-msgid "Facies diversities"
-msgstr ""
-
-msgid "Working space type"
-msgstr ""
-
-msgid "Working space types"
-msgstr ""
-
-msgid "Flow type"
-msgstr ""
-
-msgid "Flow types"
-msgstr ""
-
-msgid "Left good Working space"
-msgstr ""
-
-msgid "Right good Working space"
-msgstr ""
-
-msgid "Main flow"
-msgstr ""
-
-msgid "Secondary flow"
-msgstr ""
-
-msgid "Full edge height"
-msgstr ""
-
-msgid "Full edge width"
-msgstr ""
-
-msgid "Bank state left"
-msgstr ""
-
-msgid "Bank state right"
-msgstr ""
-
-msgid "Main habitat"
-msgstr ""
-
-msgid "Secondary habitat"
-msgstr ""
-
-msgid "Plan layout"
-msgstr ""
-
-msgid "Morphology"
-msgstr ""
-
-msgid "Morphologies"
-msgstr ""
-
-msgid "Land type"
-msgstr ""
-
-msgid "Land types"
-msgstr ""
-
-msgid "Owner"
-msgstr ""
-
-msgid "Agreement"
-msgstr ""
-
-msgid "Comment"
-msgstr ""
-
-msgid "Identifier"
-msgstr ""
-
-msgid "Land"
-msgstr ""
-
-msgid "Lands"
-msgstr ""
-
-msgid "Usage type"
-msgstr ""
-
-msgid "Usage types"
-msgstr ""
-
-msgid "Usage"
-msgstr ""
-
-msgid "Usages"
-msgstr ""
-
-msgid "Status type"
-msgstr ""
-
-msgid "Status types"
-msgstr ""
-
-msgid "Your status is a regulation status"
-msgstr ""
-
-msgid "Regulation"
-msgstr ""
-
-msgid "Your status is a referencial status"
-msgstr ""
-
-msgid "Referencial"
-msgstr ""
-
-msgid "Status"
-msgstr ""
-
-msgid "Statuses"
-msgstr ""
-
-msgid "Descriptions"
-msgstr ""
-
-msgid "Add a new land"
-msgstr ""
-
-msgid "Add a new usage"
-msgstr ""
-
-msgid "Morphology types"
+msgid "Watersheds"
 msgstr ""
 
