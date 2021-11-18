@@ -102,12 +102,11 @@ class FollowUpForm(CommonForm):
             'date': DatePickerInput(),
         }
 
-    def __init__(self, knowledge_id=None, *args, **kwargs):
+    def __init__(self, knowledge=None, *args, **kwargs):
         super().__init__(*args, **kwargs)
         self.helper.form_tag = False
         if not self.instance.pk:
             # New followup, set its knowledge from knowledge_id
-            if knowledge_id:
-                knowledge = Knowledge.objects.get(id=knowledge_id)
+            if knowledge:
                 self.fields['knowledge'].initial = knowledge
-                self.helper.form_action += '?knowledge_id={}'.format(knowledge_id)
+                self.helper.form_action += '?knowledge_id={}'.format(knowledge.id)
