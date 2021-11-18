@@ -2,8 +2,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: geotrek\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-05-05 11:58+0000\n"
-"PO-Revision-Date: 2021-11-18 17:32\n"
+"POT-Creation-Date: 2021-09-23 12:43+0000\n"
+"PO-Revision-Date: 2021-11-18 17:36\n"
 "Last-Translator: \n"
 "Language-Team: Spanish\n"
 "Language: es_ES\n"
@@ -14,8 +14,8 @@ msgstr ""
 "X-Crowdin-Project: geotrek\n"
 "X-Crowdin-Project-ID: 485941\n"
 "X-Crowdin-Language: es-ES\n"
-"X-Crowdin-File: /master/georiviere/description/locale/en/LC_MESSAGES/django.po\n"
-"X-Crowdin-File-ID: 85\n"
+"X-Crowdin-File: /master/georiviere/description/locale/fr/LC_MESSAGES/django.po\n"
+"X-Crowdin-File-ID: 145\n"
 
 msgid "Description"
 msgstr ""
@@ -23,7 +23,7 @@ msgstr ""
 msgid "Status cannot be qualified but without type"
 msgstr ""
 
-msgid "Name"
+msgid "Label"
 msgstr ""
 
 msgid "Plan layout type"
@@ -119,6 +119,15 @@ msgstr ""
 msgid "Morphologies"
 msgstr ""
 
+msgid "Name"
+msgstr ""
+
+msgid "Add a new morphology"
+msgstr ""
+
+msgid "Status"
+msgstr ""
+
 msgid "Land type"
 msgstr ""
 
@@ -129,9 +138,6 @@ msgid "Owner"
 msgstr ""
 
 msgid "Agreement"
-msgstr ""
-
-msgid "Comment"
 msgstr ""
 
 msgid "Identifier"
@@ -173,10 +179,10 @@ msgstr ""
 msgid "Referencial"
 msgstr ""
 
-msgid "Status"
+msgid "Statuses"
 msgstr ""
 
-msgid "Statuses"
+msgid "Add a new status"
 msgstr ""
 
 msgid "Descriptions"
@@ -188,6 +194,9 @@ msgstr ""
 msgid "Add a new usage"
 msgstr ""
 
-msgid "Morphology types"
-msgstr ""
+#~ msgid "Comment"
+#~ msgstr "Commentaire"
+
+#~ msgid "Morphology types"
+#~ msgstr "Types de morphologie"
 
