@@ -22,7 +22,7 @@ class SnappedLineStringWidget(MapWidget):
         return super().deserialize(value)
 
 
-class SourceLocationWidget(LeafletWidget):
+class SourceLocationWidget(MapWidget):
     """Widget for source location"""
 
     geometry_field_class = 'SourceLocationField'
