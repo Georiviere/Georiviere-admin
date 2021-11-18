@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: geotrek\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-08-04 09:41+0000\n"
+"POT-Creation-Date: 2021-08-03 11:14+0000\n"
 "PO-Revision-Date: 2021-11-18 17:32\n"
 "Last-Translator: \n"
 "Language-Team: Italian\n"
@@ -14,54 +14,87 @@ msgstr ""
 "X-Crowdin-Project: geotrek\n"
 "X-Crowdin-Project-ID: 485941\n"
 "X-Crowdin-Language: it\n"
-"X-Crowdin-File: /master/georiviere/proceeding/locale/en/LC_MESSAGES/django.po\n"
-"X-Crowdin-File-ID: 97\n"
+"X-Crowdin-File: /master/georiviere/maintenance/locale/en/LC_MESSAGES/django.po\n"
+"X-Crowdin-File-ID: 93\n"
 
-msgid "Proceeding"
-msgstr ""
-
-msgid "Related events type"
-msgstr ""
-
-msgid "Main fields"
-msgstr ""
-
-msgid "Events"
+msgid "Maintenance"
 msgstr ""
 
 msgid "Name"
 msgstr ""
 
-msgid "Event type"
-msgstr ""
-
-msgid "Event types"
-msgstr ""
-
 msgid "Date"
 msgstr ""
 
-msgid "External id"
+msgid "Status"
+msgstr ""
+
+msgid "Type"
+msgstr ""
+
+msgid "Stake"
+msgstr ""
+
+msgid "Disorders"
 msgstr ""
 
 msgid "Description"
 msgstr ""
 
-msgid "Add a new proceeding"
+msgid "Remarks and notes"
 msgstr ""
 
-msgid "Proceedings"
+msgid "Width"
 msgstr ""
 
-msgid "Event"
+msgid "Height"
 msgstr ""
 
-msgid "No events"
+msgid "Area"
 msgstr ""
 
-msgid "Add a line"
+msgid "Intervention"
 msgstr ""
 
-msgid "Remove"
+msgid "Interventions"
+msgstr ""
+
+msgid "Add a new intervention"
+msgstr ""
+
+msgid "On"
+msgstr ""
+
+msgid "Display order"
+msgstr ""
+
+msgid "Intervention's status"
+msgstr ""
+
+msgid "Intervention's statuses"
+msgstr ""
+
+msgid "Intervention's type"
+msgstr ""
+
+msgid "Intervention's types"
+msgstr ""
+
+msgid "Intervention's stake"
+msgstr ""
+
+msgid "Intervention's stakes"
+msgstr ""
+
+msgid "Disorder"
+msgstr ""
+
+msgid "Intervention's disorder"
+msgstr ""
+
+msgid "Intervention's disorders"
+msgstr ""
+
+msgid "Target"
 msgstr ""
 
