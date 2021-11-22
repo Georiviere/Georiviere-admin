@@ -1,6 +1,7 @@
 from collections import OrderedDict
 
 from django.core.exceptions import ObjectDoesNotExist
+from django.utils.translation import gettext_lazy as _
 from geotrek.authent.factories import StructureFactory
 
 from georiviere.tests import CommonRiverTest
@@ -27,9 +28,7 @@ class KnowledgeViewTestCase(CommonRiverTest):
         }
 
     def get_bad_data(self):
-        return OrderedDict([
-            ('name', ''),
-        ]), 'This field is required.'
+        return {'geom': '{"geom": "POINT (0.0 1.0)"}'}, _("Geometry invalid snapping.")
 
     def get_good_data(self):
         structure = StructureFactory.create()
@@ -39,7 +38,8 @@ class KnowledgeViewTestCase(CommonRiverTest):
         )
         return {
             'structure': structure.pk,
-            'geom': temp_data.geom.ewkt,
+            'geom': '{"geom": "%s", "snap": [%s]}' % (temp_data.geom.transform(4326, clone=True).ewkt,
+                                                      ','.join(['null'])),
             'knowledge_type': knowledge_type.pk,
             'code': '1234',
             'name': 'test',

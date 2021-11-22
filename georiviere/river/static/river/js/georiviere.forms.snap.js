@@ -24,13 +24,18 @@ L.FieldStore.LineSnapStore = L.FieldStore.extend({
         }
         var snaplist = new Array(n);
         if (layer.editing._poly === undefined) {
-            return {geom: str, snap: []}
-        }
-        if (layer.editing._poly.snapediting) {
-            for (var i=0; i<n; i++) {
-                var marker = layer.editing._poly.snapediting._markers[i];
+            if (layer.editing._markers !== undefined) {
+                var marker = layer.editing._markers[0];
                 if (marker.snap && marker.snap.properties && marker.snap.properties.pk)
-                    snaplist[i] = marker.snap.properties.pk;
+                    snaplist[0] = marker.snap.properties.pk;
+            }
+        }
+        if (layer.editing._snapper && layer.editing._snapper._markers) {
+            var markers = layer.editing._snapper._markers.sort((a, b) => a._index - b._index)
+            for (var i=0; i<n; i++) {
+                var marker = markers[i];
+                if (marker && marker.snap && marker.snap.properties && marker.snap.properties.pk)
+                        snaplist[i] = marker.snap.properties.pk;
             }
         }
 
@@ -154,6 +159,9 @@ MapEntity.GeometryField.GeometryFieldSnap = MapEntity.GeometryField.extend({
 
         // On edition, show start and end markers as snapped
         this._map.on('draw:editstart', function (e) {
+            if (layer.editing._snapper) {
+                layer.editing._snapper._markers = [];
+            }
             setTimeout(function () {
                 if (!layer.editing) {
                     console.warn('Layer has no snap editing');
@@ -161,7 +169,7 @@ MapEntity.GeometryField.GeometryFieldSnap = MapEntity.GeometryField.extend({
                 }
                 if (layer.editing._enabled === false) {
                     console.warn('Layer was not enable editing');
-                    return;  // should never happen ;)
+                    return;
                 }
                 var markers = layer.editing._markers;
                 var first = markers[0],

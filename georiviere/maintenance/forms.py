@@ -12,7 +12,7 @@ from georiviere.river.fields import SnappedGeometryField
 
 class InterventionForm(autocomplete.FutureModelForm, CommonForm):
     """Intervention form"""
-    _geom = SnappedGeometryField()
+    _geom = SnappedGeometryField(required=False)
 
     geomfields = ['_geom']
 

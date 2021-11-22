@@ -1,6 +1,10 @@
 from django.conf import settings
 from django.contrib.gis.db import models
 from django.contrib.gis.geos import Point
+<<<<<<< HEAD
+=======
+from django.db import connection
+>>>>>>> Fix snapping other type of geoms, add_tests snapping
 from django.db.models import Q
 from django.utils.translation import gettext_lazy as _
 
@@ -85,6 +89,25 @@ class Stream(AddPropertyBufferMixin, TimeStampedModelMixin, WatershedPropertiesM
             extent[2] = max(extent[2], self.source_location.x)
             extent[3] = max(extent[3], self.source_location.y)
         return extent
+
+    def snap(self, point):
+        """
+        Returns the point snapped (i.e closest) to the path line geometry.
+        """
+        if not self.pk:
+            raise ValueError("Cannot compute snap on unsaved path")
+        if point.srid != self.geom.srid:
+            point.transform(self.geom.srid)
+        cursor = connection.cursor()
+        sql = """
+        WITH p AS (SELECT ST_ClosestPoint(geom, '%(ewkt)s'::geometry) AS geom
+                   FROM %(table)s
+                   WHERE id = '%(pk)s')
+        SELECT ST_X(p.geom), ST_Y(p.geom) FROM p
+        """ % {'ewkt': point.ewkt, 'table': self._meta.db_table, 'pk': self.pk}
+        cursor.execute(sql)
+        result = cursor.fetchall()
+        return Point(*result[0], srid=self.geom.srid)
 
 
 class Topology(models.Model):

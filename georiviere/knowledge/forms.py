@@ -79,7 +79,7 @@ class WorkForm(ModelForm):
 
 class FollowUpForm(CommonForm):
     """FollowUp form"""
-    _geom = SnappedGeometryField()
+    _geom = SnappedGeometryField(required=False)
 
     geomfields = ['_geom']
 

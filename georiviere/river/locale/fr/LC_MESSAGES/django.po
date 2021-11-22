@@ -26,6 +26,9 @@ msgid ""
 "redirected."
 msgstr "L'accès à cette ressource est restreint. Vous avez été redirigé."
 
+msgid "Geometry invalid snapping."
+msgstr "Impossible de faire toucher la géométrie"
+
 msgid "Linestring invalid snapping."
 msgstr "Impossible de faire toucher la ligne"
 

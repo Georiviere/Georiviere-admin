@@ -10,7 +10,10 @@ class SnappedGeometryWidget(MapWidget):
         geojson = super().serialize(value)
         snaplist = []
         if value:
-            snaplist = [None for c in range(len(value.coords))]
+            if value.geom_type == "Point":
+                snaplist = [None]
+            else:
+                snaplist = [None for c in range(len(value.coords))]
         value = {'geom': geojson, 'snap': snaplist}
         return json.dumps(value)
 

@@ -39,7 +39,8 @@ class StudyViewTestCase(CommonRiverTest):
         )
         return {
             'structure': structure.pk,
-            'geom': temp_data.geom.ewkt,
+            'geom': '{"geom": "%s", "snap": [%s]}' % (temp_data.geom.transform(4326, clone=True).ewkt,
+                                                      ','.join(['null'])),
             'study_types': [study_type1.pk, study_type2.pk],
             'title': 'test',
             'year': 2012,
