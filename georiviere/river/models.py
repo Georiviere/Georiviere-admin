@@ -92,7 +92,7 @@ class Stream(AddPropertyBufferMixin, TimeStampedModelMixin, WatershedPropertiesM
         Returns the point snapped (i.e closest) to the path line geometry.
         """
         if not self.pk:
-            raise ValueError("Cannot compute snap on unsaved path")
+            raise ValueError("Cannot compute snap on unsaved stream")
         if point.srid != self.geom.srid:
             point.transform(self.geom.srid)
         cursor = connection.cursor()
