@@ -38,13 +38,17 @@ class LandViewTestCase(CommonRiverTest):
             'land_type': self.obj.land_type.pk
         }
 
+    def get_bad_data(self):
+        return {'geom': '{"geom": "LINESTRING (0.0 0.0, 1.0 1.0)"}'}, _("Geometry invalid snapping.")
+
     def get_good_data(self):
         structure = StructureFactory.create()
         land_type = LandTypeFactory.create()
         temp_data = self.modelfactory.build(structure=structure)
         return {
             'structure': structure.pk,
-            'geom': temp_data.geom.ewkt,
+            'geom': '{"geom": "%s", "snap": [%s]}' % (temp_data.geom.transform(4326, clone=True).ewkt,
+                                                      ','.join(['null'] * len(temp_data.geom.coords))),
             'land_type': land_type.pk,
             'owner': temp_data.owner,
             'description': temp_data.description
@@ -55,6 +59,9 @@ class LandViewTestCase(CommonRiverTest):
 class UsageViewTestCase(CommonRiverTest):
     model = Usage
     modelfactory = UsageFactory
+
+    def get_bad_data(self):
+        return {'geom': '{"geom": "LINESTRING (0.0 0.0, 1.0 1.0)"}'}, _("Geometry invalid snapping.")
 
     def get_expected_json_attrs(self):
         return {
@@ -80,7 +87,8 @@ class UsageViewTestCase(CommonRiverTest):
         temp_data = self.modelfactory.build(structure=structure, usage_types=[usage_type])
         return {
             'structure': structure.pk,
-            'geom': temp_data.geom.ewkt,
+            'geom': '{"geom": "%s", "snap": [%s]}' % (temp_data.geom.transform(4326, clone=True).ewkt,
+                                                      ','.join(['null'] * len(temp_data.geom.coords))),
             'usage_types': [usage_type.pk, ]
         }
 

@@ -1,6 +1,6 @@
 from django.test import TestCase
 from django.core.exceptions import ValidationError
-from django.contrib.gis.geos import GEOSGeometry, LineString,Point, Polygon
+from django.contrib.gis.geos import GEOSGeometry, LineString, Point, Polygon
 from django.conf import settings
 
 from georiviere.river.fields import SnappedGeometryField, SnappedLineStringField
