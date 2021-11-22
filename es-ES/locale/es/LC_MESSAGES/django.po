@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: geotrek\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-11-15 09:24+0000\n"
+"POT-Creation-Date: 2021-09-23 12:43+0000\n"
 "PO-Revision-Date: 2021-11-22 13:41\n"
 "Last-Translator: \n"
 "Language-Team: Spanish\n"
@@ -14,180 +14,198 @@ msgstr ""
 "X-Crowdin-Project: geotrek\n"
 "X-Crowdin-Project-ID: 485941\n"
 "X-Crowdin-Language: es-ES\n"
-"X-Crowdin-File: /master/georiviere/observations/locale/en/LC_MESSAGES/django.po\n"
-"X-Crowdin-File-ID: 95\n"
+"X-Crowdin-File: /master/georiviere/description/locale/fr/LC_MESSAGES/django.po\n"
+"X-Crowdin-File-ID: 145\n"
 
-msgid "Observations"
+msgid "Description"
 msgstr ""
 
-msgid "Yes"
-msgstr ""
-
-msgid "No"
+msgid "Status cannot be qualified but without type"
 msgstr ""
 
 msgid "Label"
 msgstr ""
 
-msgid "Code"
+msgid "Plan layout type"
 msgstr ""
 
-msgid "Tracked parameters"
+msgid "Plan layout types"
 msgstr ""
 
-msgid "Unknown"
+msgid "Habitat type"
 msgstr ""
 
-msgid "Main fields"
+msgid "Habitat types"
 msgstr ""
 
-msgid "Specific profiles"
+msgid "Habitats diversity"
 msgstr ""
 
-msgid "Parameters tracking"
+msgid "Habitats diversities"
 msgstr ""
 
-msgid "This code is already in use."
+msgid "Bank state"
 msgstr ""
 
-msgid "Station profile code"
+msgid "Bank states"
 msgstr ""
 
-msgid "Station profile label"
+msgid "Sediment dynamic"
 msgstr ""
 
-msgid "Station profile"
+msgid "Sediment dynamics"
 msgstr ""
 
-msgid "Station profiles"
+msgid "Granulometric diversity"
 msgstr ""
 
-msgid "Null"
+msgid "Granulometric diversities"
 msgstr ""
 
-msgid "Low water only"
+msgid "Facies diversity"
 msgstr ""
 
-msgid "Strong"
+msgid "Facies diversities"
 msgstr ""
 
-msgid "High water only"
+msgid "Working space type"
 msgstr ""
 
-msgid "Station code"
+msgid "Working space types"
 msgstr ""
 
-msgid "Station label"
+msgid "Flow type"
 msgstr ""
 
-msgid "Station description"
+msgid "Flow types"
 msgstr ""
 
-msgid "Site code"
+msgid "Left good Working space"
 msgstr ""
 
-msgid "Station URI"
+msgid "Right good Working space"
 msgstr ""
 
-msgid "Station purpose"
+msgid "Main flow"
 msgstr ""
 
-msgid "In service"
+msgid "Secondary flow"
 msgstr ""
 
-msgid "Local influence"
+msgid "Full edge height"
 msgstr ""
 
-msgid "For hydrometric station profile"
+msgid "Full edge width"
 msgstr ""
 
-msgid "Hardness"
+msgid "Bank state left"
 msgstr ""
 
-msgid "For physico-chemical station profile"
+msgid "Bank state right"
+msgstr ""
+
+msgid "Main habitat"
+msgstr ""
+
+msgid "Secondary habitat"
+msgstr ""
+
+msgid "Plan layout"
+msgstr ""
+
+msgid "Morphology"
+msgstr ""
+
+msgid "Morphologies"
+msgstr ""
+
+msgid "Name"
+msgstr ""
+
+msgid "Add a new morphology"
+msgstr ""
+
+msgid "Land type"
+msgstr ""
+
+msgid "Land types"
+msgstr ""
+
+msgid "Owner"
+msgstr ""
+
+msgid "Agreement"
+msgstr ""
+
+msgid "Identifier"
+msgstr ""
+
+msgid "Land"
+msgstr ""
+
+msgid "Lands"
+msgstr ""
+
+msgid "Usage type"
+msgstr ""
+
+msgid "Usage types"
+msgstr ""
+
+msgid "Usage"
+msgstr ""
+
+msgid "Usages"
+msgstr ""
+
+msgid "Status type"
+msgstr ""
+
+msgid "Status types"
+msgstr ""
+
+msgid "Your status is a regulation status"
+msgstr ""
+
+msgid "Regulation"
+msgstr ""
+
+msgid "Your status is a referencial status"
+msgstr ""
+
+msgid "Referencial"
+msgstr ""
+
+msgid "Status"
+msgstr ""
+
+msgid "Statuses"
+msgstr ""
+
+msgid "Add a new status"
+msgstr ""
+
+msgid "Stream"
 msgstr ""
 
 msgid "Station"
 msgstr ""
 
-msgid "Stations"
+msgid "Study"
 msgstr ""
 
-msgid "Add a new station"
+msgid "Proceeding"
 msgstr ""
 
-msgid "Symbol"
+msgid "Knowledge"
 msgstr ""
 
-msgid "Unit"
+msgid "Descriptions"
 msgstr ""
 
-msgid "Units"
+msgid "Add a new land"
 msgstr ""
 
-msgid "Definition"
-msgstr ""
-
-msgid "Parameter category"
-msgstr ""
-
-msgid "Parameter categories"
-msgstr ""
-
-msgid "Qualitative"
-msgstr ""
-
-msgid "Quantitative"
-msgstr ""
-
-msgid "Parameter type"
-msgstr ""
-
-msgid "Parameter"
-msgstr ""
-
-msgid "Parameters"
-msgstr ""
-
-msgid "Online"
-msgstr ""
-
-msgid "On demand"
-msgstr ""
-
-msgid "Measure frequency"
-msgstr ""
-
-msgid "Transmission frequency"
-msgstr ""
-
-msgid "Data availability"
-msgstr ""
-
-msgid "Measure start date"
-msgstr ""
-
-msgid "Measure end date"
-msgstr ""
-
-msgid "Parameter tracking"
-msgstr ""
-
-msgid "Parameter trackings"
-msgstr ""
-
-msgid "Yes,No,Unknown"
-msgstr ""
-
-msgid "No parameter tracked"
-msgstr ""
-
-msgid "Edit station to add parameter to track"
-msgstr ""
-
-msgid "Add a line"
-msgstr ""
-
-msgid "Remove"
+msgid "Add a new usage"
 msgstr ""
 
