@@ -138,11 +138,13 @@ MapEntity.GeometryField.GeometryFieldSnap = MapEntity.GeometryField.extend({
         var handlerClass = null;
         if (layer instanceof L.Marker) {
             handlerClass = L.Handler.MarkerSnap;
+            // Markers don't need draw edition because we don't need to modify multiple points we can move freely the Marker
             $('.leaflet-draw-edit-edit').hide()
             $('.leaflet-draw-edit-remove').hide()
         }
         else if (layer instanceof L.Polyline) {
             handlerClass = L.Handler.PolylineSnap;
+            // We show draw edition in the case we used to draw a point and we change it for anything else
             $('.leaflet-draw-edit-edit').show()
             $('.leaflet-draw-edit-remove').show()
         }
@@ -164,6 +166,8 @@ MapEntity.GeometryField.GeometryFieldSnap = MapEntity.GeometryField.extend({
         // On edition, show start and end markers as snapped
         this._map.on('draw:editstart', function (e) {
             if (layer.editing._snapper) {
+                // The markers in snapper are kept between 2 modifications. Markers are added when we edit a layer.
+                // We left an empty array, it will get all the old markers after.
                 layer.editing._snapper._markers = [];
             }
             setTimeout(function () {
