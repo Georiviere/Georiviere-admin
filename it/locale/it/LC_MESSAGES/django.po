@@ -2,8 +2,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: geotrek\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-11-17 08:23+0000\n"
-"PO-Revision-Date: 2021-11-22 10:27\n"
+"POT-Creation-Date: 2021-11-22 12:23+0000\n"
+"PO-Revision-Date: 2021-11-22 13:41\n"
 "Last-Translator: \n"
 "Language-Team: Italian\n"
 "Language: it_IT\n"
@@ -14,8 +14,8 @@ msgstr ""
 "X-Crowdin-Project: geotrek\n"
 "X-Crowdin-Project-ID: 485941\n"
 "X-Crowdin-Language: it\n"
-"X-Crowdin-File: /master/georiviere/river/locale/fr/LC_MESSAGES/django.po\n"
-"X-Crowdin-File-ID: 159\n"
+"X-Crowdin-File: /master/georiviere/river/locale/en/LC_MESSAGES/django.po\n"
+"X-Crowdin-File-ID: 99\n"
 
 msgid "River"
 msgstr ""
@@ -41,10 +41,13 @@ msgstr ""
 msgid "Stream"
 msgstr ""
 
-msgid "Add a new stream"
+msgid "Source location"
 msgstr ""
 
 msgid "Streams"
+msgstr ""
+
+msgid "Add a new stream"
 msgstr ""
 
 msgid "Start position"
@@ -84,6 +87,15 @@ msgid "Knowledges"
 msgstr ""
 
 msgid "Cut topology"
+msgstr ""
+
+msgid "Set the source location"
+msgstr ""
+
+msgid "Move the source location"
+msgstr ""
+
+msgid "Delete the source location"
 msgstr ""
 
 msgid "Topology is not qualified"
