@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-09-23 12:43+0000\n"
+"POT-Creation-Date: 2021-11-17 08:23+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -56,6 +56,15 @@ msgstr "Position de départ"
 msgid "End position"
 msgstr "Position de fin"
 
+msgid "Status {}"
+msgstr "Statut {}"
+
+msgid "Morphology {}"
+msgstr "Morphologie {}"
+
+msgid "Topology {}"
+msgstr "Topologie {}"
+
 msgid "Topology"
 msgstr "Topologie"
 
@@ -82,6 +91,13 @@ msgstr "Couper topologie"
 
 msgid "Topology is not qualified"
 msgstr "La topologie n'est pas qualifiée"
+
+msgid ""
+"To cut this topology, click on scissors control, then move the marker to "
+"snap it with the topology line."
+msgstr ""
+"Pour découper cette topologie, cliquer sur l'outil ciseaux, puis déplacer le "
+"marqueur pour l'aimanter à la topologie."
 
 msgid "Topology could not be cut"
 msgstr "La topologie n'a pas pu être découpée"

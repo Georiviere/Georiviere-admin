@@ -76,7 +76,7 @@ L.Control.PointTopology = L.Control.extend({
     includes: L.Mixin.ActivableControl,
 
     statics: {
-        TITLE: 'Cut',
+        TITLE: 'Cut topology',
     },
 
     options: {
@@ -106,10 +106,19 @@ L.Control.PointTopology = L.Control.extend({
 L.Handler.PointTopology = L.Draw.Marker.extend({
     initialize: function (map, guidesLayer, options) {
         L.Draw.Marker.prototype.initialize.call(this, map, options);
+        this._helpText = gettext('Click map to place marker, then move it to snap with the topology.');
         this._topoMarker = null;
         this._partTopo = null;
         this._guidesLayer = guidesLayer;
         map.on('draw:created', this._onDrawn, this);
+    },
+
+    /* Update tooltip */
+	addHooks: function () {
+		L.Draw.Marker.prototype.addHooks.call(this);
+		if (this._map) {
+			this._tooltip.updateContent({ text: this._helpText });
+        }
     },
 
     reset: function() {
@@ -121,7 +130,7 @@ L.Handler.PointTopology = L.Draw.Marker.extend({
 
     restoreTopology: function (topo) {
         this._topoMarker = L.marker([topo.lat, topo.lng]);
-        this._initMarker(this._topoMarker);
+        this._splitTopology(this._topoMarker);
         if (topo.snap) {
             this._topoMarker.fire('move');  // snap to closest
         }
@@ -135,11 +144,11 @@ L.Handler.PointTopology = L.Draw.Marker.extend({
 
             this.fire('topo:created');
             this._topoMarker = L.marker(e.layer.getLatLng());
-            this._initMarker(this._topoMarker);
+            this._splitTopology(this._topoMarker);
         }
     },
 
-    _initMarker: function (marker) {
+    _splitTopology: function (marker) {
         marker.addTo(this._map);
         L.DomUtil.addClass(marker._icon, 'marker-point');
         marker.editing = new L.Handler.MarkerSnap(this._map, marker);
@@ -150,7 +159,11 @@ L.Handler.PointTopology = L.Draw.Marker.extend({
             $('#lat').val(e.latlng.lat);
             $('#lng').val(e.latlng.lng);
             if (this._partTopo === null){
-                var partTopo = new L.Polyline(L.GeometryUtil.extract(this._map, this._guidesLayer, L.GeometryUtil.locateOnLine(this._map, this._guidesLayer, e.latlng), 0),
+                var partTopo = new L.Polyline(L.GeometryUtil.extract(
+                    this._map,
+                    this._guidesLayer,
+                    L.GeometryUtil.locateOnLine(this._map, this._guidesLayer, e.latlng),
+                    0),
                 {color: 'red', weight: 5, opacity: 0.5});
                 this._partTopo = partTopo;
                 partTopo.addTo(this._map);
