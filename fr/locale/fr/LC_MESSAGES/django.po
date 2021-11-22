@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: geotrek\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-11-22 12:23+0000\n"
+"POT-Creation-Date: 2021-11-15 09:15+0000\n"
 "PO-Revision-Date: 2021-11-22 13:41\n"
 "Last-Translator: \n"
 "Language-Team: French\n"
@@ -14,99 +14,180 @@ msgstr ""
 "X-Crowdin-Project: geotrek\n"
 "X-Crowdin-Project-ID: 485941\n"
 "X-Crowdin-Language: fr\n"
-"X-Crowdin-File: /master/georiviere/river/locale/en/LC_MESSAGES/django.po\n"
-"X-Crowdin-File-ID: 99\n"
+"X-Crowdin-File: /master/georiviere/observations/locale/fr/LC_MESSAGES/django.po\n"
+"X-Crowdin-File-ID: 155\n"
 
-msgid "River"
+msgid "Observations"
 msgstr ""
 
-msgid "Access to the requested resource is restricted by structure. You have been redirected."
+msgid "Yes"
 msgstr ""
 
-msgid "Linestring invalid snapping."
+msgid "No"
 msgstr ""
 
-msgid "Length"
+msgid "Label"
 msgstr ""
 
-msgid "Name"
+msgid "Code"
 msgstr ""
 
-msgid "Qualified"
+msgid "Tracked parameters"
 msgstr ""
 
-msgid "Structure"
+msgid "Unknown"
 msgstr ""
 
-msgid "Stream"
+msgid "Main fields"
 msgstr ""
 
-msgid "Source location"
+msgid "Specific profiles"
 msgstr ""
 
-msgid "Streams"
+msgid "Parameters tracking"
 msgstr ""
 
-msgid "Add a new stream"
+msgid "This code is already in use."
 msgstr ""
 
-msgid "Start position"
+msgid "Station profile code"
 msgstr ""
 
-msgid "End position"
+msgid "Station profile label"
 msgstr ""
 
-msgid "Status {}"
+msgid "Station profile"
 msgstr ""
 
-msgid "Morphology {}"
+msgid "Station profiles"
 msgstr ""
 
-msgid "Topology {}"
+msgid "Null"
 msgstr ""
 
-msgid "Topology"
+msgid "Low water only"
 msgstr ""
 
-msgid "Topologies"
+msgid "Strong"
+msgstr ""
+
+msgid "High water only"
+msgstr ""
+
+msgid "Station code"
+msgstr ""
+
+msgid "Station label"
+msgstr ""
+
+msgid "Station description"
+msgstr ""
+
+msgid "Site code"
+msgstr ""
+
+msgid "Station URI"
+msgstr ""
+
+msgid "Station purpose"
+msgstr ""
+
+msgid "In service"
+msgstr ""
+
+msgid "Local influence"
+msgstr ""
+
+msgid "For hydrometric station profile"
+msgstr ""
+
+msgid "Hardness"
+msgstr ""
+
+msgid "For physico-chemical station profile"
+msgstr ""
+
+msgid "Station"
 msgstr ""
 
 msgid "Stations"
 msgstr ""
 
-msgid "Knowledge"
+msgid "Add a new station"
 msgstr ""
 
-msgid "Proceedings"
+msgid "Symbol"
 msgstr ""
 
-msgid "Studies"
+msgid "Unit"
 msgstr ""
 
-msgid "Knowledges"
+msgid "Units"
 msgstr ""
 
-msgid "Cut topology"
+msgid "Definition"
 msgstr ""
 
-msgid "Set the source location"
+msgid "Parameter category"
 msgstr ""
 
-msgid "Move the source location"
+msgid "Parameter categories"
 msgstr ""
 
-msgid "Delete the source location"
+msgid "Qualitative"
 msgstr ""
 
-msgid "Topology is not qualified"
+msgid "Quantitative"
 msgstr ""
 
-msgid "To cut this topology, click on scissors control, then move the marker to snap it with the topology line."
+msgid "Parameter type"
 msgstr ""
 
-msgid "Topology could not be cut"
+msgid "Parameter"
 msgstr ""
 
-msgid "Topology has been cut"
+msgid "Parameters"
+msgstr ""
+
+msgid "Online"
+msgstr ""
+
+msgid "On demand"
+msgstr ""
+
+msgid "Measure frequency"
+msgstr ""
+
+msgid "Transmission frequency"
+msgstr ""
+
+msgid "Data availability"
+msgstr ""
+
+msgid "Measure start date"
+msgstr ""
+
+msgid "Measure end date"
+msgstr ""
+
+msgid "Parameter tracking"
+msgstr ""
+
+msgid "Parameter trackings"
+msgstr ""
+
+msgid "Yes,No,Unknown"
+msgstr ""
+
+msgid "No parameter tracked"
+msgstr ""
+
+msgid "Edit station to add parameter to track"
+msgstr ""
+
+msgid "Add a line"
+msgstr ""
+
+msgid "Remove"
 msgstr ""
 
