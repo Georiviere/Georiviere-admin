@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: geotrek\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-11-17 13:20+0000\n"
+"POT-Creation-Date: 2021-11-16 11:33+0000\n"
 "PO-Revision-Date: 2021-11-22 10:27\n"
 "Last-Translator: \n"
 "Language-Team: Italian\n"
@@ -14,213 +14,78 @@ msgstr ""
 "X-Crowdin-Project: geotrek\n"
 "X-Crowdin-Project-ID: 485941\n"
 "X-Crowdin-Language: it\n"
-"X-Crowdin-File: /master/georiviere/knowledge/locale/fr/LC_MESSAGES/django.po\n"
-"X-Crowdin-File-ID: 149\n"
+"X-Crowdin-File: /master/georiviere/river/locale/en/LC_MESSAGES/django.po\n"
+"X-Crowdin-File-ID: 99\n"
 
-msgid "Knowledge"
+msgid "River"
 msgstr ""
 
-msgid "Name"
+msgid "Access to the requested resource is restricted by structure. You have been redirected."
 msgstr ""
 
-msgid "Code"
-msgstr ""
-
-msgid "Vegetation details"
-msgstr ""
-
-msgid "Work details"
-msgstr ""
-
-msgid "Label"
-msgstr ""
-
-msgid "Knowledge type"
-msgstr ""
-
-msgid "Knowledge types"
-msgstr ""
-
-msgid "Age class diversity"
-msgstr ""
-
-msgid "Age class diversities"
-msgstr ""
-
-msgid "Specific diversity"
-msgstr ""
-
-msgid "Specific diversities"
-msgstr ""
-
-msgid "Vegetation state"
-msgstr ""
-
-msgid "Vegetation states"
-msgstr ""
-
-msgid "Vegetation strata"
-msgstr ""
-
-msgid "Vegetation stratas"
-msgstr ""
-
-msgid "Vegetation thickness type"
-msgstr ""
-
-msgid "Vegetation thickness types"
-msgstr ""
-
-msgid "Vegetation type"
-msgstr ""
-
-msgid "Vegetation types"
-msgstr ""
-
-msgid "Work type"
-msgstr ""
-
-msgid "Work types"
-msgstr ""
-
-msgid "Work material"
-msgstr ""
-
-msgid "Work materials"
-msgstr ""
-
-msgid "Work state"
-msgstr ""
-
-msgid "Work states"
-msgstr ""
-
-msgid "Work bank effect"
-msgstr ""
-
-msgid "Work bank effects"
-msgstr ""
-
-msgid "Work stream influence"
-msgstr ""
-
-msgid "Work stream influences"
-msgstr ""
-
-msgid "Work sediment effect"
-msgstr ""
-
-msgid "Work sediment effects"
-msgstr ""
-
-msgid "Work fish continuity effect"
-msgstr ""
-
-msgid "Work fish continuity effects"
-msgstr ""
-
-msgid "Description"
-msgstr ""
-
-msgid "Knowledges"
-msgstr ""
-
-msgid "Add a new knowledge"
-msgstr ""
-
-msgid "Thickness type"
-msgstr ""
-
-msgid "Vegetation Strata"
-msgstr ""
-
-msgid "Other information"
-msgstr ""
-
-msgid "Vegetation"
-msgstr ""
-
-msgid "Vegetations"
-msgstr ""
-
-msgid "Downstream bank effect"
-msgstr ""
-
-msgid "Upstream bank effect"
-msgstr ""
-
-msgid "Downstream influence"
-msgstr ""
-
-msgid "Upstream influence"
-msgstr ""
-
-msgid "Sediment effect"
-msgstr ""
-
-msgid "Fish Continuity effect"
-msgstr ""
-
-msgid "Usage"
-msgstr ""
-
-msgid "Width"
-msgstr ""
-
-msgid "Height"
+msgid "Linestring invalid snapping."
 msgstr ""
 
 msgid "Length"
 msgstr ""
 
-msgid "Drop height"
+msgid "Name"
 msgstr ""
 
-msgid "Pit height"
+msgid "Qualified"
 msgstr ""
 
-msgid "Work"
+msgid "Structure"
 msgstr ""
 
-msgid "Works"
+msgid "Stream"
 msgstr ""
 
-msgid "Follow-up type"
+msgid "Add a new stream"
 msgstr ""
 
-msgid "Follow-up types"
+msgid "Streams"
 msgstr ""
 
-msgid "Date"
+msgid "Start position"
 msgstr ""
 
-msgid "Measure frequency"
+msgid "End position"
 msgstr ""
 
-msgid "Follow-up"
+msgid "Topology"
 msgstr ""
 
-msgid "Follow-ups"
+msgid "Topologies"
 msgstr ""
 
-msgid "Add a new follow-up"
+msgid "Stations"
 msgstr ""
 
-msgid "Results"
+msgid "Knowledge"
 msgstr ""
 
-msgid "Dimensions"
+msgid "Proceedings"
 msgstr ""
 
-msgid "H:"
+msgid "Studies"
 msgstr ""
 
-msgid "L:"
+msgid "Knowledges"
 msgstr ""
 
-msgid "W:"
+msgid "Cut topology"
 msgstr ""
 
-msgid "Other follow-ups on this knowledge"
+msgid "Topology is not qualified"
+msgstr ""
+
+msgid "To cut this topology, click on scissors control, then move the marker to snap it with the topology line."
+msgstr ""
+
+msgid "Topology could not be cut"
+msgstr ""
+
+msgid "Topology has been cut"
 msgstr ""
 
