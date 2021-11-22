@@ -88,21 +88,25 @@ class FollowUpForm(CommonForm):
             "length",
             "width",
             "height",
+            "measure_frequency",
             "description",
         )]
 
     class Meta:
         model = FollowUp
         fields = [
-            "structure", "name", "date",
-            "followup_type", "knowledge",
-            "length", "width", "height",
-            "description", "_geom"
+            "structure", "name", "date", "followup_type", "knowledge",
+            "length", "width", "height", "measure_frequency", "description", "_geom"
         ]
         widgets = {
             'date': DatePickerInput(),
         }
 
-    def __init__(self, *args, **kwargs):
+    def __init__(self, knowledge=None, *args, **kwargs):
         super().__init__(*args, **kwargs)
         self.helper.form_tag = False
+        if not self.instance.pk:
+            # New followup, set its knowledge from knowledge_id
+            if knowledge:
+                self.fields['knowledge'].initial = knowledge
+                self.helper.form_action += '?knowledge_id={}'.format(knowledge.id)

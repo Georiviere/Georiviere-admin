@@ -27,5 +27,7 @@ class FollowUpFilterSet(WatershedFilterSet, RestrictedAreaFilterSet,
     class Meta(MapEntityFilterSet.Meta):
         model = FollowUp
         fields = MapEntityFilterSet.Meta.fields + [
-            'name'
+            'name',
+            'followup_type',
+            'knowledge',
         ]

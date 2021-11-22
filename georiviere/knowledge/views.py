@@ -1,3 +1,5 @@
+from django.shortcuts import get_object_or_404
+
 from mapentity import views as mapentity_views
 from geotrek.authent.decorators import same_structure_required
 from rest_framework import permissions as rest_permissions
@@ -168,6 +170,15 @@ class FollowUpDetail(mapentity_views.MapEntityDetail):
 class FollowUpCreate(mapentity_views.MapEntityCreate):
     model = FollowUp
     form_class = FollowUpForm
+
+    def get_form_kwargs(self):
+        kwargs = super().get_form_kwargs()
+        if 'knowledge_id' in self.request.GET:
+            # Create follow-up on an existing knowledge
+            knowledge_id = self.request.GET['knowledge_id']
+            knowledge = get_object_or_404(Knowledge, pk=knowledge_id)
+            kwargs['knowledge'] = knowledge
+        return kwargs
 
 
 class FollowUpUpdate(mapentity_views.MapEntityUpdate):
