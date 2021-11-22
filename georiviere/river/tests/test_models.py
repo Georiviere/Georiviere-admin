@@ -2,10 +2,9 @@ from django.conf import settings
 from django.contrib.gis.geos import Point, LineString
 from django.test import TestCase
 
-from geotrek.authent.factories import StructureFactory, UserFactory
-
 from georiviere.description.tests.factories import MorphologyFactory, StatusFactory
 from georiviere.river.tests.factories import TopologyFactory, StreamFactory
+
 
 class TopologyTest(TestCase):
 

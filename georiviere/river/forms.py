@@ -1,5 +1,3 @@
-from copy import deepcopy
-
 from django import forms
 
 from geotrek.common.forms import CommonForm
