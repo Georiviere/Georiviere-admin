@@ -25,7 +25,7 @@ msgid "Status cannot be qualified but without type"
 msgstr "Un statut ne peut pas être qualifié sans type de statut"
 
 msgid "Label"
-msgstr ""
+msgstr "Libellé"
 
 msgid "Plan layout type"
 msgstr "Type de tracé en plan"
@@ -126,9 +126,6 @@ msgstr "Nom"
 msgid "Add a new morphology"
 msgstr "Ajouter une nouvelle morphologie"
 
-msgid "Status"
-msgstr "Statut"
-
 msgid "Land type"
 msgstr "Type foncier"
 
@@ -180,11 +177,29 @@ msgstr "Votre statut est un statut référentiel"
 msgid "Referencial"
 msgstr "Référentiel"
 
+msgid "Status"
+msgstr "Statut"
+
 msgid "Statuses"
 msgstr "Statuts"
 
 msgid "Add a new status"
 msgstr "Ajouter un nouveau statut réglementaire"
+
+msgid "Stream"
+msgstr "Cours d'eau"
+
+msgid "Station"
+msgstr "Station"
+
+msgid "Study"
+msgstr "Étude"
+
+msgid "Proceeding"
+msgstr "Contentieux"
+
+msgid "Knowledge"
+msgstr "Connaissance"
 
 msgid "Descriptions"
 msgstr "Descriptions"
@@ -194,9 +209,3 @@ msgstr "Ajouter un nouveau statut foncier"
 
 msgid "Add a new usage"
 msgstr "Ajouter un nouvel usage"
-
-#~ msgid "Comment"
-#~ msgstr "Commentaire"
-
-#~ msgid "Morphology types"
-#~ msgstr "Types de morphologie"

@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-11-16 11:33+0000\n"
+"POT-Creation-Date: 2021-11-22 12:23+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -44,16 +44,28 @@ msgstr ""
 msgid "Stream"
 msgstr ""
 
-msgid "Add a new stream"
+msgid "Source location"
 msgstr ""
 
 msgid "Streams"
+msgstr ""
+
+msgid "Add a new stream"
 msgstr ""
 
 msgid "Start position"
 msgstr ""
 
 msgid "End position"
+msgstr ""
+
+msgid "Status {}"
+msgstr ""
+
+msgid "Morphology {}"
+msgstr ""
+
+msgid "Topology {}"
 msgstr ""
 
 msgid "Topology"
@@ -78,6 +90,15 @@ msgid "Knowledges"
 msgstr ""
 
 msgid "Cut topology"
+msgstr ""
+
+msgid "Set the source location"
+msgstr ""
+
+msgid "Move the source location"
+msgstr ""
+
+msgid "Delete the source location"
 msgstr ""
 
 msgid "Topology is not qualified"

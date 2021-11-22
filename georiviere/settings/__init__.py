@@ -257,6 +257,7 @@ LEAFLET_CONFIG = {
     'SPATIAL_EXTENT': (-5, 40, 10, 55),
     'NO_GLOBALS': False,
     'PLUGINS': {
+        'georiviere': {'js': ['river/js/source_location.js']},
         'topofields': {'js': ['river/js/georiviere.forms.snap.js',
                               'river/js/cut-topology.js'],
                        'css': ['river/css/cut-topology.css']}
@@ -277,6 +278,10 @@ CACHES = {
 
 PATHS_LINE_MARKER = 'dotL'
 SNAP_DISTANCE = 30
+
+ICON_SIZES = {
+    'river_source': 18,
+}
 
 LOGIN_REDIRECT_URL = '/'
 LOGOUT_REDIRECT_URL = '/'

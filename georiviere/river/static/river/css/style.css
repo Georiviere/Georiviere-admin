@@ -1,0 +1,16 @@
+
+.leaflet-marker-icon.source-location {
+    background-image: url(../images/source.svg);
+    background-size: cover;
+    width: 20px !important;
+    height: 20px !important;
+    margin-left: -10px;
+    margin-top: -10px;
+}
+
+
+.leaflet-draw.id_source_location .leaflet-draw-draw-marker {
+    background-image: url(../images/source.svg);
+    background-position: 5px 5px, center;
+    background-size: 15px;
+}

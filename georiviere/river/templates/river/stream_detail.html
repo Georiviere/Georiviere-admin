@@ -16,4 +16,30 @@
 
     {% include "georiviere/javascript_detail_river.html" with object=object %}
 
+    <script type="text/javascript">
+        $(window).on('detailmap:ready', function (e, data) {
+            var map = data.map;
+
+            //
+            // Source
+            {% if object.source_location %}
+                var sourceIcon = L.icon({
+                    iconUrl: "{% static "images/source.svg" %}",
+                    iconSize: [{{ view.icon_sizes.source }}, {{ view.icon_sizes.source }}],
+                    iconAnchor: [{{ view.icon_sizes.source }}/2, {{ view.icon_sizes.source }}/2],
+                });
+                var point = {{object.source_location|geojsonfeature|safe}};
+                var location = point.geometry.coordinates.reverse();
+                L.marker(location, {icon: sourceIcon})
+                 .bindPopup("Source")
+                 .addTo(map);
+
+                // Make sure parking icon is visible on the map
+                var bounds = map.getBounds();
+                bounds.extend(location);
+                map.fitBounds(bounds);
+            {% endif %}
+        });
+    </script>
+
 {% endblock extrabody %}

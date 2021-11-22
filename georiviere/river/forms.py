@@ -2,6 +2,7 @@ from django import forms
 
 from geotrek.common.forms import CommonForm
 
+from georiviere.river.widgets import SourceLocationWidget
 from georiviere.river.fields import SnappedLineStringField
 from georiviere.river.models import Stream, Topology
 
@@ -11,9 +12,12 @@ class StreamForm(CommonForm):
 
     geomfields = ['geom']
 
-    class Meta:
+    class Meta(CommonForm):
         fields = "__all__"
         model = Stream
+        widgets = {
+            'source_location': SourceLocationWidget()
+        }
 
 
 class TopologyRiverForm(CommonForm):

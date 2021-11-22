@@ -19,3 +19,11 @@ class SnappedLineStringWidget(MapWidget):
             value = json.loads(value)
             value = value['geom']
         return super().deserialize(value)
+
+
+class SourceLocationWidget(MapWidget):
+    """Widget for source location"""
+
+    geometry_field_class = 'SourceLocationField'
+    target_map = 'geom'
+    geom_type = 'POINT'

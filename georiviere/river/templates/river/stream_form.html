@@ -1,0 +1,12 @@
+{% extends "mapentity/mapentity_form.html" %}
+
+{% load i18n crispy_forms_tags static %}
+
+{% block extrabody %}
+    {{ block.super }}
+    <script type="text/javascript">
+        MapEntity.i18n['Set the source location'] = "{% trans "Set the source location" %}";
+        MapEntity.i18n['Move the source location'] = "{% trans "Move the source location" %}";
+        MapEntity.i18n['Delete the source location'] = "{% trans "Delete the source location" %}";
+    </script>
+{% endblock extrabody %}

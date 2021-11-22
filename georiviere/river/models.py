@@ -1,17 +1,18 @@
 from django.conf import settings
 from django.contrib.gis.db import models
+from django.contrib.gis.geos import Point
 from django.db.models import Q
 from django.utils.translation import gettext_lazy as _
 
 from geotrek.authent.models import StructureRelated
 from geotrek.common.mixins import TimeStampedModelMixin
 from geotrek.zoning.mixins import ZoningPropertiesMixin
+from mapentity.models import MapEntityMixin
 
 from georiviere.main.models import AddPropertyBufferMixin
 from georiviere.altimetry import AltimetryMixin
 from georiviere.functions import LineSubString
 from georiviere.knowledge.models import Knowledge, FollowUp
-from mapentity.models import MapEntityMixin
 from georiviere.observations.models import Station
 from georiviere.proceeding.models import Proceeding
 from georiviere.studies.models import Study
@@ -38,18 +39,26 @@ class Stream(AddPropertyBufferMixin, TimeStampedModelMixin, WatershedPropertiesM
     name = models.CharField(max_length=100, default=_('Stream'), verbose_name=_("Name"))
     geom = models.LineStringField(srid=settings.SRID, spatial_index=True)
 
+    source_location = models.PointField(verbose_name=_("Source location"),
+                                        srid=settings.SRID, spatial_index=False,
+                                        blank=True, null=True)
+
+    class Meta:
+        verbose_name = _("Stream")
+        verbose_name_plural = _("Streams")
+
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
         for model_topology in self.model_topologies:
             setattr(self, model_topology._meta.model_name, self.get_topology(model_topology._meta.model_name))
 
-    def get_topology(self, value):
-        topologies = self.topologies.filter(**{f'{value}__isnull': False})
-        topologies = [getattr(topology, value) for topology in topologies]
-        return topologies
-
     def __str__(self):
         return self.name
+
+    def save(self, *args, **kwargs):
+        if not self.source_location:
+            self.source_location = Point(self.geom[0])
+        super().save(*args, **kwargs)
 
     @classmethod
     def get_create_label(cls):
@@ -62,9 +71,20 @@ class Stream(AddPropertyBufferMixin, TimeStampedModelMixin, WatershedPropertiesM
                                                                  self,
                                                                  self)
 
-    class Meta:
-        verbose_name = _("Stream")
-        verbose_name_plural = _("Streams")
+    def get_topology(self, value):
+        topologies = self.topologies.filter(**{f'{value}__isnull': False})
+        topologies = [getattr(topology, value) for topology in topologies]
+        return topologies
+
+    def get_map_image_extent(self, srid=settings.API_SRID):
+        extent = list(super().get_map_image_extent(srid))
+        if self.source_location:
+            self.source_location.transform(srid)
+            extent[0] = min(extent[0], self.source_location.x)
+            extent[1] = min(extent[1], self.source_location.y)
+            extent[2] = max(extent[2], self.source_location.x)
+            extent[3] = max(extent[3], self.source_location.y)
+        return extent
 
 
 class Topology(models.Model):
