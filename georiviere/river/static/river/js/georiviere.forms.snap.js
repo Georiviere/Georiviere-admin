@@ -138,9 +138,13 @@ MapEntity.GeometryField.GeometryFieldSnap = MapEntity.GeometryField.extend({
         var handlerClass = null;
         if (layer instanceof L.Marker) {
             handlerClass = L.Handler.MarkerSnap;
+            $('.leaflet-draw-edit-edit').hide()
+            $('.leaflet-draw-edit-remove').hide()
         }
         else if (layer instanceof L.Polyline) {
             handlerClass = L.Handler.PolylineSnap;
+            $('.leaflet-draw-edit-edit').show()
+            $('.leaflet-draw-edit-remove').show()
         }
         else {
             console.warn('Unsupported layer type for snap.');
