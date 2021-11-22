@@ -17,11 +17,13 @@ class StreamForm(CommonForm):
     class Meta(CommonForm):
         fields = "__all__"
         model = Stream
+        widgets = {
+            'source_location': SourceLocationWidget()
+        }
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
         self.fieldslayout = deepcopy(self.fieldslayout)
-        self.fields['source_location'].widget = SourceLocationWidget()
 
 
 class TopologyRiverForm(CommonForm):
