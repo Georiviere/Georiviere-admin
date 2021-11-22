@@ -21,10 +21,6 @@ class StreamForm(CommonForm):
             'source_location': SourceLocationWidget()
         }
 
-    def __init__(self, *args, **kwargs):
-        super().__init__(*args, **kwargs)
-        self.fieldslayout = deepcopy(self.fieldslayout)
-
 
 class TopologyRiverForm(CommonForm):
     class Media:
