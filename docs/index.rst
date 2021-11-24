@@ -1,7 +1,10 @@
 Welcome to Georiviere's documentation!
 ======================================
 
-.. _contents:
+.. include:: ../README.rst
+
+Content
+-------
 
 .. toctree::
     :maxdepth: 2
