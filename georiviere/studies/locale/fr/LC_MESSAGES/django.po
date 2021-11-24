@@ -11,7 +11,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-04-12 15:24+0000\n"
+"POT-Creation-Date: 2021-03-29 15:54+0000\n"
 "PO-Revision-Date: 2021-11-23 15:31+0000\n"
 "Last-Translator: Jean-Etienne Castagnede <jecastagnede@vivaldi.net>, 2021\n"
 "Language-Team: French (https://www.transifex.com/georiviere/teams/128005/fr/)\n"
@@ -21,38 +21,23 @@ msgstr ""
 "Language: fr\n"
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
 
-msgid "Studies"
-msgstr "Études"
+msgid "Watershed"
+msgstr "Bassin versant"
 
-msgid "Title"
-msgstr "Titre"
+msgid "Name"
+msgstr "Nom"
 
-msgid "Start year"
-msgstr "Date de début"
+msgid "Color"
+msgstr "Couleur"
 
-msgid "End year"
-msgstr "Date de fin"
+msgid "Color shown on map"
+msgstr "Couleur sur la carte"
 
-msgid "Label"
-msgstr "Libellé"
+msgid "Watershed type"
+msgstr "Type de bassin versant"
 
-msgid "Study type"
-msgstr "Type d'étude"
+msgid "External id"
+msgstr "ID externe"
 
-msgid "Study types"
-msgstr "Types d'étude"
-
-msgid "Year"
-msgstr "Année"
-
-msgid "Authors"
-msgstr "Auteurs, Autrices"
-
-msgid "Description"
-msgstr "Description"
-
-msgid "Study"
-msgstr "Étude"
-
-msgid "Add a new study"
-msgstr "Ajouter une nouvelle étude"
+msgid "Watersheds"
+msgstr "Bassins versant"
