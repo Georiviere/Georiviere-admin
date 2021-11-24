@@ -1,22 +1,24 @@
 # SOME DESCRIPTIVE TITLE.
-# SOME DESCRIPTIVE TITLE.
 # Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
 # This file is distributed under the same license as the PACKAGE package.
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
-#
+# 
+# Translators:
+# Jean-Etienne Castagnede <jecastagnede@vivaldi.net>, 2021
+# 
 #, fuzzy
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-09-23 12:43+0000\n"
-"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
-"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
-"Language-Team: LANGUAGE <LL@li.org>\n"
-"Language: \n"
+"POT-Creation-Date: 2021-08-03 11:14+0000\n"
+"PO-Revision-Date: 2021-11-23 15:31+0000\n"
+"Last-Translator: Jean-Etienne Castagnede <jecastagnede@vivaldi.net>, 2021\n"
+"Language-Team: French (https://www.transifex.com/georiviere/teams/128005/fr/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"Language: fr\n"
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
 
 msgid "Maintenance"
@@ -24,9 +26,6 @@ msgstr "Maintenance"
 
 msgid "Name"
 msgstr "Nom"
-
-msgid "Target"
-msgstr "Cible"
 
 msgid "Date"
 msgstr "Date"
@@ -70,9 +69,6 @@ msgstr "Ajouter une Intervention"
 msgid "On"
 msgstr "Sur"
 
-msgid "Label"
-msgstr "Libellé"
-
 msgid "Display order"
 msgstr "Ordre d'affichage"
 
@@ -94,11 +90,14 @@ msgstr "Enjeu"
 msgid "Intervention's stakes"
 msgstr "Enjeux"
 
+msgid "Disorder"
+msgstr "Désordre"
+
 msgid "Intervention's disorder"
 msgstr "Désordre"
 
 msgid "Intervention's disorders"
 msgstr "Désordres"
 
-msgid "Related interventions"
-msgstr "Interventions reliées"
+msgid "Target"
+msgstr "Cible"
