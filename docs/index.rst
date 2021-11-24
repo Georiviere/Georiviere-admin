@@ -9,7 +9,21 @@ Welcome to Georiviere's documentation!
     usage/index
     install/index
     development/index
+
+Changelog
+---------
+
+.. toctree::
+    :maxdepth: 2
+
     changelog
+
+Authors
+-------
+
+.. toctree::
+    :maxdepth: 1
+
     authors
 
 
