@@ -1,26 +1,14 @@
 Welcome to Georiviere's documentation!
 ======================================
 
-.. toctree::
-    :caption: Installation & configuration
-    :maxdepth: 2
-
-    install
-    configuration
-    import_data
+.. _contents:
 
 .. toctree::
-    :caption: Development & publication
     :maxdepth: 2
 
-    development
-    publication
-
-
-.. toctree::
-    :caption: Changelog & authors
-    :maxdepth: 2
-
+    usage/index
+    install/index
+    development/index
     changelog
     authors
 
