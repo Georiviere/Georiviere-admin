@@ -5,8 +5,7 @@ Georiviere-admin is an application to handle aquatic environment (stream, river,
 
 It is a `Django <https://www.djangoproject.com/>`_ application, based on `Geotrek-admin <https://geotrek.readthedocs.io/>`_ and `Mapentity <https://django-mapentity.readthedocs.io/>`_.
 
-Content
--------
+.. _contents:
 
 .. toctree::
     :maxdepth: 2
