@@ -17,7 +17,7 @@ logger = logging.getLogger(__name__)
 
 class SnappedFieldMixin(object):
     """
-    It's a LineString field, with additional information about snapped vertices.
+    It's a Geometry field, with additional information about snapped vertices.
     """
     widget = SnappedGeometryWidget
 
@@ -48,8 +48,7 @@ class SnappedFieldMixin(object):
             geom.srid = settings.API_SRID
             geom.transform(settings.SRID)
 
-            # We have the list of snapped paths, we use them to modify the
-            # geometry vertices
+            # Snapped paths list is used to modify the geometry vertices according to its type
             snaplist = value.get('snap', [])
             if geom.geom_type == "Polygon":
                 snaplist.append(snaplist[0])

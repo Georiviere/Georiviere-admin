@@ -16,6 +16,7 @@ from georiviere.functions import LineSubString
 from georiviere.knowledge.models import Knowledge, FollowUp
 from georiviere.observations.models import Station
 from georiviere.proceeding.models import Proceeding
+from georiviere.river.functions import ClosestPoint
 from georiviere.studies.models import Study
 from georiviere.watershed.mixins import WatershedPropertiesMixin
 
@@ -95,16 +96,8 @@ class Stream(AddPropertyBufferMixin, TimeStampedModelMixin, WatershedPropertiesM
             raise ValueError("Cannot compute snap on unsaved stream")
         if point.srid != self.geom.srid:
             point.transform(self.geom.srid)
-        cursor = connection.cursor()
-        sql = """
-        WITH p AS (SELECT ST_ClosestPoint(geom, '%(ewkt)s'::geometry) AS geom
-                   FROM %(table)s
-                   WHERE id = '%(pk)s')
-        SELECT ST_X(p.geom), ST_Y(p.geom) FROM p
-        """ % {'ewkt': point.ewkt, 'table': self._meta.db_table, 'pk': self.pk}
-        cursor.execute(sql)
-        result = cursor.fetchall()
-        return Point(*result[0], srid=self.geom.srid)
+        return self._meta.model.objects.filter(pk=self.pk).annotate(
+            closest_point=ClosestPoint('geom', point)).first().closest_point
 
 
 class Topology(models.Model):
