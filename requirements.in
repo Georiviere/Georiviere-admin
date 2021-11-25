@@ -1,9 +1,8 @@
 psycopg2
 django>=2.2
 django-autocomplete-light[gfk]
-git+https://github.com/GeotrekCE/Geotrek-admin.git@2.71.0#egg=geotrek
-git+https://github.com/makinacorpus/django-mapentity.git@backport_geotrek#egg=mapentity
-git+https://github.com/GeotrekCE/django-leaflet.git@0.19+geotrek8#egg=django-leaflet
+git+https://github.com/GeotrekCE/Geotrek-admin.git@split_mapentity#egg=geotrek
+git+https://github.com/makinacorpus/django-mapentity.git@master#egg=mapentity
 paperclip
 
 # prod

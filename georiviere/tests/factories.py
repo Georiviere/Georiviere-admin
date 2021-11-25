@@ -1,21 +1,12 @@
 import factory
 from django.contrib.auth.models import Permission
-from django.contrib.gis.geos import LineString, Point
+from django.contrib.gis.geos import LineString
 from faker import Faker
 from faker.providers import geo
-from mapentity.factories import UserFactory
+from mapentity.tests.factories import UserFactory
 
 fake = Faker('fr_FR')
 fake.add_provider(geo)
-
-
-class PointFactory(factory.django.DjangoModelFactory):
-    @factory.lazy_attribute
-    def geom(self):
-        lat, lon, *other = fake.local_latlng(country_code='FR')
-        point = Point(float(lon), float(lat), srid=4326)
-        point.transform(2154)
-        return point
 
 
 class BaseLineStringFactory(factory.django.DjangoModelFactory):

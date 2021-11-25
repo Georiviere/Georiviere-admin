@@ -6,28 +6,12 @@
 #
 amqp==5.0.5
     # via kombu
-appy==1.0.7
-    # via django-appypod
 asgiref==3.3.1
     # via django
 attrs==20.3.0
     # via fiona
-beautifulsoup4==4.9.3
-    # via
-    #   geotrek
-    #   mapentity
 billiard==3.6.3.0
     # via celery
-btrees==4.8.0
-    # via zodb
-cairocffi==1.2.0
-    # via
-    #   cairosvg
-    #   geotrek
-    #   mapentity
-    #   weasyprint
-cairosvg==2.5.1
-    # via weasyprint
 celery[redis]==5.0.5
     # via
     #   django-celery-results
@@ -37,12 +21,6 @@ certifi==2020.12.5
     #   fiona
     #   requests
     #   sentry-sdk
-cffi==1.14.4
-    # via
-    #   cairocffi
-    #   cryptography
-    #   persistent
-    #   weasyprint
 chardet==4.0.0
     # via requests
 click==7.1.2
@@ -69,42 +47,24 @@ coreschema==0.0.4
     # via
     #   coreapi
     #   drf-yasg
-cryptography==3.3.1
-    # via
-    #   pyopenssl
-    #   requests
-cssselect2==0.4.1
-    # via
-    #   cairosvg
-    #   weasyprint
-datetime==4.3
-    # via appy
-defusedxml==0.6.0
-    # via cairosvg
+coverage==6.1.2
+    # via geotrek
 django==3.1.13
     # via
     #   -r requirements.in
     #   django-appconf
-    #   django-appypod
+    #   django-debug-toolbar
     #   django-embed-video
-    #   django-filter
-    #   django-geojson
-    #   django-modeltranslation
+    #   django-extensions
     #   django-mptt
     #   django-querysetsequence
-    #   django-weasyprint
     #   djangorestframework
     #   drf-yasg
     #   easy-thumbnails
     #   geotrek
-    #   mapentity
     #   paperclip
 django-appconf==1.0.4
     # via django-compressor
-django-appypod==2.0.7
-    # via
-    #   geotrek
-    #   mapentity
 django-autocomplete-light[gfk]==3.8.2
     # via -r requirements.in
 django-celery-results==2.0.1
@@ -112,67 +72,25 @@ django-celery-results==2.0.1
 django-colorfield==0.4.1
     # via geotrek
 django-compressor==2.4.1
-    # via
-    #   -r requirements.in
-    #   geotrek
-    #   mapentity
-django-crispy-forms==1.11.0
-    # via
-    #   geotrek
-    #   mapentity
+    # via -r requirements.in
+django-debug-toolbar==3.2.2
+    # via geotrek
 django-embed-video==1.4.0
-    # via
-    #   geotrek
-    #   mapentity
-    #   paperclip
+    # via paperclip
 django-extended-choices==1.3.3
     # via geotrek
-django-filter==2.4.0
-    # via
-    #   geotrek
-    #   mapentity
-django-geojson==3.1.0
-    # via
-    #   geotrek
-    #   mapentity
+django-extensions==3.1.5
+    # via geotrek
 django-js-asset==1.2.2
     # via django-mptt
-django-leaflet @ git+https://github.com/GeotrekCE/django-leaflet.git@0.19+geotrek8
-    # via
-    #   -r requirements.in
-    #   geotrek
-    #   mapentity
-django-modelcluster==5.1
-    # via
-    #   geotrek
-    #   mapentity
-django-modeltranslation==0.16.1
-    # via
-    #   geotrek
-    #   mapentity
 django-mptt==0.11.0
     # via geotrek
 django-querysetsequence==0.14
     # via django-autocomplete-light
-django-tinymce==2.9.0
-    # via
-    #   geotrek
-    #   mapentity
-django-weasyprint==1.0.2
-    # via
-    #   geotrek
-    #   mapentity
 djangorestframework==3.12.2
     # via
-    #   djangorestframework-gis
     #   drf-extensions
     #   drf-yasg
-    #   geotrek
-    #   mapentity
-djangorestframework-gis==0.17
-    # via
-    #   geotrek
-    #   mapentity
 docutils==0.16
     # via geotrek
 drf-dynamic-fields==0.3.1
@@ -182,32 +100,27 @@ drf-extensions==0.6.0
 drf-yasg==1.20.0
     # via geotrek
 easy-thumbnails==2.7.1
-    # via
-    #   geotrek
-    #   mapentity
-    #   paperclip
+    # via paperclip
+env-file==2020.12.3
+    # via geotrek
 factory-boy==3.2.1
     # via geotrek
 faker==9.7.1
     # via factory-boy
 fiona==1.8.18
-    # via
-    #   geotrek
-    #   mapentity
+    # via geotrek
+freezegun==1.1.0
+    # via geotrek
 geojson==2.5.0
     # via
     #   geotrek
     #   tif2geojson
-geotrek @ git+https://github.com/GeotrekCE/Geotrek-admin.git@2.71.0
+geotrek @ git+https://github.com/GeotrekCE/Geotrek-admin.git@split_mapentity
     # via -r requirements.in
-gpxpy==1.4.2
-    # via
-    #   geotrek
-    #   mapentity
 gunicorn==20.1.0
-    # via -r requirements.in
-html5lib==1.1
-    # via weasyprint
+    # via
+    #   -r requirements.in
+    #   geotrek
 idna==2.10
     # via requests
 inflection==0.5.1
@@ -220,121 +133,92 @@ kombu==5.0.2
     # via celery
 landez==2.5.0
     # via geotrek
-lxml==4.6.2
+mapentity @ git+https://github.com/makinacorpus/django-mapentity.git@master
     # via
+    #   -r requirements.in
     #   geotrek
-    #   mapentity
-mapentity @ git+https://github.com/makinacorpus/django-mapentity.git@backport_geotrek
-    # via -r requirements.in
 markupsafe==1.1.1
     # via jinja2
 mbutil==0.3.0
     # via landez
 munch==2.5.0
     # via fiona
-netifaces==0.10.9
-    # via
-    #   geotrek
-    #   mapentity
 packaging==20.9
     # via drf-yasg
 paperclip==2.3.2
-    # via
-    #   -r requirements.in
-    #   geotrek
-    #   mapentity
+    # via -r requirements.in
 papersize==1.0.1
     # via pdfimpose
 pdfimpose==1.1.0
     # via geotrek
-persistent==4.7.0
-    # via
-    #   btrees
-    #   zodb
 pillow==8.1.0
     # via
-    #   cairosvg
     #   easy-thumbnails
     #   geotrek
     #   paperclip
-    #   weasyprint
 prompt-toolkit==3.0.14
     # via click-repl
 psycopg2==2.8.6
     # via
     #   -r requirements.in
     #   geotrek
-pycparser==2.20
-    # via cffi
 pygal==2.4.0
     # via geotrek
-pyopenssl==20.0.1
-    # via requests
 pyparsing==2.4.7
     # via packaging
 pypdf2==1.26.0
     # via pdfimpose
-pyphen==0.10.0
-    # via weasyprint
 python-dateutil==2.8.1
-    # via faker
+    # via
+    #   faker
+    #   freezegun
 python-memcached==1.59
-    # via -r requirements.in
+    # via
+    #   -r requirements.in
+    #   geotrek
 pytz==2021.1
     # via
     #   celery
-    #   datetime
     #   django
-    #   django-modelcluster
+raven==6.10.0
+    # via geotrek
 rcssmin==1.0.6
     # via django-compressor
 redis==3.5.3
     # via celery
-requests[security]==2.25.1
+requests==2.25.1
     # via
     #   coreapi
     #   django-embed-video
-    #   geotrek
     #   landez
-    #   mapentity
 rjsmin==1.1.0
     # via django-compressor
 ruamel.yaml==0.16.12
     # via drf-yasg
 sentry-sdk==0.19.5
-    # via -r requirements.in
+    # via
+    #   -r requirements.in
+    #   geotrek
 simplekml==1.3.5
     # via geotrek
 six==1.15.0
     # via
     #   click-repl
-    #   cryptography
     #   django-autocomplete-light
     #   django-compressor
     #   django-extended-choices
-    #   django-modeltranslation
     #   fiona
-    #   html5lib
     #   munch
-    #   pyopenssl
     #   python-dateutil
     #   python-memcached
-    #   zodb
-soupsieve==2.1
-    # via beautifulsoup4
 sqlparse==0.4.1
-    # via django
+    # via
+    #   django
+    #   django-debug-toolbar
 text-unidecode==1.3
     # via faker
 tif2geojson==0.1.3
     # via geotrek
-tinycss2==1.1.0
-    # via
-    #   cairosvg
-    #   cssselect2
-    #   weasyprint
-transaction==3.0.1
-    # via zodb
 uritemplate==3.0.1
     # via
     #   coreapi
@@ -343,41 +227,18 @@ urllib3==1.26.3
     # via
     #   requests
     #   sentry-sdk
+values==2020.12.3
+    # via env-file
 vine==5.0.0
     # via
     #   amqp
     #   celery
 wcwidth==0.2.5
     # via prompt-toolkit
-weasyprint==52.2
-    # via
-    #   django-weasyprint
-    #   geotrek
-    #   mapentity
-webencodings==0.5.1
-    # via
-    #   cssselect2
-    #   html5lib
-    #   tinycss2
 xlrd==2.0.1
     # via geotrek
 xmltodict==0.12.0
     # via tif2geojson
-zc.lockfile==2.0
-    # via zodb
-zconfig==3.5.0
-    # via zodb
-zodb==5.6.0
-    # via appy
-zodbpickle==2.0.0
-    # via zodb
-zope.interface==5.4.0
-    # via
-    #   btrees
-    #   datetime
-    #   persistent
-    #   transaction
-    #   zodb
 
 # The following packages are considered to be unsafe in a requirements file:
 # setuptools

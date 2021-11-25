@@ -10,10 +10,6 @@ amqp==5.0.5
     # via
     #   -r requirements.txt
     #   kombu
-appy==1.0.7
-    # via
-    #   -r requirements.txt
-    #   django-appypod
 asgiref==3.3.1
     # via
     #   -r requirements.txt
@@ -24,30 +20,10 @@ attrs==20.3.0
     #   fiona
 babel==2.9.1
     # via sphinx
-beautifulsoup4==4.9.3
-    # via
-    #   -r requirements.txt
-    #   geotrek
-    #   mapentity
 billiard==3.6.3.0
     # via
     #   -r requirements.txt
     #   celery
-btrees==4.8.0
-    # via
-    #   -r requirements.txt
-    #   zodb
-cairocffi==1.2.0
-    # via
-    #   -r requirements.txt
-    #   cairosvg
-    #   geotrek
-    #   mapentity
-    #   weasyprint
-cairosvg==2.5.1
-    # via
-    #   -r requirements.txt
-    #   weasyprint
 celery[redis]==5.0.5
     # via
     #   -r requirements.txt
@@ -59,13 +35,6 @@ certifi==2020.12.5
     #   fiona
     #   requests
     #   sentry-sdk
-cffi==1.14.4
-    # via
-    #   -r requirements.txt
-    #   cairocffi
-    #   cryptography
-    #   persistent
-    #   weasyprint
 chardet==4.0.0
     # via
     #   -r requirements.txt
@@ -106,54 +75,29 @@ coreschema==0.0.4
     #   -r requirements.txt
     #   coreapi
     #   drf-yasg
-coverage==6.1.1
-    # via -r dev-requirements.in
-cryptography==3.3.1
+coverage==6.1.2
     # via
+    #   -r dev-requirements.in
     #   -r requirements.txt
-    #   pyopenssl
-    #   requests
-cssselect2==0.4.1
-    # via
-    #   -r requirements.txt
-    #   cairosvg
-    #   weasyprint
-datetime==4.3
-    # via
-    #   -r requirements.txt
-    #   appy
-defusedxml==0.6.0
-    # via
-    #   -r requirements.txt
-    #   cairosvg
+    #   geotrek
 django==3.1.13
     # via
     #   -r requirements.txt
     #   django-appconf
-    #   django-appypod
     #   django-debug-toolbar
     #   django-embed-video
-    #   django-filter
-    #   django-geojson
-    #   django-modeltranslation
+    #   django-extensions
     #   django-mptt
     #   django-querysetsequence
-    #   django-weasyprint
     #   djangorestframework
     #   drf-yasg
     #   easy-thumbnails
     #   geotrek
-    #   mapentity
     #   paperclip
 django-appconf==1.0.4
     # via
     #   -r requirements.txt
     #   django-compressor
-django-appypod==2.0.7
-    # via
-    #   -r requirements.txt
-    #   geotrek
-    #   mapentity
 django-autocomplete-light[gfk]==3.8.2
     # via -r requirements.txt
 django-celery-results==2.0.1
@@ -165,56 +109,28 @@ django-colorfield==0.4.1
     #   -r requirements.txt
     #   geotrek
 django-compressor==2.4.1
+    # via -r requirements.txt
+django-debug-toolbar==3.2.2
     # via
+    #   -r dev-requirements.in
     #   -r requirements.txt
     #   geotrek
-    #   mapentity
-django-crispy-forms==1.11.0
-    # via
-    #   -r requirements.txt
-    #   geotrek
-    #   mapentity
-django-debug-toolbar==3.2
-    # via -r dev-requirements.in
 django-embed-video==1.4.0
     # via
     #   -r requirements.txt
-    #   geotrek
-    #   mapentity
     #   paperclip
 django-extended-choices==1.3.3
     # via
     #   -r requirements.txt
     #   geotrek
-django-filter==2.4.0
+django-extensions==3.1.5
     # via
     #   -r requirements.txt
     #   geotrek
-    #   mapentity
-django-geojson==3.1.0
-    # via
-    #   -r requirements.txt
-    #   geotrek
-    #   mapentity
 django-js-asset==1.2.2
     # via
     #   -r requirements.txt
     #   django-mptt
-django-leaflet @ git+https://github.com/GeotrekCE/django-leaflet.git@0.19+geotrek8
-    # via
-    #   -r requirements.txt
-    #   geotrek
-    #   mapentity
-django-modelcluster==5.1
-    # via
-    #   -r requirements.txt
-    #   geotrek
-    #   mapentity
-django-modeltranslation==0.16.1
-    # via
-    #   -r requirements.txt
-    #   geotrek
-    #   mapentity
 django-mptt==0.11.0
     # via
     #   -r requirements.txt
@@ -223,29 +139,11 @@ django-querysetsequence==0.14
     # via
     #   -r requirements.txt
     #   django-autocomplete-light
-django-tinymce==2.9.0
-    # via
-    #   -r requirements.txt
-    #   geotrek
-    #   mapentity
-django-weasyprint==1.0.2
-    # via
-    #   -r requirements.txt
-    #   geotrek
-    #   mapentity
 djangorestframework==3.12.2
     # via
     #   -r requirements.txt
-    #   djangorestframework-gis
     #   drf-extensions
     #   drf-yasg
-    #   geotrek
-    #   mapentity
-djangorestframework-gis==0.17
-    # via
-    #   -r requirements.txt
-    #   geotrek
-    #   mapentity
 docutils==0.16
     # via
     #   -r requirements.txt
@@ -267,9 +165,11 @@ drf-yasg==1.20.0
 easy-thumbnails==2.7.1
     # via
     #   -r requirements.txt
-    #   geotrek
-    #   mapentity
     #   paperclip
+env-file==2020.12.3
+    # via
+    #   -r requirements.txt
+    #   geotrek
 factory-boy==3.2.1
     # via
     #   -r dev-requirements.in
@@ -283,29 +183,24 @@ fiona==1.8.18
     # via
     #   -r requirements.txt
     #   geotrek
-    #   mapentity
 flake8==3.8.4
     # via -r dev-requirements.in
 freezegun==1.1.0
-    # via -r dev-requirements.in
+    # via
+    #   -r dev-requirements.in
+    #   -r requirements.txt
+    #   geotrek
 geojson==2.5.0
     # via
     #   -r requirements.txt
     #   geotrek
     #   tif2geojson
-geotrek @ git+https://github.com/GeotrekCE/Geotrek-admin.git@2.71.0
+geotrek @ git+https://github.com/GeotrekCE/Geotrek-admin.git@split_mapentity
     # via -r requirements.txt
-gpxpy==1.4.2
+gunicorn==20.1.0
     # via
     #   -r requirements.txt
     #   geotrek
-    #   mapentity
-gunicorn==20.1.0
-    # via -r requirements.txt
-html5lib==1.1
-    # via
-    #   -r requirements.txt
-    #   weasyprint
 idna==2.10
     # via
     #   -r requirements.txt
@@ -333,13 +228,10 @@ landez==2.5.0
     # via
     #   -r requirements.txt
     #   geotrek
-lxml==4.6.2
+mapentity @ git+https://github.com/makinacorpus/django-mapentity.git@master
     # via
     #   -r requirements.txt
     #   geotrek
-    #   mapentity
-mapentity @ git+https://github.com/makinacorpus/django-mapentity.git@backport_geotrek
-    # via -r requirements.txt
 markupsafe==1.1.1
     # via
     #   -r requirements.txt
@@ -354,21 +246,13 @@ munch==2.5.0
     # via
     #   -r requirements.txt
     #   fiona
-netifaces==0.10.9
-    # via
-    #   -r requirements.txt
-    #   geotrek
-    #   mapentity
 packaging==20.9
     # via
     #   -r requirements.txt
     #   drf-yasg
     #   sphinx
 paperclip==2.3.2
-    # via
-    #   -r requirements.txt
-    #   geotrek
-    #   mapentity
+    # via -r requirements.txt
 papersize==1.0.1
     # via
     #   -r requirements.txt
@@ -379,19 +263,12 @@ pdfimpose==1.1.0
     #   geotrek
 pep517==0.12.0
     # via pip-tools
-persistent==4.7.0
-    # via
-    #   -r requirements.txt
-    #   btrees
-    #   zodb
 pillow==8.1.0
     # via
     #   -r requirements.txt
-    #   cairosvg
     #   easy-thumbnails
     #   geotrek
     #   paperclip
-    #   weasyprint
 pip-tools==6.4.0
     # via -r dev-requirements.in
 prompt-toolkit==3.0.14
@@ -404,10 +281,6 @@ psycopg2==2.8.6
     #   geotrek
 pycodestyle==2.6.0
     # via flake8
-pycparser==2.20
-    # via
-    #   -r requirements.txt
-    #   cffi
 pyflakes==2.2.0
     # via flake8
 pygal==2.4.0
@@ -416,10 +289,6 @@ pygal==2.4.0
     #   geotrek
 pygments==2.10.0
     # via sphinx
-pyopenssl==20.0.1
-    # via
-    #   -r requirements.txt
-    #   requests
 pyparsing==2.4.7
     # via
     #   -r requirements.txt
@@ -428,25 +297,25 @@ pypdf2==1.26.0
     # via
     #   -r requirements.txt
     #   pdfimpose
-pyphen==0.10.0
-    # via
-    #   -r requirements.txt
-    #   weasyprint
 python-dateutil==2.8.1
     # via
     #   -r requirements.txt
     #   faker
     #   freezegun
 python-memcached==1.59
-    # via -r requirements.txt
+    # via
+    #   -r requirements.txt
+    #   geotrek
 pytz==2021.1
     # via
     #   -r requirements.txt
     #   babel
     #   celery
-    #   datetime
     #   django
-    #   django-modelcluster
+raven==6.10.0
+    # via
+    #   -r requirements.txt
+    #   geotrek
 rcssmin==1.0.6
     # via
     #   -r requirements.txt
@@ -455,14 +324,12 @@ redis==3.5.3
     # via
     #   -r requirements.txt
     #   celery
-requests[security]==2.25.1
+requests==2.25.1
     # via
     #   -r requirements.txt
     #   coreapi
     #   django-embed-video
-    #   geotrek
     #   landez
-    #   mapentity
     #   sphinx
 rjsmin==1.1.0
     # via
@@ -473,7 +340,9 @@ ruamel.yaml==0.16.12
     #   -r requirements.txt
     #   drf-yasg
 sentry-sdk==0.19.5
-    # via -r requirements.txt
+    # via
+    #   -r requirements.txt
+    #   geotrek
 simplekml==1.3.5
     # via
     #   -r requirements.txt
@@ -482,24 +351,15 @@ six==1.15.0
     # via
     #   -r requirements.txt
     #   click-repl
-    #   cryptography
     #   django-autocomplete-light
     #   django-compressor
     #   django-extended-choices
-    #   django-modeltranslation
     #   fiona
-    #   html5lib
     #   munch
-    #   pyopenssl
     #   python-dateutil
     #   python-memcached
-    #   zodb
 snowballstemmer==2.1.0
     # via sphinx
-soupsieve==2.1
-    # via
-    #   -r requirements.txt
-    #   beautifulsoup4
 sphinx==4.2.0
     # via
     #   -r dev-requirements.in
@@ -533,18 +393,8 @@ tif2geojson==0.1.3
     # via
     #   -r requirements.txt
     #   geotrek
-tinycss2==1.1.0
-    # via
-    #   -r requirements.txt
-    #   cairosvg
-    #   cssselect2
-    #   weasyprint
 tomli==1.2.2
     # via pep517
-transaction==3.0.1
-    # via
-    #   -r requirements.txt
-    #   zodb
 uritemplate==3.0.1
     # via
     #   -r requirements.txt
@@ -555,6 +405,10 @@ urllib3==1.26.3
     #   -r requirements.txt
     #   requests
     #   sentry-sdk
+values==2020.12.3
+    # via
+    #   -r requirements.txt
+    #   env-file
 vine==5.0.0
     # via
     #   -r requirements.txt
@@ -564,18 +418,6 @@ wcwidth==0.2.5
     # via
     #   -r requirements.txt
     #   prompt-toolkit
-weasyprint==52.2
-    # via
-    #   -r requirements.txt
-    #   django-weasyprint
-    #   geotrek
-    #   mapentity
-webencodings==0.5.1
-    # via
-    #   -r requirements.txt
-    #   cssselect2
-    #   html5lib
-    #   tinycss2
 wheel==0.37.0
     # via pip-tools
 xlrd==2.0.1
@@ -586,30 +428,6 @@ xmltodict==0.12.0
     # via
     #   -r requirements.txt
     #   tif2geojson
-zc.lockfile==2.0
-    # via
-    #   -r requirements.txt
-    #   zodb
-zconfig==3.5.0
-    # via
-    #   -r requirements.txt
-    #   zodb
-zodb==5.6.0
-    # via
-    #   -r requirements.txt
-    #   appy
-zodbpickle==2.0.0
-    # via
-    #   -r requirements.txt
-    #   zodb
-zope.interface==5.4.0
-    # via
-    #   -r requirements.txt
-    #   btrees
-    #   datetime
-    #   persistent
-    #   transaction
-    #   zodb
 
 # The following packages are considered to be unsafe in a requirements file:
 # pip
