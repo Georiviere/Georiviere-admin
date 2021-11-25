@@ -18,31 +18,30 @@ Install
 =======
 
 * Download `zip package <https://github.com/Georiviere/Georiviere-admin/releases/latest/download/install.zip>`_
+
 * Unzip it where you want
 
-.. code-block :: bash
+  .. code-block :: bash
 
-    unzip install.zip
-    cd georiviere
+      unzip install.zip
+      cd georiviere
 
 
 * Prepare environment variables
 
-.. code-block :: bash
+  .. code-block :: bash
 
-    mv .env.dist .env
+      mv .env.dist .env
 
-
-**-> Set all required values**
+  **-> Set all required values**
 
 * Init default var folder
 
-.. code-block :: bash
+  .. code-block :: bash
 
-    docker-compose run --rm web bash -c "exit"
+      docker-compose run --rm web bash -c "exit"
 
-
-* Set at least variables `SRID`, `DEFAULT_STRUCTURE_NAME`, and `SPATIAL_EXTENT` in var/conf/custom.py (as geotrek overlay, these settings should be set BEFORE database initialization)
+* Set at least variables ``SRID``, ``DEFAULT_STRUCTURE_NAME``, and ``SPATIAL_EXTENT`` in ``var/conf/custom.py`` (as geotrek overlay, these settings should be set BEFORE database initialization)
 
 * Init database and project config
 
@@ -50,13 +49,11 @@ Install
 
       docker-compose run --rm web update.sh
 
-
 * Create your super user
 
   .. code-block :: bash
 
       docker-compose run --rm web ./manage.py createsuperuser
-
 
 * Launch stack
 

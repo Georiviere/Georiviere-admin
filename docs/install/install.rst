@@ -1,5 +1,5 @@
-===================
-Installation manual
-===================
+====================
+Install instructions
+====================
 
 .. include:: ../../install/README.rst
