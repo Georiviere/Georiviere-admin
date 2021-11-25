@@ -1,8 +1,6 @@
 Welcome to Georiviere's documentation!
 ======================================
 
-.. include:: ../README.rst
-
 Content
 -------
 
