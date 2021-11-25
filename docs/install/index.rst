@@ -5,4 +5,4 @@ Install
     :maxdepth: 2
 
     install
-    configuration
+    settings
