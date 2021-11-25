@@ -82,17 +82,3 @@ Each time you run pip-compile for requirements.txt, you should run pip-compile f
 .. warning::
     Geotrek is used as main library of this project. Sub-dependencies are not yet managed in geotrek setup.py.
     When you update geotrek, you should update requirements according geotrek dependencies versions.
-
-
-Documentation
--------------
-
-We use sphinx doc and sphinx-rtd-theme.
-
-Requirements are included.
-
-To compile and test documentation on local environment, run :
-
-.. code-block :: bash
-
-    docker-compose run --workdir /opt/georiviere-admin/docs --rm web make html
