@@ -1,6 +1,10 @@
 Welcome to Georiviere's documentation!
 ======================================
 
+Georiviere-admin is an application to handle aquatic environment (stream, river, watersheds…) in a given territory.
+
+It is a `Django <https://www.djangoproject.com/>`_ application, based on `Geotrek-admin <https://geotrek.readthedocs.io/>`_ and `Mapentity <https://django-mapentity.readthedocs.io/>`_.
+
 Content
 -------
 
