@@ -1,7 +1,6 @@
 from django.conf import settings
 from django.contrib.gis.db import models
 from django.contrib.gis.geos import Point
-from django.db import connection
 from django.db.models import Q
 from django.utils.translation import gettext_lazy as _
 
@@ -12,11 +11,10 @@ from mapentity.models import MapEntityMixin
 
 from georiviere.main.models import AddPropertyBufferMixin
 from georiviere.altimetry import AltimetryMixin
-from georiviere.functions import LineSubString
+from georiviere.functions import ClosestPoint, LineSubString
 from georiviere.knowledge.models import Knowledge, FollowUp
 from georiviere.observations.models import Station
 from georiviere.proceeding.models import Proceeding
-from georiviere.river.functions import ClosestPoint
 from georiviere.studies.models import Study
 from georiviere.watershed.mixins import WatershedPropertiesMixin
 
