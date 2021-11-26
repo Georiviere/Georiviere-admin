@@ -49,7 +49,8 @@ class StationViewTestCase(CommonRiverTest):
         )
         return {
             'structure': structure.pk,
-            'geom': temp_data.geom.ewkt,
+            'geom': '{"geom": "%s", "snap": [%s]}' % (temp_data.geom.transform(4326, clone=True).ewkt,
+                                                      ','.join(['null'])),
             'code': '1234',
             'label': 'test',
             'station_profiles': [station_profile.pk],

@@ -18,3 +18,8 @@ class Length3D(GeoFunc):
 
 class LineSubString(GeomOutputGeoFunc):
     geom_param_pos = (0, )
+
+
+class ClosestPoint(GeomOutputGeoFunc):
+    """ SQL Function class to get closest point of an other geometry (ST_ClosestPoint) """
+    geom_param_pos = (0, 1)

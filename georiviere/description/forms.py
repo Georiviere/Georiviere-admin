@@ -7,9 +7,12 @@ from geotrek.common.forms import CommonForm
 from georiviere.description.models import Land, Status, Morphology, Usage
 
 from georiviere.river.forms import TopologyRiverForm
+from georiviere.river.fields import SnappedGeometryField
 
 
 class UsageForm(CommonForm):
+    geom = SnappedGeometryField()
+
     geomfields = ['geom']
 
     class Meta:
@@ -18,6 +21,8 @@ class UsageForm(CommonForm):
 
 
 class LandForm(CommonForm):
+    geom = SnappedGeometryField()
+
     geomfields = ['geom']
 
     class Meta:

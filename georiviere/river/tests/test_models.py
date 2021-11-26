@@ -3,6 +3,7 @@ from django.contrib.gis.geos import Point, LineString
 from django.test import TestCase
 
 from georiviere.description.tests.factories import MorphologyFactory, StatusFactory
+from georiviere.river.models import Stream
 from georiviere.river.tests.factories import TopologyFactory, StreamFactory
 
 
@@ -39,3 +40,16 @@ class StreamSourceLocationTest(TestCase):
         self.assertAlmostEqual(lat_min, -5.9838563092087576)
         self.assertAlmostEqual(lng_max, -1.0680441780204335)
         self.assertAlmostEqual(lat_max, -5.655019875165679)
+
+
+class SnapTest(TestCase):
+    def test_snap_not_saved(self):
+        p = Stream()
+        with self.assertRaisesRegex(ValueError, "Cannot compute snap on unsaved stream"):
+            p.snap(Point(0, 0))
+
+    def test_snap_reproj(self):
+        p = StreamFactory.create(geom=LineString(Point(700000, 6600000), Point(700100, 6600100), srid=settings.SRID))
+        snap = p.snap(Point(3, 46.5, srid=4326))
+        self.assertEqual(snap.x, 700000)
+        self.assertEqual(snap.y, 6600000)

@@ -16,13 +16,26 @@ L.FieldStore.LineSnapStore = L.FieldStore.extend({
         layer = edited[0];
 
         // Store snaplist
-        var n = layer.getLatLngs().length,
-            snaplist = new Array(n);
-        if (layer.editing._poly.snapediting) {
-            for (var i=0; i<n; i++) {
-                var marker = layer.editing._poly.snapediting._markers[i];
+        if (layer.hasOwnProperty('_latlng')) {
+            var n = 1;
+        }
+        else {
+            var n = layer.getLatLngs().length;
+        }
+        var snaplist = new Array(n);
+        if (layer.editing._poly === undefined) {
+            if (layer.editing._markers !== undefined) {
+                var marker = layer.editing._markers[0];
                 if (marker.snap && marker.snap.properties && marker.snap.properties.pk)
-                    snaplist[i] = marker.snap.properties.pk;
+                    snaplist[0] = marker.snap.properties.pk;
+            }
+        }
+        if (layer.editing._snapper && layer.editing._snapper._markers) {
+            var markers = layer.editing._snapper._markers.sort((a, b) => a._index - b._index)
+            for (var i=0; i<n; i++) {
+                var marker = markers[i];
+                if (marker && marker.snap && marker.snap.properties && marker.snap.properties.pk)
+                        snaplist[i] = marker.snap.properties.pk;
             }
         }
 
@@ -125,9 +138,15 @@ MapEntity.GeometryField.GeometryFieldSnap = MapEntity.GeometryField.extend({
         var handlerClass = null;
         if (layer instanceof L.Marker) {
             handlerClass = L.Handler.MarkerSnap;
+            // Markers don't need draw edition because we don't need to modify multiple points we can move freely the Marker
+            $('.leaflet-draw-edit-edit').hide()
+            $('.leaflet-draw-edit-remove').hide()
         }
         else if (layer instanceof L.Polyline) {
             handlerClass = L.Handler.PolylineSnap;
+            // We show draw edition in the case we used to draw a point and we change it for anything else
+            $('.leaflet-draw-edit-edit').show()
+            $('.leaflet-draw-edit-remove').show()
         }
         else {
             console.warn('Unsupported layer type for snap.');
@@ -146,10 +165,19 @@ MapEntity.GeometryField.GeometryFieldSnap = MapEntity.GeometryField.extend({
 
         // On edition, show start and end markers as snapped
         this._map.on('draw:editstart', function (e) {
+            if (layer.editing._snapper) {
+                // The markers in snapper are kept between 2 modifications. Markers are added when we edit a layer.
+                // We left an empty array, it will get all the old markers after.
+                layer.editing._snapper._markers = [];
+            }
             setTimeout(function () {
                 if (!layer.editing) {
                     console.warn('Layer has no snap editing');
                     return;  // should never happen ;)
+                }
+                if (layer.editing._enabled === false) {
+                    console.warn('Layer was not enable editing');
+                    return;
                 }
                 var markers = layer.editing._markers;
                 var first = markers[0],

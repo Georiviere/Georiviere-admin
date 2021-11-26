@@ -11,7 +11,7 @@ from mapentity.models import MapEntityMixin
 
 from georiviere.main.models import AddPropertyBufferMixin
 from georiviere.altimetry import AltimetryMixin
-from georiviere.functions import LineSubString
+from georiviere.functions import ClosestPoint, LineSubString
 from georiviere.knowledge.models import Knowledge, FollowUp
 from georiviere.observations.models import Station
 from georiviere.proceeding.models import Proceeding
@@ -85,6 +85,17 @@ class Stream(AddPropertyBufferMixin, TimeStampedModelMixin, WatershedPropertiesM
             extent[2] = max(extent[2], self.source_location.x)
             extent[3] = max(extent[3], self.source_location.y)
         return extent
+
+    def snap(self, point):
+        """
+        Returns the point snapped (i.e closest) to the path line geometry.
+        """
+        if not self.pk:
+            raise ValueError("Cannot compute snap on unsaved stream")
+        if point.srid != self.geom.srid:
+            point.transform(self.geom.srid)
+        return self._meta.model.objects.filter(pk=self.pk).annotate(
+            closest_point=ClosestPoint('geom', point)).first().closest_point
 
 
 class Topology(models.Model):

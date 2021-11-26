@@ -12,6 +12,7 @@ from geotrek.common.forms import CommonForm
 
 from georiviere.main.widgets import DatePickerInput
 from georiviere.proceeding.models import Proceeding, Event
+from georiviere.river.fields import SnappedGeometryField
 
 
 class EventForm(forms.ModelForm):
@@ -36,6 +37,8 @@ EventFormSet = inlineformset_factory(Proceeding, Event, form=EventForm, extra=1)
 
 
 class ProceedingForm(CommonForm):
+    geom = SnappedGeometryField()
+
     geomfields = ['geom']
 
     fieldslayout = [

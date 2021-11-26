@@ -49,7 +49,8 @@ class ProceedingViewTestCase(CommonRiverTest):
         temp_data = self.modelfactory.build(structure=structure)
         return {
             'structure': structure.pk,
-            'geom': temp_data.geom.ewkt,
+            'geom': '{"geom": "%s", "snap": [%s]}' % (temp_data.geom.transform(4326, clone=True).ewkt,
+                                                      ','.join(['null'] * len(temp_data.geom.coords))),
             'eid': '2',
             'description': "5",
             'name': 'Name',

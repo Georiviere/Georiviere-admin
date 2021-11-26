@@ -3,14 +3,17 @@ import json
 from mapentity.widgets import MapWidget
 
 
-class SnappedLineStringWidget(MapWidget):
+class SnappedGeometryWidget(MapWidget):
     geometry_field_class = 'MapEntity.GeometryField.GeometryFieldSnap'
 
     def serialize(self, value):
         geojson = super().serialize(value)
         snaplist = []
         if value:
-            snaplist = [None for c in range(len(value.coords))]
+            if value.geom_type == "Point":
+                snaplist = [None]
+            else:
+                snaplist = [None for c in range(len(value.coords))]
         value = {'geom': geojson, 'snap': snaplist}
         return json.dumps(value)
 

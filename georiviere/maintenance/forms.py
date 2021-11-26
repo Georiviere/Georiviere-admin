@@ -7,10 +7,13 @@ from geotrek.common.forms import CommonForm
 from georiviere.knowledge.models import Knowledge
 from georiviere.main.widgets import DatePickerInput
 from georiviere.maintenance.models import Intervention
+from georiviere.river.fields import SnappedGeometryField
 
 
 class InterventionForm(autocomplete.FutureModelForm, CommonForm):
     """Intervention form"""
+    _geom = SnappedGeometryField(required=False)
+
     geomfields = ['_geom']
 
     target = autocomplete.Select2GenericForeignKeyModelField(

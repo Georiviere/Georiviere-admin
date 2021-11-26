@@ -7,6 +7,8 @@ from crispy_forms.bootstrap import Tab, TabHolder
 from geotrek.common.forms import CommonForm
 
 from georiviere.main.widgets import DatePickerInput
+from georiviere.river.fields import SnappedGeometryField
+
 from .models import Station, ParameterTracking
 
 
@@ -60,6 +62,8 @@ ParameterTrackingFormset = inlineformset_factory(
 
 class StationForm(CommonForm):
     """Station form"""
+    geom = SnappedGeometryField()
+
     geomfields = ['geom']
 
     fieldslayout = [
