@@ -24,7 +24,7 @@ It is a `Django <https://www.djangoproject.com/>`_ application, based on `Geotre
     install/settings
 
 .. toctree::
-    :caption: Development
+    :caption: Contribution & publication
     :maxdepth: 2
 
     development/development

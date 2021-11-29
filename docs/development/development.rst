@@ -1,5 +1,5 @@
-Local Environment
-=================
+Install local Environment
+=========================
 
 * Configuration
 
