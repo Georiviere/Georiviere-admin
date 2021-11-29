@@ -210,7 +210,7 @@ class AdministrativeOperation(models.Model):
                                         max_digits=19, decimal_places=2, default=0)
     subcontract_cost = models.DecimalField(verbose_name=_("Subcontract cost"),
                                            max_digits=19, decimal_places=2, default=0)
-    manday_cost = models.DecimalField(verbose_name=_("Subcontract cost"),
+    manday_cost = models.DecimalField(verbose_name=_("Cost of man-day"),
                                       max_digits=19, decimal_places=2, default=0)
 
     content_type = models.ForeignKey(ContentType, on_delete=models.CASCADE)

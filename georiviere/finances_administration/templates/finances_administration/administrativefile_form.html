@@ -21,6 +21,7 @@
 
     <fieldset id="adminoperationFormset" class="formset">
         <legend>{% trans "Operations" %}</legend>
+        <p class='text-muted'>{% trans 'To edit man-days, save project and edit each operation from detail page.' %}</p>
         {{ adminoperation_formset.non_field_errors }}
         {{ adminoperation_formset.management_form }}
         {% for adminoperation_form in adminoperation_formset %}
