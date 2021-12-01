@@ -39,7 +39,7 @@ cffi==1.15.0
     #   cairocffi
     #   persistent
     #   weasyprint
-chardet==4.0.0
+charset-normalizer==2.0.8
     # via requests
 click==7.1.2
     # via
@@ -273,7 +273,7 @@ rcssmin==1.0.6
     # via django-compressor
 redis==3.5.3
     # via celery
-requests==2.25.1
+requests==2.26.0
     # via
     #   coreapi
     #   django-embed-video
