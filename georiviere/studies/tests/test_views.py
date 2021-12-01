@@ -1,6 +1,6 @@
 from collections import OrderedDict
 
-from geotrek.authent.factories import StructureFactory
+from geotrek.authent.tests.factories import StructureFactory
 
 from georiviere.tests import CommonRiverTest
 from .factories import StudyFactory, StudyTypeFactory

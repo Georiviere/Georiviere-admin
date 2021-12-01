@@ -1,6 +1,6 @@
 from django.contrib.gis.geos import GeometryCollection
 from django.test import TestCase
-from geotrek.authent.factories import StructureFactory
+from geotrek.authent.tests.factories import StructureFactory
 
 from georiviere.observations.tests.factories import StationFactory
 from georiviere.studies.tests.factories import StudyFactory

@@ -278,7 +278,7 @@ fiona==1.8.18
     #   -r requirements.txt
     #   geotrek
     #   mapentity
-flake8==3.8.4
+flake8==4.0.1
     # via -r dev-requirements.in
 freezegun==1.1.0
     # via
@@ -399,13 +399,13 @@ psycopg2==2.8.6
     # via
     #   -r requirements.txt
     #   geotrek
-pycodestyle==2.6.0
+pycodestyle==2.8.0
     # via flake8
 pycparser==2.21
     # via
     #   -r requirements.txt
     #   cffi
-pyflakes==2.2.0
+pyflakes==2.4.0
     # via flake8
 pygal==2.4.0
     # via

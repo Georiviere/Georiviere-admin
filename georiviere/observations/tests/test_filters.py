@@ -1,5 +1,5 @@
 from django.test import TestCase
-from geotrek.authent.factories import StructureFactory
+from geotrek.authent.tests.factories import StructureFactory
 
 from georiviere.observations.filters import StationFilterSet
 from georiviere.observations.tests.factories import StationFactory, ParameterFactory, ParameterTrackingFactory

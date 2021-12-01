@@ -1,8 +1,8 @@
 from collections import OrderedDict
 
 from django.core.exceptions import ObjectDoesNotExist
+from geotrek.authent.tests.factories import StructureFactory
 from django.utils.translation import gettext_lazy as _
-from geotrek.authent.factories import StructureFactory
 
 from georiviere.tests import CommonRiverTest
 from . import factories

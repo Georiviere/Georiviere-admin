@@ -3,7 +3,7 @@ from mapentity.tests import MapEntityTest
 
 from georiviere.tests.factories import UserAllPermsFactory
 
-from geotrek.authent.factories import StructureFactory
+from geotrek.authent.tests.factories import StructureFactory
 
 
 class CommonRiverTest(MapEntityTest):

@@ -1,5 +1,5 @@
 import factory
-from geotrek.authent.factories import StructureFactory
+from geotrek.authent.tests.factories import StructureFactory
 
 from georiviere.tests.factories import BaseLineStringFactory
 from georiviere.river.models import Stream, Topology

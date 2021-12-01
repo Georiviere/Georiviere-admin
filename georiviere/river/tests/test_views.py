@@ -5,7 +5,7 @@ from django.urls import reverse
 from django.utils.translation import gettext_lazy as _
 from tempfile import TemporaryDirectory
 
-from geotrek.authent.factories import StructureFactory, UserFactory
+from geotrek.authent.tests.factories import StructureFactory, UserFactory
 
 from georiviere.tests import CommonRiverTest
 from georiviere.description.tests.factories import StatusOnStreamFactory

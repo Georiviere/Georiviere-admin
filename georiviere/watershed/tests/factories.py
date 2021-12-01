@@ -1,7 +1,7 @@
 from django.conf import settings
 from django.contrib.gis.geos import Polygon, MultiPolygon
 from factory import django, fuzzy, Sequence, SubFactory
-from mapentity.helpers import bbox_split_srid_2154
+from geotrek.zoning.tests.factories import bbox_split_srid_2154
 
 from .. import models
 
