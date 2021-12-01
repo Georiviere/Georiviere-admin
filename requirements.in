@@ -2,8 +2,9 @@ psycopg2
 django>=2.2
 django-autocomplete-light[gfk]
 git+https://github.com/GeotrekCE/Geotrek-admin.git@split_mapentity#egg=geotrek
-git+https://github.com/makinacorpus/django-mapentity.git@master#egg=mapentity
+mapentity
 paperclip
+django-weasyprint<2.0
 
 # prod
 django-compressor
