@@ -1,6 +1,6 @@
 from factory import django, fuzzy, post_generation
+from mapentity.tests.factories import PointFactory
 
-from georiviere.tests.factories import PointFactory
 from .. import models
 
 

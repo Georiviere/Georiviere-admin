@@ -1,7 +1,7 @@
 from collections import OrderedDict
 
 from django.contrib.contenttypes.models import ContentType
-from geotrek.authent.factories import StructureFactory
+from geotrek.authent.tests.factories import StructureFactory
 
 from georiviere.finances_administration.models import AdministrativeFile
 from georiviere.finances_administration.tests.factories import AdministrativeFileFactory, OrganismFactory

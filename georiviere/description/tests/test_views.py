@@ -2,7 +2,7 @@ from tempfile import TemporaryDirectory
 
 from django.test import override_settings
 from django.utils.translation import gettext_lazy as _
-from geotrek.authent.factories import StructureFactory
+from geotrek.authent.tests.factories import StructureFactory
 
 from georiviere.river.tests import TopologyTestCase
 from georiviere.river.tests.factories import StreamFactory

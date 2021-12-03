@@ -1,5 +1,5 @@
 from django.contrib.auth.models import Permission
-from geotrek.authent.factories import StructureFactory
+from geotrek.authent.tests.factories import StructureFactory
 
 from georiviere.tests import CommonRiverTest
 

@@ -1,6 +1,6 @@
 from factory import django, fuzzy, SubFactory, Sequence
+from mapentity.tests.factories import PointFactory
 
-from georiviere.tests.factories import PointFactory
 from georiviere.knowledge import models
 
 
