@@ -67,3 +67,8 @@ Status of sub-projects
 
 .. image:: https://github.com/GeotrekCE.png
      :height: 200
+
+.. |django-mapentity| image:: https://github.com/makinacorpus/django-mapentity/actions/workflows/python-ci.yml/badge.svg
+
+* |django-mapentity| `geotrek <https://github.com/makinacorpus/django-mapentity>`_
+
