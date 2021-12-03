@@ -70,5 +70,5 @@ Status of sub-projects
 
 .. |django-mapentity| image:: https://github.com/makinacorpus/django-mapentity/actions/workflows/python-ci.yml/badge.svg
 
-* |django-mapentity| `geotrek <https://github.com/makinacorpus/django-mapentity>`_
+* |django-mapentity| `django-mapentity <https://github.com/makinacorpus/django-mapentity>`_
 
