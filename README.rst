@@ -44,7 +44,7 @@ License
 Maintainers
 -----------
 
-* Parc National du Haut-Jura
+* Parc Naturel Régional du Haut-Jura
 * Makina Corpus
 
 |logo-pnrhj| |logo-makina|
