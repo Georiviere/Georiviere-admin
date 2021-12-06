@@ -2,10 +2,15 @@
 CHANGELOG
 =========
 
-0.9.5+dev    (XXXX-XX-XX)
+0.9.6    (2021-12-XX)
 -------------------------
 
-*
+* Use mapentity standalone release
+* Improve documentation
+* Add source location on a stream
+* Make cut topology simpler
+* Add help message on how edit man-days cost
+* Fix filters on intervention and follow-ups
 
 
 0.9.5        (2021-11-08)
