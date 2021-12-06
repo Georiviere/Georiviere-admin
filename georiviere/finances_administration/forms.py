@@ -2,7 +2,7 @@ from django.forms import inlineformset_factory, ModelForm
 from django.utils.translation import gettext_lazy as _
 from crispy_forms.helper import FormHelper
 from crispy_forms.layout import Div, HTML, Layout, Field, Button
-from crispy_forms.bootstrap import AppendedText, Tab, TabHolder, FormActions, UneditableField
+from crispy_forms.bootstrap import AppendedText, Tab, TabHolder, FormActions
 from dal import autocomplete
 from mapentity.forms import SubmitButton
 from geotrek.common.forms import CommonForm
