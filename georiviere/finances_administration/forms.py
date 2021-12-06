@@ -55,7 +55,7 @@ class AdministrativeOperationForm(autocomplete.FutureModelForm):
         model = AdministrativeOperation
         fields = (
             'id', 'name', 'content_object', 'operation_status',
-            'estimated_cost', 'material_cost', 'subcontract_cost', 'manday_cost'
+            'estimated_cost', 'material_cost', 'subcontract_cost',
         )
 
     def __init__(self, *args, **kwargs):
@@ -71,7 +71,9 @@ class AdministrativeOperationForm(autocomplete.FutureModelForm):
             AppendedText('estimated_cost', '&euro;'),
             AppendedText('material_cost', '&euro;'),
             AppendedText('subcontract_cost', '&euro;'),
-            UneditableField('manday_cost'),
+            HTML('<div class="form-group"><label>{0}</label><div>{1}</div></div>'.format(
+                _("Man-day cost"),
+                self.instance._get_manday_cost()))
         )
 
     def save(self, *args, **kwargs):
