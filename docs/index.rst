@@ -22,6 +22,7 @@ It is a `Django <https://www.djangoproject.com/>`_ application, based on `Geotre
 
     install/install
     install/settings
+    install/advanced_settings
 
 .. toctree::
     :caption: Contribution & publication
@@ -31,13 +32,6 @@ It is a `Django <https://www.djangoproject.com/>`_ application, based on `Geotre
     development/documentation
     development/publication
 
-Changelog
----------
-
-.. toctree::
-    :maxdepth: 2
-
-    changelog
 
 Authors
 -------
@@ -46,6 +40,15 @@ Authors
     :maxdepth: 1
 
     authors
+
+
+Changelog
+---------
+
+.. toctree::
+    :maxdepth: 2
+
+    changelog
 
 
 Indices and tables
