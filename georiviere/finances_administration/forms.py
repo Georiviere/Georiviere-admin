@@ -73,7 +73,7 @@ class AdministrativeOperationForm(autocomplete.FutureModelForm):
             AppendedText('subcontract_cost', '&euro;'),
             HTML('<div class="form-group"><label>{0}</label><div>{1}&nbsp;€</div></div>'.format(
                 _("Man-day cost (read-only)"),
-                self.instance._get_manday_cost()))
+                self.instance.manday_cost))
         )
 
     def save(self, *args, **kwargs):
