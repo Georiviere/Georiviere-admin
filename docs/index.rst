@@ -11,7 +11,7 @@ It is a `Django <https://www.djangoproject.com/>`_ application, based on `Geotre
     :caption: User manual
     :maxdepth: 2
 
-    usage/interface
+    usage/features
     usage/modules
     usage/configuration
     usage/import_data
