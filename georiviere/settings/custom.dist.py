@@ -14,6 +14,8 @@ LEAFLET_CONFIG['TILES'].append(
      '&copy; IGN - GeoPortail')
 )
 
+# BASE_INTERSECTION_MARGIN = 2000
+
 # Enable sentry
 
 # import sentry_sdk
