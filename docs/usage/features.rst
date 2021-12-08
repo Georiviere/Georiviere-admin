@@ -14,5 +14,5 @@ Interface
 .. image :: /images/georiviere-01-liste.png
 
 To get more detail on how add and edit contents,
-have a look on `Geotrek-admin documentation <https://geotrek.readthedocs.io/en/master/user-manual.html>`
+have a look on `Geotrek-admin documentation <https://geotrek.readthedocs.io/en/master/user-manual.html>`_
 (in french).
