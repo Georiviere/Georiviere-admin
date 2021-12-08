@@ -50,7 +50,12 @@ class AdministrativeOperationForm(autocomplete.FutureModelForm):
         ],
         label=_('Operation on'),
     )
-    manday_cost = DecimalField(disabled=True, required=False)
+    manday_cost = DecimalField(
+        label=_("Cost of man-day"),
+        disabled=True,
+        required=False,
+        help_text=_("Man-day cost (read-only)")
+    )
 
     class Meta:
         model = AdministrativeOperation
