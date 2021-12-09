@@ -3,8 +3,20 @@
 }
 
 .formset .form-row > .form-group {
-    flex-basis: auto;
-    max-width: 50%;
+    flex-basis: 100%;
+    max-width: 100%;
+}
+
+@media (min-width: 576px) {
+    .formset .form-row > .form-group {
+        flex-basis: 50%;
+    }
+}
+
+@media (min-width: 992px) {
+    .formset .form-row > .form-group {
+        flex-basis: 25%;
+    }
 }
 
 /* Fragment when objects are not in a table */

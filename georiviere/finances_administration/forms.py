@@ -1,7 +1,7 @@
-from django.forms import inlineformset_factory, ModelForm
+from django.forms import inlineformset_factory, ModelForm, DecimalField
 from django.utils.translation import gettext_lazy as _
 from crispy_forms.helper import FormHelper
-from crispy_forms.layout import Div, Layout, Field, Button
+from crispy_forms.layout import Div, HTML, Layout, Field, Button
 from crispy_forms.bootstrap import AppendedText, Tab, TabHolder, FormActions
 from dal import autocomplete
 from mapentity.forms import SubmitButton
@@ -50,12 +50,19 @@ class AdministrativeOperationForm(autocomplete.FutureModelForm):
         ],
         label=_('Operation on'),
     )
+    manday_cost = DecimalField(
+        label=_("Cost of man-day"),
+        disabled=True,
+        required=False,
+        help_text=_("Man-day cost (read-only)")
+    )
 
     class Meta:
         model = AdministrativeOperation
         fields = (
             'id', 'name', 'content_object', 'operation_status',
             'estimated_cost', 'material_cost', 'subcontract_cost',
+            'manday_cost'
         )
 
     def __init__(self, *args, **kwargs):
@@ -67,9 +74,11 @@ class AdministrativeOperationForm(autocomplete.FutureModelForm):
             'name',
             Field('content_object', css_class="chosen-select"),
             'operation_status',
+            HTML('<div class="w-100"></div>'),
             AppendedText('estimated_cost', '&euro;'),
             AppendedText('material_cost', '&euro;'),
             AppendedText('subcontract_cost', '&euro;'),
+            AppendedText('manday_cost', '&euro;'),
         )
 
     def save(self, *args, **kwargs):

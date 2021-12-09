@@ -2,23 +2,24 @@
 # Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
 # This file is distributed under the same license as the PACKAGE package.
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
-# 
+#
 # Translators:
 # Jean-Etienne Castagnede <jecastagnede@vivaldi.net>, 2021
-# 
+#
 #, fuzzy
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-10-20 10:10+0000\n"
+"POT-Creation-Date: 2021-12-06 16:57+0000\n"
 "PO-Revision-Date: 2021-11-23 14:22+0000\n"
 "Last-Translator: Jean-Etienne Castagnede <jecastagnede@vivaldi.net>, 2021\n"
-"Language-Team: French (https://www.transifex.com/georiviere/teams/128005/fr/)\n"
+"Language-Team: French (https://www.transifex.com/georiviere/teams/128005/"
+"fr/)\n"
+"Language: fr\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Language: fr\n"
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
 
 msgid "Finances and administration"
@@ -29,6 +30,9 @@ msgstr "Nom"
 
 msgid "Operation on"
 msgstr "Opération sur"
+
+msgid "Man-day cost (read-only)"
+msgstr "Coût jours-homme (lecture seule)"
 
 msgid "Cancel"
 msgstr "Annuler"
@@ -123,6 +127,9 @@ msgstr "Coût matériel"
 msgid "Subcontract cost"
 msgstr "Coût sous-traitance"
 
+msgid "Cost of man-day"
+msgstr "Coût jour-homme"
+
 msgid "Administrative operation"
 msgstr "Opération du dossier administratif"
 
@@ -137,9 +144,6 @@ msgstr "Financement"
 
 msgid "Fundings"
 msgstr "Financements"
-
-msgid "Cost of man-day"
-msgstr "Coût jour-homme"
 
 msgid "Active"
 msgstr "Actif"
@@ -179,6 +183,12 @@ msgstr "Pas d'opération créée"
 
 msgid "Edit administrative file to add new operations."
 msgstr "Modifier le dossier administratif pour ajouter des opérations"
+
+msgid ""
+"To edit man-days, save project and edit each operation from detail page."
+msgstr ""
+"Pour modifier les jours-hommes, enregistrez le dossier et modifiez chaque "
+"opération depuis la page détail."
 
 msgid "Add an operation"
 msgstr "Ajouter une opération"

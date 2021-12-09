@@ -29,6 +29,7 @@ class AdministrativeFilesMixin:
 
 
 class Organism(StructureOrNoneRelated):
+    """Model for Organism"""
 
     name = models.CharField(max_length=128, verbose_name=_("Organism"))
 
@@ -44,6 +45,7 @@ class Organism(StructureOrNoneRelated):
 
 
 class AdministrativeFileType(StructureOrNoneRelated):
+    """Model for Administraive file type"""
 
     label = models.CharField(max_length=128, verbose_name=_("Label"))
 
@@ -59,6 +61,7 @@ class AdministrativeFileType(StructureOrNoneRelated):
 
 
 class AdministrativeFileDomain(StructureOrNoneRelated):
+    """Model for Administraive file domain"""
 
     label = models.CharField(max_length=128, verbose_name=_("Label"))
 
@@ -179,6 +182,9 @@ class AdministrativeFile(TimeStampedModelMixin, WatershedPropertiesMixin, Zoning
 
     @property
     def total_costs(self):
+        """Total costs for this administrative and financial file
+        :return dict
+        """
         results = self.operations.all().aggregate(
             estimated=Sum('estimated_cost'),
             material=Sum('material_cost'),
@@ -210,7 +216,9 @@ class AdministrativeOperation(models.Model):
                                         max_digits=19, decimal_places=2, default=0)
     subcontract_cost = models.DecimalField(verbose_name=_("Subcontract cost"),
                                            max_digits=19, decimal_places=2, default=0)
-    manday_cost = models.DecimalField(verbose_name=_("Subcontract cost"),
+
+    # Manday cost is computed on Manday save method, each time a Manday is updated or added to this operation
+    manday_cost = models.DecimalField(verbose_name=_("Cost of man-day"),
                                       max_digits=19, decimal_places=2, default=0)
 
     content_type = models.ForeignKey(ContentType, on_delete=models.CASCADE)
@@ -228,7 +236,7 @@ class AdministrativeOperation(models.Model):
         )
 
     def _get_manday_cost(self):
-        """Man-day costs computed"""
+        """Man-day costs computed for this operation"""
         if not self.mandays.count():
             return Decimal('0.00')
         result = self.mandays \
@@ -254,6 +262,7 @@ class AdministrativeOperation(models.Model):
 
 
 class Funding(models.Model):
+    """Model for funding"""
 
     amount = models.DecimalField(verbose_name=_("Amount"),
                                  max_digits=19, decimal_places=2, default=0)
@@ -271,6 +280,7 @@ class Funding(models.Model):
 
 
 class JobCategory(StructureOrNoneRelated):
+    """Model for job category, used by man-days"""
 
     label = models.CharField(max_length=128, verbose_name=_("Label"))
     man_day_cost = models.DecimalField(
@@ -293,6 +303,7 @@ class JobCategory(StructureOrNoneRelated):
 
 
 class ManDay(models.Model):
+    """Model for man-days"""
 
     nb_days = models.DecimalField(verbose_name=_("Man-days"), decimal_places=2, max_digits=6)
     operation = models.ForeignKey(AdministrativeOperation,
@@ -317,7 +328,7 @@ class ManDay(models.Model):
         return str(self.nb_days)
 
     def save(self, *args, **kwargs):
-        """Compute manday_cost value"""
+        """Compute manday_cost value for related operation"""
         super().save(*args, **kwargs)
         self.operation.manday_cost = self.operation._get_manday_cost()
         self.operation.save()

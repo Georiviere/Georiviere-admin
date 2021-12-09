@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-10-20 10:10+0000\n"
+"POT-Creation-Date: 2021-12-06 16:57+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -25,6 +25,9 @@ msgid "Name"
 msgstr ""
 
 msgid "Operation on"
+msgstr ""
+
+msgid "Man-day cost (read-only)"
 msgstr ""
 
 msgid "Cancel"
@@ -120,6 +123,9 @@ msgstr ""
 msgid "Subcontract cost"
 msgstr ""
 
+msgid "Cost of man-day"
+msgstr ""
+
 msgid "Administrative operation"
 msgstr ""
 
@@ -133,9 +139,6 @@ msgid "Funding"
 msgstr ""
 
 msgid "Fundings"
-msgstr ""
-
-msgid "Cost of man-day"
 msgstr ""
 
 msgid "Active"
@@ -175,6 +178,10 @@ msgid "No operation is created"
 msgstr ""
 
 msgid "Edit administrative file to add new operations."
+msgstr ""
+
+msgid ""
+"To edit man-days, save project and edit each operation from detail page."
 msgstr ""
 
 msgid "Add an operation"
