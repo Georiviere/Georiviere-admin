@@ -41,7 +41,13 @@ Install
 
       docker-compose run --rm web bash -c "exit"
 
-* Set at least variables ``SRID``, ``DEFAULT_STRUCTURE_NAME``, and ``SPATIAL_EXTENT`` in ``var/conf/custom.py`` (as geotrek overlay, these settings should be set BEFORE database initialization)
+* Set at least these variables in ``var/conf/custom.py``:
+    * ``SRID``
+    * ``DEFAULT_STRUCTURE_NAME``
+    * ``SPATIAL_EXTENT``
+
+    As geotrek overlay, these settings should be set BEFORE database initialization.
+    See :doc:`./settings` for details
 
 * Init database and project config
 
