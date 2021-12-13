@@ -33,3 +33,6 @@
 .details-panel .table.operations th {
     width: auto;
 }
+.details-panel .table.operations th.actual-costs {
+    width: 35%;
+}

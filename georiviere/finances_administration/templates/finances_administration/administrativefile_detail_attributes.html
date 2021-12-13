@@ -77,7 +77,7 @@
             <tr>
                 <th>{% trans "Name" %}</th>
                 <th>{% trans "Estimated cost" %}</th>
-                <th>{% trans "Actual cost" %}</th>
+                <th class="actual-costs">{% trans "Actual cost" %}</th>
                 <th>{% trans "Edit costs" %}</th>
             </tr>
         </thead>
@@ -95,10 +95,10 @@
                 <td>{{ operation.content_object_display|safe }}</td>
                 <td>{{ operation.estimated_cost }}&nbsp;&euro;</td>
                 <td>
-                    {{ operation.actual_cost }}&nbsp;&euro;
-                      <button class="btn btn-sm btn-outline-primary" type="button"
-                              data-toggle="collapse" data-target="#detailCosts{{ operation.pk }}"
-                              aria-expanded="false" aria-controls="detailCosts{{ operation.pk }}">
+                    {{ operation.actual_cost }}&nbsp;&euro;<br>
+                    <button class="btn btn-sm btn-link" type="button"
+                        data-toggle="collapse" data-target="#detailCosts{{ operation.pk }}"
+                        aria-expanded="false" aria-controls="detailCosts{{ operation.pk }}">
                         {% trans "Costs details" %}
                       </button>
                     <div class="collapse" id="detailCosts{{ operation.pk }}">
