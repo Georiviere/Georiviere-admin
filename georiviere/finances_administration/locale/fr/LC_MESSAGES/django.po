@@ -11,7 +11,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-12-06 16:57+0000\n"
+"POT-Creation-Date: 2021-12-13 11:25+0000\n"
 "PO-Revision-Date: 2021-11-23 14:22+0000\n"
 "Last-Translator: Jean-Etienne Castagnede <jecastagnede@vivaldi.net>, 2021\n"
 "Language-Team: French (https://www.transifex.com/georiviere/teams/128005/"
@@ -30,6 +30,9 @@ msgstr "Nom"
 
 msgid "Operation on"
 msgstr "Opération sur"
+
+msgid "Cost of man-day"
+msgstr "Coût jour-homme"
 
 msgid "Man-day cost (read-only)"
 msgstr "Coût jours-homme (lecture seule)"
@@ -127,9 +130,6 @@ msgstr "Coût matériel"
 msgid "Subcontract cost"
 msgstr "Coût sous-traitance"
 
-msgid "Cost of man-day"
-msgstr "Coût jour-homme"
-
 msgid "Administrative operation"
 msgstr "Opération du dossier administratif"
 
@@ -174,6 +174,9 @@ msgstr "Éditer les coûts"
 
 msgid "Totals"
 msgstr "Totaux"
+
+msgid "Costs details"
+msgstr "Coûts en détail"
 
 msgid "Edit"
 msgstr "Éditer"
