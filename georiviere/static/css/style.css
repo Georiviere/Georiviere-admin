@@ -29,3 +29,7 @@
 .fragment-wrapper:hover .autohide {
     opacity: 1;
 }
+
+.details-panel .table.operations th {
+    width: auto;
+}
