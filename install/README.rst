@@ -61,6 +61,12 @@ Install
 
       docker-compose run --rm web ./manage.py createsuperuser
 
+* Load initial data
+
+  .. code-block :: bash
+
+      docker-compose run --rm web ./manage.py loaddata georiviere/**/fixtures/basic.json
+
 * Launch stack
 
   .. code-block :: bash
