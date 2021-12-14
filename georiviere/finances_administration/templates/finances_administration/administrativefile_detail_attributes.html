@@ -77,7 +77,7 @@
             <tr>
                 <th>{% trans "Name" %}</th>
                 <th>{% trans "Estimated cost" %}</th>
-                <th>{% trans "Actual cost" %}</th>
+                <th class="actual-costs">{% trans "Actual cost" %}</th>
                 <th>{% trans "Edit costs" %}</th>
             </tr>
         </thead>
@@ -95,17 +95,28 @@
                 <td>{{ operation.content_object_display|safe }}</td>
                 <td>{{ operation.estimated_cost }}&nbsp;&euro;</td>
                 <td>
-                    {{ operation.actual_cost }}&nbsp;&euro;
-                      <button class="btn btn-sm btn-outline-primary" type="button"
-                              data-toggle="collapse" data-target="#detailCosts{{ operation.pk }}"
-                              aria-expanded="false" aria-controls="detailCosts{{ operation.pk }}">
-                        Costs details
+                    {{ operation.actual_cost }}&nbsp;&euro;<br>
+                    <button class="btn btn-sm btn-link" type="button"
+                        data-toggle="collapse" data-target="#detailCosts{{ operation.pk }}"
+                        aria-expanded="false" aria-controls="detailCosts{{ operation.pk }}">
+                        {% trans "Costs details" %}
                       </button>
-                    <div class="collapse" id="detailCosts{{ operation.pk }}"><small>
-                        {% trans "Material cost" %} &rightarrow; {{ operation.material_cost }}&nbsp;&euro;<br>
-                        {% trans "Subcontract cost" %} &rightarrow; {{ operation.subcontract_cost }}&nbsp;&euro;<br>
-                        {% trans "Cost of man-day" %} &rightarrow; {{ operation.manday_cost }}&nbsp;&euro;<br>
-                    </small></div>
+                    <div class="collapse" id="detailCosts{{ operation.pk }}">
+                        <table class="table table-sm costs">
+                            <tr>
+                                <th>{% trans "Material cost:" %}</th>
+                                <td>{{ operation.material_cost }}&nbsp;&euro;</td>
+                            </tr>
+                            <tr>
+                                <th>{% trans "Subcontract cost:" %}</th>
+                                <td>{{ operation.subcontract_cost }}&nbsp;&euro;</td>
+                            </tr>
+                            <tr>
+                                <th>{% trans "Cost of man-day:" %}</th>
+                                <td>{{ operation.manday_cost }}&nbsp;&euro;</td>
+                            </tr>
+                        </table>
+                    </div>
                 </td>
                 <td>
                     <a href="{% url 'finances_administration:administrativeoperation-update' operation.pk %}">
