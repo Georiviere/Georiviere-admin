@@ -1,0 +1,34 @@
+[
+{
+    "model": "studies.studytype",
+    "pk": 1,
+    "fields": {
+        "structure": null,
+        "label": "Environnement"
+    }
+},
+{
+    "model": "studies.studytype",
+    "pk": 2,
+    "fields": {
+        "structure": null,
+        "label": "Physico-chimique"
+    }
+},
+{
+    "model": "studies.studytype",
+    "pk": 3,
+    "fields": {
+        "structure": null,
+        "label": "Biodiversité"
+    }
+},
+{
+    "model": "studies.studytype",
+    "pk": 4,
+    "fields": {
+        "structure": null,
+        "label": "Sociologique"
+    }
+}
+]

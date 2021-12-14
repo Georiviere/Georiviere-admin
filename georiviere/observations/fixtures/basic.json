@@ -1,0 +1,29 @@
+[
+{
+    "model": "observations.stationprofile",
+    "pk": 1,
+    "fields": {
+        "structure": null,
+        "code": "PCQUAL",
+        "label": "Qualité physico-chimique"
+    }
+},
+{
+    "model": "observations.stationprofile",
+    "pk": 2,
+    "fields": {
+        "structure": null,
+        "code": "HYDRO",
+        "label": "Hydrométrie"
+    }
+},
+{
+    "model": "observations.stationprofile",
+    "pk": 3,
+    "fields": {
+        "structure": null,
+        "code": "TEMP",
+        "label": "Température"
+    }
+}
+]
