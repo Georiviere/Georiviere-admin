@@ -15,5 +15,6 @@
 }
 
 .pointtopology-control {
-    background-image: url('../images/scissor.png');
+    background-image: url('../images/scissors.svg');
+    background-size: contain;
 }
