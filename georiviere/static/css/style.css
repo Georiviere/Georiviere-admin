@@ -2,6 +2,7 @@
     max-width: 100%;
 }
 
+/* Formset styles */
 .formset .form-row > .form-group {
     flex-basis: 100%;
     max-width: 100%;
@@ -17,6 +18,11 @@
     .formset .form-row > .form-group {
         flex-basis: 25%;
     }
+}
+
+/* Form with fixed action bar */
+.fixed-actions {
+    padding-bottom: 80px;
 }
 
 /* Fragment when objects are not in a table */
