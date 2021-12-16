@@ -72,10 +72,10 @@ INSTALLED_APPS = [
     'georiviere.river',
     'georiviere.description',
     'georiviere.knowledge',
-    'georiviere.observations',
-    'georiviere.studies',
     'georiviere.maintenance',
+    'georiviere.observations',
     'georiviere.finances_administration',
+    'georiviere.studies',
     'georiviere.proceeding',
     'geotrek.zoning',
     'georiviere.watershed',
@@ -244,7 +244,7 @@ MAPENTITY_CONFIG = {
         'morphology': {'weight': 4, 'color': 'brown', 'opacity': 0.5},
         'status': {'weight': 4, 'color': 'grey', 'opacity': 0.5},
         'land': {'weight': 4, 'color': 'red', 'opacity': 0.5},
-        'stream': {'weight': 4, 'color': 'red', 'opacity': 0.5},
+        'stream': {'weight': 4, 'color': 'blue', 'opacity': 0.5},
     }
 }
 
