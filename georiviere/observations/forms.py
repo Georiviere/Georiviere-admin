@@ -97,6 +97,9 @@ class StationForm(CommonForm):
     class Meta:
         model = Station
         fields = "__all__"
+        help_texts = {
+            'station_profiles': _('Hold Ctrl key to select multiple items'),
+        }
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)

@@ -18,6 +18,9 @@ class UsageForm(CommonForm):
     class Meta:
         fields = "__all__"
         model = Usage
+        help_texts = {
+            'usage_types': _('Hold Ctrl key to select multiple items'),
+        }
 
 
 class LandForm(CommonForm):
@@ -37,6 +40,9 @@ class StatusForm(TopologyRiverForm):
     class Meta:
         fields = ['status_types', 'qualified', 'geom']
         model = Status
+        help_texts = {
+            'status_types': _('Hold Ctrl key to select multiple items'),
+        }
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
