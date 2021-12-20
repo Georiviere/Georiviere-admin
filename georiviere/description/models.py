@@ -201,7 +201,9 @@ class Morphology(AddPropertyBufferMixin, TopologyMixin, TimeStampedModelMixin,
         verbose_name_plural = _("Morphologies")
 
     def __str__(self):
-        return f"{self.pk}"
+        if self.main_flow:
+            return f"{self.main_flow} / {self.full_edge_width}"
+        return f"- / {self.full_edge_width}"
 
     @property
     def name_verbose_name(self):
@@ -339,7 +341,7 @@ class Status(TopologyMixin, AddPropertyBufferMixin, TimeStampedModelMixin, Water
         if self.status_types.count():
             return ', '.join([value.label for value in self.status_types.all()])
         else:
-            return "{}".format(self.pk)
+            return f"{self.pk}"
 
     def clean(self):
         if hasattr(self, 'topology') and self.topology is not None:
