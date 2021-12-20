@@ -39,6 +39,16 @@ class StatusTest(TestCase):
 
 
 class MorphologyTest(TestCase):
+
+    def test_str(self):
+        morpho1 = factories.MorphologyFactory.create()
+        morpho2 = factories.MorphologyFactory.create(
+            main_flow=factories.FlowTypeFactory.create(label="Plat"),
+            full_edge_width=15.0,
+        )
+        self.assertEqual(str(morpho1), "- / 0.0")
+        self.assertEqual(str(morpho2), "Plat / 15.0")
+
     def test_planlayout_str(self):
         plan_layout_type = factories.PlanLayoutTypeFactory.create()
         self.assertEqual(str(plan_layout_type), "Plan layout type 0")
