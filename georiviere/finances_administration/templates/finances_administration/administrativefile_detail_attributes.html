@@ -99,7 +99,7 @@
                       <button class="btn btn-sm btn-outline-primary" type="button"
                               data-toggle="collapse" data-target="#detailCosts{{ operation.pk }}"
                               aria-expanded="false" aria-controls="detailCosts{{ operation.pk }}">
-                        Costs details
+			      {% trans "Costs details" %}
                       </button>
                     <div class="collapse" id="detailCosts{{ operation.pk }}"><small>
                         {% trans "Material cost" %} &rightarrow; {{ operation.material_cost }}&nbsp;&euro;<br>

@@ -111,6 +111,9 @@ msgstr "Ajouter un dossier administratif"
 msgid "Status"
 msgstr "Statut"
 
+msgid "Costs details"
+msgstr "Détail des coûts"
+
 msgid "Estimated cost"
 msgstr "Coût estimé"
 
