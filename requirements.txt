@@ -75,7 +75,7 @@ datetime==4.3
     # via appy
 defusedxml==0.7.1
     # via cairosvg
-django==3.1.13
+django==3.1.14
     # via
     #   -r requirements.in
     #   django-appconf
@@ -202,7 +202,7 @@ kombu==5.0.2
     # via celery
 landez==2.5.0
     # via geotrek
-lxml==4.6.4
+lxml==4.7.1
     # via mapentity
 mapentity==7.0.5
     # via
@@ -230,7 +230,7 @@ persistent==4.7.0
     # via
     #   btrees
     #   zodb
-pillow==8.1.0
+pillow==8.4.0
     # via
     #   cairosvg
     #   easy-thumbnails

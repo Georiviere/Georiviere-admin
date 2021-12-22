@@ -89,7 +89,7 @@ ENV GUNICORN_CMD_ARGS "--workers 1 --timeout 3600 --bind 0.0.0.0:8000 --timeout 
 USER root
 
 RUN apt-get update -qq && \
-    apt-get full-upgrade && \
+    apt-get full-upgrade -y -qq && \
     apt-get clean all && rm -rf /var/lib/apt/lists/* && rm -rf /var/cache/apt/*
 
 COPY --chown=django:django --from=build /opt/venv /opt/venv
