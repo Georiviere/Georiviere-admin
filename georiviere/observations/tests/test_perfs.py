@@ -4,7 +4,7 @@ from georiviere.observations.models import Parameter, ParameterTracking
 from . import factories
 
 
-class PerformanceTest(TestCase):
+class ParametersTest(TestCase):
 
     @classmethod
     def setUpTestData(cls):
