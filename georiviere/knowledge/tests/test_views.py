@@ -139,9 +139,6 @@ class KnowledgeViewTestCase(CommonRiverTest):
         self.login()
         self.modelfactory.create_batch(100)
 
-        with self.assertNumQueries(30):
-            self.client.get(self.model.get_list_url())
-
         with self.assertNumQueries(6):
             self.client.get(self.model.get_jsonlist_url())
 
@@ -153,7 +150,7 @@ class KnowledgeViewTestCase(CommonRiverTest):
         self.login()
         station = self.modelfactory.create()
 
-        with self.assertNumQueries(41):
+        with self.assertNumQueries(43):
             self.client.get(station.get_detail_url())
 
 
@@ -207,9 +204,6 @@ class FollowUpViewsTest(CommonRiverTest):
         self.login()
         self.modelfactory.create_batch(100)
 
-        with self.assertNumQueries(32):
-            self.client.get(self.model.get_list_url())
-
         with self.assertNumQueries(6):
             self.client.get(self.model.get_jsonlist_url())
 
@@ -221,5 +215,5 @@ class FollowUpViewsTest(CommonRiverTest):
         self.login()
         station = self.modelfactory.create()
 
-        with self.assertNumQueries(41):
+        with self.assertNumQueries(43):
             self.client.get(station.get_detail_url())

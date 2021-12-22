@@ -86,9 +86,6 @@ class StationViewTestCase(CommonRiverTest):
         self.login()
         self.modelfactory.create_batch(100)
 
-        with self.assertNumQueries(31):
-            self.client.get(self.model.get_list_url())
-
         with self.assertNumQueries(7):
             self.client.get(self.model.get_jsonlist_url())
 
@@ -100,5 +97,5 @@ class StationViewTestCase(CommonRiverTest):
         self.login()
         station = self.modelfactory.create()
 
-        with self.assertNumQueries(47):
+        with self.assertNumQueries(49):
             self.client.get(station.get_detail_url())
