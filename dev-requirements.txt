@@ -121,7 +121,7 @@ defusedxml==0.7.1
     # via
     #   -r requirements.txt
     #   cairosvg
-django==3.1.13
+django==3.1.14
     # via
     #   -r requirements.txt
     #   django-appconf
@@ -331,7 +331,7 @@ landez==2.5.0
     # via
     #   -r requirements.txt
     #   geotrek
-lxml==4.6.4
+lxml==4.7.1
     # via
     #   -r requirements.txt
     #   mapentity
@@ -381,7 +381,7 @@ persistent==4.7.0
     #   -r requirements.txt
     #   btrees
     #   zodb
-pillow==8.1.0
+pillow==8.4.0
     # via
     #   -r requirements.txt
     #   cairosvg
