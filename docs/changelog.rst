@@ -2,10 +2,23 @@
 CHANGELOG
 =========
 
-0.9.7+dev    (XXXX-XX-XX)
+0.9.7    (2021-12-23)
 -------------------------
 
-* …
+**Enhancement**
+
+* Change module order
+* Add help text for multiselect
+
+**Bug fixes**
+
+* Fix logo header for PDF
+* Fix man-days and costs display
+* Fix translations
+
+**Dependencies**
+
+* Update to django-mapentity 7.0.5 and Geotrek 2.74.1
 
 
 0.9.6    (2021-12-XX)
