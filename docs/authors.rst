@@ -28,3 +28,4 @@ Icons
 * Finance & administration : report from [SVG Repo](https://www.svgrepo.com/svg/58321/report) - CC0
 * Studies : research from [SVG Repo](https://www.svgrepo.com/svg/109479/research)
 * Description : Makina Corpus, derivated from [SVG Repo](https://www.svgrepo.com/svg/258092/route-start) - CC0
+* Scissors from [SVG Repo](https://www.svgrepo.com/svg/82088/opened-scissors)

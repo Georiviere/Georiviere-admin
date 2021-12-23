@@ -21,15 +21,15 @@ urlpatterns = [
     path('', include('georiviere.main.urls'), ),
     path('', include('mapentity.urls'),),
     path('', include('georiviere.river.urls')),
+    path('', include('geotrek.zoning.urls')),
     path('', include('georiviere.description.urls')),
     path('', include('georiviere.knowledge.urls')),
+    path('', include('georiviere.maintenance.urls')),
     path('', include('georiviere.observations.urls')),
-    path('', include('georiviere.studies.urls')),
-    path('', include('geotrek.zoning.urls')),
     path('', include('georiviere.watershed.urls')),
     path('', include('georiviere.finances_administration.urls')),
+    path('', include('georiviere.studies.urls')),
     path('', include('georiviere.proceeding.urls')),
-    path('', include('georiviere.maintenance.urls')),
 ]
 
 if settings.DEBUG:

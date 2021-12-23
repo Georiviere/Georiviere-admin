@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-08-03 11:14+0000\n"
+"POT-Creation-Date: 2021-12-22 13:39+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -22,6 +22,9 @@ msgid "Maintenance"
 msgstr ""
 
 msgid "Name"
+msgstr ""
+
+msgid "Knowledge"
 msgstr ""
 
 msgid "Date"
@@ -45,6 +48,9 @@ msgstr ""
 msgid "Remarks and notes"
 msgstr ""
 
+msgid "Length"
+msgstr ""
+
 msgid "Width"
 msgstr ""
 
@@ -64,6 +70,9 @@ msgid "Add a new intervention"
 msgstr ""
 
 msgid "On"
+msgstr ""
+
+msgid "Label"
 msgstr ""
 
 msgid "Display order"
@@ -87,9 +96,6 @@ msgstr ""
 msgid "Intervention's stakes"
 msgstr ""
 
-msgid "Disorder"
-msgstr ""
-
 msgid "Intervention's disorder"
 msgstr ""
 
@@ -97,4 +103,7 @@ msgid "Intervention's disorders"
 msgstr ""
 
 msgid "Target"
+msgstr ""
+
+msgid "Related interventions"
 msgstr ""
