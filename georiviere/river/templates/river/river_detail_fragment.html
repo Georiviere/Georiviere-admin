@@ -11,7 +11,9 @@
             {% if object.topology %}
             <a href="{{ object.topology.stream.get_detail_url }}">{{ object.topology.stream.name }}</a>
             {% else %}
-            {% valuelist object.streams field='name' %}
+            {% for s in object.streams %}
+                {{ s.name_display|safe }}({{ s.distance_to_source }})
+            {% endfor %}
             {% endif %}
 
         </td>

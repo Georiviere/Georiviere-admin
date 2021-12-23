@@ -13,8 +13,13 @@
                 <i class="bi bi-plus-circle-fill"></i> {% trans "Add a new knowledge" %}</a>
             </p>
             {% endif %}
-
-            {% valuelist object.knowledges field='name' %}
+            {% if modelname == 'stream' %}
+                {% for s in object.knowledges %}
+                    {{ s.name_display|safe }}({{ object.distance_to_source }})
+                {% endfor %}
+            {% else %}
+                {% valuelist object.knowledges field='name' %}
+            {% endif %}
         </td>
     </tr>
 </table>
