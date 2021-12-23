@@ -2,6 +2,12 @@
 CHANGELOG
 =========
 
+1.0.0+dev    (XXXX-XX-XX)
+-------------------------
+
+* …
+
+
 0.9.7    (2021-12-23)
 -------------------------
 
@@ -21,7 +27,7 @@ CHANGELOG
 * Update to django-mapentity 7.0.5 and Geotrek 2.74.1
 
 
-0.9.6    (2021-12-XX)
+0.9.6    (2021-12-09)
 -------------------------
 
 * Use mapentity standalone release
