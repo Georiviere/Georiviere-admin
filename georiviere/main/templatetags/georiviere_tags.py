@@ -29,8 +29,8 @@ def valuelist_source(items, field=None, enumeration=False):
     valuelist = []
     for i, item in enumerate(itemslist):
         distance_to_source = None
-        if hasattr(i, 'distance_to_source'):
-            distance_to_source = 42
+        if hasattr(item, 'distance_to_source'):
+            distance_to_source = item.distance_to_source
         valuelist.append({
             'enumeration': letters[i] if enumeration else False,
             'pk': getattr(items[i], 'pk', None),

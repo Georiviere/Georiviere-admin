@@ -11,6 +11,7 @@ class ValueListTest(TestCase):
     def setUpClass(cls):
         super().setUpClass()
         translation.deactivate()
+        cls.obj = StreamFactory(name='blah')
 
     def test_empty_list_should_show_none(self):
         out = Template(
@@ -31,16 +32,26 @@ class ValueListTest(TestCase):
         self.assertHTMLEqual(out.strip(), """<ul><li>blah</li></ul>""")
 
     def test_can_specify_field_to_be_used(self):
-        obj = StreamFactory(name='blah')
         out = Template(
             '{% load georiviere_tags %}'
             '{% valuelist_source items field="name" %}'
         ).render(Context({
-            'items': [obj]
+            'items': [self.obj]
         }))
         self.assertHTMLEqual(out.strip(), """<ul>
         <li class="hoverable" data-modelname="stream" data-pk="1">
         <a data-pk="1" href="/stream/1/" title="blah">blah</a></li>
+        </ul>""")
+
+    def test_obj_with_distance_to_source(self):
+        out = Template(
+            '{% load georiviere_tags %}'
+            '{% valuelist_source items %}'
+        ).render(Context({
+            'items': [self.obj]
+        }))
+        self.assertHTMLEqual(out.strip(), """<ul>
+        <li class="hoverable" data-modelname="stream" data-pk="1">blah (42m)</li>
         </ul>""")
 
     def test_can_specify_an_enumeration4(self):
