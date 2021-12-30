@@ -28,11 +28,14 @@ def valuelist_source(items, field=None, enumeration=False):
 
     valuelist = []
     for i, item in enumerate(itemslist):
+        distance_to_source = None
+        if hasattr(i, 'distance_to_source'):
+            distance_to_source = 42
         valuelist.append({
             'enumeration': letters[i] if enumeration else False,
             'pk': getattr(items[i], 'pk', None),
             'text': item,
-            'distance_to_source': 42,
+            'distance_to_source': distance_to_source,
         })
 
     modelname = None
