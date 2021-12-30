@@ -1,4 +1,4 @@
-{% load i18n mapentity_tags %}
+{% load i18n mapentity_tags georiviere_tags %}
 
 {% if modelname != "knowledge" and modelname != "followup" %}
 <h3>{% trans "Knowledge" %}</h3>
@@ -14,9 +14,7 @@
             </p>
             {% endif %}
             {% if modelname == 'stream' %}
-                {% for s in object.knowledges %}
-                    {{ s.name_display|safe }}({{ object.distance_to_source }})
-                {% endfor %}
+                {% valuelist_source object.knowledges field='name' %}
             {% else %}
                 {% valuelist object.knowledges field='name' %}
             {% endif %}
