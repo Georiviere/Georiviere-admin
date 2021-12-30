@@ -37,9 +37,9 @@ class ValueListTest(TestCase):
         ).render(Context({
             'items': [self.obj]
         }))
-        self.assertHTMLEqual(out.strip(), """<ul>
-        <li class="hoverable" data-modelname="stream" data-pk="1">
-        <a data-pk="1" href="/stream/1/" title="blah">blah</a></li>
+        self.assertHTMLEqual(out.strip(), f"""<ul>
+        <li class="hoverable" data-modelname="stream" data-pk="{self.obj.pk}">
+        <a data-pk="{self.obj.pk}" href="/stream/{self.obj.pk}/" title="{self.obj.name}">blah</a></li>
         </ul>""")
 
     def test_obj_with_distance_to_source(self):
@@ -49,8 +49,8 @@ class ValueListTest(TestCase):
         ).render(Context({
             'items': [self.obj]
         }))
-        self.assertHTMLEqual(out.strip(), """<ul>
-        <li class="hoverable" data-modelname="stream" data-pk="1">blah (42m)</li>
+        self.assertHTMLEqual(out.strip(), f"""<ul>
+        <li class="hoverable" data-modelname="stream" data-pk="{self.obj.pk}">{self.obj.name} (42m)</li>
         </ul>""")
 
     def test_can_specify_an_enumeration4(self):
