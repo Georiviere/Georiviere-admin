@@ -30,18 +30,6 @@ class ValueListTest(TestCase):
         }))
         self.assertHTMLEqual(out.strip(), """<ul><li>blah</li></ul>""")
 
-    def test_can_specify_field_to_be_used(self):
-        out = Template(
-            '{% load georiviere_tags %}'
-            '{% valuelist_source items field="name" %}'
-        ).render(Context({
-            'items': [self.obj]
-        }))
-        self.assertHTMLEqual(out.strip(), f"""<ul>
-        <li class="hoverable" data-modelname="stream" data-pk="{self.obj.pk}">
-        <a data-pk="{self.obj.pk}" href="/stream/{self.obj.pk}/" title="{self.obj.name}">blah</a></li>
-        </ul>""")
-
     def test_obj_with_distance_to_source(self):
         out = Template(
             '{% load georiviere_tags %}'

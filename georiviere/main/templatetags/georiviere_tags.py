@@ -17,32 +17,29 @@ def valuelist_source(items, field=None, enumeration=False):
         https://github.com/makinacorpus/Geotrek/issues/214
         https://github.com/makinacorpus/Geotrek/issues/871
     """
-    if field:
-        def display(v):
-            return getattr(v, '%s_display' % field, getattr(v, field))
-        itemslist = [display(v) for v in items]
-    else:
-        itemslist = items
-
     letters = alphabet_enumeration(len(items))
-
-    valuelist = []
-    for i, item in enumerate(itemslist):
-        distance_to_source = None
-        if hasattr(item, 'distance_to_source'):
-            distance_to_source = item.distance_to_source
-        valuelist.append({
-            'enumeration': letters[i] if enumeration else False,
-            'pk': getattr(items[i], 'pk', None),
-            'text': item,
-            'distance_to_source': distance_to_source,
-        })
 
     modelname = None
     if len(items) > 0:
         oneitem = items[0]
         if hasattr(oneitem, '_meta'):
             modelname = oneitem._meta.object_name.lower()
+
+    valuelist = []
+    for i, item in enumerate(items):
+        distance_to_source = None
+        if field:
+            text = getattr(item, '%s_display' % field, getattr(item, field))
+        else:
+            text = item
+        if modelname == 'stream':
+            distance_to_source = item.distance_to_source
+        valuelist.append({
+            'enumeration': letters[i] if enumeration else False,
+            'pk': getattr(items[i], 'pk', None),
+            'text': text,
+            'distance_to_source': distance_to_source,
+        })
 
     return {
         'valuelist': valuelist,
