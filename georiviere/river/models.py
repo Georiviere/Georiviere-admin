@@ -40,7 +40,7 @@ class Stream(AddPropertyBufferMixin, TimeStampedModelMixin, WatershedPropertiesM
     geom = models.LineStringField(srid=settings.SRID, spatial_index=True)
 
     source_location = models.PointField(verbose_name=_("Source location"),
-                                        srid=settings.SRID, spatial_index=False,
+                                        srid=settings.SRID,
                                         blank=True, null=True)
 
     class Meta:
