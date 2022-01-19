@@ -36,6 +36,20 @@ class ValueListTest(TestCase):
         <li class="hoverable" data-modelname="knowledge" data-pk="{self.knowledge.pk}">{self.knowledge.name} (42m)</li>
         </ul>""")
 
+    def test_obj_list_with_distance_to_source_related_to_stream_with_field(self):
+        out = Template(
+            '{% load georiviere_tags %}'
+            '{% valuelist_source items stream name %}'
+        ).render(Context({
+            'stream': self.stream,
+            'items': [self.knowledge]
+        }))
+        self.assertHTMLEqual(out.strip(), f"""<ul>
+        <li class="hoverable" data-modelname="knowledge" data-pk="{self.knowledge.pk}">
+        <a data-pk="{self.knowledge.pk}" href="/knowledge/{self.knowledge.pk}/" title="{self.knowledge.name}">
+        {self.knowledge.name}</a> (42m)</li>
+        </ul>""")
+
     def test_stream_list_with_distance_to_source_related_to_object(self):
         out = Template(
             '{% load georiviere_tags %}'

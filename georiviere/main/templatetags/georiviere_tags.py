@@ -5,7 +5,7 @@ register = template.Library()
 
 
 @register.inclusion_tag('main/_detail_valuelist_source_fragment.html')
-def valuelist_source(items, object=None, field=None, enumeration=False):
+def valuelist_source(items, stream, field=None, enumeration=False):
     """
     Common template tag to show a list of values in detail pages.
 
@@ -31,13 +31,7 @@ def valuelist_source(items, object=None, field=None, enumeration=False):
             text = getattr(item, '%s_display' % field, getattr(item, field))
         else:
             text = item
-        if object:
-            if modelname == 'stream':
-                distance_to_source = item.distance_to_source
-            else:
-                distance_to_source = object.distance_to_source
-        else:
-            distance_to_source = None
+        distance_to_source = stream.distance_to_source
         valuelist.append({
             'enumeration': letters[i] if enumeration else False,
             'pk': getattr(items[i], 'pk', None),

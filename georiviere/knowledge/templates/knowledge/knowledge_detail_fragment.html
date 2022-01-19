@@ -14,7 +14,7 @@
             </p>
             {% endif %}
             {% if modelname == 'stream' %}
-                {% valuelist_source object.knowledges field='name' %}
+                {% valuelist_source object.knowledges object field='name' %}
             {% else %}
                 {% valuelist object.knowledges field='name' %}
             {% endif %}
