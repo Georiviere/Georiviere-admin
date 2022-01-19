@@ -2,6 +2,7 @@ from django.conf import settings
 from django.contrib.gis.geos import Point, LineString
 from django.test import TestCase
 
+from georiviere.finances_administration.tests.factories import AdministrativeFileFactory
 from georiviere.description.tests.factories import MorphologyFactory, StatusFactory, UsageFactory
 from georiviere.river.models import Stream
 from georiviere.river.tests.factories import TopologyFactory, StreamFactory
@@ -31,6 +32,7 @@ class StreamSourceLocationTest(TestCase):
         cls.usage_point = UsageFactory.create(
             geom=Point(10000, 10020)
         )
+        cls.administrative_file = AdministrativeFileFactory.create()
 
     def test_source_location_default(self):
         """Test if source_location is set on save()"""
@@ -47,6 +49,7 @@ class StreamSourceLocationTest(TestCase):
     def test_distance_to_source(self):
         """Test distance from a given object to stream source according to differents geom"""
         self.assertAlmostEqual(self.stream1.distance_to_source(self.usage_point), 20)
+        self.assertEqual(self.stream1.distance_to_source(self.administrative_file), None)
 
 
 class SnapTest(TestCase):
