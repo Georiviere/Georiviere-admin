@@ -31,7 +31,7 @@ def valuelist_source(items, stream, field=None, enumeration=False):
             text = getattr(item, '%s_display' % field, getattr(item, field))
         else:
             text = item
-        distance_to_source = stream.distance_to_source
+        distance_to_source = stream.distance_to_source(item)
         valuelist.append({
             'enumeration': letters[i] if enumeration else False,
             'pk': getattr(items[i], 'pk', None),
@@ -46,13 +46,13 @@ def valuelist_source(items, stream, field=None, enumeration=False):
 
 
 @register.inclusion_tag('main/_detail_valuelist_streams_fragment.html')
-def valuelist_streams(streams, object):
+def valuelist_streams(streams, element):
     """
     Template tag to show a list of stream with object distance to source in detail pages.
     """
     valuelist = []
     for stream in streams:
-        distance_to_source = stream.distance_to_source
+        distance_to_source = stream.distance_to_source(element)
         valuelist.append({
             'pk': stream.pk,
             'text': stream.name_display,

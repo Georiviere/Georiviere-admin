@@ -97,9 +97,11 @@ class Stream(AddPropertyBufferMixin, TimeStampedModelMixin, WatershedPropertiesM
         return self._meta.model.objects.filter(pk=self.pk).annotate(
             closest_point=ClosestPoint('geom', point)).first().closest_point
 
-    @property
-    def distance_to_source(self):
-        return 42
+    def distance_to_source(self, element):
+        """Returns distance from element to stream source"""
+        if hasattr(element, 'geom'):
+            return self.source_location.distance(element.geom)
+        return None
 
 
 class Topology(models.Model):

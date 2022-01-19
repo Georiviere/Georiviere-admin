@@ -33,7 +33,8 @@ class ValueListTest(TestCase):
             'items': [self.knowledge]
         }))
         self.assertHTMLEqual(out.strip(), f"""<ul>
-        <li class="hoverable" data-modelname="knowledge" data-pk="{self.knowledge.pk}">{self.knowledge.name} (42m)</li>
+        <li class="hoverable" data-modelname="knowledge" data-pk="{self.knowledge.pk}">{self.knowledge.name}
+        ({self.stream.distance_to_source(self.knowledge)}m)</li>
         </ul>""")
 
     def test_obj_list_with_distance_to_source_related_to_stream_with_field(self):
@@ -47,7 +48,8 @@ class ValueListTest(TestCase):
         self.assertHTMLEqual(out.strip(), f"""<ul>
         <li class="hoverable" data-modelname="knowledge" data-pk="{self.knowledge.pk}">
         <a data-pk="{self.knowledge.pk}" href="/knowledge/{self.knowledge.pk}/" title="{self.knowledge.name}">
-        {self.knowledge.name}</a> (42m)</li>
+        {self.knowledge.name}</a>
+        ({self.stream.distance_to_source(self.knowledge)}m)</li>
         </ul>""")
 
     def test_stream_list_with_distance_to_source_related_to_object(self):
@@ -61,5 +63,6 @@ class ValueListTest(TestCase):
         self.assertHTMLEqual(out.strip(), f"""<ul>
         <li class="hoverable" data-modelname="stream" data-pk="{self.stream.pk}">
         <a data-pk="{self.stream.pk}" href="/stream/{self.stream.pk}/" title="{self.stream.name}">
-        {self.stream.name}</a> (42m)</li>
+        {self.stream.name}</a>
+        ({self.stream.distance_to_source(self.knowledge)}m)</li>
         </ul>""")
