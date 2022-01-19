@@ -39,7 +39,7 @@ class ValueListTest(TestCase):
     def test_obj_list_with_distance_to_source_related_to_stream_with_field(self):
         out = Template(
             '{% load georiviere_tags %}'
-            '{% valuelist_source items stream name %}'
+            '{% valuelist_source items stream "name" %}'
         ).render(Context({
             'stream': self.stream,
             'items': [self.knowledge]
