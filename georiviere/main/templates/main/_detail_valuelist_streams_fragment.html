@@ -3,7 +3,7 @@
     {% if forloop.first %}<ul>{% endif %}
     <li{% if modelname and v.pk %} class="hoverable" data-modelname="{{ modelname }}" data-pk="{{ v.pk }}"{% endif %}>
         {{ v.text|safe }}
-        {% if v.distance_to_source %} ({{ v.distance_to_source|floatformat }}m){% endif %}
+        {% if v.distance_to_source %} ({{ v.distance_to_source|floatformat }} m){% endif %}
     </li>
     {% if forloop.last %}</ul>{% endif %}
 {% empty %}
