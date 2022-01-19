@@ -1,3 +1,4 @@
+from unittest import mock
 from django.template import Template, Context
 from django.test import TestCase
 from django.utils import translation
@@ -13,6 +14,13 @@ class ValueListTest(TestCase):
         translation.deactivate()
         cls.stream = StreamFactory(name='A river')
         cls.knowledge = KnowledgeFactory(name='A bridge')
+        cls.mock_distance_to_source_patcher = mock.patch('georiviere.river.models.Stream.distance_to_source')
+        cls.mock_distance_to_source = cls.mock_distance_to_source_patcher.start()
+        cls.mock_distance_to_source.return_value = 42.63
+
+    @classmethod
+    def teardown_class(cls):
+        cls.mock_distance_to_source_patcher.stop()
 
     def test_empty_list_should_show_none(self):
         out = Template(
@@ -34,7 +42,7 @@ class ValueListTest(TestCase):
         }))
         self.assertHTMLEqual(out.strip(), f"""<ul>
         <li class="hoverable" data-modelname="knowledge" data-pk="{self.knowledge.pk}">{self.knowledge.name}
-        ({self.stream.distance_to_source(self.knowledge)}m)</li>
+        (42.6m)</li>
         </ul>""")
 
     def test_obj_list_with_distance_to_source_related_to_stream_with_field(self):
@@ -49,7 +57,7 @@ class ValueListTest(TestCase):
         <li class="hoverable" data-modelname="knowledge" data-pk="{self.knowledge.pk}">
         <a data-pk="{self.knowledge.pk}" href="/knowledge/{self.knowledge.pk}/" title="{self.knowledge.name}">
         {self.knowledge.name}</a>
-        ({self.stream.distance_to_source(self.knowledge)}m)</li>
+        (42.6m)</li>
         </ul>""")
 
     def test_stream_list_with_distance_to_source_related_to_object(self):
@@ -64,5 +72,5 @@ class ValueListTest(TestCase):
         <li class="hoverable" data-modelname="stream" data-pk="{self.stream.pk}">
         <a data-pk="{self.stream.pk}" href="/stream/{self.stream.pk}/" title="{self.stream.name}">
         {self.stream.name}</a>
-        ({self.stream.distance_to_source(self.knowledge)}m)</li>
+        (42.6m)</li>
         </ul>""")
