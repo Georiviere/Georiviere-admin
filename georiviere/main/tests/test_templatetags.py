@@ -37,7 +37,7 @@ class ValueListTest(TestCase):
         }))
         self.assertHTMLEqual(out.strip(), f"""<ul>
         <li class="hoverable" data-modelname="knowledge" data-pk="{self.knowledge.pk}">{self.knowledge.name}
-        (42.6 m)</li>
+        (42.6&nbsp;m)</li>
         </ul>""")
 
     @mock.patch('georiviere.river.models.Stream.distance_to_source')
@@ -54,7 +54,7 @@ class ValueListTest(TestCase):
         <li class="hoverable" data-modelname="knowledge" data-pk="{self.knowledge.pk}">
         <a data-pk="{self.knowledge.pk}" href="/knowledge/{self.knowledge.pk}/" title="{self.knowledge.name}">
         {self.knowledge.name}</a>
-        (42.6 m)</li>
+        (42.6&nbsp;m)</li>
         </ul>""")
 
     @mock.patch('georiviere.river.models.Stream.distance_to_source')
@@ -71,5 +71,5 @@ class ValueListTest(TestCase):
         <li class="hoverable" data-modelname="stream" data-pk="{self.stream.pk}">
         <a data-pk="{self.stream.pk}" href="/stream/{self.stream.pk}/" title="{self.stream.name}">
         {self.stream.name}</a>
-        (42.6 m)</li>
+        (42.6&nbsp;m)</li>
         </ul>""")
