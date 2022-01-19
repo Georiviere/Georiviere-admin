@@ -1,4 +1,4 @@
-{% load i18n mapentity_tags %}
+{% load i18n mapentity_tags georiviere_tags %}
 
 {% if modelname != "station" %}
 <h3>{% trans "Stations" %}</h3>
@@ -14,7 +14,11 @@
             </p>
             {% endif %}
 
-            {% valuelist object.stations field='label' %}
+            {% if modelname == 'stream' %}
+                {% valuelist_source object.stations object field='label' %}
+            {% else %}
+                {% valuelist object.stations field='label' %}
+            {% endif %}
         </td>
     </tr>
 </table>

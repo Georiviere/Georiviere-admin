@@ -1,4 +1,4 @@
-{% load i18n mapentity_tags %}
+{% load i18n mapentity_tags georiviere_tags %}
 
 {% if modelname != "proceeding" %}
 
@@ -15,7 +15,11 @@
             </p>
             {% endif %}
 
-            {% valuelist object.proceedings field='name' %}
+            {% if modelname == 'stream' %}
+                {% valuelist_source object.proceedings object field='name' %}
+            {% else %}
+                {% valuelist object.proceedings field='name' %}
+            {% endif %}
         </td>
     </tr>
 </table>
