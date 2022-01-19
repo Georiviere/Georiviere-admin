@@ -49,3 +49,23 @@ def valuelist_source(items, object=None, field=None, enumeration=False):
         'valuelist': valuelist,
         'modelname': modelname
     }
+
+
+@register.inclusion_tag('main/_detail_valuelist_streams_fragment.html')
+def valuelist_streams(streams, object):
+    """
+    Template tag to show a list of stream with object distance to source in detail pages.
+    """
+    valuelist = []
+    for stream in streams:
+        distance_to_source = stream.distance_to_source
+        valuelist.append({
+            'pk': stream.pk,
+            'text': stream.name_display,
+            'distance_to_source': distance_to_source,
+        })
+
+    return {
+        'valuelist': valuelist,
+        'modelname': 'stream'
+    }
