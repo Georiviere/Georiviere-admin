@@ -7,15 +7,8 @@ register = template.Library()
 @register.inclusion_tag('main/_detail_valuelist_source_fragment.html')
 def valuelist_source(items, stream, field=None, enumeration=False):
     """
-    Common template tag to show a list of values in detail pages.
-
-    :param field: Use this attribute on each item instead of their unicode representation
-    :param enumeration: Show enumerations, useful to match those shown by ``mapentity/leaflet.enumeration.js``
-
-    See https://github.com/makinacorpus/django-mapentity/issues/35
-        https://github.com/makinacorpus/Geotrek/issues/960
-        https://github.com/makinacorpus/Geotrek/issues/214
-        https://github.com/makinacorpus/Geotrek/issues/871
+    Template tag to show a list of values in detail pages,
+    with distance to stream source
     """
     letters = alphabet_enumeration(len(items))
 
