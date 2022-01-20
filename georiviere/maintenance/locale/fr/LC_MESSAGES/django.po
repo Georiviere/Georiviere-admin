@@ -71,7 +71,7 @@ msgid "Interventions"
 msgstr "Interventions"
 
 msgid "Add a new intervention"
-msgstr "Ajouter une Intervention"
+msgstr "Ajouter une intervention"
 
 msgid "On"
 msgstr "Sur"
