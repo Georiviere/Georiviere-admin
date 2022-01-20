@@ -1,4 +1,4 @@
-{% load i18n mapentity_tags %}
+{% load i18n mapentity_tags georiviere_tags %}
 <h3>{% trans "Description" %}</h3>
 <table class="table">
     {% if modelname != "land" %}
@@ -13,7 +13,11 @@
             </p>
             {% endif %}
 
-            {% valuelist object.lands field='name' %}
+            {% if modelname == 'stream' %}
+                {% valuelist_source object.lands object field='name' %}
+            {% else %}
+                {% valuelist object.lands field='name' %}
+            {% endif %}
         </td>
     </tr>
     {% endif %}
@@ -30,7 +34,11 @@
             </p>
             {% endif %}
 
-            {% valuelist object.usages field='usage_types' %}
+            {% if modelname == 'stream' %}
+                {% valuelist_source object.usages object field='usage_types' %}
+            {% else %}
+                {% valuelist object.usages field='usage_types' %}
+            {% endif %}
         </td>
     </tr>
     {% endif %}

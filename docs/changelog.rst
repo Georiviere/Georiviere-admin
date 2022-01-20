@@ -5,7 +5,9 @@ CHANGELOG
 1.0.0+dev    (XXXX-XX-XX)
 -------------------------
 
-* …
+**Features**
+
+* Display distance from object to stream source
 
 
 0.9.7    (2021-12-23)

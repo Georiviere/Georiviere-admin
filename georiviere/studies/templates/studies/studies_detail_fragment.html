@@ -1,4 +1,4 @@
-{% load i18n mapentity_tags %}
+{% load i18n mapentity_tags georiviere_tags %}
 
 {% if modelname != "study" %}
 
@@ -15,7 +15,11 @@
             </p>
             {% endif %}
 
-            {% valuelist object.studies field='title' %}
+            {% if modelname == 'stream' %}
+                {% valuelist_source object.studies object field='title' %}
+            {% else %}
+                {% valuelist object.studies field='title' %}
+            {% endif %}
         </td>
     </tr>
 </table>

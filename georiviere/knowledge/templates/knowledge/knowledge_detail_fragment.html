@@ -1,4 +1,4 @@
-{% load i18n mapentity_tags %}
+{% load i18n mapentity_tags georiviere_tags %}
 
 {% if modelname != "knowledge" and modelname != "followup" %}
 <h3>{% trans "Knowledge" %}</h3>
@@ -13,8 +13,11 @@
                 <i class="bi bi-plus-circle-fill"></i> {% trans "Add a new knowledge" %}</a>
             </p>
             {% endif %}
-
-            {% valuelist object.knowledges field='name' %}
+            {% if modelname == 'stream' %}
+                {% valuelist_source object.knowledges object field='name' %}
+            {% else %}
+                {% valuelist object.knowledges field='name' %}
+            {% endif %}
         </td>
     </tr>
 </table>

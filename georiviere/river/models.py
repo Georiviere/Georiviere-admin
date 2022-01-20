@@ -1,6 +1,6 @@
 from django.conf import settings
 from django.contrib.gis.db import models
-from django.contrib.gis.geos import Point
+from django.contrib.gis.geos import GEOSGeometry, Point
 from django.db.models import Q
 from django.utils.translation import gettext_lazy as _
 
@@ -40,7 +40,7 @@ class Stream(AddPropertyBufferMixin, TimeStampedModelMixin, WatershedPropertiesM
     geom = models.LineStringField(srid=settings.SRID, spatial_index=True)
 
     source_location = models.PointField(verbose_name=_("Source location"),
-                                        srid=settings.SRID, spatial_index=False,
+                                        srid=settings.SRID,
                                         blank=True, null=True)
 
     class Meta:
@@ -96,6 +96,12 @@ class Stream(AddPropertyBufferMixin, TimeStampedModelMixin, WatershedPropertiesM
             point.transform(self.geom.srid)
         return self._meta.model.objects.filter(pk=self.pk).annotate(
             closest_point=ClosestPoint('geom', point)).first().closest_point
+
+    def distance_to_source(self, element):
+        """Returns distance from element to stream source"""
+        if hasattr(element, 'geom') and isinstance(element.geom, GEOSGeometry):
+            return self.source_location.distance(element.geom)
+        return None
 
 
 class Topology(models.Model):

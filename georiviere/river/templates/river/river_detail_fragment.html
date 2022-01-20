@@ -1,4 +1,4 @@
-{% load i18n mapentity_tags %}
+{% load i18n mapentity_tags georiviere_tags %}
 
 {% if modelname != "stream" %}
 
@@ -11,7 +11,7 @@
             {% if object.topology %}
             <a href="{{ object.topology.stream.get_detail_url }}">{{ object.topology.stream.name }}</a>
             {% else %}
-            {% valuelist object.streams field='name' %}
+                {% valuelist_streams object.streams object %}
             {% endif %}
 
         </td>
