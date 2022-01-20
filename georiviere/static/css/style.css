@@ -42,3 +42,8 @@
 .details-panel .table.operations th.actual-costs {
     width: 35%;
 }
+
+/* tabbing unwanted in detail panel */
+.details-panel td ul {
+    padding-left: 0;
+}
