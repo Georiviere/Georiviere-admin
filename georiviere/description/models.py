@@ -213,7 +213,8 @@ class Morphology(AddPropertyBufferMixin, TopologyMixin, TimeStampedModelMixin,
 
     @property
     def main_flow_display(self):
-        return f'<a data-pk="{self.pk}" href="{self.get_detail_url()}" >{self.main_flow}</a>'
+        display_name = self.main_flow or _("Not completed")
+        return f'<a data-pk="{self.pk}" href="{self.get_detail_url()}" >{display_name}</a>'
 
     @property
     def main_flow_csv_display(self):
