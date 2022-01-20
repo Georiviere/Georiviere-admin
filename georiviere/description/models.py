@@ -201,9 +201,7 @@ class Morphology(AddPropertyBufferMixin, TopologyMixin, TimeStampedModelMixin,
         verbose_name_plural = _("Morphologies")
 
     def __str__(self):
-        if self.main_flow:
-            return f"{self.main_flow}"
-        return _('None')
+        return f"{self.main_flow}"
 
     @classproperty
     def name_verbose_name(cls):
@@ -219,7 +217,7 @@ class Morphology(AddPropertyBufferMixin, TopologyMixin, TimeStampedModelMixin,
 
     @property
     def main_flow_csv_display(self):
-        return str(self)
+        return self.main_flow
 
     @classmethod
     def get_create_label(cls):
