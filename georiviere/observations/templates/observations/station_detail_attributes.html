@@ -6,7 +6,7 @@
         <tr>
             <th>{{ object|verbose:"code" }}</th>
             <td>{% if object.station_uri %}
-                    <a href="{{ object.station_uri }}">{{ object.code }}</a>
+                    <a target="_blank" href="{{ object.station_uri }}">{{ object.code }}</a>
                 {% else %}
                     {{ object.code }}
                 {% endif %}
