@@ -202,23 +202,23 @@ class Morphology(AddPropertyBufferMixin, TopologyMixin, TimeStampedModelMixin,
 
     def __str__(self):
         if self.main_flow:
-            return f"{self.main_flow} / {self.full_edge_width}"
-        return f"- / {self.full_edge_width}"
+            return f"{self.main_flow}"
+        return _('None')
 
-    @property
-    def name_verbose_name(self):
+    @classproperty
+    def name_verbose_name(cls):
         return _("Name")
 
     @property
     def name(self):
-        return str(self)
+        return self.main_flow_csv_display
 
     @property
-    def name_display(self):
-        return f'<a data-pk="{self.pk}" href="{self.get_detail_url()}" >{str(self)}</a>'
+    def main_flow_display(self):
+        return f'<a data-pk="{self.pk}" href="{self.get_detail_url()}" >{self.main_flow}</a>'
 
     @property
-    def name_csv_display(self):
+    def main_flow_csv_display(self):
         return str(self)
 
     @classmethod
