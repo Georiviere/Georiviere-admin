@@ -19,5 +19,5 @@ $(window).on('entity:map', function (e, data) {
 	});
 	var url = window.SETTINGS.urls['knowledge_layer'];
 	layer.load(url);
-	map.layerscontrol.addOverlay(layer, tr('Knowledge'), tr('Knowledge'));
+	map.layerscontrol.addOverlay(layer, tr('Knowledges'), tr('Knowledges'));
 });

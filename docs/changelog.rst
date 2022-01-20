@@ -9,6 +9,10 @@ CHANGELOG
 
 * Display distance from object to stream source
 
+**Bug fixes**
+
+* Fix translations
+
 
 0.9.7    (2021-12-23)
 -------------------------
