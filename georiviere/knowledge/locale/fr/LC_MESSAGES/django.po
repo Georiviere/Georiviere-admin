@@ -35,7 +35,7 @@ msgid "Vegetation details"
 msgstr "Détails végétation"
 
 msgid "Work details"
-msgstr "Détail l'ouvrage"
+msgstr "Détail de l'ouvrage"
 
 msgid "Label"
 msgstr "Libellé"
