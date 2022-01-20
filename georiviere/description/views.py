@@ -127,7 +127,7 @@ class UsageDelete(mapentity_views.MapEntityDelete):
 class MorphologyList(TopologyListMixin, mapentity_views.MapEntityList):
     model = Morphology
     filterform = MorphologyFilterSet
-    columns = ['id', 'name']
+    columns = ['id', 'main_flow', 'full_edge_width']
 
 
 class MorphologyLayer(mapentity_views.MapEntityLayer):

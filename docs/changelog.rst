@@ -9,6 +9,10 @@ CHANGELOG
 
 * Display distance from object to stream source
 
+**Enhancement**
+
+* Improve morpho display
+
 **Bug fixes**
 
 * Fix translations

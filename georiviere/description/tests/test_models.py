@@ -46,8 +46,11 @@ class MorphologyTest(TestCase):
             main_flow=factories.FlowTypeFactory.create(label="Plat"),
             full_edge_width=15.0,
         )
-        self.assertEqual(str(morpho1), "- / 0.0")
-        self.assertEqual(str(morpho2), "Plat / 15.0")
+        self.assertEqual(str(morpho1), "None")
+        self.assertEqual(str(morpho2), "Plat")
+        self.assertHTMLEqual(
+            morpho2.main_flow_display,
+            f'<a data-pk="{morpho2.pk}" href="/morphology/{morpho2.pk}/">Plat</a>')
 
     def test_planlayout_str(self):
         plan_layout_type = factories.PlanLayoutTypeFactory.create()
