@@ -1,16 +1,18 @@
 {% load static i18n geojson_tags %}
 <script type="text/javascript">
     MapEntity.i18n['Streams'] = "{% trans "Streams" %}";
+    MapEntity.i18n['Cut topology'] = "{% trans "Cut topology" %}";
+    MapEntity.i18n['Click map to place marker, then move it to snap with the topology.'] = "{% trans "Click map to place marker, then move it to snap with the topology." %}";
 
     window.SETTINGS.urls['stream_layer'] = "{% url "river:stream_layer" %}";
 </script>
-<script type="text/javascript" src="{% static "river/js/main.js" %}"></script>
+<script type="text/javascript" src="{% static 'river/js/main.js' %}"></script>
 
 {% if object.topology %}
     <div hidden="true" id="form_topology">
         <form method="POST" action="{% url 'river:cut_topology' %}">
             {% csrf_token %}
-            <p>Topology {{ object.topology }}</p>
+            <p>{% trans 'Topology' %} {{ object.topology }}</p>
             <input type="submit" class="btn btn-danger" value="{% trans 'Cut topology' %}"></input>
             <input type="hidden" id="topology" name="topology" value="{{object.topology.id}}">
             <input type="hidden" id="lat" name="lat">

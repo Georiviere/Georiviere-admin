@@ -106,7 +106,7 @@ L.Control.PointTopology = L.Control.extend({
 L.Handler.PointTopology = L.Draw.Marker.extend({
     initialize: function (map, guidesLayer, options) {
         L.Draw.Marker.prototype.initialize.call(this, map, options);
-        this._helpText = gettext('Click map to place marker, then move it to snap with the topology.');
+        this._helpText = tr('Click map to place marker, then move it to snap with the topology.');
         this._topoMarker = null;
         this._partTopo = null;
         this._guidesLayer = guidesLayer;
