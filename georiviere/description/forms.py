@@ -35,7 +35,10 @@ class LandForm(CommonForm):
 
 class StatusForm(TopologyRiverForm):
     geomfields = ['geom']
-    qualified = forms.BooleanField(required=False)
+    qualified = forms.BooleanField(
+        label=_("Qualified"),
+        required=False,
+    )
 
     class Meta:
         fields = ['status_types', 'qualified', 'geom']
