@@ -16,7 +16,7 @@ class StationList(mapentity_views.MapEntityList):
     queryset = Station.objects\
         .prefetch_related('station_profiles').all()
     filterform = StationFilterSet
-    columns = ['id', 'code', 'label']
+    columns = ['id', 'code', 'label',]
 
 
 class StationLayer(mapentity_views.MapEntityLayer):
