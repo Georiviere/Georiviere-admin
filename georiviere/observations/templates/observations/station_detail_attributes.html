@@ -25,12 +25,6 @@
             <td>{{ object.site_code }}</td>
         </tr>
         <tr>
-            <th>{{ object|verbose:"station_profiles" }}</th>
-            <td>
-                {% valuelist object.station_profiles.all %}
-            </td>
-        </tr>
-        <tr>
             <th>{{ object|verbose:"in_service" }}</th>
             <td>{{ object.in_service|yesno:_("Yes,No,Unknown") }}</td>
         </tr>
@@ -41,14 +35,6 @@
         <tr>
             <th>{{ object|verbose:"description" }}</th>
             <td>{{ object.description }}</td>
-        </tr>
-        <tr>
-            <th>{{ object|verbose:"local_influence" }}</th>
-            <td>{{ object.get_local_influence_display }}</td>
-        </tr>
-        <tr>
-            <th>{{ object|verbose:"hardness" }}</th>
-            <td>{{ object.hardness|default:_("Unknown") }}</td>
         </tr>
 
         {% include "mapentity/trackinfo_fragment.html" %}
