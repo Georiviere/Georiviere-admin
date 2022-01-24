@@ -97,5 +97,5 @@ class StationViewTestCase(CommonRiverTest):
         self.login()
         station = self.modelfactory.create()
 
-        with self.assertNumQueries(49):
+        with self.assertNumQueries(48):
             self.client.get(station.get_detail_url())
