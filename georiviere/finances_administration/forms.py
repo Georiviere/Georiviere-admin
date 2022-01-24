@@ -172,9 +172,9 @@ class AdministrativeFileForm(CommonForm):
                 ),
                 Tab(
                     _('Stakeholders'),
-                    'project_owners',
-                    'project_managers',
-                    'contractors'
+                    Field('project_owners', css_class="chzn-select"),
+                    Field('project_managers', css_class="chzn-select"),
+                    Field('contractors', css_class="chzn-select"),
                 ),
                 Tab(
                     _('Financing'),

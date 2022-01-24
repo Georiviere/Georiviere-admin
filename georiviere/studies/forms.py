@@ -1,3 +1,4 @@
+from crispy_forms.layout import Div, Field
 from geotrek.common.forms import CommonForm
 
 from georiviere.studies.models import Study
@@ -10,6 +11,16 @@ class StudyForm(CommonForm):
 
     geomfields = ['geom']
 
-    class Meta(CommonForm.Meta):
+    fieldslayout = [
+        Div(
+            'title',
+            Field('study_types', css_class="chzn-select"),
+            'year',
+            'study_authors',
+            'description',
+        )
+    ]
+
+    class Meta:
         model = Study
         fields = "__all__"

@@ -3,6 +3,7 @@ from django.utils.translation import gettext_lazy as _
 
 from crispy_forms.helper import FormHelper
 from crispy_forms.layout import Div, Fieldset
+from crispy_forms.bootstrap import AppendedText
 from geotrek.common.forms import CommonForm
 
 from georiviere.knowledge.models import Knowledge, Vegetation, Work, FollowUp
@@ -90,9 +91,9 @@ class FollowUpForm(CommonForm):
             "date",
             "followup_type",
             "knowledge",
-            "length",
-            "width",
-            "height",
+            AppendedText("length", "m"),
+            AppendedText("width", "m"),
+            AppendedText("height", "m"),
             "measure_frequency",
             "description",
         )]

@@ -26,7 +26,7 @@ class StationFactory(django.DjangoModelFactory):
     def station_profiles(obj, create, extracted=None, **kwargs):
         if create:
             if extracted:
-                obj.categories.add(*extracted)
+                obj.station_profiles.add(*extracted)
 
 
 class UnitFactory(django.DjangoModelFactory):

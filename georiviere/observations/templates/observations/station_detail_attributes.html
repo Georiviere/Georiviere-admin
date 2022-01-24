@@ -6,7 +6,7 @@
         <tr>
             <th>{{ object|verbose:"code" }}</th>
             <td>{% if object.station_uri %}
-                    <a href="{{ object.station_uri }}">{{ object.code }}</a>
+                    <a target="_blank" href="{{ object.station_uri }}">{{ object.code }}</a>
                 {% else %}
                     {{ object.code }}
                 {% endif %}
@@ -31,6 +31,7 @@
             </td>
         </tr>
         <tr>
+        <tr>
             <th>{{ object|verbose:"in_service" }}</th>
             <td>{{ object.in_service|yesno:_("Yes,No,Unknown") }}</td>
         </tr>
@@ -41,14 +42,6 @@
         <tr>
             <th>{{ object|verbose:"description" }}</th>
             <td>{{ object.description }}</td>
-        </tr>
-        <tr>
-            <th>{{ object|verbose:"local_influence" }}</th>
-            <td>{{ object.get_local_influence_display }}</td>
-        </tr>
-        <tr>
-            <th>{{ object|verbose:"hardness" }}</th>
-            <td>{{ object.hardness|default:_("Unknown") }}</td>
         </tr>
 
         {% include "mapentity/trackinfo_fragment.html" %}
