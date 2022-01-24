@@ -117,6 +117,7 @@ class Station(TimeStampedModelMixin, WatershedPropertiesMixin, ZoningPropertiesM
         return ', '.join([str(el) for el in self.station_profiles.all()])
 
     def get_parameters_tracked(self):
+        """Returns parameters tracked by the station"""
         return self.parametertracking_set.select_related('parameter__unit').all()
 
     @classmethod

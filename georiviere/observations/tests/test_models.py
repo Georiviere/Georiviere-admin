@@ -1,19 +1,28 @@
 from django.test import TestCase
 
 from . import factories
+from georiviere.observations.models import ParameterTracking
 
 
 class StationTest(TestCase):
 
     @classmethod
     def setUpTestData(cls):
+        cls.station_profile = factories.StationProfileFactory()
         cls.station = factories.StationFactory(
             label="DOUBS A GEVRY",
-            code="06031200"
+            code="06031200",
+            station_profiles=[cls.station_profile]
         )
 
     def test_str(self):
         self.assertEqual(str(self.station), "DOUBS A GEVRY (06031200)")
+
+    def test_local_influence_display(self):
+        self.assertEqual(self.station.local_influence_display, "Unknown")
+
+    def test_station_profiles_display(self):
+        self.assertEqual(self.station.station_profiles_display, str(self.station_profile))
 
 
 class ParameterTest(TestCase):
@@ -77,4 +86,10 @@ class ParameterTest(TestCase):
         self.assertEqual(
             str(self.parameter2),
             "Nutriments"
+        )
+
+    def test_get_station_parameters_tracked(self):
+        self.assertEqual(
+            self.station.get_parameters_tracked().first(),
+            self.parameter_tracking
         )
