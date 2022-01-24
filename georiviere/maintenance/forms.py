@@ -34,7 +34,7 @@ class InterventionForm(autocomplete.FutureModelForm, CommonForm):
             "intervention_status",
             "intervention_type",
             "stake",
-            "disorders",
+            Field('disorders', css_class="chzn-select"),
             "description",
             AppendedText("length", "m"),
             AppendedText("width", "m"),
