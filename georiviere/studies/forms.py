@@ -21,6 +21,6 @@ class StudyForm(CommonForm):
         )
     ]
 
-    class Meta(CommonForm.Meta):
+    class Meta:
         model = Study
-        fields = ['title', 'study_types', 'year', 'study_authors', 'description']
+        fields = "__all__"
