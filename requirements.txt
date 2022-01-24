@@ -180,7 +180,7 @@ geojson==2.5.0
     # via
     #   geotrek
     #   tif2geojson
-geotrek @ git+https://github.com/GeotrekCE/Geotrek-admin.git@2.74.1
+geotrek @ git+https://github.com/GeotrekCE/Geotrek-admin.git@2.75.0
     # via -r requirements.in
 gpxpy==1.5.0
     # via mapentity
@@ -204,7 +204,7 @@ landez==2.5.0
     # via geotrek
 lxml==4.7.1
     # via mapentity
-mapentity==7.0.5
+mapentity==7.0.6
     # via
     #   -r requirements.in
     #   geotrek
