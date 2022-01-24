@@ -1,7 +1,6 @@
 from django.test import TestCase
 
 from . import factories
-from georiviere.observations.models import ParameterTracking
 
 
 class StationTest(TestCase):
