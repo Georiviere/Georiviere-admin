@@ -25,6 +25,13 @@
             <td>{{ object.site_code }}</td>
         </tr>
         <tr>
+            <th>{{ object|verbose:"station_profiles" }}</th>
+            <td>
+                {% valuelist object.station_profiles.all %}
+            </td>
+        </tr>
+        <tr>
+        <tr>
             <th>{{ object|verbose:"in_service" }}</th>
             <td>{{ object.in_service|yesno:_("Yes,No,Unknown") }}</td>
         </tr>
