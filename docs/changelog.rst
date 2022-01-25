@@ -3,10 +3,26 @@ CHANGELOG
 =========
 
 
-1.0.0+dev    (XXXX-XX-XX)
+0.9.9    (2022-01-25)
 -------------------------
 
-* …
+**Enhancement**
+
+* External link to station opened in new window
+* Add unit on distance fields
+* Remove secondary information from station detail
+* Add chosen on some multiselect fields
+
+**Bug fixes**
+
+* Remove unwanted padding on lists
+* Fix filter in service for stations
+* Remove useless restricted area filter, replaced by zoning filter
+
+**Dependencies**
+
+* Update to django-mapentity 7.0.6 and Geotrek 2.75.0
+
 
 0.9.8    (2022-01-20)
 -------------------------
