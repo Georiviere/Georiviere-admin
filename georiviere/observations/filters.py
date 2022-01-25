@@ -23,8 +23,8 @@ class StationFilterSet(WatershedFilterSet, ZoningFilterSet, MapEntityFilterSet):
         queryset=Parameter.objects.all(),
     )
     in_service = ChoiceFilter(
+        empty_label=_('In service'),
         null_label=_('Unknown'),
-        empty_label=_('Unknown'),
         choices=choices
     )
 
