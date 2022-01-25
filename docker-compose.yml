@@ -22,9 +22,7 @@ services:
     image: georiviere:latest
     build:
       context: .
-      target: build
-      args:
-        - REQUIREMENTS=dev-requirements.txt
+      target: dev
     depends_on:
       - screamshotter
       - convertit

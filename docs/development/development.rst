@@ -72,8 +72,7 @@ To upgrade a package, run :
 
     docker-compose run --rm web pip-compile --upgrade-package django==3.1.*
 
-Development packages are separated in dev-requirements.in. dev-requirements.txt depends on requirements.txt. Each time you run pip-compile, dev-requirements.txt is updated.
-Each time you run pip-compile for requirements.txt, you should run pip-compile for dev-requirements.txt.
+Development packages are separated in dev-requirements.in. dev-requirements.txt depends on requirements.txt.
 
 .. code-block :: bash
 
