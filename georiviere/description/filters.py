@@ -1,28 +1,26 @@
 from mapentity.filters import MapEntityFilterSet
+from geotrek.zoning.filters import ZoningFilterSet
 
 from georiviere.description.models import Usage, Land, Morphology, Status
-from georiviere.main.filters import RestrictedAreaFilterSet
 from georiviere.river.filters import TopologyFilterSet
 from georiviere.watershed.filters import WatershedFilterSet
 
-from geotrek.zoning.filters import ZoningFilterSet
 
-
-class UsageFilterSet(WatershedFilterSet, RestrictedAreaFilterSet, ZoningFilterSet, MapEntityFilterSet):
+class UsageFilterSet(WatershedFilterSet, ZoningFilterSet, MapEntityFilterSet):
 
     class Meta(MapEntityFilterSet.Meta):
         model = Usage
         fields = MapEntityFilterSet.Meta.fields + ['usage_types', ]
 
 
-class LandFilterSet(WatershedFilterSet, RestrictedAreaFilterSet, ZoningFilterSet, MapEntityFilterSet):
+class LandFilterSet(WatershedFilterSet, ZoningFilterSet, MapEntityFilterSet):
 
     class Meta(MapEntityFilterSet.Meta):
         model = Land
         fields = MapEntityFilterSet.Meta.fields + ['land_type', ]
 
 
-class MorphologyFilterSet(WatershedFilterSet, RestrictedAreaFilterSet, ZoningFilterSet, TopologyFilterSet,
+class MorphologyFilterSet(WatershedFilterSet, ZoningFilterSet, TopologyFilterSet,
                           MapEntityFilterSet):
 
     class Meta(MapEntityFilterSet.Meta):
@@ -35,7 +33,7 @@ class MorphologyFilterSet(WatershedFilterSet, RestrictedAreaFilterSet, ZoningFil
                                                    'plan_layout']
 
 
-class StatusFilterSet(WatershedFilterSet, RestrictedAreaFilterSet, ZoningFilterSet, TopologyFilterSet,
+class StatusFilterSet(WatershedFilterSet, ZoningFilterSet, TopologyFilterSet,
                       MapEntityFilterSet):
 
     class Meta(MapEntityFilterSet.Meta):

@@ -1,12 +1,10 @@
 from django_filters import ChoiceFilter, CharFilter, ModelMultipleChoiceFilter
 from django.utils.translation import gettext_lazy as _
 from mapentity.filters import MapEntityFilterSet
-
-from .models import Station, Parameter
+from geotrek.zoning.filters import ZoningFilterSet
 
 from georiviere.watershed.filters import WatershedFilterSet
-
-from geotrek.zoning.filters import ZoningFilterSet
+from georiviere.observations.models import Station, Parameter
 
 choices = (
     (True, _("Yes")),

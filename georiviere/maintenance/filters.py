@@ -5,12 +5,10 @@ from mapentity.filters import MapEntityFilterSet, PythonPolygonFilter
 from geotrek.zoning.filters import ZoningFilterSet
 
 from georiviere.maintenance.models import Intervention
-from georiviere.main.filters import RestrictedAreaFilterSet
 from georiviere.watershed.filters import WatershedFilterSet
 
 
-class InterventionFilterSet(WatershedFilterSet, RestrictedAreaFilterSet,
-                            ZoningFilterSet, MapEntityFilterSet):
+class InterventionFilterSet(WatershedFilterSet, ZoningFilterSet, MapEntityFilterSet):
     bbox = PythonPolygonFilter(field_name='geom')
     name = CharFilter(label=_('Name'), lookup_expr='icontains')
 
