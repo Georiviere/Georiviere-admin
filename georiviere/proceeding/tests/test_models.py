@@ -12,10 +12,10 @@ class ProceedingTest(TestCase):
         cls.event = factories.EventFactory.create(proceeding=cls.proceeding, event_type=cls.event_type)
 
     def test_str_proceeding(self):
-        self.assertEqual(str(self.proceeding), "Proceeding 0 :  2002-02-20")
+        self.assertEqual(str(self.proceeding), f"{self.proceeding.name} :  2002-02-20")
 
     def test_str_event(self):
-        self.assertEqual(str(self.event), "Event type 0 :  2002-02-20")
+        self.assertEqual(str(self.event), f"{self.event_type.name} :  2002-02-20")
 
     def test_str_event_type(self):
-        self.assertEqual(str(self.event_type), "Event type 0")
+        self.assertEqual(str(self.event_type), f"{self.event_type.name}")
