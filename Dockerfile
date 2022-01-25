@@ -1,5 +1,5 @@
 FROM ubuntu:focal as base
-
+# stage with general requirements
 ARG UID=1000
 
 ENV DEBIAN_FRONTEND noninteractive
@@ -51,9 +51,7 @@ ENTRYPOINT ["entrypoint.sh"]
 EXPOSE 8000
 
 FROM base as build
-
-ARG REQUIREMENTS=requirements.txt
-
+# stage with build requirements
 USER root
 
 RUN apt-get update -qq && apt-get install -y -qq \
@@ -77,13 +75,18 @@ RUN  /opt/venv/bin/pip install --no-cache-dir pip setuptools wheel -U
 # geotrek setup fix : it required django before being installed... TODO: fix it in geotrek setup.py
 RUN  /opt/venv/bin/pip install --no-cache-dir django==2.2.*
 
-COPY ${REQUIREMENTS} /opt/requirements.txt
+COPY requirements.txt /opt/requirements.txt
 RUN  /opt/venv/bin/pip install --no-cache-dir -r /opt/requirements.txt
+
+FROM build as dev
+# stage with dev requirements
+COPY dev-requirements.txt /opt/dev-requirements.txt
+RUN  /opt/venv/bin/pip install --no-cache-dir -r /opt/dev-requirements.txt
 
 CMD ./manage.py runserver 0.0.0.0:8000
 
 FROM base as prod
-
+# stage with prod requirements only
 ENV GUNICORN_CMD_ARGS "--workers 1 --timeout 3600 --bind 0.0.0.0:8000 --timeout 3600"
 
 USER root
