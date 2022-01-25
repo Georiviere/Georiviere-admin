@@ -4,13 +4,11 @@ from django.utils.translation import gettext_lazy as _
 from mapentity.filters import MapEntityFilterSet, PythonPolygonFilter
 from geotrek.zoning.filters import ZoningFilterSet
 
-from georiviere.main.filters import RestrictedAreaFilterSet
 from georiviere.finances_administration.models import AdministrativeFile
 from georiviere.watershed.filters import WatershedFilterSet
 
 
-class AdministrativeFileFilterSet(WatershedFilterSet, RestrictedAreaFilterSet,
-                                  ZoningFilterSet, MapEntityFilterSet):
+class AdministrativeFileFilterSet(WatershedFilterSet, ZoningFilterSet, MapEntityFilterSet):
     bbox = PythonPolygonFilter(field_name='geom')
     name = CharFilter(label=_('Name'), lookup_expr='icontains')
 

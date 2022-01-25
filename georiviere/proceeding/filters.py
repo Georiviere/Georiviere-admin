@@ -1,15 +1,13 @@
 from django_filters import ModelMultipleChoiceFilter
 from django.utils.translation import gettext_lazy as _
 from mapentity.filters import MapEntityFilterSet
-
-from georiviere.proceeding.models import Proceeding, EventType
-from georiviere.main.filters import RestrictedAreaFilterSet
-from georiviere.watershed.filters import WatershedFilterSet
-
 from geotrek.zoning.filters import ZoningFilterSet
 
+from georiviere.proceeding.models import Proceeding, EventType
+from georiviere.watershed.filters import WatershedFilterSet
 
-class ProceedingFilterSet(WatershedFilterSet, RestrictedAreaFilterSet, ZoningFilterSet, MapEntityFilterSet):
+
+class ProceedingFilterSet(WatershedFilterSet, ZoningFilterSet, MapEntityFilterSet):
 
     event_type = ModelMultipleChoiceFilter(
         method="filter_event_type",
