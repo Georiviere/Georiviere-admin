@@ -6,8 +6,9 @@ CHANGELOG
 1.0.0+dev    (XXXX-XX-XX)
 -------------------------
 
-* …
+**Bug fixes**
 
+* Display missing unit
 
 0.9.9    (2022-01-25)
 -------------------------
