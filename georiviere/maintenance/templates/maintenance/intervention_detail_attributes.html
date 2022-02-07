@@ -41,6 +41,13 @@
             <th>{% trans "Target" %}</th>
             <td>{{ object.target_display|safe }}</td>
         </tr>
+        <tr>
+            <th>{% trans "Dimensions" %}</th>
+            <td>{% trans "H:" %} {{ intervention.height|stringformat:".2f" }}m ,
+                {% trans "L:" %} {{ intervention.length|stringformat:".2f" }}m ,
+                {% trans "W:" %} {{ intervention.width|stringformat:".2f" }}m
+            </td>
+        </tr>
         {% include "mapentity/trackinfo_fragment.html" %}
     </table>
     {{ block.super }}
