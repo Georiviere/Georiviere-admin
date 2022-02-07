@@ -9,6 +9,7 @@ CHANGELOG
 **Enhancement**
 
 * Add chosen multiselect on usage types
+* Remove unused fields from Station form
 
 **Bug fixes**
 
