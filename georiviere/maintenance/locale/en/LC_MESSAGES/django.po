@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-12-22 13:39+0000\n"
+"POT-Creation-Date: 2022-02-07 15:38+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -103,6 +103,18 @@ msgid "Intervention's disorders"
 msgstr ""
 
 msgid "Target"
+msgstr ""
+
+msgid "Dimensions"
+msgstr ""
+
+msgid "H:"
+msgstr ""
+
+msgid "L:"
+msgstr ""
+
+msgid "W:"
 msgstr ""
 
 msgid "Related interventions"
