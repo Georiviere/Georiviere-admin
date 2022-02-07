@@ -65,6 +65,7 @@ class Station(TimeStampedModelMixin, WatershedPropertiesMixin, ZoningPropertiesM
     local_influence = models.IntegerField(
         choices=LocalInfluenceChoices.choices,
         default=LocalInfluenceChoices.UNKNOWN,
+        blank=True,
         verbose_name=_("Local influence"),
         help_text=_("For hydrometric station profile"),
     )

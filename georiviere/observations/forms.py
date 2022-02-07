@@ -82,11 +82,6 @@ class StationForm(CommonForm):
                     'station_profiles',
                 ),
                 Tab(
-                    _('Specific profiles'),
-                    'local_influence',
-                    'hardness',
-                ),
-                Tab(
                     _('Parameters tracking'),
                     Fieldset(_('Parameters tracking')),
                 )
