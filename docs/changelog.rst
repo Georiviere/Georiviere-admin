@@ -6,6 +6,10 @@ CHANGELOG
 1.0.0+dev    (XXXX-XX-XX)
 -------------------------
 
+**Enhancement**
+
+* Add chosen multiselect on usage types
+
 **Bug fixes**
 
 * Display missing unit
