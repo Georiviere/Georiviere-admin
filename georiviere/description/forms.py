@@ -23,7 +23,7 @@ class UsageForm(CommonForm):
     geomfields = ['geom']
 
     class Meta:
-        fields = ['usage_types', 'description']
+        fields = "__all__"
         model = Usage
 
 
