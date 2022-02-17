@@ -14,11 +14,11 @@
    viewBox="0 0 60 60"
    style="enable-background:new 0 0 60 60;"
    xml:space="preserve"
-   sodipodi:docname="research-svgrepo-com.svg"
-   inkscape:version="1.0.2 (e86c870879, 2021-01-15)"
-   inkscape:export-filename="/home/ehe/Dev/Georiviere/georiviere-admin/studies/static/images/study-96.png"
-   inkscape:export-xdpi="153.60001"
-   inkscape:export-ydpi="153.60001"><metadata
+   sodipodi:docname="study.svg"
+   inkscape:version="0.92.5 (2060ec1f9f, 2020-04-08)"
+   inkscape:export-filename="/home/ehe/Dev/Georiviere/Georiviere-admin/georiviere/studies/static/images/study.png"
+   inkscape:export-xdpi="76.800003"
+   inkscape:export-ydpi="76.800003"><metadata
    id="metadata93"><rdf:RDF><cc:Work
        rdf:about=""><dc:format>image/svg+xml</dc:format><dc:type
          rdf:resource="http://purl.org/dc/dcmitype/StillImage" /></cc:Work></rdf:RDF></metadata><defs
@@ -31,127 +31,155 @@
    guidetolerance="10"
    inkscape:pageopacity="0"
    inkscape:pageshadow="2"
-   inkscape:window-width="1848"
-   inkscape:window-height="1009"
+   inkscape:window-width="1920"
+   inkscape:window-height="1043"
    id="namedview89"
    showgrid="false"
    inkscape:zoom="13.05"
-   inkscape:cx="30"
-   inkscape:cy="30"
+   inkscape:cx="8.6206897"
+   inkscape:cy="29.731801"
    inkscape:window-x="0"
-   inkscape:window-y="0"
+   inkscape:window-y="1080"
    inkscape:window-maximized="1"
    inkscape:current-layer="Capa_1" />
 <g
    id="g56"
-   transform="matrix(0.93333333,0,0,0.93333333,2.0000001,2.0000001)">
+   transform="matrix(0.93333333,0,0,0.93333333,2.0000001,2.0000001)"
+   style="fill:#d63384;fill-opacity:1">
 	<g
-   id="g24">
+   id="g24"
+   style="fill:#d63384;fill-opacity:1">
 		<g
-   id="g22">
+   id="g22"
+   style="fill:#d63384;fill-opacity:1">
 			<path
    d="m 53,12 c 0,-0.1 0,-0.2 -0.1,-0.3 v -0.1 c -0.1,-0.1 -0.1,-0.2 -0.2,-0.3 l -11,-11 C 41.6,0.2 41.5,0.2 41.4,0.1 H 41.3 C 41.2,0.1 41.1,0 41,0 V 0 H 8 C 7.4,0 7,0.4 7,1 v 58 c 0,0.6 0.4,1 1,1 h 5 6 5 9 19 c 0.6,0 1,-0.4 1,-1 z M 49.6,11 H 42 V 3.4 Z M 14,23 h 4 V 52 H 14 Z M 14.5,21 16,17.5 17.5,21 Z M 14,58 v -4 h 4 v 4 z m 11,0 v -6 h 4 v -2 h -4 v -6 h 4 v -2 h -4 v -7 h 4 v -2 h -4 v -6 h 4 v -2 h -4 v -5 h 7 v 38 z m 9,0 V 19 c 0,-0.6 -0.4,-1 -1,-1 h -9 c -0.6,0 -1,0.4 -1,1 V 58 H 20 V 53 22 c 0,-0.3 -0.1,-0.6 -0.3,-0.7 l -2.8,-6.6 c -0.1,-0.4 -0.5,-0.6 -0.9,-0.6 -0.4,0 -0.7,0.2 -0.9,0.6 l -2.8,6.6 C 12.1,21.5 12,21.7 12,22 v 31 5 H 9 V 2 h 31 v 10 c 0,0.6 0.4,1 1,1 h 10 v 45 z"
-   id="path2" />
+   id="path2"
+   style="fill:#d63384;fill-opacity:1" />
 			<rect
    x="12"
    y="5"
    width="8"
    height="2"
-   id="rect4" />
+   id="rect4"
+   style="fill:#d63384;fill-opacity:1" />
 			<rect
    x="38"
    y="22"
    width="9"
    height="2"
-   id="rect6" />
+   id="rect6"
+   style="fill:#d63384;fill-opacity:1" />
 			<rect
    x="38"
    y="27"
    width="9"
    height="2"
-   id="rect8" />
+   id="rect8"
+   style="fill:#d63384;fill-opacity:1" />
 			<rect
    x="38"
    y="32"
    width="9"
    height="2"
-   id="rect10" />
+   id="rect10"
+   style="fill:#d63384;fill-opacity:1" />
 			<rect
    x="38"
    y="37"
    width="9"
    height="2"
-   id="rect12" />
+   id="rect12"
+   style="fill:#d63384;fill-opacity:1" />
 			<rect
    x="38"
    y="42"
    width="9"
    height="2"
-   id="rect14" />
+   id="rect14"
+   style="fill:#d63384;fill-opacity:1" />
 			<rect
    x="38"
    y="47"
    width="9"
    height="2"
-   id="rect16" />
+   id="rect16"
+   style="fill:#d63384;fill-opacity:1" />
 			<rect
    x="38"
    y="52"
    width="9"
    height="2"
-   id="rect18" />
+   id="rect18"
+   style="fill:#d63384;fill-opacity:1" />
 			<rect
    x="12"
    y="9"
    width="16"
    height="2"
-   id="rect20" />
+   id="rect20"
+   style="fill:#d63384;fill-opacity:1" />
 		</g>
 	</g>
 	<g
-   id="g26">
+   id="g26"
+   style="fill:#d63384;fill-opacity:1">
 	</g>
 	<g
-   id="g28">
+   id="g28"
+   style="fill:#d63384;fill-opacity:1">
 	</g>
 	<g
-   id="g30">
+   id="g30"
+   style="fill:#d63384;fill-opacity:1">
 	</g>
 	<g
-   id="g32">
+   id="g32"
+   style="fill:#d63384;fill-opacity:1">
 	</g>
 	<g
-   id="g34">
+   id="g34"
+   style="fill:#d63384;fill-opacity:1">
 	</g>
 	<g
-   id="g36">
+   id="g36"
+   style="fill:#d63384;fill-opacity:1">
 	</g>
 	<g
-   id="g38">
+   id="g38"
+   style="fill:#d63384;fill-opacity:1">
 	</g>
 	<g
-   id="g40">
+   id="g40"
+   style="fill:#d63384;fill-opacity:1">
 	</g>
 	<g
-   id="g42">
+   id="g42"
+   style="fill:#d63384;fill-opacity:1">
 	</g>
 	<g
-   id="g44">
+   id="g44"
+   style="fill:#d63384;fill-opacity:1">
 	</g>
 	<g
-   id="g46">
+   id="g46"
+   style="fill:#d63384;fill-opacity:1">
 	</g>
 	<g
-   id="g48">
+   id="g48"
+   style="fill:#d63384;fill-opacity:1">
 	</g>
 	<g
-   id="g50">
+   id="g50"
+   style="fill:#d63384;fill-opacity:1">
 	</g>
 	<g
-   id="g52">
+   id="g52"
+   style="fill:#d63384;fill-opacity:1">
 	</g>
 	<g
-   id="g54">
+   id="g54"
+   style="fill:#d63384;fill-opacity:1">
 	</g>
 </g>
 <g
