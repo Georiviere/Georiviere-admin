@@ -138,7 +138,7 @@ django-mptt==0.11.0
     # via geotrek
 django-querysetsequence==0.14
     # via django-autocomplete-light
-django-tinymce==2.9.0
+django-tinymce==3.4.0
     # via mapentity
 django-weasyprint==1.1.0.post1
     # via
@@ -180,7 +180,7 @@ geojson==2.5.0
     # via
     #   geotrek
     #   tif2geojson
-geotrek @ git+https://github.com/GeotrekCE/Geotrek-admin.git@2.75.0
+geotrek @ git+https://github.com/GeotrekCE/Geotrek-admin.git@2.76.3
     # via -r requirements.in
 gpxpy==1.5.0
     # via mapentity
@@ -204,7 +204,7 @@ landez==2.5.0
     # via geotrek
 lxml==4.7.1
     # via mapentity
-mapentity==7.0.6
+mapentity==7.1.2
     # via
     #   -r requirements.in
     #   geotrek
