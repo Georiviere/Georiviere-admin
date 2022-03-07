@@ -11,7 +11,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-12-22 13:39+0000\n"
+"POT-Creation-Date: 2022-02-07 15:38+0000\n"
 "PO-Revision-Date: 2021-11-23 15:31+0000\n"
 "Last-Translator: Jean-Etienne Castagnede <jecastagnede@vivaldi.net>, 2021\n"
 "Language-Team: French (https://www.transifex.com/georiviere/teams/128005/"
@@ -108,6 +108,18 @@ msgstr "Désordres"
 
 msgid "Target"
 msgstr "Cible"
+
+msgid "Dimensions"
+msgstr "Dimensions"
+
+msgid "H:"
+msgstr "H :"
+
+msgid "L:"
+msgstr "L :"
+
+msgid "W:"
+msgstr "W :"
 
 msgid "Related interventions"
 msgstr "Interventions reliées"

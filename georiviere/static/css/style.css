@@ -1,6 +1,10 @@
 .chosen-container {
     max-width: 100%;
 }
+#mainfilter .chosen-container-multi,
+#mainform .chosen-container-multi {
+    width: 100% !important;
+}
 
 /* Formset styles */
 .formset .form-row > .form-group {

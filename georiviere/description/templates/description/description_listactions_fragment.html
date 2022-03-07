@@ -11,26 +11,26 @@
         </strong>
     </a>
     <ul class="dropdown-menu">
+        {% if modelname != 'land' %}
         <li class="dropdown-item">
-            {% if modelname != 'land' %}
             <a href="{% url 'description:land_list' %}">{% trans "Lands" %}</a>
-            {% endif %}
         </li>
+        {% endif %}
+        {% if modelname != 'status' %}
         <li class="dropdown-item">
-            {% if modelname != 'status' %}
             <a href="{% url 'description:status_list' %}">{% trans "Status" %}</a>
-            {% endif %}
         </li>
+        {% endif %}
+        {% if modelname != 'morphology' %}
         <li class="dropdown-item">
-            {% if modelname != 'morphology' %}
             <a href="{% url 'description:morphology_list' %}">{% trans "Morphologies" %}</a>
-            {% endif %}
         </li>
+        {% endif %}
+        {% if modelname != 'usage' %}
         <li class="dropdown-item">
-            {% if modelname != 'usage' %}
             <a href="{% url 'description:usage_list' %}">{% trans "Usages" %}</a>
-            {% endif %}
         </li>
+        {% endif %}
 
     </ul>
 </div>

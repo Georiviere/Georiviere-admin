@@ -1,6 +1,8 @@
 from django import forms
 from django.core.exceptions import ValidationError
 from django.utils.translation import gettext_lazy as _
+from crispy_forms.layout import Field
+from crispy_forms.bootstrap import AppendedText
 
 from geotrek.common.forms import CommonForm
 
@@ -13,14 +15,17 @@ from georiviere.river.fields import SnappedGeometryField
 class UsageForm(CommonForm):
     geom = SnappedGeometryField()
 
+    fieldslayout = [
+        'structure',
+        Field('usage_types', css_class="chosen-select"),
+        'description',
+    ]
+
     geomfields = ['geom']
 
     class Meta:
         fields = "__all__"
         model = Usage
-        help_texts = {
-            'usage_types': _('Hold Ctrl key to select multiple items'),
-        }
 
 
 class LandForm(CommonForm):
@@ -68,6 +73,18 @@ class StatusForm(TopologyRiverForm):
 
 
 class MorphologyForm(TopologyRiverForm):
+
+    fieldslayout = [
+        "good_working_space_left", "good_working_space_right",
+        "facies_diversity", "main_flow",
+        "secondary_flow", "granulometric_diversity",
+        AppendedText("full_edge_height", "m"),
+        AppendedText("full_edge_width", "m"),
+        "sediment_dynamic",
+        "bank_state_left", "bank_state_right",
+        "habitats_diversity", "main_habitat", "secondary_habitat",
+        "plan_layout", "qualified"
+    ]
     geomfields = ['geom']
     qualified = forms.BooleanField(required=False)
 

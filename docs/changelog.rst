@@ -6,8 +6,14 @@ CHANGELOG
 1.0.0+dev    (XXXX-XX-XX)
 -------------------------
 
-* …
+**Enhancement**
 
+* Add chosen multiselect on usage types
+* Remove unused fields from Station form
+
+**Bug fixes**
+
+* Display missing unit
 
 0.9.9    (2022-01-25)
 -------------------------
