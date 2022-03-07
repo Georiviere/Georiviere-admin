@@ -32,6 +32,11 @@ class Command(BaseImportCommand):
                     'hardness': station['durete'],
                 }
             )
+            if station['date_arret']:
+                station_obj.in_service = False
+            else:
+                station_obj.in_service = True
+            station_obj.save()
             station_obj.station_profiles.add(station_profile)
 
             if verbosity >= 2:

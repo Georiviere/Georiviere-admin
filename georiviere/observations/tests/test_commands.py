@@ -113,7 +113,10 @@ class ImportStationTest(TestCase):
         self.assertEqual(station.code, "06017140")
         self.assertEqual(station.station_uri, "http://id.eaufrance.fr/STQ/06017140")
         self.assertEqual(station.hardness, None)
-        self.assertEquals(station.in_service, None)
+        self.assertEquals(station.in_service, True)
+
+        station_ended = stations.get(code="06017098")
+        self.assertEquals(station_ended.in_service, False)
 
     def test_temperature_stations_imported(self, mock_get):
 
