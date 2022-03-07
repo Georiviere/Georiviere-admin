@@ -17,6 +17,7 @@ class UsageForm(CommonForm):
     geom = SnappedGeometryField()
 
     fieldslayout = [
+        'structure',
         Field('usage_types', css_class="chosen-select"),
         'description',
     ]
@@ -26,9 +27,6 @@ class UsageForm(CommonForm):
     class Meta:
         fields = "__all__"
         model = Usage
-
-    def save(self, *args, **kwargs):
-        return super().save(*args, **kwargs)
 
 
 class LandForm(CommonForm):
