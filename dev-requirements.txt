@@ -92,6 +92,8 @@ pyflakes==2.4.0
     # via flake8
 pygments==2.11.2
     # via sphinx
+pygraphviz==1.9
+    # via -r dev-requirements.in
 pyparsing==2.4.7
     # via
     #   -c requirements.txt
