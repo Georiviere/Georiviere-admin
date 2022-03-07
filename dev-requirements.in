@@ -8,6 +8,7 @@ tblib
 pip-tools
 coverage
 django-debug-toolbar
+django-extensions
 factory-boy
 flake8  # WARNING : CI always use last flake8 published version
 
