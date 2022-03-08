@@ -274,7 +274,10 @@ class ImportStationWithParametersTest(TestCase):
         parameters_tracked = station.parametertracking_set.all()
         self.assertEqual(parameters_tracked.count(), 16)
         self.assertEqual(parameters_tracked.filter(parameter__label='pH').count(), 1)
-        self.assertEqual(parameters_tracked.get(parameter__label='pH').parameter.unit.symbol, "unité pH")
+        ph_parameter_tracked = parameters_tracked.get(parameter__label='pH')
+        self.assertEqual(ph_parameter_tracked.parameter.unit.symbol, "unité pH")
+        self.assertEqual(ph_parameter_tracked.measure_start_date.strftime('%Y-%m-%d'), "2002-08-27")
+        self.assertEqual(ph_parameter_tracked.measure_end_date.strftime('%Y-%m-%d'), "2005-05-16")
 
         # Check output
         self.assertIn("Added parameter pH", out.getvalue())

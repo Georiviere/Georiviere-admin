@@ -1,3 +1,4 @@
+from datetime import datetime, date
 import requests
 from django.contrib.gis.geos import Point
 from georiviere.observations.models import Station, StationProfile, Parameter, ParameterTracking, Unit
@@ -81,8 +82,18 @@ class Command(BaseImportCommand):
                             'measure_frequency': "",
                             'transmission_frequency': "",
                             'data_availability': ParameterTracking.DataAvailabilityChoice.ONLINE,
+                            'measure_start_date': datetime.strptime(measure['date_prelevement'], '%Y-%m-%d').date(),
+                            'measure_end_date': datetime.strptime(measure['date_prelevement'], '%Y-%m-%d').date(),
                         }
                     )
+
+                    if parameter_tracking.measure_start_date > datetime.strptime(measure['date_prelevement'], '%Y-%m-%d').date():
+                        parameter_tracking.measure_start_date = datetime.strptime(measure['date_prelevement'], '%Y-%m-%d').date()
+
+                    if parameter_tracking.measure_end_date < datetime.strptime(measure['date_prelevement'], '%Y-%m-%d').date():
+                        parameter_tracking.measure_end_date = datetime.strptime(measure['date_prelevement'], '%Y-%m-%d').date()
+
+                    parameter_tracking.save()
 
                     if verbosity >= 2 and parameter_tracking_created:
                         self.stdout.write('Added parameter {0}'.format(parameter_tracking))
