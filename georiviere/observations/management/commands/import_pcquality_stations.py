@@ -40,6 +40,12 @@ class Command(BaseImportCommand):
             station_obj.save()
             station_obj.station_profiles.add(station_profile)
 
+            # Set data availability
+            if station['nature'] == 'M':
+                data_availability = ParameterTracking.DataAvailabilityChoice.ONDEMAND
+            elif station['nature'] == 'A':
+                data_availability = ParameterTracking.DataAvailabilityChoice.ONLINE
+
             if verbosity >= 2:
                 if station_created:
                     self.stdout.write('Created station {0}'.format(station_obj))
@@ -88,7 +94,7 @@ class Command(BaseImportCommand):
                             'label': measure['libelle_parametre'],
                             'measure_frequency': "",
                             'transmission_frequency': "",
-                            'data_availability': ParameterTracking.DataAvailabilityChoice.ONLINE,
+                            'data_availability': data_availability,
                         }
                     )
 

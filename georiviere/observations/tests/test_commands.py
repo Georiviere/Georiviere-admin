@@ -8,7 +8,7 @@ from django.core.management import call_command
 from django.core.management.base import CommandError
 from django.test import TestCase
 
-from georiviere.observations.models import Station, StationProfile, Unit
+from georiviere.observations.models import Station, StationProfile, Unit, ParameterTracking
 
 TEST_DATA_PATH = settings.PROJECT_DIR / 'observations' / 'tests' / 'data'
 
@@ -290,6 +290,7 @@ class ImportStationWithParametersTest(TestCase):
         self.assertEqual(ph_parameter_tracked.parameter.unit.symbol, "unité pH")
         self.assertEqual(ph_parameter_tracked.measure_start_date.strftime('%Y-%m-%d'), "2012-02-20")
         self.assertEqual(ph_parameter_tracked.measure_end_date.strftime('%Y-%m-%d'), "2020-11-17")
+        self.assertEqual(ph_parameter_tracked.data_availability, ParameterTracking.DataAvailabilityChoice.ONDEMAND)
 
         # Check output
         self.assertIn("Added parameter Potentiel en Hydrogène (pH)", out.getvalue())
