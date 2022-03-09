@@ -267,6 +267,10 @@ LEAFLET_CONFIG = {
         'topofields': {'js': ['river/js/georiviere.forms.snap.js',
                               'river/js/cut-topology.js'],
                        'css': ['river/css/cut-topology.css']}
+        'leaflet.pin': {
+            'css': ['vendors/Leaflet.Pin/leaflet.pin.min.css'],
+            'js': ['vendors/Leaflet.Pin/leaflet.pin.min.js'],
+        }
     }
 }
 
