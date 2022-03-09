@@ -292,5 +292,11 @@ class ImportStationWithParametersTest(TestCase):
         self.assertEqual(ph_parameter_tracked.measure_end_date.strftime('%Y-%m-%d'), "2020-11-17")
         self.assertEqual(ph_parameter_tracked.data_availability, ParameterTracking.DataAvailabilityChoice.ONDEMAND)
 
+        # This station has an automatice nature in test dataset 05137100
+        station = stations.get(code="05137100")
+        parameters_tracked = station.parametertracking_set.all()
+        ph_parameter_tracked = parameters_tracked.get(parameter__label='Potentiel en Hydrogène (pH)')
+        self.assertEqual(ph_parameter_tracked.data_availability, ParameterTracking.DataAvailabilityChoice.ONLINE)
+
         # Check output
         self.assertIn("Added parameter Potentiel en Hydrogène (pH)", out.getvalue())
