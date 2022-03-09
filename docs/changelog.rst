@@ -13,6 +13,7 @@ CHANGELOG
 * Change base buffer width
 * Change module picto colors
 * Improve map color settings
+* Display layers for all modules
 
 **Bug fixes**
 
