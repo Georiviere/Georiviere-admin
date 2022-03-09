@@ -10,6 +10,7 @@ CHANGELOG
 
 * Add chosen multiselect on usage types
 * Remove unused fields from Station form
+* Get more data from Hubeau (start and end measure dates, measure type)
 * Change base buffer width
 * Change module picto colors
 * Improve map color settings
