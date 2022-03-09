@@ -1,12 +1,11 @@
 //
-// Knowledge layer
+// Station layer
 //
-
 $(window).on('entity:map', function (e, data) {
-    var modelname = 'knowledge';
+    var modelname = 'station';
     var layername = `${modelname}_layer`;
     var url = window.SETTINGS.urls[layername];
-    var loaded_knowledge = false;
+    var loaded_station = false;
     var map = data.map;
 
     // Show station layer in application maps
@@ -16,15 +15,15 @@ $(window).on('entity:map', function (e, data) {
     });
 
     if (data.modelname != modelname){
-        map.layerscontrol.addOverlay(layer, tr('Knowledge'), tr('Knowledges'));
+        map.layerscontrol.addOverlay(layer, tr('Stations'), tr('Observations'));
     };
 
     map.on('layeradd', function (e) {
         var options = e.layer.options || { 'modelname': 'None' };
-        if (! loaded_knowledge) {
+        if (! loaded_station) {
             if (options.modelname == modelname && options.modelname != data.modelname) {
                 e.layer.load(url);
-                loaded_knowledge = true;
+                loaded_station = true;
             }
         }
     });

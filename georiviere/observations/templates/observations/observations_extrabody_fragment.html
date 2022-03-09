@@ -1,0 +1,8 @@
+{% load static i18n %}
+<script type="text/javascript">
+    MapEntity.i18n['Stations'] = "{% trans "Stations" %}";
+    MapEntity.i18n['Observations'] = "{% trans "Observations" %}";
+
+    window.SETTINGS.urls['station_layer'] = "{% url "observations:station_layer" %}";
+</script>
+<script type="text/javascript" src="{% static 'observations/js/main.js' %}"></script>

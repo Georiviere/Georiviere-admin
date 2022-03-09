@@ -21,9 +21,6 @@ class StationList(mapentity_views.MapEntityList):
 
 class StationLayer(mapentity_views.MapEntityLayer):
     model = Station
-    columns = [
-        'id', 'code', 'label'
-    ]
 
 
 class StationJsonList(mapentity_views.MapEntityJsonList, StationList):
