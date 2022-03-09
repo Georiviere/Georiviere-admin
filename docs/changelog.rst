@@ -10,10 +10,14 @@ CHANGELOG
 
 * Add chosen multiselect on usage types
 * Remove unused fields from Station form
+* Change base buffer width
+* Change module picto colors
+* Improve map color settings
 
 **Bug fixes**
 
 * Display missing unit
+* Fix pip-tools / pip incompatibility
 
 0.9.9    (2022-01-25)
 -------------------------
