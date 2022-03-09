@@ -1,5 +1,5 @@
 //
-// Core
+// Knowledge layer
 //
 
 $(window).on('entity:map', function (e, data) {
@@ -10,13 +10,13 @@ $(window).on('entity:map', function (e, data) {
     var map = data.map;
 
     // Show station layer in application maps
-       var layer = new L.ObjectsLayer(null, {
-               modelname: modelname,
-               style: L.Util.extend(window.SETTINGS.map.styles[modelname] || {}, { clickable:false }),
-       });
+    var layer = new L.ObjectsLayer(null, {
+        modelname: modelname,
+        style: L.Util.extend(window.SETTINGS.map.styles[modelname] || {}, { clickable:false }),
+    });
 
     if (data.modelname != modelname){
-           map.layerscontrol.addOverlay(layer, tr('Knowledge'), tr('Knowledges'));
+        map.layerscontrol.addOverlay(layer, tr('Knowledge'), tr('Knowledges'));
     };
 
     map.on('layeradd', function (e) {
