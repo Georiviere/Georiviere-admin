@@ -1,4 +1,4 @@
-from datetime import datetime, date
+from datetime import datetime
 import requests
 from django.contrib.gis.geos import Point
 from georiviere.observations.models import Station, StationProfile, Parameter, ParameterTracking, Unit
@@ -47,15 +47,24 @@ class Command(BaseImportCommand):
                     self.stdout.write('Updated station {0}'.format(station_obj))
 
             if with_parameters:
-                # Get parameters from analyse_pc API endpoint
+                # Get 50 first and 50 last parameters from analyse_pc API endpoint
                 payload = {
                     'format': 'json',
                     'size': 50,
                     'code_station': station_obj.code,
                 }
-                response = requests.get(self.api_analyse_pc_url, params=payload)
-                response_content = response.json()
-                analysepc_data = response_content['data']
+                response_firstpage = requests.get(self.api_analyse_pc_url, params=payload)
+                response_firstpage_content = response_firstpage.json()
+                analysepc_data = response_firstpage_content['data']
+
+                # If there is more than one page, get data desc sorted
+                if response_firstpage_content['count'] > 200:
+                    payload['sort'] = 'desc'
+                    response_desc_results = requests.get(self.api_analyse_pc_url, params=payload)
+                    response_desc_data = response_desc_results.json()['data']
+                    analysepc_data = analysepc_data + response_desc_data
+                    if station_obj.code == '05130000':
+                        self.stdout.write('last page content {0}'.format([el['date_prelevement'] for el in analysepc_data]))
 
                 for measure in analysepc_data:
 
@@ -82,14 +91,16 @@ class Command(BaseImportCommand):
                             'measure_frequency': "",
                             'transmission_frequency': "",
                             'data_availability': ParameterTracking.DataAvailabilityChoice.ONLINE,
-                            'measure_start_date': datetime.strptime(measure['date_prelevement'], '%Y-%m-%d').date(),
-                            'measure_end_date': datetime.strptime(measure['date_prelevement'], '%Y-%m-%d').date(),
                         }
                     )
 
+                    if not parameter_tracking.measure_start_date:
+                        parameter_tracking.measure_start_date = datetime.strptime(measure['date_prelevement'], '%Y-%m-%d').date()
+                    if not parameter_tracking.measure_end_date:
+                        parameter_tracking.measure_end_date = datetime.strptime(measure['date_prelevement'], '%Y-%m-%d').date()
+
                     if parameter_tracking.measure_start_date > datetime.strptime(measure['date_prelevement'], '%Y-%m-%d').date():
                         parameter_tracking.measure_start_date = datetime.strptime(measure['date_prelevement'], '%Y-%m-%d').date()
-
                     if parameter_tracking.measure_end_date < datetime.strptime(measure['date_prelevement'], '%Y-%m-%d').date():
                         parameter_tracking.measure_end_date = datetime.strptime(measure['date_prelevement'], '%Y-%m-%d').date()
 
