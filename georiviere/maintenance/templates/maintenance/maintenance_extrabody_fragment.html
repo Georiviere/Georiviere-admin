@@ -1,0 +1,8 @@
+{% load static i18n %}
+<script type="text/javascript">
+    MapEntity.i18n['Maintenance'] = "{% trans "Maintenance" %}";
+    MapEntity.i18n['Interventions'] = "{% trans "Interventions" %}";
+
+    window.SETTINGS.urls['intervention_layer'] = "{% url "maintenance:intervention_layer" %}";
+</script>
+<script type="text/javascript" src="{% static 'maintenance/js/main.js' %}"></script>
