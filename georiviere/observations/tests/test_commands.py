@@ -26,7 +26,10 @@ def requests_get_mock_response(*args, **kwargs):
     if "station_pc" in args[0]:
         filename = TEST_DATA_PATH / 'response_api_pcquality_stations.json'
     if "analyse_pc" in args[0]:
-        filename = TEST_DATA_PATH / 'response_api_pcquality_analyse.json'
+        if "sort" in kwargs['params']:
+            filename = TEST_DATA_PATH / 'response_api_pcquality_analyse_desc.json'
+        else:
+            filename = TEST_DATA_PATH / 'response_api_pcquality_analyse.json'
 
     # Build response
     mock_response = mock.Mock()
@@ -99,23 +102,28 @@ class ImportStationTest(TestCase):
         self.assertEquals(station.purpose_code, "")
 
     def test_pcquality_stations_imported(self, mock_get):
+        """Test import PC Quality stations
+        Test data from
+        https://hubeau.eaufrance.fr/api/v1/qualite_rivieres/station_pc?format=json&code_departement=11&size=1000
+        """
+
         # Call command
         out = StringIO()
         call_command('import_pcquality_stations', stdout=out)
 
         # Check stations imported
         stations = Station.objects.all()
-        self.assertEqual(stations.count(), 10)
-        station = stations.get(code="06017140")
+        self.assertEqual(stations.count(), 28)
+        station = stations.get(code="05134550")
         pcquality_station_profile = StationProfile.objects.get(code='PCQUAL') or None
         self.assertIn(pcquality_station_profile, station.station_profiles.all())
-        self.assertEqual(station.label, "DOUBS A LABERGEMENT-STE-MARIE 2")
-        self.assertEqual(station.code, "06017140")
-        self.assertEqual(station.station_uri, "http://id.eaufrance.fr/STQ/06017140")
+        self.assertEqual(station.label, "Le Laudot au niveau de Les Brunels")
+        self.assertEqual(station.code, "05134550")
+        self.assertEqual(station.station_uri, "http://id.eaufrance.fr/STQ/05134550")
         self.assertEqual(station.hardness, None)
         self.assertEquals(station.in_service, True)
 
-        station_ended = stations.get(code="06017098")
+        station_ended = stations.get(code="05137100")
         self.assertEquals(station_ended.in_service, False)
 
     def test_temperature_stations_imported(self, mock_get):
@@ -182,7 +190,7 @@ class ImportStationAllRedoTest(TestCase):
         call_command('import_temperature_stations', stdout=out)
 
         stations = Station.objects.all()
-        self.assertEqual(stations.count(), 11)
+        self.assertEqual(stations.count(), 30)
 
     def test_redo_import_hydrometric_stations(self, mock_get):
         """Test import twice hydrometric stations"""
@@ -211,12 +219,12 @@ class ImportStationAllRedoTest(TestCase):
 
         # Check output
         self.assertIn('Created station profile  (PCQUAL)', out.getvalue())
-        self.assertIn('Created station DOUBS A LABERGEMENT-STE-MARIE 2 (06017140)', out.getvalue())
+        self.assertIn('Created station Le Laudot au niveau de Les Brunels (05134550)', out.getvalue())
 
         # Call command a second time
         call_command('import_pcquality_stations', verbosity=2, stdout=out)
         # Check output
-        self.assertIn('Updated station DOUBS A LABERGEMENT-STE-MARIE 2 (06017140)', out.getvalue())
+        self.assertIn('Updated station Le Laudot au niveau de Les Brunels (05134550)', out.getvalue())
 
     def test_redo_import_temperature_stations(self, mock_get):
         """Test import twice temperature stations"""
@@ -261,6 +269,10 @@ class ImportStationWithParametersTest(TestCase):
         self.assertIn("Added parameter Chronique température", out.getvalue())
 
     def test_import_pcquality_stations_with_parameters(self, mock_get):
+        """Test import PC Quality stations with parameters
+        Test data from
+        https://hubeau.eaufrance.fr/api/v1/qualite_rivieres/analyse_pc?size=50&code_station=06079182
+        """
         # Call command with parameters
         out = StringIO()
         call_command('import_pcquality_stations',
@@ -270,14 +282,14 @@ class ImportStationWithParametersTest(TestCase):
 
         # Check stations imported
         stations = Station.objects.all()
-        station = stations.get(code="06017140")
+        station = stations.get(code="05134550")
         parameters_tracked = station.parametertracking_set.all()
         self.assertEqual(parameters_tracked.count(), 16)
-        self.assertEqual(parameters_tracked.filter(parameter__label='pH').count(), 1)
-        ph_parameter_tracked = parameters_tracked.get(parameter__label='pH')
+        self.assertEqual(parameters_tracked.filter(parameter__label='Potentiel en Hydrogène (pH)').count(), 1)
+        ph_parameter_tracked = parameters_tracked.get(parameter__label='Potentiel en Hydrogène (pH)')
         self.assertEqual(ph_parameter_tracked.parameter.unit.symbol, "unité pH")
-        self.assertEqual(ph_parameter_tracked.measure_start_date.strftime('%Y-%m-%d'), "2002-08-27")
-        self.assertEqual(ph_parameter_tracked.measure_end_date.strftime('%Y-%m-%d'), "2005-05-16")
+        self.assertEqual(ph_parameter_tracked.measure_start_date.strftime('%Y-%m-%d'), "2012-02-20")
+        self.assertEqual(ph_parameter_tracked.measure_end_date.strftime('%Y-%m-%d'), "2020-11-17")
 
         # Check output
-        self.assertIn("Added parameter pH", out.getvalue())
+        self.assertIn("Added parameter Potentiel en Hydrogène (pH)", out.getvalue())

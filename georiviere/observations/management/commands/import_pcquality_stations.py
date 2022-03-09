@@ -58,7 +58,7 @@ class Command(BaseImportCommand):
                 analysepc_data = response_firstpage_content['data']
 
                 # If there is more than one page, get data desc sorted
-                if response_firstpage_content['count'] > 200:
+                if response_firstpage_content['count'] > 50:
                     payload['sort'] = 'desc'
                     response_desc_results = requests.get(self.api_analyse_pc_url, params=payload)
                     response_desc_data = response_desc_results.json()['data']
