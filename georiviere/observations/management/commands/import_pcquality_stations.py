@@ -63,8 +63,6 @@ class Command(BaseImportCommand):
                     response_desc_results = requests.get(self.api_analyse_pc_url, params=payload)
                     response_desc_data = response_desc_results.json()['data']
                     analysepc_data = analysepc_data + response_desc_data
-                    if station_obj.code == '05130000':
-                        self.stdout.write('last page content {0}'.format([el['date_prelevement'] for el in analysepc_data]))
 
                 for measure in analysepc_data:
 
