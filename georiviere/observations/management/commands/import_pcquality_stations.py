@@ -40,7 +40,7 @@ class Command(BaseImportCommand):
             station_obj.save()
             station_obj.station_profiles.add(station_profile)
 
-            # Set data availability
+            # Get data availability for this station (will be used in parameter_tracked)
             if station['nature'] == 'M':
                 data_availability = ParameterTracking.DataAvailabilityChoice.ONDEMAND
             elif station['nature'] == 'A':
@@ -98,15 +98,14 @@ class Command(BaseImportCommand):
                         }
                     )
 
-                    if not parameter_tracking.measure_start_date:
-                        parameter_tracking.measure_start_date = datetime.strptime(measure['date_prelevement'], '%Y-%m-%d').date()
-                    if not parameter_tracking.measure_end_date:
-                        parameter_tracking.measure_end_date = datetime.strptime(measure['date_prelevement'], '%Y-%m-%d').date()
+                    # Set start and end measure date
+                    measure_date = datetime.strptime(measure['date_prelevement'], '%Y-%m-%d').date()
 
-                    if parameter_tracking.measure_start_date > datetime.strptime(measure['date_prelevement'], '%Y-%m-%d').date():
-                        parameter_tracking.measure_start_date = datetime.strptime(measure['date_prelevement'], '%Y-%m-%d').date()
-                    if parameter_tracking.measure_end_date < datetime.strptime(measure['date_prelevement'], '%Y-%m-%d').date():
-                        parameter_tracking.measure_end_date = datetime.strptime(measure['date_prelevement'], '%Y-%m-%d').date()
+                    if not parameter_tracking.measure_start_date or parameter_tracking.measure_start_date > measure_date:
+                        parameter_tracking.measure_start_date = measure_date
+
+                    if not parameter_tracking.measure_end_date or parameter_tracking.measure_end_date < measure_date:
+                        parameter_tracking.measure_end_date = measure_date
 
                     parameter_tracking.save()
 
