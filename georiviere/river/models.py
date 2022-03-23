@@ -36,8 +36,26 @@ class TopologyMixin(object):
 
 class Stream(AddPropertyBufferMixin, TimeStampedModelMixin, WatershedPropertiesMixin, ZoningPropertiesMixin,
              MapEntityMixin, AltimetryMixin, StructureRelated):
+    """Model for stream"""
+
+    class FlowChoices(models.IntegerChoices):
+        """Choices for stream flow"""
+        TBD = 0, _('To be defined')
+        PERMANENT = 1, _('Permanent')
+        TEMPORARY = 2, _('Temporary')
+
     name = models.CharField(max_length=100, default=_('Stream'), verbose_name=_("Name"))
     geom = models.LineStringField(srid=settings.SRID, spatial_index=True)
+
+    flow = models.CharField(
+        choices=FlowChoices.choices,
+        default=FlowChoices.TBD,
+        max_length=2,
+        verbose_name=_("Flow"),
+    )
+    data_source = models.ForeignKey('main.DataSource', on_delete=models.CASCADE,
+                               null=True, blank=True, related_name='rivers',
+                               verbose_name=_("Data source"))
 
     source_location = models.PointField(verbose_name=_("Source location"),
                                         srid=settings.SRID,
