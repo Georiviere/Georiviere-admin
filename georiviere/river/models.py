@@ -54,8 +54,8 @@ class Stream(AddPropertyBufferMixin, TimeStampedModelMixin, WatershedPropertiesM
         verbose_name=_("Flow"),
     )
     data_source = models.ForeignKey('main.DataSource', on_delete=models.CASCADE,
-                               null=True, blank=True, related_name='rivers',
-                               verbose_name=_("Data source"))
+                                    null=True, blank=True, related_name='rivers',
+                                    verbose_name=_("Data source"))
 
     source_location = models.PointField(verbose_name=_("Source location"),
                                         srid=settings.SRID,
