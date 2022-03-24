@@ -47,10 +47,10 @@ class Stream(AddPropertyBufferMixin, TimeStampedModelMixin, WatershedPropertiesM
     name = models.CharField(max_length=100, default=_('Stream'), verbose_name=_("Name"))
     geom = models.LineStringField(srid=settings.SRID, spatial_index=True)
 
-    flow = models.CharField(
+    flow = models.IntegerField(
         choices=FlowChoices.choices,
         default=FlowChoices.TBD,
-        max_length=2,
+        blank=True,
         verbose_name=_("Flow"),
     )
     data_source = models.ForeignKey('main.DataSource', on_delete=models.CASCADE,
