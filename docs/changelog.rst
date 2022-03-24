@@ -5,7 +5,10 @@ CHANGELOG
 1.0.0+dev    (XXXX-XX-XX)
 -------------------------
 
-* 
+**Enhancement**
+
+* Add data source and flow to stream
+
 
 1.0.0    (2022-03-10)
 -------------------------
