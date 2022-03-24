@@ -7,7 +7,6 @@ from georiviere.river.models import Stream, Topology
 
 class StreamFactory(BaseLineStringFactory):
     name = factory.Sequence(lambda n: 'stream-%d' % n)
-    flow = factory.fuzzy.FuzzyChoice(Stream.FlowChoices)
     structure = factory.SubFactory(StructureFactory)
 
     class Meta:
