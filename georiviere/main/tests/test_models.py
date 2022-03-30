@@ -5,6 +5,7 @@ from .factories import DataSourceFactory
 
 
 class DataSourceTest(TestCase):
+    """Test for Data source model"""
 
     def test_str(self):
         data_source = DataSourceFactory(name="Jouvence")
