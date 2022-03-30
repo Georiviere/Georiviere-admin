@@ -11,7 +11,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-02-07 15:38+0000\n"
+"POT-Creation-Date: 2022-03-23 17:11+0000\n"
 "PO-Revision-Date: 2021-11-23 15:31+0000\n"
 "Last-Translator: Jean-Etienne Castagnede <jecastagnede@vivaldi.net>, 2021\n"
 "Language-Team: French (https://www.transifex.com/georiviere/teams/128005/"
@@ -27,6 +27,15 @@ msgstr "Principal"
 
 msgid "Restricted area"
 msgstr "Zone réglementaire"
+
+msgid "Name"
+msgstr "Nom"
+
+msgid "Data source"
+msgstr "Source de données"
+
+msgid "Data sources"
+msgstr "Sources de données"
 
 msgid "None"
 msgstr "Aucun(e)"
