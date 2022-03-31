@@ -5,13 +5,16 @@ services:
 
   convertit:
     image: makinacorpus/convertit:latest
+    restart: on-failure
 
   screamshotter:
     image: makinacorpus/screamshotter:v2
+    restart: on-failure
 
   # delete postgres section if you use external database.
   postgres:
     image: juank/postgis:14-3.1
+    restart: on-failure
     volumes:
       - postgres:/var/lib/postgresql/data
     env_file:
@@ -19,6 +22,7 @@ services:
 
   web:
     image: ghcr.io/georiviere/georiviere-admin:latest
+    restart: on-failure
     depends_on:
       - screamshotter
       - convertit
@@ -34,6 +38,7 @@ services:
   # delete nginx section if you want to use external nginx proxy
   nginx:
     image: nginx:latest
+    restart: on-failure
     depends_on:
       - web
     ports:
