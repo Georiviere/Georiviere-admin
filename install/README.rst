@@ -1,15 +1,17 @@
 Requirements
 ============
+
 * You need docker installed. Docker-compose is recommended in the configuration below.
+    See `Docker <https://docs.docker.com/engine/install/>`_ and `Docker compose <https://docs.docker.com/compose/install/>`_ install documentations.
 
 * **Optional** : if you want to use external database, prepare a postgresql 10+ postgis2.5+ database with postgis and postgis_raster enabled, and a dedicated user.
 
-You can use external database by commenting postgres container and volume references in docker-compose.yml, and set variables :
-    * POSTGRES_HOST
-    * POSTGRES_PORT
-    * POSTGRES_USER
-    * POSTGRES_PASSWORD
-    * POSTGRES_DB
+    You can use external database by commenting postgres container and volume references in docker-compose.yml, and set variables :
+        * POSTGRES_HOST
+        * POSTGRES_PORT
+        * POSTGRES_USER
+        * POSTGRES_PASSWORD
+        * POSTGRES_DB
 
 * You can use external nginx proxy. Edit provided nginx conf file and comment nginx references in docker-compose.yml. Fix web:8000 to 127.0.0.1:8000 in nginx.conf.
 
@@ -34,6 +36,12 @@ Install
       mv .env.dist .env
 
   **-> Set all required values**
+
+* Pull images
+
+  .. code-block :: bash
+
+      docker-compose pull
 
 * Init default var folder
 
