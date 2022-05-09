@@ -11,7 +11,7 @@ ENV SERVER_NAME localhost
 ENV CONVERSION_HOST convertit
 ENV CAPTURE_HOST screamshotter
 ENV POSTGRES_HOST postgres
-ENV PGPORT 5432
+ENV POSTGRES_PORT 5432
 ENV CUSTOM_SETTINGS_FILE /opt/georiviere-admin/var/conf/custom.py
 
 RUN mkdir -p /opt/georiviere-admin/var
