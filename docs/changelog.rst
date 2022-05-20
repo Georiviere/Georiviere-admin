@@ -7,7 +7,8 @@ CHANGELOG
 
 **Bug fixes**
 
-*
+* Fix ```./manage.py loaddem ...``` command by including postgis libraries
+
 
 1.0.1    (2022-03-30)
 -------------------------
