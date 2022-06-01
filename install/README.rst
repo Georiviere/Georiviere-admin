@@ -43,6 +43,8 @@ Install
 
       docker-compose pull
 
+    (Use `docker compose` if docker-compose version is >=2.4.x)
+
 * Init default var folder
 
   .. code-block :: bash
@@ -79,7 +81,7 @@ Install
 
   .. code-block :: bash
 
-      docker-compose up
+      docker-compose up -d
 
 
 Update
@@ -108,4 +110,4 @@ Update
   .. code-block :: bash
 
       docker-compose down
-      docker-compose up
+      docker-compose up -d
