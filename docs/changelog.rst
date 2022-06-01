@@ -9,6 +9,10 @@ CHANGELOG
 
 * Add flow info and filter
 
+**Documentation**
+
+* Update doc installation
+
 
 1.0.2        (2022-05-22)
 -------------------------
