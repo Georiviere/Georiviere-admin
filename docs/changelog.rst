@@ -5,6 +5,10 @@ CHANGELOG
 1.0.2+dev    (XXXX-XX-XX)
 -------------------------
 
+**Bug fixes**
+
+* Add flow info and filter
+
 
 1.0.2        (2022-05-22)
 -------------------------
