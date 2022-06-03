@@ -13,6 +13,7 @@ class StudyForm(CommonForm):
 
     fieldslayout = [
         Div(
+            'structure',
             'title',
             Field('study_types', css_class="chzn-select"),
             'year',

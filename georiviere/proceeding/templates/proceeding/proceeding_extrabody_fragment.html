@@ -1,0 +1,8 @@
+{% load static i18n %}
+<script type="text/javascript">
+    MapEntity.i18n['Proceeding'] = "{% trans "Proceeding" %}";
+    MapEntity.i18n['Proceedings'] = "{% trans "Proceedings" %}";
+
+    window.SETTINGS.urls['proceeding_layer'] = "{% url "proceeding:proceeding_layer" %}";
+</script>
+<script type="text/javascript" src="{% static 'proceeding/js/main.js' %}"></script>

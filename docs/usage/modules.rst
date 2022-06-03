@@ -18,7 +18,7 @@ In a content detail page, nearby other contents are displayed.
 Streams
 -------
 
-Streams is a line with a source location.
+Streams is a line with a source location and flow type. Length is computed from geometry.
 
 Descriptions
 ------------

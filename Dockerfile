@@ -43,7 +43,8 @@ RUN apt-get update -qq && apt-get install -y -qq \
     libgdk-pixbuf2.0 \
     libpango1.0-0 \
     libpangocairo-1.0-0 \
-    libpq5 &&\
+    libpq5 && \
+    apt-get install -y -qq --no-install-recommends postgis && \
     apt-get clean all && rm -rf /var/lib/apt/lists/* && rm -rf /var/cache/apt/*
 
 USER django
@@ -59,13 +60,16 @@ RUN apt-get update -qq && apt-get install -y -qq \
     python3.9-dev \
     python3.9-venv \
     build-essential \
+    graphviz \
     libffi-dev \
     libfreetype6-dev \
     libgdk-pixbuf2.0-dev \
     libssl-dev \
     libpq-dev \
     libxml2-dev \
-    libxslt-dev && \
+    libxslt-dev \
+    libgraphviz-dev \
+    pkg-config && \
     apt-get clean all && rm -rf /var/lib/apt/lists/* && rm -rf /var/cache/apt/*
 
 USER django

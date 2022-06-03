@@ -2,12 +2,51 @@
 CHANGELOG
 =========
 
-
-1.0.0+dev    (XXXX-XX-XX)
+1.0.2+dev    (XXXX-XX-XX)
 -------------------------
 
-* …
+**Bug fixes**
 
+* Add flow info and filter
+
+**Documentation**
+
+* Update doc installation
+
+
+1.0.2        (2022-05-22)
+-------------------------
+
+**Bug fixes**
+
+* Fix ```./manage.py loaddem ...``` command by including postgis libraries
+
+
+1.0.1    (2022-03-30)
+-------------------------
+
+**Enhancement**
+
+* Add data source and flow to stream
+
+
+1.0.0    (2022-03-10)
+-------------------------
+
+**Enhancement**
+
+* Add chosen multiselect on usage types
+* Remove unused fields from Station form
+* Get more data from Hubeau (start and end measure dates, measure type)
+* Change base buffer width
+* Change module picto colors
+* Improve map color settings
+* Display layers for all modules
+
+**Bug fixes**
+
+* Display missing unit
+* Fix pip-tools / pip incompatibility
 
 0.9.9    (2022-01-25)
 -------------------------
