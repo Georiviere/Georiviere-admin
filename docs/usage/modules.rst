@@ -40,7 +40,7 @@ Knowledges
 
 Knowledges can be a point, line or polygon about a stream, of vegetation, work or other type.
 
-Vegetation and work type knowledges have specific fields.
+Vegetation and work type knowledges have specific fields. For this, first value in type_connaisance = végétation and second value = ouvrage.
 
 Follow-ups
 ----------

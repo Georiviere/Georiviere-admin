@@ -3,6 +3,12 @@ Advanced settings
 
 More settings can be overriden in ``var/conf/custom.py`` file.
 
+After any change in custom.py, run:
+
+.. code-block :: bash
+
+	docker compose restart
+
 Georiviere settings
 -------------------
 
