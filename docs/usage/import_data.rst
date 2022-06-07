@@ -53,6 +53,7 @@ Custom your import file named import_bdtopage.py et put this file in ``georivier
 
 And run command : docker compose run --rm web ./import_bdtopage.py
 
+
 Import altimetry file
 ---------------------
 
@@ -63,6 +64,7 @@ Put your altimetry file in ``var/`` folder, and run command
     docker-compose run --rm web ./manage.py loaddem <dem_path>
 
 where ``<dem_path>`` is ``/opt/georiviere-admin/var/my_dem_file.tiff``
+
 
 Import stations from Hub'Eau
 ----------------------------
@@ -87,6 +89,7 @@ Example:
 
     docker-compose run --rm web ./manage.py import_pcquality_stations --department 39,25
 
+
 Import data references from Sandre
 ----------------------------------
 
@@ -97,6 +100,7 @@ Usage:
 .. code-block :: bash
 
     docker-compose run --rm web ./manage.py import_reference_data
+
 
 Import zoning data from file
 ----------------------------
@@ -124,7 +128,8 @@ Example:
 .. code-block :: bash
 
     docker compose run --rm web ./manage.py loadcities /opt/georiviere-admin/var/commune.shp --name-attribute nom --code-attribute insee_com
-	
+
+
 Load districts
 ''''''''''''''
 
@@ -145,7 +150,8 @@ Example:
 .. code-block :: bash
 
     docker compose run --rm web ./manage.py loaddistricts /opt/georiviere-admin/var/epci.shp --name-attribute nom --code-attribute code_siren
-	
+
+
 Load Restricted Area
 ''''''''''''''
 
