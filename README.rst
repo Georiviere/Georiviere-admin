@@ -16,7 +16,7 @@
 .. image:: https://github.com/Georiviere.png
    :height: 150
 
-* **Georiviere**, community software available under Open Source licence.
+* **GeoRivière**, community software available under Open Source licence.
 * Trademark is registered to **Institut National de la Propriété Intellectuelle** as a word mark under n°4691040.
 * `Brand policy <./docs/Georiviere-politiquemarque--1.0.pdf>`_
 

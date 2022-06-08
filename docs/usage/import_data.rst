@@ -1,7 +1,7 @@
 Import data
 ===========
 
-To import data, you have to run these commands from the server where Georiviere-admin is hosted.
+To import data, you have to run these commands from the server where GeoRiviere-admin is hosted.
 
 Import data
 ---------------------
