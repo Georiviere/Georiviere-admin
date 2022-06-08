@@ -5,7 +5,7 @@ CI
 --
 
 * Each edition runs a CI build.
-* All Georiviere-admin maintainers can review or merge Pull Requests.
+* All GeoRiviere-admin maintainers can review or merge Pull Requests.
 * First time contributor not in maintainer team can request to be added. Maintainers can accept its first pull request to allow CI build.
 
 
