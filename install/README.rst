@@ -8,7 +8,7 @@ Requirements
 
     You can use external database by commenting postgres container and volume references in docker-compose.yml, and set variables :
         * POSTGRES_HOST
-        * POSTGRES_PORT
+        * PGPORT
         * POSTGRES_USER
         * POSTGRES_PASSWORD
         * POSTGRES_DB
