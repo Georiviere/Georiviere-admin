@@ -153,7 +153,7 @@ Example:
 
 
 Load Restricted Area
-''''''''''''''
+''''''''''''''''''''
 
 Load Restricted Area from a file within the spatial extent ``loadrestrictedareas <file_path>`` and specify the name of the Area type
 
@@ -175,5 +175,5 @@ Example:
 	
 
 Import watershed
-''''''''''''''
+''''''''''''''''
 To import, use QGIS and edit watershed_watershed layer and specify "name" and  "watershed_type_id" in attributes
