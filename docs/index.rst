@@ -1,4 +1,4 @@
-Welcome to GeoRiviere's documentation!
+Welcome to GeoRivière's documentation!
 ======================================
 
 GeoRiviere-admin is an application to handle aquatic environment (stream, river, watersheds…) in a given territory.

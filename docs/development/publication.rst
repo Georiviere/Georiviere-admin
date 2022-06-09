@@ -27,4 +27,4 @@ To release a new version :
 Docker image
 ------------
 
-* Docker image is published after each release in Georiviere github repository: ghcr.io/georiviere/georiviere-admin:latest
+* Docker image is published after each release in GeoRivière github repository: ghcr.io/georiviere/georiviere-admin:latest

@@ -9,7 +9,7 @@ After any change in custom.py, run:
 
 	docker compose restart
 
-Georiviere settings
+GeoRivière settings
 -------------------
 
 Base intersection margin
@@ -22,7 +22,7 @@ Base intersection margin
 Based on Geotrek or Mapentity settings
 --------------------------------------
 
-Some settings come from Geotrek-admin or Mapentity, on which GeoRiviere is based:
+Some settings come from Geotrek-admin or Mapentity, on which GeoRivière is based:
 
 * `Email settings <https://geotrek.readthedocs.io/en/master/advanced-configuration.html#email-settings>`_
 * `Change or add WMTS tiles layers <https://geotrek.readthedocs.io/en/master/advanced-configuration.html#change-or-add-wmts-tiles-layers-ign-osm-mapbox>`_
