@@ -12,6 +12,7 @@ CHANGELOG
 **Documentation**
 
 * Update doc installation
+* Fix install doc with PostgreSQL not in Docker
 
 
 1.0.2        (2022-05-22)

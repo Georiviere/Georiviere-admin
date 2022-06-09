@@ -8,10 +8,12 @@ Requirements
 
     You can use external database by commenting postgres container and volume references in docker-compose.yml, and set variables :
         * POSTGRES_HOST
-        * POSTGRES_PORT
+        * PGPORT
         * POSTGRES_USER
         * POSTGRES_PASSWORD
         * POSTGRES_DB
+
+Add local IPs in `pg_hba.conf` to allow connection from docker containers to your database.
 
 * You can use external nginx proxy. Edit provided nginx conf file and comment nginx references in docker-compose.yml. Fix web:8000 to 127.0.0.1:8000 in nginx.conf.
 
