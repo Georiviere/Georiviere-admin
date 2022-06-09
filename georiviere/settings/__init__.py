@@ -23,7 +23,7 @@ PROJECT_DIR = BASE_DIR / "georiviere"
 VAR_DIR = BASE_DIR / 'var'
 
 ROOT_URL = ""
-TITLE = "Georivière"
+TITLE = "GeoRivière"
 
 VERSION = f"{__version__} based on geotrek {__geotrek_version__}"
 
