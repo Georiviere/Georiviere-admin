@@ -10,7 +10,7 @@
     :target: https://georiviere.readthedocs.io
 
 
-**Georiviere**
+**GeoRivière**
 --------------
 
 .. image:: https://github.com/Georiviere.png
