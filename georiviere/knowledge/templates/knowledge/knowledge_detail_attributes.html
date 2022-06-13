@@ -12,6 +12,10 @@
             <td>{{ object.knowledge_type }}</td>
         </tr>
         <tr>
+            <th>{{ object|verbose:"code" }}</th>
+            <td>{{ object.code }}</td>
+        </tr>
+        <tr>
             <th>{{ object|verbose:"description" }}</th>
             <td>{{ object.description|linebreaks }}</td>
         </tr>
