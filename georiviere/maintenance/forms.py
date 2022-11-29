@@ -23,6 +23,7 @@ class InterventionForm(autocomplete.FutureModelForm, CommonForm):
         ],
         label=_('Knowledge'),
         required=False,
+        initial=None,
     )
 
     fieldslayout = [
