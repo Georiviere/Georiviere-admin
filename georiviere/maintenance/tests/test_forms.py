@@ -1,5 +1,3 @@
-from datetime import date
-from django.core.exceptions import ValidationError
 from django.test import TestCase
 
 from geotrek.authent.tests.factories import StructureFactory
@@ -10,6 +8,7 @@ from georiviere.maintenance.tests.factories import (
 from georiviere.tests.factories import UserAllPermsFactory
 from georiviere.river.tests.factories import StreamFactory
 from georiviere.maintenance.forms import InterventionForm
+
 
 class InterventionTest(TestCase):
 
