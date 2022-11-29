@@ -15,6 +15,10 @@
             <th>{{ object|verbose:"flow" }}</th>
             <td>{{ object.get_flow_display }}</td>
         </tr>
+        <tr>
+            <th>{{ object|verbose:"data_source" }}</th>
+            <td>{{ object.data_source|default_if_none:"-" }}</td>
+        </tr>
         {% include "altimetry/elevationinfo_fragment.html" %}
         {% include "mapentity/trackinfo_fragment.html" %}
     </table>
