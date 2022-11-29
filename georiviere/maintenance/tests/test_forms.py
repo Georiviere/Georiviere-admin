@@ -20,7 +20,7 @@ class InterventionTest(TestCase):
     def test_create_standalone_intervention(self):
         """Test creation of an intervention not linked to a knowledge"""
 
-        user = UserAllPermsFactory(password='booh')
+        user = UserAllPermsFactory()
         structure = StructureFactory.create()
         data = {
             'structure': structure,
