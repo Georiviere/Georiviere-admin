@@ -57,3 +57,9 @@ class InterventionForm(autocomplete.FutureModelForm, CommonForm):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
         self.helper.form_tag = False
+
+    def clean_target(self):
+        target = self.cleaned_data['target']
+        if target == "":
+            return None
+        return target

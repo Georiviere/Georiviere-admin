@@ -24,6 +24,7 @@ class InterventionTest(TestCase):
         structure = StructureFactory.create()
         data = {
             'structure': structure,
+            'target': '',
             'name': 'test',
             'date': '2012-08-23',
             'disorders': [InterventionDisorderFactory.create()],
