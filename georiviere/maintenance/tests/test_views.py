@@ -9,7 +9,7 @@ from georiviere.maintenance.tests.factories import (
     InterventionFactory, InterventionStatusFactory,
     InterventionDisorderFactory, InterventionStakeFactory
 )
-from georiviere.observations.tests.factories import StationFactory
+from georiviere.knowledge.tests.factories import KnowledgeFactory
 
 
 class InterventionViewsTest(CommonRiverTest):
@@ -37,10 +37,6 @@ class InterventionViewsTest(CommonRiverTest):
 
     def get_good_data(self):
         structure = StructureFactory.create()
-        station_object = StationFactory.create(
-            structure=structure
-        )
-        station_contenttype = ContentType.objects.get(model='station')
         good_data = {
             'structure': structure.pk,
             'name': 'test',
@@ -54,19 +50,46 @@ class InterventionViewsTest(CommonRiverTest):
             'length': 0.0,
             'intervention_status': InterventionStatusFactory.create().pk,
             'stake': InterventionStakeFactory.create().pk,
-            'target_type': station_contenttype.pk,
-            'target_id': station_object.pk,
+        }
+        return good_data
+
+
+class InterventionWithTargetViewsTest(InterventionViewsTest):
+    """Test Intervention linked to a target"""
+
+    def get_good_data(self):
+        """Test creation of an intervention not linked to a knowledge"""
+        structure = StructureFactory.create()
+        knowledge_object = KnowledgeFactory.create(
+            structure=structure
+        )
+        knowledge_contenttype = ContentType.objects.get(model='knowledge')
+        good_data = {
+            'structure': structure.pk,
+            'name': 'test',
+            'date': '2012-08-23',
+            'disorders': InterventionDisorderFactory.create().pk,
+            'description': '',
+            'slope': 0,
+            'area': 0,
+            'height': 0.0,
+            'width': 0.0,
+            'length': 0.0,
+            'intervention_status': InterventionStatusFactory.create().pk,
+            'stake': InterventionStakeFactory.create().pk,
+            'target_type': knowledge_contenttype.pk,
+            'target_id': knowledge_object.pk,
         }
         return good_data
 
     def test_detail_target_objects(self):
         self.login()
         structure = StructureFactory.create()
-        station_object = StationFactory.create(
+        knowledge_object = KnowledgeFactory.create(
             structure=structure
         )
-        intervention_station = InterventionFactory.create(target=station_object)
+        intervention_on_knowledge = InterventionFactory.create(target=knowledge_object)
 
-        response = self.client.get(intervention_station.get_detail_url())
+        response = self.client.get(intervention_on_knowledge.get_detail_url())
         self.assertEqual(response.status_code, 200)
-        self.assertContains(response, intervention_station.target_display)
+        self.assertContains(response, intervention_on_knowledge.target_display)
