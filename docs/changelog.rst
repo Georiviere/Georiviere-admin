@@ -8,6 +8,7 @@ CHANGELOG
 **Bug fixes**
 
 * Add flow info and filter
+* Fix standalone intervention creation bug (#93)
 
 **Documentation**
 
