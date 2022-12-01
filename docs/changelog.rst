@@ -7,7 +7,8 @@ CHANGELOG
 
 **Bug fixes**
 
-* Add flow info and filter
+* Display flow and source in stream detail
+* Add flow filter in stream list
 * Fix standalone intervention creation bug (#93)
 
 **Documentation**
