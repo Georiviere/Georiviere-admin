@@ -26,10 +26,10 @@ class MorphologyFilterSet(WatershedFilterSet, ZoningFilterSet, TopologyFilterSet
     class Meta(MapEntityFilterSet.Meta):
         model = Morphology
         fields = MapEntityFilterSet.Meta.fields + ['good_working_space_left', 'good_working_space_right',
-                                                   'facies_diversity', 'main_flow', 'secondary_flow',
+                                                   'facies_diversity', 'main_flow', 'secondary_flows',
                                                    'granulometric_diversity', 'full_edge_height', 'full_edge_width',
                                                    'sediment_dynamic', 'bank_state_left', 'bank_state_right',
-                                                   'habitats_diversity', 'main_habitat', 'secondary_habitat',
+                                                   'habitats_diversity', 'main_habitat', 'secondary_habitats',
                                                    'plan_layout']
 
 

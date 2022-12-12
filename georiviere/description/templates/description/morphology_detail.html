@@ -25,8 +25,8 @@
                 <td>{{ morphology.main_flow|default_if_none:"-" }}</td>
             </tr>
             <tr>
-                <th>{{ morphology|verbose:"secondary_flow" }}</th>
-                <td>{{ morphology.secondary_flow|default_if_none:"-" }}</td>
+                <th>{{ morphology|verbose:"secondary_flows" }}</th>
+                <td>{% valuelist morphology.secondary_flows.all %}</td>
             </tr>
             <tr>
                 <th>{{ morphology|verbose:"granulometric_diversity" }}</th>
@@ -61,8 +61,8 @@
                 <td>{{ morphology.main_habitat|default_if_none:"-" }}</td>
             </tr>
             <tr>
-                <th>{{ morphology|verbose:"secondary_habitat" }}</th>
-                <td>{{ morphology.secondary_habitat|default_if_none:"-" }}</td>
+                <th>{{ morphology|verbose:"secondary_habitats" }}</th>
+                <td>{% valuelist morphology.secondary_habitats.all %}</td>
             </tr>
             <tr>
                 <th>{{ morphology|verbose:"plan_layout" }}</th>

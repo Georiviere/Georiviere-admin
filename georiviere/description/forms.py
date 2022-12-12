@@ -77,12 +77,14 @@ class MorphologyForm(TopologyRiverForm):
     fieldslayout = [
         "good_working_space_left", "good_working_space_right",
         "facies_diversity", "main_flow",
-        "secondary_flow", "granulometric_diversity",
+        Field('secondary_flows', css_class="chzn-select"),
+        "granulometric_diversity",
         AppendedText("full_edge_height", "m"),
         AppendedText("full_edge_width", "m"),
         "sediment_dynamic",
         "bank_state_left", "bank_state_right",
-        "habitats_diversity", "main_habitat", "secondary_habitat",
+        "habitats_diversity", "main_habitat",
+        Field('secondary_habitats', css_class="chzn-select"),
         "plan_layout", "qualified"
     ]
     geomfields = ['geom']
@@ -90,8 +92,8 @@ class MorphologyForm(TopologyRiverForm):
 
     class Meta:
         fields = ["good_working_space_left", "good_working_space_right", "facies_diversity", "main_flow",
-                  "secondary_flow", "granulometric_diversity", "full_edge_height", "full_edge_width", "sediment_dynamic",
-                  "bank_state_left", "bank_state_right", "habitats_diversity", "main_habitat", "secondary_habitat",
+                  "secondary_flows", "granulometric_diversity", "full_edge_height", "full_edge_width", "sediment_dynamic",
+                  "bank_state_left", "bank_state_right", "habitats_diversity", "main_habitat", "secondary_habitats",
                   "plan_layout", "geom", "qualified", ]
         model = Morphology
 
