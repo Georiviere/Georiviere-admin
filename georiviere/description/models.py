@@ -148,6 +148,10 @@ class Morphology(AddPropertyBufferMixin, TopologyMixin, TimeStampedModelMixin,
         on_delete=models.SET_NULL, null=True, blank=True,
         related_name='secondary_flow'
     )
+    secondary_flows = models.ManyToManyField(
+        FlowType, verbose_name=_("Secondary flow"),
+        related_name='flows_on_second'
+    )
     granulometric_diversity = models.ForeignKey(
         GranulometricDiversity,
         verbose_name=_("Granulometric diversity"),
@@ -188,6 +192,10 @@ class Morphology(AddPropertyBufferMixin, TopologyMixin, TimeStampedModelMixin,
         HabitatType, verbose_name=_("Secondary habitat"),
         on_delete=models.SET_NULL, null=True, blank=True,
         related_name='secondary_habitat'
+    )
+    secondary_habitats = models.ManyToManyField(
+        HabitatType, verbose_name=_("Secondary habitat"),
+        related_name='morphologies_on_second'
     )
     plan_layout = models.ForeignKey(
         PlanLayoutType, verbose_name=_("Plan layout"),
