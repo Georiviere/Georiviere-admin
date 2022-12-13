@@ -234,12 +234,6 @@ class Vegetation(models.Model):
         null=True, blank=True,
         on_delete=models.CASCADE
     )
-    strata = models.ForeignKey(
-        'knowledge.VegetationStrata',
-        verbose_name=_("Vegetation Strata"),
-        null=True, blank=True,
-        on_delete=models.CASCADE
-    )
     stratas = models.ManyToManyField(
         'knowledge.VegetationStrata',
         verbose_name=_("Vegetation Strata"),
