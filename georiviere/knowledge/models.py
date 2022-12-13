@@ -148,6 +148,28 @@ class WorkStreamInfluence(models.Model):
         return self.label
 
 
+class WorkWaterEffect(models.Model):
+    label = models.CharField(verbose_name=_("Label"), max_length=128)
+
+    class Meta:
+        verbose_name = _("Work water effect")
+        verbose_name_plural = _("Work water effects")
+
+    def __str__(self):
+        return self.label
+
+
+class WorkBedEffect(models.Model):
+    label = models.CharField(verbose_name=_("Label"), max_length=128)
+
+    class Meta:
+        verbose_name = _("Work bed effect")
+        verbose_name_plural = _("Work bed effects")
+
+    def __str__(self):
+        return self.label
+
+
 class WorkSedimentEffect(models.Model):
     label = models.CharField(verbose_name=_("Label"), max_length=128)
 
@@ -322,6 +344,27 @@ class Work(models.Model):
     sediment_effect = models.ForeignKey(
         'knowledge.WorkSedimentEffect',
         verbose_name=_("Sediment effect"),
+        null=True, blank=True,
+        related_name='works',
+        on_delete=models.CASCADE
+    )
+    upstream_bed_effect = models.ForeignKey(
+        'knowledge.WorkBedEffect',
+        verbose_name=_("Upstream bed effect"),
+        null=True, blank=True,
+        related_name='upstream_effect_works',
+        on_delete=models.CASCADE
+    )
+    downstream_bed_effect = models.ForeignKey(
+        'knowledge.WorkBedEffect',
+        verbose_name=_("Downstream bed effect"),
+        null=True, blank=True,
+        related_name='downstream_effect_works',
+        on_delete=models.CASCADE
+    )
+    water_effect = models.ForeignKey(
+        'knowledge.WorkWaterEffect',
+        verbose_name=_("Water effect"),
         null=True, blank=True,
         related_name='works',
         on_delete=models.CASCADE
