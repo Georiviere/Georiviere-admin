@@ -36,8 +36,10 @@
             <td> {{ object.vegetation.thickness|default:"-" }}</td>
         </tr>
         <tr>
-            <th>{{ object.vegetation|verbose:"strata" }}</th>
-            <td> {{ object.vegetation.strata|default:"-" }}</td>
+            <th>{{ object.vegetation|verbose:"stratas" }}</th>
+            <td>
+                {% valuelist object.stratas.all %}
+            </td>
         </tr>
         <tr>
             <th>{{ object.vegetation|verbose:"age_class_diversity" }}</th>
@@ -86,6 +88,18 @@
         <tr>
             <th>{{ object.work|verbose:"sediment_effect" }}</th>
             <td> {{ object.work.sediment_effect|default:"-" }}</td>
+        </tr>
+        <tr>
+            <th>{{ object.work|verbose:"water_effect" }}</th>
+            <td> {{ object.work.upstream_bed_effect|default:"-" }}</td>
+        </tr>
+        <tr>
+            <th>{{ object.work|verbose:"downstream_bed_effect" }}</th>
+            <td> {{ object.work.downstream_bed_effect|default:"-" }}</td>
+        </tr>
+        <tr>
+            <th>{{ object.work|verbose:"upstream_bed_effect" }}</th>
+            <td> {{ object.work.upstream_bed_effect|default:"-" }}</td>
         </tr>
         <tr>
             <th>{{ object.work|verbose:"fish_continuity_effect" }}</th>

@@ -348,6 +348,13 @@ class Work(models.Model):
         related_name='works',
         on_delete=models.CASCADE
     )
+    water_effect = models.ForeignKey(
+        'knowledge.WorkWaterEffect',
+        verbose_name=_("Water effect"),
+        null=True, blank=True,
+        related_name='works',
+        on_delete=models.CASCADE
+    )
     upstream_bed_effect = models.ForeignKey(
         'knowledge.WorkBedEffect',
         verbose_name=_("Upstream bed effect"),
@@ -360,13 +367,6 @@ class Work(models.Model):
         verbose_name=_("Downstream bed effect"),
         null=True, blank=True,
         related_name='downstream_effect_works',
-        on_delete=models.CASCADE
-    )
-    water_effect = models.ForeignKey(
-        'knowledge.WorkWaterEffect',
-        verbose_name=_("Water effect"),
-        null=True, blank=True,
-        related_name='works',
         on_delete=models.CASCADE
     )
     fish_continuity_effect = models.ForeignKey(
