@@ -270,7 +270,7 @@ class Vegetation(models.Model):
     )
     stratas = models.ManyToManyField(
         'knowledge.VegetationStrata',
-        verbose_name=_("Vegetation Strata"),
+        verbose_name=_("Vegetation Stratas"),
         blank=True,
         related_name='vegetations'
     )

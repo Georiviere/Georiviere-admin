@@ -11,7 +11,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-02-07 15:38+0000\n"
+"POT-Creation-Date: 2022-12-13 17:38+0000\n"
 "PO-Revision-Date: 2021-11-23 15:08+0000\n"
 "Last-Translator: Jean-Etienne Castagnede <jecastagnede@vivaldi.net>, 2021\n"
 "Language-Team: French (https://www.transifex.com/georiviere/teams/128005/"
@@ -112,6 +112,18 @@ msgstr "Influence courant"
 msgid "Work stream influences"
 msgstr "Influences courant"
 
+msgid "Work water effect"
+msgstr "Impact eau"
+
+msgid "Work water effects"
+msgstr "Impacts eau"
+
+msgid "Work bed effect"
+msgstr "Impact lit de l'ouvrage"
+
+msgid "Work bed effects"
+msgstr "Impacts lit de l'ouvrage"
+
 msgid "Work sediment effect"
 msgstr "Impact sédiment de l'ouvrage"
 
@@ -136,8 +148,8 @@ msgstr "Ajouter une connaissance"
 msgid "Thickness type"
 msgstr "Type d'épaisseur"
 
-msgid "Vegetation Strata"
-msgstr "Strate de végétation"
+msgid "Vegetation Stratas"
+msgstr "Strates de végétation"
 
 msgid "Other information"
 msgstr "Autre information"
@@ -162,6 +174,15 @@ msgstr "Influence amont"
 
 msgid "Sediment effect"
 msgstr "Impact sédiment"
+
+msgid "Water effect"
+msgstr "Impact eau"
+
+msgid "Upstream bed effect"
+msgstr "Impact lit amont"
+
+msgid "Downstream bed effect"
+msgstr "Impact lit aval"
 
 msgid "Fish Continuity effect"
 msgstr "Impact continuité piscicole"
