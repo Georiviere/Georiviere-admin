@@ -237,6 +237,7 @@ class Vegetation(models.Model):
     stratas = models.ManyToManyField(
         'knowledge.VegetationStrata',
         verbose_name=_("Vegetation Strata"),
+        blank=True,
         related_name='vegetations'
     )
     age_class_diversity = models.ForeignKey(
