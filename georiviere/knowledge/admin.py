@@ -4,6 +4,7 @@ from georiviere.knowledge.models import (
     Vegetation, VegetationState, VegetationStrata, VegetationType,
     VegetationAgeClassDiversity, VegetationThicknessType, VegetationSpecificDiversity,
     Work, WorkBankEffect, WorkFishContinuityEffect, WorkSedimentEffect,
+    WorkWaterEffect, WorkBedEffect,
     WorkStreamInfluence, WorkMaterial, WorkState, WorkType, KnowledgeType,
     FollowUpType
 )
@@ -22,6 +23,8 @@ admin.site.register(WorkStreamInfluence, admin.ModelAdmin)
 admin.site.register(WorkFishContinuityEffect, admin.ModelAdmin)
 admin.site.register(WorkMaterial, admin.ModelAdmin)
 admin.site.register(WorkSedimentEffect, admin.ModelAdmin)
+admin.site.register(WorkWaterEffect, admin.ModelAdmin)
+admin.site.register(WorkBedEffect, admin.ModelAdmin)
 admin.site.register(WorkState, admin.ModelAdmin)
 admin.site.register(WorkType, admin.ModelAdmin)
 admin.site.register(FollowUpType, admin.ModelAdmin)
