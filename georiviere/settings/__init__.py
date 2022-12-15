@@ -29,6 +29,9 @@ VERSION = f"{__version__} based on geotrek {__geotrek_version__}"
 
 SRID = 2154
 
+# SRID displayed for the user (screens / pdf ...)
+DISPLAY_SRID = 3857
+
 SPATIAL_EXTENT = (105000, 6150000, 1100000, 7150000)
 VIEWPORT_MARGIN = 0.1
 
