@@ -5,6 +5,7 @@ git+https://github.com/GeotrekCE/Geotrek-admin.git@2.93.0#egg=geotrek
 mapentity
 paperclip
 django-weasyprint<2.0
+django-geojson
 
 # prod
 django-compressor
