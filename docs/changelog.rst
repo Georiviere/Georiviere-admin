@@ -7,6 +7,7 @@ CHANGELOG
 
 **Enhancement**
 
+* Change secondary flow and habitat to multiselect field in description module
 * Add fields to work : upstream and downstream bed impact, water impact
 * Change vegetation strata field into a multiselect field
 
