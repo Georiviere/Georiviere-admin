@@ -1,6 +1,6 @@
 from django.contrib import admin
 from .models import EventType
-from geotrek.common.mixins import MergeActionMixin
+from geotrek.common.mixins.actions import MergeActionMixin
 
 
 class EventTypeAdmin(MergeActionMixin, admin.ModelAdmin):

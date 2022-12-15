@@ -5,7 +5,7 @@ from django.db.models import Q
 from django.utils.translation import gettext_lazy as _
 
 from geotrek.authent.models import StructureRelated
-from geotrek.common.mixins import TimeStampedModelMixin
+from geotrek.common.mixins.models import TimeStampedModelMixin
 from geotrek.zoning.mixins import ZoningPropertiesMixin
 from mapentity.models import MapEntityMixin
 

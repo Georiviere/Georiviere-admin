@@ -3,7 +3,7 @@ from django.db import models
 from django.utils.translation import gettext_lazy as _
 from paperclip.models import FileType as BaseFileType, Attachment as BaseAttachment
 from geotrek.authent.models import StructureOrNoneRelated
-from geotrek.common.mixins import AddPropertyMixin
+from geotrek.common.mixins.models import AddPropertyMixin
 
 
 class FileType(StructureOrNoneRelated, BaseFileType):

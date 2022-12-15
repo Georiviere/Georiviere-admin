@@ -8,7 +8,7 @@ from mapentity.models import MapEntityMixin
 
 from georiviere.altimetry import AltimetryMixin
 from geotrek.authent.models import StructureRelated, StructureOrNoneRelated
-from geotrek.common.mixins import TimeStampedModelMixin
+from geotrek.common.mixins.models import TimeStampedModelMixin
 from geotrek.zoning.mixins import ZoningPropertiesMixin
 
 from georiviere.main.models import AddPropertyBufferMixin

@@ -11,7 +11,7 @@ from django.utils.translation import gettext_lazy as _
 
 from mapentity.models import MapEntityMixin
 from geotrek.authent.models import StructureRelated, StructureOrNoneRelated
-from geotrek.common.mixins import TimeStampedModelMixin
+from geotrek.common.mixins.models import TimeStampedModelMixin
 from geotrek.common.utils import classproperty
 from geotrek.zoning.mixins import ZoningPropertiesMixin
 

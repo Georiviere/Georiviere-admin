@@ -1,7 +1,7 @@
 from django.contrib import admin
 from .models import (StatusType, LandType, UsageType, FlowType, WorkingSpaceType, FaciesDiversity,
                      GranulometricDiversity, SedimentDynamic, BankState, HabitatsDiversity, HabitatType, PlanLayoutType)
-from geotrek.common.mixins import MergeActionMixin
+from geotrek.common.mixins.actions import MergeActionMixin
 
 
 class PhysicalTypeAdmin(MergeActionMixin, admin.ModelAdmin):
