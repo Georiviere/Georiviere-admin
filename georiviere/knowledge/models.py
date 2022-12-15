@@ -33,6 +33,7 @@ class VegetationAgeClassDiversity(models.Model):
     class Meta:
         verbose_name = _("Age class diversity")
         verbose_name_plural = _("Age class diversities")
+        ordering = ['label']
 
     def __str__(self):
         return self.label
@@ -55,6 +56,7 @@ class VegetationState(models.Model):
     class Meta:
         verbose_name = _("Vegetation state")
         verbose_name_plural = _("Vegetation states")
+        ordering = ['label']
 
     def __str__(self):
         return self.label
@@ -66,6 +68,7 @@ class VegetationStrata(models.Model):
     class Meta:
         verbose_name = _("Vegetation strata")
         verbose_name_plural = _("Vegetation stratas")
+        ordering = ['label']
 
     def __str__(self):
         return self.label
@@ -88,6 +91,7 @@ class VegetationType(models.Model):
     class Meta:
         verbose_name = _("Vegetation type")
         verbose_name_plural = _("Vegetation types")
+        ordering = ['label']
 
     def __str__(self):
         return self.label
@@ -99,6 +103,7 @@ class WorkType(models.Model):
     class Meta:
         verbose_name = _("Work type")
         verbose_name_plural = _("Work types")
+        ordering = ['label']
 
     def __str__(self):
         return self.label
@@ -110,6 +115,7 @@ class WorkMaterial(models.Model):
     class Meta:
         verbose_name = _("Work material")
         verbose_name_plural = _("Work materials")
+        ordering = ['label']
 
     def __str__(self):
         return self.label
@@ -121,6 +127,7 @@ class WorkState(models.Model):
     class Meta:
         verbose_name = _("Work state")
         verbose_name_plural = _("Work states")
+        ordering = ['label']
 
     def __str__(self):
         return self.label
@@ -132,6 +139,7 @@ class WorkBankEffect(models.Model):
     class Meta:
         verbose_name = _("Work bank effect")
         verbose_name_plural = _("Work bank effects")
+        ordering = ['label']
 
     def __str__(self):
         return self.label
@@ -148,12 +156,37 @@ class WorkStreamInfluence(models.Model):
         return self.label
 
 
+class WorkWaterEffect(models.Model):
+    label = models.CharField(verbose_name=_("Label"), max_length=128)
+
+    class Meta:
+        verbose_name = _("Work water effect")
+        verbose_name_plural = _("Work water effects")
+        ordering = ['label']
+
+    def __str__(self):
+        return self.label
+
+
+class WorkBedEffect(models.Model):
+    label = models.CharField(verbose_name=_("Label"), max_length=128)
+
+    class Meta:
+        verbose_name = _("Work bed effect")
+        verbose_name_plural = _("Work bed effects")
+        ordering = ['label']
+
+    def __str__(self):
+        return self.label
+
+
 class WorkSedimentEffect(models.Model):
     label = models.CharField(verbose_name=_("Label"), max_length=128)
 
     class Meta:
         verbose_name = _("Work sediment effect")
         verbose_name_plural = _("Work sediment effects")
+        ordering = ['label']
 
     def __str__(self):
         return self.label
@@ -165,6 +198,7 @@ class WorkFishContinuityEffect(models.Model):
     class Meta:
         verbose_name = _("Work fish continuity effect")
         verbose_name_plural = _("Work fish continuity effects")
+        ordering = ['label']
 
     def __str__(self):
         return self.label
@@ -234,11 +268,11 @@ class Vegetation(models.Model):
         null=True, blank=True,
         on_delete=models.CASCADE
     )
-    strata = models.ForeignKey(
+    stratas = models.ManyToManyField(
         'knowledge.VegetationStrata',
-        verbose_name=_("Vegetation Strata"),
-        null=True, blank=True,
-        on_delete=models.CASCADE
+        verbose_name=_("Vegetation Stratas"),
+        blank=True,
+        related_name='vegetations'
     )
     age_class_diversity = models.ForeignKey(
         'knowledge.VegetationAgeClassDiversity',
@@ -324,6 +358,27 @@ class Work(models.Model):
         verbose_name=_("Sediment effect"),
         null=True, blank=True,
         related_name='works',
+        on_delete=models.CASCADE
+    )
+    water_effect = models.ForeignKey(
+        'knowledge.WorkWaterEffect',
+        verbose_name=_("Water effect"),
+        null=True, blank=True,
+        related_name='works',
+        on_delete=models.CASCADE
+    )
+    upstream_bed_effect = models.ForeignKey(
+        'knowledge.WorkBedEffect',
+        verbose_name=_("Upstream bed effect"),
+        null=True, blank=True,
+        related_name='upstream_effect_works',
+        on_delete=models.CASCADE
+    )
+    downstream_bed_effect = models.ForeignKey(
+        'knowledge.WorkBedEffect',
+        verbose_name=_("Downstream bed effect"),
+        null=True, blank=True,
+        related_name='downstream_effect_works',
         on_delete=models.CASCADE
     )
     fish_continuity_effect = models.ForeignKey(

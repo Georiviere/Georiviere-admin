@@ -2,7 +2,7 @@ from django.forms import ModelForm
 from django.utils.translation import gettext_lazy as _
 
 from crispy_forms.helper import FormHelper
-from crispy_forms.layout import Layout, Div, Fieldset
+from crispy_forms.layout import Layout, Div, Fieldset, Field
 from crispy_forms.bootstrap import AppendedText
 from geotrek.common.forms import CommonForm
 
@@ -49,6 +49,16 @@ class KnowledgeForm(CommonForm):
 class VegetationForm(ModelForm):
     """Vegetation form, to be included in Knowledge form"""
 
+    fieldslayout = Layout(
+        "vegetation_type",
+        "state",
+        "thickness",
+        Field('stratas', css_class="chzn-select"),
+        "age_class_diversity",
+        "specific_diversity",
+        "other_information",
+    )
+
     class Meta:
         model = Vegetation
         exclude = ["knowledge"]
@@ -57,6 +67,7 @@ class VegetationForm(ModelForm):
         super().__init__(*args, **kwargs)
         self.helper = FormHelper()
         self.helper.form_tag = False
+        self.helper.layout = self.fieldslayout
         self.helper.form_class = 'form-horizontal'
         self.helper.label_class = 'col-md-auto'
         self.helper.field_class = 'controls col-md-auto'
@@ -74,6 +85,9 @@ class WorkForm(ModelForm):
         "downstream_influence",
         "upstream_influence",
         "sediment_effect",
+        "water_effect",
+        "downstream_bed_effect",
+        "upstream_bed_effect",
         "fish_continuity_effect",
         "usage",
         AppendedText("width", "m"),

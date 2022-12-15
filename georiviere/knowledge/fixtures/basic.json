@@ -42,13 +42,6 @@
     }
 },
 {
-    "model": "knowledge.vegetationstate",
-    "pk": 1,
-    "fields": {
-        "label": "Individus sains"
-    }
-},
-{
     "model": "knowledge.vegetationspecificdiversity",
     "pk": 1,
     "fields": {
@@ -67,6 +60,13 @@
     "pk": 3,
     "fields": {
         "label": ">10"
+    }
+},
+{
+    "model": "knowledge.vegetationstate",
+    "pk": 1,
+    "fields": {
+        "label": "Individus sains"
     }
 },
 {
@@ -333,6 +333,41 @@
     "pk": 6,
     "fields": {
         "label": ">50m"
+    }
+},
+{
+    "model": "knowledge.workwatereffect",
+    "pk": 1,
+    "fields": {
+        "label": "Oui"
+    }
+},
+{
+    "model": "knowledge.workwatereffect",
+    "pk": 2,
+    "fields": {
+        "label": "Non"
+    }
+},
+{
+    "model": "knowledge.workwatereffect",
+    "pk": 3,
+    "fields": {
+        "label": "Partiel"
+    }
+},
+{
+    "model": "knowledge.workbedeffect",
+    "pk": 1,
+    "fields": {
+        "label": "Dépôt"
+    }
+},
+{
+    "model": "knowledge.workbedeffect",
+    "pk": 2,
+    "fields": {
+        "label": "Érosion"
     }
 },
 {

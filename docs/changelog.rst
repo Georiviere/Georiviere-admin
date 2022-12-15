@@ -5,6 +5,11 @@ CHANGELOG
 1.0.2+dev    (XXXX-XX-XX)
 -------------------------
 
+**Enhancement**
+
+* Add fields to work : upstream and downstream bed impact, water impact
+* Change vegetation strata field into a multiselect field
+
 **Bug fixes**
 
 * Display flow and source in stream detail
