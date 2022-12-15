@@ -146,7 +146,7 @@ class Morphology(AddPropertyBufferMixin, TopologyMixin, TimeStampedModelMixin,
     secondary_flows = models.ManyToManyField(
         FlowType, verbose_name=_("Secondary flow"),
         blank=True,
-        related_name='flows_on_second'
+        related_name='morphologies_on_second'
     )
     granulometric_diversity = models.ForeignKey(
         GranulometricDiversity,

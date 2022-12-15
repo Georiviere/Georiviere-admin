@@ -13,7 +13,7 @@ class Migration(migrations.Migration):
         migrations.AddField(
             model_name='morphology',
             name='secondary_flows',
-            field=models.ManyToManyField(blank=True, related_name='flows_on_second', to='description.FlowType', verbose_name='Secondary flow'),
+            field=models.ManyToManyField(blank=True, related_name='morphologies_on_second', to='description.FlowType', verbose_name='Secondary flow'),
         ),
         migrations.AddField(
             model_name='morphology',
