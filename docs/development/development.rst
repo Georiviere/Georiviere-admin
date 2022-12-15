@@ -46,14 +46,14 @@ Tests
 
 .. code-block :: bash
 
-    docker-compose run --rm -e ENV=tests web ./manage.py test
+    docker-compose run --rm web ./manage.py test
 
 
 * With coverage :
 
 .. code-block :: bash
 
-    docker-compose run --rm -e ENV=tests web coverage run ./manage.py test
+    docker-compose run --rm web coverage run ./manage.py test
     docker-compose run --rm web coverage report -m
 
 
