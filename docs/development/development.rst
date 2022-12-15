@@ -1,6 +1,9 @@
 Install local Environment
 =========================
 
+Installation
+------------
+
 * Configuration
 
 To get local environment working, we recommend to use a custom domain, as 'georiviere.local'.
@@ -36,6 +39,9 @@ Set required values, for postgres database access
     docker-compose up
 
 
+Tests
+-----
+
 * Launch tests :
 
 .. code-block :: bash
@@ -50,15 +56,17 @@ Set required values, for postgres database access
     docker-compose run --rm web coverage run ./manage.py test
     docker-compose run --rm web coverage report -m
 
-* Dependencies :
 
-  * Manage all project dependencies with pip-tools
-  * Use included pip-tools to generate requirements (python version should match georiviere version)
+Dependencies
+------------
+
+* Manage all project dependencies with pip-tools
+* Use included pip-tools to generate requirements (python version should match georiviere version)
 
 
-* Global dependencies :
+Global dependencies:
 
-  * set global dependency in requirements.in
+Set global dependency in requirements.in
 
 .. code-block :: bash
 
@@ -66,7 +74,7 @@ Set required values, for postgres database access
 
 **pip-tools** does not upgrade any package by default. Package is upgrade only if new dependency require another version that already fixed in requirements.txt file.
 
-To upgrade a package, run :
+To upgrade a package, run:
 
 .. code-block :: bash
 
