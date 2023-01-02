@@ -3,7 +3,7 @@ from django.utils.translation import gettext_lazy as _
 from crispy_forms.layout import Div, Field
 from crispy_forms.bootstrap import AppendedText
 from dal import autocomplete
-from geotrek.common.forms import CommonForm
+from georiviere.main.forms import CommonForm
 
 from georiviere.knowledge.models import Knowledge
 from georiviere.main.widgets import DatePickerInput

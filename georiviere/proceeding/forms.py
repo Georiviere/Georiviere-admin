@@ -8,7 +8,7 @@ from crispy_forms.layout import Div
 from crispy_forms.layout import Layout, Fieldset
 from crispy_forms.helper import FormHelper
 
-from geotrek.common.forms import CommonForm
+from georiviere.main.forms import CommonForm
 
 from georiviere.main.widgets import DatePickerInput
 from georiviere.proceeding.models import Proceeding, Event

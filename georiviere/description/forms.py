@@ -4,7 +4,7 @@ from django.utils.translation import gettext_lazy as _
 from crispy_forms.layout import Field
 from crispy_forms.bootstrap import AppendedText
 
-from geotrek.common.forms import CommonForm
+from georiviere.main.forms import CommonForm
 
 from georiviere.description.models import Land, Status, Morphology, Usage
 

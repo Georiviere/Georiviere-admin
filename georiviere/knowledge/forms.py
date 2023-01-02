@@ -4,7 +4,7 @@ from django.utils.translation import gettext_lazy as _
 from crispy_forms.helper import FormHelper
 from crispy_forms.layout import Layout, Div, Fieldset, Field
 from crispy_forms.bootstrap import AppendedText
-from geotrek.common.forms import CommonForm
+from georiviere.main.forms import CommonForm
 
 from georiviere.knowledge.models import Knowledge, Vegetation, Work, FollowUp
 from georiviere.main.widgets import DatePickerInput

@@ -1,7 +1,6 @@
 from django import forms
 
-from geotrek.common.forms import CommonForm
-
+from georiviere.main.forms import CommonForm
 from georiviere.river.widgets import SourceLocationWidget
 from georiviere.river.fields import SnappedLineStringField
 from georiviere.river.models import Stream, Topology

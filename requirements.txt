@@ -90,7 +90,6 @@ django==3.2.16
     #   django-embed-video
     #   django-extensions
     #   django-filter
-    #   django-geojson
     #   django-leaflet
     #   django-modeltranslation
     #   django-mptt
@@ -132,8 +131,6 @@ django-extensions==3.1.5
     # via geotrek
 django-filter==21.1
     # via mapentity
-django-geojson==4.0.0
-    # via -r requirements.in
 django-js-asset==1.2.2
     # via django-mptt
 django-leaflet==0.19.post9
@@ -232,7 +229,7 @@ netifaces==0.11.0
     # via mapentity
 packaging==20.9
     # via drf-yasg
-paperclip==2.3.2
+paperclip==2.6.1
     # via
     #   -r requirements.in
     #   geotrek

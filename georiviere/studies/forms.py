@@ -1,5 +1,5 @@
 from crispy_forms.layout import Div, Field
-from geotrek.common.forms import CommonForm
+from georiviere.main.forms import CommonForm
 
 from georiviere.studies.models import Study
 from georiviere.river.fields import SnappedGeometryField

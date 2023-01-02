@@ -60,12 +60,11 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'easy_thumbnails',
     'embed_video',
-    'djgeojson',
     'django_filters',
     'compressor',
+    'paperclip',
     'mapentity',  # mapentity should be placed after app declaring paperclip models
     'leaflet',
-    'paperclip',
     'crispy_forms',
     'rest_framework',
     'modeltranslation',
@@ -94,6 +93,7 @@ STATICFILES_FINDERS = (
 
 PAPERCLIP_ATTACHMENT_MODEL = 'main.Attachment'
 PAPERCLIP_FILETYPE_MODEL = 'main.FileType'
+PAPERCLIP_LICENSE_MODEL = 'main.License'
 
 CRISPY_ALLOWED_TEMPLATE_PACKS = ('bootstrap', 'bootstrap3', 'bootstrap4')
 CRISPY_TEMPLATE_PACK = 'bootstrap4'

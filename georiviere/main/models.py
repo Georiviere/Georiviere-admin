@@ -1,7 +1,11 @@
 from django.conf import settings
 from django.db import models
 from django.utils.translation import gettext_lazy as _
-from paperclip.models import FileType as BaseFileType, Attachment as BaseAttachment
+from paperclip.models import (
+    FileType as BaseFileType,
+    Attachment as BaseAttachment,
+    License as BaseLicense
+)
 from geotrek.authent.models import StructureOrNoneRelated
 from geotrek.common.mixins.models import AddPropertyMixin
 
@@ -12,6 +16,10 @@ class FileType(StructureOrNoneRelated, BaseFileType):
 
 
 class Attachment(BaseAttachment):
+    pass
+
+
+class License(BaseLicense):
     pass
 
 
