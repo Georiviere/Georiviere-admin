@@ -4,6 +4,8 @@
 #
 #    pip-compile
 #
+-e git+https://github.com/GeotrekCE/Geotrek-admin.git@refactor-commonform#egg=geotrek
+    # via -r requirements.in
 amqp==5.0.5
     # via kombu
 appy==1.0.9
@@ -108,7 +110,7 @@ django-autocomplete-light[gfk]==3.8.2
     # via -r requirements.in
 django-celery-results==2.2.0
     # via geotrek
-django-clearcache @ git+https://github.com/timonweb/django-clearcache.git@6de7994
+django-clearcache==1.2.1
     # via geotrek
 django-colorfield==0.4.1
     # via geotrek
@@ -190,8 +192,6 @@ geojson==2.5.0
     # via
     #   geotrek
     #   tif2geojson
-geotrek @ git+https://github.com/GeotrekCE/Geotrek-admin.git@2.94.0
-    # via -r requirements.in
 gpxpy==1.5.0
     # via mapentity
 gunicorn==20.1.0
@@ -216,7 +216,7 @@ landez==2.5.0
     # via geotrek
 lxml==4.7.1
     # via mapentity
-mapentity==8.2.1
+mapentity==8.3.0
     # via
     #   -r requirements.in
     #   geotrek
