@@ -1,21 +1,23 @@
 from django.conf import settings
 from django.contrib import messages
-from django.contrib.gis.geos import Point
-from django.contrib.gis.db.models.functions import LineLocatePoint
-from django.core.exceptions import PermissionDenied
 from django.contrib.auth.mixins import LoginRequiredMixin
+from django.contrib.gis.db.models.functions import LineLocatePoint
+from django.contrib.gis.db.models.functions import Transform
+from django.contrib.gis.geos import Point
+from django.core.exceptions import PermissionDenied
 from django.db.utils import InternalError
 from django.http.response import HttpResponseRedirect
 from django.utils.translation import gettext as _
 from django.views.generic.edit import FormView
 
 from geotrek.authent.decorators import same_structure_required
+from mapentity import views as mapentity_views
+from mapentity.views import MapEntityViewSet
 
+from .filters import StreamFilterSet
 from .forms import CutTopologyForm, StreamForm
 from .models import Stream, Topology
-from .filters import StreamFilterSet
-
-from mapentity import views as mapentity_views
+from .serializers import StreamSerializer, StreamGeojsonSerializer
 
 
 class StreamList(mapentity_views.MapEntityList):
@@ -24,12 +26,19 @@ class StreamList(mapentity_views.MapEntityList):
     filterform = StreamFilterSet
 
 
-class StreamLayer(mapentity_views.MapEntityLayer):
-    queryset = Stream.objects.all()
+class StreamViewSet(MapEntityViewSet):
+    model = Stream
+    serializer_class = StreamSerializer
+    geojson_serializer_class = StreamGeojsonSerializer
+    filterset_class = StreamFilterSet
+    mapentity_list_class = StreamList
 
-
-class StreamJsonList(mapentity_views.MapEntityJsonList, StreamList):
-    pass
+    def get_queryset(self):
+        qs = self.model.objects.all()
+        if self.format_kwarg == 'geojson':
+            qs = qs.annotate(api_geom=Transform('geom', settings.API_SRID))
+            qs = qs.only('id', 'name')
+        return qs
 
 
 class StreamFormat(mapentity_views.MapEntityFormat):
