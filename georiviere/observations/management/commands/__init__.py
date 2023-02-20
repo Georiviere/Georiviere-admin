@@ -38,7 +38,7 @@ class BaseImportCommand(BaseCommand):
 
         response = requests.get(self.api_url, params=payload)
 
-        if response.status_code != 200:
+        if response.status_code not in [200, 206]:
             message = "Failed to fetch {}. Status code : {}.".format(
                 self.api_url,
                 response.status_code
