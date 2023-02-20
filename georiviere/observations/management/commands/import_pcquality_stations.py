@@ -7,7 +7,7 @@ from . import BaseImportCommand
 
 class Command(BaseImportCommand):
     help = "Import physico-chemical quality stations from Hub'Eau API"
-    api_url = "https://hubeau.eaufrance.fr/api/v1/qualite_rivieres/station_pc"
+    api_url = "https://hubeau.eaufrance.fr/api/v2/qualite_rivieres/station_pc"
     api_analyse_pc_url = "https://hubeau.eaufrance.fr/api/v1/qualite_rivieres/analyse_pc"
 
     def create_or_update_stations(self, results, verbosity, with_parameters=False):
