@@ -18,8 +18,10 @@ class Command(BaseImportCommand):
         if verbosity >= 2:
             if station_profile_created:
                 self.stdout.write('Created station profile {0}'.format(station_profile))
+        today = datetime.today().strftime('%d-%m-%Y')
 
         for station in results:
+            operations_uri = f"{self.operations_url}?debut=01-01-1990&fin={today}&stations={station['code_station_hydrobio']}"
             station_obj, station_created = Station.objects.update_or_create(
                 code=station['code_station'],
                 defaults={
@@ -31,6 +33,7 @@ class Command(BaseImportCommand):
                         srid='2154'
                     ),
                     'hardness': station['durete'],
+                    'operations_uri': operations_uri
                 }
             )
             if station['date_arret']:

@@ -6,6 +6,7 @@ from django.core.management.base import BaseCommand, CommandError
 class BaseImportCommand(BaseCommand):
     help = "Import whatever stations from Hub'Eau API"
     api_url = ""
+    operations_url = "https://naiades.eaufrance.fr/acces-donnees#/physicochimie/operations"
 
     def add_arguments(self, parser):
         parser.add_argument('--department', nargs='+', help="Department code")
