@@ -218,7 +218,7 @@ netifaces==0.11.0
     # via mapentity
 packaging==20.9
     # via drf-yasg
-paperclip==2.3.2
+paperclip==2.4.2
     # via
     #   -r requirements.in
     #   mapentity
