@@ -21,7 +21,7 @@ class Command(BaseImportCommand):
         today = datetime.today().strftime('%d-%m-%Y')
 
         for station in results:
-            operations_uri = f"{self.operations_url}?debut=01-01-1990&fin={today}&stations={station['code_station_hydrobio']}"
+            operations_uri = f"{self.operations_url}?debut=01-01-1990&fin={today}&stations={station['code_station']}"
             station_obj, station_created = Station.objects.update_or_create(
                 code=station['code_station'],
                 defaults={
