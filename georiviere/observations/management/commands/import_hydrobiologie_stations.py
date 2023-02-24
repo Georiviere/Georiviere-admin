@@ -52,7 +52,11 @@ class Command(BaseImportCommand):
                     'size': 50,
                     'code_station': station_obj.code,
                 }
-                response_firstpage = requests.get(self.api_analyse_indices, params=payload_indices)
+                try:
+                    response_firstpage = requests.get(self.api_analyse_indices, params=payload_indices)
+                except requests.exceptions.ConnectionError as e:
+                    self.stdout.write(f'Limit of connection has been exceeded {e}')
+                    continue
                 response_firstpage_content = response_firstpage.json()
                 indices_data = response_firstpage_content['data']
 
@@ -82,12 +86,12 @@ class Command(BaseImportCommand):
                     if codes_unit:
                         code_unit = codes_unit[0]
                         unit = Unit.objects.get(code=code_unit)
-
                     parameter_obj, parameter_created = Parameter.objects.get_or_create(
                         code=taxon['code_appel_taxon'],
                         defaults={
                             'label': taxon['libelle_appel_taxon'],
                             'unit': unit,
+                            'parameter_type': Parameter.ParameterTypeChoice.QUALITATIVE,
                         }
                     )
                     parameter_tracking, parameter_tracking_created = ParameterTracking.objects.get_or_create(

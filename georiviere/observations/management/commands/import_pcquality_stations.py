@@ -8,7 +8,7 @@ from . import BaseImportCommand
 class Command(BaseImportCommand):
     help = "Import physico-chemical quality stations from Hub'Eau API"
     api_url = "https://hubeau.eaufrance.fr/api/v2/qualite_rivieres/station_pc"
-    api_analyse_pc_url = "https://hubeau.eaufrance.fr/api/v1/qualite_rivieres/analyse_pc"
+    api_analyse_pc_url = "https://hubeau.eaufrance.fr/api/v2/qualite_rivieres/analyse_pc"
 
     def create_or_update_stations(self, results, verbosity, with_parameters=False):
         """Create or update stations from results"""
@@ -62,14 +62,22 @@ class Command(BaseImportCommand):
                     'size': 50,
                     'code_station': station_obj.code,
                 }
-                response_firstpage = requests.get(self.api_analyse_pc_url, params=payload)
+                try:
+                    response_firstpage = requests.get(self.api_analyse_pc_url, params=payload)
+                except requests.exceptions.ConnectionError as e:
+                    self.stdout.write(f'Limit of connection has been exceeded {e}')
+                    continue
                 response_firstpage_content = response_firstpage.json()
                 analysepc_data = response_firstpage_content['data']
 
                 # If there is more than one page, get data desc sorted
                 if response_firstpage_content['count'] > 50:
                     payload['sort'] = 'desc'
-                    response_desc_results = requests.get(self.api_analyse_pc_url, params=payload)
+                    try:
+                        response_desc_results = requests.get(self.api_analyse_pc_url, params=payload)
+                    except requests.exceptions.ConnectionError as e:
+                        self.stdout.write(f'Limit of connection has been exceeded {e}')
+                        continue
                     response_desc_data = response_desc_results.json()['data']
                     analysepc_data = analysepc_data + response_desc_data
 
