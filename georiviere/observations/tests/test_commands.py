@@ -300,3 +300,45 @@ class ImportStationWithParametersTest(TestCase):
 
         # Check output
         self.assertIn("Added parameter Potentiel en Hydrogène (pH)", out.getvalue())
+
+    def test_import_pcquality_stations_with_parameters_fail(self, mock_get):
+        """Test import PC Quality stations with parameters which fail
+        """
+        # Call command with parameters
+        out = StringIO()
+
+        def requests_get_mock_response_fail_connectionerror(*args, **kwargs):
+            """Build mock_response with test file data, according to api_url"""
+            # Get filename from api_url
+            filename = TEST_DATA_PATH / 'response_api_pcquality_stations.json'
+            if kwargs.get('code_station') == "05137100":
+                raise requests.exceptions.ConnectionError
+            if "analyse_pc" in args[0]:
+                filename = TEST_DATA_PATH / 'response_api_pcquality_analyse.json'
+
+            # Build response
+            mock_response = mock.Mock()
+            with open(filename, 'r') as f:
+                expected_dict = json.load(f)
+            mock_response.json.return_value = expected_dict
+            mock_response.status_code = 200
+            return mock_response
+
+        mock_get.side_effect = requests_get_mock_response_fail_connectionerror
+        call_command('import_pcquality_stations',
+                     verbosity=2,
+                     with_parameters=True,
+                     stdout=out)
+        self.assertEqual(Station.objects.count(), 28)
+        # Check stations imported
+        stations = Station.objects.all()
+        station = stations.get(code="05134550")
+        parameters_tracked = station.parametertracking_set.all()
+        self.assertEqual(parameters_tracked.count(), 14)
+        self.assertEqual(parameters_tracked.filter(parameter__label='Potentiel en Hydrogène (pH)').count(), 1)
+        ph_parameter_tracked = parameters_tracked.get(parameter__label='Potentiel en Hydrogène (pH)')
+        self.assertEqual(ph_parameter_tracked.parameter.unit.symbol, "unité pH")
+        self.assertEqual(ph_parameter_tracked.measure_start_date.strftime('%Y-%m-%d'), "2012-02-20")
+        # Only one parameter has been created because of connectionerror
+        self.assertEqual(ph_parameter_tracked.measure_end_date.strftime('%Y-%m-%d'), "2012-04-16")
+        self.assertEqual(ph_parameter_tracked.data_availability, ParameterTracking.DataAvailabilityChoice.ONDEMAND)
