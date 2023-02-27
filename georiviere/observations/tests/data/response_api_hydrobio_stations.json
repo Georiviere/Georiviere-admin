@@ -1,0 +1,115 @@
+{
+  "count": 1,
+  "first": "https://hubeau.eaufrance.fr/api/v1/hydrobio/stations_hydrobio?code_station_hydrobio=06000874&page=1&size=1000",
+  "last": null,
+  "prev": null,
+  "next": null,
+  "api_version": "1.0.0",
+  "data": [
+    {
+      "code_station_hydrobio": "06000874",
+      "libelle_station_hydrobio": "VIREMONT A VALZIN-EN-PETITE-MONTAGNE 1",
+      "uri_station_hydrobio": "http://id.eaufrance.fr/StationMesureEauxSurface/06000874",
+      "coordonnee_x": 901636.0,
+      "coordonnee_y": 6595038.0,
+      "code_projection": "2154",
+      "code_cours_eau": null,
+      "libelle_cours_eau": null,
+      "uri_cours_eau": null,
+      "code_masse_eau": null,
+      "libelle_masse_eau": null,
+      "uri_masse_eau": null,
+      "code_sous_bassin": null,
+      "libelle_sous_bassin": null,
+      "code_bassin": null,
+      "libelle_bassin": null,
+      "code_commune": "39290",
+      "libelle_commune": "Valzin en Petite Montagne",
+      "code_departement": "39",
+      "libelle_departement": "Jura",
+      "code_region": "27",
+      "libelle_region": "Bourgogne-Franche-Comté",
+      "codes_reseaux": null,
+      "libelles_reseaux": null,
+      "codes_supports": [
+        "13"
+      ],
+      "libelles_supports": [
+        "Macroinvertébrés aquatiques"
+      ],
+      "codes_appel_taxons": [
+        "837",
+        "1056",
+        "933",
+        "913",
+        "909",
+        "1043",
+        "704",
+        "697",
+        "693",
+        "807",
+        "819",
+        "2393",
+        "2394",
+        "457",
+        "1015",
+        "518",
+        "622",
+        "1024",
+        "994",
+        "2971",
+        "719"
+      ],
+      "libelles_appel_taxons": [
+        "Tabanidae",
+        "Dugesia",
+        "Oligochaeta",
+        "Helobdella stagnalis",
+        "Glossiphonia",
+        "Pisidium",
+        "Sialis",
+        "Libellula",
+        "Somatochlora",
+        "Chironomidae",
+        "Ceratopogonidae",
+        "Hydroporinae",
+        "Laccophilinae",
+        "Caenis",
+        "Gyraulus",
+        "Haliplus",
+        "Oulimnius",
+        "Planorbis",
+        "Bithynia",
+        "Branchiopoda",
+        "Micronecta"
+      ],
+      "codes_indices": [
+        "5910",
+        "6034",
+        "6035"
+      ],
+      "libelles_indices": [
+        "Indice dit \"équivalent\" (Phases A+B) de la méthode macroinvertébrés NF T90-333 ou protocole RCS antérieur",
+        "Variété taxonomique de l'indice dit \"équivalent\" (Phases A+B) de la méthode macroinvertébrés NF T90-333 ou protocole RCS antérieur",
+        "Groupe Faunistique Indicateur de l'indice dit \"équivalent\" (Phases A+B) de la méthode macroinvertébrés NF T90-333 ou protocole RCS antérieur"
+      ],
+      "latitude": 46.425124449197064,
+      "longitude": 5.626121763174408,
+      "geometry": {
+        "type": "Point",
+        "crs": {
+          "type": "name",
+          "properties": {
+            "name": "urn:ogc:def:crs:OGC:1.3:CRS84"
+          }
+        },
+        "coordinates": [
+          5.626121763174408,
+          46.425124449197064
+        ]
+      },
+      "date_premier_prelevement": "2017-07-24",
+      "date_dernier_prelevement": "2017-07-24"
+    }
+  ]
+}
