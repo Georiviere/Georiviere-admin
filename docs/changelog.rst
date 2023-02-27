@@ -8,6 +8,9 @@ CHANGELOG
 **Enhancement**
 
 * Add possibility to create attachment with external link
+* Add command import hydrobiologie stations hubeau
+* Upgrade api hubeau PC quality
+
 
 1.0.3 (2022-12-15)
 -------------------------
