@@ -7,6 +7,7 @@ CHANGELOG
 
 **Enhancement**
 
+* Add possibility to show geometries overprinted on topologies (#105)
 * Add possibility to create attachment with external link
 
 1.0.3 (2022-12-15)

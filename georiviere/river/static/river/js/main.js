@@ -42,6 +42,27 @@ $(window).on('entity:map', function (e, data) {
 	var is_detail_view = /detail/.test(data.viewname);
     if (is_detail_view && (data.modelname == 'status' || data.modelname == 'morphology')) {
         map.on("layeradd", function(layer) {
+            if (map.filecontrol === undefined){
+                var pointToLayer = function (feature, latlng) {
+                    return L.circleMarker(latlng, {style: window.SETTINGS.map.styles.filelayer})
+                            .setRadius(window.SETTINGS.map.styles.filelayer.radius);
+                },
+                onEachFeature = function (feature, layer) {
+                    if (feature.properties.name) {
+                        layer.bindLabel(feature.properties.name);
+                    }
+                },
+                filecontrol = L.Control.fileLayerLoad({
+                    fitBounds: true,
+                    position: 'topleft',
+                    layerOptions: {style: window.SETTINGS.map.styles.filelayer,
+                                   pointToLayer: pointToLayer,
+                                   onEachFeature: onEachFeature,}
+
+                });
+                map.filecontrol = filecontrol;
+                map.addControl(filecontrol);
+            };
             if (map.cutControl === undefined){
                 var cutControl = new L.Control.PointTopology(map, layer, {});
 
