@@ -1,6 +1,8 @@
 from factory import django, Sequence, SubFactory, post_generation
 
+from georiviere.description.tests.factories import LandFactory
 from georiviere.maintenance import models
+from georiviere.river.tests.factories import StreamFactory, WithStreamFactory
 
 
 class InterventionStatusFactory(django.DjangoModelFactory):
@@ -44,3 +46,27 @@ class InterventionFactory(django.DjangoModelFactory):
     def create_intervention(obj, create, extracted, **kwargs):
         if obj.pk:
             obj.disorders.add(InterventionDisorderFactory.create())
+
+
+class InterventionWithTargetFactory(InterventionFactory):
+    class Meta:
+        model = models.Intervention
+
+    @post_generation
+    def create_target_intervention(obj, create, extracted, **kwargs):
+        land = LandFactory.create(geom='SRID=2154;POINT (700040 6600040)')
+        obj.target = land
+        if create:
+            obj.save()
+
+    @post_generation
+    def with_stream(obj, create, with_stream):
+        # First generate create_target_intervention and then with stream.
+        # We add the with stream here and do not use WithStreamFactory because it needs to be after
+        # create_target_intervention
+        if not create or not with_stream:
+            return
+        if with_stream and obj.geom:
+            # Status / Morphology is already on a stream
+            # It should not add this next stream in distance to source
+            StreamFactory.create(geom_around=obj.geom)

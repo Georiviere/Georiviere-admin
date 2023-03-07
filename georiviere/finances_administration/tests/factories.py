@@ -6,6 +6,7 @@ from georiviere.observations.tests.factories import StationFactory
 from georiviere.studies.tests.factories import StudyFactory
 
 from georiviere.finances_administration import models
+from georiviere.river.tests.factories import WithStreamFactory
 
 
 class AdministrativeDeferralFactory(factory.django.DjangoModelFactory):
@@ -36,7 +37,7 @@ class AdministrativeFileDomainFactory(factory.django.DjangoModelFactory):
     label = factory.Sequence(lambda n: "Domain %s" % n)
 
 
-class AdministrativeFileFactory(factory.django.DjangoModelFactory):
+class AdministrativeFileFactory(WithStreamFactory, factory.django.DjangoModelFactory):
     class Meta:
         model = models.AdministrativeFile
 

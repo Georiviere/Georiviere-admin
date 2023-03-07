@@ -12,6 +12,17 @@ class ClassificationWaterPolicyFactory(factory.django.DjangoModelFactory):
         model = ClassificationWaterPolicy
 
 
+class WithStreamFactory(factory.django.DjangoModelFactory):
+    @factory.post_generation
+    def with_stream(obj, create, with_stream):
+        if not create or not with_stream:
+            return
+        if with_stream and obj.geom:
+            # Status / Morphology is already on a stream
+            # It should not add this next stream in distance to source
+            StreamFactory.create(geom_around=obj.geom)
+
+
 class StreamFactory(BaseLineStringFactory):
     name = factory.Sequence(lambda n: 'stream-%d' % n)
     structure = factory.SubFactory(StructureFactory)
