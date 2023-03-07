@@ -4,7 +4,7 @@ from django.test import TestCase
 
 from georiviere.finances_administration.tests.factories import AdministrativeFileFactory
 from georiviere.description.tests.factories import MorphologyFactory, StatusFactory, UsageFactory
-from georiviere.river.models import Stream
+from georiviere.river.models import DistanceToSource, Stream
 from georiviere.river.tests.factories import TopologyFactory, StreamFactory, ClassificationWaterPolicyFactory
 
 
@@ -54,8 +54,15 @@ class StreamSourceLocationTest(TestCase):
 
     def test_distance_to_source(self):
         """Test distance from a given object to stream source according to differents geom"""
-        self.assertAlmostEqual(self.stream1.distance_to_source(self.usage_point), 20)
+        self.assertAlmostEqual(self.stream1.distance_to_source(self.usage_point), 28.2842712)
         self.assertEqual(self.stream1.distance_to_source(self.administrative_file), None)
+        self.assertEqual(DistanceToSource.objects.count(), 6)
+        usage_point = UsageFactory.create(
+            geom=Point(10000, 10010)
+        )
+        self.assertEqual(DistanceToSource.objects.count(), 8)
+        usage_point.delete()
+        self.assertEqual(DistanceToSource.objects.count(), 6)
 
 
 class SnapTest(TestCase):
