@@ -2,7 +2,7 @@ from factory import django, Sequence, SubFactory, post_generation
 
 from georiviere.description.tests.factories import LandFactory
 from georiviere.maintenance import models
-from georiviere.river.tests.factories import StreamFactory, WithStreamFactory
+from georiviere.river.tests.factories import StreamFactory
 
 
 class InterventionStatusFactory(django.DjangoModelFactory):
