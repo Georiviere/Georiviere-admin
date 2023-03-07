@@ -198,3 +198,6 @@ Stream.add_property('stations', Station.within_buffer, _("Stations"))
 Stream.add_property('studies', Study.within_buffer, _("Studies"))
 Stream.add_property('knowledges', Knowledge.within_buffer, _("Knowledges"))
 Stream.add_property('proceedings', Proceeding.within_buffer, _("Proceedings"))
+
+Intervention.add_property('streams', Stream.within_buffer, _("Stream"))
+AdministrativeFile.add_property('streams', Stream.within_buffer, _("Stream"))
