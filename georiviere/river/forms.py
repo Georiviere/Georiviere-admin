@@ -1,4 +1,5 @@
 from django import forms
+from django.contrib.gis.forms.fields import GeometryField
 
 from geotrek.common.forms import CommonForm
 

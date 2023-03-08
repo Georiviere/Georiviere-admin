@@ -1,16 +1,21 @@
 from django.conf import settings
 from django.contrib import messages
+from django.contrib.gis.db.models.functions import Distance
 from django.contrib.gis.geos import Point
 from django.contrib.gis.db.models.functions import LineLocatePoint
 from django.core.exceptions import PermissionDenied
 from django.contrib.auth.mixins import LoginRequiredMixin
+from django.db.models import F, FloatField, Case, Min, When
 from django.db.utils import InternalError
+from django.http import JsonResponse
 from django.http.response import HttpResponseRedirect
 from django.utils.translation import gettext as _
 from django.views.generic.edit import FormView
-
+from django.views.generic.base import View
 from geotrek.authent.decorators import same_structure_required
 
+from georiviere.functions import ClosestPoint, Length, LineSubString, LineLocatePoint
+from georiviere.main.decorators import same_structure_required_with_fallback
 from .forms import CutTopologyForm, StreamForm
 from .models import Stream, Topology
 from .filters import StreamFilterSet
@@ -102,8 +107,9 @@ class TopologyAddDeleteMixin(object):
 
 class CutTopologyView(LoginRequiredMixin, FormView):
     form_class = CutTopologyForm
+    http_method_names = ['post']
 
-    @same_structure_required('river:stream_detail')
+    @same_structure_required_with_fallback('river:stream_detail', 'river:stream_list')
     def dispatch(self, *args, **kwargs):
         return super().dispatch(*args, **kwargs)
 
@@ -143,3 +149,39 @@ class CutTopologyView(LoginRequiredMixin, FormView):
 
         messages.success(self.request, _("Topology has been cut"))
         return HttpResponseRedirect(duplicate_instance.get_detail_url())
+
+
+class DistanceToSourceView(LoginRequiredMixin, View):
+    http_method_names = ['get']
+
+    def get(self, request, *args, **kwargs):
+        geom_point = Point(x=float(request.GET['lng_distance']),
+                           y=float(request.GET['lat_distance']),
+                           srid=4326).transform(settings.SRID, clone=True)
+        streams = Stream.objects.annotate(distance=Distance(
+            F('geom'), geom_point, output_field=FloatField()))
+        stream_min_distance = streams.aggregate(
+            min_distance=Min(F('distance'))
+        )['min_distance']
+
+        streams = streams.annotate(locate_source=LineLocatePoint(F('geom'),
+                                                                 F('source_location')),
+                                   locate_point=LineLocatePoint(F('geom'),
+                                                                 ClosestPoint(F('geom'),
+                                                                              geom_point)),
+                                   locate=Length(LineSubString(F('geom'),
+                                                               Case(
+                                                                   When(locate_source__gte=F('locate_point'),
+                                                                        then=F('locate_point')),
+                                                                   default=F('locate_source')
+                                                               ),
+                                                               Case(
+                                                                   When(locate_source__gte=F('locate_point'),
+                                                                        then=F('locate_source')),
+                                                                   default=F('locate_point')
+                                                               ))) + F('distance') +
+                                          Distance(F('geom'),
+                                                   F('source_location'),
+                                                   output_field=FloatField())).filter(
+            distance=stream_min_distance)
+        return JsonResponse({"distance": round(streams.first().locate, 1)})

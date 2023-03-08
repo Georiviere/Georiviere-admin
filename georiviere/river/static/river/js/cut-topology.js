@@ -175,7 +175,23 @@ L.Handler.PointTopology = L.Draw.Marker.extend({
                 L.GeometryUtil.extract(this._map,
                     this._guidesLayer,
                     L.GeometryUtil.locateOnLine(this._map, this._guidesLayer, e.latlng), 0));
-            marker.bindPopup(content.html()).openPopup();
+                $.ajax({
+                    url: window.SETTINGS.urls['distance_to_source'],
+                    type: 'GET',
+                    dataType: 'json',
+                    data: {
+                        "lat_distance": e.latlng.lat,
+                        "lng_distance": e.latlng.lng
+                    },
+                    success: function(data) {
+                        this._helpText = data;
+                        $('#distance-on-topology').text(data['distance'] + " m")
+                        marker.bindPopup(content.html()).openPopup();
+                    },
+                    error: function(data) {
+                        marker.bindPopup(content.html()).openPopup();
+                    }
+                });
         }, this);
         marker.on('unsnap', function (e) {
                   marker.closePopup();
