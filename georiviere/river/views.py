@@ -184,4 +184,4 @@ class DistanceToSourceView(LoginRequiredMixin, View):
                                                                       output_field=FloatField())
                                    ).filter(distance=stream_min_distance)
 
-        return JsonResponse({"distance": round(streams.first().locate, 1) if streams else 0})
+        return JsonResponse({"distance": round(streams.first().locate.m, 1) if streams else 0})

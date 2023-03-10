@@ -37,7 +37,7 @@ def save_objects_generate_distance_to_source(sender, instance, **kwargs):
                 object_id=instance.pk,
                 content_type=ContentType.objects.get_for_model(instance._meta.model),
                 stream=stream,
-                defaults={"distance": stream.locate}
+                defaults={"distance": stream.locate.m}
             )
         if not kwargs.get('created'):
             DistanceToSource.objects.filter(object_id=instance.pk,
@@ -50,7 +50,7 @@ def save_objects_generate_distance_to_source(sender, instance, **kwargs):
             object_id=instance.pk,
             content_type=ContentType.objects.get_for_model(instance._meta.model),
             stream=stream,
-            defaults={"distance": stream.locate}
+            defaults={"distance": stream.locate.m}
         )
 
 

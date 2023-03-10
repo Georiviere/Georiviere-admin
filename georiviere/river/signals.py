@@ -58,7 +58,7 @@ def save_stream_generate_distance_to_source(sender, instance, **kwargs):
                     object_id=object_topology.pk,
                     content_type=ContentType.objects.get_for_model(object_topology._meta.model),
                     stream=instance,
-                    defaults={"distance": object_topology.locate}
+                    defaults={"distance": object_topology.locate.m}
                 )[0].pk)
             if not kwargs['created']:
                 DistanceToSource.objects.exclude(pk__in=distances_to_sources).filter(stream=instance.pk, content_type=ContentType.objects.get_for_model(model)).delete()
