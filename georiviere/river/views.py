@@ -2,7 +2,7 @@ from django.conf import settings
 from django.contrib import messages
 from django.contrib.gis.db.models.functions import Distance
 from django.contrib.gis.geos import Point
-from django.contrib.gis.db.models.functions import LineLocatePoint
+from django.contrib.gis.db.models.functions import Length, LineLocatePoint
 from django.core.exceptions import PermissionDenied
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.db.models import F, FloatField, Case, Min, When
@@ -14,7 +14,7 @@ from django.views.generic.edit import FormView
 from django.views.generic.base import View
 from geotrek.authent.decorators import same_structure_required
 
-from georiviere.functions import ClosestPoint, Length, LineSubString, LineLocatePoint
+from georiviere.functions import ClosestPoint, LineSubString
 from georiviere.main.decorators import same_structure_required_with_fallback
 from .forms import CutTopologyForm, StreamForm
 from .models import Stream, Topology
@@ -163,26 +163,25 @@ class DistanceToSourceView(LoginRequiredMixin, View):
         stream_min_distance = streams.aggregate(
             min_distance=Min(F('distance'))
         )['min_distance']
-
         streams = streams.annotate(locate_source=LineLocatePoint(F('geom'),
                                                                  F('source_location')),
                                    locate_point=LineLocatePoint(F('geom'),
-                                                                 ClosestPoint(F('geom'),
-                                                                              geom_point)),
-                                   locate=Length(LineSubString(F('geom'),
-                                                               Case(
-                                                                   When(locate_source__gte=F('locate_point'),
-                                                                        then=F('locate_point')),
-                                                                   default=F('locate_source')
-                                                               ),
-                                                               Case(
-                                                                   When(locate_source__gte=F('locate_point'),
-                                                                        then=F('locate_source')),
-                                                                   default=F('locate_point')
-                                                               ))) + F('distance') +
-                                          Distance(F('geom'),
-                                                   F('source_location'),
-                                                   output_field=FloatField())).filter(
-            distance=stream_min_distance)
+                                                                ClosestPoint(F('geom'),
+                                                                             geom_point)),
+                                   locate=Length(LineSubString(
+                                       F('geom'),
+                                       Case(
+                                           When(locate_source__gte=F('locate_point'),
+                                                then=F('locate_point')),
+                                           default=F('locate_source')
+                                       ),
+                                       Case(
+                                           When(locate_source__gte=F('locate_point'),
+                                                then=F('locate_source')),
+                                           default=F('locate_point')
+                                       ))) + F('distance') + Distance(F('geom'),
+                                                                      F('source_location'),
+                                                                      output_field=FloatField())
+                                   ).filter(distance=stream_min_distance)
 
         return JsonResponse({"distance": round(streams.first().locate, 1) if streams else 0})

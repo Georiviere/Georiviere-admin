@@ -8,7 +8,7 @@ from tempfile import TemporaryDirectory
 from geotrek.authent.tests.factories import StructureFactory, UserFactory
 
 from georiviere.tests import CommonRiverTest
-from georiviere.description.tests.factories import LandFactory, StatusOnStreamFactory
+from georiviere.description.tests.factories import StatusOnStreamFactory
 from georiviere.description.models import Status
 from georiviere.river.models import Stream
 from georiviere.river.tests.factories import StreamFactory

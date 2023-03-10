@@ -23,6 +23,6 @@ class StreamEntityOptions(AltimetryEntityOptions):
 
 urlpatterns = [
     path('cut_topology/', CutTopologyView.as_view(), name='cut_topology'),
-    path('distance_to_source', DistanceToSourceView.as_view(),  name='distance_to_source')
+    path('distance_to_source', DistanceToSourceView.as_view(), name='distance_to_source')
 ]
 urlpatterns += registry.register(Stream, StreamEntityOptions)

@@ -1,13 +1,13 @@
 from django.apps import apps
 from django.conf import settings
 from django.contrib.contenttypes.models import ContentType
-from django.contrib.gis.db.models.functions import Distance
+from django.contrib.gis.db.models.functions import Distance, Length, LineLocatePoint
 from django.db.models.signals import post_save
 from django.db.models.fields.reverse_related import OneToOneRel
 from django.db.models import F, FloatField, Case, When
 from django.dispatch import receiver
 
-from georiviere.functions import ClosestPoint, Length, LineSubString, LineLocatePoint
+from georiviere.functions import ClosestPoint, LineSubString
 from georiviere.main.models import DistanceToSource
 from georiviere.river.models import Stream, Topology, TopologyMixin
 

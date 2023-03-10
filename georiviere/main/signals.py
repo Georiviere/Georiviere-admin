@@ -1,8 +1,8 @@
-from django.contrib.gis.db.models.functions import Distance
+from django.contrib.gis.db.models.functions import Distance, Length, LineLocatePoint
 from django.contrib.contenttypes.models import ContentType
 from django.db.models import F, FloatField, Case, When
 
-from georiviere.functions import ClosestPoint, Length, LineSubString, LineLocatePoint
+from georiviere.functions import ClosestPoint, LineSubString
 from georiviere.river.models import Stream
 from georiviere.main.models import DistanceToSource
 
