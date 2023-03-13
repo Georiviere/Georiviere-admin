@@ -87,6 +87,11 @@ $(window).on('entity:map', function (e, data) {
             }
             distanceControl.handler.reset();
            }, this);
-
+        map.on('popupclose', function(){
+            if (loaded_river) {
+                map.removeLayer(layer);
+                loaded_river = false;
+            }
+           }, this);
 	}
 });
