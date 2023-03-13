@@ -201,7 +201,10 @@ class Morphology(AddPropertyBufferMixin, TopologyMixin, TimeStampedModelMixin,
         verbose_name_plural = _("Morphologies")
 
     def __str__(self):
-        return f"{self.main_flow}"
+        if self.main_flow:
+            return f"{self.main_flow}"
+        else:
+            return f"{self.pk}"
 
     @classproperty
     def name_verbose_name(cls):
