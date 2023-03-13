@@ -56,11 +56,12 @@ class MorphologyTest(TestCase):
 
     def test_str(self):
         morpho1 = factories.MorphologyFactory.create()
+        pk_morpho = morpho1.pk
         morpho2 = factories.MorphologyFactory.create(
             main_flow=factories.FlowTypeFactory.create(label="Plat"),
             full_edge_width=15.0,
         )
-        self.assertEqual(str(morpho1), "None")
+        self.assertEqual(str(morpho1), str(pk_morpho))
         self.assertEqual(str(morpho2), "Plat")
         self.assertHTMLEqual(
             morpho2.main_flow_display,
