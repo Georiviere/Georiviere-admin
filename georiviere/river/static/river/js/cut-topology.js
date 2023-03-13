@@ -185,7 +185,7 @@ L.Handler.PointTopology = L.Draw.Marker.extend({
                     },
                     success: function(data) {
                         this._helpText = data;
-                        $('#distance-on-topology').text(data['distance'] + " m")
+                        $('#distance-on-topology').text(tr('Distance to source') + " : " + data['distance'] + " m");
                         marker.bindPopup(content.html()).openPopup();
                     },
                     error: function(data) {

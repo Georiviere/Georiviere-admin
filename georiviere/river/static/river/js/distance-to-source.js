@@ -145,7 +145,7 @@ L.Handler.PointDistance = L.Draw.Marker.extend({
             success: function(data) {
                 this._helpText = data;
 
-                marker.bindPopup("<div><b>" + data['distance'] + " m</b></div>").openPopup()
+                marker.bindPopup("<div><b>"+ tr('Distance to source') + " : " + data['distance'] + " m</b></div>").openPopup()
             }
         });
         this._map.on('popupclose', function(e) {

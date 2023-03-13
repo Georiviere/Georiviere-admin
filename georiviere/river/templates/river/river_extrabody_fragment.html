@@ -1,10 +1,12 @@
 {% load static i18n geojson_tags %}
 <script type="text/javascript">
     MapEntity.i18n['Streams'] = "{% trans "Streams" %}";
+    MapEntity.i18n['Distance to source'] = "{% trans "Distance to source" %}";
     MapEntity.i18n['Cut topology'] = "{% trans 'Cut topology' %}";
     MapEntity.i18n['Click map to place marker, then move it to snap with the topology.'] = "{% trans "Click map to place marker, then move it to snap with the topology." %}";
 
     L.Control.PointTopology.TITLE = "{% trans 'Cut topology' %}";
+    L.Control.PointDistance.TITLE = "{% trans 'Distance to source' %}";
 
     window.SETTINGS.urls['stream_layer'] = "{% url "river:stream_layer" %}";
     window.SETTINGS.urls['distance_to_source'] = "{% url "river:distance_to_source" %}";
