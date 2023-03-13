@@ -76,6 +76,8 @@ class StationForm(CommonForm):
                     'label',
                     'description',
                     'station_uri',
+                    'operations_uri',
+                    'annex_uri',
                     'site_code',
                     'purpose_code',
                     'in_service',

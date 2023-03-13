@@ -6,48 +6,38 @@ from . import BaseImportCommand
 
 
 class Command(BaseImportCommand):
-    help = "Import physico-chemical quality stations from Hub'Eau API"
-    api_url = "https://hubeau.eaufrance.fr/api/v2/qualite_rivieres/station_pc"
-    api_analyse_pc_url = "https://hubeau.eaufrance.fr/api/v2/qualite_rivieres/analyse_pc"
+    help = "Import hydro-biological quality stations from Hub'Eau API"
+
+    api_url = "https://hubeau.eaufrance.fr/api/v1/hydrobio/stations_hydrobio"
+    api_analyse_taxons = "https://hubeau.eaufrance.fr/api/v1/hydrobio/taxons"
+    api_analyse_indices = "https://hubeau.eaufrance.fr/api/v1/hydrobio/indices"
 
     def create_or_update_stations(self, results, verbosity, with_parameters=False):
         """Create or update stations from results"""
         station_profile, station_profile_created = StationProfile.objects.get_or_create(
-            code='PCQUAL'
+            code='HYDROB'
         )
         if verbosity >= 2:
             if station_profile_created:
                 self.stdout.write('Created station profile {0}'.format(station_profile))
         today = datetime.today().strftime('%d-%m-%Y')
-
         for station in results:
-            operations_uri = f"{self.operations_url}?debut=01-01-1990&fin={today}&stations={station['code_station']}"
+            operations_uri = f"{self.operations_url}?debut=01-01-1990&fin={today}&stations={station['code_station_hydrobio']}"
             station_obj, station_created = Station.objects.update_or_create(
-                code=station['code_station'],
+                code=station['code_station_hydrobio'],
                 defaults={
-                    'label': station['libelle_station'] or "",
-                    'station_uri': station['uri_station'] or "",
+                    'label': station['libelle_station_hydrobio'] or "",
+                    'station_uri': station['uri_station_hydrobio'] or "",
                     'geom': Point(
                         station['coordonnee_x'],
                         station['coordonnee_y'],
                         srid='2154'
                     ),
-                    'hardness': station['durete'],
                     'operations_uri': operations_uri
                 }
             )
-            if station['date_arret']:
-                station_obj.in_service = False
-            else:
-                station_obj.in_service = True
             station_obj.save()
             station_obj.station_profiles.add(station_profile)
-
-            # Get data availability for this station (will be used in parameter_tracked)
-            if station['nature'] == 'M':
-                data_availability = ParameterTracking.DataAvailabilityChoice.ONDEMAND
-            elif station['nature'] == 'A':
-                data_availability = ParameterTracking.DataAvailabilityChoice.ONLINE
 
             if verbosity >= 2:
                 if station_created:
@@ -57,60 +47,66 @@ class Command(BaseImportCommand):
 
             if with_parameters:
                 # Get 50 first and 50 last parameters from analyse_pc API endpoint
-                payload = {
+                payload_indices = {
                     'format': 'json',
                     'size': 50,
                     'code_station': station_obj.code,
                 }
                 try:
-                    response_firstpage = requests.get(self.api_analyse_pc_url, params=payload)
+                    response_firstpage = requests.get(self.api_analyse_indices, params=payload_indices)
                 except requests.exceptions.ConnectionError as e:
                     self.stdout.write(f'Limit of connection has been exceeded {e}')
                     continue
                 response_firstpage_content = response_firstpage.json()
-                analysepc_data = response_firstpage_content['data']
+                indices_data = response_firstpage_content['data']
 
-                # If there is more than one page, get data desc sorted
-                if response_firstpage_content['count'] > 50:
-                    payload['sort'] = 'desc'
-                    try:
-                        response_desc_results = requests.get(self.api_analyse_pc_url, params=payload)
-                    except requests.exceptions.ConnectionError as e:
-                        self.stdout.write(f'Limit of connection has been exceeded {e}')
-                        continue
-                    response_desc_data = response_desc_results.json()['data']
-                    analysepc_data = analysepc_data + response_desc_data
-
-                for measure in analysepc_data:
-
-                    # Create Parameter and Unit for temperature
+                for indice in indices_data:
+                    # Create Unit for indices
                     unit_obj, unit_created = Unit.objects.get_or_create(
-                        code=measure['code_unite'],
+                        code=indice['code_indice'],
                         defaults={
-                            'label': measure['symbole_unite'],
-                            'symbol': measure['symbole_unite'],
+                            'label': indice['unite_indice'],
+                            'symbol': indice['unite_indice'],
                         }
                     )
+                    if verbosity >= 2 and unit_created:
+                        self.stdout.write('Added parameter {0}'.format(unit_obj))
+                payload_taxons = {
+                    'format': 'json',
+                    'size': 50,
+                    'code_station': station_obj.code,
+                }
+                response_firstpage = requests.get(self.api_analyse_taxons, params=payload_taxons)
+                response_firstpage_content = response_firstpage.json()
+                taxons_data = response_firstpage_content['data']
+
+                for taxon in taxons_data:
+                    codes_unit = taxon['codes_indices_operation']
+                    unit = None
+                    if codes_unit:
+                        code_unit = codes_unit[0]
+                        unit = Unit.objects.get(code=code_unit)
                     parameter_obj, parameter_created = Parameter.objects.get_or_create(
-                        code=measure['code_parametre'],
+                        code=taxon['code_appel_taxon'],
                         defaults={
-                            'label': measure['libelle_parametre'],
-                            'unit': unit_obj,
+                            'label': taxon['libelle_appel_taxon'],
+                            'unit': unit,
+                            'parameter_type': Parameter.ParameterTypeChoice.QUALITATIVE,
                         }
                     )
                     parameter_tracking, parameter_tracking_created = ParameterTracking.objects.get_or_create(
                         station=station_obj,
                         parameter=parameter_obj,
                         defaults={
-                            'label': measure['libelle_parametre'],
+                            'label': taxon['libelle_appel_taxon'],
                             'measure_frequency': "",
                             'transmission_frequency': "",
-                            'data_availability': data_availability,
+                            'data_availability': ParameterTracking.DataAvailabilityChoice.ONLINE,
                         }
                     )
 
                     # Set start and end measure date
-                    measure_date = datetime.strptime(measure['date_prelevement'], '%Y-%m-%d').date()
+                    measure_date = datetime.strptime(taxon['date_prelevement'], '%Y-%m-%dT%H:%M:%SZ').date()
 
                     if not parameter_tracking.measure_start_date or parameter_tracking.measure_start_date > measure_date:
                         parameter_tracking.measure_start_date = measure_date

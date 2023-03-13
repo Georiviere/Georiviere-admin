@@ -15,6 +15,7 @@ class StationViewTestCase(CommonRiverTest):
 
     def get_expected_json_attrs(self):
         return {
+            'annex_uri': '',
             'id': self.obj.pk,
             'code': self.obj.code,
             'date_insert': '2020-03-17T00:00:00Z',
@@ -25,6 +26,7 @@ class StationViewTestCase(CommonRiverTest):
             'in_service': self.obj.in_service,
             'label': self.obj.label,
             'local_influence': self.obj.local_influence,
+            'operations_uri': '',
             'purpose_code': self.obj.purpose_code,
             'site_code': self.obj.site_code,
             'station_profiles': [],
@@ -55,7 +57,8 @@ class StationViewTestCase(CommonRiverTest):
             'label': 'test',
             'station_profiles': [station_profile.pk],
             'local_influence': Station.LocalInfluenceChoices.UNKNOWN,
-
+            'operations_uri': 'https://fad.dtr',
+            'annex_uri': 'https://fad.dtr',
             'parametertracking_set-TOTAL_FORMS': '2',
             'parametertracking_set-INITIAL_FORMS': '0',
             'parametertracking_set-MAX_NUM_FORMS': '',

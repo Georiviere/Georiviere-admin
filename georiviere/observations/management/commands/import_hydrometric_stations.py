@@ -6,6 +6,7 @@ from . import BaseImportCommand
 class Command(BaseImportCommand):
     help = "Import hydrometry stations from Hub'Eau API"
     api_url = "https://hubeau.eaufrance.fr/api/v1/hydrometrie/referentiel/stations"
+    operations_url = " https://www.hydro.eaufrance.fr/sitehydro/"
 
     def create_or_update_stations(self, results, verbosity, with_parameters=False):
         """Create or update stations from results"""
@@ -21,6 +22,7 @@ class Command(BaseImportCommand):
             uri_station = "https://id.eaufrance.fr/StationHydro/{}".format(
                 station['code_station'],
             ) or ""
+            operations_uri = f"{self.operations_url}{station['code_station']}/series"
             station_obj, station_created = Station.objects.update_or_create(
                 code=station['code_station'],
                 defaults={
@@ -35,6 +37,7 @@ class Command(BaseImportCommand):
                         station['coordonnee_y_station'],
                         srid='2154'
                     ),
+                    'operations_uri': operations_uri,
                     'local_influence': station['influence_locale_station'] or Station.LocalInfluenceChoices.UNKNOWN,
                 }
             )
