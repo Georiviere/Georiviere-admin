@@ -115,7 +115,7 @@ class CutTopologyTestCase(TestCase):
         cls.user = UserFactory(password='booh')
 
     def setUp(self):
-        self.client.login(username=self.user.username, password="booh")
+        self.client.force_login(self.user)
 
     def test_cut_topology(self):
         geom = GEOSGeometry('SRID=4326;LINESTRING(3 40, 4 40, 5 40)')
@@ -164,7 +164,7 @@ class DistanceToSourceTestCase(TestCase):
         cls.user = UserFactory(password='booh')
 
     def setUp(self):
-        self.client.login(username=self.user.username, password="booh")
+        self.client.force_login(self.user)
 
     def test_distance_to_source(self):
         geom = GEOSGeometry('SRID=4326;POINT(3 40)')

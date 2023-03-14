@@ -15,7 +15,6 @@ from django.views.generic.base import View
 from geotrek.authent.decorators import same_structure_required
 
 from georiviere.functions import ClosestPoint, LineSubString
-from georiviere.main.decorators import same_structure_required_with_fallback
 from .forms import CutTopologyForm, StreamForm
 from .models import Stream, Topology
 from .filters import StreamFilterSet
@@ -108,10 +107,6 @@ class TopologyAddDeleteMixin(object):
 class CutTopologyView(LoginRequiredMixin, FormView):
     form_class = CutTopologyForm
     http_method_names = ['post']
-
-    @same_structure_required_with_fallback('river:stream_detail', 'river:stream_list')
-    def dispatch(self, *args, **kwargs):
-        return super().dispatch(*args, **kwargs)
 
     def form_valid(self, form):
         topology = form.cleaned_data['topology']
