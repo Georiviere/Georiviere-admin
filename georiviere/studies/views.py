@@ -39,7 +39,7 @@ class StudyDetail(mapentity_views.MapEntityDetail):
         return context
 
 
-class StudyCreate(mapentity_views.MapEntityCreate):
+class StudyCreate(AdministrativeOperationOnObjectMixin, mapentity_views.MapEntityCreate):
     model = Study
     form_class = StudyForm
 

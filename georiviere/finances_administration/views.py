@@ -18,22 +18,23 @@ from georiviere.finances_administration.serializers import AdministrativeFileSer
 
 class AdministrativeOperationOnObjectMixin(object):
     def form_valid(self, form):
-        obj = self.get_object()
         if form.is_valid():
-            if form.cleaned_data['administrative_file']:
-                if isinstance(form.cleaned_data['administrative_file'], AdministrativeFile):
-                    AdministrativeOperation.objects.create(content_type_id=obj.get_content_type_id(),
-                                                           object_id=obj.pk,
-                                                           administrative_file=form.cleaned_data['administrative_file'])
-                else:
-                    return self.form_invalid(form)
-        return super().form_valid(form)
+            response = super().form_valid(form)
+            if form.cleaned_data.get('administrative_file'):
+                obj = self.object
+                AdministrativeOperation.objects.create(content_type_id=obj.get_content_type_id(),
+                                                       object_id=obj.pk,
+                                                       administrative_file=form.cleaned_data['administrative_file'])
+        else:
+            return self.form_invalid(form)
+        return response
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        obj = self.get_object()
-        context['existing_administrative_files'] = AdministrativeFile.objects.prefetch_related('operations').filter(
-            operations__content_type_id=obj.get_content_type_id(), operations__object_id=obj.pk).distinct()
+        if self.object:
+            context['existing_administrative_files'] = AdministrativeFile.objects.prefetch_related('operations').filter(
+                operations__content_type_id=self.object.get_content_type_id(),
+                operations__object_id=self.object.pk).distinct()
         return context
 
 

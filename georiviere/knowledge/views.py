@@ -168,7 +168,7 @@ class FollowUpDetail(mapentity_views.MapEntityDetail):
         return context
 
 
-class FollowUpCreate(mapentity_views.MapEntityCreate):
+class FollowUpCreate(AdministrativeOperationOnObjectMixin, mapentity_views.MapEntityCreate):
     model = FollowUp
     form_class = FollowUpForm
 

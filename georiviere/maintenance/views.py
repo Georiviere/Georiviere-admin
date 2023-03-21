@@ -51,7 +51,7 @@ class InterventionDetail(mapentity_views.MapEntityDetail):
         return context
 
 
-class InterventionCreate(mapentity_views.MapEntityCreate):
+class InterventionCreate(AdministrativeOperationOnObjectMixin, mapentity_views.MapEntityCreate):
     model = Intervention
     form_class = InterventionForm
 

@@ -1,14 +1,79 @@
 from collections import OrderedDict
 
 from django.contrib.contenttypes.models import ContentType
-from geotrek.authent.tests.factories import StructureFactory
+from django.urls import reverse
+from django.test import TestCase
+from geotrek.authent.tests.factories import StructureFactory, UserFactory
 
 from georiviere.finances_administration.models import AdministrativeFile
-from georiviere.finances_administration.tests.factories import AdministrativeFileFactory, OrganismFactory
+from georiviere.finances_administration.tests.factories import (AdministrativeFileFactory,
+                                                                StudyOperationFactory,
+                                                                AdministrativeFilePhaseFactory,
+                                                                OrganismFactory)
 from georiviere.tests import CommonRiverTest
 from georiviere.maintenance.tests.factories import InterventionStatusFactory, InterventionFactory
 from georiviere.observations.tests.factories import StationFactory
 from georiviere.studies.tests.factories import StudyFactory
+
+
+class AdministrativePhaseViewTestCase(TestCase):
+    @classmethod
+    def setUpTestData(cls):
+        cls.administrative_phase = AdministrativeFilePhaseFactory(name="Old name")
+        cls.user = UserFactory(password='booh')
+
+    def setUp(self):
+        self.client.login(username=self.user.username, password="booh")
+
+    def test_get_update_phase(self):
+        response = self.client.get(reverse('finances_administration:administrativephase-update',
+                                           kwargs={"pk": self.administrative_phase.pk}),)
+        self.assertEqual(response.status_code, 200)
+        self.assertIn(b'Edit phase for', response.content)
+
+    def test_post_update_phase(self):
+        self.assertEquals(self.administrative_phase.name, "Old name")
+        response = self.client.post(reverse('finances_administration:administrativephase-update',
+                                            kwargs={"pk": self.administrative_phase.pk}),
+                                    {"name": "New name",
+                                     "estimated_budget": 2000,
+                                     "administrative_file": self.administrative_phase.administrative_file,
+                                     "revised_budget": 200})
+        self.assertEqual(response.status_code, 302)
+        self.administrative_phase.refresh_from_db()
+        self.assertEquals(self.administrative_phase.name, "New name")
+
+
+class AdministrativeOperationViewTestCase(TestCase):
+    @classmethod
+    def setUpTestData(cls):
+        cls.administrative_operation = StudyOperationFactory(name="Old name")
+        cls.user = UserFactory(password='booh')
+
+    def setUp(self):
+        self.client.login(username=self.user.username, password="booh")
+
+    def test_get_update_operation(self):
+        response = self.client.get(reverse('finances_administration:administrativeoperation-update',
+                                           kwargs={"pk": self.administrative_operation.pk}),)
+        self.assertEqual(response.status_code, 200)
+
+    def test_post_update_operation(self):
+        self.assertEquals(self.administrative_operation.name, "Old name")
+        response = self.client.post(reverse('finances_administration:administrativeoperation-update',
+                                            kwargs={"pk": self.administrative_operation.pk}),
+                                    {"name": "New name",
+                                     "estimated_cost": 2000,
+                                     "material_cost": 3000,
+                                     "subcontract_cost": 500,
+
+                                     'mandays-TOTAL_FORMS': 0,
+                                     'mandays-INITIAL_FORMS': '0',
+                                     'mandays-MAX_NUM_FORMS': '',
+                                     })
+        self.assertEqual(response.status_code, 302)
+        self.administrative_operation.refresh_from_db()
+        self.assertEquals(self.administrative_operation.name, "New name")
 
 
 class AdministrativeFileViewTestCase(CommonRiverTest):
@@ -47,9 +112,9 @@ class AdministrativeFileViewTestCase(CommonRiverTest):
             ('funding_set-INITIAL_FORMS', '1'),
             ('funding_set-MAX_NUM_FORMS', '0'),
 
-            ('phases-TOTAL_FORMS', 0),
-            ('phases-INITIAL_FORMS', '0'),
-            ('phases-MAX_NUM_FORMS', ''),
+            ('phases-TOTAL_FORMS', '0'),
+            ('phases-INITIAL_FORMS', '1'),
+            ('phases-MAX_NUM_FORMS', '0'),
         ]), 'This field is required.'
 
     def get_good_data(self):

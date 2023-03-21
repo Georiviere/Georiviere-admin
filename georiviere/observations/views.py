@@ -50,7 +50,7 @@ class StationDetail(mapentity_views.MapEntityDetail):
         return context
 
 
-class StationCreate(ParameterTrackingFormsetMixin, mapentity_views.MapEntityCreate):
+class StationCreate(AdministrativeOperationOnObjectMixin, ParameterTrackingFormsetMixin, mapentity_views.MapEntityCreate):
     model = Station
     form_class = StationForm
 

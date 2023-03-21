@@ -71,10 +71,27 @@ class AdministrativeFileTest(TestCase):
             administrative_file=cls.admin_file1
         )
         cls.job_cat1 = factories.JobCategoryFactory(man_day_cost=500)
-        cls.job_cat2 = factories.JobCategoryFactory(man_day_cost=700)
+        cls.job_cat2 = factories.JobCategoryFactory(man_day_cost=700, structure=cls.structure)
+        cls.deferral = factories.AdministrativeDeferralFactory(label="Foo")
+        cls.deferral_structure = factories.AdministrativeDeferralFactory(label="Foo", structure=cls.structure)
 
-    def test_str(self):
+    def test_str_administrativefile(self):
         self.assertEqual(str(self.admin_file1), "Hello goodbye")
+
+    def test_str_administrative_deferral_without_structure(self):
+        self.assertEqual(str(self.deferral), "Foo")
+
+    def test_str_administrative_deferral_with_structure(self):
+        self.assertEqual(str(self.deferral_structure), "Foo (Ma structure)")
+
+    def test_str_funding_with_structure(self):
+        self.assertEqual(str(self.funding1), f"Ma petite entreprise : {self.funding1.amount} €")
+
+    def test_str_jobcategory_with_structure(self):
+        self.assertEqual(str(self.job_cat2), "Job category 1 (Ma structure)")
+
+    def test_str_jobcategory_without_structure(self):
+        self.assertEqual(str(self.job_cat1), "Job category 0")
 
     def test_str_with_structure(self):
         """Test str methods for objects with structure or None"""
@@ -108,6 +125,7 @@ class AdministrativeFileTest(TestCase):
         )
         manday_total_costs = 5 * 500 + 8 * 700
         self.assertEqual(self.operation_station1.manday_cost, manday_total_costs)
+        self.assertEqual(str(self.mandays1), '5')
 
     def test_total_costs(self):
         """Test computed costs for an AdministrativeFile with operations with costs"""
