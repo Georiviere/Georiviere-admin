@@ -19,6 +19,17 @@
         {% endfor %}
     </fieldset>
 
+    <fieldset id="adminphaseFormset" class="formset">
+        <legend>{% trans "Admin Phases" %}</legend>
+        {{ adminphase_formset.non_field_errors }}
+        {{ adminphase_formset.management_form }}
+        {% for adminphase_form in adminphase_formset %}
+            <div class="form-row inline controls controls-row {{ adminphase_formset.prefix }}">
+                {% crispy adminphase_form %}
+            </div>
+        {% endfor %}
+    </fieldset>
+
     <fieldset id="adminoperationFormset" class="formset">
         <legend>{% trans "Operations" %}</legend>
         <p class='text-muted'>{% trans 'To edit man-days, save project and edit each operation from detail page.' %}</p>
@@ -44,9 +55,10 @@
 
     $(window).ready(function () {
 
-        // Initialize formset for admin_operations and funding_set
+        // Initialize formset for admin_operations, admin_phases, funding_set
         // TODO: do this with crispyforms !
         $("#adminoperationFormset").detach().appendTo('#adminoperationWrapper');
+        $("#adminphaseFormset").detach().appendTo('#adminphaseWrapper');
         $("#fundingFormset").detach().appendTo('#fundingWrapper');
 
         $('.form-row.inline.{{ adminoperation_formset.prefix }}').formset({
@@ -67,6 +79,16 @@
             formCssClass: 'dynamic-form-funding',
             deleteCssClass: 'delete-row',
             addText: '{% trans "Add funding" %}',
+            deleteText: '{% trans "Remove" %}',
+        })
+
+        $('.form-row.inline.{{ adminphase_formset.prefix }}').formset({
+            prefix: '{{ adminphase_formset.prefix }}',
+            keepFieldValues: "[name='csrfmiddlewaretoken']",
+            addCssClass: 'btn btn-primary add-row',
+            formCssClass: 'dynamic-form-funding',
+            deleteCssClass: 'delete-row',
+            addText: '{% trans "Add a phase" %}',
             deleteText: '{% trans "Remove" %}',
         })
 

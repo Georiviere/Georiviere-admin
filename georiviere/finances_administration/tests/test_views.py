@@ -46,6 +46,10 @@ class AdministrativeFileViewTestCase(CommonRiverTest):
             ('funding_set-TOTAL_FORMS', '0'),
             ('funding_set-INITIAL_FORMS', '1'),
             ('funding_set-MAX_NUM_FORMS', '0'),
+
+            ('phases-TOTAL_FORMS', 0),
+            ('phases-INITIAL_FORMS', '0'),
+            ('phases-MAX_NUM_FORMS', ''),
         ]), 'This field is required.'
 
     def get_good_data(self):
@@ -70,6 +74,10 @@ class AdministrativeFileViewTestCase(CommonRiverTest):
             'funding_set-TOTAL_FORMS': 0,
             'funding_set-INITIAL_FORMS': '0',
             'funding_set-MAX_NUM_FORMS': '',
+
+            'phases-TOTAL_FORMS': 0,
+            'phases-INITIAL_FORMS': '0',
+            'phases-MAX_NUM_FORMS': '',
 
             'operations-TOTAL_FORMS': 0,
             'operations-INITIAL_FORMS': '0',
@@ -115,6 +123,9 @@ class AdministrativeFileViewTestCase(CommonRiverTest):
             'operations-INITIAL_FORMS': '0',
             'operations-MAX_NUM_FORMS': '',
 
+            'phases-TOTAL_FORMS': 0,
+            'phases-INITIAL_FORMS': '0',
+            'phases-MAX_NUM_FORMS': '',
         }
 
     def get_good_data_with_operations(self):
@@ -154,6 +165,10 @@ class AdministrativeFileViewTestCase(CommonRiverTest):
             'funding_set-INITIAL_FORMS': '0',
             'funding_set-MAX_NUM_FORMS': '',
 
+            'phases-TOTAL_FORMS': 0,
+            'phases-INITIAL_FORMS': '0',
+            'phases-MAX_NUM_FORMS': '',
+
             'operations-TOTAL_FORMS': 3,
             'operations-INITIAL_FORMS': '0',
             'operations-MAX_NUM_FORMS': '',
@@ -186,6 +201,57 @@ class AdministrativeFileViewTestCase(CommonRiverTest):
             'operations-2-DELETE': '',
         }
 
+    def get_good_data_with_phases(self):
+        """Create a Study and a Station with same structure as AdministrativeFile"""
+        structure = StructureFactory.create()
+        organism1 = OrganismFactory.create()
+        organism2 = OrganismFactory.create()
+
+        return {
+            'structure': structure.pk,
+            'name': 'test',
+            'adminfile_type': '',
+            'domain': '',
+            'begin_date': '2010-01-01',
+            'end_date': '2012-01-01',
+            'constraints': '',
+            'global_cost': '12',
+            'comments': '',
+            'contractors': organism2.pk,
+            'project_owners': organism1.pk,
+            'project_managers': organism2.pk,
+
+            'funding_set-TOTAL_FORMS': 0,
+            'funding_set-INITIAL_FORMS': '0',
+            'funding_set-MAX_NUM_FORMS': '',
+
+            'operations-TOTAL_FORMS': 0,
+            'operations-INITIAL_FORMS': '0',
+            'operations-MAX_NUM_FORMS': '',
+
+            'phases-TOTAL_FORMS': 3,
+            'phases-INITIAL_FORMS': '0',
+            'phases-MAX_NUM_FORMS': '',
+
+            'phases-0-id': '',
+            'phases-0-name': "Phase 1",
+            'phases-0-estimated_budget': 20000,
+            'phases-0-revised_budget': 0,
+            'phases-0-DELETE': '',
+
+            'phases-1-id': '',
+            'phases-1-name': "Phase 2",
+            'phases-1-estimated_budget': 0,
+            'phases-1-revised_budget': 0,
+            'phases-1-DELETE': '',
+
+            'phases-2-id': '',
+            'phases-2-name': "Phase 3",
+            'phases-2-estimated_budget': 0,
+            'phases-2-revised_budget': 500,
+            'phases-2-DELETE': '',
+        }
+
     def _check_update_geom_permission(self, response):
         """Pass check geom permission, AdministrativeFile has no geom"""
         pass
@@ -204,3 +270,10 @@ class AdministrativeFileViewTestCase(CommonRiverTest):
         administrative_file = self.model.objects.last()
         self.assertEquals(administrative_file.funding_set.count(), 2)
         self.assertEquals(administrative_file.funders.count(), 2)
+
+    def test_crud_with_phases(self):
+        self.login()
+        response = self.client.post(self._get_add_url(), self.get_good_data_with_phases())
+        self.assertEqual(response.status_code, 302)
+        administrative_file = self.model.objects.last()
+        self.assertEquals(administrative_file.phases.count(), 3)

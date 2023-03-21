@@ -1,3 +1,4 @@
+from django.db.models import Count
 from django.views import generic as generic_views
 from django.utils.translation import gettext_lazy as _
 
@@ -6,11 +7,11 @@ from geotrek.authent.decorators import same_structure_required
 from rest_framework import permissions as rest_permissions
 
 from georiviere.main.views import FormsetMixin
-from georiviere.finances_administration.models import AdministrativeFile, AdministrativeOperation
+from georiviere.finances_administration.models import AdministrativeFile, AdministrativeOperation, AdministrativePhase
 from georiviere.finances_administration.filters import AdministrativeFileFilterSet
 from georiviere.finances_administration.forms import (
-    AdministrativeFileForm, AdministrativeOperationFormset, FundingFormSet,
-    ManDayFormSet, AdministrativeOperationCostsForm
+    AdministrativeFileForm, AdministrativeOperationFormset, AdministrativePhaseFormSet, FundingFormSet,
+    ManDayFormSet, AdministrativeOperationCostsForm, AdministrativePhaseUpdateForm
 )
 from georiviere.finances_administration.serializers import AdministrativeFileSerializer, AdministrativeFileGeojsonSerializer
 
@@ -42,6 +43,7 @@ class AdministrativeFileFormsetMixin:
         context = self.get_context_data()
         funding_formset = context['funding_formset']
         adminoperation_formset = context['adminoperation_formset']
+        adminphase_formset = context['adminphase_formset']
 
         if form.is_valid():
             administrative_file = form.save()
@@ -55,7 +57,11 @@ class AdministrativeFileFormsetMixin:
                 adminoperation_formset.save()
             else:
                 return self.form_invalid(form)
-
+            if adminphase_formset.is_valid():
+                adminphase_formset.instance = administrative_file
+                adminphase_formset.save()
+            else:
+                return self.form_invalid(form)
         return super().form_valid(form)
 
     def get_context_data(self, **kwargs):
@@ -65,12 +71,19 @@ class AdministrativeFileFormsetMixin:
                 self.request.POST,
                 instance=self.object
             )
+            context['adminphase_formset'] = AdministrativePhaseFormSet(
+                self.request.POST,
+                instance=self.object
+            )
             context['adminoperation_formset'] = AdministrativeOperationFormset(
                 self.request.POST,
                 instance=self.object
             )
         else:
             context['funding_formset'] = FundingFormSet(
+                instance=self.object
+            )
+            context['adminphase_formset'] = AdministrativePhaseFormSet(
                 instance=self.object
             )
             context['adminoperation_formset'] = AdministrativeOperationFormset(
@@ -116,6 +129,12 @@ class AdministrativeFileDetail(mapentity_views.MapEntityDetail):
     def get_context_data(self, *args, **kwargs):
         context = super().get_context_data(*args, **kwargs)
         context['can_edit'] = self.get_object().same_structure(self.request.user)
+        context['phases'] = AdministrativePhase.objects.annotate(
+            count_operations=Count('operations') + 1).filter(administrative_file=self.get_object()).order_by('-count_operations')
+        operations_without_phases = AdministrativeOperation.objects.filter(administrative_file=self.get_object(),
+                                                                           phase__isnull=True)
+
+        context['operations_without_phases'] = operations_without_phases
         return context
 
 
@@ -164,6 +183,22 @@ class AdministrativeOperationUpdate(ManDayFormSet, generic_views.UpdateView):
 
     def get_title(self):
         return _("Edit costs for").format(self.get_object())
+
+    def get_success_url(self):
+        return self.get_object().administrative_file.get_detail_url()
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['title'] = self.get_title()
+        return context
+
+
+class AdministrativePhaseUpdate(generic_views.UpdateView):
+    model = AdministrativePhase
+    form_class = AdministrativePhaseUpdateForm
+
+    def get_title(self):
+        return _("Edit phase for").format(self.get_object())
 
     def get_success_url(self):
         return self.get_object().administrative_file.get_detail_url()
