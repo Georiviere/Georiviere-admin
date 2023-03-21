@@ -7,6 +7,7 @@ from rest_framework import permissions as rest_permissions
 from georiviere.knowledge.filters import KnowledgeFilterSet, FollowUpFilterSet
 from georiviere.knowledge.forms import KnowledgeForm, VegetationForm, WorkForm, FollowUpForm
 from georiviere.knowledge.models import Knowledge, KnowledgeType, FollowUp
+from georiviere.finances_administration.views import AdministrativeOperationOnObjectMixin
 from georiviere.knowledge.serializers import FollowUpSerializer, FollowUpGeojsonSerializer
 
 
@@ -181,7 +182,7 @@ class FollowUpCreate(mapentity_views.MapEntityCreate):
         return kwargs
 
 
-class FollowUpUpdate(mapentity_views.MapEntityUpdate):
+class FollowUpUpdate(AdministrativeOperationOnObjectMixin, mapentity_views.MapEntityUpdate):
     model = FollowUp
     form_class = FollowUpForm
 

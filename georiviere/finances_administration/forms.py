@@ -15,6 +15,16 @@ from georiviere.knowledge.models import FollowUp
 from georiviere.finances_administration.models import AdministrativeFile, AdministrativeOperation, ManDay
 
 
+class AdministrativeFileObjectFormMixin(Form):
+    administrative_file = autocomplete.Select2GenericForeignKeyModelField(
+        model_choice=[
+            (AdministrativeFile, 'name',),
+        ],
+        label=_('Create operation on'),
+        required=False
+    )
+
+
 class FundingForm(ModelForm):
 
     class Meta:

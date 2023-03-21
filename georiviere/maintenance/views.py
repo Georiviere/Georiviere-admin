@@ -6,6 +6,7 @@ from georiviere.maintenance.models import Intervention
 from georiviere.maintenance.forms import InterventionForm
 from georiviere.maintenance.filters import InterventionFilterSet
 from georiviere.maintenance.serializers import InterventionSerializer, InterventionGeojsonSerializer
+from georiviere.finances_administration.views import AdministrativeOperationOnObjectMixin
 
 
 class InterventionList(mapentity_views.MapEntityList):
@@ -55,7 +56,7 @@ class InterventionCreate(mapentity_views.MapEntityCreate):
     form_class = InterventionForm
 
 
-class InterventionUpdate(mapentity_views.MapEntityUpdate):
+class InterventionUpdate(AdministrativeOperationOnObjectMixin, mapentity_views.MapEntityUpdate):
     model = Intervention
     form_class = InterventionForm
 

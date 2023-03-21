@@ -5,13 +5,14 @@ from crispy_forms.bootstrap import AppendedText
 from dal import autocomplete
 from geotrek.common.forms import CommonForm
 
+from georiviere.finances_administration.forms import AdministrativeFileObjectFormMixin
 from georiviere.knowledge.models import Knowledge
 from georiviere.main.widgets import DatePickerInput
 from georiviere.maintenance.models import Intervention
 from georiviere.river.fields import SnappedGeometryField
 
 
-class InterventionForm(autocomplete.FutureModelForm, CommonForm):
+class InterventionForm(AdministrativeFileObjectFormMixin, CommonForm):
     """Intervention form"""
     _geom = SnappedGeometryField(required=False)
 
@@ -40,6 +41,8 @@ class InterventionForm(autocomplete.FutureModelForm, CommonForm):
             AppendedText("length", "m"),
             AppendedText("width", "m"),
             AppendedText("height", "m"),
+            Div(css_id="div_id_operations", css_class="form-group row"),
+            "administrative_file",
         )]
 
     class Meta:
@@ -48,7 +51,7 @@ class InterventionForm(autocomplete.FutureModelForm, CommonForm):
             "structure", "target", "name", "date",
             "intervention_status", "intervention_type",
             "stake", "disorders", "description",
-            "length", "width", "height", "_geom"
+            "length", "width", "height", "_geom", "administrative_file"
         ]
         widgets = {
             'date': DatePickerInput(),

@@ -1,0 +1,33 @@
+{% load i18n %}
+<div id="adminOperations">
+    <label for="id_operations" class="col-form-label col-md-3">
+        {% trans 'Existing operations' %} :
+    </label>
+    <div class="constrols col-md-9">
+        {% for af in existing_administrative_files %}
+            <p id="id_operations">
+                {% trans "On" %}:
+                <img src="{{ STATIC_URL }}images/administrativefile-16.png" alt="Administrative file">
+                {{ af }}
+            </p>
+            {% for operation in af.operations.all %}
+                {% if operation.content_object == object %}
+                    <img src="/static/images/{{ modelname }}-16.png" alt="{{ modelname }}">
+                    <b>{{ operation }}</b>
+                    <br>
+           {# We choose to show only operations linked to the object we are updating #}
+           {# We could add and else : operation.content_object_display|safe if we want to show the others with link #}
+                {% endif %}
+
+            {% endfor %}
+            <hr>
+        {% endfor %}
+    </div>
+</div>
+
+ <script type="text/javascript">
+    $(window).ready(function () {
+        // TODO: do this with crispyforms !
+        $("#adminOperations").children().detach().appendTo('#div_id_operations');
+    });
+</script>

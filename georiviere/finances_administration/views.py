@@ -15,6 +15,27 @@ from georiviere.finances_administration.forms import (
 from georiviere.finances_administration.serializers import AdministrativeFileSerializer, AdministrativeFileGeojsonSerializer
 
 
+class AdministrativeOperationOnObjectMixin(object):
+    def form_valid(self, form):
+        obj = self.get_object()
+        if form.is_valid():
+            if form.cleaned_data['administrative_file']:
+                if isinstance(form.cleaned_data['administrative_file'], AdministrativeFile):
+                    AdministrativeOperation.objects.create(content_type_id=obj.get_content_type_id(),
+                                                           object_id=obj.pk,
+                                                           administrative_file=form.cleaned_data['administrative_file'])
+                else:
+                    return self.form_invalid(form)
+        return super().form_valid(form)
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        obj = self.get_object()
+        context['existing_administrative_files'] = AdministrativeFile.objects.prefetch_related('operations').filter(
+            operations__content_type_id=obj.get_content_type_id(), operations__object_id=obj.pk).distinct()
+        return context
+
+
 class AdministrativeFileFormsetMixin:
 
     def form_valid(self, form):
