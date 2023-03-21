@@ -13,6 +13,8 @@ CHANGELOG
 * Add command import hydrobiologie stations hubeau
 * Upgrade api hubeau PC quality
 * Add control type on Land module
+* Add phases on Administrative Files
+* Allow to create operations directly from creation of studies / follow ups / interventions / stations
 
 **Bug fixes**
 
