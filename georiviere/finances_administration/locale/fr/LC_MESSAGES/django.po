@@ -11,7 +11,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-02-07 15:38+0000\n"
+"POT-Creation-Date: 2023-03-22 09:10+0000\n"
 "PO-Revision-Date: 2021-11-23 14:22+0000\n"
 "Last-Translator: Jean-Etienne Castagnede <jecastagnede@vivaldi.net>, 2021\n"
 "Language-Team: French (https://www.transifex.com/georiviere/teams/128005/"
@@ -28,6 +28,33 @@ msgstr "Finances et administratif"
 msgid "Name"
 msgstr "Nom"
 
+msgid "Create operation on"
+msgstr "Créer une opération sur"
+
+msgid "Estimated budget"
+msgstr "Budget estimé"
+
+msgid "Estimated budget of this phase"
+msgstr "Budget estimé de cette phase"
+
+msgid "Revised budget"
+msgstr "Budget révisé"
+
+msgid "Revised budget of this phase"
+msgstr ""
+
+msgid "Actual budget"
+msgstr "Budget réel"
+
+msgid "Actual budget of this phase"
+msgstr "Budget réel de cette phase"
+
+msgid "Cancel"
+msgstr "Annuler"
+
+msgid "Save changes"
+msgstr "Sauvegarder"
+
 msgid "Operation on"
 msgstr "Opération sur"
 
@@ -37,12 +64,6 @@ msgstr "Coût jour-homme"
 msgid "Man-day cost (read-only)"
 msgstr "Coût jours-homme (lecture seule)"
 
-msgid "Cancel"
-msgstr "Annuler"
-
-msgid "Save changes"
-msgstr "Sauvegarder"
-
 msgid "General information"
 msgstr "Informations générales"
 
@@ -51,6 +72,9 @@ msgstr "Parties prenantes"
 
 msgid "Financing"
 msgstr "Financements"
+
+msgid "Phase"
+msgstr "Phase"
 
 msgid "Operations"
 msgstr "Opérations"
@@ -118,8 +142,26 @@ msgstr "Dossiers administratifs"
 msgid "Add a new admin file"
 msgstr "Ajouter un dossier administratif"
 
+msgid "Administrative deferral"
+msgstr "Report administratif"
+
+msgid "Administrative deferrals"
+msgstr "Reports administratifs"
+
+msgid "Phases"
+msgstr "Phases"
+
+msgid "Administrative phase"
+msgstr "Phase administrative"
+
+msgid "Administrative phases"
+msgstr "Phases administratifs"
+
 msgid "Status"
 msgstr "Statut"
+
+msgid "Deferral"
+msgstr "Report"
 
 msgid "Estimated cost"
 msgstr "Coût estimé"
@@ -175,6 +217,9 @@ msgstr "Éditer les coûts"
 msgid "Totals"
 msgstr "Totaux"
 
+msgid "Edit"
+msgstr "Éditer"
+
 msgid "Costs details"
 msgstr "Coûts en détail"
 
@@ -187,14 +232,17 @@ msgstr "Coût sous-traitance :"
 msgid "Cost of man-day:"
 msgstr "Coût jour-homme :"
 
-msgid "Edit"
-msgstr "Éditer"
+msgid "Subtotal by phase"
+msgstr "Sous-total par phase"
 
 msgid "No operation is created"
 msgstr "Pas d'opération créée"
 
 msgid "Edit administrative file to add new operations."
 msgstr "Modifier le dossier administratif pour ajouter des opérations"
+
+msgid "Admin Phases"
+msgstr "Phases administratives"
 
 msgid ""
 "To edit man-days, save project and edit each operation from detail page."
@@ -211,14 +259,29 @@ msgstr "Supprimer"
 msgid "Add funding"
 msgstr "Ajouter un financement"
 
+msgid "Add a phase"
+msgstr "Ajouter une phase"
+
 msgid "Edit costs for"
 msgstr "Éditer les coûts pour"
 
 msgid "Add manday"
 msgstr "Ajouter des jours-homme"
 
+msgid "Edit phase :"
+msgstr "Éditer phase :"
+
+msgid "Existing operations"
+msgstr "Opérations existantes"
+
+msgid "On"
+msgstr "Sur"
+
 msgid "Related administrative files"
 msgstr "Dossiers administratif reliés"
 
 msgid "Add a new administrative file"
 msgstr "Ajouter un dossier administratif"
+
+msgid "Edit phase for"
+msgstr "Éditer les phases pour"

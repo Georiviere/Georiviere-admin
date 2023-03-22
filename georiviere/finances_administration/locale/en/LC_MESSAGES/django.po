@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-02-07 15:38+0000\n"
+"POT-Creation-Date: 2023-03-22 09:10+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -24,6 +24,33 @@ msgstr ""
 msgid "Name"
 msgstr ""
 
+msgid "Create operation on"
+msgstr ""
+
+msgid "Estimated budget"
+msgstr ""
+
+msgid "Estimated budget of this phase"
+msgstr ""
+
+msgid "Revised budget"
+msgstr ""
+
+msgid "Revised budget of this phase"
+msgstr ""
+
+msgid "Actual budget"
+msgstr ""
+
+msgid "Actual budget of this phase"
+msgstr ""
+
+msgid "Cancel"
+msgstr ""
+
+msgid "Save changes"
+msgstr ""
+
 msgid "Operation on"
 msgstr ""
 
@@ -33,12 +60,6 @@ msgstr ""
 msgid "Man-day cost (read-only)"
 msgstr ""
 
-msgid "Cancel"
-msgstr ""
-
-msgid "Save changes"
-msgstr ""
-
 msgid "General information"
 msgstr ""
 
@@ -46,6 +67,9 @@ msgid "Stakeholders"
 msgstr ""
 
 msgid "Financing"
+msgstr ""
+
+msgid "Phase"
 msgstr ""
 
 msgid "Operations"
@@ -114,7 +138,25 @@ msgstr ""
 msgid "Add a new admin file"
 msgstr ""
 
+msgid "Administrative deferral"
+msgstr ""
+
+msgid "Administrative deferrals"
+msgstr ""
+
+msgid "Phases"
+msgstr ""
+
+msgid "Administrative phase"
+msgstr ""
+
+msgid "Administrative phases"
+msgstr ""
+
 msgid "Status"
+msgstr ""
+
+msgid "Deferral"
 msgstr ""
 
 msgid "Estimated cost"
@@ -171,6 +213,9 @@ msgstr ""
 msgid "Totals"
 msgstr ""
 
+msgid "Edit"
+msgstr ""
+
 msgid "Costs details"
 msgstr ""
 
@@ -183,13 +228,16 @@ msgstr ""
 msgid "Cost of man-day:"
 msgstr ""
 
-msgid "Edit"
+msgid "Subtotal by phase"
 msgstr ""
 
 msgid "No operation is created"
 msgstr ""
 
 msgid "Edit administrative file to add new operations."
+msgstr ""
+
+msgid "Admin Phases"
 msgstr ""
 
 msgid ""
@@ -205,14 +253,29 @@ msgstr ""
 msgid "Add funding"
 msgstr ""
 
+msgid "Add a phase"
+msgstr ""
+
 msgid "Edit costs for"
 msgstr ""
 
 msgid "Add manday"
 msgstr ""
 
+msgid "Edit phase :"
+msgstr ""
+
+msgid "Existing operations"
+msgstr ""
+
+msgid "On"
+msgstr ""
+
 msgid "Related administrative files"
 msgstr ""
 
 msgid "Add a new administrative file"
+msgstr ""
+
+msgid "Edit phase for"
 msgstr ""
