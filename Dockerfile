@@ -19,8 +19,7 @@ RUN mkdir -p /opt/georiviere-admin/var
 RUN useradd -ms /bin/bash django --uid ${UID}
 RUN chown -R django:django /opt
 
-COPY .docker/update.sh /usr/local/bin/update.sh
-COPY .docker/entrypoint.sh /usr/local/bin/entrypoint.sh
+COPY .docker/* /usr/local/bin/
 
 WORKDIR /opt/georiviere-admin
 
