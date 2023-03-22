@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+{% load i18n mapentity_tags static %}
+
+<html lang="en">
+  <head>
+    {% block style %}
+      <style type="text/css">
+        {% include template_css %}
+
+      </style>
+    {% endblock style %}
+  </head>
+  <body>
+    {% block body %}
+      <header>
+        {% block header %}
+            <div class="logo">
+              {% block logo %}
+                <img src="file://{% media_static_fallback_path "upload/logo-header.png" "images/logo-header.png" %}" alt="">
+                <p>GéoRIVIERE</p>
+              {% endblock logo %}
+            </div>
+            <div class="url">
+              {% block url %}
+              {% endblock url %}
+            </div>
+        {% endblock header %}
+      </header>
+      <div class="gray">
+      </div>
+      <div class="intro">
+      </div>
+    {% endblock body %}
+    {% block footer %}
+      <div id="footer">
+        <div class="text">{% now 'SHORT_DATE_FORMAT' %} &#8226; {{ object.name }}</div>
+      </div>
+    {% endblock footer %}
+  </body>
+</html>

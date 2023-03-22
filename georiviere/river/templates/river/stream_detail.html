@@ -1,6 +1,6 @@
 {% extends "mapentity/mapentity_detail.html" %}
 
-{% load static geojson_tags %}
+{% load i18n static geojson_tags %}
 
 {% block mappanel %}
 
@@ -43,3 +43,11 @@
     </script>
 
 {% endblock extrabody %}
+
+{% block download %}
+  {{ block.super }}
+  </div>
+
+  <div class="btn-group pull-right">
+    <a class="btn btn-light btn-sm" href="{% url 'river:stream_printable' LANGUAGE_CODE object.pk object.slug %}" title="{% trans "Report print" %}" target="_blank"><img src="{% static "paperclip/fileicons/pdf.png" %}"/> {% trans "Print" %}</a>
+{% endblock download %}

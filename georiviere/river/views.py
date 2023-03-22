@@ -18,6 +18,7 @@ from georiviere.functions import ClosestPoint, LineSubString
 from .forms import CutTopologyForm, StreamForm
 from .models import Stream, Topology
 from .filters import StreamFilterSet
+from georiviere.main.mixins.views import DocumentReportMixin
 
 from mapentity import views as mapentity_views
 
@@ -34,6 +35,16 @@ class StreamLayer(mapentity_views.MapEntityLayer):
 
 class StreamJsonList(mapentity_views.MapEntityJsonList, StreamList):
     pass
+
+
+class StreamDocumentReport(DocumentReportMixin, mapentity_views.MapEntityDocumentWeasyprint):
+    def get_object(self, queryset=None):
+        obj = super().get_object(queryset)
+        if not self.request.user.is_authenticated:
+            raise PermissionDenied
+        if not self.request.user.has_perm('%s.read_%s' % (obj._meta.app_label, obj._meta.model_name)):
+            raise PermissionDenied
+        return obj
 
 
 class StreamFormat(mapentity_views.MapEntityFormat):

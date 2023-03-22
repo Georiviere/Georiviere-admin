@@ -3,6 +3,7 @@ from django.contrib.contenttypes.models import ContentType
 from django.contrib.gis.db import models
 from django.contrib.gis.geos import Point
 from django.db.models import Q
+from django.template.defaultfilters import slugify
 from django.utils.translation import gettext_lazy as _
 
 from geotrek.authent.models import StructureRelated, StructureOrNoneRelated
@@ -91,6 +92,10 @@ class Stream(AddPropertyBufferMixin, TimeStampedModelMixin, WatershedPropertiesM
 
     def __str__(self):
         return self.name
+
+    @property
+    def slug(self):
+        return slugify(self.name) or str(self.pk)
 
     def save(self, *args, **kwargs):
         if not self.source_location:
