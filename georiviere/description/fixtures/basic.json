@@ -219,6 +219,27 @@
     },
     {
         "pk": 1,
+        "model": "description.controltype",
+        "fields": {
+            "label": "Convention"
+        }
+    },
+    {
+        "pk": 2,
+        "model": "description.controltype",
+        "fields": {
+            "label": "Achat"
+        }
+    },
+    {
+        "pk": 3,
+        "model": "description.controltype",
+        "fields": {
+            "label": "ORE"
+        }
+    },
+    {
+        "pk": 1,
         "model": "description.bankstate",
         "fields": {
             "label": "Stable"
