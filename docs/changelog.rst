@@ -12,6 +12,10 @@ CHANGELOG
 * Add command import hydrobiologie stations hubeau
 * Upgrade api hubeau PC quality
 
+**Bug fixes**
+
+* Fix update attachments save buttons
+
 
 1.0.3 (2022-12-15)
 -------------------------

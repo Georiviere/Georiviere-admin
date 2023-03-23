@@ -7,12 +7,19 @@ from django.views.i18n import JavaScriptCatalog
 
 from georiviere.main.views import home
 
+from mapentity.forms import AttachmentForm
+from paperclip import views as paperclip_views
+
 admin.autodiscover()
 
 urlpatterns = [
     path('', home, name='home'),
     path('login/', views.LoginView.as_view(), name='login'),
     path('logout/', views.LogoutView.as_view(), name='logout'),
+    path('paperclip/add-for/<str:app_label>/<str:model_name>/<int:pk>/',
+         paperclip_views.add_attachment, kwargs={'attachment_form': AttachmentForm}, name="add_attachment"),
+    path('paperclip/update/<int:attachment_pk>/', paperclip_views.update_attachment,
+         kwargs={'attachment_form': AttachmentForm}, name="update_attachment"),
     path('paperclip/', include('paperclip.urls')),
     path('admin/', admin.site.urls),
     path('i18n/', include('django.conf.urls.i18n')),
