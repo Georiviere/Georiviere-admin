@@ -7,6 +7,7 @@ CHANGELOG
 
 **Enhancement**
 
+* Add field classification water policy on rivers (#117)
 * Add possibility to show geometries overprinted on topologies (#105)
 * Add possibility to create attachment with external link
 * Add command import hydrobiologie stations hubeau

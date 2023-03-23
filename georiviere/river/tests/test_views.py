@@ -35,6 +35,7 @@ class StreamViewTestCase(CommonRiverTest):
             'max_elevation': self.obj.max_elevation,
             'slope': self.obj.slope,
             'source_location': self.obj.source_location.ewkt,
+            'classification_water_policy': self.obj.classification_water_policy.pk,
             'name': self.obj.name,
             'geom': self.obj.geom.ewkt,
         }

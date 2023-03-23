@@ -25,7 +25,7 @@ class StreamList(mapentity_views.MapEntityList):
 
 
 class StreamLayer(mapentity_views.MapEntityLayer):
-    queryset = Stream.objects.all()
+    queryset = Stream.objects.select_related('classification_water_policy')
 
 
 class StreamJsonList(mapentity_views.MapEntityJsonList, StreamList):

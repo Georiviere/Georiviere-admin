@@ -18,7 +18,7 @@ class StreamFilterSet(WatershedFilterSet, ZoningFilterSet, MapEntityFilterSet):
 
     class Meta(MapEntityFilterSet.Meta):
         model = Stream
-        fields = MapEntityFilterSet.Meta.fields + ['name', 'length', 'flow']
+        fields = MapEntityFilterSet.Meta.fields + ['name', 'length', 'flow', 'classification_water_policy']
 
 
 class TopologyFilterSet(FilterSet):

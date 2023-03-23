@@ -5,7 +5,13 @@ from django.test import TestCase
 from georiviere.finances_administration.tests.factories import AdministrativeFileFactory
 from georiviere.description.tests.factories import MorphologyFactory, StatusFactory, UsageFactory
 from georiviere.river.models import Stream
-from georiviere.river.tests.factories import TopologyFactory, StreamFactory
+from georiviere.river.tests.factories import TopologyFactory, StreamFactory, ClassificationWaterPolicyFactory
+
+
+class ClassificationWaterPolicyModelTest(TestCase):
+    def test_str(self):
+        classification = ClassificationWaterPolicyFactory.create()
+        self.assertEqual(str(classification), classification.label)
 
 
 class TopologyTest(TestCase):
