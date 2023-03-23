@@ -103,11 +103,19 @@ class LandTypeFactory(django.DjangoModelFactory):
     label = Sequence(lambda n: 'Land type {}'.format(n))
 
 
+class ControlTypeFactory(django.DjangoModelFactory):
+    class Meta:
+        model = models.ControlType
+
+    label = Sequence(lambda n: f'Control type {n}')
+
+
 class LandFactory(BaseLineStringFactory):
     class Meta:
         model = models.Land
 
     land_type = SubFactory(LandTypeFactory)
+    control_type = SubFactory(ControlTypeFactory)
     owner = fuzzy.FuzzyText()
     description = fuzzy.FuzzyText(length=200)
     identifier = fuzzy.FuzzyText(chars=ascii_letters)

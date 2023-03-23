@@ -1,8 +1,22 @@
 from django.core.exceptions import ValidationError
 from django.test import TestCase
 
+from geotrek.authent.tests.factories import StructureFactory
 from georiviere.description.tests import factories
 from georiviere.river.tests.factories import TopologyFactory
+
+
+class ControlTypeTest(TestCase):
+
+    @classmethod
+    def setUpTestData(cls):
+        cls.control_type = factories.ControlTypeFactory.create()
+        cls.control_type_with_structure = factories.ControlTypeFactory.create(structure=StructureFactory.create())
+
+    def test_str(self):
+        self.assertEqual(str(self.control_type), self.control_type.label)
+        self.assertEqual(str(self.control_type_with_structure),
+                         f"{self.control_type_with_structure.label} ({self.control_type_with_structure.structure.name})")
 
 
 class DescriptionTest(TestCase):
