@@ -8,7 +8,7 @@ from georiviere.river.tests import TopologyTestCase
 from georiviere.river.tests.factories import StreamFactory
 from georiviere.tests import CommonRiverTest
 from .factories import LandFactory, LandTypeFactory, UsageFactory, UsageTypeFactory, StatusTypeFactory, \
-    StatusOnStreamFactory
+    StatusOnStreamFactory, ControlTypeFactory
 from ..models import Land, Status, Usage
 
 
@@ -35,7 +35,8 @@ class LandViewTestCase(CommonRiverTest):
             'max_elevation': self.obj.max_elevation,
             'slope': self.obj.slope,
             'geom': self.obj.geom.ewkt,
-            'land_type': self.obj.land_type.pk
+            'land_type': self.obj.land_type.pk,
+            'control_type': self.obj.control_type.pk
         }
 
     def get_bad_data(self):
@@ -44,12 +45,14 @@ class LandViewTestCase(CommonRiverTest):
     def get_good_data(self):
         structure = StructureFactory.create()
         land_type = LandTypeFactory.create()
+        control_type = ControlTypeFactory.create()
         temp_data = self.modelfactory.build(structure=structure)
         return {
             'structure': structure.pk,
             'geom': '{"geom": "%s", "snap": [%s]}' % (temp_data.geom.transform(4326, clone=True).ewkt,
                                                       ','.join(['null'] * len(temp_data.geom.coords))),
             'land_type': land_type.pk,
+            'control_type': control_type.pk,
             'owner': temp_data.owner,
             'description': temp_data.description
         }

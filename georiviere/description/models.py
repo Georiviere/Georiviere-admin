@@ -237,6 +237,20 @@ class LandType(StructureOrNoneRelated):
         return self.label
 
 
+class ControlType(StructureOrNoneRelated):
+    label = models.CharField(max_length=128, verbose_name=_("Label"), unique=True)
+
+    class Meta:
+        verbose_name = _("Control type")
+        verbose_name_plural = _("Control types")
+        ordering = ['label']
+
+    def __str__(self):
+        if self.structure:
+            return "{} ({})".format(self.label, self.structure.name)
+        return self.label
+
+
 class Land(AddPropertyBufferMixin, TimeStampedModelMixin, WatershedPropertiesMixin,
            ZoningPropertiesMixin, AltimetryMixin, MapEntityMixin, StructureRelated):
     geom = models.GeometryField(srid=settings.SRID, spatial_index=True)
@@ -245,6 +259,8 @@ class Land(AddPropertyBufferMixin, TimeStampedModelMixin, WatershedPropertiesMix
     agreement = models.BooleanField(verbose_name=_("Agreement"), default=False)
     description = models.TextField(verbose_name=_("Description"), blank=True)
     identifier = models.CharField(verbose_name=_("Identifier"), blank=True, max_length=255)
+    control_type = models.ForeignKey(ControlType, verbose_name=_("Control type"), null=True, blank=True,
+                                     on_delete=models.SET_NULL)
 
     class Meta:
         verbose_name = _("Land")
