@@ -18,15 +18,13 @@ from georiviere.finances_administration.serializers import AdministrativeFileSer
 
 class AdministrativeOperationOnObjectMixin(object):
     def form_valid(self, form):
+        response = super().form_valid(form)
         if form.is_valid():
-            response = super().form_valid(form)
             if form.cleaned_data.get('administrative_file'):
                 obj = self.object
                 AdministrativeOperation.objects.create(content_type_id=obj.get_content_type_id(),
                                                        object_id=obj.pk,
                                                        administrative_file=form.cleaned_data['administrative_file'])
-        else:
-            return self.form_invalid(form)
         return response
 
     def get_context_data(self, **kwargs):

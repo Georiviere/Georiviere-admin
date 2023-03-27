@@ -80,6 +80,10 @@ class AdministrativeFileViewTestCase(CommonRiverTest):
     model = AdministrativeFile
     modelfactory = AdministrativeFileFactory
 
+    @classmethod
+    def setUpTestData(cls):
+        cls.structure = StructureFactory.create()
+
     def get_expected_json_attrs(self):
         return {
             'id': self.obj.pk,
@@ -117,13 +121,111 @@ class AdministrativeFileViewTestCase(CommonRiverTest):
             ('phases-MAX_NUM_FORMS', '0'),
         ]), 'This field is required.'
 
+    def get_bad_data_operations(self):
+        intervention_object = InterventionFactory.create(
+            structure=self.structure
+        )
+        intervention_contenttype = ContentType.objects.get(model='intervention')
+        return {
+            'structure': self.structure.pk,
+            'name': 'test',
+            'adminfile_type': '',
+            'domain': '',
+            'begin_date': '2010-01-01',
+            'end_date': '2012-01-01',
+            'constraints': '',
+            'global_cost': '12',
+            'comments': '',
+
+            'funding_set-TOTAL_FORMS': 0,
+            'funding_set-INITIAL_FORMS': '1',
+            'funding_set-MAX_NUM_FORMS': '',
+
+            'phases-TOTAL_FORMS': 0,
+            'phases-INITIAL_FORMS': '1',
+            'phases-MAX_NUM_FORMS': '',
+
+            'operations-TOTAL_FORMS': 3,
+            'operations-INITIAL_FORMS': '0',
+            'operations-MAX_NUM_FORMS': '',
+
+            'operations-0-id': '',
+            'operations-0-name': "",
+            'operations-0-content_object': "{}-{}".format(intervention_contenttype.pk, intervention_object.pk),
+            'operations-0-operation_status': "",
+            'operations-0-estimated_cost': 20000,
+            'operations-0-material_cost': 0,
+            'operations-0-subcontract_cost': 0,
+            'operations-0-DELETE': '',
+        }
+
+    def get_bad_data_fundings(self):
+        return {
+            'structure': self.structure.pk,
+            'name': 'test',
+            'adminfile_type': '',
+            'domain': '',
+            'begin_date': '2010-01-01',
+            'end_date': '2012-01-01',
+            'constraints': '',
+            'global_cost': '12',
+            'comments': '',
+
+            'funding_set-TOTAL_FORMS': 1,
+            'funding_set-INITIAL_FORMS': '0',
+            'funding_set-MAX_NUM_FORMS': '',
+
+            'funding_set-0-id': '',
+            'funding_set-0-amount': 20000,
+            'funding_set-0-organism': '',
+            'funding_set-0-DELETE': '',
+
+            'phases-TOTAL_FORMS': 0,
+            'phases-INITIAL_FORMS': '1',
+            'phases-MAX_NUM_FORMS': '',
+
+            'operations-TOTAL_FORMS': 0,
+            'operations-INITIAL_FORMS': '1',
+            'operations-MAX_NUM_FORMS': '',
+        }
+
+    def get_bad_data_phases(self):
+        return {
+            'structure': self.structure.pk,
+            'name': 'test',
+            'adminfile_type': '',
+            'domain': '',
+            'begin_date': '2010-01-01',
+            'end_date': '2012-01-01',
+            'constraints': '',
+            'global_cost': '12',
+            'comments': '',
+
+            'funding_set-TOTAL_FORMS': 0,
+            'funding_set-INITIAL_FORMS': '1',
+            'funding_set-MAX_NUM_FORMS': '',
+
+            'phases-TOTAL_FORMS': 1,
+            'phases-INITIAL_FORMS': '0',
+            'phases-MAX_NUM_FORMS': '',
+
+            'phases-0-id': '',
+            'phases-0-name': '',
+            'phases-0-estimated_budget': "wrong value",
+            'phases-0-revised_budget': 0,
+            'phases-0-DELETE': '',
+
+            'operations-TOTAL_FORMS': 0,
+            'operations-INITIAL_FORMS': '1',
+            'operations-MAX_NUM_FORMS': '',
+        }
+
     def get_good_data(self):
-        structure = StructureFactory.create()
         organism1 = OrganismFactory.create()
         organism2 = OrganismFactory.create()
 
         return {
-            'structure': structure.pk,
+            'structure': self.structure.pk,
             'name': 'test',
             'adminfile_type': '',
             'domain': '',
@@ -152,12 +254,11 @@ class AdministrativeFileViewTestCase(CommonRiverTest):
 
     def get_good_data_with_fundings(self):
         """Create a Study and a Station with same structure as AdministrativeFile"""
-        structure = StructureFactory.create()
         organism1 = OrganismFactory.create()
         organism2 = OrganismFactory.create()
 
         return {
-            'structure': structure.pk,
+            'structure': self.structure.pk,
             'name': 'test',
             'adminfile_type': '',
             'domain': '',
@@ -195,17 +296,16 @@ class AdministrativeFileViewTestCase(CommonRiverTest):
 
     def get_good_data_with_operations(self):
         """Create a Study and a Station with same structure as AdministrativeFile"""
-        structure = StructureFactory.create()
         organism1 = OrganismFactory.create()
         organism2 = OrganismFactory.create()
         study_object = StudyFactory.create(
-            structure=structure
+            structure=self.structure
         )
         station_object = StationFactory.create(
-            structure=structure
+            structure=self.structure
         )
         intervention_object = InterventionFactory.create(
-            structure=structure
+            structure=self.structure
         )
         study_contenttype = ContentType.objects.get(model='study')
         station_contenttype = ContentType.objects.get(model='station')
@@ -213,7 +313,7 @@ class AdministrativeFileViewTestCase(CommonRiverTest):
         status = InterventionStatusFactory.create()
 
         return {
-            'structure': structure.pk,
+            'structure': self.structure.pk,
             'name': 'test',
             'adminfile_type': '',
             'domain': '',
@@ -268,12 +368,11 @@ class AdministrativeFileViewTestCase(CommonRiverTest):
 
     def get_good_data_with_phases(self):
         """Create a Study and a Station with same structure as AdministrativeFile"""
-        structure = StructureFactory.create()
         organism1 = OrganismFactory.create()
         organism2 = OrganismFactory.create()
 
         return {
-            'structure': structure.pk,
+            'structure': self.structure.pk,
             'name': 'test',
             'adminfile_type': '',
             'domain': '',
@@ -327,6 +426,9 @@ class AdministrativeFileViewTestCase(CommonRiverTest):
         self.assertEqual(response.status_code, 302)
         administrative_file = self.model.objects.last()
         self.assertEquals(administrative_file.operations.count(), 3)
+        response = self.client.post(self._get_add_url(), self.get_bad_data_operations())
+        self.assertEqual(response.status_code, 200)
+        self.assertEquals(administrative_file.operations.count(), 3)
 
     def test_crud_with_fundings(self):
         self.login()
@@ -335,10 +437,16 @@ class AdministrativeFileViewTestCase(CommonRiverTest):
         administrative_file = self.model.objects.last()
         self.assertEquals(administrative_file.funding_set.count(), 2)
         self.assertEquals(administrative_file.funders.count(), 2)
+        response = self.client.post(self._get_add_url(), self.get_bad_data_fundings())
+        self.assertEqual(response.status_code, 200)
+        self.assertEquals(administrative_file.funders.count(), 2)
 
     def test_crud_with_phases(self):
         self.login()
         response = self.client.post(self._get_add_url(), self.get_good_data_with_phases())
         self.assertEqual(response.status_code, 302)
         administrative_file = self.model.objects.last()
+        self.assertEquals(administrative_file.phases.count(), 3)
+        response = self.client.post(self._get_add_url(), self.get_bad_data_phases())
+        self.assertEqual(response.status_code, 200)
         self.assertEquals(administrative_file.phases.count(), 3)

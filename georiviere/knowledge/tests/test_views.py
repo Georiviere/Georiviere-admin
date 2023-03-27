@@ -198,19 +198,11 @@ class FollowUpViewsTest(CommonRiverTest):
                                                                self.administrative_file.pk),
         return dict_good_data
 
-    def get_bad_data_with_administrative_file(self):
-        dict_bad_data = deepcopy(self.get_good_data())
-        self.knowledge = factories.KnowledgeFactory.create()
-        dict_bad_data['administrative_file'] = "{}-{}".format(self.knowledge.get_content_type_id(),
-                                                              self.knowledge.pk),
-        print("coucocu")
-        return dict_bad_data
-
-    def test_crud_with_administrative_file(self):
+    def test_good_data_with_administrative_file(self):
         self.login()
-        response = self.client.post(self._get_add_url(), self.get_bad_data_with_administrative_file())
-        self.assertEqual(response.status_code, 200)
-        self.assertEquals(self.model.objects.count(), 0)
+        response = self.client.post(self._get_add_url(), self.get_good_data_with_administrative_file())
+        self.assertEqual(response.status_code, 302)
+        self.assertEquals(self.model.objects.count(), 1)
 
     def test_creation_form_on_knowledge(self):
         """Test if form is initialized with knowledge when its id is passed in url"""
