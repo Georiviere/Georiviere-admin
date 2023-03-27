@@ -4,7 +4,7 @@ from django.contrib.gis.geos import GEOSGeometry, Point
 from django.db.models import Q
 from django.utils.translation import gettext_lazy as _
 
-from geotrek.authent.models import StructureRelated
+from geotrek.authent.models import StructureRelated, StructureOrNoneRelated
 from geotrek.common.mixins import TimeStampedModelMixin
 from geotrek.zoning.mixins import ZoningPropertiesMixin
 from mapentity.models import MapEntityMixin
@@ -34,6 +34,17 @@ class TopologyMixin(object):
         return final_topologies
 
 
+class ClassificationWaterPolicy(StructureOrNoneRelated):
+    label = models.CharField(max_length=128, verbose_name=_("Label"), )
+
+    class Meta:
+        verbose_name = _("Classification water policy")
+        verbose_name_plural = _("Classification water policies")
+
+    def __str__(self):
+        return self.label
+
+
 class Stream(AddPropertyBufferMixin, TimeStampedModelMixin, WatershedPropertiesMixin, ZoningPropertiesMixin,
              MapEntityMixin, AltimetryMixin, StructureRelated):
     """Model for stream"""
@@ -53,13 +64,17 @@ class Stream(AddPropertyBufferMixin, TimeStampedModelMixin, WatershedPropertiesM
         blank=True,
         verbose_name=_("Flow"),
     )
-    data_source = models.ForeignKey('main.DataSource', on_delete=models.CASCADE,
-                                    null=True, blank=True, related_name='rivers',
+    data_source = models.ForeignKey('main.DataSource', on_delete=models.SET_NULL,
+                                    null=True, blank=True, related_name='streams',
                                     verbose_name=_("Data source"))
 
     source_location = models.PointField(verbose_name=_("Source location"),
                                         srid=settings.SRID,
                                         blank=True, null=True)
+    classification_water_policy = models.ForeignKey('ClassificationWaterPolicy',
+                                                    on_delete=models.SET_NULL,
+                                                    null=True, blank=True, related_name='streams',
+                                                    verbose_name=_("Classification water policy"))
 
     class Meta:
         verbose_name = _("Stream")

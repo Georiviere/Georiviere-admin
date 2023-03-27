@@ -11,7 +11,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-03-23 16:37+0000\n"
+"POT-Creation-Date: 2023-03-23 15:37+0000\n"
 "PO-Revision-Date: 2021-11-23 15:31+0000\n"
 "Last-Translator: Jean-Etienne Castagnede <jecastagnede@vivaldi.net>, 2021\n"
 "Language-Team: French (https://www.transifex.com/georiviere/teams/128005/"
@@ -42,11 +42,23 @@ msgstr "Longueur"
 msgid "Name"
 msgstr "Nom"
 
+msgid "Flow"
+msgstr "Écoulement"
+
 msgid "Qualified"
 msgstr "Qualifié"
 
 msgid "Structure"
 msgstr "Structure"
+
+msgid "Label"
+msgstr "Label"
+
+msgid "Classification water policy"
+msgstr "Classement police de l'eau"
+
+msgid "Classification water policies"
+msgstr "Classement polices de l'eau"
 
 msgid "To be defined"
 msgstr "À définir"
@@ -60,8 +72,8 @@ msgstr "Temporaire"
 msgid "Stream"
 msgstr "Cours d'eau"
 
-msgid "Flow"
-msgstr "Écoulement"
+msgid "Data source"
+msgstr "Source de donnée"
 
 msgid "Source location"
 msgstr "Emplacement de la source"

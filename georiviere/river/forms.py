@@ -9,8 +9,7 @@ from georiviere.river.models import Stream, Topology
 
 class StreamForm(CommonForm):
     geom = SnappedLineStringField()
-
-    geomfields = ['geom']
+    geomfields = ['geom', 'source_location']
 
     class Meta(CommonForm):
         fields = "__all__"
