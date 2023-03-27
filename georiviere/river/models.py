@@ -65,7 +65,7 @@ class Stream(AddPropertyBufferMixin, TimeStampedModelMixin, WatershedPropertiesM
         verbose_name=_("Flow"),
     )
     data_source = models.ForeignKey('main.DataSource', on_delete=models.SET_NULL,
-                                    null=True, blank=True, related_name='rivers',
+                                    null=True, blank=True, related_name='streams',
                                     verbose_name=_("Data source"))
 
     source_location = models.PointField(verbose_name=_("Source location"),
@@ -73,7 +73,7 @@ class Stream(AddPropertyBufferMixin, TimeStampedModelMixin, WatershedPropertiesM
                                         blank=True, null=True)
     classification_water_policy = models.ForeignKey('ClassificationWaterPolicy',
                                                     on_delete=models.SET_NULL,
-                                                    null=True, blank=True, related_name='rivers',
+                                                    null=True, blank=True, related_name='streams',
                                                     verbose_name=_("Classification water policy"))
 
     class Meta:
