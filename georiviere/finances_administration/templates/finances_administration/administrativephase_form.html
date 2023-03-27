@@ -2,27 +2,18 @@
 {% load i18n crispy_forms_tags %}
 
 {% block mainform %}
+<div class="col-sm-6 offset-sm-3 fixed-actions">
+    <h2>{% trans "Edit phase :" %} {{ object }}</h2>
     <form id="mainform"
           action="{% if object.pk %}{{ object.get_update_url }}{% else %}{{ object.get_add_url }}{% endif %}"
-          class="form-horizontal" method="POST">
-    
+          method="POST">
+
     {% crispy form %}
-    {% include "finances_administration/existing_operations.html" %}
 
     </form>
+</div>
 {% endblock mainform %}
 
 {% block extrabody %}
     {{ block.super }}
-    <script type="text/javascript">
-    $(window).ready(function () {
-
-        $(".clearfix").removeClass("clearfix");
-
-    });
-
-    $(".chosen-select").chosen();
-
-    </script>
-
 {% endblock extrabody %}

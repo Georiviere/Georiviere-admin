@@ -8,6 +8,13 @@ from georiviere.studies.tests.factories import StudyFactory
 from georiviere.finances_administration import models
 
 
+class AdministrativeDeferralFactory(factory.django.DjangoModelFactory):
+    class Meta:
+        model = models.AdministrativeDeferral
+
+    label = factory.Sequence(lambda n: "Deferral %s" % n)
+
+
 class OrganismFactory(factory.django.DjangoModelFactory):
     class Meta:
         model = models.Organism
@@ -38,6 +45,16 @@ class AdministrativeFileFactory(factory.django.DjangoModelFactory):
     end_date = '2012-01-01'
 
 
+class AdministrativeFilePhaseFactory(factory.django.DjangoModelFactory):
+    class Meta:
+        model = models.AdministrativePhase
+
+    name = factory.Sequence(lambda n: "AdministrativePhase %s" % n)
+    administrative_file = factory.SubFactory(AdministrativeFileFactory)
+    estimated_budget = fuzzy.FuzzyDecimal(0, 100000, 2)
+    revised_budget = fuzzy.FuzzyDecimal(0, 100000, 2)
+
+
 class AdministrativeFileOperationFactory(factory.django.DjangoModelFactory):
     class Meta:
         model = models.AdministrativeOperation
@@ -55,14 +72,14 @@ class AdministrativeFileOperationFactory(factory.django.DjangoModelFactory):
     subcontract_cost = fuzzy.FuzzyDecimal(0, 100000, 2)
 
 
-class StudyOperationFactory(factory.django.DjangoModelFactory):
+class StudyOperationFactory(AdministrativeFileOperationFactory):
     class Meta:
         model = models.AdministrativeOperation
 
     content_object = factory.SubFactory(StudyFactory)
 
 
-class StationOperationFactory(factory.django.DjangoModelFactory):
+class StationOperationFactory(AdministrativeFileOperationFactory):
     class Meta:
         model = models.AdministrativeOperation
 

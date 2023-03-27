@@ -72,63 +72,139 @@
 
     <h3>{% trans "Operations" %}</h3>
     {% if object.operations.exists %}
-    <table class="table operations">
-        <thead>
-            <tr>
-                <th>{% trans "Name" %}</th>
-                <th>{% trans "Estimated cost" %}</th>
-                <th class="actual-costs">{% trans "Actual cost" %}</th>
-                <th>{% trans "Edit costs" %}</th>
-            </tr>
-        </thead>
-        <tfoot>
-            <tr>
-                <th>{% trans "Totals" %}</th>
-                <td><strong>{{ object.total_costs.estimated }}&nbsp;&euro;</strong></td>
-                <td><strong>{{ object.total_costs.actual }}&nbsp;&euro;</strong></td>
-                <td>&nbsp;</td>
-            </tr>
-        </tfoot>
-        <tbody>
-        {% for operation in object.operations.all %}
-            <tr>
-                <td>{{ operation.content_object_display|safe }}</td>
-                <td>{{ operation.estimated_cost }}&nbsp;&euro;</td>
-                <td>
-                    {{ operation.actual_cost }}&nbsp;&euro;<br>
-                    <button class="btn btn-sm btn-link" type="button"
-                        data-toggle="collapse" data-target="#detailCosts{{ operation.pk }}"
-                        aria-expanded="false" aria-controls="detailCosts{{ operation.pk }}">
-                        {% trans "Costs details" %}
-                      </button>
-                    <div class="collapse" id="detailCosts{{ operation.pk }}">
-                        <table class="table table-sm costs">
-                            <tr>
-                                <th>{% trans "Material cost:" %}</th>
-                                <td>{{ operation.material_cost }}&nbsp;&euro;</td>
-                            </tr>
-                            <tr>
-                                <th>{% trans "Subcontract cost:" %}</th>
-                                <td>{{ operation.subcontract_cost }}&nbsp;&euro;</td>
-                            </tr>
-                            <tr>
-                                <th>{% trans "Cost of man-day:" %}</th>
-                                <td>{{ operation.manday_cost }}&nbsp;&euro;</td>
-                            </tr>
-                        </table>
-                    </div>
-                </td>
-                <td>
-                    <a href="{% url 'finances_administration:administrativeoperation-update' operation.pk %}">
-                        <i class="bi bi-pencil-square"></i> <span class="sr-only">{% trans "Edit" %}</span>
-                    </a>
-                </td>
-            </tr>
-        {% endfor %}
-        </tbody>
-    </table>
+        <table class="table operations">
+            <thead>
+                <tr>
+                    <th>{% trans "Phase" %}</th>
+                    <th>{% trans "Name" %}</th>
+                    <th>{% trans "Estimated cost" %}</th>
+                    <th class="actual-costs">{% trans "Actual cost" %}</th>
+                    <th></th>
+                    <th>{% trans "Edit costs" %}</th>
+                </tr>
+            </thead>
+            <tfoot>
+                <tr>
+                    <th></th>
+                    <th>{% trans "Totals" %}</th>
+                    <td><strong>{{ object.total_costs.estimated }}&nbsp;&euro;</strong></td>
+                    <td><strong>{{ object.total_costs.actual }}&nbsp;&euro;</strong></td>
+                    <td></td>
+                    <td></td>
+                </tr>
+            </tfoot>
+            <tbody>
+            {% for phase in phases %}
+                {% if phase.operations.exists %}
+                    {% for operation in phase.operations.all %}
+                        <tr>
+                        {% if forloop.first %}
+                            <td rowspan="{{ phase.count_operations }}">{{ phase }}
+                            <a href="{% url 'finances_administration:administrativephase-update' operation.phase.pk %}">
+                                &nbsp;<i class="bi bi-pencil-square"></i> <span class="sr-only">{% trans "Edit" %}</span>
+                            </a>
+                            </td>
+                        {% endif %}
+                        <td>{{ operation.content_object_display|safe }}</td>
+                        <td>{{ operation.estimated_cost }}&nbsp;&euro;</td>
+                        <td>
+                            {{ operation.actual_cost }}&nbsp;&euro;<br>
+                            <button class="btn btn-sm btn-link" type="button"
+                                data-toggle="collapse" data-target="#detailCosts{{ operation.pk }}"
+                                aria-expanded="false" aria-controls="detailCosts{{ operation.pk }}">
+                                {% trans "Costs details" %}
+                              </button>
+                            <div class="collapse" id="detailCosts{{ operation.pk }}">
+                                <table class="table table-sm costs">
+                                    <tr>
+                                        <th>{% trans "Material cost:" %}</th>
+                                        <td>{{ operation.material_cost }}&nbsp;&euro;</td>
+                                    </tr>
+                                    <tr>
+                                        <th>{% trans "Subcontract cost:" %}</th>
+                                        <td>{{ operation.subcontract_cost }}&nbsp;&euro;</td>
+                                    </tr>
+                                    <tr>
+                                        <th>{% trans "Cost of man-day:" %}</th>
+                                        <td>{{ operation.manday_cost }}&nbsp;&euro;</td>
+                                    </tr>
+                                </table>
+                            </div>
+                        </td>
+                        <td></td>
+                        <td>
+                            <a href="{% url 'finances_administration:administrativeoperation-update' operation.pk %}">
+                                <i class="bi bi-pencil-square"></i> <span class="sr-only">{% trans "Edit" %}</span>
+                            </a>
+                        </td>
+
+                    </tr>
+                    {% if forloop.last %}
+                    <tr>
+                        <td>{% trans "Subtotal by phase" %}</td>
+                        <td title="{% trans 'Estimated budget' %}">{{ phase.estimated_budget }}&nbsp;&euro;<br><p title="{% trans 'Revised budget' %}" class="revised-budget"> {% if phase.revised_budget %}{{ phase.revised_budget }}&nbsp;&euro;</p>{% endif %}</td>
+                        <td>{{ phase.total_costs.actual }}&nbsp;&euro;</td>
+                        <td></td>
+                        <td></td>
+                    </tr>
+                    {% endif %}
+                    {% endfor %}
+                {% else %}
+                    <tr>
+                        <td rowspan="{{ phase.count_operations }}">{{ phase }}
+                            <a href="{% url 'finances_administration:administrativephase-update' phase.pk %}">
+                                &nbsp;<i class="bi bi-pencil-square"></i> <span class="sr-only">{% trans "Edit" %}</span>
+                            </a>
+                        </td>
+                        <td>{% trans "Subtotal by phase" %}</td>
+                        <td title="{% trans 'Estimated budget' %}">{{ phase.estimated_budget }}&nbsp;&euro;<br><p title="{% trans 'Revised budget' %}" class="revised-budget"> {% if phase.revised_budget %}{{ phase.revised_budget }}&nbsp;&euro;</p>{% endif %}</td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                    </tr>
+                {% endif %}
+            {% endfor %}
+            {% for operation_without_phase in operations_without_phases %}
+                <tr>
+                    <td></td>
+                    <td>{{ operation_without_phase.content_object_display|safe }}</td>
+                    <td>{{ operation_without_phase.estimated_cost }}&nbsp;&euro;</td>
+                    <td>
+                        {{ operation_without_phase.actual_cost }}&nbsp;&euro;<br>
+                        <button class="btn btn-sm btn-link" type="button"
+                            data-toggle="collapse" data-target="#detailCosts{{ operation.pk }}"
+                            aria-expanded="false" aria-controls="detailCosts{{ operation.pk }}">
+                            {% trans "Costs details" %}
+                        </button>
+                        <div class="collapse" id="detailCosts{{ operation.pk }}">
+                            <table class="table table-sm costs">
+                                <tr>
+                                    <th>{% trans "Material cost:" %}</th>
+                                    <td>{{ operation_without_phase.material_cost }}&nbsp;&euro;</td>
+                                </tr>
+                                <tr>
+                                    <th>{% trans "Subcontract cost:" %}</th>
+                                    <td>{{ operation_without_phase.subcontract_cost }}&nbsp;&euro;</td>
+                                </tr>
+                                <tr>
+                                    <th>{% trans "Cost of man-day:" %}</th>
+                                    <td>{{ operation_without_phase.manday_cost }}&nbsp;&euro;</td>
+                                </tr>
+                            </table>
+                        </div>
+                    </td>
+                    <td></td>
+                    <td>
+                        <a href="{% url 'finances_administration:administrativeoperation-update' operation_without_phase.pk %}">
+                            <i class="bi bi-pencil-square"></i> <span class="sr-only">{% trans "Edit" %}</span>
+                        </a>
+                    </td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
     {% else %}
-    {% trans "No operation is created" %}
+        {% trans "No operation is created" %}
     {% endif %}
     <p><em>{% trans "Edit administrative file to add new operations." %}</em></p>
 

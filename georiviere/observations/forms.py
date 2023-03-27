@@ -6,6 +6,7 @@ from crispy_forms.layout import Div, Field, Fieldset, Layout
 from crispy_forms.bootstrap import Tab, TabHolder
 from geotrek.common.forms import CommonForm
 
+from georiviere.finances_administration.forms import AdministrativeFileObjectFormMixin
 from georiviere.main.widgets import DatePickerInput
 from georiviere.river.fields import SnappedGeometryField
 
@@ -60,7 +61,7 @@ ParameterTrackingFormset = inlineformset_factory(
 )
 
 
-class StationForm(CommonForm):
+class StationForm(AdministrativeFileObjectFormMixin, CommonForm):
     """Station form"""
     geom = SnappedGeometryField()
 
@@ -82,6 +83,8 @@ class StationForm(CommonForm):
                     'purpose_code',
                     'in_service',
                     'station_profiles',
+                    Div(css_id="div_id_operations", css_class="form-group row"),
+                    "administrative_file",
                 ),
                 Tab(
                     _('Parameters tracking'),

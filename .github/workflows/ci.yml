@@ -78,6 +78,7 @@ jobs:
       - uses: codecov/codecov-action@v2
         with:
           verbose: true
+          fail_ci_if_error: true # optional (default = false)
 
   build-and-push-image:
     runs-on: ubuntu-latest

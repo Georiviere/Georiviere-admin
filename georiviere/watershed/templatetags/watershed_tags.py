@@ -24,7 +24,6 @@ def combobox_bbox_watershed():
     used_types = WatershedType.objects.filter(pk__in=types_watershed)
     for watershed_type in used_types:
         serialized[watershed_type.pk] = [watershed_type.name, get_bbox_watersheds(watershed_type)]
-    print(serialized)
     return {
         'bbox_watersheds': serialized
     }

@@ -1,6 +1,7 @@
 from mapentity import views as mapentity_views
 from geotrek.authent.decorators import same_structure_required
 
+from georiviere.finances_administration.views import AdministrativeOperationOnObjectMixin
 from georiviere.studies.filters import StudyFilterSet
 from georiviere.studies.forms import StudyForm
 from georiviere.studies.models import Study
@@ -38,12 +39,12 @@ class StudyDetail(mapentity_views.MapEntityDetail):
         return context
 
 
-class StudyCreate(mapentity_views.MapEntityCreate):
+class StudyCreate(AdministrativeOperationOnObjectMixin, mapentity_views.MapEntityCreate):
     model = Study
     form_class = StudyForm
 
 
-class StudyUpdate(mapentity_views.MapEntityUpdate):
+class StudyUpdate(AdministrativeOperationOnObjectMixin, mapentity_views.MapEntityUpdate):
     model = Study
     form_class = StudyForm
 

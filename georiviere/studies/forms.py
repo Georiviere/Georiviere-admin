@@ -1,11 +1,12 @@
 from crispy_forms.layout import Div, Field
 from geotrek.common.forms import CommonForm
 
+from georiviere.finances_administration.forms import AdministrativeFileObjectFormMixin
 from georiviere.studies.models import Study
 from georiviere.river.fields import SnappedGeometryField
 
 
-class StudyForm(CommonForm):
+class StudyForm(AdministrativeFileObjectFormMixin, CommonForm):
     """Study form"""
     geom = SnappedGeometryField()
 
@@ -19,6 +20,8 @@ class StudyForm(CommonForm):
             'year',
             'study_authors',
             'description',
+            Div(css_id="div_id_operations", css_class="form-group row"),
+            "administrative_file",
         )
     ]
 

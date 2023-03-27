@@ -1,4 +1,4 @@
-from django.forms import inlineformset_factory, ModelForm, DecimalField
+from django.forms import inlineformset_factory, Form, ModelForm, DecimalField
 from django.utils.translation import gettext_lazy as _
 from crispy_forms.helper import FormHelper
 from crispy_forms.layout import Div, HTML, Layout, Field, Button
@@ -12,7 +12,20 @@ from georiviere.studies.models import Study
 from georiviere.observations.models import Station
 from georiviere.maintenance.models import Intervention
 from georiviere.knowledge.models import FollowUp
-from georiviere.finances_administration.models import AdministrativeFile, AdministrativeOperation, ManDay
+from georiviere.finances_administration.models import (AdministrativeFile,
+                                                       AdministrativeOperation,
+                                                       AdministrativePhase,
+                                                       ManDay)
+
+
+class AdministrativeFileObjectFormMixin(Form):
+    administrative_file = autocomplete.Select2GenericForeignKeyModelField(
+        model_choice=[
+            (AdministrativeFile, 'name',),
+        ],
+        label=_('Create operation on'),
+        required=False
+    )
 
 
 class FundingForm(ModelForm):
@@ -39,6 +52,96 @@ FundingFormSet = inlineformset_factory(
 )
 
 
+class AdministrativePhaseForm(ModelForm):
+    estimated_budget = DecimalField(
+        label=_("Estimated budget"),
+        disabled=False,
+        required=False,
+        help_text=_("Estimated budget of this phase")
+    )
+    revised_budget = DecimalField(
+        label=_("Revised budget"),
+        disabled=False,
+        required=False,
+        help_text=_("Revised budget of this phase")
+    )
+    actual_budget = DecimalField(
+        label=_("Actual budget"),
+        disabled=True,
+        required=False,
+        help_text=_("Actual budget of this phase")
+    )
+
+    class Meta:
+        model = AdministrativePhase
+        fields = (
+            'id', 'name', 'estimated_budget', 'revised_budget', 'actual_budget'
+        )
+
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        self.fields['actual_budget'].initial = self.instance.total_costs.get('actual')
+        self.helper = FormHelper()
+        self.helper.form_tag = False
+        self.helper.layout = Layout(
+            'id',
+            'name',
+            'phase',
+            HTML('<div class="w-100"></div>'),
+            AppendedText('estimated_budget', '&euro;'),
+            AppendedText('revised_budget', '&euro;'),
+            AppendedText('actual_budget', '&euro;'),
+        )
+
+
+class AdministrativePhaseUpdateForm(ModelForm):
+    actual_budget = DecimalField(
+        label=_("Actual budget"),
+        disabled=True,
+        required=False,
+        help_text=_("Actual budget of this phase"),
+    )
+
+    class Meta:
+        model = AdministrativePhase
+        fields = (
+            'id', 'name', 'estimated_budget', 'revised_budget', 'actual_budget'
+        )
+
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        self.helper = FormHelper()
+        self.helper.form_tag = False
+        self.fields['actual_budget'].initial = self.instance.total_costs.get('actual')
+        actions = [
+            Button('cancel', _('Cancel'), css_class="btn btn-light ml-auto mr-2"),
+            SubmitButton('save_changes', _('Save changes')),
+        ]
+        formactions = FormActions(
+            *actions,
+            css_class="form-actions",
+            template='mapentity/crispy_forms/bootstrap4/layout/formactions.html'
+        )
+
+        self.helper.layout = Layout(
+            'id',
+            'name',
+            'operation_status',
+            AppendedText('estimated_budget', '&euro;'),
+            AppendedText('revised_budget', '&euro;'),
+            AppendedText('actual_budget', '&euro;'),
+            formactions,
+        )
+
+
+AdministrativePhaseFormSet = inlineformset_factory(
+    AdministrativeFile,
+    AdministrativePhase,
+    form=AdministrativePhaseForm,
+    extra=1,
+)
+
+
 class AdministrativeOperationForm(autocomplete.FutureModelForm):
 
     content_object = autocomplete.Select2GenericForeignKeyModelField(
@@ -60,7 +163,7 @@ class AdministrativeOperationForm(autocomplete.FutureModelForm):
     class Meta:
         model = AdministrativeOperation
         fields = (
-            'id', 'name', 'content_object', 'operation_status',
+            'id', 'name', 'content_object', 'operation_status', 'phase', 'deferral',
             'estimated_cost', 'material_cost', 'subcontract_cost',
             'manday_cost'
         )
@@ -72,6 +175,8 @@ class AdministrativeOperationForm(autocomplete.FutureModelForm):
         self.helper.layout = Layout(
             'id',
             'name',
+            'phase',
+            Field('deferral', css_class="chosen-select"),
             Field('content_object', css_class="chosen-select"),
             'operation_status',
             HTML('<div class="w-100"></div>'),
@@ -179,6 +284,10 @@ class AdministrativeFileForm(CommonForm):
                 Tab(
                     _('Financing'),
                     Div(css_id="fundingWrapper"),
+                ),
+                Tab(
+                    _('Phase'),
+                    Div(css_id="adminphaseWrapper"),
                 ),
                 Tab(
                     _('Operations'),

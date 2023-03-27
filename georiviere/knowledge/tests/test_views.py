@@ -1,9 +1,11 @@
 from collections import OrderedDict
+from copy import deepcopy
 
 from django.core.exceptions import ObjectDoesNotExist
 from geotrek.authent.tests.factories import StructureFactory
 from django.utils.translation import gettext_lazy as _
 
+from georiviere.finances_administration.tests.factories import AdministrativeFileFactory
 from georiviere.tests import CommonRiverTest
 from . import factories
 from ..models import Knowledge, Vegetation, Work, FollowUp
@@ -188,6 +190,19 @@ class FollowUpViewsTest(CommonRiverTest):
             'followup_type': factories.FollowUpTypeFactory.create().pk,
         }
         return good_data
+
+    def get_good_data_with_administrative_file(self):
+        dict_good_data = deepcopy(self.get_good_data())
+        self.administrative_file = AdministrativeFileFactory.create()
+        dict_good_data['administrative_file'] = "{}-{}".format(self.administrative_file.get_content_type_id(),
+                                                               self.administrative_file.pk),
+        return dict_good_data
+
+    def test_good_data_with_administrative_file(self):
+        self.login()
+        response = self.client.post(self._get_add_url(), self.get_good_data_with_administrative_file())
+        self.assertEqual(response.status_code, 302)
+        self.assertEquals(self.model.objects.count(), 1)
 
     def test_creation_form_on_knowledge(self):
         """Test if form is initialized with knowledge when its id is passed in url"""
