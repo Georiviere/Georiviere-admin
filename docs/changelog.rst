@@ -14,6 +14,10 @@ CHANGELOG
 * Upgrade api hubeau PC quality
 * Add control type on Land module
 
+**Bug fixes**
+
+* Fix update attachments save buttons
+
 
 1.0.3 (2022-12-15)
 -------------------------
