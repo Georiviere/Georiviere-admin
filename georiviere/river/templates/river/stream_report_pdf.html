@@ -1,40 +1,392 @@
-<!DOCTYPE html>
-{% load i18n mapentity_tags static %}
+{% load i18n mapentity_tags georiviere_tags static %}
 
-<html lang="en">
+<html lang="fr">
   <head>
+    <meta charset="utf-8" />
+    <link href="styles.css" rel="stylesheet" />
     {% block style %}
       <style type="text/css">
         {% include template_css %}
 
+        .intro-left .teaser,
+        .meta-items-title,
+        .advice-title,
+        .how_to_come-title,
+        .accessibility-title,
+        .gear-title,
+        .elevation-title,
+        .half-block h2,
+        .block h2,
+        .information-desks h2 {
+          color: {{ primary_color }};
+        }
+        /* TODO: Remove when the map generation is fixed */
+        .full-map img {
+            max-height: 20cm;
+            display: block;
+            margin-left: auto;
+            margin-right: auto;
+        }
       </style>
     {% endblock style %}
   </head>
-  <body>
-    {% block body %}
-      <header>
-        {% block header %}
-            <div class="logo">
-              {% block logo %}
-                <img src="file://{% media_static_fallback_path "upload/logo-header.png" "images/logo-header.png" %}" alt="">
-                <p>GéoRIVIERE</p>
-              {% endblock logo %}
-            </div>
-            <div class="url">
-              {% block url %}
-              {% endblock url %}
-            </div>
-        {% endblock header %}
-      </header>
-      <div class="gray">
+
+  <header>
+    <div class="f-left">
+      <img src="{% media_static_fallback_path "upload/logo-header.png" "images/logo-header.png" %}" class="logo_header" />
+    </div>
+    <div></div>
+    <div class="f-right">
+      <img src="{% static "images/logo-login.png" %}" class="logo_header" />
+    </div>
+  </header>
+
+  <article id="toc">
+    <h1 class="center">{{ object.name }}</h1>
+    <ul>
+      <li><a href="#section-1-h2"></a></li>
+      <li><a href="#section-2-h2"></a></li>
+      <li><a href="#section-3-h2"></a></li>
+      <li><a href="#section-4-h2"></a></li>
+      <li><a href="#section-5-h2"></a></li>
+      <li><a href="#section-6-h2"></a></li>
+      <li><a href="#section-7-h2"></a></li>
+    </ul>
+  </article>
+
+  <section id="section-1">
+    <h2 id="section-1-h2">Informations</h2>
+    <aside>
+      <figure class="size-half">
+        <img src="file://{{ map_path }}" alt="" />
+        <figcaption>Légende de la carte</figcaption>
+      </figure>
+      <figure class="size-half">
+        <img src="{% url 'river:stream_profile_svg' LANGUAGE_CODE object.pk %}" alt="" />
+        <figcaption>Légende de la carte</figcaption>
+      </figure>
+    </aside>
+    <article id="features">
+      <section class="flex-wrap troisCol">
+        <h4>Caractéristiques</h4>
+        <dl>
+          <dt>{{ object|verbose:"flow" }}</dt>
+          <dd>{{ object.get_flow_display }}</dd>
+          <dt>{{ object|verbose:"flow" }}</dt>
+          <dd>Value</dd>
+          <dt>Source des données</dt>
+          <dd>Value</dd>
+          <dt>Longueur 2D</dt>
+          <dd>Value</dd>
+          <dt>Longueur 3D</dt>
+          <dd>Value</dd>
+          <dt>Pente</dt>
+          <dd>Value</dd>
+          <dt>Altitude</dt>
+          <dd>Value</dd>
+        </dl>
+      </section>
+
+      <section class="flex-wrap">
+        <h4>Communes traversées</h4>
+        <article class="columns threeColumns">
+          <ul>
+            <li>Commune 1</li>
+            <li>Commune 2</li>
+            <li>Commune 3</li>
+            <li>Commune 4</li>
+            <li>Commune 5</li>
+            <li>Commune 6</li>
+            <li>Commune 7</li>
+            <li>Commune 8</li>
+            <li>Commune 9</li>
+            <li>Commune 10</li>
+            <li>Commune 11</li>
+            <li>Commune 12</li>
+            <li>Commune 13</li>
+            <li>Commune 14</li>
+            <li>Commune 15</li>
+            <li>Commune 16</li>
+            <li>Commune 17</li>
+            <li>Commune 18</li>
+            <li>Commune 19</li>
+            <li>Commune 20</li>
+          </ul>
+        </article>
+      </section>
+      <section class="flex-wrap">
+        <h4>Secteurs traversées</h4>
+        <article class="columns oneColumn">
+          <ul>
+            <li>Secteur 1</li>
+            <li>Secteur 2</li>
+            <li>Secteur 3</li>
+          </ul>
+        </article>
+      </section>
+      <section class="flex-wrap">
+        <h4>Zonages traversées</h4>
+        <article class="columns oneColumn">
+          <ul>
+            <li>Type zonage – nom 1</li>
+            <li>Type zonage – nom 2</li>
+            <li>Type zonage – nom 3</li>
+            <li>Type zonage – nom 4</li>
+            <li>Type zonage – nom 5</li>
+          </ul>
+        </article>
+      </section>
+      <section class="flex-wrap">
+        <h4>Bassin versant</h4>
+        <article class="columns oneColumn">
+          <ul>
+            <li>Type BV – nom 1</li>
+            <li>Type BV – nom 2</li>
+          </ul>
+        </article>
+      </section>
+      <section class="flex-wrap">
+        <h4>Statut</h4>
+        <article class="columns oneColumn">
+          <ul>
+            <li>
+              1500 m (15%) du linéaire classé en Continuité écologique liste 1
+            </li>
+            <li>1000 m (10%) du linéaire classé en APPB Ecrevisses</li>
+            <li>
+              1500 m (15%) du linéaire classé en Continuité écologique liste 2
+            </li>
+          </ul>
+        </article>
+      </section>
+    </article>
+  </section>
+
+  <hr />
+
+  <section id="section-2" class="">
+    <div class="d-flex f-row f-end">
+      <img src="img/usage-96.png" class="img-title" />
+      <h2 id="section-2-h2">Usages</h2>
+    </div>
+    <div class="d-flex f-row">
+      <div class="size-half">
+        <aside>
+          <figure class="size-full">
+            <img src="{{ map_path }}" class="size-full" />
+            <figcaption>Légende</figcaption>
+          </figure>
+        </aside>
       </div>
-      <div class="intro">
+      <div class="size-half">
+        <ul class="l-style-number">
+          <li>Type usage</li>
+          <li>Type usage</li>
+          <li>Type usage</li>
+          <li>Type usage</li>
+          <li>Type usage</li>
+          <li>Type usage</li>
+          <li>Type usage</li>
+        </ul>
       </div>
-    {% endblock body %}
-    {% block footer %}
-      <div id="footer">
-        <div class="text">{% now 'SHORT_DATE_FORMAT' %} &#8226; {{ object.name }}</div>
+    </div>
+  </section>
+
+  <hr />
+
+  <section id="section-3">
+    <div class="d-flex f-row f-end">
+      <img src="img/study-96.png" class="img-title" />
+      <h2 id="section-3-h2">Étude</h2>
+    </div>
+    <div class="d-flex f-row">
+      <div class="size-half">
+        <aside>
+          <figure class="size-full">
+            <img src="img/carte.png" class="size-full" />
+            <figcaption>Légende</figcaption>
+          </figure>
+        </aside>
       </div>
-    {% endblock footer %}
-  </body>
+      <div class="size-half">
+        <ul class="l-style-number">
+          <li>Date + Nom + Type étude</li>
+          <li>Date + Nom + Type étude</li>
+          <li>Date + Nom + Type étude</li>
+          <li>Date + Nom + Type étude</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <hr />
+
+  <section id="section-4">
+    <div class="d-flex f-row f-end">
+      <img src="img/knowledge-96.png" class="img-title" />
+      <h2 id="section-4-h2">Connaissances</h2>
+    </div>
+    <div class="d-flex f-row">
+      <div class="size-third">
+        <aside>
+          <figure class="size-full">
+            <img src="img/carte.png" class="size-full" />
+            <figcaption>Légende</figcaption>
+          </figure>
+        </aside>
+      </div>
+      <div class="size-third">
+        <h4>Connaissance</h4>
+        <ul class="">
+          <li>Nom connaissance</li>
+          <li>Type connaissance</li>
+          <li>(+Type ouvrage ou Type Végétation)</li>
+          <li>(+Etat ouvrage ou Etat Végétation)</li>
+        </ul>
+        <h4>Suivi associé</h4>
+        <ul class="">
+          <li>- Nom suivi 1 – Type suivi</li>
+          <li>Date Suivi - Fréquence des relevés</li>
+          <li>- Nom suivi 2 – Type suivi</li>
+          <li>Date Suivi - Fréquence des relevés</li>
+        </ul>
+      </div>
+
+      <div class="size-third">
+        <h4>Intervention associée</h4>
+        <b>Nom intervention </b>1
+        <ul class="l-style-tiret">
+          <li>Date</li>
+          <li>Type intervention</li>
+          <li>Statut</li>
+          <li>Enjeu</li>
+          <li>Désordres</li>
+        </ul>
+        <b>Nom intervention 2</b>
+        <ul class="l-style-tiret">
+          <li>Date</li>
+          <li>Type intervention</li>
+          <li>Statut</li>
+          <li>Enjeu</li>
+          <li>Désordres</li>
+        </ul>
+      </div>
+    </div>
+    <hr />
+
+    <div class="d-flex f-row">
+      <div class="size-third">
+        <aside>
+          <figure class="size-full">
+            <img src="img/carte.png" class="size-full" />
+            <figcaption>Légende</figcaption>
+          </figure>
+        </aside>
+      </div>
+      <div class="size-third">
+        <h4>Connaissance</h4>
+        <ul class="">
+          <li>Nom connaissance</li>
+          <li>Type connaissance</li>
+          <li>(+Type ouvrage ou Type Végétation)</li>
+          <li>(+Etat ouvrage ou Etat Végétation)</li>
+        </ul>
+        <h4>Suivi associé</h4>
+        <ul class="">
+          <li>- Nom suivi 1 – Type suivi</li>
+          <li>Date Suivi - Fréquence des relevés</li>
+          <li>- Nom suivi 2 – Type suivi</li>
+          <li>Date Suivi - Fréquence des relevés</li>
+        </ul>
+      </div>
+
+      <div class="size-third">
+        <h4>Intervention associée</h4>
+        <b>Nom intervention </b>1
+        <ul class="l-style-tiret">
+          <li>Date</li>
+          <li>Type intervention</li>
+          <li>Statut</li>
+          <li>Enjeu</li>
+          <li>Désordres</li>
+        </ul>
+        <b>Nom intervention 2</b>
+        <ul class="l-style-tiret">
+          <li>Date</li>
+          <li>Type intervention</li>
+          <li>Statut</li>
+          <li>Enjeu</li>
+          <li>Désordres</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <hr />
+  <section id="section-5">
+    <div class="d-flex f-row f-end">
+      <img src="img/followup-96.png" class="img-title" />
+      <h2 id="section-5-h2">Autres Suivis (non lié à une connaissance)</h2>
+    </div>
+    <div class="d-flex f-row">
+      <div class="size-half">
+        <aside>
+          <figure class="size-full">
+            <img src="img/carte.png" class="size-full" />
+            <figcaption>Légende</figcaption>
+          </figure>
+        </aside>
+      </div>
+      <div class="size-half">
+        <ul class="l-style-number">
+          <li>Date + Nom + Type suivi</li>
+          <li>Date + Nom + Type suivi</li>
+          <li>Date + Nom + Type suivi</li>
+          <li>Date + Nom + Type suivi</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+  <hr />
+
+  <section id="section-6">
+    <div class="d-flex f-row f-end">
+      <img src="img/intervention-96.png" class="img-title" />
+      <h2 id="section-6-h2">
+        Autres Interventions (non lié à une connaissance)
+      </h2>
+    </div>
+    <div class="d-flex f-row">
+      <div class="size-half">
+        <aside>
+          <figure class="size-full">
+            <img src="img/carte.png" class="size-full" />
+            <figcaption>Légende</figcaption>
+          </figure>
+        </aside>
+      </div>
+      <div class="size-half">
+        <ul class="l-style-number">
+          <li>Date + Nom + Type intervention</li>
+          <li>Date + Nom + Type intervention</li>
+          <li>Date + Nom + Type intervention</li>
+          <li>Date + Nom + Type intervention</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <hr />
+  <section id="section-7">
+    <div class="d-flex f-row f-end">
+      <h2 id="section-7-h2">Contact</h2>
+    </div>
+    <p>
+      Pour plus d’informations :<br />
+      Contact (général ou en fonction BV?)<br />
+      Mail - Tél<br />
+      Site internet<br />
+      URL
+    </p>
+  </section>
 </html>
