@@ -6,6 +6,11 @@ from django.db.models import Q
 from django.template.defaultfilters import slugify
 from django.utils.translation import gettext_lazy as _
 
+import math
+import os
+from mapentity.helpers import is_file_uptodate, smart_urljoin, capture_map_image
+from mapentity.registry import app_settings
+
 from geotrek.authent.models import StructureRelated, StructureOrNoneRelated
 from geotrek.common.mixins import TimeStampedModelMixin
 from geotrek.zoning.mixins import ZoningPropertiesMixin
@@ -80,6 +85,7 @@ class Stream(AddPropertyBufferMixin, TimeStampedModelMixin, WatershedPropertiesM
                                                     on_delete=models.SET_NULL,
                                                     null=True, blank=True, related_name='streams',
                                                     verbose_name=_("Classification water policy"))
+    capture_map_image_waitfor = '.other_object_enum_loaded'
 
     class Meta:
         verbose_name = _("Stream")
@@ -92,6 +98,50 @@ class Stream(AddPropertyBufferMixin, TimeStampedModelMixin, WatershedPropertiesM
 
     def __str__(self):
         return self.name
+
+    def get_printcontext_with_other_objects(self, modelnames):
+        maplayers = [
+            settings.LEAFLET_CONFIG['TILES'][0][0],
+        ]
+        return {"maplayers": maplayers, "additional_objects": modelnames}
+
+    def get_map_image_path_with_other_objects(self, modelnames):
+        basefolder = os.path.join(settings.MEDIA_ROOT, 'maps')
+        if not os.path.exists(basefolder):
+            os.makedirs(basefolder)
+        return os.path.join(basefolder, '%s-%s-%s.png' % (self._meta.model_name, self.pk, '-'.join(sorted(modelnames))))
+
+    def prepare_map_image_with_other_objects(self, rooturl, modelnames):
+        path = self.get_map_image_path_with_other_objects(modelnames)
+        # Do nothing if image is up-to-date
+        # TODO: Add check every modelname changements
+        if is_file_uptodate(path, self.get_date_update()):
+            return False
+        url = smart_urljoin(rooturl, self.get_detail_url())
+        extent = self.get_map_image_extent(3857)
+        length = max(extent[2] - extent[0], extent[3] - extent[1])
+
+        if length:
+            hint_size = app_settings['MAP_CAPTURE_SIZE']
+            length_per_tile = 256 * length / hint_size
+            RADIUS = 6378137
+            CIRCUM = 2 * math.pi * RADIUS
+            zoom = round(math.log(CIRCUM / length_per_tile, 2))
+            size = math.ceil(length * 1.1 * 256 * 2 ** zoom / CIRCUM)
+        else:
+            size = app_settings['MAP_CAPTURE_SIZE']
+        printcontext = self.get_printcontext_with_other_objects(modelnames)
+        capture_map_image(url, path, size=size, waitfor=self.capture_map_image_waitfor, printcontext=printcontext)
+        return True
+
+    @property
+    def areas_ordered_area_type(self):
+        return sorted(self.areas, key=lambda x: x.area_type.name)
+
+    @property
+    def status_type_on_stream(self):
+        topologies = Topology.objects.filter(stream=self)
+        return topologies.filter(status__isnull=False)
 
     @property
     def slug(self):

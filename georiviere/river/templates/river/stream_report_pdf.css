@@ -99,7 +99,7 @@ ul {
   margin:0 0 20px
 }
 .l-style-number {
-  list-style: number;
+  list-style: upper-alpha;
   padding-left: 20px;
   padding-top: 10px;
 }

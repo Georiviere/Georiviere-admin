@@ -1,5 +1,7 @@
 {% load i18n mapentity_tags georiviere_tags static %}
 
+{% trans 'None' as trans_none %}
+
 <html lang="fr">
   <head>
     <meta charset="utf-8" />
@@ -59,151 +61,146 @@
     <aside>
       <figure class="size-half">
         <img src="file://{{ map_path }}" alt="" />
-        <figcaption>Légende de la carte</figcaption>
+        <figcaption>{% trans "Légende de la carte" %}</figcaption>
       </figure>
       <figure class="size-half">
         <img src="{% url 'river:stream_profile_svg' LANGUAGE_CODE object.pk %}" alt="" />
-        <figcaption>Légende de la carte</figcaption>
+        <figcaption>{% trans "Légende de la carte" %}</figcaption>
       </figure>
     </aside>
     <article id="features">
       <section class="flex-wrap troisCol">
-        <h4>Caractéristiques</h4>
+        <h4>{% trans "Caractéristiques" %}</h4>
         <dl>
           <dt>{{ object|verbose:"flow" }}</dt>
           <dd>{{ object.get_flow_display }}</dd>
-          <dt>{{ object|verbose:"flow" }}</dt>
-          <dd>Value</dd>
-          <dt>Source des données</dt>
-          <dd>Value</dd>
-          <dt>Longueur 2D</dt>
-          <dd>Value</dd>
-          <dt>Longueur 3D</dt>
-          <dd>Value</dd>
-          <dt>Pente</dt>
-          <dd>Value</dd>
-          <dt>Altitude</dt>
-          <dd>Value</dd>
+          <dt>{{ object|verbose:"classification_water_policy" }}</dt>
+          <dd>{{ object.classification_water_policy|default_if_none:trans_none }}</dd>
+          <dt>{{ object|verbose:"data_source" }}</dt>
+          <dd>{{ object.data_source|default_if_none:trans_none }}</dd>
+          <dt>{% trans "Length 2D" %}</dt>
+          {# ``geom.length`` is 2D and is computed by GEOS #}
+          <dd>{{ object.geom.length|floatformat }} m</dd>
+          <dt>{{ object|verbose:"length" }}</dt>
+          <dd>{{ object.length|floatformat }} m</dd>
+          <dt>{{ object|verbose:"slope" }}</dt>
+          <dd>{{ object.slope }}</dd>
+          <dt>{% trans "Elevation" %}</dt>
+          <dd>Min: {{ object.min_elevation|floatformat }} m, Max: {{ object.max_elevation|floatformat }} m</dd>
         </dl>
       </section>
-
-      <section class="flex-wrap">
-        <h4>Communes traversées</h4>
-        <article class="columns threeColumns">
-          <ul>
-            <li>Commune 1</li>
-            <li>Commune 2</li>
-            <li>Commune 3</li>
-            <li>Commune 4</li>
-            <li>Commune 5</li>
-            <li>Commune 6</li>
-            <li>Commune 7</li>
-            <li>Commune 8</li>
-            <li>Commune 9</li>
-            <li>Commune 10</li>
-            <li>Commune 11</li>
-            <li>Commune 12</li>
-            <li>Commune 13</li>
-            <li>Commune 14</li>
-            <li>Commune 15</li>
-            <li>Commune 16</li>
-            <li>Commune 17</li>
-            <li>Commune 18</li>
-            <li>Commune 19</li>
-            <li>Commune 20</li>
-          </ul>
-        </article>
-      </section>
-      <section class="flex-wrap">
-        <h4>Secteurs traversées</h4>
-        <article class="columns oneColumn">
-          <ul>
-            <li>Secteur 1</li>
-            <li>Secteur 2</li>
-            <li>Secteur 3</li>
-          </ul>
-        </article>
-      </section>
-      <section class="flex-wrap">
-        <h4>Zonages traversées</h4>
-        <article class="columns oneColumn">
-          <ul>
-            <li>Type zonage – nom 1</li>
-            <li>Type zonage – nom 2</li>
-            <li>Type zonage – nom 3</li>
-            <li>Type zonage – nom 4</li>
-            <li>Type zonage – nom 5</li>
-          </ul>
-        </article>
-      </section>
-      <section class="flex-wrap">
-        <h4>Bassin versant</h4>
-        <article class="columns oneColumn">
-          <ul>
-            <li>Type BV – nom 1</li>
-            <li>Type BV – nom 2</li>
-          </ul>
-        </article>
-      </section>
-      <section class="flex-wrap">
-        <h4>Statut</h4>
-        <article class="columns oneColumn">
-          <ul>
-            <li>
-              1500 m (15%) du linéaire classé en Continuité écologique liste 1
-            </li>
-            <li>1000 m (10%) du linéaire classé en APPB Ecrevisses</li>
-            <li>
-              1500 m (15%) du linéaire classé en Continuité écologique liste 2
-            </li>
-          </ul>
-        </article>
-      </section>
+      {% block cities_crossed %}
+        <section class="flex-wrap">
+          {% if object.cities %}
+            <h4>{% trans "Communes traversées" %}</h4>
+            <article class="columns threeColumns">
+              <ul>
+                {% for city in object.cities %}
+                  <li>{{ city.name }}</li>
+                {% endfor %}
+              </ul>
+            </article>
+          {% endif %}
+        </section>
+      {% endblock cities_crossed %}
+      {% block districts_crossed %}
+        {% if object.districts %}
+          <section class="flex-wrap">
+            <h4>{% trans "Secteurs traversées" %}</h4>
+            <article class="columns oneColumn">
+              <ul>
+                {% for district in object.districts %}
+                  <li>{{ district.name }}</li>
+                {% endfor %}
+              </ul>
+            </article>
+          </section>
+        {% endif %}
+      {% endblock districts_crossed %}
+      {% block areas_crossed %}
+        {% if object.areas %}
+          <section class="flex-wrap">
+            <h4>{% trans "Areas crossed" %}</h4>
+            <article class="columns oneColumn">
+              <ul>
+                {% for area in object.areas_ordered_area_type %}
+                  <li>{{ area.area_type }} – {{ area.name }}</li>
+                {% endfor %}
+              </ul>
+            </article>
+          </section>
+        {% endif %}
+      {% endblock areas_crossed %}
+      {% block watersheds_crossed %}
+        {% if object.watersheds %}
+          <section class="flex-wrap">
+            <h4>{% trans "Watersheds crossed" %}</h4>
+            <article class="columns oneColumn">
+              <ul>
+                {% for watershed in object.watersheds_ordered_watershed_type %}
+                  <li>{{ watershed.watershed_type }} – {{ watershed.name }}</li>
+                {% endfor %}
+              </ul>
+            </article>
+          </section>
+        {% endif %}
+      {% endblock watersheds_crossed %}
+      {% block status %}
+        <section class="flex-wrap">
+          <h4>{% trans "Status" %}</h4>
+          <article class="columns oneColumn">
+            <ul>
+              {% for status_type, infos in status_types.items %}
+              <li>
+                 {{ infos.sum_length.m|floatformat }} m ({{ infos.percentage|floatformat }} %) {% trans "linear classified in" %} {{ status_type }}
+              </li>
+              {% endfor %}
+            </ul>
+          </article>
+        </section>
+      {% endblock status %}
     </article>
   </section>
-
-  <hr />
-
-  <section id="section-2" class="">
-    <div class="d-flex f-row f-end">
-      <img src="img/usage-96.png" class="img-title" />
-      <h2 id="section-2-h2">Usages</h2>
-    </div>
-    <div class="d-flex f-row">
-      <div class="size-half">
-        <aside>
-          <figure class="size-full">
-            <img src="{{ map_path }}" class="size-full" />
-            <figcaption>Légende</figcaption>
-          </figure>
-        </aside>
-      </div>
-      <div class="size-half">
-        <ul class="l-style-number">
-          <li>Type usage</li>
-          <li>Type usage</li>
-          <li>Type usage</li>
-          <li>Type usage</li>
-          <li>Type usage</li>
-          <li>Type usage</li>
-          <li>Type usage</li>
-        </ul>
-      </div>
-    </div>
-  </section>
-
+  {% block usages %}
+    {% if object.usages %}
+      <hr />
+      <section id="section-2" class="">
+        <div class="d-flex f-row f-end">
+          <img src="{% static 'images/usage-96.png' %}" class="img-title" />
+          <h2 id="section-2-h2">{% trans "Usages" %}</h2>
+        </div>
+        <div class="d-flex f-row">
+          <div class="size-half">
+            <aside>
+              <figure class="size-full">
+                <img src="file://{{ map_path_usage }}" class="size-full" />
+                <figcaption>{% trans "Légende" %}</figcaption>
+              </figure>
+            </aside>
+          </div>
+          <div class="size-half">
+            <ul class="l-style-number">
+              {% for usage in object.usages %}
+                <li>{{ usage }}</li>
+              {% endfor %}
+            </ul>
+          </div>
+        </div>
+      </section>
+    {% endif %}
+  {% endblock usages %}
   <hr />
 
   <section id="section-3">
     <div class="d-flex f-row f-end">
-      <img src="img/study-96.png" class="img-title" />
+      <img src="{% static 'images/study-96.png' %}" class="img-title" />
       <h2 id="section-3-h2">Étude</h2>
     </div>
     <div class="d-flex f-row">
       <div class="size-half">
         <aside>
           <figure class="size-full">
-            <img src="img/carte.png" class="size-full" />
+            <img src="file://{{ map_path_study }}" class="size-full" />
             <figcaption>Légende</figcaption>
           </figure>
         </aside>
@@ -223,14 +220,14 @@
 
   <section id="section-4">
     <div class="d-flex f-row f-end">
-      <img src="img/knowledge-96.png" class="img-title" />
+      <img src="{% static 'images/knowledge-96.png' %}" class="img-title" />
       <h2 id="section-4-h2">Connaissances</h2>
     </div>
     <div class="d-flex f-row">
       <div class="size-third">
         <aside>
           <figure class="size-full">
-            <img src="img/carte.png" class="size-full" />
+            <img src="file://{{ map_path_usage }}" class="size-full" />
             <figcaption>Légende</figcaption>
           </figure>
         </aside>
@@ -278,7 +275,7 @@
       <div class="size-third">
         <aside>
           <figure class="size-full">
-            <img src="img/carte.png" class="size-full" />
+            <img src="file://{{ map_path_usage }}" class="size-full" />
             <figcaption>Légende</figcaption>
           </figure>
         </aside>
@@ -325,14 +322,14 @@
   <hr />
   <section id="section-5">
     <div class="d-flex f-row f-end">
-      <img src="img/followup-96.png" class="img-title" />
+      <img src="{% static 'images/followup-96.png' %}" class="img-title" />
       <h2 id="section-5-h2">Autres Suivis (non lié à une connaissance)</h2>
     </div>
     <div class="d-flex f-row">
       <div class="size-half">
         <aside>
           <figure class="size-full">
-            <img src="img/carte.png" class="size-full" />
+            <img src="file://{{ map_path_usage }}" class="size-full" />
             <figcaption>Légende</figcaption>
           </figure>
         </aside>
@@ -351,7 +348,7 @@
 
   <section id="section-6">
     <div class="d-flex f-row f-end">
-      <img src="img/intervention-96.png" class="img-title" />
+      <img src="{% static 'images/intervention-96.png' %}" class="img-title" />
       <h2 id="section-6-h2">
         Autres Interventions (non lié à une connaissance)
       </h2>

@@ -2,13 +2,14 @@ from django.conf import settings
 from django.contrib import messages
 from django.contrib.gis.db.models.functions import Distance
 from django.contrib.gis.geos import Point
-from django.contrib.gis.db.models.functions import Length, LineLocatePoint
+from django.contrib.gis.db.models.functions import Length, LineLocatePoint, Transform
 from django.core.exceptions import PermissionDenied
 from django.contrib.auth.mixins import LoginRequiredMixin
-from django.db.models import F, FloatField, Case, Min, When
+from django.db.models import Sum, F, FloatField, Case, Min, When
 from django.db.utils import InternalError
 from django.http import JsonResponse
 from django.http.response import HttpResponseRedirect
+from django.shortcuts import get_object_or_404
 from django.utils.translation import gettext as _
 from django.views.generic.edit import FormView
 from django.views.generic.base import View
@@ -19,8 +20,15 @@ from .forms import CutTopologyForm, StreamForm
 from .models import Stream, Topology
 from .filters import StreamFilterSet
 from georiviere.main.mixins.views import DocumentReportMixin
+from georiviere.description.models import Status, StatusType, Usage
+from georiviere.description.serializers import UsageAPIGeojsonSerializer
+from georiviere.studies.models import Study
+from georiviere.studies.serializers import StudyAPIGeojsonSerializer
+
 
 from mapentity import views as mapentity_views
+
+from rest_framework import permissions as rest_permissions, viewsets
 
 
 class StreamList(mapentity_views.MapEntityList):
@@ -37,7 +45,54 @@ class StreamJsonList(mapentity_views.MapEntityJsonList, StreamList):
     pass
 
 
+class StreamUsageViewSet(viewsets.ModelViewSet):
+    model = Usage
+    serializer_class = UsageAPIGeojsonSerializer
+    permission_classes = [rest_permissions.DjangoModelPermissionsOrAnonReadOnly]
+
+    def get_queryset(self):
+        pk = self.kwargs['pk']
+        stream = get_object_or_404(Stream.objects.all(), pk=pk)
+        return stream.usages.annotate(api_geom=Transform("geom", settings.API_SRID)).prefetch_related('usage_types',)
+
+
+class StreamStudyViewSet(viewsets.ModelViewSet):
+    model = Study
+    serializer_class = StudyAPIGeojsonSerializer
+    permission_classes = [rest_permissions.DjangoModelPermissionsOrAnonReadOnly]
+
+    def get_queryset(self):
+        pk = self.kwargs['pk']
+        stream = get_object_or_404(Stream.objects.all(), pk=pk)
+        return stream.studies.annotate(api_geom=Transform("geom", settings.API_SRID))
+
+
 class StreamDocumentReport(DocumentReportMixin, mapentity_views.MapEntityDocumentWeasyprint):
+    def get_context_data(self, *args, **kwargs):
+        rooturl = self.request.build_absolute_uri('/')
+        self.get_object().prepare_map_image_with_other_objects(rooturl, ["usages"])
+        self.get_object().prepare_map_image_with_other_objects(rooturl, ["studies"])
+        context = super(StreamDocumentReport, self).get_context_data(*args, **kwargs)
+        topologies = Topology.objects.filter(stream=self.get_object())
+        status_types = {}
+        for status_type in StatusType.objects.filter(status__in=Status.objects.filter(
+                topology__in=topologies.filter(status__isnull=False).values_list('pk', flat=True)).values_list('pk',
+                                                                                                               flat=True)):
+            infos = status_type.status.annotate(length_2d=Length('geom')).aggregate(sum_length=Sum('length_2d'),
+                                                                                    percentage=Sum(
+                                                                                        F('topology__end_position') - F(
+                                                                                            'topology__start_position')) * 100)
+            status_types[status_type.label] = infos
+        context['status_types'] = status_types
+        context['map_path_usage'] = self.get_object().get_map_image_path_with_other_objects(["usages"])
+        context['map_path_study'] = self.get_object().get_map_image_path_with_other_objects(["studies"])
+        return context
+
+    @property
+    def status_type_on_stream(self):
+        topologies = Topology.objects.filter(stream=self)
+        return topologies.filter(status__isnull=False)
+
     def get_object(self, queryset=None):
         obj = super().get_object(queryset)
         if not self.request.user.is_authenticated:
