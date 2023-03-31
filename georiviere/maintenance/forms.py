@@ -1,3 +1,4 @@
+from django.forms import ModelChoiceField
 from django.utils.translation import gettext_lazy as _
 
 from crispy_forms.layout import Div, Field
@@ -5,14 +6,14 @@ from crispy_forms.bootstrap import AppendedText
 from dal import autocomplete
 from geotrek.common.forms import CommonForm
 
-from georiviere.finances_administration.forms import AdministrativeFileObjectFormMixin
+from georiviere.finances_administration.models import AdministrativeFile
 from georiviere.knowledge.models import Knowledge
 from georiviere.main.widgets import DatePickerInput
 from georiviere.maintenance.models import Intervention
 from georiviere.river.fields import SnappedGeometryField
 
 
-class InterventionForm(AdministrativeFileObjectFormMixin, CommonForm):
+class InterventionForm(autocomplete.FutureModelForm, CommonForm):
     """Intervention form"""
     _geom = SnappedGeometryField(required=False)
 
@@ -26,6 +27,8 @@ class InterventionForm(AdministrativeFileObjectFormMixin, CommonForm):
         required=False,
         initial=None,
     )
+    administrative_file = ModelChoiceField(label=_("Create operation on"), queryset=AdministrativeFile.objects.all(),
+                                           required=False, initial=None)
 
     fieldslayout = [
         Div(

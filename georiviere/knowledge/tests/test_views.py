@@ -194,8 +194,7 @@ class FollowUpViewsTest(CommonRiverTest):
     def get_good_data_with_administrative_file(self):
         dict_good_data = deepcopy(self.get_good_data())
         self.administrative_file = AdministrativeFileFactory.create()
-        dict_good_data['administrative_file'] = "{}-{}".format(self.administrative_file.get_content_type_id(),
-                                                               self.administrative_file.pk),
+        dict_good_data['administrative_file'] = self.administrative_file.pk,
         return dict_good_data
 
     def test_good_data_with_administrative_file(self):
