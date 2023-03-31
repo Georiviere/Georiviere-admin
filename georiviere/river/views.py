@@ -22,7 +22,6 @@ from .filters import StreamFilterSet
 from georiviere.main.mixins.views import DocumentReportMixin
 from georiviere.description.models import Status, StatusType, Usage
 from georiviere.description.serializers import UsageAPIGeojsonSerializer
-from georiviere.knowledge.models import Knowledge
 from georiviere.studies.models import Study
 from georiviere.studies.serializers import StudyAPIGeojsonSerializer
 

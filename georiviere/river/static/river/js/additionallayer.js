@@ -45,27 +45,5 @@ $(window).on('detailmap:ready', function (e, data) {
                 $('.map-panel').addClass('other_object_enum_loaded');
             });
         }
-        if (mapViewContext.additional_objects.includes('knowledges')) {
-            var geojsonKnowledgeMarkerOptions = {
-                radius: 13,
-                fillColor: "#208454",
-                color: "#208454",
-                weight: 3,
-                opacity: 1,
-                fillOpacity: 0.4
-            };
-            console.log(geojsonKnowledgeMarkerOptions);
-            $.getJSON(window.SETTINGS.urls.stream_knowledges_layer, function (data) {
-                var knowledges = new L.GeoJSON(data, {
-                    pointToLayer: function (feature, latlng) {
-                        return L.circleMarker(latlng, geojsonKnowledgeMarkerOptions);
-                    }
-                });
-                map.addLayer(knowledges);
-
-                knowledges.showEnumeration();
-                $('.map-panel').addClass('other_object_enum_loaded');
-            });
-        }
     }
 });
