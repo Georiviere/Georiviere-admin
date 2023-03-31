@@ -17,7 +17,8 @@
     {% include "georiviere/javascript_detail_river.html" with object=object %}
     <script type="text/javascript">
         window.SETTINGS.urls['stream_usages_layer'] = "{% url 'river:stream_usage_geojson' LANGUAGE_CODE object.pk %}?fields=api_geom,id,name";
-        window.SETTINGS.urls['stream_studies_layer']  = "{% url 'river:stream_study_geojson' LANGUAGE_CODE object.pk %}?fields=api_geom,id,name";
+        window.SETTINGS.urls['stream_studies_layer'] = "{% url 'river:stream_study_geojson' LANGUAGE_CODE object.pk %}?fields=api_geom,id,title";
+        window.SETTINGS.urls['stream_knowledges_layer'] = "{% url 'river:stream_knowledge_geojson' LANGUAGE_CODE object.pk %}?fields=api_geom,id,name";
     </script>
     <script src="{% static "river/js/additionallayer.js" %}"></script>
     <script type="text/javascript">

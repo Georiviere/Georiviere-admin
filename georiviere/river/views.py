@@ -22,6 +22,7 @@ from .filters import StreamFilterSet
 from georiviere.main.mixins.views import DocumentReportMixin
 from georiviere.description.models import Status, StatusType, Usage
 from georiviere.description.serializers import UsageAPIGeojsonSerializer
+from georiviere.knowledge.models import Knowledge
 from georiviere.studies.models import Study
 from georiviere.studies.serializers import StudyAPIGeojsonSerializer
 
@@ -69,9 +70,6 @@ class StreamStudyViewSet(viewsets.ModelViewSet):
 
 class StreamDocumentReport(DocumentReportMixin, mapentity_views.MapEntityDocumentWeasyprint):
     def get_context_data(self, *args, **kwargs):
-        rooturl = self.request.build_absolute_uri('/')
-        self.get_object().prepare_map_image_with_other_objects(rooturl, ["usages"])
-        self.get_object().prepare_map_image_with_other_objects(rooturl, ["studies"])
         context = super(StreamDocumentReport, self).get_context_data(*args, **kwargs)
         topologies = Topology.objects.filter(stream=self.get_object())
         status_types = {}
@@ -84,8 +82,16 @@ class StreamDocumentReport(DocumentReportMixin, mapentity_views.MapEntityDocumen
                                                                                             'topology__start_position')) * 100)
             status_types[status_type.label] = infos
         context['status_types'] = status_types
+
+        rooturl = self.request.build_absolute_uri('/')
+        self.get_object().prepare_map_image_with_other_objects(rooturl, ["usages"])
+        self.get_object().prepare_map_image_with_other_objects(rooturl, ["studies"])
         context['map_path_usage'] = self.get_object().get_map_image_path_with_other_objects(["usages"])
         context['map_path_study'] = self.get_object().get_map_image_path_with_other_objects(["studies"])
+        context['map_path_knowledge'] = {}
+        for knowledge in self.get_object().knowledges:
+            knowledge.prepare_map_image(rooturl)
+            context['map_path_knowledge'][knowledge.pk] = knowledge.get_map_image_path()
         return context
 
     @property

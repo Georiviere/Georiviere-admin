@@ -4,6 +4,11 @@ from mapentity.helpers import alphabet_enumeration
 register = template.Library()
 
 
+@register.filter
+def get_value_from_dict(h, key):
+    return h[key]
+
+
 @register.inclusion_tag('main/_detail_valuelist_source_fragment.html')
 def valuelist_source(items, stream, field=None, enumeration=False):
     """

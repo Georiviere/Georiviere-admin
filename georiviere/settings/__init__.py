@@ -253,6 +253,9 @@ MAPENTITY_CONFIG = {
         'station': {'weight': 4, 'color': '#FFD801', 'opacity': 0.9},
         'study': {'weight': 4, 'color': '#d63384', 'opacity': 0.9},
         'proceeding': {'weight': 4, 'color': '#3dd5f3', 'opacity': 0.9},
+        'print': {
+            'knowledge': {'weight': 3, 'color': '#198754', 'opacity': 1, 'fillOpacity': 0.4, 'radius': 13},
+        }
     }
 }
 

@@ -10,7 +10,7 @@ class StudySerializer(ModelSerializer):
     class Meta:
         model = Study
         fields = (
-            'id', 'name', 'description'
+            'id', 'title', 'description'
         )
 
 

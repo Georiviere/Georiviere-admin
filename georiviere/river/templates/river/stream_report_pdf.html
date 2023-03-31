@@ -189,136 +189,93 @@
       </section>
     {% endif %}
   {% endblock usages %}
-  <hr />
+  {% block studies %}
+    {% if object.studies %}
+      <hr />
 
-  <section id="section-3">
-    <div class="d-flex f-row f-end">
-      <img src="{% static 'images/study-96.png' %}" class="img-title" />
-      <h2 id="section-3-h2">Étude</h2>
-    </div>
-    <div class="d-flex f-row">
-      <div class="size-half">
-        <aside>
-          <figure class="size-full">
-            <img src="file://{{ map_path_study }}" class="size-full" />
-            <figcaption>Légende</figcaption>
-          </figure>
-        </aside>
-      </div>
-      <div class="size-half">
-        <ul class="l-style-number">
-          <li>Date + Nom + Type étude</li>
-          <li>Date + Nom + Type étude</li>
-          <li>Date + Nom + Type étude</li>
-          <li>Date + Nom + Type étude</li>
-        </ul>
-      </div>
-    </div>
-  </section>
-
-  <hr />
-
-  <section id="section-4">
-    <div class="d-flex f-row f-end">
-      <img src="{% static 'images/knowledge-96.png' %}" class="img-title" />
-      <h2 id="section-4-h2">Connaissances</h2>
-    </div>
-    <div class="d-flex f-row">
-      <div class="size-third">
-        <aside>
-          <figure class="size-full">
-            <img src="file://{{ map_path_usage }}" class="size-full" />
-            <figcaption>Légende</figcaption>
-          </figure>
-        </aside>
-      </div>
-      <div class="size-third">
-        <h4>Connaissance</h4>
-        <ul class="">
-          <li>Nom connaissance</li>
-          <li>Type connaissance</li>
-          <li>(+Type ouvrage ou Type Végétation)</li>
-          <li>(+Etat ouvrage ou Etat Végétation)</li>
-        </ul>
-        <h4>Suivi associé</h4>
-        <ul class="">
-          <li>- Nom suivi 1 – Type suivi</li>
-          <li>Date Suivi - Fréquence des relevés</li>
-          <li>- Nom suivi 2 – Type suivi</li>
-          <li>Date Suivi - Fréquence des relevés</li>
-        </ul>
-      </div>
-
-      <div class="size-third">
-        <h4>Intervention associée</h4>
-        <b>Nom intervention </b>1
-        <ul class="l-style-tiret">
-          <li>Date</li>
-          <li>Type intervention</li>
-          <li>Statut</li>
-          <li>Enjeu</li>
-          <li>Désordres</li>
-        </ul>
-        <b>Nom intervention 2</b>
-        <ul class="l-style-tiret">
-          <li>Date</li>
-          <li>Type intervention</li>
-          <li>Statut</li>
-          <li>Enjeu</li>
-          <li>Désordres</li>
-        </ul>
-      </div>
-    </div>
+      <section id="section-3">
+        <div class="d-flex f-row f-end">
+          <img src="{% static 'images/study-96.png' %}" class="img-title" />
+          <h2 id="section-3-h2">{% trans "Study" %}</h2>
+        </div>
+        <div class="d-flex f-row">
+          <div class="size-half">
+            <aside>
+              <figure class="size-full">
+                <img src="file://{{ map_path_study }}" class="size-full" />
+                <figcaption>Légende</figcaption>
+              </figure>
+            </aside>
+          </div>
+          <div class="size-half">
+            <ul class="l-style-number">
+              {% for study in object.studies %}
+                 <li>{{ study.date }} - {{ study.title }} - {{ study.study_types }}</li>
+              {% endfor %}
+            </ul>
+          </div>
+        </div>
+      </section>
+    {% endif %}
+  {% endblock studies %}
+  {% block knowledges %}
     <hr />
 
-    <div class="d-flex f-row">
-      <div class="size-third">
-        <aside>
-          <figure class="size-full">
-            <img src="file://{{ map_path_usage }}" class="size-full" />
-            <figcaption>Légende</figcaption>
-          </figure>
-        </aside>
+    <section id="section-4">
+      <div class="d-flex f-row f-end">
+        <img src="{% static 'images/knowledge-96.png' %}" class="img-title" />
+        <h2 id="section-4-h2">{% trans "Knowledges" %}</h2>
       </div>
-      <div class="size-third">
-        <h4>Connaissance</h4>
-        <ul class="">
-          <li>Nom connaissance</li>
-          <li>Type connaissance</li>
-          <li>(+Type ouvrage ou Type Végétation)</li>
-          <li>(+Etat ouvrage ou Etat Végétation)</li>
-        </ul>
-        <h4>Suivi associé</h4>
-        <ul class="">
-          <li>- Nom suivi 1 – Type suivi</li>
-          <li>Date Suivi - Fréquence des relevés</li>
-          <li>- Nom suivi 2 – Type suivi</li>
-          <li>Date Suivi - Fréquence des relevés</li>
-        </ul>
-      </div>
-
-      <div class="size-third">
-        <h4>Intervention associée</h4>
-        <b>Nom intervention </b>1
-        <ul class="l-style-tiret">
-          <li>Date</li>
-          <li>Type intervention</li>
-          <li>Statut</li>
-          <li>Enjeu</li>
-          <li>Désordres</li>
-        </ul>
-        <b>Nom intervention 2</b>
-        <ul class="l-style-tiret">
-          <li>Date</li>
-          <li>Type intervention</li>
-          <li>Statut</li>
-          <li>Enjeu</li>
-          <li>Désordres</li>
-        </ul>
-      </div>
-    </div>
-  </section>
-
+      {% for knowledge in object.knowledges %}
+        <div class="d-flex f-row">
+          <div class="size-third">
+            <aside>
+              <figure class="size-full">
+                <img src="file://{{ map_path_knowledge|get_value_from_dict:knowledge.pk }}" class="size-full" />
+                <figcaption>Légende</figcaption>
+              </figure>
+            </aside>
+          </div>
+          <div class="size-third">
+            <h4>{% trans "Knowledge" %}</h4>
+              <ul class="">
+                <li>{{ knowledge.name }}</li>
+                <li>{{ knowledge.knowledge_type }}</li>
+                <li>{% if knowledge.knowledge_type.pk == 1 and knowledge.vegetation.vegetation_type %}{{ knowledge.vegetation.vegetation_type }}{% endif %}{% if knowledge.knowledge_type.pk == 2 and knowledge.work.work_type %}{{ knowledge.work.work_type }}{% endif %}</li>
+                <li>{% if knowledge.knowledge_type.pk == 1 and knowledge.vegetation.state %}{{ knowledge.vegetation.state }}{% endif %}{% if knowledge.knowledge_type.pk == 2 and knowledge.work.state %}{{ knowledge.work.state }}{% endif %}</li>
+              </ul>
+              {% if knowledge.followups.exists %}
+                <h4>{% trans "Associated follow-ups" %}</h4>
+                <ul class="">
+                  {% for followup in knowledge.followups.all %}
+                    <li>- {{ followup.name }}{% if followup.type %} – {{ followup.type }}{% endif %}</li>
+                    <li>{{ followup.date }}{% if followup.measure_frequency %} - {{ followup.measure_frequency }}{% endif %}</li>
+                  {% endfor %}
+                </ul>
+              {% endif %}
+          </div>
+          {% if knowledge.interventions.exists %}
+            <div class="size-third">
+              <h4>{% trans "Associated interventions" %}</h4>
+              {% for intervention in knowledge.interventions.all %}
+                <b>{{ intervention.name }} </b>{{ forloop.counter }}
+                <ul class="l-style-tiret">
+                  <li>{{ intervention.date }}</li>
+                  <li>{{ intervention.intervention_type }}</li>
+                  <li>{{ intervention.intervention_status }}</li>
+                  <li>{{ intervention.stake }}</li>
+                  <li>{% for disorder in intervention.disorders.all %}{{ disorder }} {% if not forloop.last %}- {% endif %}{% endfor %}</li>
+                </ul>
+              {% endfor %}
+            </div>
+          {% endif %}
+        </div>
+        {% if not forloop.last %}
+          <hr />
+        {% endif %}
+      {% endfor %}
+    </section>
+  {% endblock knowledges %}
   <hr />
   <section id="section-5">
     <div class="d-flex f-row f-end">
