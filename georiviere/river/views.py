@@ -53,13 +53,23 @@ class StreamJsonList(mapentity_views.MapEntityJsonList, StreamList):
     pass
 
 
-class StreamViewSet(mapentity_views.MapEntityViewSet):
+class StreamViewSet(viewsets.ModelViewSet):
     model = Stream
     queryset = Stream.objects.all()
     geojson_serializer_class = StreamGeojsonSerializer
     serializer_class = StreamSerializer
     renderer_classes = (JSONRenderer, GeoJSONRenderer, )
     permission_classes = [rest_permissions.DjangoModelPermissionsOrAnonReadOnly]
+
+    def transform_serializer_geojson(self, serializer_class):
+        if self.kwargs.get('format', 'json') == 'geojson':
+            # auto override in geojson case
+            return self.geojson_serializer_class
+        return serializer_class
+
+    def get_serializer_class(self):
+        original_class = super().get_serializer_class()
+        return self.transform_serializer_geojson(original_class)
 
     @action(detail=True, url_name="usages", methods=['get'],
             renderer_classes=[GeoJSONRenderer],
@@ -119,14 +129,17 @@ class StreamDocumentReport(DocumentReportMixin, mapentity_views.MapEntityDocumen
         self.get_object().prepare_map_image_with_other_objects(rooturl, ["studies"])
         self.get_object().prepare_map_image_with_other_objects(rooturl, ["followups"])
         self.get_object().prepare_map_image_with_other_objects(rooturl, ["interventions"])
+
         context['map_path_usage'] = self.get_object().get_map_image_path_with_other_objects(["usages"])
         context['map_path_study'] = self.get_object().get_map_image_path_with_other_objects(["studies"])
         context['map_path_other_followups'] = self.get_object().get_map_image_path_with_other_objects(["followups"])
         context['map_path_other_interventions'] = self.get_object().get_map_image_path_with_other_objects(["interventions"])
+
         context['map_path_knowledge'] = {}
         for knowledge in self.get_object().knowledges:
             knowledge.prepare_map_image(rooturl)
             context['map_path_knowledge'][knowledge.pk] = knowledge.get_map_image_path()
+
         context['MAIL'] = settings.MAIL_DOCUMENT_REPORT
         context['PHONE_NUMBER'] = settings.PHONE_NUMBER_DOCUMENT_REPORT
         context['WEBSITE'] = settings.WEBSITE_DOCUMENT_REPORT
