@@ -118,6 +118,7 @@ TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
         'DIRS': [
+            VAR_DIR / 'conf' / 'extra_templates',
             PROJECT_DIR / "templates",
         ],
         'APP_DIRS': True,
@@ -216,6 +217,7 @@ MEDIA_URL = '/media/'
 STATIC_URL = '/static/'
 
 STATICFILES_DIRS = [
+    VAR_DIR / 'conf' / 'extra_static',
     PROJECT_DIR / "static",
 ]
 
