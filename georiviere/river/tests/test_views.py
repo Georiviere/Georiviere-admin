@@ -1,3 +1,6 @@
+from mapentity.tests.factories import SuperUserFactory
+from unittest import mock
+
 from django.conf import settings
 from django.contrib.gis.geos import GEOSGeometry, Point
 from django.test import override_settings, TestCase
@@ -163,9 +166,6 @@ class DistanceToSourceTestCase(TestCase):
     def setUpTestData(cls):
         cls.user = UserFactory(password='booh')
 
-    def setUp(self):
-        self.client.force_login(self.user)
-
     def test_distance_to_source(self):
         geom = GEOSGeometry('SRID=4326;POINT(3 40)')
         geom_stream = GEOSGeometry('SRID=4326;LINESTRING(3 40, 2 40, 1 40)')
@@ -179,3 +179,21 @@ class DistanceToSourceTestCase(TestCase):
                                          'lat_distance': geom.coords[1]})
         self.assertEqual(response.status_code, 200)
         self.assertEqual(response.json(), {'distance': 257535.0})
+
+
+class StreamDocumentReportTestCase(TestCase):
+    @classmethod
+    def setUpTestData(cls):
+        cls.user = SuperUserFactory(password='booh')
+        cls.stream = StreamFactory.create()
+
+    def setUp(self):
+        self.client.force_login(self.user)
+
+    @mock.patch('georiviere.river.models.Stream.prepare_map_image_with_other_objects')
+    @mock.patch('mapentity.models.MapEntityMixin.prepare_map_image')
+    def test_generation_document_report_stream(self, mock_prepare_map_image, mocked_prepare_map_image_wo):
+        response = self.client.get(reverse('river:stream_printable', kwargs={'lang': "fr",
+                                                                             'pk': self.stream.pk,
+                                                                             'slug': self.stream.slug}))
+        self.assertEqual(response.status_code, 200)
