@@ -70,7 +70,7 @@
       </figure>
       <figure class="size-half">
         <img src="{% url 'river:stream_profile_svg' LANGUAGE_CODE object.pk %}" alt="" />
-        <figcaption>{% trans "Elevation chart" %}</figcaption>
+        <figcaption>{% trans "Altimetric profile" %}</figcaption>
       </figure>
     </aside>
     <article id="features">
@@ -283,7 +283,7 @@
       </section>
     {% endif %}
   {% endblock knowledges %}
-  {% block other-followups %}
+  {% block other-follow-ups %}
     {% if object.followups_without_knowledges %}
       <hr />
       <section id="section-5">
@@ -310,7 +310,7 @@
         </div>
       </section>
     {% endif %}
-  {% endblock other-followups %}
+  {% endblock other-follow-ups %}
   {% block other-interventions %}
     {% if object.interventions_without_knowledges %}
       <hr />
