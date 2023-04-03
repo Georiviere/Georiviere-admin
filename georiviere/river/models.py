@@ -111,11 +111,12 @@ class Stream(AddPropertyBufferMixin, TimeStampedModelMixin, WatershedPropertiesM
             os.makedirs(basefolder)
         return os.path.join(basefolder, '%s-%s-%s.png' % (self._meta.model_name, self.pk, '-'.join(sorted(modelnames))))
 
-    def prepare_map_image_with_other_objects(self, rooturl, modelnames):
-        path = self.get_map_image_path_with_other_objects(modelnames)
+    def prepare_map_image_with_other_objects(self, rooturl, properties):
+        path = self.get_map_image_path_with_other_objects(properties)
         # Do nothing if image is up-to-date
         # TODO: Add check every modelname changements
-        if is_file_uptodate(path, self.get_date_update()):
+
+        if is_file_uptodate(path, self.get_date_update()) and all([is_file_uptodate(path, getattr(self, prop).latest('date_update').get_date_update()) for prop in properties]):
             return False
         url = smart_urljoin(rooturl, self.get_detail_url())
         extent = self.get_map_image_extent(3857)
@@ -130,7 +131,7 @@ class Stream(AddPropertyBufferMixin, TimeStampedModelMixin, WatershedPropertiesM
             size = math.ceil(length * 1.1 * 256 * 2 ** zoom / CIRCUM)
         else:
             size = app_settings['MAP_CAPTURE_SIZE']
-        printcontext = self.get_printcontext_with_other_objects(modelnames)
+        printcontext = self.get_printcontext_with_other_objects(properties)
         capture_map_image(url, path, size=size, waitfor=self.capture_map_image_waitfor, printcontext=printcontext)
         return True
 
