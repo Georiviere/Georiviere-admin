@@ -32,45 +32,50 @@
       </style>
     {% endblock style %}
   </head>
-
-  <header>
-    <div class="f-left">
-      <img src="{% media_static_fallback_path "upload/logo-header.png" "images/logo-header.png" %}" class="logo_header" />
-    </div>
-    <div></div>
-    <div class="f-right">
-      <img src="{% static "images/logo-login.png" %}" class="logo_header" />
-    </div>
-  </header>
-
-  <article id="toc">
-    <h1 class="center">{{ object.name }}</h1>
-    <ul>
-      <li><a href="#section-1-h2"></a></li>
-      <li><a href="#section-2-h2"></a></li>
-      <li><a href="#section-3-h2"></a></li>
-      <li><a href="#section-4-h2"></a></li>
-      <li><a href="#section-5-h2"></a></li>
-      <li><a href="#section-6-h2"></a></li>
-      <li><a href="#section-7-h2"></a></li>
-    </ul>
-  </article>
-
+  {% block header %}
+    <header>
+      {% block logo-left %}
+      <div class="f-left">
+        <img src="{% static "images/logo-header-report-left.png" %}" class="logo_header" />
+      </div>
+      {% endblock logo-left %}
+      <div></div>
+      {% block logo-right %}
+      <div class="f-right">
+        <img src="{% static "images/logo-header-report-right.png" %}" class="logo_header" />
+      </div>
+      {% endblock logo-right %}
+    </header>
+  {% endblock header %}
+  {% block article-summary %}
+    <article id="toc">
+      <h1 class="center">{{ object.name }}</h1>
+      <ul>
+        <li><a href="#section-1-h2"></a></li>
+        {% if object.usages %}<li><a href="#section-2-h2"></a></li>{% endif %}
+        {% if object.studies %}<li><a href="#section-3-h2"></a></li>{% endif %}
+        {% if object.knowledges %}<li><a href="#section-4-h2"></a></li>{% endif %}
+        {% if object.followups_without_knowledges %}<li><a href="#section-5-h2"></a></li>{% endif %}
+        {% if object.interventions_without_knowledges %}<li><a href="#section-6-h2"></a></li>{% endif %}
+        <li><a href="#section-7-h2"></a></li>
+      </ul>
+    </article>
+  {% endblock article-summary %}
   <section id="section-1">
-    <h2 id="section-1-h2">Informations</h2>
+    <h2 id="section-1-h2">{% trans "Informations" %}</h2>
     <aside>
       <figure class="size-half">
         <img src="file://{{ map_path }}" alt="" />
-        <figcaption>{% trans "Légende de la carte" %}</figcaption>
+        <figcaption>{{ object }}</figcaption>
       </figure>
       <figure class="size-half">
         <img src="{% url 'river:stream_profile_svg' LANGUAGE_CODE object.pk %}" alt="" />
-        <figcaption>{% trans "Légende de la carte" %}</figcaption>
+        <figcaption>{% trans "Elevation chart" %}</figcaption>
       </figure>
     </aside>
     <article id="features">
       <section class="flex-wrap troisCol">
-        <h4>{% trans "Caractéristiques" %}</h4>
+        <h4>{% trans "Characteristics" %}</h4>
         <dl>
           <dt>{{ object|verbose:"flow" }}</dt>
           <dd>{{ object.get_flow_display }}</dd>
@@ -92,7 +97,7 @@
       {% block cities_crossed %}
         <section class="flex-wrap">
           {% if object.cities %}
-            <h4>{% trans "Communes traversées" %}</h4>
+            <h4>{% trans "Cities crossed" %}</h4>
             <article class="columns threeColumns">
               <ul>
                 {% for city in object.cities %}
@@ -106,7 +111,7 @@
       {% block districts_crossed %}
         {% if object.districts %}
           <section class="flex-wrap">
-            <h4>{% trans "Secteurs traversées" %}</h4>
+            <h4>{% trans "Districts crossed" %}</h4>
             <article class="columns oneColumn">
               <ul>
                 {% for district in object.districts %}
@@ -174,7 +179,7 @@
             <aside>
               <figure class="size-full">
                 <img src="file://{{ map_path_usage }}" class="size-full" />
-                <figcaption>{% trans "Légende" %}</figcaption>
+                <figcaption>{{ object }} - {% trans "Usages" %}</figcaption>
               </figure>
             </aside>
           </div>
@@ -203,14 +208,14 @@
             <aside>
               <figure class="size-full">
                 <img src="file://{{ map_path_study }}" class="size-full" />
-                <figcaption>Légende</figcaption>
+                <figcaption>{{ object }} - {% trans "Studies" %}</figcaption>
               </figure>
             </aside>
           </div>
           <div class="size-half">
             <ul class="l-style-number">
               {% for study in object.studies %}
-                 <li>{{ study.date }} - {{ study.title }} - {{ study.study_types }}</li>
+                 <li>{{ study.date }} - {{ study.title }}{% if study.study_types.exists %} - {% for study_type in study.study_types.all %}{{ study_type }}{% if not forloop.last %}, {% endif %}{% endfor %}{% endif %}</li>
               {% endfor %}
             </ul>
           </div>
@@ -219,128 +224,137 @@
     {% endif %}
   {% endblock studies %}
   {% block knowledges %}
-    <hr />
+    {% if object.knowledges %}
+      <hr />
 
-    <section id="section-4">
-      <div class="d-flex f-row f-end">
-        <img src="{% static 'images/knowledge-96.png' %}" class="img-title" />
-        <h2 id="section-4-h2">{% trans "Knowledges" %}</h2>
-      </div>
-      {% for knowledge in object.knowledges %}
+      <section id="section-4">
+        <div class="d-flex f-row f-end">
+          <img src="{% static 'images/knowledge-96.png' %}" class="img-title" />
+          <h2 id="section-4-h2">{% trans "Knowledges" %}</h2>
+        </div>
+        {% for knowledge in object.knowledges %}
+          <div class="d-flex f-row">
+            <div class="size-third">
+              <aside>
+                <figure class="size-full">
+                  <img src="file://{{ map_path_knowledge|get_value_from_dict:knowledge.pk }}" class="size-full" />
+                  <figcaption>{{ knowledge }}</figcaption>
+                </figure>
+              </aside>
+            </div>
+            <div class="size-third">
+              <h4>{% trans "Knowledge" %}</h4>
+                <ul class="">
+                  <li>{{ knowledge.name }}</li>
+                  <li>{{ knowledge.knowledge_type }}</li>
+                  <li>{% if knowledge.knowledge_type.pk == 1 and knowledge.vegetation.vegetation_type %}{{ knowledge.vegetation.vegetation_type }}{% endif %}{% if knowledge.knowledge_type.pk == 2 and knowledge.work.work_type %}{{ knowledge.work.work_type }}{% endif %}</li>
+                  <li>{% if knowledge.knowledge_type.pk == 1 and knowledge.vegetation.state %}{{ knowledge.vegetation.state }}{% endif %}{% if knowledge.knowledge_type.pk == 2 and knowledge.work.state %}{{ knowledge.work.state }}{% endif %}</li>
+                </ul>
+                {% if knowledge.followups.exists %}
+                  <h4>{% trans "Associated follow-ups" %}</h4>
+                  <ul class="">
+                    {% for followup in knowledge.followups.all %}
+                      <li>- {{ followup.name }}{% if followup.type %} – {{ followup.type }}{% endif %}</li>
+                      <li>{{ followup.date }}{% if followup.measure_frequency %} - {{ followup.measure_frequency }}{% endif %}</li>
+                    {% endfor %}
+                  </ul>
+                {% endif %}
+            </div>
+            {% if knowledge.interventions.exists %}
+              <div class="size-third">
+                <h4>{% trans "Associated interventions" %}</h4>
+                {% for intervention in knowledge.interventions.all %}
+                  <b>{{ intervention.name }} </b>{{ forloop.counter }}
+                  <ul class="l-style-tiret">
+                    <li>{{ intervention.date }}</li>
+                    {% if intervention.intervention_type %}<li>{{ intervention.intervention_type }}</li>{% endif %}
+                    {% if intervention.intervention_status %}<li>{{ intervention.intervention_status }}</li>{% endif %}
+                    {% if intervention.stake %}<li>{{ intervention.stake }}</li>{% endif %}
+                    <li>{% for disorder in intervention.disorders.all %}{{ disorder }} {% if not forloop.last %}- {% endif %}{% endfor %}</li>
+                  </ul>
+                {% endfor %}
+              </div>
+            {% endif %}
+          </div>
+          {% if not forloop.last %}
+            <hr />
+          {% endif %}
+        {% endfor %}
+      </section>
+    {% endif %}
+  {% endblock knowledges %}
+  {% block other-followups %}
+    {% if object.followups_without_knowledges %}
+      <hr />
+      <section id="section-5">
+        <div class="d-flex f-row f-end">
+          <img src="{% static 'images/followup-96.png' %}" class="img-title" />
+          <h2 id="section-5-h2">{% trans "Other follow-ups (not linked to a knowledge)" %}</h2>
+        </div>
         <div class="d-flex f-row">
-          <div class="size-third">
+          <div class="size-half">
             <aside>
               <figure class="size-full">
-                <img src="file://{{ map_path_knowledge|get_value_from_dict:knowledge.pk }}" class="size-full" />
-                <figcaption>Légende</figcaption>
+                <img src="file://{{ map_path_other_followups }}" class="size-full" />
+                <figcaption>{{ object }} - {% trans "Other follow-ups" %}</figcaption>
               </figure>
             </aside>
           </div>
-          <div class="size-third">
-            <h4>{% trans "Knowledge" %}</h4>
-              <ul class="">
-                <li>{{ knowledge.name }}</li>
-                <li>{{ knowledge.knowledge_type }}</li>
-                <li>{% if knowledge.knowledge_type.pk == 1 and knowledge.vegetation.vegetation_type %}{{ knowledge.vegetation.vegetation_type }}{% endif %}{% if knowledge.knowledge_type.pk == 2 and knowledge.work.work_type %}{{ knowledge.work.work_type }}{% endif %}</li>
-                <li>{% if knowledge.knowledge_type.pk == 1 and knowledge.vegetation.state %}{{ knowledge.vegetation.state }}{% endif %}{% if knowledge.knowledge_type.pk == 2 and knowledge.work.state %}{{ knowledge.work.state }}{% endif %}</li>
-              </ul>
-              {% if knowledge.followups.exists %}
-                <h4>{% trans "Associated follow-ups" %}</h4>
-                <ul class="">
-                  {% for followup in knowledge.followups.all %}
-                    <li>- {{ followup.name }}{% if followup.type %} – {{ followup.type }}{% endif %}</li>
-                    <li>{{ followup.date }}{% if followup.measure_frequency %} - {{ followup.measure_frequency }}{% endif %}</li>
-                  {% endfor %}
-                </ul>
-              {% endif %}
-          </div>
-          {% if knowledge.interventions.exists %}
-            <div class="size-third">
-              <h4>{% trans "Associated interventions" %}</h4>
-              {% for intervention in knowledge.interventions.all %}
-                <b>{{ intervention.name }} </b>{{ forloop.counter }}
-                <ul class="l-style-tiret">
-                  <li>{{ intervention.date }}</li>
-                  <li>{{ intervention.intervention_type }}</li>
-                  <li>{{ intervention.intervention_status }}</li>
-                  <li>{{ intervention.stake }}</li>
-                  <li>{% for disorder in intervention.disorders.all %}{{ disorder }} {% if not forloop.last %}- {% endif %}{% endfor %}</li>
-                </ul>
+          <div class="size-half">
+            <ul class="l-style-number">
+              {% for followup in object.followups_without_knowledges %}
+                <li>{{ followup.date }} - {{ followup.name }} {% if followup.type %} – {{ followup.type }}{% endif %}</li>
               {% endfor %}
-            </div>
-          {% endif %}
+            </ul>
+          </div>
         </div>
-        {% if not forloop.last %}
-          <hr />
-        {% endif %}
-      {% endfor %}
-    </section>
-  {% endblock knowledges %}
-  <hr />
-  <section id="section-5">
-    <div class="d-flex f-row f-end">
-      <img src="{% static 'images/followup-96.png' %}" class="img-title" />
-      <h2 id="section-5-h2">Autres Suivis (non lié à une connaissance)</h2>
-    </div>
-    <div class="d-flex f-row">
-      <div class="size-half">
-        <aside>
-          <figure class="size-full">
-            <img src="file://{{ map_path_usage }}" class="size-full" />
-            <figcaption>Légende</figcaption>
-          </figure>
-        </aside>
-      </div>
-      <div class="size-half">
-        <ul class="l-style-number">
-          <li>Date + Nom + Type suivi</li>
-          <li>Date + Nom + Type suivi</li>
-          <li>Date + Nom + Type suivi</li>
-          <li>Date + Nom + Type suivi</li>
-        </ul>
-      </div>
-    </div>
-  </section>
-  <hr />
+      </section>
+    {% endif %}
+  {% endblock other-followups %}
+  {% block other-interventions %}
+    {% if object.interventions_without_knowledges %}
+      <hr />
 
-  <section id="section-6">
-    <div class="d-flex f-row f-end">
-      <img src="{% static 'images/intervention-96.png' %}" class="img-title" />
-      <h2 id="section-6-h2">
-        Autres Interventions (non lié à une connaissance)
-      </h2>
-    </div>
-    <div class="d-flex f-row">
-      <div class="size-half">
-        <aside>
-          <figure class="size-full">
-            <img src="img/carte.png" class="size-full" />
-            <figcaption>Légende</figcaption>
-          </figure>
-        </aside>
-      </div>
-      <div class="size-half">
-        <ul class="l-style-number">
-          <li>Date + Nom + Type intervention</li>
-          <li>Date + Nom + Type intervention</li>
-          <li>Date + Nom + Type intervention</li>
-          <li>Date + Nom + Type intervention</li>
-        </ul>
-      </div>
-    </div>
-  </section>
-
+      <section id="section-6">
+        <div class="d-flex f-row f-end">
+          <img src="{% static 'images/intervention-96.png' %}" class="img-title" />
+          <h2 id="section-6-h2">
+            {% trans "Other Interventions (not linked to a knowledge)" %}
+          </h2>
+        </div>
+        <div class="d-flex f-row">
+          <div class="size-half">
+            <aside>
+              <figure class="size-full">
+                <img src="file://{{ map_path_other_interventions }}" class="size-full" />
+                <figcaption>{{ object }} - {% trans "Other interventions" %}</figcaption>
+              </figure>
+            </aside>
+          </div>
+          <div class="size-half">
+            <ul class="l-style-number">
+              {% for intervention in object.interventions_without_knowledges %}
+                <li>{{ intervention.date }} - {{ intervention.name }} {% if intervention.intervention_type %} – {{ intervention.intervention_type }}{% endif %}</li>
+              {% endfor %}
+            </ul>
+          </div>
+        </div>
+      </section>
+    {% endif %}
+  {% endblock other-interventions %}
+  {% block contact %}
   <hr />
   <section id="section-7">
     <div class="d-flex f-row f-end">
       <h2 id="section-7-h2">Contact</h2>
     </div>
     <p>
-      Pour plus d’informations :<br />
-      Contact (général ou en fonction BV?)<br />
-      Mail - Tél<br />
-      Site internet<br />
-      URL
+      {% trans "For more informations :" %}<br />
+      {% trans "Contact :" %}<br />
+      {% if MAIL %}{{ MAIL }}{% endif %}{% if MAIL and PHONE_NUMBER %} - {% endif %}{% if PHONE_NUMBER %}{{ PHONE_NUMBER }}{% endif %}<br />
+      {% if WEBSITE %}{{ WEBSITE }}{% endif %}<br />
+      {% if URL %}{{ URL }}{% endif %}
     </p>
   </section>
+  {% endblock %}
 </html>

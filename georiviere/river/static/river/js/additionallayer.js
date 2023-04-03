@@ -45,5 +45,50 @@ $(window).on('detailmap:ready', function (e, data) {
                 $('.map-panel').addClass('other_object_enum_loaded');
             });
         }
+        if (mapViewContext.additional_objects.includes('followups')) {
+            var geojsonFollowUpMarkerOptions = {
+                radius: 13,
+                fillColor: "#fc7c14",
+                color: "#fc7c14",
+                weight: 3,
+                opacity: 1,
+                fillOpacity: 0.4
+            };
+            $.getJSON(window.SETTINGS.urls.stream_followups_layer, function (data) {
+                var followups = new L.GeoJSON(data, {
+                    pointToLayer: function (feature, latlng) {
+                        return L.circleMarker(latlng, geojsonFollowUpMarkerOptions);
+                    }
+                });
+                map.addLayer(followups);
+
+                followups.showEnumeration();
+                $('.map-panel').addClass('other_object_enum_loaded');
+            });
+        }
+        if (mapViewContext.additional_objects.includes('interventions')) {
+            var geojsonInterventionMarkerOptions = {
+                radius: 13,
+                fillColor: "#dc3444",
+                color: "#dc3444",
+                weight: 3,
+                opacity: 1,
+                fillOpacity: 0.4
+            };
+            $.getJSON(window.SETTINGS.urls.stream_interventions_layer, function (data) {
+                var interventions = new L.GeoJSON(data, {
+                    pointToLayer: function (feature, latlng) {
+                        return L.circleMarker(latlng, geojsonInterventionMarkerOptions);
+                    }
+                });
+                console.log(data);
+                map.addLayer(interventions);
+
+                interventions.showEnumeration();
+                $('.map-panel').addClass('other_object_enum_loaded');
+            });
+        }
     }
+    $('.map-panel').addClass('other_object_enum_loaded');
+
 });

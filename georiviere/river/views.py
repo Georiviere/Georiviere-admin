@@ -9,21 +9,29 @@ from django.db.models import Sum, F, FloatField, Case, Min, When
 from django.db.utils import InternalError
 from django.http import JsonResponse
 from django.http.response import HttpResponseRedirect
-from django.shortcuts import get_object_or_404
 from django.utils.translation import gettext as _
 from django.views.generic.edit import FormView
 from django.views.generic.base import View
+
+from rest_framework.decorators import action
+from rest_framework.response import Response
+from rest_framework.renderers import JSONRenderer
+
 from geotrek.authent.decorators import same_structure_required
 
 from georiviere.functions import ClosestPoint, LineSubString
 from .forms import CutTopologyForm, StreamForm
 from .models import Stream, Topology
 from .filters import StreamFilterSet
+from .serializers import StreamSerializer, StreamGeojsonSerializer
 from georiviere.main.mixins.views import DocumentReportMixin
-from georiviere.description.models import Status, StatusType, Usage
-from georiviere.description.serializers import UsageAPIGeojsonSerializer
-from georiviere.studies.models import Study
-from georiviere.studies.serializers import StudyAPIGeojsonSerializer
+from georiviere.description.models import Status, StatusType
+from georiviere.knowledge.models import Knowledge
+from georiviere.knowledge.serializers import FollowUpSerializer, FollowUpGeojsonSerializer
+from georiviere.description.serializers import UsageSerializer, UsageAPIGeojsonSerializer
+from georiviere.main.renderers import GeoJSONRenderer
+from georiviere.maintenance.serializers import InterventionSerializer, InterventionGeojsonSerializer
+from georiviere.studies.serializers import StudySerializer, StudyAPIGeojsonSerializer
 
 
 from mapentity import views as mapentity_views
@@ -45,26 +53,50 @@ class StreamJsonList(mapentity_views.MapEntityJsonList, StreamList):
     pass
 
 
-class StreamUsageViewSet(viewsets.ModelViewSet):
-    model = Usage
-    serializer_class = UsageAPIGeojsonSerializer
+class StreamViewSet(mapentity_views.MapEntityViewSet):
+    model = Stream
+    queryset = Stream.objects.all()
+    geojson_serializer_class = StreamGeojsonSerializer
+    serializer_class = StreamSerializer
+    renderer_classes = (JSONRenderer, GeoJSONRenderer, )
     permission_classes = [rest_permissions.DjangoModelPermissionsOrAnonReadOnly]
 
-    def get_queryset(self):
-        pk = self.kwargs['pk']
-        stream = get_object_or_404(Stream.objects.all(), pk=pk)
-        return stream.usages.annotate(api_geom=Transform("geom", settings.API_SRID)).prefetch_related('usage_types',)
+    @action(detail=True, url_name="usages", methods=['get'],
+            renderer_classes=[GeoJSONRenderer],
+            serializer_class=UsageSerializer, geojson_serializer_class=UsageAPIGeojsonSerializer)
+    def usages(self, request, *args, **kwargs):
+        stream = self.get_object()
+        qs = stream.usages.annotate(api_geom=Transform("geom", settings.API_SRID)).prefetch_related('usage_types', )
+        serializer = self.get_serializer(qs, many=True)
+        return Response(serializer.data)
 
+    @action(detail=True, url_name="studies", methods=['get'],
+            renderer_classes=[GeoJSONRenderer],
+            serializer_class=StudySerializer, geojson_serializer_class=StudyAPIGeojsonSerializer)
+    def studies(self, request, *args, **kwargs):
+        stream = self.get_object()
+        qs = stream.studies.annotate(api_geom=Transform("geom", settings.API_SRID))
+        serializer = self.get_serializer(qs, many=True)
+        return Response(serializer.data)
 
-class StreamStudyViewSet(viewsets.ModelViewSet):
-    model = Study
-    serializer_class = StudyAPIGeojsonSerializer
-    permission_classes = [rest_permissions.DjangoModelPermissionsOrAnonReadOnly]
+    @action(detail=True, url_name="followups-no-knowledges", methods=['get'],
+            renderer_classes=[GeoJSONRenderer],
+            serializer_class=FollowUpSerializer, geojson_serializer_class=FollowUpGeojsonSerializer)
+    def followups_without_knowledges(self, request, *args, **kwargs):
+        stream = self.get_object()
+        qs = stream.followups.select_related('followup_type', 'knowledge').filter(knowledge__isnull=True)
+        serializer = self.get_serializer(qs, many=True)
+        return Response(serializer.data)
 
-    def get_queryset(self):
-        pk = self.kwargs['pk']
-        stream = get_object_or_404(Stream.objects.all(), pk=pk)
-        return stream.studies.annotate(api_geom=Transform("geom", settings.API_SRID))
+    @action(detail=True, url_name="interventions-no-knowledges", methods=['get'],
+            renderer_classes=[GeoJSONRenderer],
+            serializer_class=InterventionSerializer, geojson_serializer_class=InterventionGeojsonSerializer)
+    def interventions_without_knowledges(self, request, *args, **kwargs):
+        stream = self.get_object()
+        content_type_id = Knowledge.get_content_type_id()
+        qs = stream.interventions.exclude(target_type=content_type_id)
+        serializer = self.get_serializer(qs, many=True)
+        return Response(serializer.data)
 
 
 class StreamDocumentReport(DocumentReportMixin, mapentity_views.MapEntityDocumentWeasyprint):
@@ -85,12 +117,20 @@ class StreamDocumentReport(DocumentReportMixin, mapentity_views.MapEntityDocumen
         rooturl = self.request.build_absolute_uri('/')
         self.get_object().prepare_map_image_with_other_objects(rooturl, ["usages"])
         self.get_object().prepare_map_image_with_other_objects(rooturl, ["studies"])
+        self.get_object().prepare_map_image_with_other_objects(rooturl, ["followups"])
+        self.get_object().prepare_map_image_with_other_objects(rooturl, ["interventions"])
         context['map_path_usage'] = self.get_object().get_map_image_path_with_other_objects(["usages"])
         context['map_path_study'] = self.get_object().get_map_image_path_with_other_objects(["studies"])
+        context['map_path_other_followups'] = self.get_object().get_map_image_path_with_other_objects(["followups"])
+        context['map_path_other_interventions'] = self.get_object().get_map_image_path_with_other_objects(["interventions"])
         context['map_path_knowledge'] = {}
         for knowledge in self.get_object().knowledges:
             knowledge.prepare_map_image(rooturl)
             context['map_path_knowledge'][knowledge.pk] = knowledge.get_map_image_path()
+        context['MAIL'] = settings.MAIL_DOCUMENT_REPORT
+        context['PHONE_NUMBER'] = settings.PHONE_NUMBER_DOCUMENT_REPORT
+        context['WEBSITE'] = settings.WEBSITE_DOCUMENT_REPORT
+        context['URL'] = settings.URL_DOCUMENT_REPORT
         return context
 
     @property
