@@ -131,6 +131,7 @@ ul {
   width: 100%;
 }
 .logo_header {
+  padding-top: 20px;
   max-width: 100px;
   max-height: 70px;
 }
