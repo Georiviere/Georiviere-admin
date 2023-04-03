@@ -25,6 +25,21 @@ class BaseLineStringFactory(factory.django.DjangoModelFactory):
         linestring.transform(2154)
         return linestring
 
+    @factory.post_generation
+    def geom_around(obj, create, geometry):
+        if not create:
+            return
+        if geometry:
+            coords = obj.geom.coords
+            if type(geometry.coords[0]) == tuple:
+                coords = coords + (tuple([coord + 1 for coord in geometry.coords[0]]), )
+            else:
+                coords = coords + (tuple([coord + 1 for coord in geometry.coords]), )
+
+            linestring = LineString(coords, srid=2154)
+            obj.geom = linestring
+            obj.save()
+
 
 class UserAllPermsFactory(UserFactory):
     is_staff = True

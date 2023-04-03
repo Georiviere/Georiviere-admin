@@ -115,7 +115,7 @@ class CutTopologyTestCase(TestCase):
         cls.user = UserFactory(password='booh')
 
     def setUp(self):
-        self.client.login(username=self.user.username, password="booh")
+        self.client.force_login(self.user)
 
     def test_cut_topology(self):
         geom = GEOSGeometry('SRID=4326;LINESTRING(3 40, 4 40, 5 40)')
@@ -156,3 +156,26 @@ class CutTopologyTestCase(TestCase):
         obj.refresh_from_db()
         self.assertEqual(Status.objects.count(), 1)
         self.assertEqual(str([msg for msg in response.context['messages']][0]), 'Topology could not be cut')
+
+
+class DistanceToSourceTestCase(TestCase):
+    @classmethod
+    def setUpTestData(cls):
+        cls.user = UserFactory(password='booh')
+
+    def setUp(self):
+        self.client.force_login(self.user)
+
+    def test_distance_to_source(self):
+        geom = GEOSGeometry('SRID=4326;POINT(3 40)')
+        geom_stream = GEOSGeometry('SRID=4326;LINESTRING(3 40, 2 40, 1 40)')
+        geom_source_point = GEOSGeometry('SRID=4326;POINT(0 40)')
+        geom_source_point_2154 = geom_source_point.transform(2154, clone=True)
+        geom_stream_2154 = geom_stream.transform(2154, clone=True)
+        StreamFactory.create(geom=geom_stream_2154,
+                             source_location=geom_source_point_2154)
+        response = self.client.get(reverse('river:distance_to_source'),
+                                   data={'lng_distance': geom.coords[0],
+                                         'lat_distance': geom.coords[1]})
+        self.assertEqual(response.status_code, 200)
+        self.assertEqual(response.json(), {'distance': 257535.0})

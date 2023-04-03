@@ -4,6 +4,7 @@ from django.contrib.gis.geos import Point
 from factory import post_generation, django, fuzzy, Sequence, SubFactory
 
 from .. import models
+from georiviere.river.tests.factories import WithStreamFactory
 
 
 class StationProfileFactory(django.DjangoModelFactory):
@@ -14,7 +15,7 @@ class StationProfileFactory(django.DjangoModelFactory):
     label = fuzzy.FuzzyText()
 
 
-class StationFactory(django.DjangoModelFactory):
+class StationFactory(WithStreamFactory, django.DjangoModelFactory):
     class Meta:
         model = models.Station
 

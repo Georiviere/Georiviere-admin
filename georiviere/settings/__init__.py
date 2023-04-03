@@ -265,7 +265,9 @@ LEAFLET_CONFIG = {
     'SPATIAL_EXTENT': (-5, 40, 10, 55),
     'NO_GLOBALS': False,
     'PLUGINS': {
-        'georiviere': {'js': ['river/js/source_location.js']},
+        'georiviere': {'js': ['river/js/source_location.js',
+                              'river/js/distance-to-source.js'],
+                       'css': ['river/css/distance-to-source.css']},
         'topofields': {'js': ['river/js/georiviere.forms.snap.js',
                               'river/js/cut-topology.js'],
                        'css': ['river/css/cut-topology.css']}

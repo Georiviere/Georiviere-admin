@@ -75,4 +75,23 @@ $(window).on('entity:map', function (e, data) {
         });
 
 	}
+	else {
+        var distanceControl = new L.Control.PointDistance(map, layer, {});
+        var exclusive = new L.Control.ExclusiveDistanceActivation();
+        map.distanceControl = map.addControl(distanceControl);
+        exclusive.add(distanceControl);
+        distanceControl.handler.on('enabled', function(){
+            if (! loaded_river) {
+                map.addLayer(layer);
+                loaded_river = true;
+            }
+            distanceControl.handler.reset();
+           }, this);
+        map.on('popupclose', function(){
+            if (loaded_river) {
+                map.removeLayer(layer);
+                loaded_river = false;
+            }
+           }, this);
+	}
 });

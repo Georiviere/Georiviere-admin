@@ -1,6 +1,7 @@
 from django.conf import settings
+from django.contrib.contenttypes.models import ContentType
 from django.contrib.gis.db import models
-from django.contrib.gis.geos import GEOSGeometry, Point
+from django.contrib.gis.geos import Point
 from django.db.models import Q
 from django.utils.translation import gettext_lazy as _
 
@@ -11,10 +12,13 @@ from mapentity.models import MapEntityMixin
 
 from georiviere.main.models import AddPropertyBufferMixin
 from georiviere.altimetry import AltimetryMixin
+from georiviere.finances_administration.models import AdministrativeFile
 from georiviere.functions import ClosestPoint, LineSubString
 from georiviere.knowledge.models import Knowledge, FollowUp
+from georiviere.main.models import DistanceToSource
 from georiviere.observations.models import Station
 from georiviere.proceeding.models import Proceeding
+from georiviere.maintenance.models import Intervention
 from georiviere.studies.models import Study
 from georiviere.watershed.mixins import WatershedPropertiesMixin
 
@@ -132,9 +136,11 @@ class Stream(AddPropertyBufferMixin, TimeStampedModelMixin, WatershedPropertiesM
 
     def distance_to_source(self, element):
         """Returns distance from element to stream source"""
-        if hasattr(element, 'geom') and isinstance(element.geom, GEOSGeometry):
-            return self.source_location.distance(element.geom)
-        return None
+        ct = ContentType.objects.get_for_model(element)
+        try:
+            return DistanceToSource.objects.get(stream=self, content_type=ct, object_id=element.pk).distance
+        except DistanceToSource.DoesNotExist:
+            return None
 
 
 class Topology(models.Model):
@@ -198,3 +204,6 @@ Stream.add_property('stations', Station.within_buffer, _("Stations"))
 Stream.add_property('studies', Study.within_buffer, _("Studies"))
 Stream.add_property('knowledges', Knowledge.within_buffer, _("Knowledges"))
 Stream.add_property('proceedings', Proceeding.within_buffer, _("Proceedings"))
+
+Intervention.add_property('streams', Stream.within_buffer, _("Stream"))
+AdministrativeFile.add_property('streams', Stream.within_buffer, _("Stream"))

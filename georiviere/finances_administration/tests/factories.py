@@ -6,6 +6,7 @@ from georiviere.observations.tests.factories import StationFactory
 from georiviere.studies.tests.factories import StudyFactory
 
 from georiviere.finances_administration import models
+from georiviere.river.tests.factories import StreamFactory
 
 
 class AdministrativeDeferralFactory(factory.django.DjangoModelFactory):
@@ -43,6 +44,16 @@ class AdministrativeFileFactory(factory.django.DjangoModelFactory):
     name = factory.Sequence(lambda n: "AdministrativeFile %s" % n)
     begin_date = '2010-01-01'
     end_date = '2012-01-01'
+
+    @factory.post_generation
+    def with_stream(obj, create, with_stream):
+        if not create or not with_stream:
+            return
+        StudyOperationFactory.create(administrative_file=obj)
+        if with_stream and obj.geom:
+            # Status / Morphology is already on a stream
+            # It should not add this next stream in distance to source
+            StreamFactory.create(geom_around=obj.geom)
 
 
 class AdministrativeFilePhaseFactory(factory.django.DjangoModelFactory):
