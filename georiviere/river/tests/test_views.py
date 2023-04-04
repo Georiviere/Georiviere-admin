@@ -229,7 +229,7 @@ class StreamDocumentReportTestCase(TestCase):
 
         self.assertEqual(response.status_code, 200)
         self.assertTemplateUsed(response,
-                                template_name=f'river/stream_report_pdf.html')
+                                template_name='river/stream_report_pdf.html')
         self.assertEqual(response.context['status_types'][self.status_type.label]['percentage'], 75.0)
         self.assertEqual(response.context['status_types'][self.status_type_2.label]['percentage'], 25.0)
         self.assertEqual(os.path.join(settings.VAR_DIR, 'media', 'maps', f'stream-{self.stream.pk}-usages.png'),
