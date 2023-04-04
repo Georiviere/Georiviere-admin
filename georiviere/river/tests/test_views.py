@@ -171,6 +171,9 @@ class DistanceToSourceTestCase(TestCase):
     def setUpTestData(cls):
         cls.user = UserFactory(password='booh')
 
+    def setUp(self):
+        self.client.force_login(self.user)
+
     def test_distance_to_source(self):
         geom = GEOSGeometry('SRID=4326;POINT(3 40)')
         geom_stream = GEOSGeometry('SRID=4326;LINESTRING(3 40, 2 40, 1 40)')

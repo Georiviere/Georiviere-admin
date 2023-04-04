@@ -16,7 +16,7 @@ def same_structure_topology_required(redirect_to):
         @wraps(view_func)
         def _wrapped_view(self, request, *args, **kwargs):
             result = view_func(self, request, *args, **kwargs)
-            print(result)
+
             if isinstance(result, HttpResponseRedirect):
                 return result
 
