@@ -20,6 +20,7 @@ from georiviere.maintenance.tests.factories import InterventionFactory
 from georiviere.studies.tests.factories import StudyFactory
 from georiviere.river.models import Stream
 from georiviere.river.tests.factories import StreamFactory, TopologyFactory
+from georiviere.watershed.tests.factories import WatershedFactory
 
 
 @override_settings(MEDIA_ROOT=TemporaryDirectory().name)
@@ -218,6 +219,8 @@ class StreamDocumentReportTestCase(TestCase):
         CityFactory.create(geom=MultiPolygon(Polygon.from_bbox(cls.stream.geom.extent)))
         DistrictFactory.create(geom=MultiPolygon(Polygon.from_bbox(cls.stream.geom.extent)))
         RestrictedAreaFactory.create(geom=MultiPolygon(Polygon.from_bbox(cls.stream.geom.extent)))
+
+        WatershedFactory.create(geom=MultiPolygon(Polygon.from_bbox(cls.stream.geom.extent)))
 
     @mock.patch('georiviere.river.models.Stream.prepare_map_image_with_other_objects')
     @mock.patch('mapentity.models.MapEntityMixin.prepare_map_image')
