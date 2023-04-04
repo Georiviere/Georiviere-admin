@@ -138,11 +138,6 @@ class Stream(AddPropertyBufferMixin, TimeStampedModelMixin, WatershedPropertiesM
         return sorted(self.areas, key=lambda x: x.area_type.name)
 
     @property
-    def status_type_on_stream(self):
-        topologies = Topology.objects.filter(stream=self)
-        return topologies.filter(status__isnull=False)
-
-    @property
     def slug(self):
         return slugify(self.name) or str(self.pk)
 
