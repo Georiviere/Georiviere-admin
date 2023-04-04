@@ -114,23 +114,21 @@ class Stream(AddPropertyBufferMixin, TimeStampedModelMixin, WatershedPropertiesM
     def prepare_map_image_with_other_objects(self, rooturl, properties):
         path = self.get_map_image_path_with_other_objects(properties)
         # Do nothing if image is up-to-date
-        # TODO: Add check every modelname changements
-
-        if is_file_uptodate(path, self.get_date_update()) and all([is_file_uptodate(path, getattr(self, prop).latest('date_update').get_date_update()) for prop in properties]):
+        dates_to_check = [self.get_date_update()]
+        for prop in properties:
+            if getattr(self, prop):
+                dates_to_check.append(getattr(self, prop).latest('date_update').get_date_update())
+        if all([is_file_uptodate(path, date) for date in dates_to_check]):
             return False
         url = smart_urljoin(rooturl, self.get_detail_url())
         extent = self.get_map_image_extent(3857)
         length = max(extent[2] - extent[0], extent[3] - extent[1])
-
-        if length:
-            hint_size = app_settings['MAP_CAPTURE_SIZE']
-            length_per_tile = 256 * length / hint_size
-            RADIUS = 6378137
-            CIRCUM = 2 * math.pi * RADIUS
-            zoom = round(math.log(CIRCUM / length_per_tile, 2))
-            size = math.ceil(length * 1.1 * 256 * 2 ** zoom / CIRCUM)
-        else:
-            size = app_settings['MAP_CAPTURE_SIZE']
+        hint_size = app_settings['MAP_CAPTURE_SIZE']
+        length_per_tile = 256 * length / hint_size
+        RADIUS = 6378137
+        CIRCUM = 2 * math.pi * RADIUS
+        zoom = round(math.log(CIRCUM / length_per_tile, 2))
+        size = math.ceil(length * 1.1 * 256 * 2 ** zoom / CIRCUM)
         printcontext = self.get_printcontext_with_other_objects(properties)
         capture_map_image(url, path, size=size, waitfor=self.capture_map_image_waitfor, printcontext=printcontext)
         return True
