@@ -15,14 +15,14 @@ env:
 jobs:
   flake8:
     name: Check python linting
-    runs-on: ubuntu-18.04
+    runs-on: ubuntu-latest
 
     steps:
       - uses: actions/checkout@v2
-      - name: Set up Python 3.6
+      - name: Set up Python 3.9
         uses: actions/setup-python@v2
         with:
-          python-version: 3.6  # lint with minimal version supported (3.6 in 18.04)
+          python-version: 3.9
       - name: Install dependencies
         run: |
           echo "${{ github.event_name }}! ${{ github.event.action }}"
@@ -34,13 +34,13 @@ jobs:
 
   doc_build:
     name: Sphinx doc is building
-    runs-on: ubuntu-18.04
+    runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
-      - name: Set up Python 3.6
+      - name: Set up Python 3.9
         uses: actions/setup-python@v2
         with:
-          python-version: 3.6  # lint with minimal version supported (3.6 in 18.04)
+          python-version: 3.9
       - name: Install dependencies
         run: |
           pip install -r docs/requirements.txt
@@ -51,7 +51,7 @@ jobs:
 
   unittests:
     name: Unit tests
-    runs-on: ubuntu-20.04
+    runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
       - name: Prepare tests settings
