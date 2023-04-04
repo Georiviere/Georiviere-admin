@@ -20,6 +20,7 @@ services:
 
   web:
     image: georiviere:latest
+    user: $UID:$GID
     build:
       context: .
       target: dev
