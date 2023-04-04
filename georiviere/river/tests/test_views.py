@@ -1,20 +1,25 @@
+import os
 from mapentity.tests.factories import SuperUserFactory
 from unittest import mock
 
 from django.conf import settings
-from django.contrib.gis.geos import GEOSGeometry, Point
+from django.contrib.gis.geos import GEOSGeometry, Point, MultiPolygon, Polygon
 from django.test import override_settings, TestCase
 from django.urls import reverse
 from django.utils.translation import gettext_lazy as _
 from tempfile import TemporaryDirectory
 
 from geotrek.authent.tests.factories import StructureFactory, UserFactory
+from geotrek.zoning.tests.factories import CityFactory, DistrictFactory, RestrictedAreaFactory
 
 from georiviere.tests import CommonRiverTest
-from georiviere.description.tests.factories import StatusOnStreamFactory
-from georiviere.description.models import Status
+from georiviere.description.tests.factories import StatusOnStreamFactory, StatusTypeFactory, StatusFactory, UsageFactory
+from georiviere.description.models import Morphology, Status
+from georiviere.knowledge.tests.factories import FollowUpKnowledgeFactory, FollowUpFactory, KnowledgeFactory
+from georiviere.maintenance.tests.factories import InterventionFactory
+from georiviere.studies.tests.factories import StudyFactory
 from georiviere.river.models import Stream
-from georiviere.river.tests.factories import StreamFactory
+from georiviere.river.tests.factories import StreamFactory, TopologyFactory
 
 
 @override_settings(MEDIA_ROOT=TemporaryDirectory().name)
@@ -184,16 +189,142 @@ class DistanceToSourceTestCase(TestCase):
 class StreamDocumentReportTestCase(TestCase):
     @classmethod
     def setUpTestData(cls):
-        cls.user = SuperUserFactory(password='booh')
+        cls.super_user = SuperUserFactory(password='booh')
+        cls.user = UserFactory(password='booh')
         cls.stream = StreamFactory.create()
+        cls.morphology = Morphology.objects.get()
+        cls.status = Status.objects.get()
+        cls.status.topology.start_position = 0
+        cls.status.topology.end_position = 0.5
+        cls.status.topology.save()
+        cls.status_without_type = StatusFactory.create(topology=TopologyFactory.create(start_position=0.5,
+                                                                                       end_position=0.75,
+                                                                                       stream=cls.stream))
+        cls.status_multi_types = StatusFactory.create(
+            topology=TopologyFactory.create(start_position=0.75, end_position=1,
+                                            stream=cls.stream))
+        cls.status_type = StatusTypeFactory.create()
+        cls.status_type_2 = StatusTypeFactory.create()
+        cls.status.status_types.add(cls.status_type)
+        cls.status_multi_types.status_types.add(cls.status_type)
+        cls.status_multi_types.status_types.add(cls.status_type_2)
 
-    def setUp(self):
-        self.client.force_login(self.user)
+        cls.knowledge = KnowledgeFactory.create(geom=cls.stream.geom)
+
+        # ZONING informations
+        CityFactory.create(geom=MultiPolygon(Polygon.from_bbox(cls.stream.geom.extent)))
+        DistrictFactory.create(geom=MultiPolygon(Polygon.from_bbox(cls.stream.geom.extent)))
+        RestrictedAreaFactory.create(geom=MultiPolygon(Polygon.from_bbox(cls.stream.geom.extent)))
 
     @mock.patch('georiviere.river.models.Stream.prepare_map_image_with_other_objects')
     @mock.patch('mapentity.models.MapEntityMixin.prepare_map_image')
-    def test_generation_document_report_stream(self, mock_prepare_map_image, mocked_prepare_map_image_wo):
+    def test_document_report_stream_succeed(self, mock_prepare_map_image, mocked_prepare_map_image_wo):
+        self.client.force_login(self.super_user)
         response = self.client.get(reverse('river:stream_printable', kwargs={'lang': "fr",
                                                                              'pk': self.stream.pk,
                                                                              'slug': self.stream.slug}))
+
         self.assertEqual(response.status_code, 200)
+        self.assertTemplateUsed(response,
+                                template_name=f'river/stream_report_pdf.html')
+        self.assertEqual(response.context['status_types'][self.status_type.label]['percentage'], 75.0)
+        self.assertEqual(response.context['status_types'][self.status_type_2.label]['percentage'], 25.0)
+        self.assertEqual(os.path.join(settings.VAR_DIR, 'media', 'maps', f'stream-{self.stream.pk}-usages.png'),
+                         response.context['map_path_usage'])
+        self.assertEqual(os.path.join(settings.VAR_DIR, 'media', 'maps', f'stream-{self.stream.pk}-studies.png'),
+                         response.context['map_path_study'])
+        self.assertEqual(os.path.join(settings.VAR_DIR, 'media', 'maps', f'stream-{self.stream.pk}-followups.png'),
+                         response.context['map_path_other_followups'])
+        self.assertEqual(os.path.join(settings.VAR_DIR, 'media', 'maps', f'stream-{self.stream.pk}-interventions.png'),
+                         response.context['map_path_other_interventions'])
+        self.assertEqual(os.path.join(settings.VAR_DIR, 'media', 'maps', f'knowledge-{self.knowledge.pk}.png'),
+                         response.context['map_path_knowledge'][self.knowledge.pk])
+
+    @mock.patch('georiviere.river.models.Stream.prepare_map_image_with_other_objects')
+    @mock.patch('mapentity.models.MapEntityMixin.prepare_map_image')
+    def test_document_report_stream_failed_no_permissions(self, mock_prepare_map_image, mocked_prepare_map_image_wo):
+        self.client.force_login(self.user)
+        response = self.client.get(reverse('river:stream_printable', kwargs={'lang': "fr",
+                                                                             'pk': self.stream.pk,
+                                                                             'slug': self.stream.slug}))
+        self.assertEqual(response.status_code, 403)
+
+    @mock.patch('georiviere.river.models.Stream.prepare_map_image_with_other_objects')
+    @mock.patch('mapentity.models.MapEntityMixin.prepare_map_image')
+    def test_document_report_stream_failed_not_authenticated(self, mock_prepare_map_image, mocked_prepare_map_image_wo):
+        response = self.client.get(reverse('river:stream_printable', kwargs={'lang': "fr",
+                                                                             'pk': self.stream.pk,
+                                                                             'slug': self.stream.slug}))
+        self.assertEqual(response.status_code, 403)
+
+
+class APIStreamViewTestCase(TestCase):
+    @classmethod
+    def setUpTestData(cls):
+        cls.super_user = SuperUserFactory(password='booh')
+        cls.stream = StreamFactory.create()
+        cls.knowledge = FollowUpKnowledgeFactory.create_batch(1, geom=cls.stream.geom)
+        cls.followup = FollowUpFactory.create()
+        cls.followup_no_knowledge = FollowUpFactory.create_batch(2, geom=cls.stream.geom)
+        cls.intervention = InterventionFactory.create_batch(2, geom=cls.stream.geom)
+        cls.usage = UsageFactory.create_batch(3, geom=cls.stream.geom)
+        cls.study = StudyFactory.create_batch(4, geom=cls.stream.geom)
+
+    def setUp(self):
+        self.client.force_login(self.super_user)
+
+    def test_api_stream_list(self):
+        response = self.client.get(reverse('river:stream-list'))
+        self.assertEqual(len(response.json()), 1)
+
+    def test_api_stream_followups_no_knowledges(self):
+        response = self.client.get(reverse('river:stream-followups-no-knowledges',
+                                           kwargs={'lang': 'fr',
+                                                   'pk': self.stream.pk}))
+        self.assertEqual(len(response.json()), 2)
+
+    def test_api_stream_followups_no_knowledges_geojson(self):
+        response = self.client.get(reverse('river:stream-followups-no-knowledges',
+                                           kwargs={'lang': 'fr',
+                                                   'pk': self.stream.pk,
+                                                   'format': 'geojson'}))
+        self.assertEqual(len(response.json()), 2)
+
+    def test_api_stream_interventions_no_knowledges(self):
+        response = self.client.get(reverse('river:stream-interventions-no-knowledges',
+                                           kwargs={'lang': 'fr',
+                                                   'pk': self.stream.pk}))
+        self.assertEqual(len(response.json()), 2)
+
+    def test_api_stream_interventions_no_knowledges_geojson(self):
+        response = self.client.get(reverse('river:stream-interventions-no-knowledges',
+                                           kwargs={'lang': 'fr',
+                                                   'pk': self.stream.pk,
+                                                   'format': 'geojson'}))
+        self.assertEqual(len(response.json()['features']), 2)
+
+    def test_api_stream_usages(self):
+        response = self.client.get(reverse('river:stream-usages',
+                                           kwargs={'lang': 'fr',
+                                                   'pk': self.stream.pk}))
+        self.assertEqual(len(response.json()), 3)
+
+    def test_api_stream_usages_geojson(self):
+        response = self.client.get(reverse('river:stream-usages',
+                                           kwargs={'lang': 'fr',
+                                                   'pk': self.stream.pk,
+                                                   'format': 'geojson'}))
+        self.assertEqual(len(response.json()['features']), 3)
+
+    def test_api_stream_studies(self):
+        response = self.client.get(reverse('river:stream-studies',
+                                           kwargs={'lang': 'fr',
+                                                   'pk': self.stream.pk}))
+        self.assertEqual(len(response.json()), 4)
+
+    def test_api_stream_studies_geojson(self):
+        response = self.client.get(reverse('river:stream-studies',
+                                           kwargs={'lang': 'fr',
+                                                   'pk': self.stream.pk,
+                                                   'format': 'geojson'}))
+        self.assertEqual(len(response.json()['features']), 4)

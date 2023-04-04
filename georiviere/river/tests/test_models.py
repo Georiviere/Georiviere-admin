@@ -1,11 +1,48 @@
+from requests import Response
+from unittest import mock
+
 from django.conf import settings
 from django.contrib.gis.geos import Point, LineString
-from django.test import TestCase
+from django.test import TestCase, RequestFactory
 
 from georiviere.finances_administration.tests.factories import AdministrativeFileFactory
 from georiviere.description.tests.factories import MorphologyFactory, StatusFactory, UsageFactory
 from georiviere.river.models import DistanceToSource, Stream
 from georiviere.river.tests.factories import TopologyFactory, StreamFactory, ClassificationWaterPolicyFactory
+
+
+class StreamModelTest(TestCase):
+    @classmethod
+    def setUpTestData(cls):
+        cls.stream = StreamFactory.create(
+            geom=LineString((10000, 10000), (50000, 50000)),
+        )
+
+    def test_prepare_map_image_with_usages(self):
+        rooturl = RequestFactory().get('/').build_absolute_uri('/')
+        with mock.patch('mapentity.helpers.get_source') as mocked_source:
+            def side_effect():
+                response = Response()
+                response.status_code = 200
+                response._content = bytes(
+                    "test",
+                    'utf-8'
+                )
+                return response
+
+            mocked_source.return_value = side_effect()
+            self.assertTrue(self.stream.prepare_map_image_with_other_objects(rooturl, ['usages']))
+            self.assertFalse(self.stream.prepare_map_image_with_other_objects(rooturl, ['usages']))
+
+            UsageFactory.create(geom=self.stream.geom)
+
+            self.assertTrue(self.stream.prepare_map_image_with_other_objects(rooturl, ['usages']))
+            self.assertFalse(self.stream.prepare_map_image_with_other_objects(rooturl, ['usages']))
+
+            self.stream.name = "New name"
+            self.stream.save()
+
+            self.assertTrue(self.stream.prepare_map_image_with_other_objects(rooturl, ['usages']))
 
 
 class ClassificationWaterPolicyModelTest(TestCase):
