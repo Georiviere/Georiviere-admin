@@ -146,11 +146,6 @@ class StreamDocumentReport(DocumentReportMixin, mapentity_views.MapEntityDocumen
         context['URL'] = settings.URL_DOCUMENT_REPORT
         return context
 
-    @property
-    def status_type_on_stream(self):
-        topologies = Topology.objects.filter(stream=self)
-        return topologies.filter(status__isnull=False)
-
     def get_object(self, queryset=None):
         obj = super().get_object(queryset)
         if not self.request.user.is_authenticated:
