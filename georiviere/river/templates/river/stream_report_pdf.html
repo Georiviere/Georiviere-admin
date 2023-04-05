@@ -95,8 +95,8 @@
         </dl>
       </section>
       {% block cities_crossed %}
-        <section class="flex-wrap">
-          {% if object.cities %}
+        {% if object.cities %}
+          <section class="flex-wrap">
             <h4>{% trans "Cities crossed" %}</h4>
             <article class="columns threeColumns">
               <ul>
@@ -105,8 +105,8 @@
                 {% endfor %}
               </ul>
             </article>
-          {% endif %}
-        </section>
+          </section>
+        {% endif %}
       {% endblock cities_crossed %}
       {% block districts_crossed %}
         {% if object.districts %}
@@ -151,18 +151,20 @@
         {% endif %}
       {% endblock watersheds_crossed %}
       {% block status %}
-        <section class="flex-wrap">
-          <h4>{% trans "Status" %}</h4>
-          <article class="columns oneColumn">
-            <ul>
-              {% for status_type, infos in status_types.items %}
-              <li>
-                 {{ infos.sum_length.m|floatformat }} m ({{ infos.percentage|floatformat }} %) {% trans "linear classified in" %} {{ status_type }}
-              </li>
-              {% endfor %}
-            </ul>
-          </article>
-        </section>
+        {% if status_types %}
+          <section class="flex-wrap">
+            <h4>{% trans "Status" %}</h4>
+            <article class="columns oneColumn">
+              <ul>
+                {% for status_type, infos in status_types.items %}
+                <li>
+                   {{ infos.sum_length.m|floatformat }} m ({{ infos.percentage|floatformat }} %) {% trans "linear classified in" %} {{ status_type }}
+                </li>
+                {% endfor %}
+              </ul>
+            </article>
+          </section>
+        {% endif %}
       {% endblock status %}
     </article>
   </section>
