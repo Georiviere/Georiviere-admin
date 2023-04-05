@@ -6,7 +6,7 @@ register = template.Library()
 
 @register.filter
 def get_value_from_dict(h, key):
-    return h[key]
+    return h.get(key, '')
 
 
 @register.inclusion_tag('main/_detail_valuelist_source_fragment.html')
