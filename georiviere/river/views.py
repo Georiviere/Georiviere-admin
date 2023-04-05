@@ -111,7 +111,7 @@ class StreamViewSet(viewsets.ModelViewSet):
 
 class StreamDocumentReport(DocumentReportMixin, mapentity_views.MapEntityDocumentWeasyprint):
     def get_context_data(self, *args, **kwargs):
-        context = super(StreamDocumentReport, self).get_context_data(*args, **kwargs)
+        context = super().get_context_data(*args, **kwargs)
         topologies = Topology.objects.filter(stream=self.get_object())
         status_types = {}
         for status_type in StatusType.objects.filter(status__in=Status.objects.filter(

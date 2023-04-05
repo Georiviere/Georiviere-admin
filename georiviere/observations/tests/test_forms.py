@@ -19,8 +19,7 @@ class StationFormTestCase(TestCase):
 
     def test_duplicate_code_error(self):
         """Test error on form if station with duplicated code key is created"""
-        success = self.client.force_login(self.user)
-        self.assertTrue(success)
+        self.client.force_login(self.user)
         station2_form = StationForm(user=self.user, data={"label": "Station 2", "code": "1234"})
         station2_form.is_valid()
         self.assertIn('code', station2_form.errors)
