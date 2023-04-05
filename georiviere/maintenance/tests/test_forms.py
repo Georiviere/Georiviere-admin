@@ -14,7 +14,7 @@ class InterventionTest(TestCase):
 
     @classmethod
     def setUpTestData(cls):
-        cls.user = UserAllPermsFactory(password='booh')
+        cls.user = UserAllPermsFactory()
         cls.stream = StreamFactory.create()
 
     def test_create_standalone_intervention(self):

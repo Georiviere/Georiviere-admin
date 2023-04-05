@@ -121,7 +121,7 @@ class StreamViewTestCase(CommonRiverTest):
 class CutTopologyTestCase(TestCase):
     @classmethod
     def setUpTestData(cls):
-        cls.user = UserFactory(password='booh')
+        cls.user = UserFactory()
 
     def setUp(self):
         self.client.force_login(self.user)
@@ -170,7 +170,7 @@ class CutTopologyTestCase(TestCase):
 class DistanceToSourceTestCase(TestCase):
     @classmethod
     def setUpTestData(cls):
-        cls.user = UserFactory(password='booh')
+        cls.user = UserFactory()
 
     def setUp(self):
         self.client.force_login(self.user)
@@ -193,8 +193,8 @@ class DistanceToSourceTestCase(TestCase):
 class StreamDocumentReportTestCase(TestCase):
     @classmethod
     def setUpTestData(cls):
-        cls.super_user = SuperUserFactory(password='booh')
-        cls.user = UserFactory(password='booh')
+        cls.super_user = SuperUserFactory()
+        cls.user = UserFactory()
         cls.stream = StreamFactory.create()
         cls.morphology = Morphology.objects.get()
         cls.status = Status.objects.get()
@@ -267,7 +267,7 @@ class StreamDocumentReportTestCase(TestCase):
 class APIStreamViewTestCase(TestCase):
     @classmethod
     def setUpTestData(cls):
-        cls.super_user = SuperUserFactory(password='booh')
+        cls.super_user = SuperUserFactory()
         cls.stream = StreamFactory.create()
         cls.knowledge = FollowUpKnowledgeFactory.create_batch(1, geom=cls.stream.geom)
         cls.followup = FollowUpFactory.create()
