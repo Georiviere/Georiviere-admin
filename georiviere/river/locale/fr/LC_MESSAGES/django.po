@@ -11,7 +11,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-04-03 14:38+0000\n"
+"POT-Creation-Date: 2023-04-19 13:35+0000\n"
 "PO-Revision-Date: 2021-11-23 15:31+0000\n"
 "Last-Translator: Jean-Etienne Castagnede <jecastagnede@vivaldi.net>, 2021\n"
 "Language-Team: French (https://www.transifex.com/georiviere/teams/128005/"
@@ -77,6 +77,9 @@ msgstr "Source de donnée"
 
 msgid "Source location"
 msgstr "Emplacement de la source"
+
+msgid "Published portals"
+msgstr "Portails publiés"
 
 msgid "Streams"
 msgstr "Cours d'eau"
