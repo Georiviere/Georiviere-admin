@@ -20,10 +20,10 @@ class AdministrativePhaseViewTestCase(TestCase):
     @classmethod
     def setUpTestData(cls):
         cls.administrative_phase = AdministrativeFilePhaseFactory(name="Old name")
-        cls.user = UserFactory(password='booh')
+        cls.user = UserFactory()
 
     def setUp(self):
-        self.client.login(username=self.user.username, password="booh")
+        self.client.force_login(self.user)
 
     def test_get_update_phase(self):
         response = self.client.get(reverse('finances_administration:administrativephase-update',
@@ -48,10 +48,10 @@ class AdministrativeOperationViewTestCase(TestCase):
     @classmethod
     def setUpTestData(cls):
         cls.administrative_operation = StudyOperationFactory(name="Old name")
-        cls.user = UserFactory(password='booh')
+        cls.user = UserFactory()
 
     def setUp(self):
-        self.client.login(username=self.user.username, password="booh")
+        self.client.force_login(self.user)
 
     def test_get_update_operation(self):
         response = self.client.get(reverse('finances_administration:administrativeoperation-update',

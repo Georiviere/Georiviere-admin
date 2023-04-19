@@ -1,0 +1,280 @@
+@font-face {
+  font-family: Fira Sans;
+  font-weight: 400;
+  src: url(firasans-regular.otf);
+}
+@font-face {
+  font-family: Fira Sans;
+  font-style: italic;
+  font-weight: 400;
+  src: url(firasans-italic.otf);
+}
+@font-face {
+  font-family: Fira Sans;
+  font-weight: 300;
+  src: url(firasans-light.otf);
+}
+@font-face {
+  font-family: Fira Sans;
+  font-style: italic;
+  font-weight: 300;
+  src: url(firasans-lightitalic.otf);
+}
+@font-face {
+  font-family: Fira Sans;
+  font-weight: 700;
+  src: url(firasans-bold.otf);
+}
+:root {
+  --main-color: #2a6380;
+}
+@page {
+  @bottom-center {
+    background: #2a6380;
+    content: '';
+    display: block;
+    height: .05cm;
+    opacity: .5;
+    width: 100%;
+  }
+  @bottom-right {
+    background: #2a6380;
+    content: counter(page);
+    height: 1cm;
+    text-align: center;
+    width: 1cm;
+    color: white;
+  }
+}
+html {
+  color: #393939;
+  font-family: Fira Sans;
+  font-size: 11pt;
+  font-weight: 300;
+  line-height: 1.5;
+}
+
+
+@page {
+  margin: 2cm 1cm 1cm 1cm;
+  size: A4;
+}
+html {
+  counter-reset: h2-counter;
+  font-size: 9pt;
+}
+body {
+  margin: 0;
+}
+
+p {
+  line-height: 2;
+  text-align: justify;
+}
+hr {
+  height: 5px;
+  margin: 30px 0;
+  background-color: var(--main-color);
+  border: none;
+}
+h1 {
+  color: var(--main-color);
+  font-size: 14pt;
+}
+h2 {
+  color: #393939;
+  /* break-before: always; */
+  counter-increment: h2-counter;
+  font-size: 2em;
+  margin: 0;
+}
+h4 {
+  font-size: 13pt;
+  color: var(--main-color);
+  margin: 0;
+}
+ul {
+  list-style: none;
+  padding: 0;
+  margin:0 0 20px
+}
+.l-style-number {
+  list-style: upper-alpha;
+  padding-left: 20px;
+  padding-top: 10px;
+}
+.l-style-tiret {
+  list-style-type: "-";
+}
+.d-flex {
+  display: flex;
+}
+.f-row {
+  flex-direction: row;
+}
+.f-end {
+  align-items: flex-end;
+}
+.f-left {
+  float: left;
+}
+.f-right {
+  float: right;
+}
+.size-third {
+  width: 33%;
+}
+.size-half {
+  width: 50%;
+}
+.size-full {
+  width: 100%;
+}
+.logo_header {
+  padding-top: 20px;
+  max-width: 100px;
+  max-height: 70px;
+}
+.img-title {
+  max-height: 40px;
+  padding-right: 10px;
+}
+header,
+footer {
+  position: fixed;
+  left: 0;
+  right: 0;
+}
+header {
+  /* subtract @page margin */
+  top: -2cm;
+  height: 2cm;
+  display: flex;
+  justify-content: space-between;
+  vertical-align: middle;
+  align-items: center;
+}
+footer {
+  /* subtract @page margin */
+  bottom: 3cm;
+  height: 3cm;
+}
+/* Table of content */
+#toc {
+    break-after: always;
+}
+#toc p {
+  font-size: 1.5em;
+}
+#toc ul {
+  display: block;
+  margin: 1em 0;
+  padding: 0;
+  list-style: none;
+}
+#toc li {
+  display: block;
+  border-top: 0.25pt solid #c1c1c1;
+  margin: 0.25cm 0;
+  padding-top: 0.25cm;
+}
+#toc ul li::before {
+  color: var(--main-color);
+  content: "• ";
+  font-size: 20pt;
+  line-height: 16pt;
+  vertical-align: bottom;
+}
+#toc a {
+  color: inherit;
+  text-decoration: none;
+}
+#toc h1 {
+  font-size: 20pt;
+  font-weight: 700;
+  margin-top: 1cm;
+  margin-bottom: 3cm;
+  text-align: center;
+}
+#toc ul li a {
+  color: inherit;
+  text-decoration-line: inherit;
+}
+#toc ul li a::before {
+  content: target-text(attr(href));
+}
+#toc ul li a::after {
+  color: var(--main-color);
+  content: target-counter(attr(href), page);
+  float: right;
+}
+aside {
+  display: flex;
+  align-items: baseline;
+}
+aside figure {
+  margin: 0;
+  padding: 1em 1em 1em 0;
+  text-align: center;
+}
+aside img {
+  height: 100%;
+  width: 100%;
+  object-fit: contain;
+  border-radius: 10px;
+  margin: 0 auto;
+  max-width: 100%;
+}
+
+.columns {
+  margin-top: 0;
+}
+.columns p {
+  text-align: justify;
+}
+.columns ul {
+  padding-left: 0;
+  margin: 0;
+}
+.oneColumn {
+  columns: 1;
+}
+.twoColumns {
+  columns: 2;
+}
+.threeColumns {
+  columns: 3;
+}
+
+section.flex-wrap{
+  display: flex;
+  flex-wrap: wrap;
+  margin: 1cm 0;
+}
+section.flex-wrap h4 {
+  flex: 1 25%;
+  margin: 0;
+  border-top: 1pt solid;
+  border-color: var(--main-color);
+}
+#features section h4 + * {
+  flex: 1 75%;
+  margin: 0;
+  padding-left: 0.5cm;
+}
+#features section p {
+  text-align: justify;
+}
+#features section.troisCol dl {
+  display: flex;
+  flex-wrap: wrap;
+}
+#features section.troisCol dl dt {
+  font-weight: 700;
+  width: 40%;
+}
+#features section.troisCol dl dd {
+  flex: 1 60%;
+  margin: 0;
+  padding: 0;
+}

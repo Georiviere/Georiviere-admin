@@ -11,7 +11,7 @@ class StationFormTestCase(TestCase):
     @classmethod
     def setUpTestData(cls):
 
-        cls.user = UserAllPermsFactory(password='booh')
+        cls.user = UserAllPermsFactory()
         cls.station1 = factories.StationFactory(
             label="Station 1",
             code="1234"
@@ -19,8 +19,7 @@ class StationFormTestCase(TestCase):
 
     def test_duplicate_code_error(self):
         """Test error on form if station with duplicated code key is created"""
-        success = self.client.login(username=self.user.username, password='booh')
-        self.assertTrue(success)
+        self.client.force_login(self.user)
         station2_form = StationForm(user=self.user, data={"label": "Station 2", "code": "1234"})
         station2_form.is_valid()
         self.assertIn('code', station2_form.errors)

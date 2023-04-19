@@ -41,7 +41,11 @@ class AddPropertyBufferMixin(AddPropertyMixin):
         if not topology.geom:
             return qs
         area = topology.geom.buffer(settings.BASE_INTERSECTION_MARGIN)
-        qs = cls.objects.filter(geom__intersects=area)
+        qs = cls.objects.all()
+        if "geom" in [field.name for field in cls._meta.get_fields()]:
+            qs = qs.filter(geom__intersects=area)
+        elif "_geom" in [field.name for field in cls._meta.get_fields()]:
+            qs = qs.filter(_geom__intersects=area)
         return qs
 
 

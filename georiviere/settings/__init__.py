@@ -118,6 +118,7 @@ TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
         'DIRS': [
+            VAR_DIR / 'conf' / 'extra_templates',
             PROJECT_DIR / "templates",
         ],
         'APP_DIRS': True,
@@ -216,6 +217,7 @@ MEDIA_URL = '/media/'
 STATIC_URL = '/static/'
 
 STATICFILES_DIRS = [
+    VAR_DIR / 'conf' / 'extra_static',
     PROJECT_DIR / "static",
 ]
 
@@ -253,6 +255,9 @@ MAPENTITY_CONFIG = {
         'station': {'weight': 4, 'color': '#FFD801', 'opacity': 0.9},
         'study': {'weight': 4, 'color': '#d63384', 'opacity': 0.9},
         'proceeding': {'weight': 4, 'color': '#3dd5f3', 'opacity': 0.9},
+        'print': {
+            'knowledge': {'weight': 3, 'color': '#198754', 'opacity': 1, 'fillOpacity': 0.4, 'radius': 13},
+        }
     }
 }
 
@@ -324,6 +329,11 @@ EMAIL_HOST_PASSWORD = os.getenv('EMAIL_HOST_PASSWORD', '')
 EMAIL_PORT = os.getenv('EMAIL_HOST_PORT', 25)
 EMAIL_USE_TLS = bool(os.getenv('EMAIL_USE_TLS', False))
 EMAIL_USE_SSL = bool(os.getenv('EMAIL_USE_SSL', False))
+
+MAIL_DOCUMENT_REPORT = ''
+PHONE_NUMBER_DOCUMENT_REPORT = ''
+WEBSITE_DOCUMENT_REPORT = ''
+URL_DOCUMENT_REPORT = ''
 
 if os.getenv('SSL_ENABLED', default=0):
     # SECURITY

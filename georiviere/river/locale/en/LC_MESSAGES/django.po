@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-03-13 15:41+0000\n"
+"POT-Creation-Date: 2023-04-03 14:38+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -119,10 +119,22 @@ msgstr ""
 msgid "Distance to source"
 msgstr ""
 
+msgid "Followups"
+msgstr ""
+
+msgid "Interventions"
+msgstr ""
+
 msgid "Cut topology"
 msgstr ""
 
 msgid "Click map to place marker, then move it to snap with the topology."
+msgstr ""
+
+msgid "Report print"
+msgstr ""
+
+msgid "Print"
 msgstr ""
 
 msgid "Set the source location"
@@ -132,6 +144,72 @@ msgid "Move the source location"
 msgstr ""
 
 msgid "Delete the source location"
+msgstr ""
+
+msgid "None"
+msgstr ""
+
+msgid "Informations"
+msgstr ""
+
+msgid "Elevation chart"
+msgstr ""
+
+msgid "Characteristics"
+msgstr ""
+
+msgid "Length 2D"
+msgstr ""
+
+msgid "Elevation"
+msgstr ""
+
+msgid "Cities crossed"
+msgstr ""
+
+msgid "Districts crossed"
+msgstr ""
+
+msgid "Areas crossed"
+msgstr ""
+
+msgid "Watersheds crossed"
+msgstr ""
+
+msgid "Status"
+msgstr ""
+
+msgid "linear classified in"
+msgstr ""
+
+msgid "Usages"
+msgstr ""
+
+msgid "Study"
+msgstr ""
+
+msgid "Associated follow-ups"
+msgstr ""
+
+msgid "Associated interventions"
+msgstr ""
+
+msgid "Other follow-ups (not linked to a knowledge)"
+msgstr ""
+
+msgid "Other follow-ups"
+msgstr ""
+
+msgid "Other Interventions (not linked to a knowledge)"
+msgstr ""
+
+msgid "Other interventions"
+msgstr ""
+
+msgid "For more informations :"
+msgstr ""
+
+msgid "Contact :"
 msgstr ""
 
 msgid "Topology is not qualified"

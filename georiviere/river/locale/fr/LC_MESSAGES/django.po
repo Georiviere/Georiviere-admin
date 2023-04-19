@@ -11,7 +11,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-03-13 15:41+0000\n"
+"POT-Creation-Date: 2023-04-03 14:38+0000\n"
 "PO-Revision-Date: 2021-11-23 15:31+0000\n"
 "Last-Translator: Jean-Etienne Castagnede <jecastagnede@vivaldi.net>, 2021\n"
 "Language-Team: French (https://www.transifex.com/georiviere/teams/128005/"
@@ -123,6 +123,9 @@ msgstr "Connaissances"
 msgid "Distance to source"
 msgstr "Distance à la source"
 
+msgid "Interventions"
+msgstr "Interventions"
+
 msgid "Cut topology"
 msgstr "Découper la topologie"
 
@@ -130,6 +133,12 @@ msgid "Click map to place marker, then move it to snap with the topology."
 msgstr ""
 "Cliquer sur la carte pour placer le marqueur, puis déplacez-le pour "
 "l'aimanter à la topologie."
+
+msgid "Report print"
+msgstr "Impression du rapport"
+
+msgid "Print"
+msgstr "Impression"
 
 msgid "Set the source location"
 msgstr "Définir l'emplacement de la source"
@@ -139,6 +148,72 @@ msgstr "Déplacer l'emplacement de la source"
 
 msgid "Delete the source location"
 msgstr "Supprimer l'emplacement de la source"
+
+msgid "None"
+msgstr "Aucun(e)"
+
+msgid "Informations"
+msgstr "Informations"
+
+msgid "Altimetric profile"
+msgstr "Profil altimétrique"
+
+msgid "Characteristics"
+msgstr "Caractéristiques"
+
+msgid "Length 2D"
+msgstr "Longueur 2D"
+
+msgid "Elevation"
+msgstr "Elevation"
+
+msgid "Cities crossed"
+msgstr "Communes traversées"
+
+msgid "Districts crossed"
+msgstr "Secteurs traversés"
+
+msgid "Areas crossed"
+msgstr "Zones traversés"
+
+msgid "Watersheds crossed"
+msgstr "Bassins versants traversés"
+
+msgid "Status"
+msgstr "Statut"
+
+msgid "linear classified in"
+msgstr "linéaire classé en"
+
+msgid "Usages"
+msgstr "Usages"
+
+msgid "Study"
+msgstr "Études"
+
+msgid "Associated follow-ups"
+msgstr "Suivis associés"
+
+msgid "Associated interventions"
+msgstr "Interventions associées"
+
+msgid "Other follow-ups (not linked to a knowledge)"
+msgstr "Autres suivis (non liés à une connaissance)"
+
+msgid "Other follow-ups"
+msgstr "Autres suivis"
+
+msgid "Other Interventions (not linked to a knowledge)"
+msgstr "Autres interventions (non liés à une connaissance)"
+
+msgid "Other interventions"
+msgstr "Autres interventions"
+
+msgid "For more informations :"
+msgstr "Pour plus d'informations :"
+
+msgid "Contact :"
+msgstr "Contact :"
 
 msgid "Topology is not qualified"
 msgstr "La topologie n'est pas qualifiée"

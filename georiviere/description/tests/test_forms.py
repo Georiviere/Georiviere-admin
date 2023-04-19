@@ -10,7 +10,7 @@ class StatusTest(TestCase):
 
     @classmethod
     def setUpTestData(cls):
-        cls.user = UserAllPermsFactory(password='booh')
+        cls.user = UserAllPermsFactory()
         cls.stream = StreamFactory.create()
         cls.topologies = cls.stream.topologies.all()
 
