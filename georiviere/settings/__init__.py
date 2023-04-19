@@ -78,6 +78,7 @@ INSTALLED_APPS = [
     'georiviere.finances_administration',
     'georiviere.studies',
     'georiviere.proceeding',
+    'georiviere.valorization',
     'geotrek.zoning',
     'georiviere.watershed',
     'geotrek.authent',

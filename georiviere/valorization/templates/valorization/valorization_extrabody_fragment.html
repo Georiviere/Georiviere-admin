@@ -1,0 +1,9 @@
+{% load static i18n %}
+<script type="text/javascript">
+    MapEntity.i18n['POIs Knowledge'] = "{% trans "POIs Knowledge" %}";
+    MapEntity.i18n['POIs Action'] = "{% trans "POIs Action" %}";
+
+    window.SETTINGS.urls['poiknowledge_layer'] = "{% url "valorization:poiknowledge_layer" %}";
+    window.SETTINGS.urls['poiaction_layer'] = "{% url "valorization:poiaction_layer" %}";
+</script>
+<script type="text/javascript" src="{% static 'valorization/js/main.js' %}"></script>

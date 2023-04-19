@@ -1,0 +1,27 @@
+{% extends "mapentity/mapentity_detail_attributes.html" %}
+{% load i18n mapentity_tags %}
+
+{% block attributes %}
+    <table class="table-striped table-bordered table">
+        <tr>
+            <th>{{ object|verbose:"name" }}</th>
+            <td>{{ object.name }}</td>
+        </tr>
+        <tr>
+            <th>{{ object|verbose:"description" }}</th>
+            <td>{{ object.description|linebreaks }}</td>
+        </tr>
+        <tr>
+            <th>{{ object|verbose:"type" }}</th>
+            <td>{{ object.type }}</td>
+        </tr>
+        <tr>
+            <th>{{ object|verbose:"portals" }}</th>
+            <td>
+                {% valuelist object.portals.all %}
+            </td>
+        </tr>
+        {% include "mapentity/trackinfo_fragment.html" %}
+    </table>
+    {{ block.super }}
+{% endblock attributes %}

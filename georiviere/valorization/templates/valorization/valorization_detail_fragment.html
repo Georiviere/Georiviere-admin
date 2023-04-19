@@ -1,0 +1,37 @@
+{% load i18n mapentity_tags georiviere_tags %}
+
+{% if modelname != "poiknowledge" and modelname != "poiaction"%}
+    <h3>{% trans "Valorization" %}</h3>
+    <table class="table">
+        <tr>
+            <th>{% trans "POIs knowledge" %}</th>
+            <td>
+                {% if perms.poiknowledge.station %}
+                <p class="autohide">
+                    <a href="{% url 'valorization:poiknowledge_add' %}"
+                       class="btn btn-sm btn-success">
+                    <i class="bi bi-plus-circle-fill"></i> {% trans "Add a new poi knowledge" %}</a>
+                </p>
+                {% endif %}
+
+                {% valuelist object.pois_knowledge field='name' %}
+
+            </td>
+        </tr>
+        <tr>
+            <th>{% trans "POIs action" %}</th>
+            <td>
+                {% if perms.poiaction.add_poiaction %}
+                <p class="autohide">
+                    <a href="{% url 'valorization:poiaction_add' %}"
+                       class="btn btn-sm btn-success">
+                    <i class="bi bi-plus-circle-fill"></i> {% trans "Add a new poi action" %}</a>
+                </p>
+                {% endif %}
+
+                {% valuelist object.pois_action field='name' %}
+
+            </td>
+        </tr>
+    </table>
+{% endif %}
