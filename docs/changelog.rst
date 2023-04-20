@@ -5,6 +5,10 @@ CHANGELOG
 1.0.4+dev    (XXXX-XX-XX)
 -------------------------
 
+**Enhancement**
+
+* Add public portals on stream allowing to publish them
+
 
 1.0.4        (2023-04-05)
 -------------------------

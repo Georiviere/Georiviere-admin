@@ -47,6 +47,7 @@ class StreamViewTestCase(CommonRiverTest):
             'classification_water_policy': self.obj.classification_water_policy.pk,
             'name': self.obj.name,
             'geom': self.obj.geom.ewkt,
+            'portals': []
         }
 
     def get_bad_data(self):

@@ -74,6 +74,7 @@ INSTALLED_APPS = [
     'georiviere.knowledge',
     'georiviere.maintenance',
     'georiviere.observations',
+    'georiviere.portal',
     'georiviere.finances_administration',
     'georiviere.studies',
     'georiviere.proceeding',

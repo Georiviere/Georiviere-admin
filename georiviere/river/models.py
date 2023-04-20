@@ -85,6 +85,10 @@ class Stream(AddPropertyBufferMixin, TimeStampedModelMixin, WatershedPropertiesM
                                                     on_delete=models.SET_NULL,
                                                     null=True, blank=True, related_name='streams',
                                                     verbose_name=_("Classification water policy"))
+    portals = models.ManyToManyField('portal.Portal',
+                                     blank=True, related_name='streams',
+                                     verbose_name=_("Published portals"))
+
     capture_map_image_waitfor = '.other_object_enum_loaded'
 
     class Meta:
