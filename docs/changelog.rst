@@ -8,6 +8,7 @@ CHANGELOG
 **Enhancement**
 
 * Add public portals on stream allowing to publish them
+* Add PDFs administration of rivers
 
 
 1.0.4        (2023-04-05)
