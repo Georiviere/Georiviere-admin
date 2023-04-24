@@ -4,5 +4,5 @@ from mapentity.registry import MapEntityOptions
 
 class ValorizationOptions(MapEntityOptions):
     def __init__(self, model):
-        super(ValorizationOptions, self).__init__(model)
+        super().__init__(model)
         self.label = _('Valorization')
