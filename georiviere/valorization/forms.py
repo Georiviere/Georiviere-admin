@@ -1,3 +1,4 @@
+from django.conf import settings
 from django.contrib.gis.forms.fields import PointField
 
 from crispy_forms.layout import Div, Field
@@ -8,7 +9,7 @@ from georiviere.valorization.models import POIAction, POIKnowledge
 
 
 class POIKnowledgeForm(CommonForm):
-    geom = PointField()
+    geom = PointField(srid=settings.SRID)
 
     geomfields = ['geom']
 
@@ -27,7 +28,7 @@ class POIKnowledgeForm(CommonForm):
 
 
 class POIActionForm(CommonForm):
-    geom = PointField()
+    geom = PointField(srid=settings.SRID)
 
     geomfields = ['geom']
 

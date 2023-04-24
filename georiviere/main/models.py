@@ -41,8 +41,6 @@ class AddPropertyBufferMixin(AddPropertyMixin):
         if not topology.geom:
             return qs
         geom = topology.geom
-        if topology.geom.srid != settings.SRID:
-            geom = geom.transform(settings.SRID, clone=True)
         area = geom.buffer(settings.BASE_INTERSECTION_MARGIN)
         qs = cls.objects.all()
         if "geom" in [field.name for field in cls._meta.get_fields()]:

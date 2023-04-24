@@ -5,7 +5,7 @@ from django.contrib.gis.db import models
 
 from django.utils.translation import gettext_lazy as _
 
-from geotrek.authent.models import StructureRelated
+from geotrek.authent.models import StructureOrNoneRelated, StructureRelated
 from geotrek.common.mixins import TimeStampedModelMixin
 
 from mapentity.models import MapEntityMixin
@@ -21,13 +21,16 @@ from georiviere.studies.models import Study
 logger = logging.getLogger(__name__)
 
 
-class POIMixin(AddPropertyBufferMixin, TimeStampedModelMixin, StructureRelated, models.Model):
+class POIMixin(AddPropertyBufferMixin, TimeStampedModelMixin, StructureRelated):
     name = models.CharField(max_length=128, verbose_name=_("Name"))
     description = models.TextField(verbose_name=_("Description"), blank=True, help_text=_("History, details,  ..."))
     geom = models.PointField(srid=settings.SRID, spatial_index=True)
 
     class Meta:
         abstract = True
+        unique_together = (
+            ('name', 'structure'),
+        )
 
     @property
     def name_display(self):
@@ -38,7 +41,7 @@ class POIMixin(AddPropertyBufferMixin, TimeStampedModelMixin, StructureRelated, 
 
 
 class POIKnowledge(POIMixin, MapEntityMixin):
-    type = models.ForeignKey('POIKnowledgeType', related_name='pois', verbose_name=_("Type"), on_delete=models.CASCADE)
+    type = models.ForeignKey('POIKnowledgeType', related_name='pois', verbose_name=_("Type"), on_delete=models.PROTECT)
     portals = models.ManyToManyField('portal.Portal', verbose_name=_("Portals"), related_name='poi_knowledges',
                                      blank=True, )
 
@@ -50,20 +53,23 @@ class POIKnowledge(POIMixin, MapEntityMixin):
         return self.name
 
 
-class POIKnowledgeType(TimeStampedModelMixin, models.Model):
+class POIKnowledgeType(TimeStampedModelMixin, StructureOrNoneRelated):
     label = models.CharField(verbose_name=_("Name"), max_length=128)
 
     class Meta:
         verbose_name = _("POI knowledge type")
         verbose_name_plural = _("POI knowledge types")
         ordering = ['label']
+        unique_together = (
+            ('label', 'structure'),
+        )
 
     def __str__(self):
         return self.label
 
 
 class POIAction(POIMixin, MapEntityMixin):
-    type = models.ForeignKey('POIActionType', related_name='pois', verbose_name=_("Type"), on_delete=models.CASCADE)
+    type = models.ForeignKey('POIActionType', related_name='pois', verbose_name=_("Type"), on_delete=models.PROTECT)
     portals = models.ManyToManyField('portal.Portal', verbose_name=_("Portals"), related_name='poi_actions', blank=True)
 
     class Meta:
@@ -74,13 +80,16 @@ class POIAction(POIMixin, MapEntityMixin):
         return self.name
 
 
-class POIActionType(TimeStampedModelMixin, models.Model):
+class POIActionType(TimeStampedModelMixin, StructureOrNoneRelated):
     label = models.CharField(verbose_name=_("Name"), max_length=128)
 
     class Meta:
         verbose_name = _("POI action type")
         verbose_name_plural = _("POI action types")
         ordering = ['label']
+        unique_together = (
+            ('label', 'structure'),
+        )
 
     def __str__(self):
         return self.label
