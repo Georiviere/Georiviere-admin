@@ -16,6 +16,62 @@ from pathlib import Path
 from georiviere import __version__
 from geotrek import __version__ as __geotrek_version__
 
+from unittest import mock
+
+from django.conf.global_settings import LANGUAGES as LANGUAGES_LIST
+from django.template.engine import Engine, Template
+
+orig_import = __import__
+
+
+def import_mock(name, *args, **kwargs):
+    if 'geotrek.core.models' in name:
+        return orig_import('georiviere.main.utils', *args, **kwargs)
+    if 'geotrek.common.urls' in name:
+        return orig_import('georiviere.river.urls', *args, **kwargs)
+    if 'geotrek.common.serializers' in name:
+        return orig_import('georiviere.main.serializers', *args, **kwargs)
+    return orig_import(name, *args, **kwargs)
+
+
+patcher = mock.patch('builtins.__import__', side_effect=import_mock)
+patcher.start()
+
+engine = Engine()
+
+
+def include_mock(template_code):
+    template_code = template_code.replace('common/publication_info_fragment.html',
+                                          'main/publication_info_fragment.html')
+    return Template(template_code)
+
+
+def construct_relative_path_mock(current_template_name, relative_name):
+    if 'common/publication_info_fragment.html' in relative_name:
+        return '"main/publication_info_fragment.html"'
+    return relative_name
+
+
+patcher_include_template = mock.patch('django.template.engine.Engine.from_string',
+                                      side_effect=include_mock)
+patcher_include_template.start()
+
+patcher_loader_tags = mock.patch('django.template.loader_tags.construct_relative_path',
+                                 side_effect=construct_relative_path_mock)
+patcher_loader_tags.start()
+
+
+if 'makemigrations' in sys.argv:
+    PROJECT_APPS = []
+else:
+    PROJECT_APPS = [
+        'modeltranslation',
+    ]
+
+_MODELTRANSLATION_LANGUAGES = [language for language in LANGUAGES_LIST
+                               if language[0] in ("en", "fr", "it", "es")]
+MODELTRANSLATION_LANGUAGES = tuple(os.getenv('LANGUAGES', 'fr en').split(' '))
+
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent.parent
 
@@ -45,7 +101,7 @@ ALLOWED_HOSTS = os.getenv('SERVER_NAME').split(',')
 
 # Application definition
 
-INSTALLED_APPS = [
+INSTALLED_APPS = PROJECT_APPS + [
     'dal',
     'dal_select2',
     'dal_queryset_sequence',
@@ -65,7 +121,6 @@ INSTALLED_APPS = [
     'paperclip',
     'crispy_forms',
     'rest_framework',
-    'modeltranslation',
     'geotrek.altimetry',
     'colorfield',
     'georiviere.main',
@@ -83,6 +138,7 @@ INSTALLED_APPS = [
     'georiviere.watershed',
     'geotrek.authent',
     'georiviere.flatpages',
+    'geotrek.sensitivity',
 ]
 
 STATICFILES_FINDERS = (
@@ -261,7 +317,10 @@ MAPENTITY_CONFIG = {
         'print': {
             'knowledge': {'weight': 3, 'color': '#198754', 'opacity': 1, 'fillOpacity': 0.4, 'radius': 13},
         }
-    }
+    },
+    'TRANSLATED_LANGUAGES': [
+        language for language in LANGUAGES_LIST if language[0] in MODELTRANSLATION_LANGUAGES
+    ]
 }
 
 LEAFLET_CONFIG = {
@@ -337,6 +396,11 @@ MAIL_DOCUMENT_REPORT = ''
 PHONE_NUMBER_DOCUMENT_REPORT = ''
 WEBSITE_DOCUMENT_REPORT = ''
 URL_DOCUMENT_REPORT = ''
+
+# sensitivity
+
+SENSITIVITY_DEFAULT_RADIUS = 100  # meters
+SENSITIVE_AREA_INTERSECTION_MARGIN = 500  # meters (always used)
 
 if os.getenv('SSL_ENABLED', default=0):
     # SECURITY
