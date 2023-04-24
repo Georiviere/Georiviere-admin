@@ -21,6 +21,12 @@ from unittest import mock
 from django.conf.global_settings import LANGUAGES as LANGUAGES_LIST
 from django.template.engine import Engine, Template
 
+"""
+We use mocks here because sensitivity use some common models and utilities.
+We try to change import from geotrek to georiviere
+"""
+
+
 orig_import = __import__
 
 
