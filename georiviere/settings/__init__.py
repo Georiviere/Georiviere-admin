@@ -81,6 +81,7 @@ INSTALLED_APPS = [
     'geotrek.zoning',
     'georiviere.watershed',
     'geotrek.authent',
+    'georiviere.flatpages',
 ]
 
 STATICFILES_FINDERS = (
