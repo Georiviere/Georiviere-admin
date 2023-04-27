@@ -45,3 +45,31 @@ class FlatPageFormTest(TestCase):
         self.assertFalse(form.is_valid())
         with self.assertRaisesRegex(ValidationError, "Choose between external URL and HTML content"):
             form.clean()
+
+    def test_flatpages_content_fill(self):
+        data = {
+            'title': self.flatpage.title,
+            'content': 'content',
+            'external_url': '',
+            'portals': [portal for portal in self.flatpage.portals.all()],
+            'order': self.flatpage.order,
+            'hidden': False
+        }
+
+        form = FlatPageForm(user=self.user, instance=self.flatpage, data=data)
+
+        self.assertTrue(form.is_valid())
+
+    def test_flatpages_external_url_fill(self):
+        data = {
+            'title': self.flatpage.title,
+            'content': '',
+            'external_url': 'http://foo.foo',
+            'portals': [portal for portal in self.flatpage.portals.all()],
+            'order': self.flatpage.order,
+            'hidden': False
+        }
+
+        form = FlatPageForm(user=self.user, instance=self.flatpage, data=data)
+
+        self.assertTrue(form.is_valid())
