@@ -1,7 +1,7 @@
 from django.contrib import admin
 
 from georiviere.flatpages import models as flatpages_models
-from georiviere.flatpages.forms import FlatPageForm, FlatPagePictureForm, FlatPagePictureFormSet
+from georiviere.flatpages.forms import FlatPageForm, FlatPagePictureFormSet
 
 
 class FlatPagePictureAdminInline(admin.TabularInline):

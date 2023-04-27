@@ -1,9 +1,6 @@
-from django.core.exceptions import ValidationError
 from django.test import TestCase
 
-from georiviere.flatpages.forms import FlatPageForm
 from georiviere.flatpages.tests.factories import FlatPageFactory
-from mapentity.tests.factories import SuperUserFactory
 
 
 class FlatPageModelTest(TestCase):

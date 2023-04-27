@@ -3,7 +3,6 @@ from django.utils.translation import gettext_lazy as _
 from django.template.defaultfilters import slugify
 from django.urls import reverse
 
-from mapentity.serializers import plain_text
 from geotrek.common.mixins import TimeStampedModelMixin
 
 
