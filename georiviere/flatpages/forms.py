@@ -1,6 +1,5 @@
 from django import forms
 from django.core.exceptions import ValidationError
-from django.test import RequestFactory
 from django.utils.html import strip_tags
 from django.utils.translation import gettext_lazy as _
 
@@ -10,16 +9,22 @@ from georiviere.flatpages.widgets import AdminFileWidget
 
 
 class FlatPagePictureForm(forms.ModelForm):
-    def __init__(self, *args, **kwargs):
-        super().__init__(*args, **kwargs)
-        rooturl = RequestFactory().get('/').build_absolute_uri('/')
-        self.fields['picture'].widget = AdminFileWidget(attrs={'rooturl': rooturl})
 
     class Meta:
         model = FlatPagePicture
         fields = (
             'picture', 'flatpage'
         )
+
+
+class FlatPagePictureFormSet(forms.BaseInlineFormSet):
+
+    def __init__(self, *args, **kwargs):
+        self.request = kwargs.pop('request', None)
+        super().__init__(*args, **kwargs)
+        for form in self.forms:
+            rooturl = self.request.build_absolute_uri('/')
+            form.fields['picture'].widget = AdminFileWidget(attrs={'rooturl': rooturl})
 
 
 class FlatPageForm(CommonForm):

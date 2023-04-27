@@ -1,13 +1,23 @@
 from django.contrib import admin
 
 from georiviere.flatpages import models as flatpages_models
-from georiviere.flatpages.forms import FlatPageForm, FlatPagePictureForm
+from georiviere.flatpages.forms import FlatPageForm, FlatPagePictureForm, FlatPagePictureFormSet
 
 
 class FlatPagePictureAdminInline(admin.TabularInline):
     model = flatpages_models.FlatPagePicture
     extra = 1
-    form = FlatPagePictureForm
+    formset = FlatPagePictureFormSet
+
+    def get_formset(self, request, obj=None, **kwargs):
+        AdminFormSet = super(FlatPagePictureAdminInline, self).get_formset(request, obj, **kwargs)
+
+        class AdminFormWithRequest(AdminFormSet):
+            def __new__(cls, *args, **kwargs):
+                kwargs['request'] = request
+                return AdminFormSet(*args, **kwargs)
+
+        return AdminFormWithRequest
 
 
 class FlatPagesAdmin(admin.ModelAdmin):
