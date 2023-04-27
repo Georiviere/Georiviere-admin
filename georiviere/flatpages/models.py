@@ -60,7 +60,3 @@ class FlatPage(TimeStampedModelMixin):
 
     def get_delete_url(self):
         return reverse('admin:flatpages_flatpage_delete', args=[self.pk])
-
-    @property
-    def meta_description(self):
-        return plain_text(self.content)[:500]
