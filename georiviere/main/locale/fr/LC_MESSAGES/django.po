@@ -39,3 +39,6 @@ msgstr "Sources de données"
 
 msgid "None"
 msgstr "Aucun(e)"
+
+msgid "Visible on Geotrek-rando"
+msgstr "Visible sur Georivière"
