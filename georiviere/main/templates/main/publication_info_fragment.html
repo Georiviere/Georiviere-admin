@@ -7,7 +7,6 @@
         {% for status in object.published_status %}
             {% if status.status %}
             <li class="active">
-                <img src="{% static "images/flags/"|add:status.lang|add:".png" %}" alt="{{ status.lang }}">
                 <a href="?lang={{ status.lang }}">{{ status.language }}</a>
             </li>
             {% endif %}
