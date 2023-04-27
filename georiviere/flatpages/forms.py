@@ -47,4 +47,3 @@ class FlatPageForm(CommonForm):
             raise ValidationError(_('Choose between external URL and HTML content'))
 
         return cleaned_data
-

@@ -10,7 +10,7 @@ from geotrek.common.mixins import TimeStampedModelMixin
 class FlatPagePicture(TimeStampedModelMixin):
     picture = models.FileField(verbose_name=_("Pictogram"), upload_to='flatpages',
                                max_length=512, null=True)
-    flatpage = models.ForeignKey('flatpages.FlatPage', on_delete=models.PROTECT)
+    flatpage = models.ForeignKey('flatpages.FlatPage', on_delete=models.PROTECT, related_name='pictures')
 
     class Meta:
         verbose_name = _('Flat page picture')
