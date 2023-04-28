@@ -9,6 +9,7 @@ CHANGELOG
 
 * Add public portals on stream allowing to publish them
 * Add PDFs administration of rivers
+* Add flatpages module
 
 
 1.0.4        (2023-04-05)
