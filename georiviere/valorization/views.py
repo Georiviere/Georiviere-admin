@@ -21,7 +21,7 @@ class POIJsonList(mapentity_views.MapEntityJsonList, POIList):
     pass
 
 
-class POIKnowledgeFormat(mapentity_views.MapEntityFormat, POIList):
+class POIFormat(mapentity_views.MapEntityFormat, POIList):
     model = POI
 
 
