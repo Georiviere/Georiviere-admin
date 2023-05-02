@@ -53,8 +53,8 @@ class POIType(TimeStampedModelMixin, StructureOrNoneRelated):
 
     def __str__(self):
         if self.structure:
-            return f'{self.label} - {self.category.label} ({self.structure})'
-        return f'{self.label} - {self.category.label}'
+            return f'{self.label} ({self.structure})'
+        return self.label
 
 
 class POI(AddPropertyBufferMixin, TimeStampedModelMixin, StructureRelated, MapEntityMixin):
@@ -81,6 +81,10 @@ class POI(AddPropertyBufferMixin, TimeStampedModelMixin, StructureRelated, MapEn
                                                                  self.get_detail_url(),
                                                                  self,
                                                                  self)
+
+    @property
+    def type_display(self):
+        return f'{self.type.label} - {self.type.category.label}'
 
 
 POI.add_property('streams', Stream.within_buffer, _("Stream"))
