@@ -12,7 +12,7 @@ from ..models import POI
 
 
 @override_settings(MEDIA_ROOT=TemporaryDirectory().name)
-class POIKnowledgeViewTestCase(CommonRiverTest):
+class POIViewTestCase(CommonRiverTest):
     model = POI
     modelfactory = POIFactory
 
@@ -37,12 +37,13 @@ class POIKnowledgeViewTestCase(CommonRiverTest):
         structure = StructureFactory.create()
         poicategory = POICategoryFactory.create()
         poitype = POITypeFactory.create(category=poicategory)
-        temp_data = self.modelfactory.build(structure=structure, type=poitype, category=poicategory)
+        temp_data = self.modelfactory.build(structure=structure, type=poitype)
         return {
             'structure': structure.pk,
             'geom': temp_data.geom.ewkt,
             'name': temp_data.name,
             'description': temp_data.description,
+            'category': poicategory.pk,
             'type': poitype.pk,
             'portals': [],
         }
