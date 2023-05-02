@@ -1,6 +1,6 @@
 from django import template
 import json
-from georiviere.valorization.models import POIType, POICategory
+from georiviere.valorization.models import POICategory
 
 
 register = template.Library()
