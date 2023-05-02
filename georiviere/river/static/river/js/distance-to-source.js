@@ -99,8 +99,13 @@ L.Control.PointDistance = L.Control.extend({
 
 
 L.Handler.PointDistance = L.Draw.Marker.extend({
+    statics : {
+        TYPE : 'distance'
+    },
+
     initialize: function (map, guidesLayer, options) {
         L.Draw.Marker.prototype.initialize.call(this, map, options);
+        this.type = L.Handler.PointDistance.TYPE;
         this._guidesLayer = guidesLayer;
         this._helpText = tr("Click map to place marker, get the distance to the nearest stream's source.");
         this._distanceMarker = null;
@@ -121,7 +126,7 @@ L.Handler.PointDistance = L.Draw.Marker.extend({
     },
 
     _onDrawn: function (e) {
-        if (e.layerType === 'marker') {
+        if (e.layerType === 'distance') {
             if (this._distanceMarker !== null) {
                 this._map.removeLayer(this._distanceMarker);
             }
