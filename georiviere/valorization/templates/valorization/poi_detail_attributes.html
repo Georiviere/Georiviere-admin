@@ -12,6 +12,10 @@
             <td>{{ object.description|linebreaks }}</td>
         </tr>
         <tr>
+            <th>{% trans "Category" %}</th>
+            <td>{{ object.type.category }}</td>
+        </tr>
+        <tr>
             <th>{{ object|verbose:"type" }}</th>
             <td>{{ object.type }}</td>
         </tr>

@@ -4,19 +4,13 @@
 <div class="btn-group mr-2">
     <a class="btn btn-light dropdown-toggle" data-toggle="dropdown" href="#">
         <strong>
-            {% if modelname == 'poiknowledge' %}{% trans "POIs knowledge" %}{% endif %}
-            {% if modelname == 'poiaction' %}{% trans "POIs action" %}{% endif %}
+            {% if modelname == 'poi' %}{% trans "POIs" %}{% endif %}
         </strong>
     </a>
     <ul class="dropdown-menu">
-        {% if modelname != 'poiknowledge' %}
+        {% if modelname != 'poi' %}
         <li class="dropdown-item">
-            <a href="{% url 'valorization:poiknowledge_list' %}">{% trans "POIs knowledge" %}</a>
-        </li>
-        {% endif %}
-        {% if modelname != 'poiaction' %}
-        <li class="dropdown-item">
-            <a href="{% url 'valorization:poiaction_list' %}">{% trans "POIs action" %}</a>
+            <a href="{% url 'valorization:poi_list' %}">{% trans "POIs" %}</a>
         </li>
         {% endif %}
     </ul>
