@@ -152,7 +152,7 @@ class KnowledgeViewTestCase(CommonRiverTest):
         self.login()
         station = self.modelfactory.create()
 
-        with self.assertNumQueries(45):
+        with self.assertNumQueries(44):
             self.client.get(station.get_detail_url())
 
 
