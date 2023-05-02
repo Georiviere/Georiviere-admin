@@ -31,5 +31,5 @@ class POIForm(CommonForm):
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
-        if self.instance:
+        if self.instance.pk:
             self.fields['category'].initial = self.instance.type.category.pk
