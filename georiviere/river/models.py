@@ -28,6 +28,8 @@ from georiviere.maintenance.models import Intervention
 from georiviere.studies.models import Study
 from georiviere.watershed.mixins import WatershedPropertiesMixin
 
+from geotrek.sensitivity.models import SensitiveArea
+
 
 class TopologyMixin(object):
     structure_verbose_name = _("Structure")
@@ -264,3 +266,4 @@ Stream.add_property('interventions_without_knowledges', Intervention.within_buff
 
 Intervention.add_property('streams', Stream.within_buffer, _("Stream"))
 AdministrativeFile.add_property('streams', Stream.within_buffer, _("Stream"))
+SensitiveArea.add_property('streams', Stream.within_buffer, _("Stream"))

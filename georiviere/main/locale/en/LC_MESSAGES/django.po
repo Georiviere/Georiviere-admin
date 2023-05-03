@@ -35,3 +35,6 @@ msgstr ""
 
 msgid "None"
 msgstr ""
+
+msgid "Visible on Geotrek-rando"
+msgstr "Visible on Georiviere"

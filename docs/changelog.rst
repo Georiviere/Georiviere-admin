@@ -11,6 +11,7 @@ CHANGELOG
 * Add PDFs administration of rivers
 * Add flatpages module
 * Add valorization POIs
+* Add sensitivity module
 
 **Bug fixes**
 

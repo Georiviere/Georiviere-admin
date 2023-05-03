@@ -35,6 +35,9 @@ class StreamEntityOptions(AltimetryEntityOptions):
         return publishable_views + views
 
 
+PublishableEntityOptions = StreamEntityOptions
+
+
 router = DefaultRouter(trailing_slash=False)
 
 router.register(r'api/(?P<lang>[a-z]{2})/streams', StreamViewSet, basename='stream')
