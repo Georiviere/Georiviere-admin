@@ -37,6 +37,7 @@ urlpatterns = [
     path('', include('georiviere.finances_administration.urls')),
     path('', include('georiviere.studies.urls')),
     path('', include('georiviere.proceeding.urls')),
+    path('', include('georiviere.valorization.urls')),
 ]
 
 if settings.DEBUG:

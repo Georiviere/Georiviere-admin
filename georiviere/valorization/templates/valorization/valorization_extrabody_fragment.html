@@ -1,0 +1,14 @@
+{% load static i18n valorization_tags %}
+<script type="text/javascript">
+    MapEntity.i18n['POIs'] = "{% trans "POIs" %}";
+
+    window.SETTINGS.urls['poi_layer'] = "{% url "valorization:poi_layer" %}";
+</script>
+
+<script type="text/javascript" src="{% static 'valorization/js/main.js' %}"></script>
+{% if modelname == "poi" %}
+    <script type="application/json" id="poi-categories-types">
+        {% all_poitypes as types %}
+        {{ types|safe }}
+    </script>
+{% endif %}

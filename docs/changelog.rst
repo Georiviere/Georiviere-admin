@@ -10,7 +10,11 @@ CHANGELOG
 * Add public portals on stream allowing to publish them
 * Add PDFs administration of rivers
 * Add flatpages module
+* Add valorization POIs
 
+**Bug fixes**
+
+* Fix all point's marker was showing point to distance
 
 1.0.4        (2023-04-05)
 -------------------------
