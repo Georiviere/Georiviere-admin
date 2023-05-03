@@ -16,6 +16,8 @@ CHANGELOG
 **Bug fixes**
 
 * Fix all point's marker was showing point to distance
+* Fix form intervention, targets was not save
+
 
 1.0.4        (2023-04-05)
 -------------------------

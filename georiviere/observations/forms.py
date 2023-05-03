@@ -1,12 +1,12 @@
 from django.core.exceptions import ValidationError
-from django.forms import inlineformset_factory, ModelForm
+from django.forms import inlineformset_factory, ModelForm, ModelChoiceField
 from django.utils.translation import gettext_lazy as _
 from crispy_forms.helper import FormHelper
 from crispy_forms.layout import Div, Field, Fieldset, Layout
 from crispy_forms.bootstrap import Tab, TabHolder
 from geotrek.common.forms import CommonForm
 
-from georiviere.finances_administration.forms import AdministrativeFileObjectFormMixin
+from georiviere.finances_administration.models import AdministrativeFile
 from georiviere.main.widgets import DatePickerInput
 from georiviere.river.fields import SnappedGeometryField
 
@@ -61,9 +61,11 @@ ParameterTrackingFormset = inlineformset_factory(
 )
 
 
-class StationForm(AdministrativeFileObjectFormMixin, CommonForm):
+class StationForm(CommonForm):
     """Station form"""
     geom = SnappedGeometryField()
+    administrative_file = ModelChoiceField(label=_("Create operation on"), queryset=AdministrativeFile.objects.all(),
+                                           required=False, initial=None)
 
     geomfields = ['geom']
 

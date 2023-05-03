@@ -1,4 +1,4 @@
-from django.forms import ModelForm
+from django.forms import ModelForm, ModelChoiceField
 from django.utils.translation import gettext_lazy as _
 
 from crispy_forms.helper import FormHelper
@@ -6,7 +6,7 @@ from crispy_forms.layout import Layout, Div, Fieldset, Field
 from crispy_forms.bootstrap import AppendedText
 from geotrek.common.forms import CommonForm
 
-from georiviere.finances_administration.forms import AdministrativeFileObjectFormMixin
+from georiviere.finances_administration.models import AdministrativeFile
 from georiviere.knowledge.models import Knowledge, Vegetation, Work, FollowUp
 from georiviere.main.widgets import DatePickerInput
 from georiviere.river.fields import SnappedGeometryField
@@ -112,9 +112,11 @@ class WorkForm(ModelForm):
         self.helper.field_class = 'controls col-md-auto'
 
 
-class FollowUpForm(AdministrativeFileObjectFormMixin, CommonForm):
+class FollowUpForm(CommonForm):
     """FollowUp form"""
     _geom = SnappedGeometryField(required=False)
+    administrative_file = ModelChoiceField(label=_("Create operation on"), queryset=AdministrativeFile.objects.all(),
+                                           required=False, initial=None)
 
     geomfields = ['_geom']
 

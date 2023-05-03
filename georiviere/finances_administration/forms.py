@@ -1,4 +1,4 @@
-from django.forms import inlineformset_factory, Form, ModelForm, DecimalField
+from django.forms import inlineformset_factory, ModelForm, DecimalField
 from django.utils.translation import gettext_lazy as _
 from crispy_forms.helper import FormHelper
 from crispy_forms.layout import Div, HTML, Layout, Field, Button
@@ -16,16 +16,6 @@ from georiviere.finances_administration.models import (AdministrativeFile,
                                                        AdministrativeOperation,
                                                        AdministrativePhase,
                                                        ManDay)
-
-
-class AdministrativeFileObjectFormMixin(Form):
-    administrative_file = autocomplete.Select2GenericForeignKeyModelField(
-        model_choice=[
-            (AdministrativeFile, 'name',),
-        ],
-        label=_('Create operation on'),
-        required=False
-    )
 
 
 class FundingForm(ModelForm):
