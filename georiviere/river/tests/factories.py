@@ -25,6 +25,7 @@ class WithStreamFactory(factory.django.DjangoModelFactory):
 
 class StreamFactory(BaseLineStringFactory):
     name = factory.Sequence(lambda n: 'stream-%d' % n)
+    description = factory.Sequence(lambda n: 'Description %d' % n)
     structure = factory.SubFactory(StructureFactory)
     classification_water_policy = factory.SubFactory(ClassificationWaterPolicyFactory)
 
