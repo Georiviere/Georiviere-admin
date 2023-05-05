@@ -17,6 +17,7 @@ class StreamForm(CommonForm):
         Div(
             "structure",
             "name",
+            "description",
             "flow",
             "main_flow",
             "data_source",

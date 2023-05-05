@@ -24,5 +24,5 @@ class StreamSerializer(ModelSerializer):
     class Meta:
         model = Stream
         fields = (
-            'id', 'name', 'data_source', 'source_location', 'classification_water_policy', 'flow'
+            'id', 'name', 'description', 'data_source', 'source_location', 'classification_water_policy', 'flow'
         )

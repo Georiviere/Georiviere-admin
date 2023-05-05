@@ -69,7 +69,7 @@ class Stream(AddPropertyBufferMixin, TimeStampedModelMixin, WatershedPropertiesM
 
     name = models.CharField(max_length=100, default=_('Stream'), verbose_name=_("Name"))
     geom = models.LineStringField(srid=settings.SRID, spatial_index=True)
-
+    description = models.TextField(verbose_name=_("Description"), blank=True)
     flow = models.IntegerField(
         choices=FlowChoices.choices,
         default=FlowChoices.TBD,

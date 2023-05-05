@@ -8,6 +8,10 @@
             <td>{{ object.name }}</td>
         </tr>
         <tr>
+            <th>{{ object|verbose:"description" }}</th>
+            <td>{{ object.description }}</td>
+        </tr>
+        <tr>
             <th>{{ object|verbose:"structure" }}</th>
             <td>{{ object.structure }}</td>
         </tr>

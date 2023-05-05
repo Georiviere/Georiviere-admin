@@ -46,6 +46,7 @@ class StreamViewTestCase(CommonRiverTest):
             'source_location': self.obj.source_location.ewkt,
             'classification_water_policy': self.obj.classification_water_policy.pk,
             'name': self.obj.name,
+            'description': self.obj.description,
             'geom': self.obj.geom.ewkt,
             'portals': []
         }
