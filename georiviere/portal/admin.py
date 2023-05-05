@@ -21,7 +21,7 @@ class MapOverlayGroupLayerAdmin(admin.ModelAdmin):
 
 
 class MapOverlayLayerAdmin(admin.ModelAdmin):
-    list_display = ('label', 'url')
+    list_display = ('label', 'layer_type')
     search_fields = ('label', )
 
 

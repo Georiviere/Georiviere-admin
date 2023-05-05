@@ -43,8 +43,20 @@ class MapOverlayGroupLayer(models.Model):
 
 
 class MapOverlayLayer(models.Model):
+    class LayerTypeChoice(models.TextChoices):
+        """Choices for local influence"""
+        POIS = 'pois', _('POIs')
+        STREAMS = 'streams', _('Streams')
+        WATERSHEDS = 'watersheds', _('Watersheds')
+        CITIES = 'cities', _('Cities')
+        DISTRICTS = 'districts', _('Districts')
+        RESTRICTED_AREAS = 'restricted_areas', _('Restricted areas')
+
     label = models.CharField(max_length=50)
-    url = models.CharField(max_length=255, blank=False, help_text=_("URL of the layer"), unique=True)
+    layer_type = models.CharField(choices=LayerTypeChoice.choices,
+                                  blank=False,
+                                  verbose_name=_("Layer type"),
+                                  max_length=50)
     default_active = models.BooleanField(default=False)
     style = models.JSONField(max_length=300, null=False, blank=False, default=dict, help_text=_("Style of the layer"))
     order = models.PositiveSmallIntegerField(default=0)

@@ -38,7 +38,8 @@ urlpatterns = [
     path('', include('georiviere.studies.urls')),
     path('', include('georiviere.proceeding.urls')),
     path('', include('georiviere.valorization.urls')),
-    path('', include('geotrek.sensitivity.urls'))
+    path('', include('geotrek.sensitivity.urls')),
+    path('', include('georiviere.api.valorization.urls'))
 ]
 
 if settings.DEBUG:
