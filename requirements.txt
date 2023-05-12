@@ -85,6 +85,7 @@ django==3.1.14
     #   django-extensions
     #   django-filter
     #   django-geojson
+    #   django-js-asset
     #   django-leaflet
     #   django-modeltranslation
     #   django-mptt
@@ -96,6 +97,8 @@ django==3.1.14
     #   geotrek
     #   mapentity
     #   paperclip
+django-admin-ordering==0.17.0
+    # via -r requirements.in
 django-appconf==1.0.4
     # via django-compressor
 django-appypod==2.0.7
@@ -126,8 +129,10 @@ django-filter==21.1
     # via mapentity
 django-geojson==3.2.0
     # via mapentity
-django-js-asset==1.2.2
-    # via django-mptt
+django-js-asset==2.0.0
+    # via
+    #   django-admin-ordering
+    #   django-mptt
 django-leaflet==0.19.post9
     # via mapentity
 django-modelcluster==5.2

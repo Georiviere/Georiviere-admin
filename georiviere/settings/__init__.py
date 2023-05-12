@@ -146,6 +146,7 @@ INSTALLED_APPS = PROJECT_APPS + [
     'georiviere.flatpages',
     'geotrek.sensitivity',
     'georiviere.api',
+    'admin_ordering'
 ]
 
 STATICFILES_FINDERS = (

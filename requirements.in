@@ -11,3 +11,4 @@ django-compressor
 gunicorn
 python-memcached
 sentry-sdk
+django-admin-ordering
