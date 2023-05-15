@@ -155,6 +155,8 @@ djangorestframework==3.12.2
     #   drf-extensions
     #   drf-yasg
     #   mapentity
+djangorestframework-camel-case==1.4.2
+    # via -r requirements.in
 djangorestframework-gis==0.17
     # via mapentity
 docutils==0.16
