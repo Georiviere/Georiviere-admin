@@ -66,5 +66,5 @@ class AttachmentSerializer(AttachmentsSerializerMixin):
     class Meta:
         model = main_models.Attachment
         fields = (
-            'backend', 'type', 'filetype',
+            'type', 'filetype',
         ) + AttachmentsSerializerMixin.Meta.fields

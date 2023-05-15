@@ -19,7 +19,8 @@ class StreamViewSet(viewsets.ModelViewSet):
     permission_classes = [rest_permissions.DjangoModelPermissionsOrAnonReadOnly]
 
     def get_queryset(self):
-        queryset = Stream.objects.all()
+        portal_pk = self.kwargs['portal_pk']
+        queryset = Stream.objects.filter(portals__id=portal_pk)
         queryset = queryset.annotate(geom_transformed=Transform(F('geom'), settings.API_SRID))
         return queryset
 
