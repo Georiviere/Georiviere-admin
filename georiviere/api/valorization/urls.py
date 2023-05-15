@@ -11,9 +11,9 @@ from georiviere.api.valorization.views.zoning import CityViewSet, DistrictViewSe
 
 
 router = routers.DefaultRouter()
-router.register('(?P<portal_pk>\d+)/pois', POIViewSet, basename='pois')
+router.register(r'(?P<portal_pk>\d+)/pois', POIViewSet, basename='pois')
 
-router.register('(?P<portal_pk>\d+)/streams', StreamViewSet, basename='streams')
+router.register(r'(?P<portal_pk>\d+)/streams', StreamViewSet, basename='streams')
 
 router.register('portal', PortalViewSet, basename='portal')
 router.register('cities', CityViewSet, basename='cities')
