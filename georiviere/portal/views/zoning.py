@@ -56,7 +56,9 @@ class WatershedViewSet(viewsets.ReadOnlyModelViewSet):
     renderer_classes = [CamelCaseJSONRenderer, GeoJSONRenderer, ]
 
     def get_queryset(self):
-        return Watershed.objects.annotate(geom_transformed=Transform(F('geom'), settings.API_SRID))
+        portal_pk = self.kwargs['portal_pk']
+        queryset = Watershed.objects.select_related('watershed_type').filter(watershed_type__portals__id=portal_pk)
+        return queryset.annotate(geom_transformed=Transform(F('geom'), settings.API_SRID))
 
     def get_serializer_class(self):
         """ Use specific Serializer for GeoJSON """
