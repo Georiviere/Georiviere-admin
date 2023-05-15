@@ -12,4 +12,4 @@ class PortalSerializerTest(TestCase):
 
     def test_portal_content(self):
         data = self.serializer_portal.data
-        self.assertSetEqual(set(data.keys()), {'id', 'map', 'name', 'group'})
+        self.assertSetEqual(set(data.keys()), {'id', 'map', 'name', 'group', 'spatial_extent'})

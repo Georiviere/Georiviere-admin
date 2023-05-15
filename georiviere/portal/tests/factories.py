@@ -1,6 +1,13 @@
 import factory
+from django.conf import settings
+from django.contrib.gis.geos import Polygon
 
 from .. import models
+
+from geotrek.zoning.tests.factories import bbox_split_srid_2154
+
+
+geom_spatial_extent_iter = bbox_split_srid_2154(settings.SPATIAL_EXTENT, by_x=4, by_y=4, cycle=True)
 
 
 class PortalFactory(factory.django.DjangoModelFactory):
@@ -9,6 +16,7 @@ class PortalFactory(factory.django.DjangoModelFactory):
 
     name = factory.Sequence(lambda n: "Portal %s" % n)
     website = factory.Sequence(lambda n: "https://georiviere-{}.fr".format(n))
+    spatial_extent = factory.Sequence(lambda _: Polygon.from_bbox(next(geom_spatial_extent_iter)))
 
     @factory.post_generation
     def map_base_layers(obj, create, extracted=None, **kwargs):
