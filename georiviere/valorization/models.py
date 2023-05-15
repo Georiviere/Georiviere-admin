@@ -42,6 +42,8 @@ class POIType(TimeStampedModelMixin, StructureOrNoneRelated):
     label = models.CharField(verbose_name=_("Name"), max_length=128)
     category = models.ForeignKey(POICategory, related_name='types', on_delete=models.PROTECT,
                                  verbose_name=_("Category"))
+    pictogram = models.FileField(verbose_name=_("Pictogram"), upload_to=settings.UPLOAD_DIR,
+                                 max_length=512, null=True)
 
     class Meta:
         verbose_name = _("POI type")
