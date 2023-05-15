@@ -1,0 +1,141 @@
+[
+    {
+        "pk": 1,
+        "model": "valorization.poicategory",
+        "fields": {
+            "label": "Connaissance",
+            "date_insert": "2023-05-09T15:15:30.143Z",
+            "date_update": "2022-03-09T15:15:30.143Z"
+        }
+    },
+    {
+        "pk": 2,
+        "model": "valorization.poicategory",
+        "fields": {
+            "label": "Action",
+            "date_insert": "2023-05-09T15:15:30.143Z",
+            "date_update": "2022-03-09T15:15:30.143Z"
+        }
+    },
+    {
+        "pk": 1,
+        "model": "valorization.poitype",
+        "fields": {
+            "label": "Espèce invasive",
+            "pictogram": "upload/invasive_species.svg",
+            "category": 1,
+            "date_insert": "2023-05-09T15:15:30.143Z",
+            "date_update": "2022-03-09T15:15:30.143Z"
+        }
+    },
+    {
+        "pk": 2,
+        "model": "valorization.poitype",
+        "fields": {
+            "label": "Espèce patrimoniale",
+            "pictogram": "upload/patrimonial_species.svg",
+            "category": 1,
+            "date_insert": "2023-05-09T15:15:30.143Z",
+            "date_update": "2022-03-09T15:15:30.143Z"
+        }
+    },
+    {
+        "pk": 3,
+        "model": "valorization.poitype",
+        "fields": {
+            "label": "Fonctionnement des rivières",
+            "pictogram": "upload/knowledge_river.svg",
+            "category": 1,
+            "date_insert": "2023-05-09T15:15:30.143Z",
+            "date_update": "2022-03-09T15:15:30.143Z"
+        }
+    },
+    {
+        "pk": 4,
+        "model": "valorization.poitype",
+        "fields": {
+            "label": "Activité de pleine nature",
+            "pictogram": "upload/activity.svg",
+            "category": 1,
+            "date_insert": "2023-05-09T15:15:30.143Z",
+            "date_update": "2022-03-09T15:15:30.143Z"
+        }
+    },
+    {
+        "pk": 5,
+        "model": "valorization.poitype",
+        "fields": {
+            "label": "Particularité naturelle",
+            "pictogram": "upload/natural_feature.svg",
+            "category": 1,
+            "date_insert": "2023-05-09T15:15:30.143Z",
+            "date_update": "2022-03-09T15:15:30.143Z"
+        }
+    },
+    {
+        "pk": 6,
+        "model": "valorization.poitype",
+        "fields": {
+            "label": "Patrimoine historique",
+            "pictogram": "upload/historical_heritage.svg",
+            "category": 1,
+            "date_insert": "2023-05-09T15:15:30.143Z",
+            "date_update": "2022-03-09T15:15:30.143Z"
+        }
+    },
+    {
+        "pk": 7,
+        "model": "valorization.poitype",
+        "fields": {
+            "label": "Animation à venir",
+            "pictogram": "upload/animation.svg",
+            "category": 2,
+            "date_insert": "2023-05-09T15:15:30.143Z",
+            "date_update": "2022-03-09T15:15:30.143Z"
+        }
+    },
+    {
+        "pk": 8,
+        "model": "valorization.poitype",
+        "fields": {
+            "label": "Chantier participatif",
+            "pictogram": "",
+            "category": 2,
+            "date_insert": "2023-05-09T15:15:30.143Z",
+            "date_update": "2022-03-09T15:15:30.143Z"
+        }
+    },
+    {
+        "pk": 9,
+        "model": "valorization.poitype",
+        "fields": {
+            "label": "Travaux à venir",
+            "pictogram": "upload/future_work.svg",
+            "category": 2,
+            "date_insert": "2023-05-09T15:15:30.143Z",
+            "date_update": "2022-03-09T15:15:30.143Z"
+        }
+    },
+    {
+        "pk": 10,
+        "model": "valorization.poitype",
+        "fields": {
+            "label": "Travaux en cours",
+            "pictogram": "upload/work_in_progress.svg",
+            "category": 2,
+            "date_insert": "2023-05-09T15:15:30.143Z",
+            "date_update": "2022-03-09T15:15:30.143Z"
+        }
+    },
+    {
+        "pk": 11,
+        "model": "valorization.poitype",
+        "fields": {
+            "label": "Travaux réalisés",
+            "pictogram": "upload/finished_work.svg",
+            "category": 2,
+            "date_insert": "2023-05-09T15:15:30.143Z",
+            "date_update": "2022-03-09T15:15:30.143Z"
+        }
+    }
+]

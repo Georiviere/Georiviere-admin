@@ -20,6 +20,7 @@ RUN useradd -ms /bin/bash django --uid ${UID}
 RUN chown -R django:django /opt
 
 COPY .docker/* /usr/local/bin/
+RUN chown -R django:django /usr/local/bin/load_data.sh
 
 WORKDIR /opt/georiviere-admin
 
