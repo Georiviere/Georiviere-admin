@@ -7,23 +7,23 @@ from django.utils.translation import gettext_lazy as _
 
 from geotrek.common.mixins import TimeStampedModelMixin
 
-from georiviere.portal.validators import validate_bounds
-
 
 class MapBaseLayer(models.Model):
-    label = models.CharField(max_length=50, unique=True)
+    label = models.CharField(max_length=50)
     order = models.PositiveSmallIntegerField(default=0)
     url = models.CharField(max_length=255, blank=True, help_text=_("URL"))
     min_zoom = models.PositiveSmallIntegerField(default=0)
     max_zoom = models.PositiveSmallIntegerField(default=22)
     attribution = models.CharField(max_length=255, blank=True,
                                    help_text=_("Attribution of the baselayer. Example : © OpenStreetMap"))
-    bounds = models.CharField(max_length=255, blank=True, help_text=_("Bounds"), validators=[validate_bounds])
+    portal = models.ForeignKey('portal.Portal', verbose_name=_("Portal"), related_name='map_base_layers',
+                               on_delete=models.PROTECT)
 
     class Meta:
         verbose_name = _("Map base layer")
         verbose_name_plural = _("Map base layers")
         ordering = ('label',)
+        unique_together = ('label', 'portal')
 
     def __str__(self):
         return self.label
@@ -72,13 +72,14 @@ class MapLayer(models.Model):
 class Portal(TimeStampedModelMixin, models.Model):
     name = models.CharField(verbose_name=_("Name"), max_length=50, unique=True, help_text=_("Name of the portal"))
     website = models.URLField(verbose_name=_("Website"), max_length=256, unique=True)
-    title = models.CharField(verbose_name=_("Title"), max_length=50, help_text=_("Title on Georiviere"),
+    title = models.CharField(verbose_name=_("Title"), max_length=50,
+                             help_text=_("Title on Georiviere website used for Search Engine Optimization"),
                              default='')
-    description = models.TextField(verbose_name=_("Description"), help_text=_("Description on Georiviere"),
+    description = models.TextField(verbose_name=_("Description"),
+                                   help_text=_("Description on Georiviere website used for Search Engine Optimization"),
                                    default='')
     main_color = ColorField(verbose_name=_("Main color"), default='#444444',
                             help_text=_("Main color"))
-    map_base_layers = models.ManyToManyField('portal.MapBaseLayer', verbose_name=_("Map base layers"))
     min_zoom = models.PositiveSmallIntegerField(default=0)
     max_zoom = models.PositiveSmallIntegerField(default=22)
     spatial_extent = PolygonField(srid=settings.SRID, null=True)

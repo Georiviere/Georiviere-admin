@@ -1,7 +1,6 @@
 from admin_ordering.admin import OrderableAdmin
 from django import forms
 from django.contrib import admin
-from django.contrib.admin.helpers import InlineAdminFormSet
 from django.utils.translation import gettext_lazy as _
 
 from leaflet.admin import LeafletGeoAdmin
@@ -10,6 +9,9 @@ from georiviere.portal.models import MapBaseLayer, MapGroupLayer, MapLayer, Port
 
 
 class MapLayerAdminTabularForm(forms.ModelForm):
+    class Meta:
+        model = MapLayer
+        fields = '__all__'
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
@@ -30,6 +32,7 @@ class MapLayerAdminTabularInline(OrderableAdmin, admin.TabularInline):
     extra = 0
     form = MapLayerAdminTabularForm
     ordering_field = "order"
+    ordering = ('-group_layer', )
 
     def has_delete_permission(self, request, obj=None):
         return False
@@ -47,10 +50,19 @@ class MapGroupLayerAdminTabularInline(OrderableAdmin, admin.TabularInline):
     ordering_field = "order"
 
 
+class MapBaseLayerAdminTabularInline(OrderableAdmin, admin.TabularInline):
+    classes = ('collapse',)
+    verbose_name = _('Map base layer')
+    verbose_name_plural = _('Map base layers')
+    model = MapBaseLayer
+    extra = 0
+    ordering_field = "order"
+
+
 class PortalAdmin(LeafletGeoAdmin, OrderableAdmin, admin.ModelAdmin):
     list_display = ('name', 'website', 'title')
     search_fields = ('name', 'website')
-    inlines = [MapGroupLayerAdminTabularInline, MapLayerAdminTabularInline]
+    inlines = [MapBaseLayerAdminTabularInline, MapGroupLayerAdminTabularInline, MapLayerAdminTabularInline]
 
 
 class MapBaseLayerAdmin(OrderableAdmin, admin.ModelAdmin):
@@ -81,6 +93,10 @@ class MapGroupLayerAdmin(OrderableAdmin, admin.ModelAdmin):
 
 
 class MapLayerAdminForm(forms.ModelForm):
+    class Meta:
+        model = MapLayer
+        fields = '__all__'
+
     def __init__(self, *args, **kwargs):
         super(MapLayerAdminForm, self).__init__(*args, **kwargs)
         self.fields['group_layer'].widget.can_add_related = False
