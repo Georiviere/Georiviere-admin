@@ -1,0 +1,85 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2023-05-15 20:17+0000\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+msgid "Map layer"
+msgstr "Couche de carte"
+
+msgid "Map layers"
+msgstr "Couches de carte"
+
+msgid "Map group layer"
+msgstr "Groupe de couche de carte"
+
+msgid "Map group layers"
+msgstr "Groupes de couche de carte"
+
+msgid "Map base layer"
+msgstr "Fond de carte"
+
+msgid "Map base layers"
+msgstr "Fonds de cartes"
+
+msgid "Portal"
+msgstr "Portail"
+
+msgid "URL"
+msgstr "URL"
+
+msgid "Attribution of the baselayer. Example : © OpenStreetMap"
+msgstr "Attribution de la couche de base. Exemple : © OpenStreetMap"
+
+msgid "Map group"
+msgstr "Groupe de carte"
+
+msgid "Map groups"
+msgstr "Groupes de carte"
+
+msgid "Layer type"
+msgstr "Type de couche"
+
+msgid "Style of the layer"
+msgstr "Style de la couche"
+
+msgid "Name"
+msgstr "Nom"
+
+msgid "Name of the portal"
+msgstr "Nom du portail"
+
+msgid "Website"
+msgstr "Site web"
+
+msgid "Title"
+msgstr "Titre"
+
+msgid "Title on Georiviere website used for Search Engine Optimization"
+msgstr "Titre sur le site de Georiviere utilisé pour la SEO"
+
+msgid "Description"
+msgstr "Description"
+
+msgid "Description on Georiviere website used for Search Engine Optimization"
+msgstr "Description sur le site de Georiviere utilisé pour la SEO"
+
+msgid "Main color"
+msgstr "Couleur principale"
+
+msgid "Portals"
+msgstr "Portails"

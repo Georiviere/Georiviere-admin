@@ -51,7 +51,7 @@ class MapLayer(models.Model):
                                   verbose_name=_("Layer type"),
                                   max_length=50, editable=False)
     group_layer = models.ForeignKey('portal.MapGroupLayer',
-                                    verbose_name=_("Map group layers"), related_name='layers',
+                                    verbose_name=_("Map group layer"), related_name='layers',
                                     on_delete=models.SET_NULL, null=True, blank=True)
     portal = models.ForeignKey('portal.Portal',
                                verbose_name=_("Portal"), blank=True, related_name='layers', on_delete=models.PROTECT)

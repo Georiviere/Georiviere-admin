@@ -44,7 +44,7 @@ class MapLayerAdminTabularInline(OrderableAdmin, admin.TabularInline):
 class MapGroupLayerAdminTabularInline(OrderableAdmin, admin.TabularInline):
     classes = ('collapse',)
     verbose_name = _('Map group layer')
-    verbose_name_plural = _('Map group layers')
+    verbose_name_plural = _('Map groups layer')
     model = MapGroupLayer
     extra = 0
     ordering_field = "order"
