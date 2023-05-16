@@ -3,7 +3,7 @@ from django.test import TestCase
 from georiviere.portal.tests.factories import PortalFactory
 from georiviere.valorization.tests.factories import POICategoryFactory
 from georiviere.portal.serializers.map import (MapBaseLayerSerializer, MapLayerSerializer,
-                                                         MapGroupLayerSerializer)
+                                               MapGroupLayerSerializer)
 
 
 class MapSerializerTest(TestCase):
