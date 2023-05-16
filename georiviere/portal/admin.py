@@ -75,7 +75,7 @@ class MapBaseLayerAdmin(OrderableAdmin, admin.ModelAdmin):
 class MapGroupLayerAdminForm(forms.ModelForm):
 
     def __init__(self, *args, **kwargs):
-        super(MapGroupLayerAdminForm, self).__init__(*args, **kwargs)
+        super().__init__(*args, **kwargs)
         if self.instance.pk:
             self.fields['portal'].disabled = True
         self.fields['portal'].widget.can_add_related = False
@@ -98,7 +98,7 @@ class MapLayerAdminForm(forms.ModelForm):
         fields = '__all__'
 
     def __init__(self, *args, **kwargs):
-        super(MapLayerAdminForm, self).__init__(*args, **kwargs)
+        super().__init__(*args, **kwargs)
         self.fields['group_layer'].widget.can_add_related = False
         self.fields['portal'].disabled = True
         self.fields['portal'].widget.can_add_related = False
