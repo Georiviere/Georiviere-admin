@@ -12,7 +12,7 @@ class WatershedViewTest(TestCase):
         cls.watershed = WatershedFactory.create()
 
     def test_watershed_detail_geojson_structure(self):
-        url = reverse('api_valorization:watersheds-detail',
+        url = reverse('api_portal:watersheds-detail',
                       kwargs={'pk': self.watershed.pk, 'lang': 'fr', 'format': 'geojson'})
         response = self.client.get(url)
         self.assertEqual(response.status_code, 200)
@@ -20,7 +20,7 @@ class WatershedViewTest(TestCase):
         self.assertSetEqual(set(response.json().keys()), {'geometry', 'properties', 'type'})
 
     def test_watershed_list_geojson_structure(self):
-        url = reverse('api_valorization:watersheds-list',
+        url = reverse('api_portal:watersheds-list',
                       kwargs={'lang': 'fr', 'format': 'geojson'})
         response = self.client.get(url)
         self.assertEqual(response.status_code, 200)
@@ -28,13 +28,13 @@ class WatershedViewTest(TestCase):
         self.assertSetEqual(set(response.json().keys()), {'features', 'type'})
 
     def test_watershed_detail_json(self):
-        url = reverse('api_valorization:watersheds-detail',
+        url = reverse('api_portal:watersheds-detail',
                       kwargs={'pk': self.watershed.pk, 'lang': 'fr', 'format': 'json'})
         response = self.client.get(url)
         self.assertEqual(response.status_code, 404)
 
     def test_watershed_list_json(self):
-        url = reverse('api_valorization:watersheds-list',
+        url = reverse('api_portal:watersheds-list',
                       kwargs={'lang': 'fr', 'format': 'json'})
         response = self.client.get(url)
         self.assertEqual(response.status_code, 404)
@@ -46,7 +46,7 @@ class CityViewTest(TestCase):
         cls.city = CityFactory.create()
 
     def test_city_detail_geojson_structure(self):
-        url = reverse('api_valorization:cities-detail',
+        url = reverse('api_portal:cities-detail',
                       kwargs={'pk': self.city.pk, 'lang': 'fr', 'format': 'geojson'})
         response = self.client.get(url)
         self.assertEqual(response.status_code, 200)
@@ -54,7 +54,7 @@ class CityViewTest(TestCase):
         self.assertSetEqual(set(response.json().keys()), {'geometry', 'properties', 'type'})
 
     def test_city_list_geojson_structure(self):
-        url = reverse('api_valorization:cities-list',
+        url = reverse('api_portal:cities-list',
                       kwargs={'lang': 'fr', 'format': 'geojson'})
         response = self.client.get(url)
         self.assertEqual(response.status_code, 200)
@@ -62,13 +62,13 @@ class CityViewTest(TestCase):
         self.assertSetEqual(set(response.json().keys()), {'features', 'type'})
 
     def test_city_detail_json(self):
-        url = reverse('api_valorization:cities-detail',
+        url = reverse('api_portal:cities-detail',
                       kwargs={'pk': self.city.pk, 'lang': 'fr', 'format': 'json'})
         response = self.client.get(url)
         self.assertEqual(response.status_code, 404)
 
     def test_city_list_json(self):
-        url = reverse('api_valorization:cities-list',
+        url = reverse('api_portal:cities-list',
                       kwargs={'lang': 'fr', 'format': 'json'})
         response = self.client.get(url)
         self.assertEqual(response.status_code, 404)
@@ -80,7 +80,7 @@ class DistrictViewTest(TestCase):
         cls.district = DistrictFactory.create()
 
     def test_district_detail_geojson_structure(self):
-        url = reverse('api_valorization:districts-detail',
+        url = reverse('api_portal:districts-detail',
                       kwargs={'pk': self.district.pk, 'lang': 'fr', 'format': 'geojson'})
         response = self.client.get(url)
         self.assertEqual(response.status_code, 200)
@@ -88,7 +88,7 @@ class DistrictViewTest(TestCase):
         self.assertSetEqual(set(response.json().keys()), {'geometry', 'properties', 'type'})
 
     def test_district_list_geojson_structure(self):
-        url = reverse('api_valorization:districts-list',
+        url = reverse('api_portal:districts-list',
                       kwargs={'lang': 'fr', 'format': 'geojson'})
         response = self.client.get(url)
         self.assertEqual(response.status_code, 200)
@@ -96,13 +96,13 @@ class DistrictViewTest(TestCase):
         self.assertSetEqual(set(response.json().keys()), {'features', 'type'})
 
     def test_district_detail_json(self):
-        url = reverse('api_valorization:districts-detail',
+        url = reverse('api_portal:districts-detail',
                       kwargs={'pk': self.district.pk, 'lang': 'fr', 'format': 'json'})
         response = self.client.get(url)
         self.assertEqual(response.status_code, 404)
 
     def test_city_list_json(self):
-        url = reverse('api_valorization:districts-list',
+        url = reverse('api_portal:districts-list',
                       kwargs={'lang': 'fr', 'format': 'json'})
         response = self.client.get(url)
         self.assertEqual(response.status_code, 404)

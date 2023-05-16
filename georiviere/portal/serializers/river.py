@@ -1,5 +1,5 @@
 from georiviere.river.models import Stream
-from georiviere.api.valorization.serializers.main import AttachmentSerializer
+from georiviere.portal.serializers.main import AttachmentSerializer
 
 from rest_framework.serializers import ModelSerializer, SerializerMethodField
 from rest_framework_gis import serializers as geo_serializers

@@ -3,7 +3,7 @@ from django.test.client import RequestFactory
 from unittest import mock
 from geotrek.common.utils.testdata import get_dummy_uploaded_file, get_dummy_uploaded_image
 
-from georiviere.api.valorization.serializers.main import AttachmentSerializer
+from georiviere.portal.serializers.main import AttachmentSerializer
 from georiviere.main.tests.factories import AttachmentFactory
 from georiviere.valorization.tests.factories import POIFactory
 

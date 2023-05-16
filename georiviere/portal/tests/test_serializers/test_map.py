@@ -2,7 +2,7 @@ from django.test import TestCase
 
 from georiviere.portal.tests.factories import PortalFactory
 from georiviere.valorization.tests.factories import POICategoryFactory
-from georiviere.api.valorization.serializers.map import (MapBaseLayerSerializer, MapLayerSerializer,
+from georiviere.portal.serializers.map import (MapBaseLayerSerializer, MapLayerSerializer,
                                                          MapGroupLayerSerializer)
 
 
@@ -23,7 +23,7 @@ class MapSerializerTest(TestCase):
         data = MapLayerSerializer(instance=self.portal.layers.filter(layer_type__startswith='pois').first()).data
 
         self.assertSetEqual(set(data.keys()), {'url', 'label', 'id', 'options', 'default_active', 'geojson_url'})
-        self.assertEqual(data['geojson_url'], f'/api/valorization/fr/{self.portal.pk}/pois/category/{category.pk}.geojson')
+        self.assertEqual(data['geojson_url'], f'/api/portal/fr/{self.portal.pk}/pois/category/{category.pk}.geojson')
 
     def test_map_base_layer_content(self):
         data = self.serializer_base_layer.data

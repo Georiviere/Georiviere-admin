@@ -38,8 +38,8 @@ class MapLayerSerializer(ModelSerializer):
         if len(layer_type) == 2:
             filter_type = layer_type[-1]
             reverse_kwargs['category_pk'] = filter_type
-            return reverse('api_valorization:pois-category', kwargs=reverse_kwargs)
-        return reverse(f'api_valorization:{layer_type[0]}-list', kwargs=reverse_kwargs)
+            return reverse('api_portal:pois-category', kwargs=reverse_kwargs)
+        return reverse(f'api_portal:{layer_type[0]}-list', kwargs=reverse_kwargs)
 
     def get_url(self, obj):
         layer_type = obj.layer_type.split('-')
@@ -47,7 +47,7 @@ class MapLayerSerializer(ModelSerializer):
         reverse_kwargs = {'lang': 'fr'}
         if layer_type[0] in ['pois', 'streams']:
             reverse_kwargs['portal_pk'] = obj.portal.pk
-        return reverse(f'api_valorization:{layer_type[0]}-list', kwargs=reverse_kwargs)
+        return reverse(f'api_portal:{layer_type[0]}-list', kwargs=reverse_kwargs)
 
 
 class MapBaseLayerSerializer(ModelSerializer):

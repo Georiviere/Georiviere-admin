@@ -1,7 +1,7 @@
 from django.test import TestCase
 
 from georiviere.portal.tests.factories import GroupMapLayerFactory, PortalFactory
-from georiviere.api.valorization.serializers.portal import PortalSerializer
+from georiviere.portal.serializers.portal import PortalSerializer
 
 
 class PortalSerializerTest(TestCase):

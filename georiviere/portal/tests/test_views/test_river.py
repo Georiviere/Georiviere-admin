@@ -13,7 +13,7 @@ class StreamViewTest(TestCase):
         cls.stream.portals.add(cls.portal)
 
     def test_stream_detail_geojson_structure(self):
-        url = reverse('api_valorization:streams-detail',
+        url = reverse('api_portal:streams-detail',
                       kwargs={'portal_pk': self.portal.pk, 'pk': self.stream.pk, 'lang': 'fr', 'format': 'geojson'})
         response = self.client.get(url)
         self.assertEqual(response.status_code, 200)
@@ -21,7 +21,7 @@ class StreamViewTest(TestCase):
         self.assertSetEqual(set(response.json().keys()), {'geometry', 'properties', 'type'})
 
     def test_stream_detail_json_structure(self):
-        url = reverse('api_valorization:streams-detail',
+        url = reverse('api_portal:streams-detail',
                       kwargs={'portal_pk': self.portal.pk, 'pk': self.stream.pk, 'lang': 'fr', 'format': 'json'})
         response = self.client.get(url)
         self.assertEqual(response.status_code, 200)
@@ -29,14 +29,14 @@ class StreamViewTest(TestCase):
                                                           'id', 'description'})
 
     def test_stream_list_geojson_structure(self):
-        url = reverse('api_valorization:streams-list',
+        url = reverse('api_portal:streams-list',
                       kwargs={'portal_pk': self.portal.pk, 'lang': 'fr', 'format': 'geojson'})
         response = self.client.get(url)
         self.assertEqual(response.status_code, 200)
         self.assertSetEqual(set(response.json().keys()), {'type', 'features'})
 
     def test_stream_list_json_structure(self):
-        url = reverse('api_valorization:streams-list',
+        url = reverse('api_portal:streams-list',
                       kwargs={'portal_pk': self.portal.pk, 'lang': 'fr', 'format': 'json'})
         response = self.client.get(url)
         self.assertEqual(response.status_code, 200)

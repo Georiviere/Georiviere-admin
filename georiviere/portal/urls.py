@@ -2,12 +2,12 @@ from django.conf import settings
 from django.urls import path, include
 from rest_framework import routers
 
-from georiviere.api.valorization.views import GeoriviereVersionAPIView
-from georiviere.api.valorization.views.portal import PortalViewSet
-from georiviere.api.valorization.views.river import StreamViewSet
-from georiviere.api.valorization.views.swagger import schema_view
-from georiviere.api.valorization.views.valorization import POIViewSet
-from georiviere.api.valorization.views.zoning import CityViewSet, DistrictViewSet, WatershedViewSet
+from georiviere.portal.views import GeoriviereVersionAPIView
+from georiviere.portal.views.portal import PortalViewSet
+from georiviere.portal.views.river import StreamViewSet
+from georiviere.portal.views.swagger import schema_view
+from georiviere.portal.views.valorization import POIViewSet
+from georiviere.portal.views.zoning import CityViewSet, DistrictViewSet, WatershedViewSet
 
 
 router = routers.DefaultRouter()
@@ -20,7 +20,7 @@ router.register('cities', CityViewSet, basename='cities')
 router.register('districts', DistrictViewSet, basename='districts')
 router.register('watersheds', WatershedViewSet, basename='watersheds')
 
-app_name = 'api_valorization'
+app_name = 'api_portal'
 
 _urlpatterns = [
     path('version', GeoriviereVersionAPIView.as_view(), name='version'),
@@ -28,4 +28,4 @@ _urlpatterns = [
 ]
 if 'drf_yasg' in settings.INSTALLED_APPS:
     _urlpatterns.append(path('', schema_view.with_ui('swagger', cache_timeout=0), name='schema-swagger-ui'))
-urlpatterns = [path('api/valorization/<lang:lang>/', include(_urlpatterns))]
+urlpatterns = [path('api/portal/<lang:lang>/', include(_urlpatterns))]

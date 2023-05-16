@@ -10,7 +10,7 @@ class PortalViewDetailTest(TestCase):
         cls.portal = PortalFactory.create()
 
     def test_portal_structure(self):
-        url = reverse('api_valorization:portal-detail', kwargs={'pk': self.portal.pk, 'lang': 'fr', 'format': 'json'})
+        url = reverse('api_portal:portal-detail', kwargs={'pk': self.portal.pk, 'lang': 'fr', 'format': 'json'})
         response = self.client.get(url)
         self.assertEqual(response.status_code, 200)
 

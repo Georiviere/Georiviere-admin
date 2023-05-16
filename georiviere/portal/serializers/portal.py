@@ -1,6 +1,8 @@
 from collections import OrderedDict
-from georiviere.api.valorization.serializers.map import MapBaseLayerSerializer, MapGroupLayerSerializer, MapLayerSerializer
+from georiviere.portal.serializers.map import MapBaseLayerSerializer, MapGroupLayerSerializer, MapLayerSerializer
 from georiviere.portal.models import Portal
+
+from django.conf import settings
 
 from rest_framework.serializers import ModelSerializer, SerializerMethodField
 
@@ -17,7 +19,10 @@ class PortalSerializer(ModelSerializer):
         )
 
     def get_spatial_extent(self, obj):
-        return obj.spatial_extent.extent
+        if obj.spatial_extent:
+            return obj.spatial_extent.extent
+        else:
+            return settings.SPATIAL_EXTENT
 
     def to_representation(self, instance):
         ret = super().to_representation(instance)

@@ -2,7 +2,7 @@ from django.conf import settings
 from django.db.models import F
 from django.contrib.gis.db.models.functions import Transform
 
-from georiviere.api.valorization.serializers.zoning import CitySerializer, DistrictSerializer, WatershedSerializer
+from georiviere.portal.serializers.zoning import CitySerializer, DistrictSerializer, WatershedSerializer
 from georiviere.main.renderers import GeoJSONRenderer
 from geotrek.zoning.models import City, District
 from georiviere.watershed.models import Watershed

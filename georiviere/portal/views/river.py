@@ -3,7 +3,7 @@ from django.conf import settings
 from django.db.models import F
 from django.contrib.gis.db.models.functions import Transform
 
-from georiviere.api.valorization.serializers.river import StreamGeojsonSerializer, StreamSerializer
+from georiviere.portal.serializers.river import StreamGeojsonSerializer, StreamSerializer
 from georiviere.main.renderers import GeoJSONRenderer
 
 from rest_framework import viewsets

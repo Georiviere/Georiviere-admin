@@ -3,7 +3,7 @@ from rest_framework.permissions import AllowAny
 from djangorestframework_camel_case.render import CamelCaseJSONRenderer
 from georiviere.portal.models import Portal
 
-from georiviere.api.valorization.serializers.portal import PortalSerializer
+from georiviere.portal.serializers.portal import PortalSerializer
 
 from rest_framework import viewsets
 from rest_framework import mixins

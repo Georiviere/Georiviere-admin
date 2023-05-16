@@ -145,7 +145,6 @@ INSTALLED_APPS = PROJECT_APPS + [
     'geotrek.authent',
     'georiviere.flatpages',
     'geotrek.sensitivity',
-    'georiviere.api',
     'admin_ordering'
 ]
 
@@ -424,7 +423,7 @@ SWAGGER_SETTINGS = {
     'USE_SESSION_AUTH': False,
     'APIS_SORTER': 'alpha',
     'JSON_EDITOR': True,
-    'API_VALORIZATION': "Georiviere API"
+    'API_PORTAL': "Georiviere API"
 }
 
 if os.getenv('SSL_ENABLED', default=0):

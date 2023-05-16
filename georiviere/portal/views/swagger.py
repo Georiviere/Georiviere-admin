@@ -8,9 +8,9 @@ schema_view = get_schema_view(
     openapi.Info(
         title="Georiviere API valorization",
         default_version='v1',
-        description=settings.SWAGGER_SETTINGS["API_VALORIZATION"],
+        description=settings.SWAGGER_SETTINGS["API_PORTAL"],
     ),
-    urlconf='georiviere.api.valorization.urls',
+    urlconf='georiviere.portal.views.urls',
     public=True,
     permission_classes=(permissions.AllowAny,),
 )

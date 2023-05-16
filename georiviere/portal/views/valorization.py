@@ -3,7 +3,7 @@ from django.db.models import F
 from django.contrib.gis.db.models.functions import Transform
 from django.shortcuts import get_object_or_404
 
-from georiviere.api.valorization.serializers.valorization import POIGeojsonSerializer, POISerializer
+from georiviere.portal.serializers.valorization import POIGeojsonSerializer, POISerializer
 from georiviere.main.renderers import GeoJSONRenderer
 from georiviere.valorization.models import POI, POICategory
 
