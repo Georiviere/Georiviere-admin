@@ -1,3 +1,5 @@
+from django.urls import reverse
+
 from georiviere.portal.models import MapBaseLayer, MapGroupLayer, MapLayer
 
 from rest_framework.serializers import ModelSerializer, IntegerField, SerializerMethodField
@@ -29,19 +31,23 @@ class MapLayerSerializer(ModelSerializer):
 
     def get_geojson_url(self, obj):
         layer_type = obj.layer_type.split('-')
-        prefix = ''
+        # TODO: Make lang dynamic
+        reverse_kwargs = {'lang': 'fr', 'format': 'geojson'}
         if layer_type[0] in ['pois', 'streams']:
-            prefix = f'{obj.portal.pk}/'
+            reverse_kwargs['portal_pk'] = obj.portal.pk
         if len(layer_type) == 2:
             filter_type = layer_type[-1]
-            return f'{prefix}{layer_type[0]}/category/{filter_type}.geojson'
-        return f'{prefix}{layer_type[0]}.geojson'
+            reverse_kwargs['category_pk'] = filter_type
+            return reverse('api_valorization:pois-category', kwargs=reverse_kwargs)
+        return reverse(f'api_valorization:{layer_type[0]}-list', kwargs=reverse_kwargs)
 
     def get_url(self, obj):
         layer_type = obj.layer_type.split('-')
+        # TODO: Make lang dynamic
+        reverse_kwargs = {'lang': 'fr'}
         if layer_type[0] in ['pois', 'streams']:
-            return f'{obj.portal.pk}/{layer_type[0]}'
-        return None
+            reverse_kwargs['portal_pk'] = obj.portal.pk
+        return reverse(f'api_valorization:{layer_type[0]}-list', kwargs=reverse_kwargs)
 
 
 class MapBaseLayerSerializer(ModelSerializer):

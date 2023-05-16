@@ -33,7 +33,7 @@ class WatershedTypeSerializer(serializers.ModelSerializer):
 
 
 class WatershedSerializer(GeoFeatureModelSerializer):
-    type = WatershedTypeSerializer(many=False, source='watershed_type')
+    type = WatershedTypeSerializer(source='watershed_type')
     geometry = GeometryField(read_only=True, precision=7, source='geom_transformed')
 
     class Meta:
