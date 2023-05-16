@@ -105,6 +105,6 @@ COPY --chown=django:django manage.py /opt/georiviere-admin/manage.py
 
 USER django
 
-RUN SECRET_KEY=temp-secret-key /opt/venv/bin/python ./manage.py compilemessages
+RUN CONVERSION_HOST=localhost CAPTURE_HOST=localhost SECRET_KEY=temp-secret-key /opt/venv/bin/python ./manage.py compilemessages
 
 CMD ["gunicorn", "georiviere.wsgi:application"]
