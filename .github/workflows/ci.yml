@@ -87,7 +87,7 @@ jobs:
     env:
       REGISTRY: ghcr.io
       IMAGE_NAME: ${{ github.repository }}
-    if: ${{(github.ref_name == 'develop')}}
+    if: ${{(github.base_ref == 'refs/heads/develop')}}
     steps:
       - name: Checkout repository
         uses: actions/checkout@v3
