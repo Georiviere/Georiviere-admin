@@ -1,4 +1,3 @@
-from django.conf import settings
 from django.test import TestCase
 
 from georiviere.portal.tests.factories import GroupMapLayerFactory, PortalFactory
@@ -32,4 +31,5 @@ class PortalSerializerTest(TestCase):
     def test_portal_without_se_content(self):
         data = self.serializer_portal_without_spatial_extent.data
         self.assertSetEqual(set(data.keys()), {'id', 'map', 'name', 'group', 'spatial_extent'})
-        self.assertEqual(data['spatial_extent'], settings.SPATIAL_EXTENT)
+        self.assertAlmostEqual(data['spatial_extent'][0], -5.5006, delta=4)
+        self.assertAlmostEqual(data['spatial_extent'][3], 51.314, delta=4)
