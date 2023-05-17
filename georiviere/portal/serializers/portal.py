@@ -3,6 +3,7 @@ from georiviere.portal.serializers.map import MapBaseLayerSerializer, MapGroupLa
 from georiviere.portal.models import Portal
 
 from django.conf import settings
+from django.contrib.gis.geos import Polygon
 
 from rest_framework.serializers import ModelSerializer, SerializerMethodField
 
@@ -20,9 +21,11 @@ class PortalSerializer(ModelSerializer):
 
     def get_spatial_extent(self, obj):
         if obj.spatial_extent:
-            return obj.spatial_extent.extent
+            return obj.spatial_extent.transform(4326, clone=True).extent
         else:
-            return settings.SPATIAL_EXTENT
+            bbox = Polygon.from_bbox(settings.SPATIAL_EXTENT)
+            bbox.srid = settings.SRID
+            return bbox.transform(4326, clone=True).extent
 
     def to_representation(self, instance):
         ret = super().to_representation(instance)
