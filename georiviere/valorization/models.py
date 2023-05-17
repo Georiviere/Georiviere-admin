@@ -25,8 +25,8 @@ class POICategory(TimeStampedModelMixin, StructureOrNoneRelated):
     label = models.CharField(max_length=128, verbose_name=_("Label"))
 
     class Meta:
-        verbose_name = _("POICategory")
-        verbose_name_plural = _("POICategories")
+        verbose_name = _("POI Category")
+        verbose_name_plural = _("POI Categories")
         ordering = ['label']
         unique_together = (
             ('label', 'structure'),

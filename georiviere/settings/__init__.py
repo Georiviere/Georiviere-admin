@@ -145,6 +145,7 @@ INSTALLED_APPS = PROJECT_APPS + [
     'geotrek.authent',
     'georiviere.flatpages',
     'geotrek.sensitivity',
+    'admin_ordering'
 ]
 
 STATICFILES_FINDERS = (
@@ -407,6 +408,23 @@ URL_DOCUMENT_REPORT = ''
 
 SENSITIVITY_DEFAULT_RADIUS = 100  # meters
 SENSITIVE_AREA_INTERSECTION_MARGIN = 500  # meters (always used)
+
+# Thumbnails
+
+THUMBNAIL_ALIASES = {
+    '': {
+        'valorization': {'size': (150, 150)},
+    },
+}
+
+# API
+
+SWAGGER_SETTINGS = {
+    'USE_SESSION_AUTH': False,
+    'APIS_SORTER': 'alpha',
+    'JSON_EDITOR': True,
+    'API_PORTAL': "Georiviere API"
+}
 
 if os.getenv('SSL_ENABLED', default=0):
     # SECURITY
