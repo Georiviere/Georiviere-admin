@@ -1,5 +1,8 @@
 {% extends "mapentity/base.html" %}
 {% load static %}
+{% block navbar %}
+    {% include "main/_base_navbar.html" %}
+{% endblock navbar %}
 {% block extrabody %}
 
     <link rel="stylesheet" href="{% static 'css/style.css' %}" />

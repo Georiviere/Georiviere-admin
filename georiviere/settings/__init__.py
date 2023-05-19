@@ -146,6 +146,7 @@ INSTALLED_APPS = PROJECT_APPS + [
     'georiviere.watershed',
     'geotrek.authent',
     'georiviere.flatpages',
+    'georiviere.contribution',
     'geotrek.sensitivity',
     'admin_ordering'
 ]

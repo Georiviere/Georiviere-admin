@@ -1,0 +1,125 @@
+{% extends "mapentity/mapentity_detail_attributes.html" %}
+{% load i18n mapentity_tags %}
+
+{% block attributes %}
+    <table class="table-striped table-bordered table">
+        <tr>
+            <th>{{ object|verbose:"name_author" }}</th>
+            <td>{{ object.name_author }}</td>
+        </tr>
+        <tr>
+            <th>{{ object|verbose:"email_author" }}</th>
+            <td>{{ object.email_author }}</td>
+        </tr>
+        <tr>
+            <th>{{ object|verbose:"first_name_author" }}</th>
+            <td>{{ object.first_name_author }}</td>
+        </tr>
+        <tr>
+            <th>{{ object|verbose:"date_observation" }}</th>
+            <td>{{ object.date_observation }}</td>
+        </tr>
+        {% if object.potential_damage %}
+            <tr>
+                <th>{{ object.potential_damage|verbose:"type" }}</th>
+                <td>{{ object.potential_damage.get_type_display }}</td>
+            </tr>
+            {% if object.potential_damage.type == 1 %}
+                <tr>
+                    <th>{{ object.potential_damage|verbose:"landing_type" }}</th>
+                    <td>{% if object.potential_damage.landing_type %}{{ object.potential_damage.landing_type|safe }}
+                    {% else %}<span class="none">{% trans "None" %}</span>{% endif %}
+                    </td>
+                </tr>
+            {% endif %}
+            {% if object.potential_damage.type == 2 %}
+                <tr>
+                    <th>{{ object.potential_damage|verbose:"excessive_cutting_length" }}</th>
+                    <td>{{ object.potential_damage.excessive_cutting_length }}</td>
+                </tr>
+            {% endif %}
+            {% if object.potential_damage.type == 4 %}
+                <tr>
+                    <th>{{ object.potential_damage|verbose:"jam_type" }}</th>
+                    <td>{% if object.potential_damage.jam_type %}{{ object.potential_damage.jam_type|safe }}
+                    {% else %}<span class="none">{% trans "None" %}</span>{% endif %}
+                    </td>
+                </tr>
+            {% endif %}
+            {% if object.potential_damage.type == 5 %}
+                <tr>
+                    <th>{{ object.potential_damage|verbose:"length_bank_erosion" }}</th>
+                    <td>{{ object.potential_damage.length_bank_erosion }}</td>
+                </tr>
+            {% endif %}
+            {% if object.potential_damage.type == 6 %}
+                <tr>
+                    <th>{{ object.potential_damage|verbose:"bank_height" }}</th>
+                    <td>{{ object.potential_damage.bank_height }}</td>
+                </tr>
+            {% endif %}
+            {% if object.potential_damage.type == 7 %}
+                <tr>
+                    <th>{{ object.potential_damage|verbose:"disease_type" }}</th>
+                    <td>{% if object.potential_damage.disease_type %}{{ object.potential_damage.disease_type|safe }}
+                    {% else %}<span class="none">{% trans "None" %}</span>{% endif %}
+                    </td>
+                </tr>
+            {% endif %}
+            {% if object.potential_damage.type == 8 %}
+                <tr>
+                    <th>{{ object.potential_damage|verbose:"number_death" }}</th>
+                    <td>{{ object.potential_damage.number_death }}</td>
+                </tr>
+                <tr>
+                    <th>{{ object.potential_damage|verbose:"dead_species" }}</th>
+                    <td>{% if object.potential_damage.dead_species %}{{ object.potential_damage.dead_species|safe }}
+                    {% else %}<span class="none">{% trans "None" %}</span>{% endif %}
+                    </td>
+                </tr>
+            {% endif %}
+        {% endif %}
+        {% if object.fauna_flora %}
+            <tr>
+                <th>{{ object.fauna_flora|verbose:"type" }}</th>
+                <td>{{ object.fauna_flora.get_type_display }}</td>
+            </tr>
+            {% if object.fauna_flora.type == 1 %}
+                <tr>
+                    <th>{{ object.fauna_flora|verbose:"home_area" }}</th>
+                    <td>{{ object.fauna_flora.home_area }}</td>
+                </tr>
+                <tr>
+                    <th>{{ object.fauna_flora|verbose:"invasive_species" }}</th>
+                    <td>{{ object.fauna_flora.invasive_species }}</td>
+                </tr>
+            {% endif %}
+            {% if object.fauna_flora.type == 2 %}
+                <tr>
+                    <th>{{ object.fauna_flora|verbose:"number_heritage_species" }}</th>
+                    <td>{{ object.fauna_flora.number_heritage_species }}</td>
+                </tr>
+                <tr>
+                    <th>{{ object.fauna_flora|verbose:"heritage_species" }}</th>
+                    <td>{{ object.fauna_flora.heritage_species }}</td>
+                </tr>
+                <tr>
+                    <th>{{ object.fauna_flora|verbose:"heritage_observations" }}</th>
+                    <td>{{ object.fauna_flora.heritage_observations }}</td>
+                </tr>
+            {% endif %}
+            {% if object.fauna_flora.type == 3 %}
+                <tr>
+                    <th>{{ object.fauna_flora|verbose:"number_fish_species" }}</th>
+                    <td>{{ object.fauna_flora.number_fish_species }}</td>
+                </tr>
+                <tr>
+                    <th>{{ object.fauna_flora|verbose:"fish_species" }}</th>
+                    <td>{{ object.fauna_flora.fish_species }}</td>
+                </tr>
+            {% endif %}
+        {% endif %}
+        {% include "mapentity/trackinfo_fragment.html" %}
+    </table>
+    {{ block.super }}
+{% endblock attributes %}
