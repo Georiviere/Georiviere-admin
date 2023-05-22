@@ -20,16 +20,16 @@ class PortalSerializerTest(TestCase):
 
     def test_portal_content(self):
         data = self.serializer_portal.data
-        self.assertSetEqual(set(data.keys()), {'id', 'map', 'name', 'group', 'spatial_extent'})
+        self.assertSetEqual(set(data.keys()), {'id', 'map', 'name'})
 
     def test_portal_all_layers_grouped_content(self):
         data = self.serializer_portal_layers_all_group.data
-        self.assertEqual(len(data['group']), 1)
-        self.assertEqual(data['group'][0]['label'], 'Bar')
-        self.assertSetEqual(set(data.keys()), {'id', 'map', 'name', 'group', 'spatial_extent'})
+        self.assertEqual(len(data['map']['group']), 1)
+        self.assertEqual(data['map']['group'][0]['label'], 'Bar')
+        self.assertSetEqual(set(data.keys()), {'id', 'map', 'name'})
 
     def test_portal_without_se_content(self):
         data = self.serializer_portal_without_spatial_extent.data
-        self.assertSetEqual(set(data.keys()), {'id', 'map', 'name', 'group', 'spatial_extent'})
-        self.assertAlmostEqual(data['spatial_extent'][0], -5.5006, delta=4)
-        self.assertAlmostEqual(data['spatial_extent'][3], 51.314, delta=4)
+        self.assertSetEqual(set(data.keys()), {'id', 'map', 'name'})
+        self.assertAlmostEqual(data['map']['bounds'][0], -5.5006, delta=4)
+        self.assertAlmostEqual(data['map']['bounds'][3], 51.314, delta=4)
