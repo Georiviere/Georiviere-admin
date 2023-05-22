@@ -8,18 +8,18 @@ from django.contrib.gis.geos import Polygon
 from rest_framework.serializers import ModelSerializer, SerializerMethodField
 
 
-class PortalSerializer(ModelSerializer):
-    map = MapBaseLayerSerializer(many=True, source='map_base_layers')
+class MapSerializer(ModelSerializer):
     group = MapGroupLayerSerializer(many=True, source='mapgrouplayer_set')
-    spatial_extent = SerializerMethodField()
+    base_layers = MapBaseLayerSerializer(many=True, source='map_base_layers')
+    bounds = SerializerMethodField()
 
     class Meta:
         model = Portal
         fields = (
-            'id', 'name', 'map', 'group', 'spatial_extent'
+            'group', 'base_layers', 'bounds'
         )
 
-    def get_spatial_extent(self, obj):
+    def get_bounds(self, obj):
         if obj.spatial_extent:
             return obj.spatial_extent.transform(4326, clone=True).extent
         else:
@@ -27,11 +27,21 @@ class PortalSerializer(ModelSerializer):
             bbox.srid = settings.SRID
             return bbox.transform(4326, clone=True).extent
 
+
+class PortalSerializer(ModelSerializer):
+    map = MapSerializer(many=False, source='*')
+
+    class Meta:
+        model = Portal
+        fields = (
+            'id', 'name', 'map'
+        )
+
     def to_representation(self, instance):
         ret = super().to_representation(instance)
         layers_without_group = instance.layers.filter(group_layer__isnull=True)
         if layers_without_group.exists():
-            ret['group'].append(
+            ret['map']['group'].append(
                 OrderedDict({'label': None,
                              'layers': MapLayerSerializer(
                                  layers_without_group,
