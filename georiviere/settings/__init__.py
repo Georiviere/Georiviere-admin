@@ -33,6 +33,8 @@ orig_import = __import__
 def import_mock(name, *args, **kwargs):
     if 'geotrek.core.models' in name:
         return orig_import('georiviere.main.utils', *args, **kwargs)
+    if 'geotrek.common.models' in name:
+        return orig_import('georiviere.main.models', *args, **kwargs)
     if 'geotrek.common.urls' in name:
         return orig_import('georiviere.river.urls', *args, **kwargs)
     if 'geotrek.common.serializers' in name:
@@ -408,6 +410,11 @@ URL_DOCUMENT_REPORT = ''
 
 SENSITIVITY_DEFAULT_RADIUS = 100  # meters
 SENSITIVE_AREA_INTERSECTION_MARGIN = 500  # meters (always used)
+
+# Parser parameters for retries and error codes
+PARSER_RETRY_SLEEP_TIME = 60  # time of sleep between requests
+PARSER_NUMBER_OF_TRIES = 3  # number of requests to try before abandon
+PARSER_RETRY_HTTP_STATUS = [503]
 
 # Thumbnails
 
