@@ -5,6 +5,7 @@ from rest_framework import routers
 from georiviere.portal.views import GeoriviereVersionAPIView
 from georiviere.portal.views.portal import PortalViewSet
 from georiviere.portal.views.river import StreamViewSet
+from georiviere.portal.views.sensitivity import SensitivityViewSet
 from georiviere.portal.views.swagger import schema_view
 from georiviere.portal.views.valorization import POIViewSet
 from georiviere.portal.views.zoning import CityViewSet, DistrictViewSet, WatershedViewSet
@@ -19,6 +20,7 @@ router.register('portal', PortalViewSet, basename='portal')
 router.register('cities', CityViewSet, basename='cities')
 router.register('districts', DistrictViewSet, basename='districts')
 router.register('watersheds', WatershedViewSet, basename='watersheds')
+router.register('sensitivities', SensitivityViewSet, basename='sensitivities')
 
 app_name = 'api_portal'
 
