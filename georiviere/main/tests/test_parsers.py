@@ -121,7 +121,7 @@ class BiodivParserTests(TranslationResetMixin, TestCase):
             return response
         mocked.side_effect = side_effect
         output = StringIO()
-        call_command('import', 'georiviere.main.tests.test_parsers.BiodivWithPracticeParser', verbosity=2,
+        call_command('import_parser', 'georiviere.main.tests.test_parsers.BiodivWithPracticeParser', verbosity=2,
                      stdout=output)
         practice = SportPractice.objects.first()
         species = Species.objects.first()
