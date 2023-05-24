@@ -2,7 +2,7 @@ from django.urls import reverse
 
 from georiviere.portal.models import MapBaseLayer, MapGroupLayer, MapLayer
 
-from rest_framework.serializers import ModelSerializer, IntegerField, SerializerMethodField, CharField
+from rest_framework.serializers import ModelSerializer, IntegerField, SerializerMethodField
 
 
 class ControlLayerSerializer(ModelSerializer):
@@ -18,7 +18,7 @@ class MapLayerSerializer(ModelSerializer):
     options = SerializerMethodField()
     geojson_url = SerializerMethodField()
     url = SerializerMethodField()
-    type = CharField(source='layer_type')
+    type = SerializerMethodField()
 
     class Meta:
         model = MapLayer
@@ -29,6 +29,9 @@ class MapLayerSerializer(ModelSerializer):
 
     def get_options(self, obj):
         return {'style': obj.style if obj.style else None}
+
+    def get_type(self, obj):
+        return obj.layer_type.split('-')[0]
 
     def get_geojson_url(self, obj):
         layer_type = obj.layer_type.split('-')
