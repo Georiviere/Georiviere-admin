@@ -27,7 +27,7 @@ json_test_sport_practice = {
 }
 
 json_test_species = {
-    "count": 2,
+    "count": 3,
     "next": "next_page",
     "previous": None,
     "results": [
@@ -57,12 +57,12 @@ json_test_species = {
 }
 
 json_test_species_page_2 = {
-    "count": 2,
-    "next": None,
+    "count": 3,
+    "next": "next_page",
     "previous": None,
     "results": [
         {
-            "id": 2,
+            "id": 3,
             "url": "https://biodiv-sports.fr/api/v2/sensitivearea/46/?format=json",
             "name": {"fr": None, "en": None, "it": None},
             "description": {"fr": None, "en": None, "it": None},
@@ -73,6 +73,42 @@ json_test_species_page_2 = {
             "published": True,
             "structure": "LPO",
             "species_id": None,
+            "kml_url": "https://biodiv-sports.fr/api/fr/sensitiveareas/47.kml",
+            "geometry": {
+                "type": "MultiPolygon",
+                "coordinates": [[[[3.1, 45], [3.2, 45], [3.2, 46], [3.1, 46], [3.1, 45]],
+                                 [[3.13, 45.3], [3.17, 45.3], [3.17, 45.7], [3.13, 45.7], [3.13, 45.3]],
+                                 [[3.145, 45.45], [3.155, 45.45], [3.155, 45.55], [3.145, 45.55], [3.145, 45.45]],
+                                 [[3.14, 45.4], [3.16, 45.4], [3.16, 45.6], [3.14, 45.6], [3.14, 45.4]],
+                                 [[3.11, 45.45], [3.12, 45.45], [3.12, 45.55], [3.11, 45.55], [3.11, 45.45]]],
+                                [[[3.1, 45], [3.2, 45], [3.2, 46], [3.1, 46], [3.1, 45]]]
+                                ]
+            },
+            "update_datetime": "2017-11-29T14:53:35.949097Z",
+            "create_datetime": "2017-11-29T14:49:01.317155Z",
+            "radius": None
+        }
+    ]
+}
+
+
+json_test_species_page_3 = {
+    "count": 3,
+    "next": None,
+    "previous": None,
+    "results": [
+        {
+            "id": 2,
+            "url": "https://biodiv-sports.fr/api/v2/sensitivearea/46/?format=json",
+            "name": {"fr": "Tétras lyre", "en": "Black grouse", "it": "Fagiano di monte"},
+            "description": {"fr": "Blabla2", "en": "Blahblah2", "it": ""},
+            "period": [True, True, True, True, False, False, False, False, False, False, False, True],
+            "contact": "",
+            "practices": [1],
+            "info_url": "",
+            "published": True,
+            "structure": "LPO",
+            "species_id": 7,
             "kml_url": "https://biodiv-sports.fr/api/fr/sensitiveareas/47.kml",
             "geometry": {
                 "type": "MultiPolygon",
@@ -116,8 +152,11 @@ class BiodivParserTests(TranslationResetMixin, TestCase):
                 if self.page == 1:
                     response.json = lambda: json_test_species
                     self.page += 1
-                else:
+                elif self.page == 2:
                     response.json = lambda: json_test_species_page_2
+                    self.page += 1
+                else:
+                    response.json = lambda: json_test_species_page_3
             return response
         mocked.side_effect = side_effect
         output = StringIO()
