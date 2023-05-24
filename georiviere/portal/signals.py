@@ -28,6 +28,7 @@ def save_portal(sender, instance, created, **kwargs):
         # Generate all layers
         MapLayer.objects.create(label='Watershed', order=0, layer_type='watersheds', portal=instance)
         MapLayer.objects.create(label='City', order=0, layer_type='cities', portal=instance)
+        MapLayer.objects.create(label='Sensitivity', order=0, layer_type='sensitivities', portal=instance)
         MapLayer.objects.create(label='District', order=0, layer_type='districts', portal=instance)
         for category in POICategory.objects.all():
             MapLayer.objects.create(label=f'{category.label}', order=0, layer_type=f'pois-{category.pk}',
