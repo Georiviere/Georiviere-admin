@@ -29,19 +29,6 @@ class SeverityType(models.Model):
         return self.label
 
 
-class ContributionCategory(models.Model):
-    label = models.CharField(max_length=128, verbose_name=_("Label"), )
-    type_label = models.CharField(verbose_name=_("First list label"), max_length=128,
-                                  blank=True)
-
-    class Meta:
-        verbose_name = _("Contribution category")
-        verbose_name_plural = _("Contribution categories")
-
-    def __str__(self):
-        return self.label
-
-
 class Contribution(TimeStampedModelMixin, WatershedPropertiesMixin, ZoningPropertiesMixin,
                    AddPropertyBufferMixin, MapEntityMixin):
     """contribution model"""
@@ -67,6 +54,18 @@ class Contribution(TimeStampedModelMixin, WatershedPropertiesMixin, ZoningProper
         if hasattr(self, 'potential_damage'):
             return f'{self.email_author} {ContributionPotentialDamage._meta.verbose_name.title()} ' \
                    f'{self.potential_damage.get_type_display()}'
+        elif hasattr(self, 'fauna_flora'):
+            return f'{self.email_author} {ContributionFaunaFlora._meta.verbose_name.title()} ' \
+                   f'{self.fauna_flora.get_type_display()}'
+        elif hasattr(self, 'quality'):
+            return f'{self.email_author} {ContributionQuality._meta.verbose_name.title()} ' \
+                   f'{self.quality.get_quality_water_type_display()}'
+        elif hasattr(self, 'quantity'):
+            return f'{self.email_author} {ContributionQuantity._meta.verbose_name.title()} ' \
+                   f'{self.quantity.get_water_level_type_display()}'
+        elif hasattr(self, 'landscape_elements'):
+            return f'{self.email_author} {ContributionLandscapeElements._meta.verbose_name.title()} ' \
+                   f'{self.landscape_elements.get_type_display()}'
         return f'{self.email_author}'
 
     @property
@@ -81,7 +80,7 @@ class Contribution(TimeStampedModelMixin, WatershedPropertiesMixin, ZoningProper
             return self.quantity
         elif hasattr(self, 'landscape_elements'):
             return self.landscape_elements
-        return 'No category'
+        return _('No category')
 
     @property
     def category_display(self):
@@ -89,17 +88,6 @@ class Contribution(TimeStampedModelMixin, WatershedPropertiesMixin, ZoningProper
                                                                  self.get_detail_url(),
                                                                  self.category,
                                                                  self.category)
-
-
-class ContributionPotentialDamageType(models.Model):
-    label = models.CharField(max_length=128, verbose_name=_("Label"), )
-
-    class Meta:
-        verbose_name = _("Contribution potential damage type")
-        verbose_name_plural = _("Contribution potential damage types")
-
-    def __str__(self):
-        return self.label
 
 
 class LandingType(models.Model):
@@ -271,7 +259,7 @@ class ContributionFaunaFlora(models.Model):
         verbose_name_plural = _("contributions fauna-flora")
 
     def __str__(self):
-        return f'{self.email_author} {self.category}'
+        return f'{ContributionFaunaFlora._meta.verbose_name.title()} {self.get_type_display()}'
 
 
 class ContributionQuantity(models.Model):
@@ -281,6 +269,12 @@ class ContributionQuantity(models.Model):
         PROCESS_DRYING_OUT = 2, _('In the process of drying out')
         OVERFLOW = 3, _('Overflow')
 
+    water_level_type = models.IntegerField(
+        null=False,
+        choices=TypeChoice.choices,
+        default=TypeChoice.DRY,
+        verbose_name=_("Water level type"),
+    )
     landmark = models.TextField(blank=True, verbose_name='Landmark')
     contribution = models.OneToOneField(Contribution, parent_link=True, on_delete=models.CASCADE,
                                         related_name='quantity')
@@ -290,7 +284,7 @@ class ContributionQuantity(models.Model):
         verbose_name_plural = _("contributions quantity")
 
     def __str__(self):
-        return f'{self.email_author} {ContributionQuantity._meta.verbose_name.title()}'
+        return f'{ContributionQuantity._meta.verbose_name.title()} {self.get_water_level_type_display()}'
 
 
 class NaturePollution(models.Model):
@@ -322,17 +316,23 @@ class ContributionQuality(models.Model):
         POLLUTION = 2, _('Pollution')
         WATER_TEMPERATURE = 3, _('Water temperature')
 
+    quality_water_type = models.IntegerField(
+        null=False,
+        choices=TypeChoice.choices,
+        default=TypeChoice.ALGAL_DEVELOPMENT,
+        verbose_name=_("Quality water type"),
+    )
     nature_pollution = models.ForeignKey(NaturePollution, on_delete=models.PROTECT, null=True)
     type_pollution = models.ForeignKey(TypePollution, on_delete=models.PROTECT, null=True)
     contribution = models.OneToOneField(Contribution, parent_link=True, on_delete=models.CASCADE,
                                         related_name='quality')
 
     class Meta:
-        verbose_name = _("Contribution quantity")
-        verbose_name_plural = _("contributions quantity")
+        verbose_name = _("Contribution quality")
+        verbose_name_plural = _("contributions quality")
 
     def __str__(self):
-        return f'{self.email_author} {ContributionQuality._meta.verbose_name.title()}'
+        return f'{ContributionQuality._meta.verbose_name.title()} {self.get_quality_water_type_display()}'
 
 
 class ContributionLandscapeElements(models.Model):
@@ -346,6 +346,12 @@ class ContributionLandscapeElements(models.Model):
         LOSING_STREAM = 6, _('Losing stream')
         RESURGENCE = 7, _('Resurgence')
 
+    type = models.IntegerField(
+        null=False,
+        choices=TypeChoice.choices,
+        default=TypeChoice.SINKHOLE,
+        verbose_name=_("Type"),
+    )
     contribution = models.OneToOneField(Contribution, parent_link=True, on_delete=models.CASCADE,
                                         related_name='landscape_elements')
 
@@ -354,7 +360,7 @@ class ContributionLandscapeElements(models.Model):
         verbose_name_plural = _("contributions quantity")
 
     def __str__(self):
-        return f'{self.email_author} {ContributionQuality._meta.verbose_name.title()}'
+        return f'{ContributionLandscapeElements._meta.verbose_name.title()} {self.get_type_display()}'
 
 
 Contribution.add_property('streams', Stream.within_buffer, _("Stream"))

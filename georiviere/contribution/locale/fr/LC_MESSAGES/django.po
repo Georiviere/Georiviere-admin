@@ -1,0 +1,261 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2023-05-24 12:10+0000\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+msgid "Contribution"
+msgstr "Contribution"
+
+msgid "Name author"
+msgstr "Nom de l'auteur"
+
+msgid "Label"
+msgstr "Label"
+
+msgid "Severity type"
+msgstr "Type de sévérité"
+
+msgid "Severity types"
+msgstr "Types de sévérité"
+
+msgid "Contribution category"
+msgstr "Catégorie de contribution"
+
+msgid "Contribution categories"
+msgstr "Catégories de contribution"
+
+msgid "First name author"
+msgstr "Prénom auteur"
+
+msgid "Email"
+msgstr "Mail"
+
+msgid "Observation's date"
+msgstr "Date de l'observation"
+
+msgid "Severity"
+msgstr "Sévérité"
+
+msgid "Description"
+msgstr "Description"
+
+msgid "Description of the contribution"
+msgstr "Description de la sévérité"
+
+msgid "Contributions"
+msgstr "Contributions"
+
+msgid "Name"
+msgstr "Nom"
+
+msgid "Contribution potential damage type"
+msgstr "Type de contibution dégats potentiels"
+
+msgid "Contribution potential damage types"
+msgstr "Contribution Dégats potentiels"
+
+msgid "Jam type"
+msgstr "Type d'embâcle"
+
+msgid "Jam types"
+msgstr "Types d'embâcle"
+
+msgid "Disease type"
+msgstr "Type de maladie"
+
+msgid "Disease types"
+msgstr "Types de maladie"
+
+msgid "Dead species"
+msgstr "Espèces mortes"
+
+msgid "Landing"
+msgstr "Atterrissement"
+
+msgid "Excessive cutting of riparian forest"
+msgstr "Coupe abusive de ripisylve"
+
+msgid "Rockslides"
+msgstr "Eboulements"
+
+msgid "Disruptive jam"
+msgstr "Embâcle perturbateur "
+
+msgid "Bank erosion"
+msgstr "Erosion de la berge"
+
+msgid "River bed incision (sinking)"
+msgstr "Incision du lit (enfoncement)"
+
+msgid "Fish diseases (appearance of fish)"
+msgstr "Maladies piscicoles (aspect des poissons)"
+
+msgid "Fish mortality"
+msgstr "Mortalité piscicole"
+
+msgid "Trampling by livestock (impacting)"
+msgstr "Piétinement par le bétail (impactant)"
+
+msgid "Type"
+msgstr "Type"
+
+msgid "Excessive cutting length in meters"
+msgstr "Longueur coupe abusive en mètres"
+
+msgid "Length bank erosoion"
+msgstr "Longueur de l'érosion de la berge"
+
+msgid "Distance between the foot of the bank and the foot of the erosion."
+msgstr "Distance entre le pied de berge et le pied de l'érosion"
+
+msgid "Bank height"
+msgstr "Hauteur de berge"
+
+msgid ""
+"Bank height (measured between the foot of the bank and the top of the bank) "
+"in meters"
+msgstr "Hauteur de berge (mesurée entre le pied de berge et le haut de berge)"
+
+msgid "Number death"
+msgstr "Nombre de morts"
+
+msgid "Number of dead individuals"
+msgstr "Nombre d'individus morts"
+
+msgid "Contribution potential damage"
+msgstr "Contribution Dégâts potentiels"
+
+msgid "contributions potential damage"
+msgstr "Contributions Dégâts potentiels"
+
+msgid "Invasive species"
+msgstr "Espèce invasive"
+
+msgid "Heritage species"
+msgstr "Espèce patrimoniale"
+
+msgid "Heritage observation"
+msgstr "Observation patrimoniale"
+
+msgid "Heritage observations"
+msgstr "Observations patrimoniale"
+
+msgid "Fish species"
+msgstr "Espèce piscicole"
+
+msgid "Home area"
+msgstr "Surface du foyer"
+
+msgid "Home area in meters"
+msgstr "Surface du foyer en mètres"
+
+msgid "Number heritage species"
+msgstr "Nombre d'individus patrimoniale"
+
+msgid "Number fish species"
+msgstr "Nombre d'espèces pisicole"
+
+msgid "Contribution fauna-flora"
+msgstr "Contribution faune-flore"
+
+msgid "contributions fauna-flora"
+msgstr "Contributions faune-flore"
+
+msgid "Dry"
+msgstr "A sec"
+
+msgid "In the process of drying out"
+msgstr "En cours d'assèchement"
+
+msgid "Overflow"
+msgstr "Débordement"
+
+msgid "Contribution quantity"
+msgstr "Contribution quantité"
+
+msgid "contributions quantity"
+msgstr "Contributions quantité"
+
+msgid "Nature pollution"
+msgstr "Nature pollution"
+
+msgid "Natures pollution"
+msgstr "Natures pollution"
+
+msgid "Type pollution"
+msgstr "Type pollution"
+
+msgid "Types pollution"
+msgstr "Types pollution"
+
+msgid "Algal development"
+msgstr "Développement algal"
+
+msgid "Pollution"
+msgstr "Pollution"
+
+msgid "Water temperature"
+msgstr "Température de l'eau"
+
+msgid "Sinkhole"
+msgstr "Doline"
+
+msgid "Fountain"
+msgstr "Fontaine"
+
+msgid "Chasm"
+msgstr "Gouffre"
+
+msgid "Lesine"
+msgstr "Lésine"
+
+msgid "Pond"
+msgstr "Mare"
+
+msgid "Losing stream"
+msgstr "Perte"
+
+msgid "Resurgence"
+msgstr "Résurgence"
+
+msgid "Stream"
+msgstr "Rivière"
+
+msgid "Status"
+msgstr "Status"
+
+msgid "Morphologies"
+msgstr "Morphologies"
+
+msgid "Usages"
+msgstr "Usages"
+
+msgid "Station"
+msgstr "Station"
+
+msgid "Study"
+msgstr "Etude"
+
+msgid "Proceeding"
+msgstr "Contentieux"
+
+msgid "Knowledge"
+msgstr "Connaissance"
+
+msgid "Descriptions"
+msgstr "Descriptions"

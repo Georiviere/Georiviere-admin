@@ -1,0 +1,261 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2023-05-24 12:10+0000\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+msgid "Contribution"
+msgstr ""
+
+msgid "Name author"
+msgstr ""
+
+msgid "Label"
+msgstr ""
+
+msgid "Severity type"
+msgstr ""
+
+msgid "Severity types"
+msgstr ""
+
+msgid "Contribution category"
+msgstr ""
+
+msgid "Contribution categories"
+msgstr ""
+
+msgid "First name author"
+msgstr ""
+
+msgid "Email"
+msgstr ""
+
+msgid "Observation's date"
+msgstr ""
+
+msgid "Severity"
+msgstr ""
+
+msgid "Description"
+msgstr ""
+
+msgid "Description of the contribution"
+msgstr ""
+
+msgid "Contributions"
+msgstr ""
+
+msgid "Name"
+msgstr ""
+
+msgid "Contribution potential damage type"
+msgstr ""
+
+msgid "Contribution potential damage types"
+msgstr ""
+
+msgid "Jam type"
+msgstr ""
+
+msgid "Jam types"
+msgstr ""
+
+msgid "Disease type"
+msgstr ""
+
+msgid "Disease types"
+msgstr ""
+
+msgid "Dead species"
+msgstr ""
+
+msgid "Landing"
+msgstr ""
+
+msgid "Excessive cutting of riparian forest"
+msgstr ""
+
+msgid "Rockslides"
+msgstr ""
+
+msgid "Disruptive jam"
+msgstr ""
+
+msgid "Bank erosion"
+msgstr ""
+
+msgid "River bed incision (sinking)"
+msgstr ""
+
+msgid "Fish diseases (appearance of fish)"
+msgstr ""
+
+msgid "Fish mortality"
+msgstr ""
+
+msgid "Trampling by livestock (impacting)"
+msgstr ""
+
+msgid "Type"
+msgstr ""
+
+msgid "Excessive cutting length in meters"
+msgstr ""
+
+msgid "Length bank erosoion"
+msgstr ""
+
+msgid "Distance between the foot of the bank and the foot of the erosion."
+msgstr ""
+
+msgid "Bank height"
+msgstr ""
+
+msgid ""
+"Bank height (measured between the foot of the bank and the top of the bank) "
+"in meters"
+msgstr ""
+
+msgid "Number death"
+msgstr ""
+
+msgid "Number of dead individuals"
+msgstr ""
+
+msgid "Contribution potential damage"
+msgstr ""
+
+msgid "contributions potential damage"
+msgstr ""
+
+msgid "Invasive species"
+msgstr ""
+
+msgid "Heritage species"
+msgstr ""
+
+msgid "Heritage observation"
+msgstr ""
+
+msgid "Heritage observations"
+msgstr ""
+
+msgid "Fish species"
+msgstr ""
+
+msgid "Home area"
+msgstr ""
+
+msgid "Home area in meters"
+msgstr ""
+
+msgid "Number heritage species"
+msgstr ""
+
+msgid "Number fish species"
+msgstr ""
+
+msgid "Contribution fauna-flora"
+msgstr ""
+
+msgid "contributions fauna-flora"
+msgstr ""
+
+msgid "Dry"
+msgstr ""
+
+msgid "In the process of drying out"
+msgstr ""
+
+msgid "Overflow"
+msgstr ""
+
+msgid "Contribution quantity"
+msgstr ""
+
+msgid "contributions quantity"
+msgstr ""
+
+msgid "Nature pollution"
+msgstr ""
+
+msgid "Natures pollution"
+msgstr ""
+
+msgid "Type pollution"
+msgstr ""
+
+msgid "Types pollution"
+msgstr ""
+
+msgid "Algal development"
+msgstr ""
+
+msgid "Pollution"
+msgstr ""
+
+msgid "Water temperature"
+msgstr ""
+
+msgid "Sinkhole"
+msgstr ""
+
+msgid "Fountain"
+msgstr ""
+
+msgid "Chasm"
+msgstr ""
+
+msgid "Lesine"
+msgstr ""
+
+msgid "Pond"
+msgstr ""
+
+msgid "Losing stream"
+msgstr ""
+
+msgid "Resurgence"
+msgstr ""
+
+msgid "Stream"
+msgstr ""
+
+msgid "Status"
+msgstr ""
+
+msgid "Morphologies"
+msgstr ""
+
+msgid "Usages"
+msgstr ""
+
+msgid "Station"
+msgstr ""
+
+msgid "Study"
+msgstr ""
+
+msgid "Proceeding"
+msgstr ""
+
+msgid "Knowledge"
+msgstr ""
+
+msgid "None"
+msgstr ""

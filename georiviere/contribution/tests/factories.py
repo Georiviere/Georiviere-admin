@@ -27,13 +27,6 @@ class ContributionLandscapeElementsFactory(django.DjangoModelFactory):
     contribution = SubFactory(ContributionFactory)
 
 
-class ContributionCategoryFactory(django.DjangoModelFactory):
-    class Meta:
-        model = models.ContributionCategory
-
-    contribution = SubFactory(ContributionFactory)
-
-
 class ContributionQualityFactory(django.DjangoModelFactory):
     class Meta:
         model = models.ContributionQuality
@@ -53,3 +46,80 @@ class ContributionFaunaFloraFactory(django.DjangoModelFactory):
         model = models.ContributionFaunaFlora
 
     contribution = SubFactory(ContributionFactory)
+
+
+class SeverityTypeTypeFactory(django.DjangoModelFactory):
+    class Meta:
+        model = models.SeverityType
+
+    label = Sequence(lambda n: f'Severity type {n}')
+
+
+class LandingTypeFactory(django.DjangoModelFactory):
+    class Meta:
+        model = models.LandingType
+
+    label = Sequence(lambda n: f'Landing type {n}')
+
+
+class JamTypeFactory(django.DjangoModelFactory):
+    class Meta:
+        model = models.JamType
+
+    label = Sequence(lambda n: f'Jam type {n}')
+
+
+class DiseaseTypeFactory(django.DjangoModelFactory):
+    class Meta:
+        model = models.DiseaseType
+
+    label = Sequence(lambda n: f'Disease type {n}')
+
+
+class DeadSpeciesFactory(django.DjangoModelFactory):
+    class Meta:
+        model = models.DeadSpecies
+
+    label = Sequence(lambda n: f'Dead species {n}')
+
+
+class InvasiveSpeciesFactory(django.DjangoModelFactory):
+    class Meta:
+        model = models.InvasiveSpecies
+
+    label = Sequence(lambda n: f'Invasive species {n}')
+
+
+class HeritageSpeciesFactory(django.DjangoModelFactory):
+    class Meta:
+        model = models.HeritageSpecies
+
+    label = Sequence(lambda n: f'Heritage species {n}')
+
+
+class HeritageObservationFactory(django.DjangoModelFactory):
+    class Meta:
+        model = models.HeritageObservation
+
+    label = Sequence(lambda n: f'Heritage observation {n}')
+
+
+class FishSpeciesFactory(django.DjangoModelFactory):
+    class Meta:
+        model = models.FishSpecies
+
+    label = Sequence(lambda n: f'Fish species {n}')
+
+
+class NaturePollutionFactory(django.DjangoModelFactory):
+    class Meta:
+        model = models.NaturePollution
+
+    label = Sequence(lambda n: f'Nature pollution {n}')
+
+
+class TypePollutionFactory(django.DjangoModelFactory):
+    class Meta:
+        model = models.TypePollution
+
+    label = Sequence(lambda n: f'Type pollution {n}')
