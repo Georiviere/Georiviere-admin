@@ -41,6 +41,9 @@ class Contribution(TimeStampedModelMixin, WatershedPropertiesMixin, ZoningProper
                                  blank=True, related_name='contributions')
     description = models.TextField(verbose_name=_("Description"), help_text=_("Description of the contribution"),
                                    blank=True)
+    portal = models.ForeignKey('portal.Portal',
+                               verbose_name=_("Portal"), blank=True, related_name='contributions',
+                               on_delete=models.PROTECT)
 
     class Meta:
         verbose_name = _("Contribution")
