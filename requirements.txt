@@ -11,7 +11,9 @@ appy==1.0.9
 asgiref==3.3.1
     # via django
 attrs==20.3.0
-    # via fiona
+    # via
+    #   fiona
+    #   jsonschema
 beautifulsoup4==4.10.0
     # via mapentity
 billiard==3.6.3.0
@@ -205,6 +207,8 @@ itypes==1.2.0
     # via coreapi
 jinja2==2.11.3
     # via coreschema
+jsonschema==4.17.3
+    # via -r requirements.in
 kombu==5.0.2
     # via celery
 landez==2.5.0
@@ -260,6 +264,8 @@ pypdf2==1.26.0
     # via pdfimpose
 pyphen==0.11.0
     # via weasyprint
+pyrsistent==0.19.3
+    # via jsonschema
 python-dateutil==2.8.1
     # via
     #   faker
