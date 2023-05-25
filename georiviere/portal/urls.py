@@ -3,6 +3,7 @@ from django.urls import path, include
 from rest_framework import routers
 
 from georiviere.portal.views import GeoriviereVersionAPIView
+from georiviere.portal.views.flatpage import FlatPageViewSet
 from georiviere.portal.views.portal import PortalViewSet
 from georiviere.portal.views.river import StreamViewSet
 from georiviere.portal.views.sensitivity import SensitivityViewSet
@@ -15,6 +16,8 @@ router = routers.DefaultRouter()
 router.register(r'(?P<portal_pk>\d+)/pois', POIViewSet, basename='pois')
 
 router.register(r'(?P<portal_pk>\d+)/streams', StreamViewSet, basename='streams')
+
+router.register(r'(?P<portal_pk>\d+)/flatpages', FlatPageViewSet, basename='flatpages')
 
 router.register('portal', PortalViewSet, basename='portal')
 router.register('cities', CityViewSet, basename='cities')
