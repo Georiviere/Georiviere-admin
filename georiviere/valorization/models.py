@@ -88,6 +88,9 @@ class POI(AddPropertyBufferMixin, TimeStampedModelMixin, StructureRelated, MapEn
     def type_display(self):
         return f'{self.type.label} - {self.type.category.label}'
 
+    def is_public(self):
+        return self.portals.exists()
+
 
 POI.add_property('streams', Stream.within_buffer, _("Stream"))
 POI.add_property('status', Status.within_buffer, _("Status"))
