@@ -105,6 +105,9 @@ class Stream(AddPropertyBufferMixin, TimeStampedModelMixin, WatershedPropertiesM
     def __str__(self):
         return self.name
 
+    def is_public(self):
+        return self.portals.exists()
+
     def get_printcontext_with_other_objects(self, modelnames):
         maplayers = [
             settings.LEAFLET_CONFIG['TILES'][0][0],

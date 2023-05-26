@@ -282,6 +282,7 @@ USE_TZ = True
 STATIC_ROOT = VAR_DIR / "static"
 MEDIA_ROOT = VAR_DIR / "media"
 MEDIA_URL = '/media/'
+MEDIA_URL_SECURE = '/media_secure/'
 STATIC_URL = '/static/'
 
 STATICFILES_DIRS = [
