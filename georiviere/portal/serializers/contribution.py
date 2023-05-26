@@ -4,7 +4,9 @@ from rest_framework_gis.serializers import GeoFeatureModelSerializer
 from georiviere.contribution.models import (Contribution, ContributionQuantity, ContributionQuality,
                                             ContributionFaunaFlora, ContributionLandscapeElements,
                                             ContributionPotentialDamage, SeverityType,
-                                            LandingType, JamType, DiseaseType, DeadSpecies)
+                                            LandingType, JamType, DiseaseType, DeadSpecies,
+                                            InvasiveSpecies, HeritageSpecies, HeritageObservation, FishSpecies,
+                                            NaturePollution, TypePollution)
 from django.utils.translation import gettext as _
 
 
@@ -72,7 +74,7 @@ class ContributionSerializer(serializers.Serializer):
                         {
                             'type': "string",
                             'title': meta.get_field('landing_type').verbose_name.title(),
-                            'enum': list(LandingType.objects.all())
+                            'enum': list(LandingType.objects.values_list('label', flat=True))
                         }
                 },
             }
@@ -172,7 +174,7 @@ class ContributionSerializer(serializers.Serializer):
                             'type': "string",
                             'title': str(meta.get_field(
                                 'disease_type').verbose_name.title()),
-                            'enum': list(DiseaseType.objects.all())
+                            'enum': list(DiseaseType.objects.values_list('label', flat=True))
                         }
                 },
             }
@@ -193,7 +195,7 @@ class ContributionSerializer(serializers.Serializer):
                 'type': "string",
                 'title': str(meta.get_field(
                     'dead_species').verbose_name.title()),
-                'enum': list(DeadSpecies.objects.all())
+                'enum': list(DeadSpecies.objects.values_list('label', flat=True))
             }
         fish_mortality = {
             'if': {
@@ -211,7 +213,7 @@ class ContributionSerializer(serializers.Serializer):
         potential_damage_choices = ContributionPotentialDamage.TypeChoice
         meta_potential_damage = ContributionPotentialDamage._meta
 
-        inital_condition = {
+        initial_condition = {
             'if': {
                 'properties': {'category': {'const': str(meta_potential_damage.verbose_name.title())}}
             },
@@ -228,7 +230,7 @@ class ContributionSerializer(serializers.Serializer):
         }
 
         conditions_each_type = [
-            inital_condition,
+            initial_condition,
             self.get_excessive_cutting_riparian_forest(potential_damage_choices,
                                                        meta_potential_damage),
             self.get_bank_erosion(potential_damage_choices, meta_potential_damage),
@@ -246,8 +248,260 @@ class ContributionSerializer(serializers.Serializer):
 
         return conditions_each_type
 
+    def get_invasive_species(self, choices, meta):
+        invasive_species_property = {
+            'home_area':
+                {
+                    'type': "string",
+                    'title': str(meta.get_field(
+                        'home_area').verbose_name.title())
+                },
+        }
+        if InvasiveSpecies.objects.exists():
+            invasive_species_property['invasive_species'] = {
+                'type': "string",
+                'title': str(meta.get_field(
+                    'invasive_species').verbose_name.title()),
+                'enum': list(InvasiveSpecies.objects.values_list('label', flat=True))
+            }
+
+        invasive_species = {
+            'if': {
+                'properties': {
+                    'type': {
+                        'const': str(choices.INVASIVE_SPECIES.label)}}
+            },
+            'then': {
+                'properties': invasive_species_property
+            }
+        }
+        return invasive_species
+
+    def get_heritage_species(self, choices, meta):
+        heritage_species_property = {
+            'number_heritage_species':
+                {
+                    'type': "string",
+                    'title': str(meta.get_field(
+                        'number_heritage_species').verbose_name.title())
+                },
+        }
+        if HeritageSpecies.objects.exists():
+            heritage_species_property['heritage_species'] = {
+                'type': "string",
+                'title': str(meta.get_field(
+                    'heritage_species').verbose_name.title()),
+                'enum': list(HeritageSpecies.objects.values_list('label', flat=True))
+            }
+        if HeritageObservation.objects.exists():
+            heritage_species_property['heritage_observation'] = {
+                'type': "string",
+                'title': str(meta.get_field(
+                    'heritage_observation').verbose_name.title()),
+                'enum': list(HeritageObservation.objects.values_list('label', flat=True))
+            }
+        heritage_species = {
+            'if': {
+                'properties': {
+                    'type': {
+                        'const': str(choices.HERITAGE_SPECIES.label)}}
+            },
+            'then': {
+                'properties': heritage_species_property
+            }
+        }
+        return heritage_species
+
+    def get_fish_species(self, choices, meta):
+        fish_species_property = {
+            'number_fish_species':
+                {
+                    'type': "string",
+                    'title': str(meta.get_field(
+                        'number_fish_species').verbose_name.title())
+                },
+        }
+        if FishSpecies.objects.exists():
+            fish_species_property['fish_species'] = {
+                'type': "string",
+                'title': str(meta.get_field(
+                    'fish_species').verbose_name.title()),
+                'enum': list(FishSpecies.objects.values_list('label', flat=True))
+            }
+        fish_species = {
+            'if': {
+                'properties': {
+                    'type': {
+                        'const': str(choices.FISH_SPECIES.label)}}
+            },
+            'then': {
+                'properties': fish_species_property
+            }
+        }
+        return fish_species
+
+    def get_faunaflora_condition(self):
+        faunaflora_choices = ContributionFaunaFlora.TypeChoice
+        meta_faunaflora = ContributionFaunaFlora._meta
+
+        initial_condition = {
+            'if': {
+                'properties': {'category': {'const': str(meta_faunaflora.verbose_name.title())}}
+            },
+            'then': {
+                'properties': {
+                    'type': {
+                        'type': "string",
+                        'title': str(meta_faunaflora.get_field('type').verbose_name.title()),
+                        'enum': list(faunaflora_choices.labels)
+                    }
+                },
+                "required": ['type'],
+            }
+        }
+
+        conditions_each_type = [
+            initial_condition,
+            self.get_invasive_species(faunaflora_choices, meta_faunaflora),
+            self.get_heritage_species(faunaflora_choices, meta_faunaflora),
+            self.get_fish_species(faunaflora_choices, meta_faunaflora)
+        ]
+        return conditions_each_type
+
+    def get_overflow(self, choices, meta):
+        overflow = {
+            'if': {
+                'properties': {
+                    'type': {
+                        'const': str(choices.OVERFLOW.label)}}
+            },
+            'then': {
+                'properties': {
+                    'landmark':
+                        {
+                            'type': "string",
+                            'title': str(meta.get_field(
+                                'landmark').verbose_name.title())
+                        },
+                }
+            }
+        }
+        return overflow
+
+    def get_quantity_condition(self):
+        quantity_choices = ContributionQuantity.TypeChoice
+        meta_quantity = ContributionQuantity._meta
+
+        initial_condition = {
+            'if': {
+                'properties': {'category': {'const': str(meta_quantity.verbose_name.title())}}
+            },
+            'then': {
+                'properties': {
+                    'type': {
+                        'type': "string",
+                        'title': str(meta_quantity.get_field('type').verbose_name.title()),
+                        'enum': list(quantity_choices.labels)
+                    }
+                },
+                "required": ['type'],
+            }
+        }
+
+        conditions_each_type = [
+            initial_condition,
+            self.get_overflow(quantity_choices, meta_quantity),
+        ]
+        return conditions_each_type
+
+    def get_pollution(self, choices, meta):
+        pollution_property = {}
+        if NaturePollution.objects.exists():
+            pollution_property['nature_pollution'] = {
+                'type': "string",
+                'title': str(meta.get_field(
+                    'nature_pollution').verbose_name.title()),
+                'enum': list(NaturePollution.objects.values_list('label', flat=True))
+            }
+        if TypePollution.objects.exists():
+            pollution_property['type_pollution'] = {
+                'type': "string",
+                'title': str(meta.get_field(
+                    'type_pollution').verbose_name.title()),
+                'enum': list(TypePollution.objects.values_list('label', flat=True))
+            }
+        pollution = {
+            'if': {
+                'properties': {
+                    'type': {
+                        'const': str(choices.POLLUTION.label)}}
+            },
+            'then': {
+                'properties': pollution_property
+            }
+        }
+        return pollution
+
+    def get_quality_condition(self):
+        quality_choices = ContributionQuality.TypeChoice
+        meta_quality = ContributionQuality._meta
+
+        initial_condition = {
+            'if': {
+                'properties': {'category': {'const': str(meta_quality.verbose_name.title())}}
+            },
+            'then': {
+                'properties': {
+                    'type': {
+                        'type': "string",
+                        'title': str(meta_quality.get_field('type').verbose_name.title()),
+                        'enum': list(quality_choices.labels)
+                    }
+                },
+                "required": ['type'],
+            }
+        }
+
+        conditions_each_type = [
+            initial_condition,
+
+        ]
+        if NaturePollution.objects.exists() or TypePollution.objects.exists():
+            conditions_each_type.append(self.get_pollution(quality_choices, meta_quality))
+        return conditions_each_type
+
+    def get_landscapeelements_condition(self):
+        landscapeelements_choices = ContributionLandscapeElements.TypeChoice
+        meta_landscapeelements = ContributionLandscapeElements._meta
+
+        initial_condition = {
+            'if': {
+                'properties': {'category': {'const': str(meta_landscapeelements.verbose_name.title())}}
+            },
+            'then': {
+                'properties': {
+                    'type': {
+                        'type': "string",
+                        'title': str(meta_landscapeelements.get_field('type').verbose_name.title()),
+                        'enum': list(landscapeelements_choices.labels)
+                    }
+                },
+                "required": ['type'],
+            }
+        }
+
+        conditions_each_type = [
+            initial_condition,
+
+        ]
+        return conditions_each_type
+
     def get_allOf(self, obj):
         all_of_conditions = self.get_potentialdamage_condition()
+        all_of_conditions += self.get_faunaflora_condition()
+        all_of_conditions += self.get_quantity_condition()
+        all_of_conditions += self.get_quality_condition()
+        all_of_conditions += self.get_landscapeelements_condition()
         return all_of_conditions
 
     class Meta:

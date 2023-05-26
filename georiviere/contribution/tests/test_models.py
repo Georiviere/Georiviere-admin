@@ -54,11 +54,11 @@ class ContributionCategoriesTest(TestCase):
 
     def test_landscape_elements_str(self):
         landscape_elements = ContributionLandscapeElementsFactory(type=2)
-        self.assertEqual(str(landscape_elements), "Contribution Quantity Fountain")
+        self.assertEqual(str(landscape_elements), "Contribution Landscape Element Fountain")
         contribution = landscape_elements.contribution
         self.assertEqual(str(contribution),
                          f"{contribution.email_author} "
-                         f"Contribution Quantity Fountain")
+                         f"Contribution Landscape Element Fountain")
         self.assertEqual(contribution.category, landscape_elements)
 
     def test_severitytype_str(self):

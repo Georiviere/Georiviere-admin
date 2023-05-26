@@ -359,8 +359,8 @@ class ContributionLandscapeElements(models.Model):
                                         related_name='landscape_elements')
 
     class Meta:
-        verbose_name = _("Contribution quantity")
-        verbose_name_plural = _("contributions quantity")
+        verbose_name = _("Contribution landscape element")
+        verbose_name_plural = _("contributions landscape elements")
 
     def __str__(self):
         return f'{ContributionLandscapeElements._meta.verbose_name.title()} {self.get_type_display()}'
