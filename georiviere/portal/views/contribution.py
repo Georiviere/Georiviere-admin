@@ -10,7 +10,7 @@ from rest_framework import viewsets
 from rest_framework import mixins
 
 
-class ContributionViewSet(mixins.RetrieveModelMixin, mixins.CreateModelMixin, viewsets.GenericViewSet):
+class ContributionViewSet(mixins.RetrieveModelMixin, viewsets.GenericViewSet):
     model = Contribution
     permission_classes = [AllowAny, ]
     serializer_class = ContributionSerializer
@@ -18,10 +18,3 @@ class ContributionViewSet(mixins.RetrieveModelMixin, mixins.CreateModelMixin, vi
 
     def get_queryset(self):
         return Contribution.objects.all()
-
-    def post(self, request, *args, **kwargs):
-        return
-
-    def get_serializer_class(self):
-        """ Use specific Serializer for GeoJSON """
-        return self.serializer_class

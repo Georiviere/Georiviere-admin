@@ -8,7 +8,8 @@ from georiviere.portal.validators import validate_json_schema
 from georiviere.contribution.tests.factories import (TypePollutionFactory, NaturePollutionFactory,
                                                      FishSpeciesFactory, InvasiveSpeciesFactory, DeadSpeciesFactory,
                                                      HeritageObservationFactory, HeritageSpeciesFactory,
-                                                     DiseaseTypeFactory, LandingTypeFactory, SeverityTypeTypeFactory)
+                                                     DiseaseTypeFactory, LandingTypeFactory, SeverityTypeTypeFactory,
+                                                     JamTypeFactory)
 
 from georiviere.portal.serializers.contribution import ContributionSerializer
 
@@ -28,6 +29,8 @@ class ContributionSerializerTest(TestCase):
         self.assertEqual(json_data, data)
 
     def test_contribution_with_subtypes(self):
+        JamTypeFactory.reset_sequence()
+        JamTypeFactory.create_batch(3)
         SeverityTypeTypeFactory.reset_sequence()
         SeverityTypeTypeFactory.create_batch(3)
         TypePollutionFactory.reset_sequence()
