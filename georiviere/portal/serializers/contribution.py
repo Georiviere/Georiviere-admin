@@ -1,7 +1,6 @@
 from rest_framework import serializers
-from rest_framework_gis.serializers import GeoFeatureModelSerializer
 
-from georiviere.contribution.models import (Contribution, ContributionQuantity, ContributionQuality,
+from georiviere.contribution.models import (ContributionQuantity, ContributionQuality,
                                             ContributionFaunaFlora, ContributionLandscapeElements,
                                             ContributionPotentialDamage, SeverityType,
                                             LandingType, JamType, DiseaseType, DeadSpecies,

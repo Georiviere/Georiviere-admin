@@ -1,6 +1,5 @@
 import os
 
-from django.core.serializers.json import DjangoJSONEncoder
 from django.test import TestCase
 import json
 
