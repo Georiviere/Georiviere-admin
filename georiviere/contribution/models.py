@@ -19,7 +19,7 @@ from georiviere.watershed.mixins import WatershedPropertiesMixin
 
 
 class SeverityType(models.Model):
-    label = models.CharField(max_length=128, verbose_name=_("Label"), )
+    label = models.CharField(max_length=128, verbose_name=_("Label"), unique=True)
 
     class Meta:
         verbose_name = _("Severity type")
@@ -94,7 +94,7 @@ class Contribution(TimeStampedModelMixin, WatershedPropertiesMixin, ZoningProper
 
 
 class LandingType(models.Model):
-    label = models.CharField(max_length=128, verbose_name=_("Label"), )
+    label = models.CharField(max_length=128, verbose_name=_("Label"), unique=True)
 
     class Meta:
         verbose_name = _("Contribution potential damage type")
@@ -105,7 +105,7 @@ class LandingType(models.Model):
 
 
 class JamType(models.Model):
-    label = models.CharField(max_length=128, verbose_name=_("Label"), )
+    label = models.CharField(max_length=128, verbose_name=_("Label"), unique=True)
 
     class Meta:
         verbose_name = _("Jam type")
@@ -116,7 +116,7 @@ class JamType(models.Model):
 
 
 class DiseaseType(models.Model):
-    label = models.CharField(max_length=128, verbose_name=_("Label"), )
+    label = models.CharField(max_length=128, verbose_name=_("Label"), unique=True)
 
     class Meta:
         verbose_name = _("Disease type")
@@ -127,7 +127,7 @@ class DiseaseType(models.Model):
 
 
 class DeadSpecies(models.Model):
-    label = models.CharField(max_length=128, verbose_name=_("Label"), )
+    label = models.CharField(max_length=128, verbose_name=_("Label"), unique=True)
 
     class Meta:
         verbose_name = _("Dead species")
@@ -186,7 +186,7 @@ class ContributionPotentialDamage(models.Model):
 
 
 class InvasiveSpecies(models.Model):
-    label = models.CharField(max_length=128, verbose_name=_("Label"), )
+    label = models.CharField(max_length=128, verbose_name=_("Label"), unique=True)
 
     class Meta:
         verbose_name = _("Invasive species")
@@ -197,7 +197,7 @@ class InvasiveSpecies(models.Model):
 
 
 class HeritageSpecies(models.Model):
-    label = models.CharField(max_length=128, verbose_name=_("Label"), )
+    label = models.CharField(max_length=128, verbose_name=_("Label"), unique=True)
 
     class Meta:
         verbose_name = _("Heritage species")
@@ -208,7 +208,7 @@ class HeritageSpecies(models.Model):
 
 
 class HeritageObservation(models.Model):
-    label = models.CharField(max_length=128, verbose_name=_("Label"), )
+    label = models.CharField(max_length=128, verbose_name=_("Label"), unique=True)
 
     class Meta:
         verbose_name = _("Heritage observation")
@@ -219,7 +219,7 @@ class HeritageObservation(models.Model):
 
 
 class FishSpecies(models.Model):
-    label = models.CharField(max_length=128, verbose_name=_("Label"), )
+    label = models.CharField(max_length=128, verbose_name=_("Label"), unique=True)
 
     class Meta:
         verbose_name = _("Fish species")
@@ -250,7 +250,7 @@ class ContributionFaunaFlora(models.Model):
     number_heritage_species = models.IntegerField(default=0, null=True, blank=True,
                                                   verbose_name=_("Number heritage species"))
     heritage_species = models.ForeignKey(HeritageSpecies, on_delete=models.PROTECT, null=True)
-    heritage_observations = models.ForeignKey(HeritageObservation, on_delete=models.PROTECT, null=True)
+    heritage_observation = models.ForeignKey(HeritageObservation, on_delete=models.PROTECT, null=True)
     number_fish_species = models.IntegerField(default=0, null=True, blank=True,
                                               verbose_name=_("Number fish species"))
     fish_species = models.ForeignKey(FishSpecies, on_delete=models.PROTECT, null=True)
@@ -291,7 +291,7 @@ class ContributionQuantity(models.Model):
 
 
 class NaturePollution(models.Model):
-    label = models.CharField(max_length=128, verbose_name=_("Label"), )
+    label = models.CharField(max_length=128, verbose_name=_("Label"), unique=True)
 
     class Meta:
         verbose_name = _("Nature pollution")
@@ -302,7 +302,7 @@ class NaturePollution(models.Model):
 
 
 class TypePollution(models.Model):
-    label = models.CharField(max_length=128, verbose_name=_("Label"), )
+    label = models.CharField(max_length=128, verbose_name=_("Label"), unique=True)
 
     class Meta:
         verbose_name = _("Type pollution")

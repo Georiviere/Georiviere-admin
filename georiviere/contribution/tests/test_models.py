@@ -98,8 +98,8 @@ class ContributionFaunaFloraTest(TestCase):
         self.assertEqual(str(heritage_species), "Heritage species 1")
 
     def test_heritageobservations_str(self):
-        heritage_observations = HeritageObservationFactory(label="Heritage observations 1")
-        self.assertEqual(str(heritage_observations), "Heritage observations 1")
+        heritage_observation = HeritageObservationFactory(label="Heritage observation 1")
+        self.assertEqual(str(heritage_observation), "Heritage observation 1")
 
     def test_fishspecies_str(self):
         fish_species = FishSpeciesFactory(label="Fish species 1")
