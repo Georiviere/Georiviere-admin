@@ -1,0 +1,447 @@
+{
+  "type": "object",
+  "required": [
+    "email_author",
+    "date_observation",
+    "category"
+  ],
+  "properties": {
+    "name_author": {
+      "type": "string",
+      "title": "Name author",
+      "maxLength": 128
+    },
+    "first_name_author": {
+      "type": "string",
+      "title": "First name author",
+      "maxLength": 128
+    },
+    "email_author": {
+      "type": "string",
+      "title": "Email",
+      "format": "email"
+    },
+    "date_observation": {
+      "type": "string",
+      "title": "Observation's date",
+      "format": "date"
+    },
+    "description": {
+      "type": "string",
+      "title": "Description"
+    },
+    "category": {
+      "type": "string",
+      "title": "Category",
+      "enum": [
+        "Contribution Quantity",
+        "Contribution Quality",
+        "Contribution Fauna-Flora",
+        "Contribution Landscape Element",
+        "Contribution Potential Damage"
+      ]
+    },
+    "severity": {
+      "type": "string",
+      "title": "Severity",
+      "enum": [
+        "Severity type 0",
+        "Severity type 1",
+        "Severity type 2"
+      ]
+    }
+  },
+  "allOf": [
+    {
+      "if": {
+        "properties": {
+          "category": {
+            "const": "Contribution Potential Damage"
+          }
+        }
+      },
+      "then": {
+        "properties": {
+          "type": {
+            "type": "string",
+            "title": "Type",
+            "enum": [
+              "Landing",
+              "Excessive cutting of riparian forest",
+              "Rockslides",
+              "Disruptive jam",
+              "Bank erosion",
+              "River bed incision (sinking)",
+              "Fish diseases (appearance of fish)",
+              "Fish mortality",
+              "Trampling by livestock (impacting)"
+            ]
+          }
+        },
+        "required": [
+          "type"
+        ]
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "type": {
+            "const": "Excessive cutting of riparian forest"
+          }
+        }
+      },
+      "then": {
+        "properties": {
+          "excessive_cutting_length": {
+            "type": "number",
+            "title": "Excessive Cutting Length In Meters"
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "type": {
+            "const": "Bank erosion"
+          }
+        }
+      },
+      "then": {
+        "properties": {
+          "length_bank_erosion": {
+            "type": "string",
+            "title": "Length Bank Erosoion"
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "type": {
+            "const": "River bed incision (sinking)"
+          }
+        }
+      },
+      "then": {
+        "properties": {
+          "bank_height": {
+            "type": "string",
+            "title": "Bank Height"
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "type": {
+            "const": "Fish mortality"
+          }
+        }
+      },
+      "then": {
+        "properties": {
+          "number_death": {
+            "type": "string",
+            "title": "Number Death"
+          },
+          "dead_species": {
+            "type": "string",
+            "title": "Dead Species",
+            "enum": [
+              "Dead species 0",
+              "Dead species 1",
+              "Dead species 2"
+            ]
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "type": {
+            "const": "Landing"
+          }
+        }
+      },
+      "then": {
+        "properties": {
+          "landing_type": {
+            "type": "string",
+            "title": "Landing Type",
+            "enum": [
+              "Landing type 0",
+              "Landing type 1",
+              "Landing type 2"
+            ]
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "type": {
+            "const": "Fish diseases (appearance of fish)"
+          }
+        }
+      },
+      "then": {
+        "properties": {
+          "disease_type": {
+            "type": "string",
+            "title": "Disease Type",
+            "enum": [
+              "Disease type 0",
+              "Disease type 1",
+              "Disease type 2"
+            ]
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "category": {
+            "const": "Contribution Fauna-Flora"
+          }
+        }
+      },
+      "then": {
+        "properties": {
+          "type": {
+            "type": "string",
+            "title": "Type",
+            "enum": [
+              "Invasive species",
+              "Heritage species",
+              "Fish species"
+            ]
+          }
+        },
+        "required": [
+          "type"
+        ]
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "type": {
+            "const": "Invasive species"
+          }
+        }
+      },
+      "then": {
+        "properties": {
+          "home_area": {
+            "type": "string",
+            "title": "Home Area"
+          },
+          "invasive_species": {
+            "type": "string",
+            "title": "Invasive Species",
+            "enum": [
+              "Invasive species 0",
+              "Invasive species 1",
+              "Invasive species 2"
+            ]
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "type": {
+            "const": "Heritage species"
+          }
+        }
+      },
+      "then": {
+        "properties": {
+          "number_heritage_species": {
+            "type": "string",
+            "title": "Number Heritage Species"
+          },
+          "heritage_species": {
+            "type": "string",
+            "title": "Heritage Species",
+            "enum": [
+              "Heritage species 0",
+              "Heritage species 1",
+              "Heritage species 2"
+            ]
+          },
+          "heritage_observation": {
+            "type": "string",
+            "title": "Heritage Observation",
+            "enum": [
+              "Heritage observation 0",
+              "Heritage observation 1",
+              "Heritage observation 2"
+            ]
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "type": {
+            "const": "Fish species"
+          }
+        }
+      },
+      "then": {
+        "properties": {
+          "number_fish_species": {
+            "type": "string",
+            "title": "Number Fish Species"
+          },
+          "fish_species": {
+            "type": "string",
+            "title": "Fish Species",
+            "enum": [
+              "Fish species 0",
+              "Fish species 1",
+              "Fish species 2"
+            ]
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "category": {
+            "const": "Contribution Quantity"
+          }
+        }
+      },
+      "then": {
+        "properties": {
+          "water_level_type": {
+            "type": "string",
+            "title": "Water Level Type",
+            "enum": [
+              "Dry",
+              "In the process of drying out",
+              "Overflow"
+            ]
+          }
+        },
+        "required": [
+          "water_level_type"
+        ]
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "water_level_type": {
+            "const": "Overflow"
+          }
+        }
+      },
+      "then": {
+        "properties": {
+          "landmark": {
+            "type": "string",
+            "title": "Landmark"
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "category": {
+            "const": "Contribution Quality"
+          }
+        }
+      },
+      "then": {
+        "properties": {
+          "quality_water_type": {
+            "type": "string",
+            "title": "Quality Water Type",
+            "enum": [
+              "Algal development",
+              "Pollution",
+              "Water temperature"
+            ]
+          }
+        },
+        "required": [
+          "quality_water_type"
+        ]
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "quality_water_type": {
+            "const": "Pollution"
+          }
+        }
+      },
+      "then": {
+        "properties": {
+          "nature_pollution": {
+            "type": "string",
+            "title": "Nature Pollution",
+            "enum": [
+              "Nature pollution 0",
+              "Nature pollution 1",
+              "Nature pollution 2"
+            ]
+          },
+          "type_pollution": {
+            "type": "string",
+            "title": "Type Pollution",
+            "enum": [
+              "Type pollution 0",
+              "Type pollution 1",
+              "Type pollution 2"
+            ]
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "category": {
+            "const": "Contribution Landscape Element"
+          }
+        }
+      },
+      "then": {
+        "properties": {
+          "type": {
+            "type": "string",
+            "title": "Type",
+            "enum": [
+              "Sinkhole",
+              "Fountain",
+              "Chasm",
+              "Lesine",
+              "Pond",
+              "Losing stream",
+              "Resurgence"
+            ]
+          }
+        },
+        "required": [
+          "type"
+        ]
+      }
+    }
+  ]
+}
