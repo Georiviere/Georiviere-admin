@@ -53,13 +53,13 @@ class ContributionSerializer(serializers.Serializer):
                 str(ContributionLandscapeElements._meta.verbose_name.title()),
                 str(ContributionPotentialDamage._meta.verbose_name.title())
             ],
-        },
+        }
         }
         if SeverityType.objects.exists():
             results['severity'] = {
                 'type': "string",
                 'title': _('Severity'),
-                'enum': list(SeverityType.objects.all())
+                'enum': list(SeverityType.objects.values_list('label', flat=True))
             }
         return results
 
@@ -89,11 +89,11 @@ class ContributionSerializer(serializers.Serializer):
             },
             'then': {
                 'properties': {
-                    'landing_type':
+                    'excessive_cutting_length':
                         {
-                            'type': "string",
+                            'type': "number",
                             'title': str(meta.get_field(
-                                'landing_type').verbose_name.title()),
+                                'excessive_cutting_length').verbose_name.title()),
                         }
                 },
             }
@@ -264,7 +264,6 @@ class ContributionSerializer(serializers.Serializer):
                     'invasive_species').verbose_name.title()),
                 'enum': list(InvasiveSpecies.objects.values_list('label', flat=True))
             }
-
         invasive_species = {
             'if': {
                 'properties': {
@@ -372,7 +371,7 @@ class ContributionSerializer(serializers.Serializer):
         overflow = {
             'if': {
                 'properties': {
-                    'type': {
+                    'water_level_type': {
                         'const': str(choices.OVERFLOW.label)}}
             },
             'then': {
@@ -398,13 +397,13 @@ class ContributionSerializer(serializers.Serializer):
             },
             'then': {
                 'properties': {
-                    'type': {
+                    'water_level_type': {
                         'type': "string",
-                        'title': str(meta_quantity.get_field('type').verbose_name.title()),
+                        'title': str(meta_quantity.get_field('water_level_type').verbose_name.title()),
                         'enum': list(quantity_choices.labels)
                     }
                 },
-                "required": ['type'],
+                "required": ['water_level_type'],
             }
         }
 
@@ -433,7 +432,7 @@ class ContributionSerializer(serializers.Serializer):
         pollution = {
             'if': {
                 'properties': {
-                    'type': {
+                    'quality_water_type': {
                         'const': str(choices.POLLUTION.label)}}
             },
             'then': {
@@ -452,13 +451,13 @@ class ContributionSerializer(serializers.Serializer):
             },
             'then': {
                 'properties': {
-                    'type': {
+                    'quality_water_type': {
                         'type': "string",
-                        'title': str(meta_quality.get_field('type').verbose_name.title()),
+                        'title': str(meta_quality.get_field('quality_water_type').verbose_name.title()),
                         'enum': list(quality_choices.labels)
                     }
                 },
-                "required": ['type'],
+                "required": ['quality_water_type'],
             }
         }
 
