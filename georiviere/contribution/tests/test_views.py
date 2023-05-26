@@ -18,7 +18,8 @@ class ContributionViewTestCase(CommonRiverTest):
             'date_update': '2020-03-17T00:00:00Z',
             'date_observation': '2020-03-17T00:00:00Z',
             'severity': self.obj.severity,
-            'geom': self.obj.geom.ewkt
+            'geom': self.obj.geom.ewkt,
+            'portal': self.obj.portal.pk
         }
 
     def test_distance_to_source_is_available(self):

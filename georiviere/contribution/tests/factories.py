@@ -2,6 +2,7 @@ from factory import django, fuzzy, SubFactory, Sequence
 from mapentity.tests.factories import PointFactory
 
 from georiviere.contribution import models
+from georiviere.portal.tests.factories import PortalFactory
 
 
 class ContributionFactory(PointFactory):
@@ -11,6 +12,7 @@ class ContributionFactory(PointFactory):
     name_author = fuzzy.FuzzyText()
     email_author = Sequence(lambda n: f"mail{n}@mail.mail")
     date_observation = '2020-03-17T00:00:00Z'
+    portal = SubFactory(PortalFactory)
 
 
 class ContributionPotentialDamageFactory(django.DjangoModelFactory):
