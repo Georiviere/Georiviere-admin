@@ -23,7 +23,7 @@ class MapLayerSerializer(ModelSerializer):
     class Meta:
         model = MapLayer
         fields = (
-            'id', 'label', 'default_active', 'options', 'geojson_url', 'url', 'type'
+            'id', 'label', 'default_active', 'options', 'geojson_url', 'url', 'type', 'hidden'
         )
         ordering = ('order',)
 
