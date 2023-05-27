@@ -26,11 +26,12 @@ class StreamGeojsonSerializer(GeoFeatureModelSerializer):
 class StreamSerializer(ModelSerializer):
     attachments = AttachmentSerializer(many=True)
     flow = SerializerMethodField()
+    geometry_center = geo_serializers.GeometryField(read_only=True, precision=7, source="centroid")
 
     class Meta:
         model = Stream
         fields = (
-            'id', 'name', 'description', 'length', 'descent', 'flow', 'attachments'
+            'id', 'name', 'description', 'length', 'descent', 'flow', 'attachments', 'geometry_center'
         )
 
     def get_flow(self, obj):

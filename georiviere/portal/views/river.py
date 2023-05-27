@@ -1,7 +1,7 @@
 from georiviere.river.models import Stream
 from django.conf import settings
 from django.db.models import F
-from django.contrib.gis.db.models.functions import Transform
+from django.contrib.gis.db.models.functions import Centroid, Transform
 
 from georiviere.portal.serializers.river import StreamGeojsonSerializer, StreamSerializer
 from georiviere.main.renderers import GeoJSONRenderer
@@ -21,7 +21,8 @@ class StreamViewSet(viewsets.ModelViewSet):
     def get_queryset(self):
         portal_pk = self.kwargs['portal_pk']
         queryset = Stream.objects.filter(portals__id=portal_pk)
-        queryset = queryset.annotate(geom_transformed=Transform(F('geom'), settings.API_SRID))
+        queryset = queryset.annotate(geom_transformed=Transform(F('geom'), settings.API_SRID)).annotate(
+            centroid=Centroid('geom_transformed'))
         return queryset
 
     def get_serializer_class(self):
