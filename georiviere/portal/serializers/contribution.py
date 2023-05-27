@@ -9,7 +9,7 @@ from georiviere.contribution.models import (ContributionQuantity, ContributionQu
 from django.utils.translation import gettext as _
 
 
-class ContributionSerializer(serializers.Serializer):
+class ContributionSchemaSerializer(serializers.Serializer):
     type = serializers.CharField(default='object')
     required = serializers.SerializerMethodField(method_name='get_required')
     properties = serializers.SerializerMethodField()

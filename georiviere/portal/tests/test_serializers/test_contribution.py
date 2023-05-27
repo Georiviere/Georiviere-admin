@@ -11,15 +11,15 @@ from georiviere.contribution.tests.factories import (TypePollutionFactory, Natur
                                                      DiseaseTypeFactory, LandingTypeFactory, SeverityTypeTypeFactory,
                                                      JamTypeFactory)
 
-from georiviere.portal.serializers.contribution import ContributionSerializer
+from georiviere.portal.serializers.contribution import ContributionSchemaSerializer
 
 
 # TODO: Add tests on every possibilities validate with json schema
 
 
-class ContributionSerializerTest(TestCase):
+class ContributionSchemaSerializerTest(TestCase):
     def test_contribution_without_subtypes(self):
-        serializer_contribution = ContributionSerializer({})
+        serializer_contribution = ContributionSchemaSerializer({})
         data = serializer_contribution.data
         validate_json_schema(data)
         filename = os.path.join(os.path.dirname(os.path.dirname(__file__)), 'data',
@@ -51,7 +51,7 @@ class ContributionSerializerTest(TestCase):
         DiseaseTypeFactory.create_batch(3)
         LandingTypeFactory.reset_sequence()
         LandingTypeFactory.create_batch(3)
-        serializer_contribution = ContributionSerializer({})
+        serializer_contribution = ContributionSchemaSerializer({})
         data = serializer_contribution.data
         validate_json_schema(data)
         filename = os.path.join(os.path.dirname(os.path.dirname(__file__)), 'data',
