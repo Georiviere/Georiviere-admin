@@ -6,7 +6,7 @@ from django.contrib.gis.db.models.functions import Transform
 from georiviere.portal.serializers.river import StreamGeojsonSerializer, StreamSerializer
 from georiviere.main.renderers import GeoJSONRenderer
 
-from rest_framework import viewsets
+from rest_framework import filters, viewsets
 from rest_framework.renderers import JSONRenderer
 from rest_framework import permissions as rest_permissions
 
@@ -17,6 +17,9 @@ class StreamViewSet(viewsets.ModelViewSet):
     serializer_class = StreamSerializer
     renderer_classes = (JSONRenderer, GeoJSONRenderer, )
     permission_classes = [rest_permissions.DjangoModelPermissionsOrAnonReadOnly]
+    filter_backends = [filters.OrderingFilter, filters.SearchFilter]
+    ordering_fields = ['name', 'date_insert']
+    search_fields = ['name']
 
     def get_queryset(self):
         portal_pk = self.kwargs['portal_pk']
