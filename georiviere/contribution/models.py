@@ -62,13 +62,13 @@ class Contribution(TimeStampedModelMixin, WatershedPropertiesMixin, ZoningProper
                    f'{self.fauna_flora.get_type_display()}'
         elif hasattr(self, 'quality'):
             return f'{self.email_author} {ContributionQuality._meta.verbose_name.title()} ' \
-                   f'{self.quality.get_quality_water_type_display()}'
+                   f'{self.quality.get_type_display()}'
         elif hasattr(self, 'quantity'):
             return f'{self.email_author} {ContributionQuantity._meta.verbose_name.title()} ' \
-                   f'{self.quantity.get_water_level_type_display()}'
-        elif hasattr(self, 'landscape_elements'):
+                   f'{self.quantity.get_type_display()}'
+        elif hasattr(self, 'landscape_element'):
             return f'{self.email_author} {ContributionLandscapeElements._meta.verbose_name.title()} ' \
-                   f'{self.landscape_elements.get_type_display()}'
+                   f'{self.landscape_element.get_type_display()}'
         return f'{self.email_author}'
 
     @property
@@ -272,7 +272,7 @@ class ContributionQuantity(models.Model):
         PROCESS_DRYING_OUT = 2, _('In the process of drying out')
         OVERFLOW = 3, _('Overflow')
 
-    water_level_type = models.IntegerField(
+    type = models.IntegerField(
         null=False,
         choices=TypeChoice.choices,
         default=TypeChoice.DRY,
@@ -287,7 +287,7 @@ class ContributionQuantity(models.Model):
         verbose_name_plural = _("contributions quantity")
 
     def __str__(self):
-        return f'{ContributionQuantity._meta.verbose_name.title()} {self.get_water_level_type_display()}'
+        return f'{ContributionQuantity._meta.verbose_name.title()} {self.get_type_display()}'
 
 
 class NaturePollution(models.Model):
@@ -319,7 +319,7 @@ class ContributionQuality(models.Model):
         POLLUTION = 2, _('Pollution')
         WATER_TEMPERATURE = 3, _('Water temperature')
 
-    quality_water_type = models.IntegerField(
+    type = models.IntegerField(
         null=False,
         choices=TypeChoice.choices,
         default=TypeChoice.ALGAL_DEVELOPMENT,
@@ -335,7 +335,7 @@ class ContributionQuality(models.Model):
         verbose_name_plural = _("contributions quality")
 
     def __str__(self):
-        return f'{ContributionQuality._meta.verbose_name.title()} {self.get_quality_water_type_display()}'
+        return f'{ContributionQuality._meta.verbose_name.title()} {self.get_type_display()}'
 
 
 class ContributionLandscapeElements(models.Model):
@@ -356,7 +356,7 @@ class ContributionLandscapeElements(models.Model):
         verbose_name=_("Type"),
     )
     contribution = models.OneToOneField(Contribution, parent_link=True, on_delete=models.CASCADE,
-                                        related_name='landscape_elements')
+                                        related_name='landscape_element')
 
     class Meta:
         verbose_name = _("Contribution landscape element")

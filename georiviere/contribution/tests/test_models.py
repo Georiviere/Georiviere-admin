@@ -26,7 +26,7 @@ class ContributionCategoriesTest(TestCase):
         self.assertEqual(contribution.category, potential_damage)
 
     def test_quality_str(self):
-        quality = ContributionQualityFactory(quality_water_type=2)
+        quality = ContributionQualityFactory(type=2)
         self.assertEqual(str(quality), "Contribution Quality Pollution")
         contribution = quality.contribution
         self.assertEqual(str(contribution),
@@ -35,7 +35,7 @@ class ContributionCategoriesTest(TestCase):
         self.assertEqual(contribution.category, quality)
 
     def test_quantity_str(self):
-        quantity = ContributionQuantityFactory(water_level_type=2)
+        quantity = ContributionQuantityFactory(type=2)
         self.assertEqual(str(quantity), "Contribution Quantity In the process of drying out")
         contribution = quantity.contribution
         self.assertEqual(str(contribution),
