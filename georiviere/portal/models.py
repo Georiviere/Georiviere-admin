@@ -7,6 +7,8 @@ from django.utils.translation import gettext_lazy as _
 
 from geotrek.common.mixins import TimeStampedModelMixin
 
+from georiviere.contribution.schema import get_contribution_json_schema
+
 
 class MapBaseLayer(models.Model):
     label = models.CharField(max_length=50)
@@ -100,3 +102,7 @@ class Portal(TimeStampedModelMixin, models.Model):
     @property
     def available_layers(self):
         return self.layers.filter(hidden=False)
+
+    def contribution_json_schema(self):
+        return get_contribution_json_schema()
+
