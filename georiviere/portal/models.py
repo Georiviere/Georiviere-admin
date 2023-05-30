@@ -44,6 +44,10 @@ class MapGroupLayer(models.Model):
     def __str__(self):
         return self.label
 
+    @property
+    def available_layers(self):
+        return self.layers.filter(hidden=False)
+
 
 class MapLayer(models.Model):
     label = models.CharField(max_length=50)
@@ -58,6 +62,7 @@ class MapLayer(models.Model):
     default_active = models.BooleanField(default=False)
     style = models.JSONField(max_length=300, null=False, blank=True, default=dict, help_text=_("Style of the layer"))
     order = models.PositiveSmallIntegerField(default=0)
+    hidden = models.BooleanField(default=False, db_index=True)
 
     class Meta:
         verbose_name = _("Map layer")
@@ -91,3 +96,7 @@ class Portal(TimeStampedModelMixin, models.Model):
 
     def __str__(self):
         return self.name
+
+    @property
+    def available_layers(self):
+        return self.layers.filter(hidden=False)

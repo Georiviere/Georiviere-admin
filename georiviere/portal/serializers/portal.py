@@ -40,12 +40,13 @@ class PortalSerializer(ModelSerializer):
         )
 
     def get_flatpages(self, obj):
-        return FlatpagePortalSerializer(obj.flatpages, many=True, context={'portal_pk': self.context.get('portal_pk')}).data
+        return FlatpagePortalSerializer(obj.flatpages, many=True,
+                                        context={'portal_pk': self.context.get('portal_pk')}).data
 
     def to_representation(self, instance):
         ret = super().to_representation(instance)
-        layers_without_group = instance.layers.filter(group_layer__isnull=True)
-        if layers_without_group.exists():
+        layers_without_group = instance.available_layers.filter(group_layer__isnull=True)
+        if bool(layers_without_group):
             ret['map']['group'].append(
                 OrderedDict({'label': None,
                              'layers': MapLayerSerializer(

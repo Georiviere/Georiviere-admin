@@ -66,7 +66,7 @@ class MapBaseLayerSerializer(ModelSerializer):
 
 
 class MapGroupLayerSerializer(ModelSerializer):
-    layers = MapLayerSerializer(many=True)
+    layers = MapLayerSerializer(many=True, source='available_layers')
 
     class Meta:
         model = MapGroupLayer
