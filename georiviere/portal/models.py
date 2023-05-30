@@ -103,6 +103,6 @@ class Portal(TimeStampedModelMixin, models.Model):
     def available_layers(self):
         return self.layers.filter(hidden=False)
 
+    @property
     def contribution_json_schema(self):
         return get_contribution_json_schema()
-
