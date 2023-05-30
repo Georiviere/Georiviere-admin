@@ -1,4 +1,5 @@
 from rest_framework.permissions import AllowAny
+from django.utils import translation
 
 from djangorestframework_camel_case.render import CamelCaseJSONRenderer
 
@@ -31,4 +32,5 @@ class ContributionViewSet(mixins.CreateModelMixin, viewsets.GenericViewSet):
         """
         context = super().get_serializer_context()
         context['portal_pk'] = self.kwargs['portal_pk']
+        translation.activate(self.kwargs['lang'])
         return context

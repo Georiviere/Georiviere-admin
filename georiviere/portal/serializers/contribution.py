@@ -2,6 +2,7 @@ from copy import deepcopy
 from rest_framework import serializers
 from django.core.serializers.json import DjangoJSONEncoder
 from django.db import transaction
+from django.utils.translation import gettext_lazy as _
 from georiviere.contribution.schema import (get_contribution_properties, get_contribution_allOf,
                                             get_contribution_json_schema)
 from georiviere.contribution.models import (Contribution, ContributionLandscapeElements, ContributionQuality,
@@ -25,6 +26,7 @@ class ContributionSerializer(serializers.ModelSerializer):
 
     def create(self, validated_data):
         sid = transaction.savepoint()
+        msg = ''
         try:
             properties = validated_data.pop('properties')
             category = properties.pop('category')
@@ -54,10 +56,10 @@ class ContributionSerializer(serializers.ModelSerializer):
 
             if category == ContributionFaunaFlora._meta.verbose_name.title():
                 model = ContributionFaunaFlora
-
             if not model:
                 transaction.savepoint_rollback(sid)
-                raise serializers.ValidationError({"category": "category is not valid"})
+                msg = _("Category is not valid")
+                raise
 
             type_prop = properties.pop('type')
 
@@ -67,15 +69,15 @@ class ContributionSerializer(serializers.ModelSerializer):
                                                 type=types[type_prop],
                                                 **properties)
             transaction.savepoint_commit(sid)
-        except Exception:
+        except Exception as e:
             transaction.savepoint_rollback(sid)
-            raise serializers.ValidationError({"category": "category is not valid"})
+            raise serializers.ValidationError({"category": msg or _("An error occured")})
         return contribution
 
     def to_representation(self, instance):
         data = {
             'category': instance._meta.verbose_name.title(),
-            'type': getattr(instance, 'type'),
+            'type': instance.get_type_display(),
             'email_author': instance.contribution.email_author,
             'name_author': instance.contribution.name_author,
             'first_name_author': instance.contribution.first_name_author,
