@@ -64,6 +64,9 @@ class PortalAdmin(LeafletGeoAdmin, OrderableAdmin, admin.ModelAdmin):
     search_fields = ('name', 'website')
     inlines = [MapBaseLayerAdminTabularInline, MapGroupLayerAdminTabularInline, MapLayerAdminTabularInline]
 
+    def get_inline_instances(self, request, obj=None):
+        return obj and super().get_inline_instances(request, obj) or []
+
 
 class MapBaseLayerAdmin(OrderableAdmin, admin.ModelAdmin):
     ordering_field = "order"
