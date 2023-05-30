@@ -62,7 +62,7 @@ class MapLayer(models.Model):
     default_active = models.BooleanField(default=False)
     style = models.JSONField(max_length=300, null=False, blank=True, default=dict, help_text=_("Style of the layer"))
     order = models.PositiveSmallIntegerField(default=0)
-    hidden = models.BooleanField(default=False)
+    hidden = models.BooleanField(default=False, db_index=True)
 
     class Meta:
         verbose_name = _("Map layer")
