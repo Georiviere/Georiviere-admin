@@ -24,7 +24,7 @@ def validate_json_schema_data(value, schema):
     """
     try:
         # TODO: check additional value properties and all of properties
-        if value and schema:
+        if value is not None and schema:
             jsonschema.validators.validate(value, schema)
     except jsonschema.exceptions.ValidationError as e:
         raise ValidationError(message=e.message)
