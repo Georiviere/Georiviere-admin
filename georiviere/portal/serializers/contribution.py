@@ -1,5 +1,7 @@
 from copy import deepcopy
 from rest_framework import serializers
+from rest_framework_gis import serializers as geo_serializers
+
 from django.core.serializers.json import DjangoJSONEncoder
 from django.db import transaction
 from django.utils.translation import gettext_lazy as _
@@ -10,14 +12,39 @@ from georiviere.contribution.models import (Contribution, ContributionLandscapeE
 from georiviere.portal.validators import validate_json_schema_data
 
 
+class ContributionGeojsonSerializer(geo_serializers.GeoFeatureModelSerializer):
+    # Annotated geom field with API_SRID
+    geometry = geo_serializers.GeometryField(read_only=True, precision=7, source="geom_transformed")
+    category = serializers.SerializerMethodField(read_only=True)
+
+    class Meta:
+        geo_field = 'geometry'
+        model = Contribution
+        fields = (
+            'id', 'category', 'geometry'
+        )
+
+    def get_category(self, obj):
+        return obj.category._meta.verbose_name.title()
+
+
 class ContributionSerializer(serializers.ModelSerializer):
     properties = serializers.JSONField(required=True, encoder=DjangoJSONEncoder, write_only=True)
+    geom = geo_serializers.GeometryField(write_only=True)
+    category = serializers.SerializerMethodField(read_only=True)
+    type = serializers.SerializerMethodField(read_only=True)
 
     class Meta:
         model = Contribution
         fields = (
-            'properties', 'geom'
+            'properties', 'geom', 'type', 'category', 'description'
         )
+
+    def get_category(self, obj):
+        return obj.category._meta.verbose_name.title()
+
+    def get_type(self, obj):
+        return obj.category.get_type_display()
 
     def validate_properties(self, data):
         new_data = deepcopy(data)
@@ -75,6 +102,8 @@ class ContributionSerializer(serializers.ModelSerializer):
         return contribution
 
     def to_representation(self, instance):
+        if isinstance(instance, Contribution):
+            return super().to_representation(instance)
         data = {
             'category': instance._meta.verbose_name.title(),
             'type': instance.get_type_display(),
@@ -82,6 +111,8 @@ class ContributionSerializer(serializers.ModelSerializer):
             'name_author': instance.contribution.name_author,
             'first_name_author': instance.contribution.first_name_author,
             'date_observation': instance.contribution.date_observation,
+            'description': instance.contribution.description,
+            'severity': instance.contribution.severity
         }
         return data
 

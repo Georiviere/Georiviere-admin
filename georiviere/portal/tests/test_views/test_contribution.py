@@ -4,10 +4,11 @@ from unittest import mock
 
 from georiviere.contribution.models import (Contribution, ContributionQuality, ContributionLandscapeElements,
                                             ContributionQuantity, ContributionFaunaFlora, ContributionPotentialDamage)
+from georiviere.contribution.tests.factories import ContributionFactory, ContributionQuantityFactory
 from georiviere.portal.tests.factories import PortalFactory
 
 
-class ContributionViewDetailTest(TestCase):
+class ContributionViewPostTest(TestCase):
     @classmethod
     def setUpTestData(cls):
         cls.portal = PortalFactory.create()
@@ -143,3 +144,51 @@ class ContributionViewDetailTest(TestCase):
                                                              '"category": "foo"}'})
         self.assertEqual(response.status_code, 400)
         self.assertEqual(response.json(), {'category': "La catégorie n'est pas valide"})
+
+
+class ContributionViewTest(TestCase):
+    @classmethod
+    def setUpTestData(cls):
+        cls.portal = PortalFactory.create()
+        cls.contribution = ContributionFactory.create(published=True, portal=cls.portal, description="foo")
+        cls.contribution_other_portal = ContributionFactory.create(published=True)
+        cls.contribution_not_published = ContributionFactory.create(published=False, portal=cls.portal)
+        cls.contribution_quantity = ContributionQuantityFactory.create(contribution=cls.contribution)
+        cls.other_contribution_quantity = ContributionQuantityFactory.create(contribution=cls.contribution_not_published)
+        cls.other_contribution_quantity_2 = ContributionQuantityFactory.create(
+            contribution=cls.contribution_other_portal)
+
+    def test_contribution_list(self):
+        url = reverse('api_portal:contributions-list',
+                      kwargs={'portal_pk': self.portal.pk, 'lang': 'fr'})
+        response = self.client.get(url)
+        self.assertEqual(response.status_code, 200)
+        self.assertEqual(len(response.json()), 1)
+        self.assertDictEqual(response.json()[0], {'category': 'Contribution Quantité',
+                                                  'description': 'foo', 'type': 'A sec'})
+
+    def test_contribution_detail(self):
+        url = reverse('api_portal:contributions-detail',
+                      kwargs={'portal_pk': self.portal.pk, 'lang': 'fr', 'pk': self.contribution.pk})
+        response = self.client.get(url)
+        self.assertEqual(response.status_code, 200)
+        self.assertSetEqual(set(response.json()), {'category', 'description', 'type'})
+
+    def test_contribution_geojson_list(self):
+        url = reverse('api_portal:contributions-list',
+                      kwargs={'portal_pk': self.portal.pk, 'lang': 'fr',
+                              'format': 'geojson'})
+        response = self.client.get(url)
+        self.assertEqual(response.status_code, 200)
+
+        self.assertSetEqual(set(response.json().keys()), {'features', 'type'})
+
+    def test_contribution_geojson_detail(self):
+        url = reverse('api_portal:contributions-detail',
+                      kwargs={'portal_pk': self.portal.pk, 'lang': 'fr', 'pk': self.contribution.pk,
+                              'format': 'geojson'})
+        response = self.client.get(url)
+        self.assertEqual(response.status_code, 200)
+
+        self.assertSetEqual(set(response.json().keys()), {'id', 'type', 'geometry', 'properties'})
+        self.assertSetEqual(set(response.json()['properties']), {'category', })
