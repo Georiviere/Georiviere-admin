@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-05-24 12:10+0000\n"
+"POT-Creation-Date: 2023-05-30 10:37+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -33,12 +33,6 @@ msgstr "Type de sévérité"
 msgid "Severity types"
 msgstr "Types de sévérité"
 
-msgid "Contribution category"
-msgstr "Catégorie de contribution"
-
-msgid "Contribution categories"
-msgstr "Catégories de contribution"
-
 msgid "First name author"
 msgstr "Prénom auteur"
 
@@ -57,11 +51,17 @@ msgstr "Description"
 msgid "Description of the contribution"
 msgstr "Description de la sévérité"
 
+msgid "Portal"
+msgstr "Portail"
+
 msgid "Contributions"
 msgstr "Contributions"
 
 msgid "Name"
 msgstr "Nom"
+
+msgid "No category"
+msgstr "Aucune catégorie"
 
 msgid "Contribution potential damage type"
 msgstr "Type de contibution dégats potentiels"
@@ -91,7 +91,7 @@ msgid "Excessive cutting of riparian forest"
 msgstr "Coupe abusive de ripisylve"
 
 msgid "Rockslides"
-msgstr "Eboulements"
+msgstr "Éboulements"
 
 msgid "Disruptive jam"
 msgstr "Embâcle perturbateur "
@@ -138,10 +138,10 @@ msgid "Number of dead individuals"
 msgstr "Nombre d'individus morts"
 
 msgid "Contribution potential damage"
-msgstr "Contribution Dégâts potentiels"
+msgstr "Contribution dégâts potentiels"
 
 msgid "contributions potential damage"
-msgstr "Contributions Dégâts potentiels"
+msgstr "Contributions dégâts potentiels"
 
 msgid "Invasive species"
 msgstr "Espèce invasive"
@@ -185,6 +185,9 @@ msgstr "En cours d'assèchement"
 msgid "Overflow"
 msgstr "Débordement"
 
+msgid "Water level type"
+msgstr "Type niveau d'eau"
+
 msgid "Contribution quantity"
 msgstr "Contribution quantité"
 
@@ -212,6 +215,15 @@ msgstr "Pollution"
 msgid "Water temperature"
 msgstr "Température de l'eau"
 
+msgid "Quality water type"
+msgstr "type de qualité d'eau"
+
+msgid "Contribution quality"
+msgstr "Contribution qualité"
+
+msgid "contributions quality"
+msgstr "Contributions qualité"
+
 msgid "Sinkhole"
 msgstr "Doline"
 
@@ -232,6 +244,12 @@ msgstr "Perte"
 
 msgid "Resurgence"
 msgstr "Résurgence"
+
+msgid "Contribution landscape element"
+msgstr "Contribution élément paysagers"
+
+msgid "contributions landscape elements"
+msgstr "Contributions éléments paysagers"
 
 msgid "Stream"
 msgstr "Rivière"
@@ -257,5 +275,14 @@ msgstr "Contentieux"
 msgid "Knowledge"
 msgstr "Connaissance"
 
-msgid "Descriptions"
-msgstr "Descriptions"
+msgid "Category"
+msgstr "Catégorie"
+
+msgid "None"
+msgstr "Aucun"
+
+msgid "An error occured"
+msgstr "Une erreur est survenue"
+
+msgid "Category is not valid"
+msgstr "La catégorie n'est pas valide"

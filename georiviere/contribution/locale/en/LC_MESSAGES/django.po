@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-05-24 12:10+0000\n"
+"POT-Creation-Date: 2023-05-30 10:37+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -33,12 +33,6 @@ msgstr ""
 msgid "Severity types"
 msgstr ""
 
-msgid "Contribution category"
-msgstr ""
-
-msgid "Contribution categories"
-msgstr ""
-
 msgid "First name author"
 msgstr ""
 
@@ -57,10 +51,16 @@ msgstr ""
 msgid "Description of the contribution"
 msgstr ""
 
+msgid "Portal"
+msgstr ""
+
 msgid "Contributions"
 msgstr ""
 
 msgid "Name"
+msgstr ""
+
+msgid "No category"
 msgstr ""
 
 msgid "Contribution potential damage type"
@@ -185,6 +185,9 @@ msgstr ""
 msgid "Overflow"
 msgstr ""
 
+msgid "Water level type"
+msgstr ""
+
 msgid "Contribution quantity"
 msgstr ""
 
@@ -212,6 +215,15 @@ msgstr ""
 msgid "Water temperature"
 msgstr ""
 
+msgid "Quality water type"
+msgstr ""
+
+msgid "Contribution quality"
+msgstr ""
+
+msgid "contributions quality"
+msgstr ""
+
 msgid "Sinkhole"
 msgstr ""
 
@@ -231,6 +243,12 @@ msgid "Losing stream"
 msgstr ""
 
 msgid "Resurgence"
+msgstr ""
+
+msgid "Contribution landscape element"
+msgstr ""
+
+msgid "contributions landscape elements"
 msgstr ""
 
 msgid "Stream"
@@ -255,6 +273,9 @@ msgid "Proceeding"
 msgstr ""
 
 msgid "Knowledge"
+msgstr ""
+
+msgid "Category"
 msgstr ""
 
 msgid "None"
