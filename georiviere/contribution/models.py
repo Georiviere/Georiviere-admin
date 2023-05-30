@@ -41,6 +41,8 @@ class Contribution(TimeStampedModelMixin, WatershedPropertiesMixin, ZoningProper
                                  blank=True, related_name='contributions')
     description = models.TextField(verbose_name=_("Description"), help_text=_("Description of the contribution"),
                                    blank=True)
+    published = models.BooleanField(verbose_name=_("Published"), default=False,
+                                    help_text=_("Make it visible on portal"))
     portal = models.ForeignKey('portal.Portal',
                                verbose_name=_("Portal"), blank=True, related_name='contributions',
                                on_delete=models.PROTECT)
@@ -87,10 +89,13 @@ class Contribution(TimeStampedModelMixin, WatershedPropertiesMixin, ZoningProper
 
     @property
     def category_display(self):
-        return '<a data-pk="%s" href="%s" title="%s" >%s</a>' % (self.pk,
-                                                                 self.get_detail_url(),
-                                                                 self.category,
-                                                                 self.category)
+        s = '<a data-pk="%s" href="%s" title="%s" >%s</a>' % (self.pk,
+                                                              self.get_detail_url(),
+                                                              self.category,
+                                                              self.category)
+        if self.published:
+            s = '<span class="badge badge-success" title="%s">&#x2606;</span> ' % _("Published") + s
+        return s
 
 
 class LandingType(models.Model):

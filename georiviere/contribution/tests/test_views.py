@@ -19,7 +19,8 @@ class ContributionViewTestCase(CommonRiverTest):
             'date_observation': '2020-03-17T00:00:00Z',
             'severity': self.obj.severity,
             'geom': self.obj.geom.ewkt,
-            'portal': self.obj.portal.pk
+            'portal': self.obj.portal.pk,
+            'published': False
         }
 
     def test_distance_to_source_is_available(self):
@@ -46,6 +47,16 @@ class ContributionViewTestCase(CommonRiverTest):
         obj.delete()
         response = self.client.get(url)
         self.assertEqual(response.status_code, 404)
+
+        self._post_add_form()
+
+        # Test to update without login
+        self.logout()
+
+        obj = self.modelfactory()
+
+        response = self.client.get(obj.get_update_url())
+        self.assertEqual(response.status_code, 302)
 
     def test_document_export(self):
         pass
