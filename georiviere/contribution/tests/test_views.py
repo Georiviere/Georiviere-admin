@@ -43,12 +43,14 @@ class ContributionViewTestCase(CommonRiverTest):
         response = self.client.get(obj.get_detail_url())
         self.assertEqual(response.status_code, 200)
 
+        response = self.client.get(obj.get_update_url())
+        self.assertEqual(response.status_code, 200)
+        self._post_update_form(obj)
+
         url = obj.get_detail_url()
         obj.delete()
         response = self.client.get(url)
         self.assertEqual(response.status_code, 404)
-
-        self._post_add_form()
 
         # Test to update without login
         self.logout()
