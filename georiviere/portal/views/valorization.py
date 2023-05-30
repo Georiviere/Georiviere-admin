@@ -7,7 +7,7 @@ from georiviere.portal.serializers.valorization import POIGeojsonSerializer, POI
 from georiviere.main.renderers import GeoJSONRenderer
 from georiviere.valorization.models import POI, POICategory
 
-from rest_framework import viewsets
+from rest_framework import viewsets, filters
 from rest_framework.permissions import AllowAny
 from rest_framework import renderers
 from rest_framework.decorators import action
@@ -19,6 +19,9 @@ class POIViewSet(viewsets.ReadOnlyModelViewSet):
     serializer_class = POISerializer
     permission_classes = [AllowAny, ]
     renderer_classes = [renderers.JSONRenderer, GeoJSONRenderer]
+    filter_backends = [filters.OrderingFilter, filters.SearchFilter]
+    ordering_fields = ['name', 'date_insert']
+    search_fields = ['name', 'type__label', 'type__category__label']
 
     def get_queryset(self):
         portal_pk = self.kwargs['portal_pk']
