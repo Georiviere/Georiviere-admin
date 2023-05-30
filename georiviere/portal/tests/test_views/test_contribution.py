@@ -14,7 +14,7 @@ class ContributionViewPostTest(TestCase):
         cls.portal = PortalFactory.create()
 
     def test_contribution_structure(self):
-        url = reverse('api_portal:contributions-contributions_schema',
+        url = reverse('api_portal:contributions-json_schema',
                       kwargs={'portal_pk': self.portal.pk, 'lang': 'fr'})
         response = self.client.get(url)
         self.assertEqual(response.status_code, 200)

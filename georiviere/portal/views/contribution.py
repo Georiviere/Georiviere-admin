@@ -26,7 +26,7 @@ class ContributionViewSet(mixins.CreateModelMixin, mixins.RetrieveModelMixin, mi
     serializer_class = ContributionSerializer
     renderer_classes = [CamelCaseJSONRenderer, GeoJSONRenderer, ]
 
-    @action(detail=False, url_name="contributions_schema", methods=['get'],
+    @action(detail=False, url_name="json_schema", methods=['get'],
             renderer_classes=[CamelCaseJSONRenderer],
             serializer_class=ContributionSchemaSerializer)
     def json_schema(self, request, *args, **kwargs):
