@@ -12,7 +12,7 @@ class MapSerializerTest(TestCase):
         cls.portal = PortalFactory.create()
         cls.serializer_layer = MapLayerSerializer(instance=cls.portal.layers.first())
         cls.serializer_base_layer = MapBaseLayerSerializer(instance=cls.portal.map_base_layers.first())
-        cls.serializer_group_layer = MapGroupLayerSerializer(many=cls.portal.mapgrouplayer_set.last())
+        cls.serializer_group_layer = MapGroupLayerSerializer(instance=cls.portal.mapgrouplayer_set.first())
 
     def test_map_layer_content(self):
         data = self.serializer_layer.data
