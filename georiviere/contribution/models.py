@@ -81,8 +81,8 @@ class Contribution(TimeStampedModelMixin, WatershedPropertiesMixin, ZoningProper
             return self.quality
         elif hasattr(self, 'quantity'):
             return self.quantity
-        elif hasattr(self, 'landscape_elements'):
-            return self.landscape_elements
+        elif hasattr(self, 'landscape_element'):
+            return self.landscape_element
         return _('No category')
 
     @property
