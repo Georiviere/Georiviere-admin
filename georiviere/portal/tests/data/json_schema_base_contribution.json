@@ -343,7 +343,7 @@
       },
       "then": {
         "properties": {
-          "water_level_type": {
+          "type": {
             "type": "string",
             "title": "Water Level Type",
             "enum": [
@@ -354,14 +354,14 @@
           }
         },
         "required": [
-          "water_level_type"
+          "type"
         ]
       }
     },
     {
       "if": {
         "properties": {
-          "water_level_type": {
+          "type": {
             "const": "Overflow"
           }
         }
@@ -385,7 +385,7 @@
       },
       "then": {
         "properties": {
-          "quality_water_type": {
+          "type": {
             "type": "string",
             "title": "Quality Water Type",
             "enum": [
@@ -396,14 +396,14 @@
           }
         },
         "required": [
-          "quality_water_type"
+          "type"
         ]
       }
     },
     {
       "if": {
         "properties": {
-          "quality_water_type": {
+          "type": {
             "const": "Pollution"
           }
         }
