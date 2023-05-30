@@ -99,7 +99,7 @@
         "model": "valorization.poitype",
         "fields": {
             "label": "Chantier participatif",
-            "pictogram": "",
+            "pictogram": "upload/chantier_participatif.svg",
             "category": 2,
             "date_insert": "2023-05-09T15:15:30.143Z",
             "date_update": "2022-03-09T15:15:30.143Z"
