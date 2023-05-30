@@ -1,3 +1,6 @@
+import json
+import os
+
 from django.test import TestCase
 
 from . import factories
@@ -13,6 +16,13 @@ class PortalTest(TestCase):
 
     def test_str(self):
         self.assertEqual(str(self.portal), "Name portal")
+
+    def test_contribution_schema(self):
+        filename = os.path.join(os.path.dirname(__file__), 'data',
+                                'json_schema_base_contribution_without_subtypes.json')
+        with open(filename) as f:
+            json_data = json.load(f)
+        self.assertEqual(json_data, self.portal.contribution_json_schema)
 
 
 class MapBaseLayerTest(TestCase):

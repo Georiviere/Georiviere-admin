@@ -29,6 +29,7 @@ urlpatterns = [
     path('', include('mapentity.urls'),),
     path('', include('georiviere.river.urls')),
     path('', include('geotrek.zoning.urls')),
+    path('', include('georiviere.contribution.urls')),
     path('', include('georiviere.description.urls')),
     path('', include('georiviere.knowledge.urls')),
     path('', include('georiviere.maintenance.urls')),

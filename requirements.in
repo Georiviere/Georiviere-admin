@@ -13,3 +13,4 @@ python-memcached
 sentry-sdk
 django-admin-ordering
 djangorestframework-camel-case
+jsonschema
