@@ -97,13 +97,12 @@ class ContributionViewDetailTest(TestCase):
                                                "properties": '{"email_author": "x@x.x",  "date_observation": "2022-08-16", '
                                                              '"category": "Foo"}'})
         self.assertEqual(response.status_code, 400)
-        self.assertEqual(response.json(), {'properties':
-                                               ["'Foo' is not one of "
-                                                "['Contribution Quantité', "
-                                                "'Contribution Qualité', "
-                                                "'Contribution Faune-Flore', "
-                                                "'Contribution Élément Paysagers', "
-                                                "'Contribution Dégâts Potentiels']"]})
+        self.assertEqual(response.json(), {'properties': ["'Foo' is not one of "
+                                                          "['Contribution Quantité', "
+                                                          "'Contribution Qualité', "
+                                                          "'Contribution Faune-Flore', "
+                                                          "'Contribution Élément Paysagers', "
+                                                          "'Contribution Dégâts Potentiels']"]})
 
     @mock.patch('georiviere.contribution.schema.get_contribution_properties')
     def test_contribution_category_model_does_not_exist(self, mocked):

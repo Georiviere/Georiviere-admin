@@ -69,7 +69,7 @@ class ContributionSerializer(serializers.ModelSerializer):
                                                 type=types[type_prop],
                                                 **properties)
             transaction.savepoint_commit(sid)
-        except Exception as e:
+        except Exception:
             transaction.savepoint_rollback(sid)
             raise serializers.ValidationError({"category": msg or _("An error occured")})
         return contribution
