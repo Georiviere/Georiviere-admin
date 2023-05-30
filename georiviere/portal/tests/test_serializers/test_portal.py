@@ -28,16 +28,24 @@ class PortalSerializerTest(TestCase):
         cls.serializer_portal_without_spatial_extent = PortalSerializer(instance=cls.portal_without_se)
         cls.serializer_portal_with_flatpages = PortalSerializer(instance=cls.portal_flatpages,
                                                                 context={'portal_pk': cls.portal_flatpages.pk})
+        watershed_portal = cls.portal.layers.get(layer_type='watersheds')
+        watershed_portal.hidden = True
+        watershed_portal.save()
+        watershed_portal_all_grouped = cls.portal_layers_all_grouped.layers.get(layer_type='watersheds')
+        watershed_portal_all_grouped.hidden = True
+        watershed_portal_all_grouped.save()
 
     def test_portal_content(self):
         data = self.serializer_portal.data
         self.assertSetEqual(set(data.keys()), {'id', 'map', 'name', 'flatpages'})
+        self.assertEqual(len(data['map']['group'][0]['layers']), 4)
 
     def test_portal_all_layers_grouped_content(self):
         data = self.serializer_portal_layers_all_group.data
         self.assertEqual(len(data['map']['group']), 1)
         self.assertEqual(data['map']['group'][0]['label'], 'Bar')
         self.assertSetEqual(set(data.keys()), {'id', 'map', 'name', 'flatpages'})
+        self.assertEqual(len(data['map']['group'][0]['layers']), 4)
 
     def test_portal_without_se_content(self):
         data = self.serializer_portal_without_spatial_extent.data

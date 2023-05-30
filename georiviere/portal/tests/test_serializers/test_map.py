@@ -12,19 +12,19 @@ class MapSerializerTest(TestCase):
         cls.portal = PortalFactory.create()
         cls.serializer_layer = MapLayerSerializer(instance=cls.portal.layers.first())
         cls.serializer_base_layer = MapBaseLayerSerializer(instance=cls.portal.map_base_layers.first())
-        cls.serializer_group_layer = MapGroupLayerSerializer(instance=cls.portal.mapgrouplayer_set.first())
+        cls.serializer_group_layer = MapGroupLayerSerializer(many=cls.portal.mapgrouplayer_set.last())
 
     def test_map_layer_content(self):
         data = self.serializer_layer.data
         self.assertSetEqual(set(data.keys()), {'url', 'type', 'label', 'id', 'options', 'default_active', 'geojson_url',
-                                               'hidden'})
+                                               })
 
     def test_map_layer_content_poi_categories(self):
         category = POICategoryFactory.create()
         data = MapLayerSerializer(instance=self.portal.layers.filter(layer_type__startswith='pois').first()).data
 
         self.assertSetEqual(set(data.keys()), {'url', 'type', 'label', 'id', 'options', 'default_active', 'geojson_url',
-                                               'hidden'})
+                                               })
         self.assertEqual(data['geojson_url'], f'/api/portal/fr/{self.portal.pk}/pois/category/{category.pk}.geojson')
 
     def test_map_base_layer_content(self):

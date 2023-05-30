@@ -23,7 +23,7 @@ class MapLayerSerializer(ModelSerializer):
     class Meta:
         model = MapLayer
         fields = (
-            'id', 'label', 'default_active', 'options', 'geojson_url', 'url', 'type', 'hidden'
+            'id', 'label', 'default_active', 'options', 'geojson_url', 'url', 'type'
         )
         ordering = ('order',)
 
@@ -66,10 +66,14 @@ class MapBaseLayerSerializer(ModelSerializer):
 
 
 class MapGroupLayerSerializer(ModelSerializer):
-    layers = MapLayerSerializer(many=True)
+    layers = SerializerMethodField()
 
     class Meta:
         model = MapGroupLayer
         fields = (
             'label', 'layers'
         )
+
+    def get_layers(self, obj):
+        layers = obj.layers.filter(hidden=False)
+        return MapLayerSerializer(layers, many=True).data
