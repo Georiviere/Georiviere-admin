@@ -45,7 +45,7 @@ class PortalSerializer(ModelSerializer):
 
     def to_representation(self, instance):
         ret = super().to_representation(instance)
-        layers_without_group = instance.layers.filter(group_layer__isnull=True, hidden=False)
+        layers_without_group = instance.available_layers.filter(group_layer__isnull=True)
         if layers_without_group.exists():
             ret['map']['group'].append(
                 OrderedDict({'label': None,

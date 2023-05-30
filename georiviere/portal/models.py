@@ -44,6 +44,10 @@ class MapGroupLayer(models.Model):
     def __str__(self):
         return self.label
 
+    @property
+    def available_layers(self):
+        return self.layers.filter(hidden=False)
+
 
 class MapLayer(models.Model):
     label = models.CharField(max_length=50)
@@ -92,3 +96,7 @@ class Portal(TimeStampedModelMixin, models.Model):
 
     def __str__(self):
         return self.name
+
+    @property
+    def available_layers(self):
+        return self.layers.filter(hidden=False)

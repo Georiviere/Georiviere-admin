@@ -66,14 +66,10 @@ class MapBaseLayerSerializer(ModelSerializer):
 
 
 class MapGroupLayerSerializer(ModelSerializer):
-    layers = SerializerMethodField()
+    layers = MapLayerSerializer(many=True, source='available_layers')
 
     class Meta:
         model = MapGroupLayer
         fields = (
             'label', 'layers'
         )
-
-    def get_layers(self, obj):
-        layers = obj.layers.filter(hidden=False)
-        return MapLayerSerializer(layers, many=True).data
