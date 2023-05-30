@@ -1,6 +1,7 @@
 from georiviere.tests import CommonRiverTest
 from . import factories
 from georiviere.contribution import models as contribution_models
+from georiviere.portal.tests.factories import PortalFactory
 
 
 class ContributionViewTestCase(CommonRiverTest):
@@ -21,6 +22,18 @@ class ContributionViewTestCase(CommonRiverTest):
             'geom': self.obj.geom.ewkt,
             'portal': self.obj.portal.pk,
             'published': False
+        }
+
+    def get_good_data(self):
+        portal = PortalFactory.create()
+        severity = factories.SeverityTypeTypeFactory()
+        temp_data = self.modelfactory.build(portal=portal)
+        return {
+            'email_author': temp_data.email_author,
+            'portal': portal.pk,
+            'geom': temp_data.geom.ewkt,
+            'severity': severity.pk,
+            'description': 'New_description'
         }
 
     def test_distance_to_source_is_available(self):
