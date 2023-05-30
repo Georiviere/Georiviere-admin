@@ -1,7 +1,7 @@
 from copy import deepcopy
 from rest_framework import serializers
 from django.core.serializers.json import DjangoJSONEncoder
-
+from django.db import transaction
 from georiviere.contribution.schema import (get_contribution_properties, get_contribution_allOf,
                                             get_contribution_json_schema)
 from georiviere.contribution.models import (Contribution, ContributionLandscapeElements, ContributionQuality,
@@ -24,46 +24,52 @@ class ContributionSerializer(serializers.ModelSerializer):
         return new_data
 
     def create(self, validated_data):
-        properties = validated_data.pop('properties')
-        category = properties.pop('category')
-        email_author = properties.pop('email_author')
-        name_author = properties.pop('name_author', '')
-        first_name_author = properties.pop('first_name_author', '')
-        date_observation = properties.pop('date_observation')
-        geom = validated_data.pop('geom')
-        main_contribution = Contribution.objects.create(geom=geom, email_author=email_author,
-                                                        date_observation=date_observation,
-                                                        portal_id=self.context.get('portal_pk'),
-                                                        name_author=name_author,
-                                                        first_name_author=first_name_author)
-        model = None
+        sid = transaction.savepoint()
+        try:
+            properties = validated_data.pop('properties')
+            category = properties.pop('category')
+            email_author = properties.pop('email_author')
+            name_author = properties.pop('name_author', '')
+            first_name_author = properties.pop('first_name_author', '')
+            date_observation = properties.pop('date_observation')
+            geom = validated_data.pop('geom')
+            main_contribution = Contribution.objects.create(geom=geom, email_author=email_author,
+                                                            date_observation=date_observation,
+                                                            portal_id=self.context.get('portal_pk'),
+                                                            name_author=name_author,
+                                                            first_name_author=first_name_author)
+            model = None
 
-        if category == ContributionLandscapeElements._meta.verbose_name.title():
-            model = ContributionLandscapeElements
+            if category == ContributionLandscapeElements._meta.verbose_name.title():
+                model = ContributionLandscapeElements
 
-        if category == ContributionQuality._meta.verbose_name.title():
-            model = ContributionQuality
+            if category == ContributionQuality._meta.verbose_name.title():
+                model = ContributionQuality
 
-        if category == ContributionQuantity._meta.verbose_name.title():
-            model = ContributionQuantity
+            if category == ContributionQuantity._meta.verbose_name.title():
+                model = ContributionQuantity
 
-        if category == ContributionPotentialDamage._meta.verbose_name.title():
-            model = ContributionPotentialDamage
+            if category == ContributionPotentialDamage._meta.verbose_name.title():
+                model = ContributionPotentialDamage
 
-        if category == ContributionFaunaFlora._meta.verbose_name.title():
-            model = ContributionFaunaFlora
+            if category == ContributionFaunaFlora._meta.verbose_name.title():
+                model = ContributionFaunaFlora
 
-        if not model:
+            if not model:
+                transaction.savepoint_rollback(sid)
+                raise serializers.ValidationError({"category": "category is not valid"})
+
+            type_prop = properties.pop('type')
+
+            types = {v: k for k, v in model.TypeChoice.choices}
+
+            contribution = model.objects.create(contribution=main_contribution,
+                                                type=types[type_prop],
+                                                **properties)
+            transaction.savepoint_commit(sid)
+        except Exception:
+            transaction.savepoint_rollback(sid)
             raise serializers.ValidationError({"category": "category is not valid"})
-
-        type_prop = properties.pop('type')
-
-        types = {v: k for k, v in model.TypeChoice.choices}
-
-        contribution = model.objects.create(contribution=main_contribution,
-                                            type=types[type_prop],
-                                            **properties)
-
         return contribution
 
     def to_representation(self, instance):
