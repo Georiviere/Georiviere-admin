@@ -26,7 +26,7 @@ class StreamViewTest(TestCase):
         response = self.client.get(url)
         self.assertEqual(response.status_code, 200)
         self.assertSetEqual(set(response.json().keys()), {'attachments', 'length', 'flow', 'descent', 'name',
-                                                          'id', 'description'})
+                                                          'id', 'description', 'geometry_center'})
 
     def test_stream_list_geojson_structure(self):
         url = reverse('api_portal:streams-list',
@@ -42,4 +42,4 @@ class StreamViewTest(TestCase):
         self.assertEqual(response.status_code, 200)
         self.assertEqual(len(response.json()), 1)
         self.assertSetEqual(set(response.json()[0].keys()), {'attachments', 'flow', 'descent', 'length',
-                                                             'name', 'id', 'description'})
+                                                             'name', 'id', 'description', 'geometry_center'})
