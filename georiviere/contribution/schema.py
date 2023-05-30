@@ -512,6 +512,7 @@ def get_contribution_allOf():
 
 def get_contribution_json_schema():
     return {
+        "type": "object",
         "required": ['email_author', 'date_observation', 'category'],
         "properties": get_contribution_properties(),
         "allOf": get_contribution_allOf()
