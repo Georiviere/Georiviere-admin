@@ -1,4 +1,5 @@
 from collections import OrderedDict
+from georiviere.portal.serializers.flatpage import FlatpagePortalSerializer
 from georiviere.portal.serializers.map import MapBaseLayerSerializer, MapGroupLayerSerializer, MapLayerSerializer
 from georiviere.portal.models import Portal
 
@@ -30,12 +31,16 @@ class MapSerializer(ModelSerializer):
 
 class PortalSerializer(ModelSerializer):
     map = MapSerializer(many=False, source='*')
+    flatpages = SerializerMethodField()
 
     class Meta:
         model = Portal
         fields = (
-            'id', 'name', 'map'
+            'id', 'name', 'map', 'flatpages'
         )
+
+    def get_flatpages(self, obj):
+        return FlatpagePortalSerializer(obj.flatpages, many=True, context={'portal_pk': self.context.get('portal_pk')}).data
 
     def to_representation(self, instance):
         ret = super().to_representation(instance)

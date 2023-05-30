@@ -17,3 +17,11 @@ class PortalViewSet(mixins.RetrieveModelMixin, viewsets.GenericViewSet):
 
     def get_queryset(self):
         return Portal.objects.all()
+
+    def get_serializer_context(self):
+        """
+        Extra context provided to the serializer class.
+        """
+        context = super().get_serializer_context()
+        context['portal_pk'] = self.kwargs['pk']
+        return context
