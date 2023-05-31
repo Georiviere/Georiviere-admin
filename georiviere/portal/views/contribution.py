@@ -14,6 +14,7 @@ from georiviere.portal.serializers.contribution import (ContributionSchemaSerial
 
 from rest_framework import viewsets
 from rest_framework import mixins
+from rest_framework import renderers
 from rest_framework.decorators import action
 from rest_framework.response import Response
 
@@ -27,7 +28,7 @@ class ContributionViewSet(mixins.CreateModelMixin, mixins.RetrieveModelMixin, mi
     renderer_classes = [CamelCaseJSONRenderer, GeoJSONRenderer, ]
 
     @action(detail=False, url_name="json_schema", methods=['get'],
-            renderer_classes=[CamelCaseJSONRenderer],
+            renderer_classes=[renderers.JSONRenderer],
             serializer_class=ContributionSchemaSerializer)
     def json_schema(self, request, *args, **kwargs):
         serializer = self.get_serializer({})

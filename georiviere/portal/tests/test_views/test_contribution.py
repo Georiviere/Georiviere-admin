@@ -146,6 +146,24 @@ class ContributionViewPostTest(TestCase):
         self.assertEqual(response.status_code, 400)
         self.assertEqual(response.json(), {'Error': "La catégorie n'est pas valide"})
 
+    @mock.patch('georiviere.contribution.schema.get_contribution_allOf')
+    def test_contribution_category_model_other_error(self, mocked):
+        def json_property():
+            json_schema_all_of = [{'if': {'properties': {'category': {'const': 'Contribution Quantité'}}},
+                                   'then': {'properties': {'type': {'type': 'string', 'title': 'Type',
+                                                                    'enum': ['Landing', ]}}}}]
+            return json_schema_all_of
+
+        mocked.side_effect = json_property
+        url = reverse('api_portal:contributions-list',
+                      kwargs={'portal_pk': self.portal.pk, 'lang': 'fr'})
+        response = self.client.post(url, data={"geom": "POINT(0 0)",
+                                               "properties": '{"email_author": "x@x.x",  "date_observation": "2022-08-16", '
+                                                             '"category": "Contribution Quantité",'
+                                                             '"type": "Landing"}'})
+        self.assertEqual(response.status_code, 400)
+        self.assertEqual(response.json(), {'Error': "KeyError 'Landing'"})
+
 
 class ContributionViewTest(TestCase):
     @classmethod
@@ -155,7 +173,8 @@ class ContributionViewTest(TestCase):
         cls.contribution_other_portal = ContributionFactory.create(published=True)
         cls.contribution_not_published = ContributionFactory.create(published=False, portal=cls.portal)
         cls.contribution_quantity = ContributionQuantityFactory.create(contribution=cls.contribution)
-        cls.other_contribution_quantity = ContributionQuantityFactory.create(contribution=cls.contribution_not_published)
+        cls.other_contribution_quantity = ContributionQuantityFactory.create(
+            contribution=cls.contribution_not_published)
         cls.other_contribution_quantity_2 = ContributionQuantityFactory.create(
             contribution=cls.contribution_other_portal)
 

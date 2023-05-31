@@ -90,7 +90,6 @@ class ContributionSerializer(serializers.ModelSerializer):
             if category == ContributionFaunaFlora._meta.verbose_name.title():
                 model = ContributionFaunaFlora
             if not model:
-                transaction.savepoint_rollback(sid)
                 msg = _("Category is not valid")
                 raise
 
@@ -102,8 +101,10 @@ class ContributionSerializer(serializers.ModelSerializer):
                                                 type=types[type_prop],
                                                 **properties)
             transaction.savepoint_commit(sid)
-        except Exception:
+        except Exception as e:
             transaction.savepoint_rollback(sid)
+            if not msg:
+                msg = f'{e.__class__.__name__} {e}'
             raise serializers.ValidationError({"Error": msg or _("An error occured")})
         return contribution
 

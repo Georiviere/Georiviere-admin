@@ -1,8 +1,8 @@
 {
   "type": "object",
   "required": [
-    "emailAuthor",
-    "dateObservation",
+    "email_author",
+    "date_observation",
     "category"
   ],
   "properties": {
