@@ -65,6 +65,15 @@ class ContributionCategoriesTest(TestCase):
         severity_type = SeverityTypeTypeFactory(label="Severity type 1")
         self.assertEqual(str(severity_type), "Severity type 1")
 
+    def test_contribution_category_display(self):
+        contribution = ContributionFactory(email_author='mail.mail@mail')
+        self.assertEqual(str(contribution.category_display),
+                         f'<a data-pk="{contribution.pk}" href="/contribution/{contribution.pk}/" title="No category" >No category</a>')
+        contribution.published = True
+        contribution.save()
+        self.assertEqual(contribution.category_display,
+                         f'<span class="badge badge-success" title="Published">&#x2606;</span> <a data-pk="{contribution.pk}" href="/contribution/{contribution.pk}/" title="No category" >No category</a>')
+
 
 class ContributionPotentialDamageTest(TestCase):
     """Test for Category potential damage model"""

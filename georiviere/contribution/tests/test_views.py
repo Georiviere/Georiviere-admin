@@ -1,6 +1,7 @@
 from georiviere.tests import CommonRiverTest
 from . import factories
 from georiviere.contribution import models as contribution_models
+from georiviere.portal.tests.factories import PortalFactory
 
 
 class ContributionViewTestCase(CommonRiverTest):
@@ -19,7 +20,20 @@ class ContributionViewTestCase(CommonRiverTest):
             'date_observation': '2020-03-17T00:00:00Z',
             'severity': self.obj.severity,
             'geom': self.obj.geom.ewkt,
-            'portal': self.obj.portal.pk
+            'portal': self.obj.portal.pk,
+            'published': False
+        }
+
+    def get_good_data(self):
+        portal = PortalFactory.create()
+        severity = factories.SeverityTypeTypeFactory()
+        temp_data = self.modelfactory.build(portal=portal)
+        return {
+            'email_author': temp_data.email_author,
+            'portal': portal.pk,
+            'geom': temp_data.geom.ewkt,
+            'severity': severity.pk,
+            'description': 'New_description'
         }
 
     def test_distance_to_source_is_available(self):
@@ -42,10 +56,22 @@ class ContributionViewTestCase(CommonRiverTest):
         response = self.client.get(obj.get_detail_url())
         self.assertEqual(response.status_code, 200)
 
+        response = self.client.get(obj.get_update_url())
+        self.assertEqual(response.status_code, 200)
+        self._post_update_form(obj)
+
         url = obj.get_detail_url()
         obj.delete()
         response = self.client.get(url)
         self.assertEqual(response.status_code, 404)
+
+        # Test to update without login
+        self.logout()
+
+        obj = self.modelfactory()
+
+        response = self.client.get(obj.get_update_url())
+        self.assertEqual(response.status_code, 302)
 
     def test_document_export(self):
         pass

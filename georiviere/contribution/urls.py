@@ -3,7 +3,7 @@ from mapentity.registry import MapEntityOptions, registry
 
 
 class ContributionOptions(MapEntityOptions):
-    dynamic_views = ['List', 'JsonList', 'Layer', 'Detail']
+    dynamic_views = ['List', 'JsonList', 'Layer', 'Detail', 'Update']
 
 
 app_name = 'contribution'

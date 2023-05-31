@@ -19,6 +19,14 @@
             <th>{{ object|verbose:"date_observation" }}</th>
             <td>{{ object.date_observation }}</td>
         </tr>
+        <tr>
+            <th>{{ object|verbose:"severity" }}</th>
+            <td>{{ object.severity|default:"" }}</td>
+        </tr>
+        <tr>
+            <th>{{ object|verbose:"description" }}</th>
+            <td>{{ object.description|linebreaks }}</td>
+        </tr>
         {% if object.potential_damage %}
             <tr>
                 <th>{{ object.potential_damage|verbose:"type" }}</th>
@@ -118,6 +126,40 @@
                     <td>{{ object.fauna_flora.fish_species }}</td>
                 </tr>
             {% endif %}
+        {% endif %}
+        {% if object.quality %}
+            <tr>
+                <th>{{ object.quality|verbose:"type" }}</th>
+                <td>{{ object.quality.get_type_display }}</td>
+            </tr>
+            {% if object.quality.type == 2 %}
+                <tr>
+                    <th>{{ object.quality|verbose:"nature_pollution" }}</th>
+                    <td>{{ object.quality.nature_pollution }}</td>
+                </tr>
+                <tr>
+                    <th>{{ object.quality|verbose:"type_pollution" }}</th>
+                    <td>{{ object.quality.type_pollution }}</td>
+                </tr>
+            {% endif %}
+        {% endif %}
+        {% if object.quantity %}
+            <tr>
+                <th>{{ object.quantity|verbose:"type" }}</th>
+                <td>{{ object.quantity.get_type_display }}</td>
+            </tr>
+            {% if object.quantity.type == 3 %}
+                <tr>
+                    <th>{{ object.quantity|verbose:"landmark" }}</th>
+                    <td>{{ object.quantity.landmark }}</td>
+                </tr>
+            {% endif %}
+        {% endif %}
+        {% if object.landscape_element %}
+            <tr>
+                <th>{{ object.landscape_element|verbose:"type" }}</th>
+                <td>{{ object.landscape_element.get_type_display }}</td>
+            </tr>
         {% endif %}
         {% include "mapentity/trackinfo_fragment.html" %}
     </table>

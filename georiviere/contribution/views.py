@@ -1,7 +1,9 @@
-from mapentity.views import MapEntityList, MapEntityDetail, MapEntityFormat, MapEntityLayer, MapEntityJsonList
+from mapentity.views import (MapEntityList, MapEntityDetail, MapEntityFormat, MapEntityLayer, MapEntityJsonList,
+                             MapEntityUpdate)
 
 
 from georiviere.contribution.filters import ContributionFilterSet
+from georiviere.contribution.forms import ContributionForm
 from georiviere.contribution.models import Contribution
 
 
@@ -9,7 +11,7 @@ class ContributionList(MapEntityList):
     queryset = Contribution.objects.all()
     filterform = ContributionFilterSet
     columns = ['id', 'portal', 'category', 'name_author', 'email_author',
-               'date_observation', 'severity']
+               'date_observation', 'severity', 'published']
 
 
 class ContributionLayer(MapEntityLayer):
@@ -24,11 +26,16 @@ class ContributionJsonList(MapEntityJsonList, ContributionList):
 class ContributionDetail(MapEntityDetail):
     model = Contribution
 
-    def get_context_data(self, *args, **kwargs):
-        context = super().get_context_data(*args, **kwargs)
-        context['can_edit'] = False
-        return context
-
 
 class ContributionFormat(MapEntityFormat, ContributionList):
     model = Contribution
+
+
+class ContributionUpdate(MapEntityUpdate):
+    model = Contribution
+    form_class = ContributionForm
+
+    def get_form_kwargs(self):
+        kwargs = super().get_form_kwargs()
+        kwargs['can_delete'] = False
+        return kwargs
