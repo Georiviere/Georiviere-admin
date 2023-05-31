@@ -29,6 +29,7 @@ urlpatterns = [
     path('', include('mapentity.urls'),),
     path('', include('georiviere.river.urls')),
     path('', include('geotrek.zoning.urls')),
+    path('', include('georiviere.contribution.urls')),
     path('', include('georiviere.description.urls')),
     path('', include('georiviere.knowledge.urls')),
     path('', include('georiviere.maintenance.urls')),
@@ -38,7 +39,8 @@ urlpatterns = [
     path('', include('georiviere.studies.urls')),
     path('', include('georiviere.proceeding.urls')),
     path('', include('georiviere.valorization.urls')),
-    path('', include('geotrek.sensitivity.urls'))
+    path('', include('geotrek.sensitivity.urls')),
+    path('', include('georiviere.portal.urls'))
 ]
 
 if settings.DEBUG:

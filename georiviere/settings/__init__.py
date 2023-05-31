@@ -33,6 +33,8 @@ orig_import = __import__
 def import_mock(name, *args, **kwargs):
     if 'geotrek.core.models' in name:
         return orig_import('georiviere.main.utils', *args, **kwargs)
+    if 'geotrek.common.models' in name:
+        return orig_import('georiviere.main.models', *args, **kwargs)
     if 'geotrek.common.urls' in name:
         return orig_import('georiviere.river.urls', *args, **kwargs)
     if 'geotrek.common.serializers' in name:
@@ -144,7 +146,9 @@ INSTALLED_APPS = PROJECT_APPS + [
     'georiviere.watershed',
     'geotrek.authent',
     'georiviere.flatpages',
+    'georiviere.contribution',
     'geotrek.sensitivity',
+    'admin_ordering'
 ]
 
 STATICFILES_FINDERS = (
@@ -279,6 +283,7 @@ USE_TZ = True
 STATIC_ROOT = VAR_DIR / "static"
 MEDIA_ROOT = VAR_DIR / "media"
 MEDIA_URL = '/media/'
+MEDIA_URL_SECURE = '/media_secure/'
 STATIC_URL = '/static/'
 
 STATICFILES_DIRS = [
@@ -407,6 +412,28 @@ URL_DOCUMENT_REPORT = ''
 
 SENSITIVITY_DEFAULT_RADIUS = 100  # meters
 SENSITIVE_AREA_INTERSECTION_MARGIN = 500  # meters (always used)
+
+# Parser parameters for retries and error codes
+PARSER_RETRY_SLEEP_TIME = 60  # time of sleep between requests
+PARSER_NUMBER_OF_TRIES = 3  # number of requests to try before abandon
+PARSER_RETRY_HTTP_STATUS = [503]
+
+# Thumbnails
+
+THUMBNAIL_ALIASES = {
+    '': {
+        'valorization': {'size': (400, 400)},
+    },
+}
+
+# API
+
+SWAGGER_SETTINGS = {
+    'USE_SESSION_AUTH': False,
+    'APIS_SORTER': 'alpha',
+    'JSON_EDITOR': True,
+    'API_PORTAL': "Georiviere API"
+}
 
 if os.getenv('SSL_ENABLED', default=0):
     # SECURITY

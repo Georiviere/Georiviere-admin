@@ -25,8 +25,8 @@ class POICategory(TimeStampedModelMixin, StructureOrNoneRelated):
     label = models.CharField(max_length=128, verbose_name=_("Label"))
 
     class Meta:
-        verbose_name = _("POICategory")
-        verbose_name_plural = _("POICategories")
+        verbose_name = _("POI Category")
+        verbose_name_plural = _("POI Categories")
         ordering = ['label']
         unique_together = (
             ('label', 'structure'),
@@ -87,6 +87,9 @@ class POI(AddPropertyBufferMixin, TimeStampedModelMixin, StructureRelated, MapEn
     @property
     def type_display(self):
         return f'{self.type.label} - {self.type.category.label}'
+
+    def is_public(self):
+        return self.portals.exists()
 
 
 POI.add_property('streams', Stream.within_buffer, _("Stream"))
