@@ -1,7 +1,7 @@
 from rest_framework.permissions import AllowAny
 
 from django.conf import settings
-from django.db.models import F
+from django.db.models import F, Q
 from django.contrib.gis.db.models.functions import Transform
 from django.utils import translation
 
@@ -46,6 +46,10 @@ class ContributionViewSet(mixins.CreateModelMixin, mixins.RetrieveModelMixin, mi
     def get_queryset(self):
         portal_pk = self.kwargs['portal_pk']
         queryset = Contribution.objects.filter(portal_id=portal_pk, published=True)
+        queryset = queryset.exclude(
+            Q(potential_damage__isnull=True) & Q(fauna_flora__isnull=True) & Q(quantity__isnull=True)
+            & Q(quality__isnull=True) & Q(landscape_element__isnull=True)
+        )
         queryset = queryset.annotate(geom_transformed=Transform(F('geom'), settings.API_SRID))
         return queryset
 

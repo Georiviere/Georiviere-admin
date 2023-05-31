@@ -137,6 +137,7 @@ class ContributionViewPostTest(TestCase):
             }
             }
             return json_schema_properties
+
         mocked.side_effect = json_property
         url = reverse('api_portal:contributions-list',
                       kwargs={'portal_pk': self.portal.pk, 'lang': 'fr'})
@@ -169,6 +170,8 @@ class ContributionViewTest(TestCase):
     @classmethod
     def setUpTestData(cls):
         cls.portal = PortalFactory.create()
+        cls.contribution_without_category = ContributionFactory.create(published=True, portal=cls.portal,
+                                                                       description="x")
         cls.contribution = ContributionFactory.create(published=True, portal=cls.portal, description="foo")
         cls.contribution_other_portal = ContributionFactory.create(published=True)
         cls.contribution_not_published = ContributionFactory.create(published=False, portal=cls.portal)
