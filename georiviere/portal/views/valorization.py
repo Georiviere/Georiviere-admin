@@ -9,16 +9,18 @@ from georiviere.valorization.models import POI, POICategory
 
 from rest_framework import viewsets, filters
 from rest_framework.permissions import AllowAny
-from rest_framework import renderers
 from rest_framework.decorators import action
 from rest_framework.response import Response
+
+
+from djangorestframework_camel_case.render import CamelCaseJSONRenderer
 
 
 class POIViewSet(viewsets.ReadOnlyModelViewSet):
     geojson_serializer_class = POIGeojsonSerializer
     serializer_class = POISerializer
     permission_classes = [AllowAny, ]
-    renderer_classes = [renderers.JSONRenderer, GeoJSONRenderer]
+    renderer_classes = [CamelCaseJSONRenderer, GeoJSONRenderer]
     filter_backends = [filters.OrderingFilter, filters.SearchFilter]
     ordering_fields = ['name', 'date_insert']
     search_fields = ['name', 'type__label', 'type__category__label']

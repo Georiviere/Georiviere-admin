@@ -6,8 +6,10 @@ from django.contrib.gis.db.models.functions import Centroid, Transform
 from georiviere.portal.serializers.river import StreamGeojsonSerializer, StreamSerializer
 from georiviere.main.renderers import GeoJSONRenderer
 
+
+from djangorestframework_camel_case.render import CamelCaseJSONRenderer
+
 from rest_framework import filters, viewsets
-from rest_framework.renderers import JSONRenderer
 from rest_framework import permissions as rest_permissions
 
 
@@ -15,7 +17,7 @@ class StreamViewSet(viewsets.ModelViewSet):
     model = Stream
     geojson_serializer_class = StreamGeojsonSerializer
     serializer_class = StreamSerializer
-    renderer_classes = (JSONRenderer, GeoJSONRenderer, )
+    renderer_classes = (CamelCaseJSONRenderer, GeoJSONRenderer, )
     permission_classes = [rest_permissions.DjangoModelPermissionsOrAnonReadOnly]
     filter_backends = [filters.OrderingFilter, filters.SearchFilter]
     ordering_fields = ['name', 'date_insert']
