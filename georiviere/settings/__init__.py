@@ -422,7 +422,7 @@ PARSER_RETRY_HTTP_STATUS = [503]
 
 THUMBNAIL_ALIASES = {
     '': {
-        'valorization': {'size': (150, 150)},
+        'valorization': {'size': (400, 400)},
     },
 }
 
