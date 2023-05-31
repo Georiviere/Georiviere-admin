@@ -2,6 +2,8 @@ from copy import deepcopy
 from rest_framework import serializers
 from rest_framework_gis import serializers as geo_serializers
 
+from django.conf import settings
+from django.contrib.gis.geos import GEOSGeometry
 from django.core.serializers.json import DjangoJSONEncoder
 from django.db import transaction
 from django.utils.translation import gettext_lazy as _
@@ -61,11 +63,15 @@ class ContributionSerializer(serializers.ModelSerializer):
             name_author = properties.pop('name_author', '')
             first_name_author = properties.pop('first_name_author', '')
             date_observation = properties.pop('date_observation')
+            description = properties.pop('description', '')
             geom = validated_data.pop('geom')
+            geom = GEOSGeometry(geom, srid=4326)
+            geom = geom.transform(settings.SRID, clone=True)
             main_contribution = Contribution.objects.create(geom=geom, email_author=email_author,
                                                             date_observation=date_observation,
                                                             portal_id=self.context.get('portal_pk'),
                                                             name_author=name_author,
+                                                            description=description,
                                                             first_name_author=first_name_author)
             model = None
 
@@ -84,7 +90,6 @@ class ContributionSerializer(serializers.ModelSerializer):
             if category == ContributionFaunaFlora._meta.verbose_name.title():
                 model = ContributionFaunaFlora
             if not model:
-                transaction.savepoint_rollback(sid)
                 msg = _("Category is not valid")
                 raise
 
@@ -96,9 +101,11 @@ class ContributionSerializer(serializers.ModelSerializer):
                                                 type=types[type_prop],
                                                 **properties)
             transaction.savepoint_commit(sid)
-        except Exception:
+        except Exception as e:
             transaction.savepoint_rollback(sid)
-            raise serializers.ValidationError({"category": msg or _("An error occured")})
+            if not msg:
+                msg = f'{e.__class__.__name__} {e}'
+            raise serializers.ValidationError({"Error": msg or _("An error occured")})
         return contribution
 
     def to_representation(self, instance):

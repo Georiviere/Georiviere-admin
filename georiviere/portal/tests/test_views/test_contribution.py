@@ -66,10 +66,11 @@ class ContributionViewPostTest(TestCase):
     def test_contribution_faunaflora(self):
         url = reverse('api_portal:contributions-list',
                       kwargs={'portal_pk': self.portal.pk, 'lang': 'fr'})
-        response = self.client.post(url, data={"geom": "POINT(0 0)",
+        response = self.client.post(url, data={"geom": "POINT(4 43.5)",
                                                "properties": '{"email_author": "x@x.x",  "date_observation": "2022-08-16", '
                                                              '"category": "Contribution Faune-Flore",'
-                                                             '"type": "Espèce invasive"}'})
+                                                             '"type": "Espèce invasive",'
+                                                             '"description": "test"}'})
         self.assertEqual(response.status_code, 201)
         self.assertEqual(ContributionFaunaFlora.objects.count(), 1)
         contribution = Contribution.objects.first()
@@ -80,7 +81,7 @@ class ContributionViewPostTest(TestCase):
     def test_contribution_potential_damages(self):
         url = reverse('api_portal:contributions-list',
                       kwargs={'portal_pk': self.portal.pk, 'lang': 'fr'})
-        response = self.client.post(url, data={"geom": "POINT(0 0)",
+        response = self.client.post(url, data={"geom": "POINT(4 42.5)",
                                                "properties": '{"email_author": "x@x.x",  "date_observation": "2022-08-16", '
                                                              '"category": "Contribution Dégâts Potentiels",'
                                                              '"type": "Éboulements"}'})
@@ -136,6 +137,7 @@ class ContributionViewPostTest(TestCase):
             }
             }
             return json_schema_properties
+
         mocked.side_effect = json_property
         url = reverse('api_portal:contributions-list',
                       kwargs={'portal_pk': self.portal.pk, 'lang': 'fr'})
@@ -143,18 +145,39 @@ class ContributionViewPostTest(TestCase):
                                                "properties": '{"email_author": "x@x.x",  "date_observation": "2022-08-16", '
                                                              '"category": "foo"}'})
         self.assertEqual(response.status_code, 400)
-        self.assertEqual(response.json(), {'category': "La catégorie n'est pas valide"})
+        self.assertEqual(response.json(), {'Error': "La catégorie n'est pas valide"})
+
+    @mock.patch('georiviere.contribution.schema.get_contribution_allOf')
+    def test_contribution_category_model_other_error(self, mocked):
+        def json_property():
+            json_schema_all_of = [{'if': {'properties': {'category': {'const': 'Contribution Quantité'}}},
+                                   'then': {'properties': {'type': {'type': 'string', 'title': 'Type',
+                                                                    'enum': ['Landing', ]}}}}]
+            return json_schema_all_of
+
+        mocked.side_effect = json_property
+        url = reverse('api_portal:contributions-list',
+                      kwargs={'portal_pk': self.portal.pk, 'lang': 'fr'})
+        response = self.client.post(url, data={"geom": "POINT(0 0)",
+                                               "properties": '{"email_author": "x@x.x",  "date_observation": "2022-08-16", '
+                                                             '"category": "Contribution Quantité",'
+                                                             '"type": "Landing"}'})
+        self.assertEqual(response.status_code, 400)
+        self.assertEqual(response.json(), {'Error': "KeyError 'Landing'"})
 
 
 class ContributionViewTest(TestCase):
     @classmethod
     def setUpTestData(cls):
         cls.portal = PortalFactory.create()
+        cls.contribution_without_category = ContributionFactory.create(published=True, portal=cls.portal,
+                                                                       description="x")
         cls.contribution = ContributionFactory.create(published=True, portal=cls.portal, description="foo")
         cls.contribution_other_portal = ContributionFactory.create(published=True)
         cls.contribution_not_published = ContributionFactory.create(published=False, portal=cls.portal)
         cls.contribution_quantity = ContributionQuantityFactory.create(contribution=cls.contribution)
-        cls.other_contribution_quantity = ContributionQuantityFactory.create(contribution=cls.contribution_not_published)
+        cls.other_contribution_quantity = ContributionQuantityFactory.create(
+            contribution=cls.contribution_not_published)
         cls.other_contribution_quantity_2 = ContributionQuantityFactory.create(
             contribution=cls.contribution_other_portal)
 

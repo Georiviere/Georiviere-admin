@@ -136,7 +136,7 @@
       "then": {
         "properties": {
           "number_death": {
-            "type": "string",
+            "type": "number",
             "title": "Number Death"
           }
         }
@@ -195,7 +195,7 @@
       "then": {
         "properties": {
           "number_heritage_species": {
-            "type": "string",
+            "type": "number",
             "title": "Number Heritage Species"
           }
         }
@@ -212,7 +212,7 @@
       "then": {
         "properties": {
           "number_fish_species": {
-            "type": "string",
+            "type": "number",
             "title": "Number Fish Species"
           }
         }
