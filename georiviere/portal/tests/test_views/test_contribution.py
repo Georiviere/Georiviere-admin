@@ -66,7 +66,7 @@ class ContributionViewPostTest(TestCase):
     def test_contribution_faunaflora(self):
         url = reverse('api_portal:contributions-list',
                       kwargs={'portal_pk': self.portal.pk, 'lang': 'fr'})
-        response = self.client.post(url, data={"geom": "POINT(0 0)",
+        response = self.client.post(url, data={"geom": "POINT(4 43.5)",
                                                "properties": '{"email_author": "x@x.x",  "date_observation": "2022-08-16", '
                                                              '"category": "Contribution Faune-Flore",'
                                                              '"type": "Espèce invasive",'
@@ -81,7 +81,7 @@ class ContributionViewPostTest(TestCase):
     def test_contribution_potential_damages(self):
         url = reverse('api_portal:contributions-list',
                       kwargs={'portal_pk': self.portal.pk, 'lang': 'fr'})
-        response = self.client.post(url, data={"geom": "POINT(0 0)",
+        response = self.client.post(url, data={"geom": "POINT(4 42.5)",
                                                "properties": '{"email_author": "x@x.x",  "date_observation": "2022-08-16", '
                                                              '"category": "Contribution Dégâts Potentiels",'
                                                              '"type": "Éboulements"}'})
