@@ -26,7 +26,7 @@ def get_contribution_properties():
     }, 'date_observation': {
         'type': "string",
         'title': _("Observation's date"),
-        'format': 'date-time'
+        'format': 'date'
     }, 'description': {
         'type': "string",
         'title': _('Description')
@@ -513,7 +513,7 @@ def get_contribution_allOf():
 def get_contribution_json_schema():
     return {
         "type": "object",
-        "required": ['email_author', 'date_observation', 'category'],
+        "required": ['emailAuthor', 'dateObservation', 'category'],
         "properties": get_contribution_properties(),
         "allOf": get_contribution_allOf()
     }

@@ -1,8 +1,8 @@
 {
   "type": "object",
   "required": [
-    "email_author",
-    "date_observation",
+    "emailAuthor",
+    "dateObservation",
     "category"
   ],
   "properties": {
@@ -24,7 +24,7 @@
     "date_observation": {
       "type": "string",
       "title": "Observation's date",
-      "format": "date-time"
+      "format": "date"
     },
     "description": {
       "type": "string",
