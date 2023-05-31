@@ -2,6 +2,7 @@ from copy import deepcopy
 from rest_framework import serializers
 from rest_framework_gis import serializers as geo_serializers
 
+from django.contrib.gis.geos import GEOSGeometry
 from django.core.serializers.json import DjangoJSONEncoder
 from django.db import transaction
 from django.utils.translation import gettext_lazy as _
@@ -63,6 +64,7 @@ class ContributionSerializer(serializers.ModelSerializer):
             date_observation = properties.pop('date_observation')
             description = properties.pop('description', '')
             geom = validated_data.pop('geom')
+            geom = GEOSGeometry(geom)
             main_contribution = Contribution.objects.create(geom=geom, email_author=email_author,
                                                             date_observation=date_observation,
                                                             portal_id=self.context.get('portal_pk'),
