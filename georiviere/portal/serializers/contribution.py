@@ -61,11 +61,13 @@ class ContributionSerializer(serializers.ModelSerializer):
             name_author = properties.pop('name_author', '')
             first_name_author = properties.pop('first_name_author', '')
             date_observation = properties.pop('date_observation')
+            description = properties.pop('description', '')
             geom = validated_data.pop('geom')
             main_contribution = Contribution.objects.create(geom=geom, email_author=email_author,
                                                             date_observation=date_observation,
                                                             portal_id=self.context.get('portal_pk'),
                                                             name_author=name_author,
+                                                            description=description,
                                                             first_name_author=first_name_author)
             model = None
 
@@ -98,7 +100,7 @@ class ContributionSerializer(serializers.ModelSerializer):
             transaction.savepoint_commit(sid)
         except Exception:
             transaction.savepoint_rollback(sid)
-            raise serializers.ValidationError({"category": msg or _("An error occured")})
+            raise serializers.ValidationError({"Error": msg or _("An error occured")})
         return contribution
 
     def to_representation(self, instance):

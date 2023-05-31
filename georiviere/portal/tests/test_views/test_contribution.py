@@ -69,7 +69,8 @@ class ContributionViewPostTest(TestCase):
         response = self.client.post(url, data={"geom": "POINT(0 0)",
                                                "properties": '{"email_author": "x@x.x",  "date_observation": "2022-08-16", '
                                                              '"category": "Contribution Faune-Flore",'
-                                                             '"type": "Espèce invasive"}'})
+                                                             '"type": "Espèce invasive",'
+                                                             '"description": "test"}'})
         self.assertEqual(response.status_code, 201)
         self.assertEqual(ContributionFaunaFlora.objects.count(), 1)
         contribution = Contribution.objects.first()
@@ -143,7 +144,7 @@ class ContributionViewPostTest(TestCase):
                                                "properties": '{"email_author": "x@x.x",  "date_observation": "2022-08-16", '
                                                              '"category": "foo"}'})
         self.assertEqual(response.status_code, 400)
-        self.assertEqual(response.json(), {'category': "La catégorie n'est pas valide"})
+        self.assertEqual(response.json(), {'Error': "La catégorie n'est pas valide"})
 
 
 class ContributionViewTest(TestCase):

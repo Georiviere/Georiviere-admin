@@ -24,7 +24,7 @@
     "date_observation": {
       "type": "string",
       "title": "Observation's date",
-      "format": "date"
+      "format": "date-time"
     },
     "description": {
       "type": "string",
@@ -145,7 +145,7 @@
       "then": {
         "properties": {
           "number_death": {
-            "type": "string",
+            "type": "number",
             "title": "Number Death"
           },
           "dead_species": {
@@ -283,7 +283,7 @@
       "then": {
         "properties": {
           "number_heritage_species": {
-            "type": "string",
+            "type": "number",
             "title": "Number Heritage Species"
           },
           "heritage_species": {
@@ -318,7 +318,7 @@
       "then": {
         "properties": {
           "number_fish_species": {
-            "type": "string",
+            "type": "number",
             "title": "Number Fish Species"
           },
           "fish_species": {

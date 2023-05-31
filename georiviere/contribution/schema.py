@@ -26,7 +26,7 @@ def get_contribution_properties():
     }, 'date_observation': {
         'type': "string",
         'title': _("Observation's date"),
-        'format': 'date'
+        'format': 'date-time'
     }, 'description': {
         'type': "string",
         'title': _('Description')
@@ -180,7 +180,7 @@ def get_fish_mortality(choices, meta):
     fish_mortality_property = {
         'number_death':
             {
-                'type': "string",
+                'type': "number",
                 'title': str(meta.get_field(
                     'number_death').verbose_name.title())
             },
@@ -278,7 +278,7 @@ def get_heritage_species(choices, meta):
     heritage_species_property = {
         'number_heritage_species':
             {
-                'type': "string",
+                'type': "number",
                 'title': str(meta.get_field(
                     'number_heritage_species').verbose_name.title())
             },
@@ -314,7 +314,7 @@ def get_fish_species(choices, meta):
     fish_species_property = {
         'number_fish_species':
             {
-                'type': "string",
+                'type': "number",
                 'title': str(meta.get_field(
                     'number_fish_species').verbose_name.title())
             },
