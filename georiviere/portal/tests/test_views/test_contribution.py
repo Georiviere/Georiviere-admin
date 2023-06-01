@@ -5,7 +5,7 @@ from unittest import mock
 from georiviere.contribution.models import (Contribution, ContributionQuality, ContributionLandscapeElements,
                                             ContributionQuantity, ContributionFaunaFlora, ContributionPotentialDamage,)
 from georiviere.contribution.tests.factories import (ContributionFactory, ContributionQuantityFactory,
-                                                     NaturePollutionFactory)
+                                                     NaturePollutionFactory, SeverityTypeTypeFactory)
 from georiviere.portal.tests.factories import PortalFactory
 
 
@@ -14,6 +14,7 @@ class ContributionViewPostTest(TestCase):
     def setUpTestData(cls):
         cls.portal = PortalFactory.create()
         cls.nature_pollution = NaturePollutionFactory.create(label="Baz")
+        cls.severity = SeverityTypeTypeFactory.create(label="Boo")
 
     def test_contribution_structure(self):
         url = reverse('api_portal:contributions-json_schema',
@@ -74,7 +75,8 @@ class ContributionViewPostTest(TestCase):
                                                "properties": '{"email_author": "x@x.x",  "date_observation": "2022-08-16", '
                                                              '"category": "Contribution Faune-Flore",'
                                                              '"type": "Espèce invasive",'
-                                                             '"description": "test"}'})
+                                                             '"description": "test",'
+                                                             '"severity": "Boo"}'})
         self.assertEqual(response.status_code, 201)
         self.assertEqual(ContributionFaunaFlora.objects.count(), 1)
         contribution = Contribution.objects.first()

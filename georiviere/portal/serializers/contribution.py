@@ -11,7 +11,8 @@ from django.utils.translation import gettext_lazy as _
 from georiviere.contribution.schema import (get_contribution_properties, get_contribution_allOf,
                                             get_contribution_json_schema)
 from georiviere.contribution.models import (Contribution, ContributionLandscapeElements, ContributionQuality,
-                                            ContributionQuantity, ContributionFaunaFlora, ContributionPotentialDamage)
+                                            ContributionQuantity, ContributionFaunaFlora, ContributionPotentialDamage,
+                                            SeverityType)
 from georiviere.portal.validators import validate_json_schema_data
 
 
@@ -65,15 +66,22 @@ class ContributionSerializer(serializers.ModelSerializer):
             first_name_author = properties.pop('first_name_author', '')
             date_observation = properties.pop('date_observation')
             description = properties.pop('description', '')
+            severity = properties.pop('severity', '')
+            severity_instance = False
+            if severity:
+                severity_instance = SeverityType.objects.filter(label=severity)
             geom = validated_data.pop('geom')
             geom = GEOSGeometry(geom, srid=4326)
             geom = geom.transform(settings.SRID, clone=True)
-            main_contribution = Contribution.objects.create(geom=geom, email_author=email_author,
-                                                            date_observation=date_observation,
-                                                            portal_id=self.context.get('portal_pk'),
-                                                            name_author=name_author,
-                                                            description=description,
-                                                            first_name_author=first_name_author)
+            kwargs_contribution = {'geom': geom, 'email_author': email_author,
+                                   'date_observation': date_observation,
+                                   'portal_id': self.context.get('portal_pk'),
+                                   'name_author': name_author,
+                                   'description': description,
+                                   'first_name_author': first_name_author}
+            if bool(severity_instance):
+                kwargs_contribution['severity'] = severity_instance.first()
+            main_contribution = Contribution.objects.create(**kwargs_contribution)
             model = None
 
             if category == ContributionLandscapeElements._meta.verbose_name.title():
@@ -122,7 +130,7 @@ class ContributionSerializer(serializers.ModelSerializer):
             'first_name_author': instance.contribution.first_name_author,
             'date_observation': instance.contribution.date_observation,
             'description': instance.contribution.description,
-            'severity': instance.contribution.severity
+            'severity': instance.contribution.severity.label if instance.contribution.severity else None
         }
         return data
 
