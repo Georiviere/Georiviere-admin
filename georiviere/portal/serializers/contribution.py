@@ -6,6 +6,7 @@ from django.conf import settings
 from django.contrib.gis.geos import GEOSGeometry
 from django.core.serializers.json import DjangoJSONEncoder
 from django.db import transaction
+from django.db.models import ForeignKey
 from django.utils.translation import gettext_lazy as _
 from georiviere.contribution.schema import (get_contribution_properties, get_contribution_allOf,
                                             get_contribution_json_schema)
@@ -96,7 +97,9 @@ class ContributionSerializer(serializers.ModelSerializer):
             type_prop = properties.pop('type')
 
             types = {v: k for k, v in model.TypeChoice.choices}
-
+            for key, prop in properties.items():
+                if isinstance(model._meta.get_field(key), ForeignKey):
+                    properties[key] = model._meta.get_field(key).related_model.objects.get(label=prop)
             contribution = model.objects.create(contribution=main_contribution,
                                                 type=types[type_prop],
                                                 **properties)

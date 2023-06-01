@@ -3,8 +3,9 @@ from django.urls import reverse
 from unittest import mock
 
 from georiviere.contribution.models import (Contribution, ContributionQuality, ContributionLandscapeElements,
-                                            ContributionQuantity, ContributionFaunaFlora, ContributionPotentialDamage)
-from georiviere.contribution.tests.factories import ContributionFactory, ContributionQuantityFactory
+                                            ContributionQuantity, ContributionFaunaFlora, ContributionPotentialDamage,)
+from georiviere.contribution.tests.factories import (ContributionFactory, ContributionQuantityFactory,
+                                                     NaturePollutionFactory)
 from georiviere.portal.tests.factories import PortalFactory
 
 
@@ -12,6 +13,7 @@ class ContributionViewPostTest(TestCase):
     @classmethod
     def setUpTestData(cls):
         cls.portal = PortalFactory.create()
+        cls.nature_pollution = NaturePollutionFactory.create(label="Baz")
 
     def test_contribution_structure(self):
         url = reverse('api_portal:contributions-json_schema',
@@ -41,11 +43,13 @@ class ContributionViewPostTest(TestCase):
         response = self.client.post(url, data={"geom": "POINT(0 0)",
                                                "properties": '{"email_author": "x@x.x",  "date_observation": "2022-08-16", '
                                                              '"category": "Contribution Qualité",'
-                                                             '"type": "Pollution"}'})
+                                                             '"type": "Pollution",'
+                                                             '"nature_pollution": "Baz"}'})
         self.assertEqual(response.status_code, 201)
         self.assertEqual(ContributionQuality.objects.count(), 1)
         contribution = Contribution.objects.first()
         quality = contribution.quality
+        self.assertEqual(quality.nature_pollution.label, 'Baz')
         self.assertEqual(contribution.email_author, 'x@x.x')
         self.assertEqual(quality.get_type_display(), 'Pollution')
 

@@ -162,12 +162,13 @@ class ContributionPotentialDamage(models.Model):
         default=TypeChoice.LANDING,
         verbose_name=_("Type"),
     )
-    landing_type = models.ForeignKey(LandingType, on_delete=models.PROTECT, null=True)
+    landing_type = models.ForeignKey(LandingType, on_delete=models.PROTECT, null=True,
+                                     verbose_name=_("Landing type"))
     excessive_cutting_length = models.FloatField(default=0.0, null=True, blank=True,
                                                  verbose_name=_("Excessive cutting length in meters"))
     jam_type = models.ForeignKey(JamType, on_delete=models.PROTECT, null=True)
     length_bank_erosion = models.FloatField(default=0.0, null=True, blank=True,
-                                            verbose_name=_("Length bank erosoion"),
+                                            verbose_name=_("Length bank erosion"),
                                             help_text=_('Distance between the foot of the bank and the foot of '
                                                         'the erosion.'))
     bank_height = models.FloatField(default=0.0, null=True, blank=True,

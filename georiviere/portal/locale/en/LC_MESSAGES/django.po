@@ -83,3 +83,6 @@ msgstr ""
 
 msgid "Portals"
 msgstr ""
+
+msgid "Category is not valid"
+msgstr ""
