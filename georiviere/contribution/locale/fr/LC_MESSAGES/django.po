@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-05-30 10:37+0000\n"
+"POT-Creation-Date: 2023-06-01 09:11+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -28,10 +28,10 @@ msgid "Label"
 msgstr "Label"
 
 msgid "Severity type"
-msgstr "Type de sévérité"
+msgstr "Type de gravité"
 
 msgid "Severity types"
-msgstr "Types de sévérité"
+msgstr "Types de gravité"
 
 msgid "First name author"
 msgstr "Prénom auteur"
@@ -43,13 +43,19 @@ msgid "Observation's date"
 msgstr "Date de l'observation"
 
 msgid "Severity"
-msgstr "Sévérité"
+msgstr "Gravité"
 
 msgid "Description"
 msgstr "Description"
 
 msgid "Description of the contribution"
-msgstr "Description de la sévérité"
+msgstr "Description de la gravité"
+
+msgid "Published"
+msgstr "Publier"
+
+msgid "Make it visible on portal"
+msgstr "Rendre visible sur le portail"
 
 msgid "Portal"
 msgstr "Portail"
@@ -114,10 +120,13 @@ msgstr "Piétinement par le bétail (impactant)"
 msgid "Type"
 msgstr "Type"
 
+msgid "Landing type"
+msgstr "Type d'atterrissement"
+
 msgid "Excessive cutting length in meters"
 msgstr "Longueur coupe abusive en mètres"
 
-msgid "Length bank erosoion"
+msgid "Length bank erosion"
 msgstr "Longueur de l'érosion de la berge"
 
 msgid "Distance between the foot of the bank and the foot of the erosion."
@@ -280,12 +289,3 @@ msgstr "Catégorie"
 
 msgid "None"
 msgstr "Aucun"
-
-msgid "An error occured"
-msgstr "Une erreur est survenue"
-
-msgid "Category is not valid"
-msgstr "La catégorie n'est pas valide"
-
-msgid "Invasive Species"
-msgstr "Espèces invasives"

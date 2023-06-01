@@ -83,3 +83,6 @@ msgstr "Couleur principale"
 
 msgid "Portals"
 msgstr "Portails"
+
+msgid "Category is not valid"
+msgstr "La catégorie n'est pas valide"

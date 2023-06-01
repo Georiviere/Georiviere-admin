@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-05-30 10:37+0000\n"
+"POT-Creation-Date: 2023-06-01 09:11+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -49,6 +49,12 @@ msgid "Description"
 msgstr ""
 
 msgid "Description of the contribution"
+msgstr ""
+
+msgid "Published"
+msgstr ""
+
+msgid "Make it visible on portal"
 msgstr ""
 
 msgid "Portal"
@@ -114,10 +120,13 @@ msgstr ""
 msgid "Type"
 msgstr ""
 
+msgid "Landing type"
+msgstr ""
+
 msgid "Excessive cutting length in meters"
 msgstr ""
 
-msgid "Length bank erosoion"
+msgid "Length bank erosion"
 msgstr ""
 
 msgid "Distance between the foot of the bank and the foot of the erosion."
