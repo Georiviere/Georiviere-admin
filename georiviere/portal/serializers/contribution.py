@@ -8,12 +8,14 @@ from django.core.serializers.json import DjangoJSONEncoder
 from django.db import transaction
 from django.db.models import ForeignKey
 from django.utils.translation import gettext_lazy as _
+
 from georiviere.contribution.schema import (get_contribution_properties, get_contribution_allOf,
                                             get_contribution_json_schema)
 from georiviere.contribution.models import (Contribution, ContributionLandscapeElements, ContributionQuality,
                                             ContributionQuantity, ContributionFaunaFlora, ContributionPotentialDamage,
                                             SeverityType)
 from georiviere.portal.validators import validate_json_schema_data
+from georiviere.portal.serializers.main import AttachmentSerializer
 
 
 class ContributionGeojsonSerializer(geo_serializers.GeoFeatureModelSerializer):
@@ -33,6 +35,7 @@ class ContributionGeojsonSerializer(geo_serializers.GeoFeatureModelSerializer):
 
 
 class ContributionSerializer(serializers.ModelSerializer):
+    attachments = AttachmentSerializer(many=True, required=False)
     properties = serializers.JSONField(required=True, encoder=DjangoJSONEncoder, write_only=True)
     geom = geo_serializers.GeometryField(write_only=True)
     category = serializers.SerializerMethodField(read_only=True)
@@ -41,7 +44,7 @@ class ContributionSerializer(serializers.ModelSerializer):
     class Meta:
         model = Contribution
         fields = (
-            'properties', 'geom', 'type', 'category', 'description'
+            'properties', 'geom', 'type', 'category', 'description', 'attachments',
         )
 
     def get_category(self, obj):

@@ -17,6 +17,7 @@ from rest_framework import mixins
 from rest_framework import renderers
 from rest_framework.decorators import action
 from rest_framework.response import Response
+from rest_framework.parsers import MultiPartParser, FormParser
 
 
 class ContributionViewSet(mixins.CreateModelMixin, mixins.RetrieveModelMixin, mixins.ListModelMixin,
@@ -25,6 +26,7 @@ class ContributionViewSet(mixins.CreateModelMixin, mixins.RetrieveModelMixin, mi
     permission_classes = [AllowAny, ]
     geojson_serializer_class = ContributionGeojsonSerializer
     serializer_class = ContributionSerializer
+    parser_classes = (MultiPartParser, FormParser)
     renderer_classes = [CamelCaseJSONRenderer, GeoJSONRenderer, ]
 
     @action(detail=False, url_name="json_schema", methods=['get'],
