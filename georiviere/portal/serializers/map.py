@@ -20,13 +20,19 @@ class MapLayerSerializer(ModelSerializer):
     json_schema_url = SerializerMethodField()
     url = SerializerMethodField()
     type = SerializerMethodField()
+    is_searchable = SerializerMethodField()
 
     class Meta:
         model = MapLayer
         fields = (
-            'id', 'label', 'default_active', 'options', 'geojson_url', 'json_schema_url', 'url', 'type'
+            'id', 'label', 'default_active', 'options', 'geojson_url', 'json_schema_url', 'url', 'type', 'is_searchable'
         )
         ordering = ('order',)
+
+    def get_is_searchable(self, obj):
+        if obj.layer_type.split('-')[0] in ['pois', 'streams', 'contributions', 'sensitivities']:
+            return False
+        return True
 
     def get_options(self, obj):
         return {'style': obj.style if obj.style else None}
@@ -48,6 +54,8 @@ class MapLayerSerializer(ModelSerializer):
 
     def get_url(self, obj):
         layer_type = obj.layer_type.split('-')
+        if layer_type[0] not in ['pois', 'streams', 'contributions', 'sensitivities']:
+            return None
         # TODO: Make lang dynamic
         reverse_kwargs = {'lang': 'fr'}
         if layer_type[0] in ['pois', 'streams', 'contributions']:
