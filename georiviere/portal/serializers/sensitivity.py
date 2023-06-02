@@ -17,7 +17,8 @@ class SensitivityGeojsonSerializer(GeoFeatureModelSerializer):
 
 class SensitivitySerializer(serializers.ModelSerializer):
     attachments = AttachmentSerializer(many=True)
+    name = serializers.CharField(source='species.name')
 
     class Meta:
         model = SensitiveArea
-        fields = ('id', 'species', 'description', 'contact', 'attachments')
+        fields = ('id', 'name', 'description', 'attachments')

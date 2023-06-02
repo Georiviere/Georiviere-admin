@@ -8,6 +8,7 @@ from georiviere.portal.serializers.sensitivity import SensitivityGeojsonSerializ
 from georiviere.main.renderers import GeoJSONRenderer
 from geotrek.sensitivity.models import SensitiveArea
 
+from rest_framework import filters
 from rest_framework import viewsets
 from rest_framework.permissions import AllowAny
 
@@ -18,6 +19,9 @@ class SensitivityViewSet(viewsets.ModelViewSet):
     serializer_class = SensitivitySerializer
     permission_classes = [AllowAny, ]
     renderer_classes = [CamelCaseJSONRenderer, GeoJSONRenderer, ]
+    filter_backends = [filters.OrderingFilter, filters.SearchFilter]
+    ordering_fields = ['species__name', ]
+    search_fields = ['species__name', ]
 
     def get_queryset(self):
         qs = SensitiveArea.objects.select_related('species').filter(published=True)
