@@ -257,7 +257,8 @@ class ContributionViewTest(TestCase):
         response = self.client.get(url)
         self.assertEqual(response.status_code, 200)
         self.assertEqual(len(response.json()), 1)
-        self.assertDictEqual(response.json()[0], {'category': 'Contribution Quantité',
+        self.assertDictEqual(response.json()[0], {'id': self.contribution.pk,
+                                                  'category': 'Contribution Quantité',
                                                   'description': 'foo', 'type': 'A sec',
                                                   'attachments': []})
 
@@ -266,7 +267,7 @@ class ContributionViewTest(TestCase):
                       kwargs={'portal_pk': self.portal.pk, 'lang': 'fr', 'pk': self.contribution.pk})
         response = self.client.get(url)
         self.assertEqual(response.status_code, 200)
-        self.assertSetEqual(set(response.json()), {'category', 'description', 'type', 'attachments'})
+        self.assertSetEqual(set(response.json()), {'id', 'category', 'description', 'type', 'attachments'})
 
     def test_contribution_geojson_list(self):
         url = reverse('api_portal:contributions-list',
