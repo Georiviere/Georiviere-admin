@@ -85,6 +85,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent.parent
 
 PROJECT_DIR = BASE_DIR / "georiviere"
 VAR_DIR = BASE_DIR / 'var'
+TMP_DIR = os.path.join(VAR_DIR, 'tmp')
 
 ROOT_URL = ""
 TITLE = "Georivière"
@@ -157,6 +158,17 @@ STATICFILES_FINDERS = (
     'compressor.finders.CompressorFinder',
 )
 
+REST_FRAMEWORK = {
+    "DEFAULT_PARSER_CLASSES": (
+        "rest_framework.parsers.JSONParser",
+        "rest_framework.parsers.FormParser",
+        "rest_framework.parsers.MultiPartParser",
+    ),
+    'UNICODE_JSON': False,
+    'STRICT_JSON': False
+}
+
+CONTRIBUTION_FILETYPE = 'contribution'
 
 PAPERCLIP_ATTACHMENT_MODEL = 'main.Attachment'
 PAPERCLIP_FILETYPE_MODEL = 'main.FileType'

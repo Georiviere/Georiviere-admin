@@ -1,15 +1,22 @@
+from django.core.exceptions import ValidationError
+from django.core.files.uploadedfile import SimpleUploadedFile
 from django.test import TestCase
 from django.urls import reverse
 from unittest import mock
+from geotrek.common.utils.testdata import get_dummy_uploaded_image, get_dummy_uploaded_file
 
 from georiviere.contribution.models import (Contribution, ContributionQuality, ContributionLandscapeElements,
                                             ContributionQuantity, ContributionFaunaFlora, ContributionPotentialDamage,)
 from georiviere.contribution.tests.factories import (ContributionFactory, ContributionQuantityFactory,
-                                                     NaturePollutionFactory, SeverityTypeTypeFactory)
+                                                     NaturePollutionFactory, SeverityTypeTypeFactory,)
+from georiviere.main.models import Attachment
 from georiviere.portal.tests.factories import PortalFactory
 
+from rest_framework.test import APITestCase
+from rest_framework.test import APIClient
 
-class ContributionViewPostTest(TestCase):
+
+class ContributionViewPostTest(APITestCase):
     @classmethod
     def setUpTestData(cls):
         cls.portal = PortalFactory.create()
@@ -56,7 +63,7 @@ class ContributionViewPostTest(TestCase):
 
     def test_contribution_quantity(self):
         url = reverse('api_portal:contributions-list',
-                      kwargs={'portal_pk': self.portal.pk, 'lang': 'fr'})
+                      kwargs={'portal_pk': self.portal.pk, 'lang': 'fr', 'format': 'json'})
         response = self.client.post(url, data={"geom": "POINT(0 0)",
                                                "properties": '{"email_author": "x@x.x",  "date_observation": "2022-08-16", '
                                                              '"category": "Contribution Quantité",'
@@ -70,7 +77,7 @@ class ContributionViewPostTest(TestCase):
 
     def test_contribution_faunaflora(self):
         url = reverse('api_portal:contributions-list',
-                      kwargs={'portal_pk': self.portal.pk, 'lang': 'fr'})
+                      kwargs={'portal_pk': self.portal.pk, 'lang': 'fr', 'format': 'json'})
         response = self.client.post(url, data={"geom": "POINT(4 43.5)",
                                                "properties": '{"email_author": "x@x.x",  "date_observation": "2022-08-16", '
                                                              '"category": "Contribution Faune-Flore",'
@@ -86,7 +93,7 @@ class ContributionViewPostTest(TestCase):
 
     def test_contribution_potential_damages(self):
         url = reverse('api_portal:contributions-list',
-                      kwargs={'portal_pk': self.portal.pk, 'lang': 'fr'})
+                      kwargs={'portal_pk': self.portal.pk, 'lang': 'fr', 'format': 'json'})
         response = self.client.post(url, data={"geom": "POINT(4 42.5)",
                                                "properties": '{"email_author": "x@x.x",  "date_observation": "2022-08-16", '
                                                              '"category": "Contribution Dégâts Potentiels",'
@@ -171,6 +178,66 @@ class ContributionViewPostTest(TestCase):
         self.assertEqual(response.status_code, 400)
         self.assertEqual(response.json(), {'Error': "KeyError 'Landing'"})
 
+    def test_contribution_attachments(self):
+        url = reverse('api_portal:contributions-list',
+                      kwargs={'portal_pk': self.portal.pk, 'lang': 'fr', 'format': 'json'})
+        image_1 = get_dummy_uploaded_image()
+        image_2 = get_dummy_uploaded_image()
+        client = APIClient()
+        data = {"geom": "POINT(0 0)",
+                "image_1": image_1,
+                "image_2": image_2,
+                "properties": '{"email_author": "x@x.x", "date_observation": "2022-08-16", '
+                              '"category": "Contribution Élément Paysagers", "type": "Doline"}',
+                }
+        response = client.post(url, data=data,)
+        self.assertEqual(response.status_code, 201)
+        self.assertEqual(ContributionLandscapeElements.objects.count(), 1)
+        contribution = Contribution.objects.first()
+        landscape_element = contribution.landscape_element
+        self.assertEqual(contribution.email_author, 'x@x.x')
+        self.assertEqual(landscape_element.get_type_display(), 'Doline')
+        self.assertEqual(Attachment.objects.count(), 2)
+        self.assertEqual(contribution.attachments.count(), 2)
+
+    def test_contribution_attachments_fail(self):
+        url = reverse('api_portal:contributions-list',
+                      kwargs={'portal_pk': self.portal.pk, 'lang': 'fr', 'format': 'json'})
+        file_1 = get_dummy_uploaded_file()
+        data = {"geom": "POINT(0 0)",
+                "image_1": file_1,
+                "properties": '{"email_author": "x@x.x", "date_observation": "2022-08-16", '
+                              '"category": "Contribution Élément Paysagers", "type": "Doline"}',
+                }
+        response = self.client.post(url, data=data,)
+        self.assertEqual(response.status_code, 201)
+        self.assertEqual(ContributionLandscapeElements.objects.count(), 1)
+        contribution = Contribution.objects.first()
+        landscape_element = contribution.landscape_element
+        self.assertEqual(contribution.email_author, 'x@x.x')
+        self.assertEqual(landscape_element.get_type_display(), 'Doline')
+        self.assertEqual(Attachment.objects.count(), 0)
+
+    @mock.patch('georiviere.main.models.Attachment.full_clean')
+    def test_contribution_attachments_not_allowed(self, mocked):
+        mocked.side_effect = ValidationError('Problem attachment')
+        url = reverse('api_portal:contributions-list',
+                      kwargs={'portal_pk': self.portal.pk, 'lang': 'fr', 'format': 'json'})
+        file_1 = SimpleUploadedFile('x', b'', content_type='application/json')
+        data = {"geom": "POINT(0 0)",
+                "image_1": file_1,
+                "properties": '{"email_author": "x@x.x", "date_observation": "2022-08-16", '
+                              '"category": "Contribution Élément Paysagers", "type": "Doline"}',
+                }
+        response = self.client.post(url, data=data,)
+        self.assertEqual(response.status_code, 201)
+        self.assertEqual(ContributionLandscapeElements.objects.count(), 1)
+        contribution = Contribution.objects.first()
+        landscape_element = contribution.landscape_element
+        self.assertEqual(contribution.email_author, 'x@x.x')
+        self.assertEqual(landscape_element.get_type_display(), 'Doline')
+        self.assertEqual(Attachment.objects.count(), 0)
+
 
 class ContributionViewTest(TestCase):
     @classmethod
@@ -193,15 +260,17 @@ class ContributionViewTest(TestCase):
         response = self.client.get(url)
         self.assertEqual(response.status_code, 200)
         self.assertEqual(len(response.json()), 1)
-        self.assertDictEqual(response.json()[0], {'category': 'Contribution Quantité',
-                                                  'description': 'foo', 'type': 'A sec'})
+        self.assertDictEqual(response.json()[0], {'id': self.contribution.pk,
+                                                  'category': 'Contribution Quantité',
+                                                  'description': 'foo', 'type': 'A sec',
+                                                  'attachments': []})
 
     def test_contribution_detail(self):
         url = reverse('api_portal:contributions-detail',
                       kwargs={'portal_pk': self.portal.pk, 'lang': 'fr', 'pk': self.contribution.pk})
         response = self.client.get(url)
         self.assertEqual(response.status_code, 200)
-        self.assertSetEqual(set(response.json()), {'category', 'description', 'type'})
+        self.assertSetEqual(set(response.json()), {'id', 'category', 'description', 'type', 'attachments'})
 
     def test_contribution_geojson_list(self):
         url = reverse('api_portal:contributions-list',

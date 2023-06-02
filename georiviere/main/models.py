@@ -14,7 +14,10 @@ class FileType(StructureOrNoneRelated, BaseFileType):
 
 
 class Attachment(BaseAttachment):
-    pass
+    creator = models.ForeignKey(settings.AUTH_USER_MODEL,
+                                related_name="created_attachments",
+                                verbose_name=_('Creator'),
+                                help_text=_("User that uploaded"), on_delete=models.CASCADE, blank=True, null=True)
 
 
 class DataSource(StructureOrNoneRelated):

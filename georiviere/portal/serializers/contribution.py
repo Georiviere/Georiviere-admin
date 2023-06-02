@@ -4,16 +4,17 @@ from rest_framework_gis import serializers as geo_serializers
 
 from django.conf import settings
 from django.contrib.gis.geos import GEOSGeometry
-from django.core.serializers.json import DjangoJSONEncoder
 from django.db import transaction
 from django.db.models import ForeignKey
 from django.utils.translation import gettext_lazy as _
+
 from georiviere.contribution.schema import (get_contribution_properties, get_contribution_allOf,
                                             get_contribution_json_schema)
 from georiviere.contribution.models import (Contribution, ContributionLandscapeElements, ContributionQuality,
                                             ContributionQuantity, ContributionFaunaFlora, ContributionPotentialDamage,
                                             SeverityType)
 from georiviere.portal.validators import validate_json_schema_data
+from georiviere.portal.serializers.main import AttachmentSerializer
 
 
 class ContributionGeojsonSerializer(geo_serializers.GeoFeatureModelSerializer):
@@ -33,7 +34,8 @@ class ContributionGeojsonSerializer(geo_serializers.GeoFeatureModelSerializer):
 
 
 class ContributionSerializer(serializers.ModelSerializer):
-    properties = serializers.JSONField(required=True, encoder=DjangoJSONEncoder, write_only=True)
+    attachments = AttachmentSerializer(many=True, read_only=True)
+    properties = serializers.JSONField(required=True, write_only=True)
     geom = geo_serializers.GeometryField(write_only=True)
     category = serializers.SerializerMethodField(read_only=True)
     type = serializers.SerializerMethodField(read_only=True)
@@ -41,7 +43,7 @@ class ContributionSerializer(serializers.ModelSerializer):
     class Meta:
         model = Contribution
         fields = (
-            'properties', 'geom', 'type', 'category', 'description'
+            'id', 'properties', 'geom', 'type', 'category', 'description', 'attachments',
         )
 
     def get_category(self, obj):
@@ -108,31 +110,17 @@ class ContributionSerializer(serializers.ModelSerializer):
             for key, prop in properties.items():
                 if isinstance(model._meta.get_field(key), ForeignKey):
                     properties[key] = model._meta.get_field(key).related_model.objects.get(label=prop)
-            contribution = model.objects.create(contribution=main_contribution,
-                                                type=types[type_prop],
-                                                **properties)
+
+            model.objects.create(contribution=main_contribution,
+                                 type=types[type_prop],
+                                 **properties)
             transaction.savepoint_commit(sid)
         except Exception as e:
             transaction.savepoint_rollback(sid)
             if not msg:
                 msg = f'{e.__class__.__name__} {e}'
             raise serializers.ValidationError({"Error": msg or _("An error occured")})
-        return contribution
-
-    def to_representation(self, instance):
-        if isinstance(instance, Contribution):
-            return super().to_representation(instance)
-        data = {
-            'category': instance._meta.verbose_name.title(),
-            'type': instance.get_type_display(),
-            'email_author': instance.contribution.email_author,
-            'name_author': instance.contribution.name_author,
-            'first_name_author': instance.contribution.first_name_author,
-            'date_observation': instance.contribution.date_observation,
-            'description': instance.contribution.description,
-            'severity': instance.contribution.severity.label if instance.contribution.severity else None
-        }
-        return data
+        return main_contribution
 
 
 class ContributionSchemaSerializer(serializers.Serializer):

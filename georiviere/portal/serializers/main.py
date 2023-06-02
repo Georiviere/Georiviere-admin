@@ -10,8 +10,9 @@ from georiviere.main import models as main_models
 
 
 class AttachmentsSerializerMixin(serializers.ModelSerializer):
-    url = serializers.SerializerMethodField()
-    thumbnail = serializers.SerializerMethodField()
+    url = serializers.SerializerMethodField(read_only=True)
+    image = serializers.ImageField(write_only=True, required=False)
+    thumbnail = serializers.SerializerMethodField(read_only=True)
     license = serializers.SlugRelatedField(
         read_only=True,
         slug_field='label'
@@ -42,7 +43,7 @@ class AttachmentsSerializerMixin(serializers.ModelSerializer):
     class Meta:
         model = main_models.Attachment
         fields = (
-            'author', 'thumbnail', 'legend', 'title', 'url'
+            'author', 'thumbnail', 'legend', 'title', 'url', "author", "image"
         )
 
 
@@ -53,8 +54,8 @@ class FileTypeSerializer(serializers.ModelSerializer):
 
 
 class AttachmentSerializer(AttachmentsSerializerMixin):
-    type = serializers.SerializerMethodField()
-    filetype = FileTypeSerializer(many=False)
+    type = serializers.SerializerMethodField(read_only=True)
+    filetype = FileTypeSerializer(many=False, read_only=True)
 
     def get_type(self, obj):
         if obj.is_image or obj.attachment_link:
