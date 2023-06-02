@@ -11,7 +11,7 @@ from georiviere.main import models as main_models
 
 class AttachmentsSerializerMixin(serializers.ModelSerializer):
     url = serializers.SerializerMethodField(read_only=True)
-    image_url = serializers.ImageField(write_only=True, required=False)
+    image = serializers.ImageField(write_only=True, required=False)
     thumbnail = serializers.SerializerMethodField(read_only=True)
     license = serializers.SlugRelatedField(
         read_only=True,
@@ -43,7 +43,7 @@ class AttachmentsSerializerMixin(serializers.ModelSerializer):
     class Meta:
         model = main_models.Attachment
         fields = (
-            'author', 'thumbnail', 'legend', 'title', 'url', "author", "image_url"
+            'author', 'thumbnail', 'legend', 'title', 'url', "author", "image"
         )
 
 
