@@ -12,6 +12,7 @@ from georiviere.main.renderers import GeoJSONRenderer
 from georiviere.portal.serializers.contribution import (ContributionSchemaSerializer,
                                                         ContributionSerializer, ContributionGeojsonSerializer)
 
+from rest_framework import filters
 from rest_framework import viewsets
 from rest_framework import mixins
 from rest_framework import renderers
@@ -26,6 +27,8 @@ class ContributionViewSet(mixins.CreateModelMixin, mixins.RetrieveModelMixin, mi
     geojson_serializer_class = ContributionGeojsonSerializer
     serializer_class = ContributionSerializer
     renderer_classes = [CamelCaseJSONRenderer, GeoJSONRenderer, ]
+    filter_backends = [filters.OrderingFilter, filters.SearchFilter]
+    search_fields = ['category', 'category__type']
 
     @action(detail=False, url_name="json_schema", methods=['get'],
             renderer_classes=[renderers.JSONRenderer],
