@@ -1,3 +1,4 @@
+from django.core.exceptions import ValidationError
 from django.core.files.uploadedfile import SimpleUploadedFile
 from django.test import TestCase
 from django.urls import reverse
@@ -217,10 +218,12 @@ class ContributionViewPostTest(APITestCase):
         self.assertEqual(landscape_element.get_type_display(), 'Doline')
         self.assertEqual(Attachment.objects.count(), 0)
 
-    def test_contribution_attachments_not_allowed(self):
+    @mock.patch('georiviere.main.models.Attachment.full_clean')
+    def test_contribution_attachments_not_allowed(self, mocked):
+        mocked.side_effect = ValidationError('Problem attachment')
         url = reverse('api_portal:contributions-list',
                       kwargs={'portal_pk': self.portal.pk, 'lang': 'fr', 'format': 'json'})
-        file_1 = SimpleUploadedFile('test.odt', b'*' * 128, content_type='application/json')
+        file_1 = SimpleUploadedFile('x', b'', content_type='application/json')
         data = {"geom": "POINT(0 0)",
                 "image_1": file_1,
                 "properties": '{"email_author": "x@x.x", "date_observation": "2022-08-16", '
