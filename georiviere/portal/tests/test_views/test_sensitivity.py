@@ -23,7 +23,7 @@ class SensitivityViewTest(TestCase):
         response = self.client.get(url)
         self.assertEqual(response.status_code, 200)
 
-        self.assertSetEqual(set(response.json().keys()), {'id', 'name', 'description', 'attachments'})
+        self.assertSetEqual(set(response.json().keys()), {'id', 'name', 'description', 'attachments', 'species'})
 
     def test_sensitivity_list_json_structure(self):
         url = reverse('api_portal:sensitivities-list',
@@ -31,7 +31,7 @@ class SensitivityViewTest(TestCase):
         response = self.client.get(url)
         self.assertEqual(response.status_code, 200)
 
-        self.assertSetEqual(set(response.json()[0].keys()), {'id', 'name', 'description', 'attachments'})
+        self.assertSetEqual(set(response.json()[0].keys()), {'id', 'name', 'description', 'attachments', 'species'})
 
     def test_sensitivity_list_geojson_structure(self):
         url = reverse('api_portal:sensitivities-list',

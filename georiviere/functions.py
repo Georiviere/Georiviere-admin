@@ -1,7 +1,22 @@
 from django.contrib.gis.db.models.functions import GeoFunc, GeomOutputGeoFunc
-from django.db.models import FloatField
-
+from django.db.models import CharField, FloatField
 from georiviere.fields import ElevationInfosField
+
+
+class Area(GeoFunc):
+    """ ST_Area postgis function """
+    output_field = FloatField()
+
+
+class Buffer(GeomOutputGeoFunc):
+    """ ST_Buffer postgis function """
+    pass
+
+
+class GeometryType(GeoFunc):
+    """ GeometryType postgis function """
+    output_field = CharField()
+    function = 'GeometryType'
 
 
 class ElevationInfos(GeoFunc):
