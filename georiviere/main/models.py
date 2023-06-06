@@ -26,9 +26,7 @@ class Attachment(BaseAttachment):
                 self.attachment_file.name
             )
         else:
-            return 'attached {}'.format(
-                self.attachment_file.name
-            )
+            return self.attachment_file.name
 
 
 class DataSource(StructureOrNoneRelated):
