@@ -19,6 +19,15 @@ class Attachment(BaseAttachment):
                                 verbose_name=_('Creator'),
                                 help_text=_("User that uploaded"), on_delete=models.CASCADE, blank=True, null=True)
 
+    def __str__(self):
+        if self.creator:
+            return '{} attached {}'.format(
+                self.creator.username,
+                self.attachment_file.name
+            )
+        else:
+            return self.attachment_file.name
+
 
 class DataSource(StructureOrNoneRelated):
 
