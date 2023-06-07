@@ -25,6 +25,7 @@ from rest_framework import mixins
 from rest_framework import renderers
 from rest_framework.decorators import action
 from rest_framework.response import Response
+from rest_framework.pagination import LimitOffsetPagination
 from rest_framework.parsers import JSONParser, MultiPartParser, FormParser
 
 import logging
@@ -39,6 +40,7 @@ class ContributionViewSet(mixins.CreateModelMixin, mixins.RetrieveModelMixin, mi
     geojson_serializer_class = ContributionGeojsonSerializer
     serializer_class = ContributionSerializer
     parser_classes = (MultiPartParser, FormParser, JSONParser)
+    pagination_class = LimitOffsetPagination
     renderer_classes = [CamelCaseJSONRenderer, GeoJSONRenderer, ]
     filter_backends = [filters.OrderingFilter, filters.SearchFilter]
     search_fields = ['category', 'category__type']

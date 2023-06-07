@@ -13,6 +13,7 @@ from geotrek.sensitivity.models import SensitiveArea
 from rest_framework import filters
 from rest_framework import viewsets
 from rest_framework.permissions import AllowAny
+from rest_framework.pagination import LimitOffsetPagination
 
 
 class SensitivityViewSet(viewsets.ModelViewSet):
@@ -22,6 +23,7 @@ class SensitivityViewSet(viewsets.ModelViewSet):
     permission_classes = [AllowAny, ]
     renderer_classes = [CamelCaseJSONRenderer, GeoJSONRenderer, ]
     filter_backends = [filters.OrderingFilter, filters.SearchFilter]
+    pagination_class = LimitOffsetPagination
     ordering_fields = ['species__name', ]
     search_fields = ['species__name', ]
 
