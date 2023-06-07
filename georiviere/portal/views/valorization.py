@@ -45,7 +45,7 @@ class POIViewSet(viewsets.ReadOnlyModelViewSet):
     def category(self, request, *args, **kwargs):
         category_pk = self.kwargs['category_pk']
         category = get_object_or_404(POICategory.objects.all(), pk=category_pk)
-        qs = self.filter_queryset(POI.objects.filter(type__in=category.types.select_related('pois').values_list('pk', flat=True)).annotate(
+        qs = self.filter_queryset(POI.objects.filter(type__in=category.types.all()).annotate(
             geom_transformed=Transform(F('geom'), settings.API_SRID)))
         serializer = self.get_serializer(qs, many=True)
         return Response(serializer.data)
