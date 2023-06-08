@@ -11,6 +11,7 @@ from djangorestframework_camel_case.render import CamelCaseJSONRenderer
 
 from rest_framework import filters, viewsets
 from rest_framework import permissions as rest_permissions
+from rest_framework.pagination import LimitOffsetPagination
 
 
 class StreamViewSet(viewsets.ModelViewSet):
@@ -20,6 +21,7 @@ class StreamViewSet(viewsets.ModelViewSet):
     renderer_classes = (CamelCaseJSONRenderer, GeoJSONRenderer, )
     permission_classes = [rest_permissions.DjangoModelPermissionsOrAnonReadOnly]
     filter_backends = [filters.OrderingFilter, filters.SearchFilter]
+    pagination_class = LimitOffsetPagination
     ordering_fields = ['name', 'date_insert']
     search_fields = ['name']
 

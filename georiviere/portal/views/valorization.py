@@ -10,6 +10,7 @@ from georiviere.valorization.models import POI, POICategory
 from rest_framework import viewsets, filters
 from rest_framework.permissions import AllowAny
 from rest_framework.decorators import action
+from rest_framework.pagination import LimitOffsetPagination
 from rest_framework.response import Response
 
 
@@ -22,6 +23,7 @@ class POIViewSet(viewsets.ReadOnlyModelViewSet):
     permission_classes = [AllowAny, ]
     renderer_classes = [CamelCaseJSONRenderer, GeoJSONRenderer]
     filter_backends = [filters.OrderingFilter, filters.SearchFilter]
+    pagination_class = LimitOffsetPagination
     ordering_fields = ['name', 'date_insert']
     search_fields = ['name', 'type__label', 'type__category__label']
 
@@ -43,7 +45,7 @@ class POIViewSet(viewsets.ReadOnlyModelViewSet):
     def category(self, request, *args, **kwargs):
         category_pk = self.kwargs['category_pk']
         category = get_object_or_404(POICategory.objects.all(), pk=category_pk)
-        qs = POI.objects.filter(type__in=category.types.select_related('pois').values_list('pk', flat=True)).annotate(
-            geom_transformed=Transform(F('geom'), settings.API_SRID))
+        qs = self.filter_queryset(POI.objects.filter(type__in=category.types.all()).annotate(
+            geom_transformed=Transform(F('geom'), settings.API_SRID)))
         serializer = self.get_serializer(qs, many=True)
         return Response(serializer.data)

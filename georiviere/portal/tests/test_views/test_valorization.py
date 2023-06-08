@@ -58,3 +58,15 @@ class POIViewTest(TestCase):
         response = self.client.get(url)
         self.assertEqual(response.status_code, 200)
         self.assertSetEqual(set(response.json().keys()), {'type', 'features'})
+
+    def test_poi_category_list_json_structure_ordering(self):
+        poi = POIFactory.create(type=self.poi.type)
+        poi.portals.add(self.portal)
+        url = reverse('api_portal:pois-category',
+                      kwargs={'portal_pk': self.portal.pk, 'category_pk': self.poi.type.category.pk,
+                              'lang': 'fr'})
+        response = self.client.get(url,
+                                   {'ordering': '-date_insert'})
+
+        self.assertEqual(response.status_code, 200)
+        self.assertEqual(response.json()[0]["id"], poi.pk)
