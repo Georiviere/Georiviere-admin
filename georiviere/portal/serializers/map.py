@@ -31,8 +31,8 @@ class MapLayerSerializer(ModelSerializer):
 
     def get_is_searchable(self, obj):
         if obj.layer_type.split('-')[0] in ['pois', 'streams', 'contributions', 'sensitivities']:
-            return False
-        return True
+            return True
+        return False
 
     def get_options(self, obj):
         return {'style': obj.style if obj.style else None}
