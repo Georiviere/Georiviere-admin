@@ -43,7 +43,8 @@ class ContributionViewSet(mixins.CreateModelMixin, mixins.RetrieveModelMixin, mi
     pagination_class = LimitOffsetPagination
     renderer_classes = [CamelCaseJSONRenderer, GeoJSONRenderer, ]
     filter_backends = [filters.OrderingFilter, filters.SearchFilter]
-    search_fields = ['category', 'category__type']
+    search_fields = ['potential_damage__type', 'fauna_flora__type', 'quality__type', 'quantity__type',
+                     'landscape_element__type']
 
     @action(detail=False, url_name="json_schema", methods=['get'],
             renderer_classes=[renderers.JSONRenderer],
