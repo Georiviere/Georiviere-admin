@@ -6,6 +6,7 @@ from django.core.management.base import BaseCommand, CommandError
 class BaseImportCommand(BaseCommand):
     help = "Import whatever stations from Hub'Eau API"
     api_url = ""
+    operations_url = "https://naiades.eaufrance.fr/acces-donnees#/physicochimie/operations"
 
     def add_arguments(self, parser):
         parser.add_argument('--department', nargs='+', help="Department code")
@@ -37,7 +38,7 @@ class BaseImportCommand(BaseCommand):
 
         response = requests.get(self.api_url, params=payload)
 
-        if response.status_code != 200:
+        if response.status_code not in [200, 206]:
             message = "Failed to fetch {}. Status code : {}.".format(
                 self.api_url,
                 response.status_code

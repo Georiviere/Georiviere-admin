@@ -1,3 +1,5 @@
+from crispy_forms.layout import Div, Field
+
 from django import forms
 
 from geotrek.common.forms import CommonForm
@@ -9,8 +11,20 @@ from georiviere.river.models import Stream, Topology
 
 class StreamForm(CommonForm):
     geom = SnappedLineStringField()
-
     geomfields = ['geom']
+
+    fieldslayout = [
+        Div(
+            "structure",
+            "name",
+            "description",
+            "flow",
+            "main_flow",
+            "data_source",
+            "classification_water_policy",
+            Field('portals', css_class="chzn-select"),
+        )
+    ]
 
     class Meta(CommonForm):
         fields = "__all__"

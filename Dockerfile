@@ -19,8 +19,8 @@ RUN mkdir -p /opt/georiviere-admin/var
 RUN useradd -ms /bin/bash django --uid ${UID}
 RUN chown -R django:django /opt
 
-COPY .docker/update.sh /usr/local/bin/update.sh
-COPY .docker/entrypoint.sh /usr/local/bin/entrypoint.sh
+COPY .docker/* /usr/local/bin/
+RUN chown -R django:django /usr/local/bin/load_data.sh
 
 WORKDIR /opt/georiviere-admin
 
@@ -105,6 +105,6 @@ COPY --chown=django:django manage.py /opt/georiviere-admin/manage.py
 
 USER django
 
-RUN SECRET_KEY=temp-secret-key /opt/venv/bin/python ./manage.py compilemessages
+RUN CONVERSION_HOST=localhost CAPTURE_HOST=localhost SECRET_KEY=temp-secret-key /opt/venv/bin/python ./manage.py compilemessages
 
 CMD ["gunicorn", "georiviere.wsgi:application"]

@@ -7,6 +7,7 @@
           class="form-horizontal" method="POST">
 
     {% crispy form %}
+    {% include "finances_administration/existing_operations.html" %}
     <fieldset class="formset">
         {{ parametertracking_formset.non_field_errors }}
         {{ parametertracking_formset.management_form }}

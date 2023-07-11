@@ -1,11 +1,54 @@
+from requests import Response
+from unittest import mock
+
 from django.conf import settings
 from django.contrib.gis.geos import Point, LineString
-from django.test import TestCase
+from django.test import TestCase, RequestFactory
 
 from georiviere.finances_administration.tests.factories import AdministrativeFileFactory
 from georiviere.description.tests.factories import MorphologyFactory, StatusFactory, UsageFactory
-from georiviere.river.models import Stream
-from georiviere.river.tests.factories import TopologyFactory, StreamFactory
+from georiviere.river.models import DistanceToSource, Stream
+from georiviere.river.tests.factories import TopologyFactory, StreamFactory, ClassificationWaterPolicyFactory
+
+
+class StreamModelTest(TestCase):
+    @classmethod
+    def setUpTestData(cls):
+        cls.stream = StreamFactory.create(
+            geom=LineString((10000, 10000), (50000, 50000)),
+        )
+
+    def test_prepare_map_image_with_usages(self):
+        rooturl = RequestFactory().get('/').build_absolute_uri('/')
+        with mock.patch('mapentity.helpers.get_source') as mocked_source:
+            def side_effect():
+                response = Response()
+                response.status_code = 200
+                response._content = bytes(
+                    "test",
+                    'utf-8'
+                )
+                return response
+
+            mocked_source.return_value = side_effect()
+            self.assertTrue(self.stream.prepare_map_image_with_other_objects(rooturl, ['usages']))
+            self.assertFalse(self.stream.prepare_map_image_with_other_objects(rooturl, ['usages']))
+
+            UsageFactory.create(geom=self.stream.geom)
+
+            self.assertTrue(self.stream.prepare_map_image_with_other_objects(rooturl, ['usages']))
+            self.assertFalse(self.stream.prepare_map_image_with_other_objects(rooturl, ['usages']))
+
+            self.stream.name = "New name"
+            self.stream.save()
+
+            self.assertTrue(self.stream.prepare_map_image_with_other_objects(rooturl, ['usages']))
+
+
+class ClassificationWaterPolicyModelTest(TestCase):
+    def test_str(self):
+        classification = ClassificationWaterPolicyFactory.create()
+        self.assertEqual(str(classification), classification.label)
 
 
 class TopologyTest(TestCase):
@@ -48,8 +91,15 @@ class StreamSourceLocationTest(TestCase):
 
     def test_distance_to_source(self):
         """Test distance from a given object to stream source according to differents geom"""
-        self.assertAlmostEqual(self.stream1.distance_to_source(self.usage_point), 20)
+        self.assertAlmostEqual(self.stream1.distance_to_source(self.usage_point), 28.2842712)
         self.assertEqual(self.stream1.distance_to_source(self.administrative_file), None)
+        self.assertEqual(DistanceToSource.objects.count(), 6)
+        usage_point = UsageFactory.create(
+            geom=Point(10000, 10010)
+        )
+        self.assertEqual(DistanceToSource.objects.count(), 8)
+        usage_point.delete()
+        self.assertEqual(DistanceToSource.objects.count(), 6)
 
 
 class SnapTest(TestCase):

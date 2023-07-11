@@ -7,7 +7,7 @@ from georiviere.tests import CommonRiverTest
 from georiviere.maintenance.models import Intervention
 from georiviere.maintenance.tests.factories import (
     InterventionFactory, InterventionStatusFactory,
-    InterventionDisorderFactory, InterventionStakeFactory
+    InterventionDisorderFactory, InterventionStakeFactory, InterventionWithTargetFactory
 )
 from georiviere.knowledge.tests.factories import KnowledgeFactory
 
@@ -56,6 +56,7 @@ class InterventionViewsTest(CommonRiverTest):
 
 class InterventionWithTargetViewsTest(InterventionViewsTest):
     """Test Intervention linked to a target"""
+    modelfactory = InterventionWithTargetFactory
 
     def get_good_data(self):
         """Test creation of an intervention not linked to a knowledge"""

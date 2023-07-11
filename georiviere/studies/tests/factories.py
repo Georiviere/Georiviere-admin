@@ -3,6 +3,8 @@ from mapentity.tests.factories import PointFactory
 
 from .. import models
 
+from georiviere.river.tests.factories import WithStreamFactory
+
 
 class StudyTypeFactory(django.DjangoModelFactory):
     class Meta:
@@ -11,7 +13,7 @@ class StudyTypeFactory(django.DjangoModelFactory):
     label = fuzzy.FuzzyText()
 
 
-class StudyFactory(PointFactory):
+class StudyFactory(WithStreamFactory, PointFactory):
     class Meta:
         model = models.Study
 

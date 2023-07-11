@@ -70,6 +70,14 @@ class Intervention(TimeStampedModelMixin, WatershedPropertiesMixin, ZoningProper
     def get_create_label(cls):
         return _("Add a new intervention")
 
+    @classmethod
+    def within_buffer_without_knowledge(cls, topology):
+        area = topology.geom.buffer(settings.BASE_INTERSECTION_MARGIN)
+        from georiviere.description.models import Knowledge
+        target_type = Knowledge.get_content_type_id()
+        qs = cls.objects.filter(_geom__intersects=area).exclude(target_type=target_type)
+        return qs
+
     @property
     def name_display(self):
         return '<a data-pk="{}" href="{}" title="{}" >{}</a>'.format(

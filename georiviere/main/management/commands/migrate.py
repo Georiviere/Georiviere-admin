@@ -3,6 +3,7 @@ from django.conf import settings
 from django.contrib.gis.gdal import SpatialReference
 from django.core.exceptions import ImproperlyConfigured
 from django.core.management.commands.migrate import Command as BaseCommand
+from django.core.management import call_command
 
 from geotrek.common.utils.postgresql import load_sql_files
 
@@ -27,3 +28,5 @@ class Command(BaseCommand):
         for app in apps.get_app_configs():
             # move_models_to_schemas(app)
             load_sql_files(app, 'post')
+        call_command('sync_translation_fields', '--noinput')
+        call_command('update_translation_fields')

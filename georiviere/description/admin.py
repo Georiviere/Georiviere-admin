@@ -1,6 +1,7 @@
 from django.contrib import admin
 from .models import (StatusType, LandType, UsageType, FlowType, WorkingSpaceType, FaciesDiversity,
-                     GranulometricDiversity, SedimentDynamic, BankState, HabitatsDiversity, HabitatType, PlanLayoutType)
+                     GranulometricDiversity, SedimentDynamic, BankState, HabitatsDiversity, HabitatType, PlanLayoutType,
+                     ControlType)
 from geotrek.common.mixins import MergeActionMixin
 
 
@@ -11,6 +12,12 @@ class PhysicalTypeAdmin(MergeActionMixin, admin.ModelAdmin):
 
 
 class LandTypeAdmin(MergeActionMixin, admin.ModelAdmin):
+    list_display = ('label', )
+    search_fields = ('label', )
+    merge_field = "label"
+
+
+class ControlTypeAdmin(MergeActionMixin, admin.ModelAdmin):
     list_display = ('label', )
     search_fields = ('label', )
     merge_field = "label"
@@ -88,3 +95,4 @@ admin.site.register(BankState, BankStateAdmin)
 admin.site.register(HabitatsDiversity, HabitatsDiversityAdmin)
 admin.site.register(HabitatType, HabitatTypeAdmin)
 admin.site.register(PlanLayoutType, PlanLayoutTypeAdmin)
+admin.site.register(ControlType, ControlTypeAdmin)

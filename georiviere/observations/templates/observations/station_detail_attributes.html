@@ -43,7 +43,20 @@
             <th>{{ object|verbose:"description" }}</th>
             <td>{{ object.description }}</td>
         </tr>
-
+        <tr>
+            <th>{{ object|verbose:"operations_uri" }}</th>
+            <td>{% if object.operations_uri %}
+                    <a target="_blank" href="{{ object.operations_uri }}">{{ object.operations_uri }}</a>
+                {% endif %}
+            </td>
+        </tr>
+        <tr>
+            <th>{{ object|verbose:"annex_uri" }}</th>
+            <td>{% if object.annex_uri %}
+                    <a target="_blank" href="{{ object.annex_uri }}">{{ object.annex_uri }}</a>
+                {% endif %}
+            </td>
+        </tr>
         {% include "mapentity/trackinfo_fragment.html" %}
     </table>
 

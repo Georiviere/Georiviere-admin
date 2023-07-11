@@ -110,5 +110,29 @@
         "structure": null,
         "label": "Fonctionnement"
     }
+},
+{
+    "model": "finances_administration.administrativedeferral",
+    "pk": 1,
+    "fields": {
+        "structure": null,
+        "label": "Géographique sur même cours d'eau"
+    }
+},
+{
+    "model": "finances_administration.administrativedeferral",
+    "pk": 2,
+    "fields": {
+        "structure": null,
+        "label": "Géographique sur autre cours d'eau"
+    }
+},
+{
+    "model": "finances_administration.administrativedeferral",
+    "pk": 3,
+    "fields": {
+        "structure": null,
+        "label": "Temporel"
+    }
 }
 ]

@@ -2,9 +2,40 @@
 CHANGELOG
 =========
 
-1.0.3+dev    (XXXX-XX-XX)
+1.1.0        (2023-13-06)
 -------------------------
 
+**Enhancement**
+
+* Add public portals on stream allowing to publish them
+* Add PDFs administration of rivers
+* Add flatpages module
+* Add valorization POIs
+* Add sensitivity module
+
+**Bug fixes**
+
+* Fix all point's marker was showing point to distance
+* Fix form intervention, targets was not save
+
+
+1.0.4        (2023-04-05)
+-------------------------
+
+**Enhancement**
+
+* Add field classification water policy on rivers (#117)
+* Add possibility to show geometries overprinted on topologies (#105)
+* Add possibility to create attachment with external link
+* Add command import hydrobiologie stations hubeau
+* Upgrade api hubeau PC quality
+* Add control type on Land module
+* Add phases on Administrative Files
+* Allow to create operations directly from creation of studies / follow ups / interventions / stations
+
+**Bug fixes**
+
+* Fix update attachments save buttons
 
 
 1.0.3 (2022-12-15)

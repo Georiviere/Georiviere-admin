@@ -1,22 +1,34 @@
 from django.conf import settings
+from django.contrib.contenttypes.models import ContentType
 from django.contrib.gis.db import models
-from django.contrib.gis.geos import GEOSGeometry, Point
+from django.contrib.gis.geos import Point
 from django.db.models import Q
+from django.template.defaultfilters import slugify
 from django.utils.translation import gettext_lazy as _
 
-from geotrek.authent.models import StructureRelated
+import math
+import os
+from mapentity.helpers import is_file_uptodate, smart_urljoin, capture_map_image
+from mapentity.registry import app_settings
+
+from geotrek.authent.models import StructureRelated, StructureOrNoneRelated
 from geotrek.common.mixins import TimeStampedModelMixin
 from geotrek.zoning.mixins import ZoningPropertiesMixin
 from mapentity.models import MapEntityMixin
 
 from georiviere.main.models import AddPropertyBufferMixin
 from georiviere.altimetry import AltimetryMixin
+from georiviere.finances_administration.models import AdministrativeFile
 from georiviere.functions import ClosestPoint, LineSubString
 from georiviere.knowledge.models import Knowledge, FollowUp
+from georiviere.main.models import DistanceToSource
 from georiviere.observations.models import Station
 from georiviere.proceeding.models import Proceeding
+from georiviere.maintenance.models import Intervention
 from georiviere.studies.models import Study
 from georiviere.watershed.mixins import WatershedPropertiesMixin
+
+from geotrek.sensitivity.models import SensitiveArea
 
 
 class TopologyMixin(object):
@@ -34,6 +46,17 @@ class TopologyMixin(object):
         return final_topologies
 
 
+class ClassificationWaterPolicy(StructureOrNoneRelated):
+    label = models.CharField(max_length=128, verbose_name=_("Label"), )
+
+    class Meta:
+        verbose_name = _("Classification water policy")
+        verbose_name_plural = _("Classification water policies")
+
+    def __str__(self):
+        return self.label
+
+
 class Stream(AddPropertyBufferMixin, TimeStampedModelMixin, WatershedPropertiesMixin, ZoningPropertiesMixin,
              MapEntityMixin, AltimetryMixin, StructureRelated):
     """Model for stream"""
@@ -46,20 +69,29 @@ class Stream(AddPropertyBufferMixin, TimeStampedModelMixin, WatershedPropertiesM
 
     name = models.CharField(max_length=100, default=_('Stream'), verbose_name=_("Name"))
     geom = models.LineStringField(srid=settings.SRID, spatial_index=True)
-
+    description = models.TextField(verbose_name=_("Description"), blank=True)
     flow = models.IntegerField(
         choices=FlowChoices.choices,
         default=FlowChoices.TBD,
         blank=True,
         verbose_name=_("Flow"),
     )
-    data_source = models.ForeignKey('main.DataSource', on_delete=models.CASCADE,
-                                    null=True, blank=True, related_name='rivers',
+    data_source = models.ForeignKey('main.DataSource', on_delete=models.SET_NULL,
+                                    null=True, blank=True, related_name='streams',
                                     verbose_name=_("Data source"))
 
     source_location = models.PointField(verbose_name=_("Source location"),
                                         srid=settings.SRID,
                                         blank=True, null=True)
+    classification_water_policy = models.ForeignKey('ClassificationWaterPolicy',
+                                                    on_delete=models.SET_NULL,
+                                                    null=True, blank=True, related_name='streams',
+                                                    verbose_name=_("Classification water policy"))
+    portals = models.ManyToManyField('portal.Portal',
+                                     blank=True, related_name='streams',
+                                     verbose_name=_("Published portals"))
+
+    capture_map_image_waitfor = '.other_object_enum_loaded'
 
     class Meta:
         verbose_name = _("Stream")
@@ -72,6 +104,51 @@ class Stream(AddPropertyBufferMixin, TimeStampedModelMixin, WatershedPropertiesM
 
     def __str__(self):
         return self.name
+
+    def is_public(self):
+        return self.portals.exists()
+
+    def get_printcontext_with_other_objects(self, modelnames):
+        maplayers = [
+            settings.LEAFLET_CONFIG['TILES'][0][0],
+        ]
+        return {"maplayers": maplayers, "additional_objects": modelnames}
+
+    def get_map_image_path_with_other_objects(self, modelnames):
+        basefolder = os.path.join(settings.MEDIA_ROOT, 'maps')
+        if not os.path.exists(basefolder):
+            os.makedirs(basefolder)
+        return os.path.join(basefolder, '%s-%s-%s.png' % (self._meta.model_name, self.pk, '-'.join(sorted(modelnames))))
+
+    def prepare_map_image_with_other_objects(self, rooturl, properties):
+        path = self.get_map_image_path_with_other_objects(properties)
+        # Do nothing if image is up-to-date
+        dates_to_check = [self.get_date_update()]
+        for prop in properties:
+            if getattr(self, prop):
+                dates_to_check.append(getattr(self, prop).latest('date_update').get_date_update())
+        if all([is_file_uptodate(path, date) for date in dates_to_check]):
+            return False
+        url = smart_urljoin(rooturl, self.get_detail_url())
+        extent = self.get_map_image_extent(3857)
+        length = max(extent[2] - extent[0], extent[3] - extent[1])
+        hint_size = app_settings['MAP_CAPTURE_SIZE']
+        length_per_tile = 256 * length / hint_size
+        RADIUS = 6378137
+        CIRCUM = 2 * math.pi * RADIUS
+        zoom = round(math.log(CIRCUM / length_per_tile, 2))
+        size = math.ceil(length * 1.1 * 256 * 2 ** zoom / CIRCUM)
+        printcontext = self.get_printcontext_with_other_objects(properties)
+        capture_map_image(url, path, size=size, waitfor=self.capture_map_image_waitfor, printcontext=printcontext)
+        return True
+
+    @property
+    def areas_ordered_area_type(self):
+        return sorted(self.areas, key=lambda x: x.area_type.name)
+
+    @property
+    def slug(self):
+        return slugify(self.name) or str(self.pk)
 
     def save(self, *args, **kwargs):
         if not self.source_location:
@@ -117,9 +194,11 @@ class Stream(AddPropertyBufferMixin, TimeStampedModelMixin, WatershedPropertiesM
 
     def distance_to_source(self, element):
         """Returns distance from element to stream source"""
-        if hasattr(element, 'geom') and isinstance(element.geom, GEOSGeometry):
-            return self.source_location.distance(element.geom)
-        return None
+        ct = ContentType.objects.get_for_model(element)
+        try:
+            return DistanceToSource.objects.get(stream=self, content_type=ct, object_id=element.pk).distance
+        except DistanceToSource.DoesNotExist:
+            return None
 
 
 class Topology(models.Model):
@@ -183,3 +262,11 @@ Stream.add_property('stations', Station.within_buffer, _("Stations"))
 Stream.add_property('studies', Study.within_buffer, _("Studies"))
 Stream.add_property('knowledges', Knowledge.within_buffer, _("Knowledges"))
 Stream.add_property('proceedings', Proceeding.within_buffer, _("Proceedings"))
+Stream.add_property('followups', FollowUp.within_buffer, _("Follow-ups"))
+Stream.add_property('followups_without_knowledges', FollowUp.within_buffer_without_knowledge, _("Follow-ups"))
+Stream.add_property('interventions', Intervention.within_buffer, _("Interventions"))
+Stream.add_property('interventions_without_knowledges', Intervention.within_buffer_without_knowledge, _("Interventions"))
+
+Intervention.add_property('streams', Stream.within_buffer, _("Stream"))
+AdministrativeFile.add_property('streams', Stream.within_buffer, _("Stream"))
+SensitiveArea.add_property('streams', Stream.within_buffer, _("Stream"))

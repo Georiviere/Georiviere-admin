@@ -4,11 +4,11 @@ from factory import django, fuzzy, enums, post_generation, SubFactory, Sequence
 
 from georiviere.tests.factories import BaseLineStringFactory
 from georiviere.river.models import Stream
-from georiviere.river.tests.factories import TopologyFactory
+from georiviere.river.tests.factories import TopologyFactory, WithStreamFactory
 from .. import models
 
 
-class UsageFactory(BaseLineStringFactory):
+class UsageFactory(WithStreamFactory, BaseLineStringFactory):
     class Meta:
         model = models.Usage
 
@@ -25,12 +25,23 @@ class UsageTypeFactory(django.DjangoModelFactory):
     label = Sequence(lambda n: "Usage type %s" % n)
 
 
-class MorphologyFactory(BaseLineStringFactory):
+class MorphologyFactory(WithStreamFactory, BaseLineStringFactory):
     topology = SubFactory(TopologyFactory)
     description = fuzzy.FuzzyText(length=200)
 
     class Meta:
         model = models.Morphology
+
+
+class MorphologyOnStreamFactory(WithStreamFactory, BaseLineStringFactory):
+    class Meta:
+        model = models.Stream
+
+    @classmethod
+    def create(cls, **kwargs):
+        stream = cls._generate(enums.CREATE_STRATEGY, kwargs)
+        morphology = stream.topologies.filter(morphology__isnull=False).get().morphology
+        return morphology
 
 
 class PlanLayoutTypeFactory(django.DjangoModelFactory):
@@ -103,11 +114,19 @@ class LandTypeFactory(django.DjangoModelFactory):
     label = Sequence(lambda n: 'Land type {}'.format(n))
 
 
-class LandFactory(BaseLineStringFactory):
+class ControlTypeFactory(django.DjangoModelFactory):
+    class Meta:
+        model = models.ControlType
+
+    label = Sequence(lambda n: f'Control type {n}')
+
+
+class LandFactory(WithStreamFactory, BaseLineStringFactory):
     class Meta:
         model = models.Land
 
     land_type = SubFactory(LandTypeFactory)
+    control_type = SubFactory(ControlTypeFactory)
     owner = fuzzy.FuzzyText()
     description = fuzzy.FuzzyText(length=200)
     identifier = fuzzy.FuzzyText(chars=ascii_letters)
@@ -120,7 +139,7 @@ class StatusTypeFactory(django.DjangoModelFactory):
     label = Sequence(lambda n: 'Status type {}'.format(n))
 
 
-class StatusFactory(BaseLineStringFactory):
+class StatusFactory(WithStreamFactory, BaseLineStringFactory):
     class Meta:
         model = models.Status
 
@@ -133,7 +152,7 @@ class StatusFactory(BaseLineStringFactory):
             obj.status_types.set(extracted)
 
 
-class StatusOnStreamFactory(BaseLineStringFactory):
+class StatusOnStreamFactory(WithStreamFactory, BaseLineStringFactory):
     class Meta:
         model = Stream
 

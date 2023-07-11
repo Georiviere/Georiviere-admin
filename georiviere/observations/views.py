@@ -1,6 +1,7 @@
 from mapentity import views as mapentity_views
 from geotrek.authent.decorators import same_structure_required
 
+from georiviere.finances_administration.views import AdministrativeOperationOnObjectMixin
 from georiviere.main.views import FormsetMixin
 from .filters import StationFilterSet
 from .forms import StationForm, ParameterTrackingFormset
@@ -49,12 +50,12 @@ class StationDetail(mapentity_views.MapEntityDetail):
         return context
 
 
-class StationCreate(ParameterTrackingFormsetMixin, mapentity_views.MapEntityCreate):
+class StationCreate(AdministrativeOperationOnObjectMixin, ParameterTrackingFormsetMixin, mapentity_views.MapEntityCreate):
     model = Station
     form_class = StationForm
 
 
-class StationUpdate(ParameterTrackingFormsetMixin, mapentity_views.MapEntityUpdate):
+class StationUpdate(AdministrativeOperationOnObjectMixin, ParameterTrackingFormsetMixin, mapentity_views.MapEntityUpdate):
     model = Station
     form_class = StationForm
 

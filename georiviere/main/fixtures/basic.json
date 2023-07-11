@@ -8,24 +8,6 @@
     }
 },
 {
-    "model": "main.attachment",
-    "pk": 1,
-    "fields": {
-        "content_type": 59,
-        "object_id": 1,
-        "attachment_file": "paperclip/studies_study/1/abbaye_en_grandvaux_grande_riviere_jura_vue_36.jpg",
-        "filetype": 1,
-        "creator": 2,
-        "author": "",
-        "title": "Abbaye_en_Grandvaux_Grande_Rivière_Jura_Vue_36",
-        "legend": "",
-        "starred": false,
-        "is_image": true,
-        "date_insert": "2022-03-07T15:13:28.143Z",
-        "date_update": "2022-03-07T15:13:28.143Z"
-    }
-},
-{
     "model": "main.datasource",
     "pk": 4,
     "fields": {

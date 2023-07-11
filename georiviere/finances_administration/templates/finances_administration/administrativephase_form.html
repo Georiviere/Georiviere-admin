@@ -1,0 +1,19 @@
+{% extends "mapentity/mapentity_form.html" %}
+{% load i18n crispy_forms_tags %}
+
+{% block mainform %}
+<div class="col-sm-6 offset-sm-3 fixed-actions">
+    <h2>{% trans "Edit phase :" %} {{ object }}</h2>
+    <form id="mainform"
+          action="{% if object.pk %}{{ object.get_update_url }}{% else %}{{ object.get_add_url }}{% endif %}"
+          method="POST">
+
+    {% crispy form %}
+
+    </form>
+</div>
+{% endblock mainform %}
+
+{% block extrabody %}
+    {{ block.super }}
+{% endblock extrabody %}

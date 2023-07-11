@@ -4,7 +4,7 @@
     <li{% if modelname and v.pk %} class="hoverable" data-modelname="{{ modelname }}" data-pk="{{ v.pk }}"{% endif %}>
         {% if v.enumeration %}<span class="enumeration-value">{{ v.enumeration }}.&nbsp;</span>{% endif %}
         {{ v.text|safe }}
-        {% if v.distance_to_source %} ({{ v.distance_to_source|floatformat }}&nbsp;m){% endif %}
+        ({{ v.distance_to_source|floatformat }}&nbsp;m)
     </li>
     {% if forloop.last %}</ul>{% endif %}
 {% empty %}

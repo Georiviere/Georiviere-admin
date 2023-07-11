@@ -8,6 +8,10 @@
             <td>{{ object.name }}</td>
         </tr>
         <tr>
+            <th>{{ object|verbose:"description" }}</th>
+            <td>{{ object.description }}</td>
+        </tr>
+        <tr>
             <th>{{ object|verbose:"structure" }}</th>
             <td>{{ object.structure }}</td>
         </tr>
@@ -18,6 +22,16 @@
         <tr>
             <th>{{ object|verbose:"data_source" }}</th>
             <td>{{ object.data_source|default_if_none:"-" }}</td>
+        </tr>
+        <tr>
+            <th>{{ object|verbose:"classification_water_policy" }}</th>
+            <td>{{ object.classification_water_policy|default_if_none:"-" }}</td>
+        </tr>
+        <tr>
+            <th>{{ object|verbose:"portals" }}</th>
+            <td>
+                {% valuelist object.portals.all %}
+            </td>
         </tr>
         {% include "altimetry/elevationinfo_fragment.html" %}
         {% include "mapentity/trackinfo_fragment.html" %}

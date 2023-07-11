@@ -1,0 +1,42 @@
+[
+  {
+    "model": "river.classificationwaterpolicy",
+    "pk": 1,
+    "fields": {
+      "label": "Classé cours d’eau",
+      "structure": null
+    }
+  },
+  {
+    "model": "river.classificationwaterpolicy",
+    "pk": 2,
+    "fields": {
+      "label": "Non cours d’eau",
+      "structure": null
+    }
+  },
+  {
+    "model": "river.classificationwaterpolicy",
+    "pk": 3,
+    "fields": {
+      "label": "Reclassement demandé",
+      "structure": null
+    }
+  },
+  {
+    "model": "river.classificationwaterpolicy",
+    "pk": 4,
+    "fields": {
+      "label": "Reclassement à faire",
+      "structure": null
+    }
+  },
+  {
+    "model": "river.classificationwaterpolicy",
+    "pk": 4,
+    "fields": {
+      "label": "À déterminer",
+      "structure": null
+    }
+  }
+]

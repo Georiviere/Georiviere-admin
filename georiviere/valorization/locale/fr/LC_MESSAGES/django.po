@@ -1,0 +1,94 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2023-05-15 19:57+0000\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+msgid "Valorization"
+msgstr "Valorisation"
+
+msgid "Name"
+msgstr "Nom"
+
+msgid "Label"
+msgstr "Label"
+
+msgid "POI Category"
+msgstr "Catégorie POI"
+
+msgid "POI Categories"
+msgstr "Catgéories POI"
+
+msgid "Category"
+msgstr "Catégorie"
+
+msgid "Pictogram"
+msgstr "Pictogramme"
+
+msgid "POI type"
+msgstr "Type de POI"
+
+msgid "POI types"
+msgstr "Types de POI"
+
+msgid "Description"
+msgstr "Description"
+
+msgid "History, details,  ..."
+msgstr "Historique, détails, ..."
+
+msgid "Type"
+msgstr "Type "
+
+msgid "Portals"
+msgstr "Portails"
+
+msgid "POI"
+msgstr "POI"
+
+msgid "POIs"
+msgstr "POIs"
+
+msgid "Stream"
+msgstr "Rivière"
+
+msgid "Status"
+msgstr "Statut"
+
+msgid "Morphologies"
+msgstr "Morphologies"
+
+msgid "Usages"
+msgstr "Usages"
+
+msgid "Station"
+msgstr "Station"
+
+msgid "Study"
+msgstr "Étude"
+
+msgid "Proceeding"
+msgstr "Acte"
+
+msgid "Knowledge"
+msgstr "Connaissance"
+
+msgid "Add a new poi"
+msgstr "Ajoute un nouveau POI"
+
+msgid "This field is required."
+msgstr "Ce champ est requis."

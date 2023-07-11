@@ -1,3 +1,4 @@
+from django.forms import ModelChoiceField
 from django.utils.translation import gettext_lazy as _
 
 from crispy_forms.layout import Div, Field
@@ -5,6 +6,7 @@ from crispy_forms.bootstrap import AppendedText
 from dal import autocomplete
 from geotrek.common.forms import CommonForm
 
+from georiviere.finances_administration.models import AdministrativeFile
 from georiviere.knowledge.models import Knowledge
 from georiviere.main.widgets import DatePickerInput
 from georiviere.maintenance.models import Intervention
@@ -25,6 +27,8 @@ class InterventionForm(autocomplete.FutureModelForm, CommonForm):
         required=False,
         initial=None,
     )
+    administrative_file = ModelChoiceField(label=_("Create operation on"), queryset=AdministrativeFile.objects.all(),
+                                           required=False, initial=None)
 
     fieldslayout = [
         Div(
@@ -40,6 +44,8 @@ class InterventionForm(autocomplete.FutureModelForm, CommonForm):
             AppendedText("length", "m"),
             AppendedText("width", "m"),
             AppendedText("height", "m"),
+            Div(css_id="div_id_operations", css_class="form-group row"),
+            "administrative_file",
         )]
 
     class Meta:
@@ -48,7 +54,7 @@ class InterventionForm(autocomplete.FutureModelForm, CommonForm):
             "structure", "target", "name", "date",
             "intervention_status", "intervention_type",
             "stake", "disorders", "description",
-            "length", "width", "height", "_geom"
+            "length", "width", "height", "_geom", "administrative_file"
         ]
         widgets = {
             'date': DatePickerInput(),

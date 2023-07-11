@@ -201,7 +201,10 @@ class Morphology(AddPropertyBufferMixin, TopologyMixin, TimeStampedModelMixin,
         verbose_name_plural = _("Morphologies")
 
     def __str__(self):
-        return f"{self.main_flow}"
+        if self.main_flow:
+            return f"{self.main_flow}"
+        else:
+            return f"{self.pk}"
 
     @classproperty
     def name_verbose_name(cls):
@@ -237,6 +240,20 @@ class LandType(StructureOrNoneRelated):
         return self.label
 
 
+class ControlType(StructureOrNoneRelated):
+    label = models.CharField(max_length=128, verbose_name=_("Label"), unique=True)
+
+    class Meta:
+        verbose_name = _("Control type")
+        verbose_name_plural = _("Control types")
+        ordering = ['label']
+
+    def __str__(self):
+        if self.structure:
+            return "{} ({})".format(self.label, self.structure.name)
+        return self.label
+
+
 class Land(AddPropertyBufferMixin, TimeStampedModelMixin, WatershedPropertiesMixin,
            ZoningPropertiesMixin, AltimetryMixin, MapEntityMixin, StructureRelated):
     geom = models.GeometryField(srid=settings.SRID, spatial_index=True)
@@ -245,6 +262,8 @@ class Land(AddPropertyBufferMixin, TimeStampedModelMixin, WatershedPropertiesMix
     agreement = models.BooleanField(verbose_name=_("Agreement"), default=False)
     description = models.TextField(verbose_name=_("Description"), blank=True)
     identifier = models.CharField(verbose_name=_("Identifier"), blank=True, max_length=255)
+    control_type = models.ForeignKey(ControlType, verbose_name=_("Control type"), null=True, blank=True,
+                                     on_delete=models.SET_NULL)
 
     class Meta:
         verbose_name = _("Land")
@@ -381,6 +400,7 @@ Land.add_property('studies', Study.within_buffer, _("Study"))
 Land.add_property('proceedings', Proceeding.within_buffer, _("Proceeding"))
 Land.add_property('knowledges', Knowledge.within_buffer, _("Knowledge"))
 
+Morphology.add_property('streams', lambda self: [self.topology.stream], _("Stream"))
 Morphology.add_property('status', lambda self: self.get_topology('status'), _("Status"))
 Morphology.add_property('lands', Land.within_buffer, _("Lands"))
 Morphology.add_property('usages', Usage.within_buffer, _("Usages"))
@@ -389,6 +409,7 @@ Morphology.add_property('studies', Study.within_buffer, _("Study"))
 Morphology.add_property('proceedings', Proceeding.within_buffer, _("Proceeding"))
 Morphology.add_property('knowledges', Knowledge.within_buffer, _("Knowledge"))
 
+Status.add_property('streams', lambda self: [self.topology.stream], _("Stream"))
 Status.add_property('morphologies', lambda self: self.get_topology('morphology'), _("Morphologies"))
 Status.add_property('lands', Land.within_buffer, _("Lands"))
 Status.add_property('usages', Usage.within_buffer, _("Usages"))

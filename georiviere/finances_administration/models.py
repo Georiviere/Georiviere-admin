@@ -195,6 +195,50 @@ class AdministrativeFile(TimeStampedModelMixin, WatershedPropertiesMixin, Zoning
         return results
 
 
+class AdministrativeDeferral(StructureOrNoneRelated):
+    label = models.CharField(verbose_name=_("Label"), max_length=128,
+                             blank=True, null=True)
+
+    class Meta:
+        verbose_name = _("Administrative deferral")
+        verbose_name_plural = _("Administrative deferrals")
+
+    def __str__(self):
+        if self.structure:
+            return "{} ({})".format(self.label, self.structure.name)
+        return self.label
+
+
+class AdministrativePhase(models.Model):
+    administrative_file = models.ForeignKey(AdministrativeFile,
+                                            on_delete=models.CASCADE,
+                                            related_name='phases',
+                                            verbose_name=_("Phases"))
+    name = models.CharField(verbose_name=_("Name"), max_length=128, default="", blank=True)
+    estimated_budget = models.DecimalField(verbose_name=_("Estimated budget"),
+                                           max_digits=19, decimal_places=2, default=0)
+    revised_budget = models.DecimalField(verbose_name=_("Revised budget"),
+                                         max_digits=19, decimal_places=2,
+                                         blank=True, null=True)
+
+    class Meta:
+        verbose_name = _("Administrative phase")
+        verbose_name_plural = _("Administrative phases")
+
+    def __str__(self):
+        return self.name
+
+    @property
+    def total_costs(self):
+        """Total costs for this phase
+        :return dict
+        """
+        cost = self.operations.all().aggregate(
+            actual=Sum(F('material_cost') + F('subcontract_cost') + F('manday_cost')),
+        )
+        return cost
+
+
 class AdministrativeOperation(models.Model):
     """Model to link projects to any other contents in a N-N relation"""
 
@@ -204,11 +248,18 @@ class AdministrativeOperation(models.Model):
         related_name="operations",
         verbose_name=_('Administrative file')
     )
+    phase = models.ForeignKey(AdministrativePhase,
+                              null=True, blank=True,
+                              related_name='operations',
+                              verbose_name=_("Phase"),
+                              on_delete=models.SET_NULL)
     operation_status = models.ForeignKey('maintenance.InterventionStatus',
                                          null=True, blank=True,
                                          verbose_name=_("Status"),
                                          on_delete=models.CASCADE)
-
+    deferral = models.ManyToManyField(AdministrativeDeferral,
+                                      related_name='operations',
+                                      blank=True, verbose_name=_("Deferral"))
     name = models.CharField(verbose_name=_("Name"), max_length=128, default="", blank=True)
     estimated_cost = models.DecimalField(verbose_name=_("Estimated cost"),
                                          max_digits=19, decimal_places=2, default=0)

@@ -42,6 +42,27 @@ $(window).on('entity:map', function (e, data) {
 	var is_detail_view = /detail/.test(data.viewname);
     if (is_detail_view && (data.modelname == 'status' || data.modelname == 'morphology')) {
         map.on("layeradd", function(layer) {
+            if (map.filecontrol === undefined){
+                var pointToLayer = function (feature, latlng) {
+                    return L.circleMarker(latlng, {style: window.SETTINGS.map.styles.filelayer})
+                            .setRadius(window.SETTINGS.map.styles.filelayer.radius);
+                },
+                onEachFeature = function (feature, layer) {
+                    if (feature.properties.name) {
+                        layer.bindLabel(feature.properties.name);
+                    }
+                },
+                filecontrol = L.Control.fileLayerLoad({
+                    fitBounds: true,
+                    position: 'topleft',
+                    layerOptions: {style: window.SETTINGS.map.styles.filelayer,
+                                   pointToLayer: pointToLayer,
+                                   onEachFeature: onEachFeature,}
+
+                });
+                map.filecontrol = filecontrol;
+                map.addControl(filecontrol);
+            };
             if (map.cutControl === undefined){
                 var cutControl = new L.Control.PointTopology(map, layer, {});
 
@@ -53,5 +74,24 @@ $(window).on('entity:map', function (e, data) {
             }
         });
 
+	}
+	else {
+        var distanceControl = new L.Control.PointDistance(map, layer, {});
+        var exclusive = new L.Control.ExclusiveDistanceActivation();
+        map.distanceControl = map.addControl(distanceControl);
+        exclusive.add(distanceControl);
+        distanceControl.handler.on('enabled', function(){
+            if (! loaded_river) {
+                map.addLayer(layer);
+                loaded_river = true;
+            }
+            distanceControl.handler.reset();
+           }, this);
+        map.on('popupclose', function(){
+            if (loaded_river) {
+                map.removeLayer(layer);
+                loaded_river = false;
+            }
+           }, this);
 	}
 });

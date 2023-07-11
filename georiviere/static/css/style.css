@@ -47,6 +47,10 @@
     width: 35%;
 }
 
+.revised-budget {
+  color: red;
+}
+
 /* tabbing unwanted in detail panel */
 .details-panel td ul {
     padding-left: 0;

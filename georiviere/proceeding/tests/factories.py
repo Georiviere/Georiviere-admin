@@ -3,8 +3,10 @@ from factory import django, Sequence, SubFactory
 from georiviere.tests.factories import BaseLineStringFactory
 from georiviere.proceeding import models
 
+from georiviere.river.tests.factories import WithStreamFactory
 
-class ProceedingFactory(BaseLineStringFactory):
+
+class ProceedingFactory(WithStreamFactory, BaseLineStringFactory):
     class Meta:
         model = models.Proceeding
 

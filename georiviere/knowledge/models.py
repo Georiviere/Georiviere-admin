@@ -459,6 +459,12 @@ class FollowUp(TimeStampedModelMixin, WatershedPropertiesMixin, ZoningProperties
         verbose_name_plural = _("Follow-ups")
 
     @classmethod
+    def within_buffer_without_knowledge(cls, topology):
+        area = topology.geom.buffer(settings.BASE_INTERSECTION_MARGIN)
+        qs = cls.objects.filter(_geom__intersects=area).filter(knowledge__isnull=True)
+        return qs
+
+    @classmethod
     def get_create_label(cls):
         return _("Add a new follow-up")
 

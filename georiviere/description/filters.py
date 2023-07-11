@@ -17,7 +17,7 @@ class LandFilterSet(WatershedFilterSet, ZoningFilterSet, MapEntityFilterSet):
 
     class Meta(MapEntityFilterSet.Meta):
         model = Land
-        fields = MapEntityFilterSet.Meta.fields + ['land_type', ]
+        fields = MapEntityFilterSet.Meta.fields + ['land_type', 'control_type']
 
 
 class MorphologyFilterSet(WatershedFilterSet, ZoningFilterSet, TopologyFilterSet,

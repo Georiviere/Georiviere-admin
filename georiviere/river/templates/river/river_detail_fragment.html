@@ -8,12 +8,7 @@
     <tr>
         <th>{% trans "Stream" %}</th>
         <td>
-            {% if object.topology %}
-            <a href="{{ object.topology.stream.get_detail_url }}">{{ object.topology.stream.name }}</a>
-            {% else %}
-                {% valuelist_streams object.streams object %}
-            {% endif %}
-
+            {% valuelist_streams object.streams object %}
         </td>
     </tr>
     {% endif %}

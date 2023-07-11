@@ -2,6 +2,7 @@ from factory import django, fuzzy, SubFactory, Sequence
 from mapentity.tests.factories import PointFactory
 
 from georiviere.knowledge import models
+from georiviere.river.tests.factories import WithStreamFactory
 
 
 class KnowledgeTypeFactory(django.DjangoModelFactory):
@@ -11,7 +12,7 @@ class KnowledgeTypeFactory(django.DjangoModelFactory):
     label = fuzzy.FuzzyText()
 
 
-class KnowledgeFactory(PointFactory):
+class KnowledgeFactory(WithStreamFactory, PointFactory):
     class Meta:
         model = models.Knowledge
 

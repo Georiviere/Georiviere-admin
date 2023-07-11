@@ -1,0 +1,22 @@
+{% load i18n mapentity_tags georiviere_tags %}
+
+{% if modelname != "poi"%}
+    <h3>{% trans "Valorization" %}</h3>
+    <table class="table">
+        <tr>
+            <th>{% trans "POIs" %}</th>
+            <td>
+                {% if perms.valorization.add_poi %}
+                <p class="autohide">
+                    <a href="{% url 'valorization:poi_add' %}"
+                       class="btn btn-sm btn-success">
+                    <i class="bi bi-plus-circle-fill"></i> {% trans "Add a new poi" %}</a>
+                </p>
+                {% endif %}
+
+                {% valuelist object.pois field='name' %}
+
+            </td>
+        </tr>
+    </table>
+{% endif %}

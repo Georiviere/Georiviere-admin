@@ -6,6 +6,14 @@ from georiviere.observations.tests.factories import StationFactory
 from georiviere.studies.tests.factories import StudyFactory
 
 from georiviere.finances_administration import models
+from georiviere.river.tests.factories import StreamFactory
+
+
+class AdministrativeDeferralFactory(factory.django.DjangoModelFactory):
+    class Meta:
+        model = models.AdministrativeDeferral
+
+    label = factory.Sequence(lambda n: "Deferral %s" % n)
 
 
 class OrganismFactory(factory.django.DjangoModelFactory):
@@ -37,6 +45,26 @@ class AdministrativeFileFactory(factory.django.DjangoModelFactory):
     begin_date = '2010-01-01'
     end_date = '2012-01-01'
 
+    @factory.post_generation
+    def with_stream(obj, create, with_stream):
+        if not create or not with_stream:
+            return
+        StudyOperationFactory.create(administrative_file=obj)
+        if with_stream and obj.geom:
+            # Status / Morphology is already on a stream
+            # It should not add this next stream in distance to source
+            StreamFactory.create(geom_around=obj.geom)
+
+
+class AdministrativeFilePhaseFactory(factory.django.DjangoModelFactory):
+    class Meta:
+        model = models.AdministrativePhase
+
+    name = factory.Sequence(lambda n: "AdministrativePhase %s" % n)
+    administrative_file = factory.SubFactory(AdministrativeFileFactory)
+    estimated_budget = fuzzy.FuzzyDecimal(0, 100000, 2)
+    revised_budget = fuzzy.FuzzyDecimal(0, 100000, 2)
+
 
 class AdministrativeFileOperationFactory(factory.django.DjangoModelFactory):
     class Meta:
@@ -55,14 +83,14 @@ class AdministrativeFileOperationFactory(factory.django.DjangoModelFactory):
     subcontract_cost = fuzzy.FuzzyDecimal(0, 100000, 2)
 
 
-class StudyOperationFactory(factory.django.DjangoModelFactory):
+class StudyOperationFactory(AdministrativeFileOperationFactory):
     class Meta:
         model = models.AdministrativeOperation
 
     content_object = factory.SubFactory(StudyFactory)
 
 
-class StationOperationFactory(factory.django.DjangoModelFactory):
+class StationOperationFactory(AdministrativeFileOperationFactory):
     class Meta:
         model = models.AdministrativeOperation
 

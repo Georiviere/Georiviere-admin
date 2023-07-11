@@ -16,11 +16,76 @@ from pathlib import Path
 from georiviere import __version__
 from geotrek import __version__ as __geotrek_version__
 
+from unittest import mock
+
+from django.conf.global_settings import LANGUAGES as LANGUAGES_LIST
+from django.template.engine import Engine, Template
+
+"""
+We use mocks here because sensitivity use some common models and utilities.
+We try to change import from geotrek to georiviere
+"""
+
+
+orig_import = __import__
+
+
+def import_mock(name, *args, **kwargs):
+    if 'geotrek.core.models' in name:
+        return orig_import('georiviere.main.utils', *args, **kwargs)
+    if 'geotrek.common.models' in name:
+        return orig_import('georiviere.main.models', *args, **kwargs)
+    if 'geotrek.common.urls' in name:
+        return orig_import('georiviere.river.urls', *args, **kwargs)
+    if 'geotrek.common.serializers' in name:
+        return orig_import('georiviere.main.serializers', *args, **kwargs)
+    return orig_import(name, *args, **kwargs)
+
+
+patcher = mock.patch('builtins.__import__', side_effect=import_mock)
+patcher.start()
+
+engine = Engine()
+
+
+def include_mock(template_code):
+    template_code = template_code.replace('common/publication_info_fragment.html',
+                                          'main/publication_info_fragment.html')
+    return Template(template_code)
+
+
+def construct_relative_path_mock(current_template_name, relative_name):
+    if 'common/publication_info_fragment.html' in relative_name:
+        return '"main/publication_info_fragment.html"'
+    return relative_name
+
+
+patcher_include_template = mock.patch('django.template.engine.Engine.from_string',
+                                      side_effect=include_mock)
+patcher_include_template.start()
+
+patcher_loader_tags = mock.patch('django.template.loader_tags.construct_relative_path',
+                                 side_effect=construct_relative_path_mock)
+patcher_loader_tags.start()
+
+
+if 'makemigrations' in sys.argv:
+    PROJECT_APPS = []
+else:
+    PROJECT_APPS = [
+        'modeltranslation',
+    ]
+
+_MODELTRANSLATION_LANGUAGES = [language for language in LANGUAGES_LIST
+                               if language[0] in ("en", "fr", "it", "es")]
+MODELTRANSLATION_LANGUAGES = tuple(os.getenv('LANGUAGES', 'fr en').split(' '))
+
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent.parent
 
 PROJECT_DIR = BASE_DIR / "georiviere"
 VAR_DIR = BASE_DIR / 'var'
+TMP_DIR = os.path.join(VAR_DIR, 'tmp')
 
 ROOT_URL = ""
 TITLE = "GeoRivière"
@@ -45,7 +110,7 @@ ALLOWED_HOSTS = os.getenv('SERVER_NAME').split(',')
 
 # Application definition
 
-INSTALLED_APPS = [
+INSTALLED_APPS = PROJECT_APPS + [
     'dal',
     'dal_select2',
     'dal_queryset_sequence',
@@ -65,7 +130,6 @@ INSTALLED_APPS = [
     'paperclip',
     'crispy_forms',
     'rest_framework',
-    'modeltranslation',
     'geotrek.altimetry',
     'colorfield',
     'georiviere.main',
@@ -74,12 +138,18 @@ INSTALLED_APPS = [
     'georiviere.knowledge',
     'georiviere.maintenance',
     'georiviere.observations',
+    'georiviere.portal',
     'georiviere.finances_administration',
     'georiviere.studies',
     'georiviere.proceeding',
+    'georiviere.valorization',
     'geotrek.zoning',
     'georiviere.watershed',
     'geotrek.authent',
+    'georiviere.flatpages',
+    'georiviere.contribution',
+    'geotrek.sensitivity',
+    'admin_ordering'
 ]
 
 STATICFILES_FINDERS = (
@@ -88,9 +158,22 @@ STATICFILES_FINDERS = (
     'compressor.finders.CompressorFinder',
 )
 
+REST_FRAMEWORK = {
+    "DEFAULT_PARSER_CLASSES": (
+        "rest_framework.parsers.JSONParser",
+        "rest_framework.parsers.FormParser",
+        "rest_framework.parsers.MultiPartParser",
+    ),
+    'UNICODE_JSON': False,
+    'STRICT_JSON': False
+}
+
+CONTRIBUTION_FILETYPE = 'contribution'
 
 PAPERCLIP_ATTACHMENT_MODEL = 'main.Attachment'
 PAPERCLIP_FILETYPE_MODEL = 'main.FileType'
+PAPERCLIP_ENABLE_LINK = True
+PAPERCLIP_ENABLE_VIDEO = True
 
 CRISPY_ALLOWED_TEMPLATE_PACKS = ('bootstrap', 'bootstrap3', 'bootstrap4')
 CRISPY_TEMPLATE_PACK = 'bootstrap4'
@@ -116,6 +199,7 @@ TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
         'DIRS': [
+            VAR_DIR / 'conf' / 'extra_templates',
             PROJECT_DIR / "templates",
         ],
         'APP_DIRS': True,
@@ -211,9 +295,11 @@ USE_TZ = True
 STATIC_ROOT = VAR_DIR / "static"
 MEDIA_ROOT = VAR_DIR / "media"
 MEDIA_URL = '/media/'
+MEDIA_URL_SECURE = '/media_secure/'
 STATIC_URL = '/static/'
 
 STATICFILES_DIRS = [
+    VAR_DIR / 'conf' / 'extra_static',
     PROJECT_DIR / "static",
 ]
 
@@ -251,7 +337,13 @@ MAPENTITY_CONFIG = {
         'station': {'weight': 4, 'color': '#FFD801', 'opacity': 0.9},
         'study': {'weight': 4, 'color': '#d63384', 'opacity': 0.9},
         'proceeding': {'weight': 4, 'color': '#3dd5f3', 'opacity': 0.9},
-    }
+        'print': {
+            'knowledge': {'weight': 3, 'color': '#198754', 'opacity': 1, 'fillOpacity': 0.4, 'radius': 13},
+        }
+    },
+    'TRANSLATED_LANGUAGES': [
+        language for language in LANGUAGES_LIST if language[0] in MODELTRANSLATION_LANGUAGES
+    ]
 }
 
 LEAFLET_CONFIG = {
@@ -263,7 +355,9 @@ LEAFLET_CONFIG = {
     'SPATIAL_EXTENT': (-5, 40, 10, 55),
     'NO_GLOBALS': False,
     'PLUGINS': {
-        'georiviere': {'js': ['river/js/source_location.js']},
+        'georiviere': {'js': ['river/js/source_location.js',
+                              'river/js/distance-to-source.js'],
+                       'css': ['river/css/distance-to-source.css']},
         'topofields': {'js': ['river/js/georiviere.forms.snap.js',
                               'river/js/cut-topology.js'],
                        'css': ['river/css/cut-topology.css']}
@@ -320,6 +414,38 @@ EMAIL_HOST_PASSWORD = os.getenv('EMAIL_HOST_PASSWORD', '')
 EMAIL_PORT = os.getenv('EMAIL_HOST_PORT', 25)
 EMAIL_USE_TLS = bool(os.getenv('EMAIL_USE_TLS', False))
 EMAIL_USE_SSL = bool(os.getenv('EMAIL_USE_SSL', False))
+
+MAIL_DOCUMENT_REPORT = ''
+PHONE_NUMBER_DOCUMENT_REPORT = ''
+WEBSITE_DOCUMENT_REPORT = ''
+URL_DOCUMENT_REPORT = ''
+
+# sensitivity
+
+SENSITIVITY_DEFAULT_RADIUS = 100  # meters
+SENSITIVE_AREA_INTERSECTION_MARGIN = 500  # meters (always used)
+
+# Parser parameters for retries and error codes
+PARSER_RETRY_SLEEP_TIME = 60  # time of sleep between requests
+PARSER_NUMBER_OF_TRIES = 3  # number of requests to try before abandon
+PARSER_RETRY_HTTP_STATUS = [503]
+
+# Thumbnails
+
+THUMBNAIL_ALIASES = {
+    '': {
+        'valorization': {'size': (400, 400)},
+    },
+}
+
+# API
+
+SWAGGER_SETTINGS = {
+    'USE_SESSION_AUTH': False,
+    'APIS_SORTER': 'alpha',
+    'JSON_EDITOR': True,
+    'API_PORTAL': "Georiviere API"
+}
 
 if os.getenv('SSL_ENABLED', default=0):
     # SECURITY

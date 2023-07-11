@@ -30,7 +30,12 @@ def requests_get_mock_response(*args, **kwargs):
             filename = TEST_DATA_PATH / 'response_api_pcquality_analyse_desc.json'
         else:
             filename = TEST_DATA_PATH / 'response_api_pcquality_analyse.json'
-
+    if 'stations_hydrobio' in args[0]:
+        filename = TEST_DATA_PATH / 'response_api_hydrobio_stations.json'
+    if 'indices' in args[0]:
+        filename = TEST_DATA_PATH / 'response_api_hydrobio_indices.json'
+    if 'taxons' in args[0]:
+        filename = TEST_DATA_PATH / 'response_api_hydrobio_taxons.json'
     # Build response
     mock_response = mock.Mock()
     with open(filename, 'r') as f:
@@ -242,6 +247,22 @@ class ImportStationAllRedoTest(TestCase):
         # Check output
         self.assertIn('Updated station DOUBS A LABERGEMENT-STE-MARIE 1 (06017200)', out.getvalue())
 
+    def test_redo_import_hydrobiologie_stations(self, mock_get):
+        """Test import twice temperature stations"""
+
+        # Call command
+        out = StringIO()
+        call_command('import_hydrobiologie_stations', verbosity=2, stdout=out)
+
+        # Check output
+        self.assertIn('Created station profile  (HYDROB)', out.getvalue())
+        self.assertIn('Created station VIREMONT A VALZIN-EN-PETITE-MONTAGNE 1 (06000874)', out.getvalue())
+
+        # Call command a second time
+        call_command('import_hydrobiologie_stations', verbosity=2, stdout=out)
+        # Check output
+        self.assertIn('Updated station VIREMONT A VALZIN-EN-PETITE-MONTAGNE 1 (06000874)', out.getvalue())
+
 
 @mock.patch.object(requests, 'get', side_effect=requests_get_mock_response)
 class ImportStationWithParametersTest(TestCase):
@@ -300,3 +321,134 @@ class ImportStationWithParametersTest(TestCase):
 
         # Check output
         self.assertIn("Added parameter Potentiel en Hydrogène (pH)", out.getvalue())
+
+    def test_import_pcquality_stations_with_parameters_fail(self, mock_get):
+        """Test import PC Quality stations with parameters which fail
+        """
+        # Call command with parameters
+        out = StringIO()
+
+        def requests_get_mock_response_fail_connectionerror_asc(*args, **kwargs):
+            """Build mock_response with test file data, according to api_url"""
+            # Get filename from api_url
+            filename = TEST_DATA_PATH / 'response_api_pcquality_stations.json'
+            if kwargs.get('params').get('code_station') == "05134550":
+                raise requests.exceptions.ConnectionError
+            if "analyse_pc" in args[0]:
+                filename = TEST_DATA_PATH / 'response_api_pcquality_analyse.json'
+
+            # Build response
+            mock_response = mock.Mock()
+            with open(filename, 'r') as f:
+                expected_dict = json.load(f)
+            mock_response.json.return_value = expected_dict
+            mock_response.status_code = 200
+            return mock_response
+
+        def requests_get_mock_response_fail_connectionerror_desc(*args, **kwargs):
+            """Build mock_response with test file data, according to api_url"""
+            # Get filename from api_url
+            filename = TEST_DATA_PATH / 'response_api_pcquality_stations.json'
+            if "analyse_pc" in args[0]:
+                if "sort" in kwargs['params']:
+                    filename = TEST_DATA_PATH / 'response_api_pcquality_analyse_desc.json'
+                    if kwargs.get('params').get('code_station') == "05134550":
+                        raise requests.exceptions.ConnectionError
+                else:
+                    filename = TEST_DATA_PATH / 'response_api_pcquality_analyse.json'
+
+            # Build response
+            mock_response = mock.Mock()
+            with open(filename, 'r') as f:
+                expected_dict = json.load(f)
+            mock_response.json.return_value = expected_dict
+            mock_response.status_code = 200
+            return mock_response
+
+        mock_get.side_effect = requests_get_mock_response_fail_connectionerror_asc
+        call_command('import_pcquality_stations',
+                     verbosity=2,
+                     with_parameters=True,
+                     stdout=out)
+
+        mock_get.side_effect = requests_get_mock_response_fail_connectionerror_desc
+        call_command('import_pcquality_stations',
+                     verbosity=2,
+                     with_parameters=True,
+                     stdout=out)
+
+        self.assertEqual(Station.objects.count(), 28)
+        # Check stations imported
+        stations = Station.objects.all()
+        station = stations.get(code="05134550")
+        parameters_tracked = station.parametertracking_set.all()
+        self.assertEqual(parameters_tracked.count(), 0)
+
+
+@mock.patch.object(requests, 'get', side_effect=requests_get_mock_response)
+class ImportHydrobioWithParametersTest(TestCase):
+    """
+    Test import_station command with parameters
+    """
+
+    def test_import_hydrobio_stations_with_parameters(self, mock_get):
+        """
+        Test import Hydrobio stations with parameters
+        Test data from
+        https://hubeau.eaufrance.fr/api/v1/hydrobio/stations_hydrobio?code_station_hydrobio=06000874
+        """
+        # Call command with parameters
+        out = StringIO()
+        call_command('import_hydrobiologie_stations',
+                     verbosity=2,
+                     with_parameters=True,
+                     stdout=out)
+
+        # Check stations imported
+        station = Station.objects.get(code="06000874")
+        parameter_tracking_set = station.parametertracking_set.all()
+        self.assertEqual(parameter_tracking_set.count(), 21)
+        self.assertEqual(parameter_tracking_set[0].parameter.label, "Bithynia")
+        self.assertEqual(parameter_tracking_set[0].parameter.unit.symbol, "n")
+
+        # Check output
+        self.assertIn("Added parameter Bithynia", out.getvalue())
+
+    def test_import_hydrobio_stations_with_parameters_fail(self, mock_get):
+        """
+        Test import Hydrobio stations with parameters
+        Test data from
+        https://hubeau.eaufrance.fr/api/v1/hydrobio/stations_hydrobio?code_station_hydrobio=06000874
+        with taxons and indices which fail
+        """
+        # Call command with parameters
+        out = StringIO()
+
+        def requests_get_mock_response_fail_connectionerror_taxons(*args, **kwargs):
+            """Build mock_response with test file data, according to api_url"""
+            # Get filename from api_url
+            filename = TEST_DATA_PATH / 'response_api_hydrobio_stations.json'
+            if "taxons" in args[0]:
+                raise requests.exceptions.ConnectionError
+            if "indices" in args[0]:
+                raise requests.exceptions.ConnectionError
+            # Build response
+            mock_response = mock.Mock()
+            with open(filename, 'r') as f:
+                expected_dict = json.load(f)
+            mock_response.json.return_value = expected_dict
+            mock_response.status_code = 200
+            return mock_response
+
+        mock_get.side_effect = requests_get_mock_response_fail_connectionerror_taxons
+        call_command('import_hydrobiologie_stations',
+                     verbosity=2,
+                     with_parameters=True,
+                     stdout=out)
+
+        self.assertEqual(Station.objects.count(), 1)
+        # Check stations imported
+        stations = Station.objects.all()
+        station = stations.get(code="06000874")
+        parameters_tracked = station.parametertracking_set.all()
+        self.assertEqual(parameters_tracked.count(), 0)

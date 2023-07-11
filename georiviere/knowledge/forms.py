@@ -1,4 +1,4 @@
-from django.forms import ModelForm
+from django.forms import ModelForm, ModelChoiceField
 from django.utils.translation import gettext_lazy as _
 
 from crispy_forms.helper import FormHelper
@@ -6,6 +6,7 @@ from crispy_forms.layout import Layout, Div, Fieldset, Field
 from crispy_forms.bootstrap import AppendedText
 from geotrek.common.forms import CommonForm
 
+from georiviere.finances_administration.models import AdministrativeFile
 from georiviere.knowledge.models import Knowledge, Vegetation, Work, FollowUp
 from georiviere.main.widgets import DatePickerInput
 from georiviere.river.fields import SnappedGeometryField
@@ -114,6 +115,8 @@ class WorkForm(ModelForm):
 class FollowUpForm(CommonForm):
     """FollowUp form"""
     _geom = SnappedGeometryField(required=False)
+    administrative_file = ModelChoiceField(label=_("Create operation on"), queryset=AdministrativeFile.objects.all(),
+                                           required=False, initial=None)
 
     geomfields = ['_geom']
 
@@ -129,12 +132,14 @@ class FollowUpForm(CommonForm):
             AppendedText("height", "m"),
             "measure_frequency",
             "description",
+            Div(css_id="div_id_operations", css_class="form-group row"),
+            "administrative_file",
         )]
 
     class Meta:
         model = FollowUp
         fields = [
-            "structure", "name", "date", "followup_type", "knowledge",
+            "structure", "name", "date", "followup_type", "knowledge", "administrative_file",
             "length", "width", "height", "measure_frequency", "description", "_geom"
         ]
         widgets = {

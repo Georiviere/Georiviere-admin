@@ -59,6 +59,8 @@ class Station(TimeStampedModelMixin, WatershedPropertiesMixin, ZoningPropertiesM
     geom = models.GeometryField(srid=settings.SRID, spatial_index=True)
     site_code = models.CharField(max_length=50, blank=True, default="", verbose_name=_("Site code"))
     station_uri = models.URLField(blank=True, default="", verbose_name=_("Station URI"))
+    operations_uri = models.URLField(blank=True, default="", verbose_name=_("Operations URI"))
+    annex_uri = models.URLField(blank=True, default="", verbose_name=_("Annex URI"))
     purpose_code = models.CharField(max_length=50, blank=True, default="", verbose_name=_("Station purpose"))
     in_service = models.BooleanField(blank=True, null=True, verbose_name=_("In service"))
 
