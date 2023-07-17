@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-02-07 15:38+0000\n"
+"POT-Creation-Date: 2023-07-17 10:28+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -42,10 +42,10 @@ msgstr ""
 msgid "Unknown"
 msgstr ""
 
-msgid "Main fields"
+msgid "Create operation on"
 msgstr ""
 
-msgid "Specific profiles"
+msgid "Main fields"
 msgstr ""
 
 msgid "Parameters tracking"
@@ -94,6 +94,12 @@ msgid "Site code"
 msgstr ""
 
 msgid "Station URI"
+msgstr ""
+
+msgid "Operations URI"
+msgstr ""
+
+msgid "Annex URI"
 msgstr ""
 
 msgid "Station purpose"
