@@ -50,7 +50,7 @@ class BaseImportCommand(BaseCommand):
             self.stdout.write('Get station from API {0}'.format(response.url))
         try:
             response_content = response.json()
-        except json.decoder.JSONDecodeError:
+        except json.JSONDecodeError:
             self.stdout.write('Response is not a json')
             return
         if verbosity >= 1:
@@ -65,7 +65,7 @@ class BaseImportCommand(BaseCommand):
                 self.stdout.write('Import next page from {0}'.format(response.url))
             try:
                 response_content = response.json()
-            except requests.exceptions.JSONDecodeError:
+            except json.JSONDecodeError:
                 self.stdout.write('Response is not a json')
                 return
             results = response_content['data']

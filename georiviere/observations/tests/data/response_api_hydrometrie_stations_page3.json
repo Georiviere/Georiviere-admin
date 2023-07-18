@@ -1,0 +1,10 @@
+{
+  "count": 2,
+  "first": "https://hubeau.eaufrance.fr/api/v1/hydrometrie/referentiel/stations?code_site=U2012010&code_site=U2015410&format=json&page=2&size=20",
+  "last": null,
+  "prev": null,
+  "next": null,
+  "api_version": "1.0.1",
+  "data": [
+  ]
+}
