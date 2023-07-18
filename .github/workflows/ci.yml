@@ -32,6 +32,10 @@ jobs:
         run: |
           flake8 georiviere
 
+      - name: Not evaluated values in migration files
+        run: |
+          test $(ls georiviere/*/migrations/*.py | xargs grep -l srid | xargs grep -L SRID | wc -l) -eq 0
+
   doc_build:
     name: Sphinx doc is building
     runs-on: ubuntu-latest
