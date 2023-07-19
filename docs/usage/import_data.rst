@@ -74,6 +74,7 @@ Stations can be imported from french Hub'Eau APIs :
 - Temperature stations with ``import_temperature_stations``
 - Hydrometry with ``import_hydrometric_stations``
 - Physico-chemical quality with ``import_pcquality_stations``
+- Hydrobilogy stations with ``import_hydrobiologie_stations``
 
 Optional arguments::
 
