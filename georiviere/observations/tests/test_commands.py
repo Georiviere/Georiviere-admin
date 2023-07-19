@@ -17,27 +17,105 @@ def requests_get_mock_response(*args, **kwargs):
     """Build mock_response with test file data, according to api_url"""
     # Get filename from api_url
     filename = TEST_DATA_PATH / 'response_api_hydrometrie_stations.json'
+    if 'page=3' in args[0]:
+        filename = TEST_DATA_PATH / 'response_api_hydrometrie_stations_page3.json'
     if "urf" in args[0]:
         filename = TEST_DATA_PATH / 'response_sandre_urf.json'
     if "hydrometrie" in args[0]:
         filename = TEST_DATA_PATH / 'response_api_hydrometrie_stations.json'
+        if 'page=3' in args[0]:
+            filename = TEST_DATA_PATH / 'response_api_hydrometrie_stations_page3.json'
     if "temperature" in args[0]:
         filename = TEST_DATA_PATH / 'response_api_temperature_stations.json'
+        if 'page=3' in args[0]:
+            filename = TEST_DATA_PATH / 'response_api_temperature_stations_page3.json'
     if "station_pc" in args[0]:
         filename = TEST_DATA_PATH / 'response_api_pcquality_stations.json'
+        if 'page=3' in args[0]:
+            filename = TEST_DATA_PATH / 'response_api_pcquality_stations_page3.json'
     if "analyse_pc" in args[0]:
         if "sort" in kwargs['params']:
             filename = TEST_DATA_PATH / 'response_api_pcquality_analyse_desc.json'
+            if 'page=3' in args[0]:
+                filename = TEST_DATA_PATH / 'response_api_pcquality_analyse_page3.json'
         else:
             filename = TEST_DATA_PATH / 'response_api_pcquality_analyse.json'
+            if 'page=3' in args[0]:
+                filename = TEST_DATA_PATH / 'response_api_pcquality_analyse_page3.json'
     if 'stations_hydrobio' in args[0]:
         filename = TEST_DATA_PATH / 'response_api_hydrobio_stations.json'
+        if 'page=3' in args[0]:
+            filename = TEST_DATA_PATH / 'response_api_hydrobio_stations_page3.json'
     if 'indices' in args[0]:
         filename = TEST_DATA_PATH / 'response_api_hydrobio_indices.json'
+        if 'page=3' in args[0]:
+            filename = TEST_DATA_PATH / 'response_api_hydrobio_indices_page3.json'
     if 'taxons' in args[0]:
         filename = TEST_DATA_PATH / 'response_api_hydrobio_taxons.json'
+        if 'page=3' in args[0]:
+            filename = TEST_DATA_PATH / 'response_api_hydrobio_taxons_page3.json'
     # Build response
     mock_response = mock.Mock()
+    with open(filename, 'r') as f:
+        expected_dict = json.load(f)
+    mock_response.json.return_value = expected_dict
+    mock_response.status_code = 200
+    return mock_response
+
+
+def requests_get_mock_response_error_initial_url(*args, **kwargs):
+    mock_response = mock.Mock()
+    mock_response.json.side_effect = json.JSONDecodeError('msg', 'doc', 1)
+    mock_response.status_code = 200
+    return mock_response
+
+
+def requests_get_mock_response_error(*args, **kwargs):
+    """Build mock_response with test file data, according to api_url"""
+    # Get filename from api_url
+    mock_response = mock.Mock()
+    filename = TEST_DATA_PATH / 'response_api_hydrometrie_stations.json'
+    if 'page=3' in args[0]:
+        filename = TEST_DATA_PATH / 'response_api_hydrometrie_stations_page3.json'
+    if "urf" in args[0]:
+        filename = TEST_DATA_PATH / 'response_sandre_urf.json'
+    if "hydrometrie" in args[0]:
+        filename = TEST_DATA_PATH / 'response_api_hydrometrie_stations.json'
+        if 'page=3' in args[0]:
+            filename = TEST_DATA_PATH / 'response_api_hydrometrie_stations_page3.json'
+    if "temperature" in args[0]:
+        filename = TEST_DATA_PATH / 'response_api_temperature_stations.json'
+        if 'page=3' in args[0]:
+            filename = TEST_DATA_PATH / 'response_api_temperature_stations_page3.json'
+    if "station_pc" in args[0]:
+        filename = TEST_DATA_PATH / 'response_api_pcquality_stations.json'
+        if 'page=3' in args[0]:
+            filename = TEST_DATA_PATH / 'response_api_pcquality_stations_page3.json'
+    if "analyse_pc" in args[0]:
+        if "sort" in kwargs['params']:
+            mock_response.json.side_effect = json.JSONDecodeError('msg', 'doc', 1)
+            if 'page=3' in args[0]:
+                filename = TEST_DATA_PATH / 'response_api_pcquality_analyse_page3.json'
+        else:
+            filename = TEST_DATA_PATH / 'response_api_pcquality_analyse.json'
+            if kwargs.get('params', {})["code_station"] == "05137100":
+                mock_response.json.side_effect = json.JSONDecodeError('msg', 'doc', 1)
+            if 'page=3' in args[0]:
+                filename = TEST_DATA_PATH / 'response_api_pcquality_analyse_page3.json'
+    if 'stations_hydrobio' in args[0]:
+        filename = TEST_DATA_PATH / 'response_api_hydrobio_stations.json'
+        if 'page=3' in args[0]:
+            mock_response.json.side_effect = json.JSONDecodeError('msg', 'doc', 1)
+    if 'indices' in args[0]:
+        mock_response.json.side_effect = json.JSONDecodeError('msg', 'doc', 1)
+        if 'page=3' in args[0]:
+            filename = TEST_DATA_PATH / 'response_api_hydrobio_indices_page3.json'
+    if 'taxons' in args[0]:
+        mock_response.json.side_effect = json.JSONDecodeError('msg', 'doc', 1)
+        if 'page=3' in args[0]:
+            mock_response.json.side_effect = json.JSONDecodeError('msg', 'doc', 1)
+    # Build response
+
     with open(filename, 'r') as f:
         expected_dict = json.load(f)
     mock_response.json.return_value = expected_dict
@@ -75,6 +153,77 @@ class ImportReferentielTest(TestCase):
         self.assertIn('Created unit mg(Cl2)/L', out.getvalue())
 
 
+@mock.patch.object(requests, 'get', side_effect=requests_get_mock_response_error_initial_url)
+class ImportStationErrorTest(TestCase):
+    """Test import_station command
+    Test datas are from LABERGEMENT-STE-MARIE
+    """
+
+    def test_import_hydrometric_stations_error_json(self, mock_get):
+        out = StringIO()
+
+        # Call command
+        call_command('import_hydrometric_stations', with_parameters=True, stdout=out)
+
+        # Check stations imported
+        stations = Station.objects.all()
+        self.assertEqual(stations.count(), 0)
+        self.assertIn("Response is not a json", out.getvalue())
+        mock_get.side_effect = requests_get_mock_response_error
+        # Call command 2nd time
+        call_command('import_hydrometric_stations', with_parameters=True, stdout=out)
+
+        self.assertEqual(stations.count(), 2)
+
+    def test_import_pcquality_stations_error_json(self, mock_get):
+        out = StringIO()
+
+        # Call command
+        call_command('import_pcquality_stations', with_parameters=True, stdout=out)
+
+        # Check stations imported
+        stations = Station.objects.all()
+        self.assertEqual(stations.count(), 0)
+        self.assertIn("Response is not a json", out.getvalue())
+        mock_get.side_effect = requests_get_mock_response_error
+        # Call command 2nd time
+        call_command('import_pcquality_stations', with_parameters=True, stdout=out)
+
+        self.assertEqual(stations.count(), 28)
+
+    def test_import_temperature_stations_error_json(self, mock_get):
+        out = StringIO()
+
+        # Call command
+        call_command('import_temperature_stations', stdout=out)
+
+        # Check stations imported
+        stations = Station.objects.all()
+        self.assertEqual(stations.count(), 0)
+        self.assertIn("Response is not a json", out.getvalue())
+        mock_get.side_effect = requests_get_mock_response_error
+        # Call command 2nd time
+        call_command('import_temperature_stations', with_parameters=True, stdout=out)
+
+        self.assertEqual(stations.count(), 2)
+
+    def test_import_hydrobio_stations_error_json(self, mock_get):
+        out = StringIO()
+
+        # Call command
+        call_command('import_hydrobiologie_stations', stdout=out)
+
+        # Check stations imported
+        stations = Station.objects.all()
+        self.assertEqual(stations.count(), 0)
+        self.assertIn("Response is not a json", out.getvalue())
+        mock_get.side_effect = requests_get_mock_response_error
+        # Call command 2nd time
+        call_command('import_hydrobiologie_stations', with_parameters=True, stdout=out)
+
+        self.assertEqual(stations.count(), 1)
+
+
 @mock.patch.object(requests, 'get', side_effect=requests_get_mock_response)
 class ImportStationTest(TestCase):
     """Test import_station command
@@ -85,7 +234,7 @@ class ImportStationTest(TestCase):
         out = StringIO()
 
         # Call command
-        call_command('import_hydrometric_stations', stdout=out)
+        call_command('import_hydrometric_stations', stdout=out, size=100, department="49")
 
         # Check stations imported
         stations = Station.objects.all()
@@ -332,7 +481,9 @@ class ImportStationWithParametersTest(TestCase):
             """Build mock_response with test file data, according to api_url"""
             # Get filename from api_url
             filename = TEST_DATA_PATH / 'response_api_pcquality_stations.json'
-            if kwargs.get('params').get('code_station') == "05134550":
+            if 'page=3' in args[0]:
+                filename = TEST_DATA_PATH / 'response_api_pcquality_stations_page3.json'
+            if kwargs.get('params', {}).get('code_station') == "05134550":
                 raise requests.exceptions.ConnectionError
             if "analyse_pc" in args[0]:
                 filename = TEST_DATA_PATH / 'response_api_pcquality_analyse.json'
@@ -349,13 +500,19 @@ class ImportStationWithParametersTest(TestCase):
             """Build mock_response with test file data, according to api_url"""
             # Get filename from api_url
             filename = TEST_DATA_PATH / 'response_api_pcquality_stations.json'
+            if 'page=3' in args[0]:
+                filename = TEST_DATA_PATH / 'response_api_pcquality_stations_page3.json'
             if "analyse_pc" in args[0]:
                 if "sort" in kwargs['params']:
                     filename = TEST_DATA_PATH / 'response_api_pcquality_analyse_desc.json'
+                    if 'page=3' in args[0]:
+                        filename = TEST_DATA_PATH / 'response_api_pcquality_analyse_page3.json'
                     if kwargs.get('params').get('code_station') == "05134550":
                         raise requests.exceptions.ConnectionError
                 else:
                     filename = TEST_DATA_PATH / 'response_api_pcquality_analyse.json'
+                    if 'page=3' in args[0]:
+                        filename = TEST_DATA_PATH / 'response_api_pcquality_analyse_page3.json'
 
             # Build response
             mock_response = mock.Mock()
@@ -428,6 +585,8 @@ class ImportHydrobioWithParametersTest(TestCase):
             """Build mock_response with test file data, according to api_url"""
             # Get filename from api_url
             filename = TEST_DATA_PATH / 'response_api_hydrobio_stations.json'
+            if 'page=3' in args[0]:
+                filename = TEST_DATA_PATH / 'response_api_hydrobio_stations_page3.json'
             if "taxons" in args[0]:
                 raise requests.exceptions.ConnectionError
             if "indices" in args[0]:

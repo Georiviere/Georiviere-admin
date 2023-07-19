@@ -1,4 +1,5 @@
 from datetime import datetime
+import json
 import requests
 from django.contrib.gis.geos import Point
 from georiviere.observations.models import Station, StationProfile, Parameter, ParameterTracking, Unit
@@ -57,7 +58,11 @@ class Command(BaseImportCommand):
                 except requests.exceptions.ConnectionError as e:
                     self.stdout.write(f'Limit of connection has been exceeded {e}')
                     continue
-                response_firstpage_content = response_firstpage.json()
+                try:
+                    response_firstpage_content = response_firstpage.json()
+                except json.JSONDecodeError:
+                    self.stdout.write('Response is not a json')
+                    continue
                 indices_data = response_firstpage_content['data']
 
                 for indice in indices_data:

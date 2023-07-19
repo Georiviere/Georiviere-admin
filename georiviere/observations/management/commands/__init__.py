@@ -1,3 +1,4 @@
+import json
 import requests
 
 from django.core.management.base import BaseCommand, CommandError
@@ -47,9 +48,11 @@ class BaseImportCommand(BaseCommand):
 
         if verbosity >= 2:
             self.stdout.write('Get station from API {0}'.format(response.url))
-
-        response_content = response.json()
-
+        try:
+            response_content = response.json()
+        except json.JSONDecodeError:
+            self.stdout.write('Response is not a json')
+            return
         if verbosity >= 1:
             self.stdout.write('Import {1} stations from API {0}'.format(response.url, response_content['count']))
 
@@ -60,6 +63,10 @@ class BaseImportCommand(BaseCommand):
             response = requests.get(response_content['next'])
             if verbosity >= 2:
                 self.stdout.write('Import next page from {0}'.format(response.url))
-            response_content = response.json()
+            try:
+                response_content = response.json()
+            except json.JSONDecodeError:
+                self.stdout.write('Response is not a json')
+                return
             results = response_content['data']
             self.create_or_update_stations(results, verbosity, with_parameters)
