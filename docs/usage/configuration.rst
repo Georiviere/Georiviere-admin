@@ -55,6 +55,11 @@ To customize lists for each module, go to django administration page.
     * Parameters
     * Station profiles
     * Units
+* Portal
+    * Portals
+    * Map base layers
+    * Group layers
+    * Layers
 * Proceeding: Event types
 * Studies Study types
 * Watershed

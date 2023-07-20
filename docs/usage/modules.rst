@@ -20,6 +20,20 @@ Streams
 
 Streams is a line with a source location and flow type. Length is computed from geometry.
 
+Distances to every objects are computed during the creation of an object and stocked in the table distancetosource.
+It's the distance of the shortest path between the object and the stream
+added with the length between the point of junction between the shortest path
+and the stream and the source location.
+
+If the source location is not at the beginning of the stream, we also add the distance of the shortest
+path between source location and the stream.
+
+
+
+.. image:: /images/distance_to_source.png
+    :alt: Object distance to source
+
+
 Descriptions
 ------------
 

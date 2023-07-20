@@ -14,6 +14,7 @@ It is a `Django <https://www.djangoproject.com/>`_ application, based on `Geotre
     usage/features
     usage/modules
     usage/configuration
+    usage/portals
     usage/import_data
 
 .. toctree::
