@@ -1,3 +1,116 @@
 {% extends "mapentity/mapentity_list.html" %}
+{% load i18n %}
 {% block mainactions %}
 {% endblock %}
+
+{% block extrabody %}
+    {{ block.super }}
+    <script type="text/javascript" src="https://code.jquery.com/ui/1.11.3/jquery-ui.min.js"></script>
+    <script type="text/javascript">
+        $("select#id_category").on("change", function(event, status) {
+            var selectedCategories = [];
+            $("#id_category>option").each(function() {
+                if ($(this).context.selected) {
+                    selectedCategories.push($(this).val())
+                }
+            });
+            if (selectedCategories.length >= 1) {
+                $("select#id_type_contribution option:contains('{% trans "Dry" %}')").css('display', 'none');
+                $("select#id_type_contribution option:contains('{% trans "In the process of drying out" %}')").css('display', 'none');
+                $("select#id_type_contribution option:contains('{% trans "Overflow" %}')").css('display', 'none');
+                $("select#id_type_contribution option:contains('{% trans "Invasive species" %}')").css('display', 'none');
+                $("select#id_type_contribution option:contains('{% trans "Heritage species" %}')").css('display', 'none');
+                $("select#id_type_contribution option:contains('{% trans "Fish species" %}')").css('display', 'none');
+                $("select#id_type_contribution option:contains('{% trans "Landing" %}')").css('display', 'none');
+                $("select#id_type_contribution option:contains('{% trans "Excessive cutting of riparian forest" %}')").css('display', 'none');
+                $("select#id_type_contribution option:contains('{% trans "Rockslides" %}')").css('display', 'none');
+                $("select#id_type_contribution option:contains('{% trans "Disruptive jam" %}')").css('display', 'none');
+                $("select#id_type_contribution option:contains('{% trans "Bank erosion" %}')").css('display', 'none');
+                $("select#id_type_contribution option:contains('{% trans "River bed incision (sinking)" %}')").css('display', 'none');
+                $("select#id_type_contribution option:contains('{% trans "Fish diseases (appearance of fish)" %}')").css('display', 'none');
+                $("select#id_type_contribution option:contains('{% trans "Fish mortality" %}')").css('display', 'none');
+                $("select#id_type_contribution option:contains('{% trans "Trampling by livestock (impacting)" %}')").css('display', 'none');
+                $("select#id_type_contribution option:contains('{% trans "Algal development" %}')").css('display', 'none');
+                $("select#id_type_contribution option:contains('{% trans "Pollution" %}')").css('display', 'none');
+                $("select#id_type_contribution option:contains('{% trans "Water temperature" %}')").css('display', 'none');
+                $("select#id_type_contribution option:contains('{% trans "Sinkhole" %}')").css('display', 'none');
+                $("select#id_type_contribution option:contains('{% trans "Fountain" %}')").css('display', 'none');
+                $("select#id_type_contribution option:contains('{% trans "Chasm" %}')").css('display', 'none');
+                $("select#id_type_contribution option:contains('{% trans "Lesine" %}')").css('display', 'none');
+                $("select#id_type_contribution option:contains('{% trans "Pond" %}')").css('display', 'none');
+                $("select#id_type_contribution option:contains('{% trans "Losing stream" %}')").css('display', 'none');
+                $("select#id_type_contribution option:contains('{% trans "Resurgence" %}')").css('display', 'none');
+            }
+            if (selectedCategories.length == 0) {
+                $("select#id_type_contribution option:contains('{% trans "Dry" %}')").css('display', '');
+                $("select#id_type_contribution option:contains('{% trans "In the process of drying out" %}')").css('display', '');
+                $("select#id_type_contribution option:contains('{% trans "Overflow" %}')").css('display', '');
+                $("select#id_type_contribution option:contains('{% trans "Invasive species" %}')").css('display', '');
+                $("select#id_type_contribution option:contains('{% trans "Heritage species" %}')").css('display', '');
+                $("select#id_type_contribution option:contains('{% trans "Fish species" %}')").css('display', '');
+                $("select#id_type_contribution option:contains('{% trans "Landing" %}')").css('display', '');
+                $("select#id_type_contribution option:contains('{% trans "Excessive cutting of riparian forest" %}')").css('display');
+                $("select#id_type_contribution option:contains('{% trans "Rockslides" %}')").css('display', '');
+                $("select#id_type_contribution option:contains('{% trans "Disruptive jam" %}')").css('display', '');
+                $("select#id_type_contribution option:contains('{% trans "Bank erosion" %}')").css('display', '');
+                $("select#id_type_contribution option:contains('{% trans "River bed incision (sinking)" %}')").css('display', '');
+                $("select#id_type_contribution option:contains('{% trans "Fish diseases (appearance of fish)" %}')").css('display', '');
+                $("select#id_type_contribution option:contains('{% trans "Fish mortality" %}')").css('display', '');
+                $("select#id_type_contribution option:contains('{% trans "Trampling by livestock (impacting)" %}')").css('display', '');
+                $("select#id_type_contribution option:contains('{% trans "Algal development" %}')").css('display', '');
+                $("select#id_type_contribution option:contains('{% trans "Pollution" %}')").css('display', '');
+                $("select#id_type_contribution option:contains('{% trans "Water temperature" %}')").css('display', '');
+                $("select#id_type_contribution option:contains('{% trans "Sinkhole" %}')").css('display', '');
+                $("select#id_type_contribution option:contains('{% trans "Fountain" %}')").css('display', '');
+                $("select#id_type_contribution option:contains('{% trans "Chasm" %}')").css('display', '');
+                $("select#id_type_contribution option:contains('{% trans "Lesine" %}')").css('display', '');
+                $("select#id_type_contribution option:contains('{% trans "Pond" %}')").css('display', '');
+                $("select#id_type_contribution option:contains('{% trans "Losing stream" %}')").css('display', '');
+                $("select#id_type_contribution option:contains('{% trans "Resurgence" %}')").css('display', '');
+            }
+            for (var i=0; i<selectedCategories.length; i++) {
+                var category = selectedCategories[i];
+                if (category == "quality") {
+                    $("select#id_type_contribution option:contains('{% trans "Algal development" %}')").css('display', '');
+                    $("select#id_type_contribution option:contains('{% trans "Pollution" %}')").css('display', '');
+                    $("select#id_type_contribution option:contains('{% trans "Water temperature" %}')").css('display', '');
+                }
+
+                if (category == "potential_damage" ) {
+                    $("select#id_type_contribution option:contains('{% trans "Landing" %}')").css('display', '');
+                    $("select#id_type_contribution option:contains('{% trans "Excessive cutting of riparian forest" %}')").css('display', '');
+                    $("select#id_type_contribution option:contains('{% trans "Rockslides" %}')").css('display', '');
+                    $("select#id_type_contribution option:contains('{% trans "Disruptive jam" %}')").css('display', '');
+                    $("select#id_type_contribution option:contains('{% trans "Bank erosion" %}')").css('display', '');
+                    $("select#id_type_contribution option:contains('{% trans "River bed incision (sinking)" %}')").css('display', '');
+                    $("select#id_type_contribution option:contains('{% trans "Fish diseases (appearance of fish)" %}')").css('display', '');
+                    $("select#id_type_contribution option:contains('{% trans "Fish mortality" %}')").css('display', '');
+                    $("select#id_type_contribution option:contains('{% trans "Trampling by livestock (impacting)" %}')").css('display', '');
+                }
+
+                if (category == "fauna_flora") {
+                    $("select#id_type_contribution option:contains('{% trans "Invasive species" %}')").css('display', '');
+                    $("select#id_type_contribution option:contains('{% trans "Heritage species" %}')").css('display', '');
+                    $("select#id_type_contribution option:contains('{% trans "Fish species" %}')").css('display', '');
+                }
+
+                if (category == "quantity" ) {
+                    $("select#id_type_contribution option:contains('{% trans "Dry" %}')").css('display', '');
+                    $("select#id_type_contribution option:contains('{% trans "In the process of drying out" %}')").css('display', '');
+                    $("select#id_type_contribution option:contains('{% trans "Overflow" %}')").css('display', '');
+                }
+
+                if (category == "landscape_elements") {
+                    $("select#id_type_contribution option:contains('{% trans "Sinkhole" %}')").css('display', '');
+                    $("select#id_type_contribution option:contains('{% trans "Fountain" %}')").css('display', '');
+                    $("select#id_type_contribution option:contains('{% trans "Chasm" %}')").css('display', '');
+                    $("select#id_type_contribution option:contains('{% trans "Lesine" %}')").css('display', '');
+                    $("select#id_type_contribution option:contains('{% trans "Pond" %}')").css('display', '');
+                    $("select#id_type_contribution option:contains('{% trans "Losing stream" %}')").css('display', '');
+                    $("select#id_type_contribution option:contains('{% trans "Resurgence" %}')").css('display', '');
+                }
+            }
+            $('select#id_type_contribution').trigger("chosen:updated");
+        });
+    </script>
+{% endblock extrabody %}

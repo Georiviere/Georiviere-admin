@@ -10,8 +10,7 @@ from georiviere.contribution.models import Contribution
 class ContributionList(MapEntityList):
     queryset = Contribution.objects.all()
     filterform = ContributionFilterSet
-    columns = ['id', 'portal', 'category', 'name_author', 'email_author',
-               'date_observation', 'severity', 'published']
+    columns = ['id', 'category', 'date_observation', 'severity', 'published']
 
 
 class ContributionLayer(MapEntityLayer):
