@@ -1,0 +1,16 @@
+{% load i18n l10n %}
+{% autoescape off %}
+{% blocktrans with email=contribution.email_author %}{{email}} has sent a contribution.{% endblocktrans %}
+
+{% if contribution.severity %}{% blocktrans with severity=report.severity %}Severity : {{severity}}{% endblocktrans %}{% endif %}
+{% trans "Category" %} : {{contribution.category}}
+{% trans "Description" %} : {{contribution.description}}
+
+{% trans "Portal" %} : {{contribution.portal}}
+
+{% if report.geom %}{% blocktrans with lat=report.geom_wgs84.y|stringformat:".6f" lng=report.geom_wgs84.x|stringformat:".6f" %}
+Lat : {{lat}} / Lon : {{lng}}
+http://www.openstreetmap.org/?mlat={{lat}}&mlon={{lng}}
+{% endblocktrans %}{% endif %}
+
+{% endautoescape %}
