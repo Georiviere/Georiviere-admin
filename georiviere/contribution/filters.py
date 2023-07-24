@@ -1,3 +1,7 @@
+import functools
+import operator
+
+from django.db.models import Q
 from django_filters import MultipleChoiceFilter
 from django.utils.translation import gettext_lazy as _
 from mapentity.filters import MapEntityFilterSet, PythonPolygonFilter
@@ -11,7 +15,7 @@ from georiviere.contribution.models import (
 from georiviere.watershed.filters import WatershedFilterSet
 
 
-class CategoryFilter(MultipleChoiceFilter):
+class ContributionCategoryFilter(MultipleChoiceFilter):
     def __init__(self, *args, **kwargs):
         self.choices = [
             ('potential_damage', _('Potential damage')),
@@ -25,11 +29,11 @@ class CategoryFilter(MultipleChoiceFilter):
     def filter(self, qs, values):
         if not values:
             return qs
-        qs = qs.filter(**{f'{value}__isnull': False for value in values})
+        qs = qs.filter(functools.reduce(operator.or_, [Q(**{f'{value}__isnull': False}) for value in values]))
         return qs
 
 
-class TypeFilter(MultipleChoiceFilter):
+class ContributionTypeFilter(MultipleChoiceFilter):
     choices_category = {}
 
     def __init__(self, *args, **kwargs):
@@ -60,11 +64,11 @@ class TypeFilter(MultipleChoiceFilter):
 
 class ContributionFilterSet(WatershedFilterSet, ZoningFilterSet, MapEntityFilterSet):
     bbox = PythonPolygonFilter(field_name='geom')
-    category = CategoryFilter(label=_('Category'))
-    type_contribution = TypeFilter(label=_('Type'))
+    category_contribution = ContributionCategoryFilter(label=_('Category'))
+    type_contribution = ContributionTypeFilter(label=_('Type'))
 
     class Meta(MapEntityFilterSet.Meta):
         model = Contribution
         fields = MapEntityFilterSet.Meta.fields + [
-            "category", "type_contribution"
+            "category_contribution", "type_contribution"
         ]
