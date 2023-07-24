@@ -1,6 +1,10 @@
+import logging
+
 from django.conf import settings
 from django.contrib.auth.models import User
 from django.contrib.gis.db import models
+from django.core.mail import mail_managers
+from django.template.loader import render_to_string
 from django.utils.translation import gettext_lazy as _
 
 from mapentity.models import MapEntityMixin
@@ -18,6 +22,8 @@ from georiviere.observations.models import Station
 from georiviere.proceeding.models import Proceeding
 from georiviere.studies.models import Study
 from georiviere.watershed.mixins import WatershedPropertiesMixin
+
+logger = logging.getLogger(__name__)
 
 
 class SeverityType(models.Model):
@@ -143,6 +149,22 @@ class Contribution(BasePublishableMixin, TimeStampedModelMixin, WatershedPropert
         if self.published:
             s = '<span class="badge badge-success" title="%s">&#x2606;</span> ' % _("Published") + s
         return s
+
+    def send_report_to_managers(self, template_name="contribution/report_email.txt"):
+        subject = _("Feedback from {email}").format(email=self.email_author)
+        message = render_to_string(template_name, {"contribution": self})
+        mail_managers(subject, message, fail_silently=False)
+
+    def try_send_report_to_managers(self):
+        try:
+            self.send_report_to_managers()
+        except Exception as e:
+            logger.error("Email could not be sent to managers.")
+            logger.exception(e)  # This sends an email to admins :)
+
+    def save(self, *args, **kwargs):
+        super().save(*args, **kwargs)  # Contribution updates should do nothing more
+        self.try_send_report_to_managers()
 
 
 class LandingType(models.Model):
