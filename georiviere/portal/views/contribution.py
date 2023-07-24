@@ -120,7 +120,7 @@ class ContributionViewSet(mixins.CreateModelMixin, mixins.RetrieveModelMixin, mi
                             e))
         if settings.SEND_REPORT_ACK and response.status_code == 201:
             send_mail(
-                _("Georiviere : Signal a mistake"),
+                _("Georiviere : Contribution"),
                 _(
                     """Hello,
 
