@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-06-01 09:11+0000\n"
+"POT-Creation-Date: 2023-07-24 12:00+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -21,7 +21,25 @@ msgstr ""
 msgid "Contribution"
 msgstr ""
 
-msgid "Name author"
+msgid "Potential damage"
+msgstr ""
+
+msgid "Fauna flora"
+msgstr ""
+
+msgid "Quality"
+msgstr ""
+
+msgid "Quantity"
+msgstr ""
+
+msgid "Landscape elements"
+msgstr ""
+
+msgid "Category"
+msgstr ""
+
+msgid "Type"
 msgstr ""
 
 msgid "Label"
@@ -31,6 +49,9 @@ msgid "Severity type"
 msgstr ""
 
 msgid "Severity types"
+msgstr ""
+
+msgid "Name author"
 msgstr ""
 
 msgid "First name author"
@@ -115,9 +136,6 @@ msgid "Fish mortality"
 msgstr ""
 
 msgid "Trampling by livestock (impacting)"
-msgstr ""
-
-msgid "Type"
 msgstr ""
 
 msgid "Landing type"
@@ -282,9 +300,6 @@ msgid "Proceeding"
 msgstr ""
 
 msgid "Knowledge"
-msgstr ""
-
-msgid "Category"
 msgstr ""
 
 msgid "None"
