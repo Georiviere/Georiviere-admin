@@ -1,4 +1,5 @@
 from django.conf import settings
+from django.contrib.auth.models import User
 from django.contrib.gis.db import models
 from django.utils.translation import gettext_lazy as _
 
@@ -8,6 +9,7 @@ from geotrek.common.mixins import TimeStampedModelMixin
 from geotrek.common.utils import classproperty
 from geotrek.zoning.mixins import ZoningPropertiesMixin
 
+from georiviere.contribution.managers import SelectableUserManager
 from georiviere.description.models import Status, Morphology, Usage
 from georiviere.river.models import Stream
 from georiviere.knowledge.models import Knowledge
@@ -29,6 +31,36 @@ class SeverityType(models.Model):
         return self.label
 
 
+class ContributionStatus(TimeStampedModelMixin, models.Model):
+    label = models.CharField(verbose_name=_("Status"), max_length=128)
+
+    class Meta:
+        verbose_name = _("Status")
+        verbose_name_plural = _("Status")
+
+    def __str__(self):
+        return self.label
+
+
+class SelectableUser(User):
+
+    objects = SelectableUserManager()
+
+    class Meta:
+        proxy = True
+
+    def __str__(self):
+        return f"{self.username} ({self.email})"
+
+
+def status_default():
+    """Set status to New by default"""
+    new_status_query = ContributionStatus.objects.filter(label="Informé")
+    if new_status_query:
+        return new_status_query.get().pk
+    return None
+
+
 class Contribution(TimeStampedModelMixin, WatershedPropertiesMixin, ZoningPropertiesMixin,
                    AddPropertyBufferMixin, MapEntityMixin):
     """contribution model"""
@@ -46,6 +78,22 @@ class Contribution(TimeStampedModelMixin, WatershedPropertiesMixin, ZoningProper
     portal = models.ForeignKey('portal.Portal',
                                verbose_name=_("Portal"), blank=True, related_name='contributions',
                                on_delete=models.PROTECT)
+    assigned_user = models.ForeignKey(
+        SelectableUser,
+        blank=True,
+        on_delete=models.PROTECT,
+        null=True,
+        verbose_name=_("Supervisor"),
+        related_name="contributions"
+    )
+    status_contribution = models.ForeignKey(
+        "ContributionStatus",
+        on_delete=models.PROTECT,
+        null=True,
+        blank=True,
+        default=status_default,
+        verbose_name=_("Status"),
+    )
 
     class Meta:
         verbose_name = _("Contribution")
