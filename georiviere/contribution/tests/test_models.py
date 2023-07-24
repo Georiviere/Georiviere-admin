@@ -1,4 +1,5 @@
-from django.test import TestCase
+from django.core import mail
+from django.test import override_settings, TestCase
 
 from .factories import (ContributionFactory, ContributionPotentialDamageFactory, ContributionQualityFactory,
                         ContributionQuantityFactory, ContributionFaunaFloraFactory,
@@ -8,16 +9,27 @@ from .factories import (ContributionFactory, ContributionPotentialDamageFactory,
                         TypePollutionFactory, ContributionStatusFactory)
 
 
-class ContributionCategoriesTest(TestCase):
-    """Test for Category Contribution model"""
+@override_settings(MANAGERS=[("Fake", "fake@fake.fake"), ])
+class ContributionMetaTest(TestCase):
+    """Test for Contribution model"""
+
+    @override_settings(MANAGERS=["fake@fake.fake"])
+    def test_contribution_try_send_report_fail(self):
+        self.assertEqual(len(mail.outbox), 0)
+        contribution = ContributionFactory(email_author='mail.mail@mail')
+        self.assertEqual(str(contribution), "mail.mail@mail")
+        self.assertEqual(len(mail.outbox), 0)
 
     def test_contribution_str(self):
         ContributionStatusFactory(label="Informé")
+        self.assertEqual(len(mail.outbox), 0)
         contribution = ContributionFactory(email_author='mail.mail@mail')
         self.assertEqual(str(contribution), "mail.mail@mail")
         self.assertEqual(contribution.category, "No category")
+        self.assertEqual(len(mail.outbox), 1)
 
     def test_potentialdamage_str(self):
+        self.assertEqual(len(mail.outbox), 0)
         potential_damage = ContributionPotentialDamageFactory(type=2)
         self.assertEqual(str(potential_damage), "Contribution Potential Damage Excessive cutting of riparian forest")
         contribution = potential_damage.contribution
@@ -25,8 +37,10 @@ class ContributionCategoriesTest(TestCase):
                          f"{contribution.email_author} "
                          f"Contribution Potential Damage Excessive cutting of riparian forest")
         self.assertEqual(contribution.category, potential_damage)
+        self.assertEqual(len(mail.outbox), 1)
 
     def test_quality_str(self):
+        self.assertEqual(len(mail.outbox), 0)
         quality = ContributionQualityFactory(type=2)
         self.assertEqual(str(quality), "Contribution Quality Pollution")
         contribution = quality.contribution
@@ -34,8 +48,10 @@ class ContributionCategoriesTest(TestCase):
                          f"{contribution.email_author} "
                          f"Contribution Quality Pollution")
         self.assertEqual(contribution.category, quality)
+        self.assertEqual(len(mail.outbox), 1)
 
     def test_quantity_str(self):
+        self.assertEqual(len(mail.outbox), 0)
         quantity = ContributionQuantityFactory(type=2)
         self.assertEqual(str(quantity), "Contribution Quantity In the process of drying out")
         contribution = quantity.contribution
@@ -43,8 +59,10 @@ class ContributionCategoriesTest(TestCase):
                          f"{contribution.email_author} "
                          f"Contribution Quantity In the process of drying out")
         self.assertEqual(contribution.category, quantity)
+        self.assertEqual(len(mail.outbox), 1)
 
     def test_fauna_flora_str(self):
+        self.assertEqual(len(mail.outbox), 0)
         fauna_flora = ContributionFaunaFloraFactory(type=2)
         self.assertEqual(str(fauna_flora), "Contribution Fauna-Flora Heritage species")
         contribution = fauna_flora.contribution
@@ -52,8 +70,10 @@ class ContributionCategoriesTest(TestCase):
                          f"{contribution.email_author} "
                          f"Contribution Fauna-Flora Heritage species")
         self.assertEqual(contribution.category, fauna_flora)
+        self.assertEqual(len(mail.outbox), 1)
 
     def test_landscape_elements_str(self):
+        self.assertEqual(len(mail.outbox), 0)
         landscape_elements = ContributionLandscapeElementsFactory(type=2)
         self.assertEqual(str(landscape_elements), "Contribution Landscape Element Fountain")
         contribution = landscape_elements.contribution
@@ -61,6 +81,7 @@ class ContributionCategoriesTest(TestCase):
                          f"{contribution.email_author} "
                          f"Contribution Landscape Element Fountain")
         self.assertEqual(contribution.category, landscape_elements)
+        self.assertEqual(len(mail.outbox), 1)
 
     def test_severitytype_str(self):
         severity_type = SeverityTypeTypeFactory(label="Severity type 1")
