@@ -70,5 +70,5 @@ class ContributionFilterSet(WatershedFilterSet, ZoningFilterSet, MapEntityFilter
     class Meta(MapEntityFilterSet.Meta):
         model = Contribution
         fields = MapEntityFilterSet.Meta.fields + [
-            "category_contribution", "type_contribution"
+            "category_contribution", "type_contribution", 'status_contribution', 'assigned_user'
         ]

@@ -27,6 +27,14 @@
             <th>{{ object|verbose:"description" }}</th>
             <td>{{ object.description|linebreaks }}</td>
         </tr>
+        <tr>
+            <th>{{ object|verbose:"assigned_user" }}</th>
+            <td>{{ object.assigned_user|default:"" }}</td>
+        </tr>
+        <tr>
+            <th>{{ object|verbose:"status_contribution" }}</th>
+            <td>{{ object.status_contribution|default:"" }}</td>
+        </tr>
         {% if object.potential_damage %}
             <tr>
                 <th>{{ object.potential_damage|verbose:"type" }}</th>

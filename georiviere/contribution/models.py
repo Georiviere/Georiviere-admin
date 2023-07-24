@@ -49,9 +49,6 @@ class SelectableUser(User):
     class Meta:
         proxy = True
 
-    def __str__(self):
-        return f"{self.username} ({self.email})"
-
 
 def status_default():
     """Set status to New by default"""
