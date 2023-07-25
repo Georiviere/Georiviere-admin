@@ -2,9 +2,10 @@ from django.contrib import admin
 
 from georiviere.contribution.models import (
     SeverityType, LandingType, JamType, DiseaseType, DeadSpecies, InvasiveSpecies, HeritageSpecies, HeritageObservation,
-    FishSpecies, NaturePollution, TypePollution
+    FishSpecies, NaturePollution, TypePollution, ContributionStatus
 )
 
+admin.site.register(ContributionStatus, admin.ModelAdmin)
 admin.site.register(SeverityType, admin.ModelAdmin)
 admin.site.register(LandingType, admin.ModelAdmin)
 admin.site.register(JamType, admin.ModelAdmin)

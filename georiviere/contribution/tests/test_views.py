@@ -11,6 +11,7 @@ class ContributionViewTestCase(CommonRiverTest):
     def get_expected_json_attrs(self):
         return {
             'id': self.obj.pk,
+            'assigned_user': self.obj.assigned_user,
             'name_author': self.obj.name_author,
             'email_author': self.obj.email_author,
             'description': self.obj.description,
@@ -21,7 +22,8 @@ class ContributionViewTestCase(CommonRiverTest):
             'severity': self.obj.severity,
             'geom': self.obj.geom.ewkt,
             'portal': self.obj.portal.pk,
-            'published': False
+            'published': False,
+            'status_contribution': self.obj.status_contribution
         }
 
     def get_good_data(self):

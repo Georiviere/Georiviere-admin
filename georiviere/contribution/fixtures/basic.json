@@ -1,0 +1,38 @@
+[
+{
+    "model": "contribution.contributionstatus",
+    "pk": 1,
+    "fields": {
+        "label": "Informé",
+        "date_insert": "2023-05-09T15:15:30.143Z",
+        "date_update": "2022-03-09T15:15:30.143Z"
+    }
+},
+{
+    "model": "contribution.contributionstatus",
+    "pk": 2,
+    "fields": {
+        "label": "En cours de traitement",
+        "date_insert": "2023-05-09T15:15:30.143Z",
+        "date_update": "2022-03-09T15:15:30.143Z"
+    }
+},
+{
+    "model": "contribution.contributionstatus",
+    "pk": 3,
+    "fields": {
+        "label": "Traité",
+        "date_insert": "2023-05-09T15:15:30.143Z",
+        "date_update": "2022-03-09T15:15:30.143Z"
+    }
+},
+{
+    "model": "contribution.contributionstatus",
+    "pk": 4,
+    "fields": {
+        "label": "Retour au contributeur",
+        "date_insert": "2023-05-09T15:15:30.143Z",
+        "date_update": "2022-03-09T15:15:30.143Z"
+    }
+}
+]

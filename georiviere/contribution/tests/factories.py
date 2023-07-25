@@ -5,6 +5,13 @@ from georiviere.contribution import models
 from georiviere.portal.tests.factories import PortalFactory
 
 
+class ContributionStatusFactory(django.DjangoModelFactory):
+    class Meta:
+        model = models.ContributionStatus
+
+    label = Sequence(lambda n: f'Contribution status {n}')
+
+
 class ContributionFactory(PointFactory):
     class Meta:
         model = models.Contribution

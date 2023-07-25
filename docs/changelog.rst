@@ -2,6 +2,16 @@
 CHANGELOG
 =========
 
+1.1.0+dev    (XXXX-XX-XX)
+-------------------------
+
+**Enhancement**
+
+* Add contributions type / category filters
+* Add contributions manager
+* Add contribution status
+
+
 1.1.0        (2023-13-06)
 -------------------------
 
