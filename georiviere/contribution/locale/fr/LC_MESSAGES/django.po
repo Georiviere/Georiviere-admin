@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-06-01 09:11+0000\n"
+"POT-Creation-Date: 2023-07-24 12:00+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -21,8 +21,26 @@ msgstr ""
 msgid "Contribution"
 msgstr "Contribution"
 
-msgid "Name author"
-msgstr "Nom de l'auteur"
+msgid "Potential damage"
+msgstr "Dégâts potentiels"
+
+msgid "Fauna flora"
+msgstr "Faune flore"
+
+msgid "Quality"
+msgstr "Qualité"
+
+msgid "Quantity"
+msgstr "Quantité"
+
+msgid "Landscape elements"
+msgstr "Éléments paysagers"
+
+msgid "Category"
+msgstr "Catégorie"
+
+msgid "Type"
+msgstr "Type"
 
 msgid "Label"
 msgstr "Label"
@@ -32,6 +50,9 @@ msgstr "Type de gravité"
 
 msgid "Severity types"
 msgstr "Types de gravité"
+
+msgid "Name author"
+msgstr "Nom de l'auteur"
 
 msgid "First name author"
 msgstr "Prénom auteur"
@@ -116,9 +137,6 @@ msgstr "Mortalité piscicole"
 
 msgid "Trampling by livestock (impacting)"
 msgstr "Piétinement par le bétail (impactant)"
-
-msgid "Type"
-msgstr "Type"
 
 msgid "Landing type"
 msgstr "Type d'atterrissement"
@@ -283,9 +301,6 @@ msgstr "Contentieux"
 
 msgid "Knowledge"
 msgstr "Connaissance"
-
-msgid "Category"
-msgstr "Catégorie"
 
 msgid "None"
 msgstr "Aucun"
