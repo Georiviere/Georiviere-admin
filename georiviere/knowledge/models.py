@@ -225,6 +225,12 @@ class Knowledge(WatershedPropertiesMixin, TimeStampedModelMixin, ZoningPropertie
         object_id_field='target_id',
     )
 
+    contributions = GenericRelation(
+        'contribution.Contribution',
+        content_type_field='linked_object_type',
+        object_id_field='linked_object_id',
+    )
+
     class Meta:
         verbose_name = _("Knowledge")
         verbose_name_plural = _("Knowledges")
@@ -450,6 +456,11 @@ class FollowUp(TimeStampedModelMixin, WatershedPropertiesMixin, ZoningProperties
     length = models.FloatField(default=0.0, blank=True, null=True, verbose_name=_("Length"))
     width = models.FloatField(default=0.0, blank=True, null=True, verbose_name=_("Width"))
     height = models.FloatField(default=0.0, blank=True, null=True, verbose_name=_("Height"))
+    contributions = GenericRelation(
+        'contribution.Contribution',
+        content_type_field='linked_object_type',
+        object_id_field='linked_object_id',
+    )
 
     # generic relations
     administrative_operations = GenericRelation(AdministrativeOperation)
