@@ -13,6 +13,7 @@ CHANGELOG
 * Add contribution status
 * Send mail to managers when contribution is created
 * Send mail to contributor when contribution is created
+* Add linked objects on contributions
 
 1.1.0        (2023-13-06)
 -------------------------
