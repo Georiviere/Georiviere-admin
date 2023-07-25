@@ -7,6 +7,7 @@ CHANGELOG
 
 **Enhancement**
 
+* Add contributions validated and publication date
 * Add contributions type / category filters
 * Add contributions manager
 * Add contribution status
