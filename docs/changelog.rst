@@ -11,7 +11,8 @@ CHANGELOG
 * Add contributions type / category filters
 * Add contributions manager
 * Add contribution status
-
+* Send mail to managers when contribution is created
+* Send mail to contributor when contribution is created
 
 1.1.0        (2023-13-06)
 -------------------------
