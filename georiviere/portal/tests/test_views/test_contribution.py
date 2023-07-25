@@ -1,7 +1,7 @@
 from django.core import mail
 from django.core.exceptions import ValidationError
 from django.core.files.uploadedfile import SimpleUploadedFile
-from django.test import TestCase
+from django.test import TestCase, override_settings
 from django.urls import reverse
 from unittest import mock
 from geotrek.common.utils.testdata import get_dummy_uploaded_image, get_dummy_uploaded_file
@@ -47,6 +47,17 @@ class ContributionViewPostTest(APITestCase):
         self.assertEqual(contribution.email_author, 'x@x.x')
         self.assertEqual(landscape_element.get_type_display(), 'Doline')
         self.assertEqual(len(mail.outbox), 1)
+
+    @override_settings(MANAGERS=[("Fake", "fake@fake.fake"), ])
+    def test_contribution_create_send_manager_contributor(self):
+        self.assertEqual(len(mail.outbox), 0)
+        url = reverse('api_portal:contributions-list',
+                      kwargs={'portal_pk': self.portal.pk, 'lang': 'fr'})
+        self.client.post(url, data={"geom": "POINT(0 0)",
+                                    "properties": '{"email_author": "x@x.x",  "date_observation": "2022-08-16", '
+                                                  '"category": "Contribution Élément Paysagers",'
+                                                  '"type": "Doline"}'})
+        self.assertEqual(len(mail.outbox), 2)
 
     def test_contribution_quality(self):
         self.assertEqual(len(mail.outbox), 0)
