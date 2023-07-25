@@ -23,7 +23,9 @@ class ContributionViewTestCase(CommonRiverTest):
             'geom': self.obj.geom.ewkt,
             'portal': self.obj.portal.pk,
             'published': False,
-            'status_contribution': self.obj.status_contribution
+            'status_contribution': self.obj.status_contribution,
+            'validated': False,
+            'publication_date': self.obj.publication_date,
         }
 
     def get_good_data(self):
