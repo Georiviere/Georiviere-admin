@@ -5,7 +5,7 @@ from django.utils.translation import gettext_lazy as _
 
 from mapentity.models import MapEntityMixin
 
-from geotrek.common.mixins import TimeStampedModelMixin
+from geotrek.common.mixins import TimeStampedModelMixin, BasePublishableMixin
 from geotrek.common.utils import classproperty
 from geotrek.zoning.mixins import ZoningPropertiesMixin
 
@@ -58,7 +58,7 @@ def status_default():
     return None
 
 
-class Contribution(TimeStampedModelMixin, WatershedPropertiesMixin, ZoningPropertiesMixin,
+class Contribution(BasePublishableMixin, TimeStampedModelMixin, WatershedPropertiesMixin, ZoningPropertiesMixin,
                    AddPropertyBufferMixin, MapEntityMixin):
     """contribution model"""
     geom = models.GeometryField(srid=settings.SRID, spatial_index=True)
@@ -91,6 +91,8 @@ class Contribution(TimeStampedModelMixin, WatershedPropertiesMixin, ZoningProper
         default=status_default,
         verbose_name=_("Status"),
     )
+    validated = models.BooleanField(verbose_name=_("Validated"), default=False,
+                                    help_text=_("Validate the contribution"))
 
     class Meta:
         verbose_name = _("Contribution")

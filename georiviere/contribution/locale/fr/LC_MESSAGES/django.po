@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-07-24 12:00+0000\n"
+"POT-Creation-Date: 2023-07-25 12:41+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -51,6 +51,9 @@ msgstr "Type de gravité"
 msgid "Severity types"
 msgstr "Types de gravité"
 
+msgid "Status"
+msgstr "Status"
+
 msgid "Name author"
 msgstr "Nom de l'auteur"
 
@@ -72,14 +75,17 @@ msgstr "Description"
 msgid "Description of the contribution"
 msgstr "Description de la gravité"
 
-msgid "Published"
-msgstr "Publier"
-
-msgid "Make it visible on portal"
-msgstr "Rendre visible sur le portail"
-
 msgid "Portal"
 msgstr "Portail"
+
+msgid "Supervisor"
+msgstr "Superviseur"
+
+msgid "Validated"
+msgstr "Validé"
+
+msgid "Validate the contribution"
+msgstr "Valider la contribution"
 
 msgid "Contributions"
 msgstr "Contributions"
@@ -89,6 +95,9 @@ msgstr "Nom"
 
 msgid "No category"
 msgstr "Aucune catégorie"
+
+msgid "Published"
+msgstr "Publié"
 
 msgid "Contribution potential damage type"
 msgstr "Type de contibution dégats potentiels"
@@ -280,9 +289,6 @@ msgstr "Contributions éléments paysagers"
 
 msgid "Stream"
 msgstr "Rivière"
-
-msgid "Status"
-msgstr "Status"
 
 msgid "Morphologies"
 msgstr "Morphologies"

@@ -430,6 +430,10 @@ PARSER_RETRY_SLEEP_TIME = 60  # time of sleep between requests
 PARSER_NUMBER_OF_TRIES = 3  # number of requests to try before abandon
 PARSER_RETRY_HTTP_STATUS = [503]
 
+# Publication
+
+PUBLISHED_BY_LANG = False
+
 # Thumbnails
 
 THUMBNAIL_ALIASES = {

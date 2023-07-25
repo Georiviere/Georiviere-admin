@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-03-23 17:11+0000\n"
+"POT-Creation-Date: 2023-07-25 12:42+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -24,6 +24,12 @@ msgstr ""
 msgid "Restricted area"
 msgstr ""
 
+msgid "Creator"
+msgstr ""
+
+msgid "User that uploaded"
+msgstr ""
+
 msgid "Name"
 msgstr ""
 
@@ -33,8 +39,77 @@ msgstr ""
 msgid "Data sources"
 msgstr ""
 
+msgid "Distance"
+msgstr ""
+
+msgid "Distance to source"
+msgstr ""
+
+msgid "Distance to sources"
+msgstr ""
+
+msgid "List"
+msgstr ""
+
+msgid "Quick access"
+msgstr ""
+
+msgid "Add"
+msgstr ""
+
+msgid "Admin"
+msgstr ""
+
+msgid "Logbook"
+msgstr ""
+
+msgid "Logout"
+msgstr ""
+
 msgid "None"
 msgstr ""
 
-msgid "Visible on Geotrek-rando"
-msgstr "Visible on Georiviere"
+msgid "Display report"
+msgstr ""
+
+#, python-format
+msgid "%(n)s/%(nb_lines)s line imported."
+msgid_plural "%(n)s/%(nb_lines)s lines imported."
+msgstr[0] ""
+msgstr[1] ""
+
+#, python-format
+msgid "%(n)s record created."
+msgid_plural "%(n)s records created."
+msgstr[0] ""
+msgstr[1] ""
+
+#, python-format
+msgid "%(n)s record updated."
+msgid_plural "%(n)s records updated."
+msgstr[0] ""
+msgstr[1] ""
+
+#, python-format
+msgid "%(n)s record deleted."
+msgid_plural "%(n)s records deleted."
+msgstr[0] ""
+msgstr[1] ""
+
+#, python-format
+msgid "%(n)s record unmodified."
+msgid_plural "%(n)s records unmodified."
+msgstr[0] ""
+msgstr[1] ""
+
+#, python-format
+msgid "%(n)s warning:"
+msgid_plural "%(n)s warnings:"
+msgstr[0] ""
+msgstr[1] ""
+
+msgid "Waiting for publication"
+msgstr ""
+
+msgid "Draft"
+msgstr ""
