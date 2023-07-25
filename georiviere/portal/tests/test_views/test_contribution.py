@@ -1,6 +1,7 @@
+from django.core import mail
 from django.core.exceptions import ValidationError
 from django.core.files.uploadedfile import SimpleUploadedFile
-from django.test import TestCase
+from django.test import TestCase, override_settings
 from django.urls import reverse
 from unittest import mock
 from geotrek.common.utils.testdata import get_dummy_uploaded_image, get_dummy_uploaded_file
@@ -32,6 +33,7 @@ class ContributionViewPostTest(APITestCase):
         self.assertSetEqual(set(response.json().keys()), {'type', 'required', 'properties', 'allOf'})
 
     def test_contribution_landscape_element(self):
+        self.assertEqual(len(mail.outbox), 0)
         url = reverse('api_portal:contributions-list',
                       kwargs={'portal_pk': self.portal.pk, 'lang': 'fr'})
         response = self.client.post(url, data={"geom": "POINT(0 0)",
@@ -44,8 +46,21 @@ class ContributionViewPostTest(APITestCase):
         landscape_element = contribution.landscape_element
         self.assertEqual(contribution.email_author, 'x@x.x')
         self.assertEqual(landscape_element.get_type_display(), 'Doline')
+        self.assertEqual(len(mail.outbox), 1)
+
+    @override_settings(MANAGERS=[("Fake", "fake@fake.fake"), ])
+    def test_contribution_create_send_manager_contributor(self):
+        self.assertEqual(len(mail.outbox), 0)
+        url = reverse('api_portal:contributions-list',
+                      kwargs={'portal_pk': self.portal.pk, 'lang': 'fr'})
+        self.client.post(url, data={"geom": "POINT(0 0)",
+                                    "properties": '{"email_author": "x@x.x",  "date_observation": "2022-08-16", '
+                                                  '"category": "Contribution Élément Paysagers",'
+                                                  '"type": "Doline"}'})
+        self.assertEqual(len(mail.outbox), 2)
 
     def test_contribution_quality(self):
+        self.assertEqual(len(mail.outbox), 0)
         url = reverse('api_portal:contributions-list',
                       kwargs={'portal_pk': self.portal.pk, 'lang': 'fr'})
         response = self.client.post(url, data={"geom": "POINT(0 0)",
@@ -60,8 +75,10 @@ class ContributionViewPostTest(APITestCase):
         self.assertEqual(quality.nature_pollution.label, 'Baz')
         self.assertEqual(contribution.email_author, 'x@x.x')
         self.assertEqual(quality.get_type_display(), 'Pollution')
+        self.assertEqual(len(mail.outbox), 1)
 
     def test_contribution_quantity(self):
+        self.assertEqual(len(mail.outbox), 0)
         url = reverse('api_portal:contributions-list',
                       kwargs={'portal_pk': self.portal.pk, 'lang': 'fr', 'format': 'json'})
         response = self.client.post(url, data={"geom": "POINT(0 0)",
@@ -74,8 +91,10 @@ class ContributionViewPostTest(APITestCase):
         quantity = contribution.quantity
         self.assertEqual(contribution.email_author, 'x@x.x')
         self.assertEqual(quantity.get_type_display(), 'A sec')
+        self.assertEqual(len(mail.outbox), 1)
 
     def test_contribution_faunaflora(self):
+        self.assertEqual(len(mail.outbox), 0)
         url = reverse('api_portal:contributions-list',
                       kwargs={'portal_pk': self.portal.pk, 'lang': 'fr', 'format': 'json'})
         response = self.client.post(url, data={"geom": "POINT(4 43.5)",
@@ -90,8 +109,10 @@ class ContributionViewPostTest(APITestCase):
         fauna_flora = contribution.fauna_flora
         self.assertEqual(contribution.email_author, 'x@x.x')
         self.assertEqual(fauna_flora.get_type_display(), 'Espèce invasive')
+        self.assertEqual(len(mail.outbox), 1)
 
     def test_contribution_potential_damages(self):
+        self.assertEqual(len(mail.outbox), 0)
         url = reverse('api_portal:contributions-list',
                       kwargs={'portal_pk': self.portal.pk, 'lang': 'fr', 'format': 'json'})
         response = self.client.post(url, data={"geom": "POINT(4 42.5)",
@@ -104,6 +125,7 @@ class ContributionViewPostTest(APITestCase):
         potential_damage = contribution.potential_damage
         self.assertEqual(contribution.email_author, 'x@x.x')
         self.assertEqual(potential_damage.get_type_display(), 'Éboulements')
+        self.assertEqual(len(mail.outbox), 1)
 
     def test_contribution_category_does_not_exist(self):
         url = reverse('api_portal:contributions-list',

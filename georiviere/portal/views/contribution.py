@@ -1,3 +1,4 @@
+import json
 import os
 from PIL import Image
 
@@ -7,9 +8,11 @@ from django.conf import settings
 from django.contrib.contenttypes.models import ContentType
 from django.core.exceptions import ValidationError
 from django.core.files import File
+from django.core.mail import send_mail
 from django.db.models import F, Q
 from django.contrib.gis.db.models.functions import Transform
 from django.utils import translation
+from django.utils.translation import gettext_lazy as _
 
 from djangorestframework_camel_case.render import CamelCaseJSONRenderer
 
@@ -115,4 +118,20 @@ class ContributionViewSet(mixins.CreateModelMixin, mixins.RetrieveModelMixin, mi
                     logger.error(
                         f"Failed to convert attachment {name}{extension} for report {response.data.get('id')}: " + str(
                             e))
+        if settings.SEND_REPORT_ACK and response.status_code == 201:
+            send_mail(
+                _("Georiviere : Contribution"),
+                _(
+                    """Hello,
+
+                We acknowledge receipt of your contribution, thank you for your interest in Georiviere.
+
+                Best regards,
+
+                The Georiviere Team
+                http://georiviere.fr"""
+                ),
+                settings.DEFAULT_FROM_EMAIL,
+                [json.loads(request.data.get("properties")).get('email_author'), ],
+            )
         return response
