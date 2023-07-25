@@ -12,7 +12,8 @@
             {% endif %}
         {% endfor %}
         </ul>
-        ({{ object|verbose:"publication_date" }}: {{ object.publication_date }})
+        {% if object.publication_date %}({{ object|verbose:"publication_date" }}: {{ object.publication_date }})
+        {% endif %}
     {% else %}
         {% if object.review %}
             {% trans "Waiting for publication" %}

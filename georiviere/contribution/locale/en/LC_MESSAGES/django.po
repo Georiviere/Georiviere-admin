@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-07-24 12:00+0000\n"
+"POT-Creation-Date: 2023-07-25 12:41+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -51,6 +51,9 @@ msgstr ""
 msgid "Severity types"
 msgstr ""
 
+msgid "Status"
+msgstr ""
+
 msgid "Name author"
 msgstr ""
 
@@ -72,13 +75,16 @@ msgstr ""
 msgid "Description of the contribution"
 msgstr ""
 
-msgid "Published"
-msgstr ""
-
-msgid "Make it visible on portal"
-msgstr ""
-
 msgid "Portal"
+msgstr ""
+
+msgid "Supervisor"
+msgstr ""
+
+msgid "Validated"
+msgstr ""
+
+msgid "Validate the contribution"
 msgstr ""
 
 msgid "Contributions"
@@ -88,6 +94,9 @@ msgid "Name"
 msgstr ""
 
 msgid "No category"
+msgstr ""
+
+msgid "Published"
 msgstr ""
 
 msgid "Contribution potential damage type"
@@ -279,9 +288,6 @@ msgid "contributions landscape elements"
 msgstr ""
 
 msgid "Stream"
-msgstr ""
-
-msgid "Status"
 msgstr ""
 
 msgid "Morphologies"

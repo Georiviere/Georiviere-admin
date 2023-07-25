@@ -11,7 +11,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-03-23 17:11+0000\n"
+"POT-Creation-Date: 2023-07-25 12:42+0000\n"
 "PO-Revision-Date: 2021-11-23 15:31+0000\n"
 "Last-Translator: Jean-Etienne Castagnede <jecastagnede@vivaldi.net>, 2021\n"
 "Language-Team: French (https://www.transifex.com/georiviere/teams/128005/"
@@ -28,6 +28,12 @@ msgstr "Principal"
 msgid "Restricted area"
 msgstr "Zone réglementaire"
 
+msgid "Creator"
+msgstr "Créateur"
+
+msgid "User that uploaded"
+msgstr "Utilisateur qui a téléverser"
+
 msgid "Name"
 msgstr "Nom"
 
@@ -37,8 +43,77 @@ msgstr "Source de données"
 msgid "Data sources"
 msgstr "Sources de données"
 
+msgid "Distance"
+msgstr "Distance"
+
+msgid "Distance to source"
+msgstr "Distance à la source"
+
+msgid "Distance to sources"
+msgstr "Distance aux sources"
+
+msgid "List"
+msgstr "Liste"
+
+msgid "Quick access"
+msgstr "Accès rapide"
+
+msgid "Add"
+msgstr "Ajouter"
+
+msgid "Admin"
+msgstr "Admin"
+
+msgid "Logbook"
+msgstr "Registre"
+
+msgid "Logout"
+msgstr "Se déconnecter"
+
 msgid "None"
 msgstr "Aucun(e)"
 
-msgid "Visible on Geotrek-rando"
-msgstr "Visible sur Georivière"
+msgid "Display report"
+msgstr "Afficher le rapport"
+
+#, python-format
+msgid "%(n)s/%(nb_lines)s line imported."
+msgid_plural "%(n)s/%(nb_lines)s lines imported."
+msgstr[0] ""
+msgstr[1] ""
+
+#, python-format
+msgid "%(n)s record created."
+msgid_plural "%(n)s records created."
+msgstr[0] ""
+msgstr[1] ""
+
+#, python-format
+msgid "%(n)s record updated."
+msgid_plural "%(n)s records updated."
+msgstr[0] ""
+msgstr[1] ""
+
+#, python-format
+msgid "%(n)s record deleted."
+msgid_plural "%(n)s records deleted."
+msgstr[0] ""
+msgstr[1] ""
+
+#, python-format
+msgid "%(n)s record unmodified."
+msgid_plural "%(n)s records unmodified."
+msgstr[0] ""
+msgstr[1] ""
+
+#, python-format
+msgid "%(n)s warning:"
+msgid_plural "%(n)s warnings:"
+msgstr[0] ""
+msgstr[1] ""
+
+msgid "Waiting for publication"
+msgstr "En attente pour publication"
+
+msgid "Draft"
+msgstr "Brouillon"

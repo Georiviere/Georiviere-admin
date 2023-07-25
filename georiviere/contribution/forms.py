@@ -14,16 +14,17 @@ class ContributionForm(CommonForm):
             "description",
             "severity",
             "published",
+            "validated"
             "portal",
             "email_author",
             "assigned_user",
-            "status_contribution"
+            "status_contribution",
         )
     ]
 
     class Meta(CommonForm):
         fields = ["description", "severity", "published", "portal", "email_author", "geom", "assigned_user",
-                  "status_contribution"]
+                  "status_contribution", "validated"]
         model = Contribution
 
     def __init__(self, *args, **kwargs):
