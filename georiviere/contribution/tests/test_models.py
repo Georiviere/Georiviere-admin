@@ -5,13 +5,14 @@ from .factories import (ContributionFactory, ContributionPotentialDamageFactory,
                         ContributionLandscapeElementsFactory, SeverityTypeTypeFactory, LandingTypeFactory,
                         JamTypeFactory, DiseaseTypeFactory, DeadSpeciesFactory, InvasiveSpeciesFactory,
                         HeritageSpeciesFactory, HeritageObservationFactory, FishSpeciesFactory, NaturePollutionFactory,
-                        TypePollutionFactory)
+                        TypePollutionFactory, ContributionStatusFactory)
 
 
 class ContributionCategoriesTest(TestCase):
     """Test for Category Contribution model"""
 
     def test_contribution_str(self):
+        ContributionStatusFactory(label="Informé")
         contribution = ContributionFactory(email_author='mail.mail@mail')
         self.assertEqual(str(contribution), "mail.mail@mail")
         self.assertEqual(contribution.category, "No category")
@@ -125,3 +126,11 @@ class ContributionNaturePollutionTest(TestCase):
     def test_typepollution_str(self):
         type_pollution = TypePollutionFactory(label="Type pollution 1")
         self.assertEqual(str(type_pollution), "Type pollution 1")
+
+
+class ContributionStatusTest(TestCase):
+    """Test for Status Contribution model"""
+
+    def test_status_str(self):
+        nature_pollution = ContributionStatusFactory(label="Contribution status 1")
+        self.assertEqual(str(nature_pollution), "Contribution status 1")
