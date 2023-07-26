@@ -119,7 +119,9 @@ class Contribution(BasePublishableMixin, TimeStampedModelMixin, WatershedPropert
 
     @property
     def linked_object_model_name(self):
-        return self.linked_object._meta.verbose_name
+        if self.linked_object:
+            return self.linked_object._meta.verbose_name
+        return None
 
     def __str__(self):
         if hasattr(self, 'potential_damage'):

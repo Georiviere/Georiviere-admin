@@ -1,6 +1,7 @@
 from georiviere.tests import CommonRiverTest
 from . import factories
 from georiviere.contribution import models as contribution_models
+from georiviere.knowledge.tests.factories import KnowledgeFactory
 from georiviere.portal.tests.factories import PortalFactory
 
 
@@ -26,6 +27,8 @@ class ContributionViewTestCase(CommonRiverTest):
             'status_contribution': self.obj.status_contribution,
             'validated': False,
             'publication_date': self.obj.publication_date,
+            'linked_object_type': None,
+            'linked_object_id': None,
         }
 
     def get_good_data(self):
@@ -56,6 +59,12 @@ class ContributionViewTestCase(CommonRiverTest):
 
         response = self.client.get(obj.get_detail_url().replace(str(obj.pk), '1234567890'))
         self.assertEqual(response.status_code, 404)
+
+        response = self.client.get(obj.get_detail_url())
+        self.assertEqual(response.status_code, 200)
+
+        obj.linked_object = KnowledgeFactory.create()
+        obj.save()
 
         response = self.client.get(obj.get_detail_url())
         self.assertEqual(response.status_code, 200)
