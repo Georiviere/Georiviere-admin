@@ -17,6 +17,7 @@ from georiviere.watershed.filters import WatershedFilterSet
 
 class ContributionCategoryFilter(MultipleChoiceFilter):
     def __init__(self, *args, **kwargs):
+        # Here we generate choices for the category of contributions.
         self.choices = [
             ('potential_damage', _('Potential damage')),
             ('fauna_flora', _('Fauna flora')),
