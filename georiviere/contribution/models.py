@@ -2,6 +2,8 @@ import logging
 
 from django.conf import settings
 from django.contrib.auth.models import User
+from django.contrib.contenttypes.fields import GenericForeignKey
+from django.contrib.contenttypes.models import ContentType
 from django.contrib.gis.db import models
 from django.core.mail import mail_managers
 from django.template.loader import render_to_string
@@ -99,6 +101,9 @@ class Contribution(BasePublishableMixin, TimeStampedModelMixin, WatershedPropert
     )
     validated = models.BooleanField(verbose_name=_("Validated"), default=False,
                                     help_text=_("Validate the contribution"))
+    linked_object_type = models.ForeignKey(ContentType, null=True, on_delete=models.CASCADE)
+    linked_object_id = models.PositiveIntegerField(blank=True, null=True)
+    linked_object = GenericForeignKey('linked_object_type', 'linked_object_id')
 
     class Meta:
         verbose_name = _("Contribution")
@@ -107,6 +112,16 @@ class Contribution(BasePublishableMixin, TimeStampedModelMixin, WatershedPropert
     @classproperty
     def category_verbose_name(cls):
         return _("Name")
+
+    @classproperty
+    def linked_object_verbose_name(cls):
+        return _("Linked object")
+
+    @property
+    def linked_object_model_name(self):
+        if self.linked_object:
+            return self.linked_object._meta.verbose_name
+        return None
 
     def __str__(self):
         if hasattr(self, 'potential_damage'):

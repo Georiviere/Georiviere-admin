@@ -61,6 +61,11 @@ class Intervention(TimeStampedModelMixin, WatershedPropertiesMixin, ZoningProper
 
     # generic relations
     administrative_operations = GenericRelation(AdministrativeOperation)
+    contributions = GenericRelation(
+        'contribution.Contribution',
+        content_type_field='linked_object_type',
+        object_id_field='linked_object_id',
+    )
 
     class Meta:
         verbose_name = _("Intervention")

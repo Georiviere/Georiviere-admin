@@ -16,6 +16,8 @@ class ContributionList(MapEntityList):
 class ContributionLayer(MapEntityLayer):
     queryset = Contribution.objects.all()
     model = Contribution
+    filterform = ContributionFilterSet
+    columns = ['category', ]
 
 
 class ContributionJsonList(MapEntityJsonList, ContributionList):

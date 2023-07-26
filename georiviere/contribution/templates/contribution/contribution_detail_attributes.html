@@ -35,6 +35,10 @@
             <th>{{ object|verbose:"status_contribution" }}</th>
             <td>{{ object.status_contribution|default:"" }}</td>
         </tr>
+        <tr>
+            <th>{{ object|verbose:"linked_object" }}</th>
+            <td>{% if object.linked_object_model_name %}{{ object.linked_object_model_name }} : {% endif %}{{ object.linked_object|default:"" }}</td>
+        </tr>
         {% if object.potential_damage %}
             <tr>
                 <th>{{ object.potential_damage|verbose:"type" }}</th>
