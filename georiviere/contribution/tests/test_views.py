@@ -1,6 +1,9 @@
+from django.contrib.contenttypes.models import ContentType
+
 from georiviere.tests import CommonRiverTest
 from . import factories
 from georiviere.contribution import models as contribution_models
+from georiviere.knowledge.models import Knowledge
 from georiviere.knowledge.tests.factories import KnowledgeFactory
 from georiviere.portal.tests.factories import PortalFactory
 
@@ -35,12 +38,15 @@ class ContributionViewTestCase(CommonRiverTest):
         portal = PortalFactory.create()
         severity = factories.SeverityTypeTypeFactory()
         temp_data = self.modelfactory.build(portal=portal)
+        knowledge = KnowledgeFactory.create()
         return {
             'email_author': temp_data.email_author,
             'portal': portal.pk,
             'geom': temp_data.geom.ewkt,
             'severity': severity.pk,
-            'description': 'New_description'
+            'description': 'New_description',
+            'linked_object_id': knowledge.pk,
+            'linked_object_type': ContentType.objects.get_for_model(Knowledge)
         }
 
     def test_distance_to_source_is_available(self):
@@ -72,6 +78,17 @@ class ContributionViewTestCase(CommonRiverTest):
         response = self.client.get(obj.get_update_url())
         self.assertEqual(response.status_code, 200)
         self._post_update_form(obj)
+
+        response = self.client.get(obj.get_update_url())
+        self.assertEqual(response.status_code, 200)
+        good_data_without_linked_object = self.get_good_data()
+        good_data_without_linked_object['linked_object'] = ""
+        response = self.client.post(obj.get_update_url(), good_data_without_linked_object)
+        if response.status_code != 302:
+            form = self.get_form(response)
+            self.assertEqual(form.errors, [])  # this will show form errors
+
+        self.assertEqual(response.status_code, 302)  # success, redirects to detail view
 
         url = obj.get_detail_url()
         obj.delete()
