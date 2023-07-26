@@ -31,8 +31,10 @@ orig_import = __import__
 
 
 def import_mock(name, *args, **kwargs):
+    # TODO: Remove geotrek.core.models when georiviere use Geotrek latest versions
     if 'geotrek.core.models' in name:
         return orig_import('georiviere.main.utils', *args, **kwargs)
+    # TODO: Remove geotrek.common.models when georiviere use Geotrek latest versions
     if 'geotrek.common.models' in name:
         return orig_import('georiviere.main.models', *args, **kwargs)
     if 'geotrek.common.urls' in name:
@@ -42,24 +44,30 @@ def import_mock(name, *args, **kwargs):
     return orig_import(name, *args, **kwargs)
 
 
+# Mock the imports of Georiviere. It catches all imports even ones in Geotrek.
+# We use it to replace Geotrek models / urls etc by Georiviere models ...
 patcher = mock.patch('builtins.__import__', side_effect=import_mock)
 patcher.start()
 
 engine = Engine()
 
 
+# This mock is used for templating. We replace a template by another one.
 def include_mock(template_code):
     template_code = template_code.replace('common/publication_info_fragment.html',
                                           'main/publication_info_fragment.html')
     return Template(template_code)
 
 
+# This mock is used for templating. We replace a template by another one.
 def construct_relative_path_mock(current_template_name, relative_name):
     if 'common/publication_info_fragment.html' in relative_name:
         return '"main/publication_info_fragment.html"'
     return relative_name
 
 
+# This mock is used for templating. We replace a template by another one.
+# This one specially for inclusion of template. {% include ... %}
 patcher_include_template = mock.patch('django.template.engine.Engine.from_string',
                                       side_effect=include_mock)
 patcher_include_template.start()
