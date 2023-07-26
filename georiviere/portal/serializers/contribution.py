@@ -60,6 +60,12 @@ class ContributionSerializer(serializers.ModelSerializer):
     def create(self, validated_data):
         sid = transaction.savepoint()
         msg = ''
+        # Create a contribution depending on the data you get from the portal
+        # The datas should follow the json schema generated in `georiviere/contribution/schema.py`
+        # All the properties are flatten directly in the field properties
+        # Properties depend on the category and type of contributions.
+        # Check https://github.com/Georiviere/Georiviere-admin/issues/139
+        # For more informations
         try:
             properties = validated_data.pop('properties')
             category = properties.pop('category')
@@ -105,12 +111,14 @@ class ContributionSerializer(serializers.ModelSerializer):
                 raise
 
             type_prop = properties.pop('type')
-
+            # All the categories have a field type. We get all choices available and check
+            # if the type exists for this category
             types = {v: k for k, v in model.TypeChoice.choices}
             for key, prop in properties.items():
                 if isinstance(model._meta.get_field(key), ForeignKey):
                     properties[key] = model._meta.get_field(key).related_model.objects.get(label=prop)
-
+                    # If the type doesn't exist for this category, the error is catched, a validationerror occur.
+            # If it exists, the contribution of the category in properties is created.
             model.objects.create(contribution=main_contribution,
                                  type=types[type_prop],
                                  **properties)
@@ -123,6 +131,8 @@ class ContributionSerializer(serializers.ModelSerializer):
         return main_contribution
 
 
+# Serializer for the contribution json schema's following the jsonschema reference :
+# https://json-schema.org/understanding-json-schema/reference/conditionals.html
 class ContributionSchemaSerializer(serializers.Serializer):
     type = serializers.CharField(default='object')
     required = serializers.SerializerMethodField(method_name='get_required')
