@@ -124,6 +124,9 @@ class Contribution(BasePublishableMixin, TimeStampedModelMixin, WatershedPropert
         return None
 
     def __str__(self):
+        # Use the category and the type (One to One field) to generate what it will show on the list / detail / etc...
+        # It will generate like that :
+        # test@test.test Potential Damage Landing
         if hasattr(self, 'potential_damage'):
             return f'{self.email_author} {ContributionPotentialDamage._meta.verbose_name.title()} ' \
                    f'{self.potential_damage.get_type_display()}'
@@ -143,6 +146,9 @@ class Contribution(BasePublishableMixin, TimeStampedModelMixin, WatershedPropert
 
     @property
     def category(self):
+        # The category is the reverse of the one to one fields :
+        # For example :
+        # Potential damage
         if hasattr(self, 'potential_damage'):
             return self.potential_damage
         elif hasattr(self, 'fauna_flora'):
@@ -166,6 +172,7 @@ class Contribution(BasePublishableMixin, TimeStampedModelMixin, WatershedPropert
         return s
 
     def send_report_to_managers(self, template_name="contribution/report_email.txt"):
+        # Send report to managers when a contribution has been created (MANAGERS settings)
         subject = _("Feedback from {email}").format(email=self.email_author)
         message = render_to_string(template_name, {"contribution": self})
         mail_managers(subject, message, fail_silently=False)
@@ -180,6 +187,27 @@ class Contribution(BasePublishableMixin, TimeStampedModelMixin, WatershedPropert
     def save(self, *args, **kwargs):
         super().save(*args, **kwargs)  # Contribution updates should do nothing more
         self.try_send_report_to_managers()
+
+
+# Contributions has a category in the list :
+# Potential damage
+# Fauna flora
+# Quality
+# Quantity
+# Landscape elements
+
+# Contributions has a type depending on its category
+# Potential damage => Landing, Excessive cutting of riparian forest, Rockslides, Disruptive jam, Bank erosion
+#                     River bed incision (sinking), Fish diseases (appearance of fish), Fish mortality,
+#                     Trampling by livestock (impacting)
+# Fauna flora => Invasive species, Heritage species, Fish species
+# Quantity => Dry, In the process of drying out, Overflow
+# Quality => Algal development, Pollution, Water temperature
+# Landscape elements => Sinkhole, Fountain, Chasm, Lesine, Pond, Losing stream, Resurgence
+
+# Depending on its type of contribution, some fields are available or not.
+# Everything is summarize on :
+# https://github.com/Georiviere/Georiviere-admin/issues/139
 
 
 class LandingType(models.Model):

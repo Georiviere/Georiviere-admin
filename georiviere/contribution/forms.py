@@ -15,6 +15,7 @@ class ContributionForm(autocomplete.FutureModelForm, CommonForm):
 
     linked_object = autocomplete.Select2GenericForeignKeyModelField(
         model_choice=[
+            # Get the values 'name' for each object of each models
             (Knowledge, 'name'),
             (Intervention, 'name'),
             (FollowUp, 'name')
