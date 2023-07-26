@@ -14,6 +14,7 @@ from georiviere.portal.views.zoning import CityViewSet, DistrictViewSet, Watersh
 
 
 router = routers.DefaultRouter()
+# Datas are available depending on portal or not.
 router.register(r'(?P<portal_pk>\d+)/pois', POIViewSet, basename='pois')
 
 router.register(r'(?P<portal_pk>\d+)/streams', StreamViewSet, basename='streams')
