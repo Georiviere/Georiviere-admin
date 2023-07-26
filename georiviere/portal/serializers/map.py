@@ -47,6 +47,7 @@ class MapLayerSerializer(ModelSerializer):
         if layer_type[0] in ['pois', 'streams', 'contributions']:
             reverse_kwargs['portal_pk'] = obj.portal.pk
         if len(layer_type) == 2:
+            # If the layer type is poi, it's separated by category.
             filter_type = layer_type[-1]
             reverse_kwargs['category_pk'] = filter_type
             return reverse('api_portal:pois-category', kwargs=reverse_kwargs)
