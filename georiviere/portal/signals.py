@@ -7,6 +7,7 @@ from georiviere.valorization.models import POICategory
 
 @receiver(post_delete, sender=POICategory, dispatch_uid='delete_category_maplayer')
 def delete_category_maplayer(sender, instance, **kwargs):
+    # Remove every map layer (all portals) when a category is deleted
     MapLayer.objects.filter(layer_type__startswith='pois',
                             layer_type__endswith=instance.pk).delete()
 
@@ -15,6 +16,7 @@ def delete_category_maplayer(sender, instance, **kwargs):
 def save_category_maplayer(sender, instance, created, **kwargs):
     if created:
         for portal in Portal.objects.all():
+            # Create a map layer for each portal for this POICategory
             MapLayer.objects.create(label=instance.label, order=0, layer_type=f'pois-{instance.pk}',
                                     portal=portal)
 
