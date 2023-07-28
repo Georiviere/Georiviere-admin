@@ -9,6 +9,7 @@ https://docs.djangoproject.com/en/3.1/topics/settings/
 For the full list of settings and their values, see
 https://docs.djangoproject.com/en/3.1/ref/settings/
 """
+from decouple import config, Csv
 import os
 import sys
 from pathlib import Path
@@ -108,13 +109,14 @@ VIEWPORT_MARGIN = 0.1
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/3.1/howto/deployment/checklist/
 
-SECRET_KEY = os.getenv('SECRET_KEY')
+SECRET_KEY = config("SECRET_KEY", default="please-override-me")
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False
 TEST = 'test' in sys.argv
 
-ALLOWED_HOSTS = os.getenv('SERVER_NAME').split(',')
+
+ALLOWED_HOSTS = config("SERVER_NAME", default="", cast=Csv())
 
 # Application definition
 
@@ -457,14 +459,13 @@ THUMBNAIL_ALIASES = {
 
 # API
 
-SWAGGER_SETTINGS = {
-    'USE_SESSION_AUTH': False,
-    'APIS_SORTER': 'alpha',
-    'JSON_EDITOR': True,
-    'API_PORTAL': "Georiviere API"
-}
+API_SCHEMA = config("API_SCHEMA", default=False, cast=bool)
+API_SWAGGER = config("API_SWAGGER", default=False, cast=bool)  # NEED API_SCHEMA
+API_REDOC = config("API_REDOC", default=False, cast=bool)  # NEED API_SCHEMA
 
-if os.getenv('SSL_ENABLED', default=0):
+SSL_ENABLED = config("SSL_ENABLED", default=False, cast=bool)
+
+if SSL_ENABLED:
     # SECURITY
     SECURE_CONTENT_TYPE_NOSNIFF = True
     SECURE_BROWSER_XSS_FILTER = True
