@@ -8,6 +8,7 @@ from django.contrib.gis.geos import Polygon
 from geotrek.sensitivity.models import SportPractice
 
 
+# TODO: We should remove this part of the parser with the latest version. Fix of this parser is in the version 2.77.3
 class BiodivParser(GeotrekBiodivParser):
     def report(self, output_format='txt'):
         context = {
