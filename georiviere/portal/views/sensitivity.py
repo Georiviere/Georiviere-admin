@@ -16,7 +16,7 @@ from rest_framework.permissions import AllowAny
 from rest_framework.pagination import LimitOffsetPagination
 
 
-class SensitivityViewSet(viewsets.ModelViewSet):
+class SensitivityViewSet(viewsets.ReadOnlyModelViewSet):
     model = SensitiveArea
     geojson_serializer_class = SensitivityGeojsonSerializer
     serializer_class = SensitivitySerializer

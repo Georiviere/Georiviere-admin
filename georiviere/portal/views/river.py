@@ -14,7 +14,7 @@ from rest_framework import permissions as rest_permissions
 from rest_framework.pagination import LimitOffsetPagination
 
 
-class StreamViewSet(viewsets.ModelViewSet):
+class StreamViewSet(viewsets.ReadOnlyModelViewSet):
     model = Stream
     geojson_serializer_class = StreamGeojsonSerializer
     serializer_class = StreamSerializer

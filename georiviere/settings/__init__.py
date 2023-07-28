@@ -157,7 +157,8 @@ INSTALLED_APPS = PROJECT_APPS + [
     'georiviere.flatpages',
     'georiviere.contribution',
     'geotrek.sensitivity',
-    'admin_ordering'
+    'admin_ordering',
+    'drf_spectacular'
 ]
 
 STATICFILES_FINDERS = (
@@ -167,6 +168,7 @@ STATICFILES_FINDERS = (
 )
 
 REST_FRAMEWORK = {
+    "DEFAULT_SCHEMA_CLASS": "drf_spectacular.openapi.AutoSchema",
     "DEFAULT_PARSER_CLASSES": (
         "rest_framework.parsers.JSONParser",
         "rest_framework.parsers.FormParser",
@@ -175,6 +177,8 @@ REST_FRAMEWORK = {
     'UNICODE_JSON': False,
     'STRICT_JSON': False
 }
+
+SPECTACULAR_SETTINGS = {'PREPROCESSING_HOOKS': ['georiviere.hooks.preprocessing_filter_spec', ]}
 
 CONTRIBUTION_FILETYPE = 'contribution'
 
