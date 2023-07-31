@@ -17,6 +17,7 @@ from georiviere.watershed.filters import WatershedFilterSet
 
 class ContributionCategoryFilter(MultipleChoiceFilter):
     def __init__(self, *args, **kwargs):
+        # Here we generate choices for the category of contributions.
         self.choices = [
             ('potential_damage', _('Potential damage')),
             ('fauna_flora', _('Fauna flora')),
@@ -37,6 +38,9 @@ class ContributionTypeFilter(MultipleChoiceFilter):
     choices_category = {}
 
     def __init__(self, *args, **kwargs):
+        # Here we generate choices for the type of contributions.
+        # We want to be able to filter one type of contribution with the type of contribution.
+        # We need the category of the contribution to be able to filter on the type
         self.choices_category = {
             ContributionQuantity: {value: key for key, value in ContributionQuantity.TypeChoice.choices},
             ContributionQuality: {value: key for key, value in ContributionQuality.TypeChoice.choices},
@@ -49,6 +53,7 @@ class ContributionTypeFilter(MultipleChoiceFilter):
             ContributionFaunaFlora.TypeChoice.labels + \
             ContributionLandscapeElements.TypeChoice.labels + \
             ContributionPotentialDamage.TypeChoice.labels
+        # The value is the same as the label because we need to be able to filter it easily.
         self.choices = [(value, value) for value in choices]
         super().__init__(choices=self.choices, *args, **kwargs)
 
@@ -56,6 +61,8 @@ class ContributionTypeFilter(MultipleChoiceFilter):
         if not values:
             return qs
         contributions = []
+        # For each category of contributions, we filter the types chose in the filter.
+        # TODO: It might be possible to improve the performances by looping on the filter values
         for key_model, dict_value in self.choices_category.items():
             contributions.extend(list(key_model.objects.filter(type__in=[dict_value.get(i) for i in values if dict_value.get(i) is not None]).values_list('contribution_id', flat=True)))
         qs = qs.filter(id__in=contributions)

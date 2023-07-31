@@ -31,13 +31,17 @@ class WatershedViewTest(TestCase):
         url = reverse('api_portal:watersheds-detail',
                       kwargs={'pk': self.watershed.pk, 'lang': 'fr', 'format': 'json'})
         response = self.client.get(url)
-        self.assertEqual(response.status_code, 404)
+        self.assertEqual(response.status_code, 200)
+
+        self.assertSetEqual(set(response.json().keys()), {'id', 'type', 'name'})
 
     def test_watershed_list_json(self):
         url = reverse('api_portal:watersheds-list',
                       kwargs={'lang': 'fr', 'format': 'json'})
         response = self.client.get(url)
-        self.assertEqual(response.status_code, 404)
+        self.assertEqual(response.status_code, 200)
+
+        self.assertSetEqual(set(response.json()[0].keys()), {'id', 'name', 'type'})
 
 
 class CityViewTest(TestCase):
@@ -65,13 +69,17 @@ class CityViewTest(TestCase):
         url = reverse('api_portal:cities-detail',
                       kwargs={'pk': self.city.pk, 'lang': 'fr', 'format': 'json'})
         response = self.client.get(url)
-        self.assertEqual(response.status_code, 404)
+        self.assertEqual(response.status_code, 200)
+
+        self.assertSetEqual(set(response.json().keys()), {'id', 'name'})
 
     def test_city_list_json(self):
         url = reverse('api_portal:cities-list',
                       kwargs={'lang': 'fr', 'format': 'json'})
         response = self.client.get(url)
-        self.assertEqual(response.status_code, 404)
+        self.assertEqual(response.status_code, 200)
+
+        self.assertSetEqual(set(response.json()[0].keys()), {'id', 'name'})
 
 
 class DistrictViewTest(TestCase):
@@ -99,10 +107,14 @@ class DistrictViewTest(TestCase):
         url = reverse('api_portal:districts-detail',
                       kwargs={'pk': self.district.pk, 'lang': 'fr', 'format': 'json'})
         response = self.client.get(url)
-        self.assertEqual(response.status_code, 404)
+        self.assertEqual(response.status_code, 200)
 
-    def test_city_list_json(self):
+        self.assertSetEqual(set(response.json().keys()), {'id', 'name'})
+
+    def test_district_list_json(self):
         url = reverse('api_portal:districts-list',
                       kwargs={'lang': 'fr', 'format': 'json'})
         response = self.client.get(url)
-        self.assertEqual(response.status_code, 404)
+        self.assertEqual(response.status_code, 200)
+
+        self.assertSetEqual(set(response.json()[0].keys()), {'id', 'name'})

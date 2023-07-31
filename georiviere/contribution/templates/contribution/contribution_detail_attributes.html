@@ -39,6 +39,7 @@
             <th>{{ object|verbose:"linked_object" }}</th>
             <td>{% if object.linked_object_model_name %}{{ object.linked_object_model_name }} : {% endif %}{{ object.linked_object|default:"" }}</td>
         </tr>
+        {# Depending on the json schema / https://github.com/Georiviere/Georiviere-admin/issues/139 : some field are available for some type of contributions #}
         {% if object.potential_damage %}
             <tr>
                 <th>{{ object.potential_damage|verbose:"type" }}</th>

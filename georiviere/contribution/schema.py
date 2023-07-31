@@ -7,6 +7,13 @@ from georiviere.contribution.models import (ContributionQuantity, ContributionQu
                                             InvasiveSpecies, HeritageSpecies, HeritageObservation, FishSpecies,
                                             NaturePollution, TypePollution)
 
+# The json schema is summarize on :
+# https://github.com/Georiviere/Georiviere-admin/issues/139
+# Depending of the category and type of the contributions, some fields are available or not.
+# Here is the generation of the json schema used by the website portal.
+# The fields available depending on the type of contributions follow the documentation of jsonschema :
+# https://json-schema.org/understanding-json-schema/reference/conditionals.html
+
 
 def get_contribution_properties():
     """ Feature properties as form initial data format (name / value) """

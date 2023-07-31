@@ -9,6 +9,7 @@ https://docs.djangoproject.com/en/3.1/topics/settings/
 For the full list of settings and their values, see
 https://docs.djangoproject.com/en/3.1/ref/settings/
 """
+from decouple import config, Csv
 import os
 import sys
 from pathlib import Path
@@ -31,8 +32,10 @@ orig_import = __import__
 
 
 def import_mock(name, *args, **kwargs):
+    # TODO: Remove geotrek.core.models when georiviere use Geotrek latest versions
     if 'geotrek.core.models' in name:
         return orig_import('georiviere.main.utils', *args, **kwargs)
+    # TODO: Remove geotrek.common.models when georiviere use Geotrek latest versions
     if 'geotrek.common.models' in name:
         return orig_import('georiviere.main.models', *args, **kwargs)
     if 'geotrek.common.urls' in name:
@@ -42,24 +45,30 @@ def import_mock(name, *args, **kwargs):
     return orig_import(name, *args, **kwargs)
 
 
+# Mock the imports of Georiviere. It catches all imports even ones in Geotrek.
+# We use it to replace Geotrek models / urls etc by Georiviere models ...
 patcher = mock.patch('builtins.__import__', side_effect=import_mock)
 patcher.start()
 
 engine = Engine()
 
 
+# This mock is used for templating. We replace a template by another one.
 def include_mock(template_code):
     template_code = template_code.replace('common/publication_info_fragment.html',
                                           'main/publication_info_fragment.html')
     return Template(template_code)
 
 
+# This mock is used for templating. We replace a template by another one.
 def construct_relative_path_mock(current_template_name, relative_name):
     if 'common/publication_info_fragment.html' in relative_name:
         return '"main/publication_info_fragment.html"'
     return relative_name
 
 
+# This mock is used for templating. We replace a template by another one.
+# This one specially for inclusion of template. {% include ... %}
 patcher_include_template = mock.patch('django.template.engine.Engine.from_string',
                                       side_effect=include_mock)
 patcher_include_template.start()
@@ -100,13 +109,14 @@ VIEWPORT_MARGIN = 0.1
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/3.1/howto/deployment/checklist/
 
-SECRET_KEY = os.getenv('SECRET_KEY')
+SECRET_KEY = config("SECRET_KEY", default="please-override-me")
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False
 TEST = 'test' in sys.argv
 
-ALLOWED_HOSTS = os.getenv('SERVER_NAME').split(',')
+
+ALLOWED_HOSTS = config("SERVER_NAME", default="", cast=Csv())
 
 # Application definition
 
@@ -149,7 +159,8 @@ INSTALLED_APPS = PROJECT_APPS + [
     'georiviere.flatpages',
     'georiviere.contribution',
     'geotrek.sensitivity',
-    'admin_ordering'
+    'admin_ordering',
+    'drf_spectacular'
 ]
 
 STATICFILES_FINDERS = (
@@ -159,6 +170,7 @@ STATICFILES_FINDERS = (
 )
 
 REST_FRAMEWORK = {
+    "DEFAULT_SCHEMA_CLASS": "drf_spectacular.openapi.AutoSchema",
     "DEFAULT_PARSER_CLASSES": (
         "rest_framework.parsers.JSONParser",
         "rest_framework.parsers.FormParser",
@@ -167,6 +179,8 @@ REST_FRAMEWORK = {
     'UNICODE_JSON': False,
     'STRICT_JSON': False
 }
+
+SPECTACULAR_SETTINGS = {'PREPROCESSING_HOOKS': ['georiviere.hooks.preprocessing_filter_spec', ]}
 
 CONTRIBUTION_FILETYPE = 'contribution'
 
@@ -445,14 +459,13 @@ THUMBNAIL_ALIASES = {
 
 # API
 
-SWAGGER_SETTINGS = {
-    'USE_SESSION_AUTH': False,
-    'APIS_SORTER': 'alpha',
-    'JSON_EDITOR': True,
-    'API_PORTAL': "Georiviere API"
-}
+API_SCHEMA = config("API_SCHEMA", default=False, cast=bool)
+API_SWAGGER = config("API_SWAGGER", default=False, cast=bool)  # NEED API_SCHEMA
+API_REDOC = config("API_REDOC", default=False, cast=bool)  # NEED API_SCHEMA
 
-if os.getenv('SSL_ENABLED', default=0):
+SSL_ENABLED = config("SSL_ENABLED", default=False, cast=bool)
+
+if SSL_ENABLED:
     # SECURITY
     SECURE_CONTENT_TYPE_NOSNIFF = True
     SECURE_BROWSER_XSS_FILTER = True

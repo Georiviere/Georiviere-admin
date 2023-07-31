@@ -6,6 +6,9 @@
 {% block extrabody %}
     {{ block.super }}
     <script type="text/javascript">
+        {# JS which allow to filter on types and categories #}
+        {# Types are updated depending of the category filter #}
+        {# TODO: This could be improved using a filter tag #}
         $("select#id_category").on("change", function(event, status) {
             var selectedCategories = [];
             $("#id_category>option").each(function() {

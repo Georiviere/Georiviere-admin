@@ -5,7 +5,7 @@ from georiviere.watershed.models import Watershed, WatershedType
 from geotrek.zoning.models import City, District
 
 
-class CitySerializer(GeoFeatureModelSerializer):
+class CityGeojsonSerializer(GeoFeatureModelSerializer):
     id = serializers.ReadOnlyField(source='code')
     geometry = GeometryField(read_only=True, precision=7, source='geom_transformed')
 
@@ -16,7 +16,15 @@ class CitySerializer(GeoFeatureModelSerializer):
         fields = ('id', 'name')
 
 
-class DistrictSerializer(GeoFeatureModelSerializer):
+class CitySerializer(serializers.ModelSerializer):
+    id = serializers.ReadOnlyField(source='code')
+
+    class Meta:
+        model = City
+        fields = ('id', 'name')
+
+
+class DistrictGeojsonSerializer(GeoFeatureModelSerializer):
     geometry = GeometryField(read_only=True, precision=7, source='geom_transformed')
 
     class Meta:
@@ -26,13 +34,20 @@ class DistrictSerializer(GeoFeatureModelSerializer):
         fields = ('id', 'name')
 
 
+class DistrictSerializer(serializers.ModelSerializer):
+
+    class Meta:
+        model = District
+        fields = ('id', 'name')
+
+
 class WatershedTypeSerializer(serializers.ModelSerializer):
     class Meta:
         model = WatershedType
         fields = ("name", "color")
 
 
-class WatershedSerializer(GeoFeatureModelSerializer):
+class WatershedGeojsonSerializer(GeoFeatureModelSerializer):
     type = WatershedTypeSerializer(source='watershed_type')
     geometry = GeometryField(read_only=True, precision=7, source='geom_transformed')
 
@@ -40,4 +55,12 @@ class WatershedSerializer(GeoFeatureModelSerializer):
         model = Watershed
         geo_field = 'geometry'
         id_field = False
+        fields = ('id', 'name', 'type')
+
+
+class WatershedSerializer(serializers.ModelSerializer):
+    type = WatershedTypeSerializer(source='watershed_type')
+
+    class Meta:
+        model = Watershed
         fields = ('id', 'name', 'type')

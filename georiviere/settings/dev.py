@@ -10,7 +10,6 @@ EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 # Enable debug toolbar
 INSTALLED_APPS.append('debug_toolbar')
 INSTALLED_APPS.append('django_extensions')
-INSTALLED_APPS.append('drf_yasg')
 
 MIDDLEWARE += (
     'debug_toolbar.middleware.DebugToolbarMiddleware',

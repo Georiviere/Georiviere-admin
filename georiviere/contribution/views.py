@@ -38,5 +38,6 @@ class ContributionUpdate(MapEntityUpdate):
 
     def get_form_kwargs(self):
         kwargs = super().get_form_kwargs()
+        # We don't want to allow to delete contributions
         kwargs['can_delete'] = False
         return kwargs
