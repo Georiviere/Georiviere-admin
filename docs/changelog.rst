@@ -5,8 +5,15 @@ CHANGELOG
 1.1.0+dev    (XXXX-XX-XX)
 -------------------------
 
+**Documentation**
+
+* Add documentation portals
+* Add documentation distance to source
+
 **Enhancement**
 
+* Add informations when hub'eau does not send a json
+* Add migration generation distance to source
 * Add contributions validated and publication date
 * Add contributions type / category filters
 * Add contributions manager
