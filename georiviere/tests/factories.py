@@ -31,7 +31,7 @@ class BaseLineStringFactory(factory.django.DjangoModelFactory):
             return
         if geometry:
             coords = obj.geom.coords
-            if type(geometry.coords[0]) == tuple:
+            if isinstance(geometry.coords[0], tuple):
                 coords = coords + (tuple([coord + 1 for coord in geometry.coords[0]]), )
             else:
                 coords = coords + (tuple([coord + 1 for coord in geometry.coords]), )
