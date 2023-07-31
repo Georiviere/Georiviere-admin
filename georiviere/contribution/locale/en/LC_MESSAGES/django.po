@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-07-25 12:41+0000\n"
+"POT-Creation-Date: 2023-07-31 13:06+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -40,6 +40,9 @@ msgid "Category"
 msgstr ""
 
 msgid "Type"
+msgstr ""
+
+msgid "Linked object"
 msgstr ""
 
 msgid "Label"
@@ -75,6 +78,12 @@ msgstr ""
 msgid "Description of the contribution"
 msgstr ""
 
+msgid "Published"
+msgstr ""
+
+msgid "Make it visible on portal"
+msgstr ""
+
 msgid "Portal"
 msgstr ""
 
@@ -96,7 +105,8 @@ msgstr ""
 msgid "No category"
 msgstr ""
 
-msgid "Published"
+#, python-brace-format
+msgid "Feedback from {email}"
 msgstr ""
 
 msgid "Contribution potential damage type"
@@ -150,16 +160,16 @@ msgstr ""
 msgid "Landing type"
 msgstr ""
 
-msgid "Excessive cutting length in meters"
+msgid "Excessive cutting length (in meters)"
 msgstr ""
 
-msgid "Length bank erosion"
+msgid "Length bank erosion (in meters)"
 msgstr ""
 
 msgid "Distance between the foot of the bank and the foot of the erosion."
 msgstr ""
 
-msgid "Bank height"
+msgid "Bank height (in meters)"
 msgstr ""
 
 msgid ""
@@ -194,10 +204,10 @@ msgstr ""
 msgid "Fish species"
 msgstr ""
 
-msgid "Home area"
+msgid "Home area (in square meters)"
 msgstr ""
 
-msgid "Home area in meters"
+msgid "Home area in square meters"
 msgstr ""
 
 msgid "Number heritage species"
@@ -309,4 +319,19 @@ msgid "Knowledge"
 msgstr ""
 
 msgid "None"
+msgstr ""
+
+#, python-format
+msgid "%(email)s has sent a contribution."
+msgstr ""
+
+#, python-format
+msgid "Severity : %(severity)s"
+msgstr ""
+
+#, python-format
+msgid ""
+"\n"
+"Lat : %(lat)s / Lon : %(lng)s\n"
+"http://www.openstreetmap.org/?mlat=%(lat)s&mlon=%(lng)s\n"
 msgstr ""

@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-07-25 12:41+0000\n"
+"POT-Creation-Date: 2023-07-31 13:06+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -41,6 +41,9 @@ msgstr "Catégorie"
 
 msgid "Type"
 msgstr "Type"
+
+msgid "Linked object"
+msgstr "Objet lié"
 
 msgid "Label"
 msgstr "Label"
@@ -75,6 +78,12 @@ msgstr "Description"
 msgid "Description of the contribution"
 msgstr "Description de la gravité"
 
+msgid "Published"
+msgstr "Publié"
+
+msgid "Make it visible on portal"
+msgstr "Rendre visible sur le portail"
+
 msgid "Portal"
 msgstr "Portail"
 
@@ -96,8 +105,9 @@ msgstr "Nom"
 msgid "No category"
 msgstr "Aucune catégorie"
 
-msgid "Published"
-msgstr "Publié"
+#, python-brace-format
+msgid "Feedback from {email}"
+msgstr "Retour utilisateur depuis {email}"
 
 msgid "Contribution potential damage type"
 msgstr "Type de contibution dégats potentiels"
@@ -150,17 +160,17 @@ msgstr "Piétinement par le bétail (impactant)"
 msgid "Landing type"
 msgstr "Type d'atterrissement"
 
-msgid "Excessive cutting length in meters"
-msgstr "Longueur coupe abusive en mètres"
+msgid "Excessive cutting length (in meters)"
+msgstr "Longueur coupe abusive (en mètres)"
 
-msgid "Length bank erosion"
-msgstr "Longueur de l'érosion de la berge"
+msgid "Length bank erosion (in meters)"
+msgstr "Longueur de l'érosion de la berge (en mètres)"
 
 msgid "Distance between the foot of the bank and the foot of the erosion."
 msgstr "Distance entre le pied de berge et le pied de l'érosion"
 
-msgid "Bank height"
-msgstr "Hauteur de berge"
+msgid "Bank height (in meters)"
+msgstr "Hauteur de berge (en mètres)"
 
 msgid ""
 "Bank height (measured between the foot of the bank and the top of the bank) "
@@ -194,11 +204,11 @@ msgstr "Observations patrimoniale"
 msgid "Fish species"
 msgstr "Espèce piscicole"
 
-msgid "Home area"
-msgstr "Surface du foyer"
+msgid "Home area (in square meters)"
+msgstr "Surface du foyer (en mètres carrés)"
 
-msgid "Home area in meters"
-msgstr "Surface du foyer en mètres"
+msgid "Home area in square meters"
+msgstr "Surface du foyer en mètres carrés"
 
 msgid "Number heritage species"
 msgstr "Nombre d'individus patrimoniale"
@@ -310,3 +320,19 @@ msgstr "Connaissance"
 
 msgid "None"
 msgstr "Aucun"
+
+#, python-format
+msgid "%(email)s has sent a contribution."
+msgstr "%(email)s has sent a contribution."
+
+#, python-format
+#| msgid "Severity types"
+msgid "Severity : %(severity)s"
+msgstr "Sévérité : %(severity)s"
+
+#, python-format
+msgid ""
+"\n"
+"Lat : %(lat)s / Lon : %(lng)s\n"
+"http://www.openstreetmap.org/?mlat=%(lat)s&mlon=%(lng)s\n"
+msgstr ""

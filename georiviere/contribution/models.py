@@ -277,14 +277,14 @@ class ContributionPotentialDamage(models.Model):
     landing_type = models.ForeignKey(LandingType, on_delete=models.PROTECT, null=True,
                                      verbose_name=_("Landing type"))
     excessive_cutting_length = models.FloatField(default=0.0, null=True, blank=True,
-                                                 verbose_name=_("Excessive cutting length in meters"))
+                                                 verbose_name=_("Excessive cutting length (in meters)"))
     jam_type = models.ForeignKey(JamType, on_delete=models.PROTECT, null=True)
     length_bank_erosion = models.FloatField(default=0.0, null=True, blank=True,
-                                            verbose_name=_("Length bank erosion"),
+                                            verbose_name=_("Length bank erosion (in meters)"),
                                             help_text=_('Distance between the foot of the bank and the foot of '
                                                         'the erosion.'))
     bank_height = models.FloatField(default=0.0, null=True, blank=True,
-                                    verbose_name=_("Bank height"),
+                                    verbose_name=_("Bank height (in meters)"),
                                     help_text=_('Bank height (measured between the foot of the bank and the top '
                                                 'of the bank) in meters'))
     disease_type = models.ForeignKey(DiseaseType, on_delete=models.PROTECT, null=True)
@@ -362,8 +362,8 @@ class ContributionFaunaFlora(models.Model):
         verbose_name=_("Type"),
     )
     home_area = models.FloatField(default=0.0, null=True, blank=True,
-                                  verbose_name=_("Home area"),
-                                  help_text=_('Home area in meters'))
+                                  verbose_name=_("Home area (in square meters)"),
+                                  help_text=_('Home area in square meters'))
     invasive_species = models.ForeignKey(InvasiveSpecies, on_delete=models.PROTECT, null=True)
     number_heritage_species = models.IntegerField(default=0, null=True, blank=True,
                                                   verbose_name=_("Number heritage species"))
