@@ -16,12 +16,11 @@ class CityGeojsonSerializer(GeoFeatureModelSerializer):
         fields = ('id', 'name')
 
 
-class CitySerializer(GeoFeatureModelSerializer):
+class CitySerializer(serializers.ModelSerializer):
     id = serializers.ReadOnlyField(source='code')
 
     class Meta:
         model = City
-        id_field = False
         fields = ('id', 'name')
 
 
@@ -35,11 +34,10 @@ class DistrictGeojsonSerializer(GeoFeatureModelSerializer):
         fields = ('id', 'name')
 
 
-class DistrictSerializer(GeoFeatureModelSerializer):
+class DistrictSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = District
-        id_field = False
         fields = ('id', 'name')
 
 
@@ -60,10 +58,9 @@ class WatershedGeojsonSerializer(GeoFeatureModelSerializer):
         fields = ('id', 'name', 'type')
 
 
-class WatershedSerializer(GeoFeatureModelSerializer):
+class WatershedSerializer(serializers.ModelSerializer):
     type = WatershedTypeSerializer(source='watershed_type')
 
     class Meta:
         model = Watershed
-        id_field = False
         fields = ('id', 'name', 'type')
