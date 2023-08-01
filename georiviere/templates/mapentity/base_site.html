@@ -4,6 +4,7 @@
     {% include "main/_base_navbar.html" %}
 {% endblock navbar %}
 {% block extrabody %}
+    <script src="{% static "js/main.js" %}"></script>
 
     <link rel="stylesheet" href="{% static 'css/style.css' %}" />
     {{ block.super }}
