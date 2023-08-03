@@ -32,12 +32,18 @@ class MapSerializer(ModelSerializer):
 class PortalSerializer(ModelSerializer):
     map = MapSerializer(many=False, source='*')
     flatpages = SerializerMethodField()
+    extent = SerializerMethodField()
 
     class Meta:
         model = Portal
         fields = (
-            'id', 'name', 'map', 'flatpages'
+            'id', 'name', 'map', 'flatpages', 'description', 'title', 'main_color', 'max_zoom', 'min_zoom',
+            'extent'
         )
+
+    def get_extent(self, obj):
+        if obj.spatial_extent:
+            return obj.spatial_extent.transform(4326, clone=True).extent
 
     def get_flatpages(self, obj):
         return FlatpagePortalSerializer(obj.flatpages, many=True,

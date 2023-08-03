@@ -17,6 +17,8 @@ class PortalViewDetailTest(TestCase):
         response = self.client.get(url)
         self.assertEqual(response.status_code, 200)
 
-        self.assertEqual(list(response.json().keys()), ['id', 'name', 'map', 'flatpages'])
+        self.assertEqual(list(response.json().keys()), ['id', 'name', 'map', 'flatpages',
+                                                        'description', 'title', 'mainColor',
+                                                        'maxZoom', 'minZoom', 'extent'])
         self.assertEqual(len(response.json()['map']['group']), 1)
         self.assertEqual(response.json()['map']['group'][0]['label'], None)

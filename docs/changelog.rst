@@ -21,6 +21,9 @@ CHANGELOG
 * Send mail to managers when contribution is created
 * Send mail to contributor when contribution is created
 * Add linked objects on contributions
+* Add portal SEO informations
+* Add min zoom, max zoom extent portal
+
 
 1.1.0        (2023-13-06)
 -------------------------
