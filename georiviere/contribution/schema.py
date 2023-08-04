@@ -69,7 +69,7 @@ def get_landing(choices, meta):
                 'landing_type':
                     {
                         'type': "string",
-                        'title': meta.get_field('landing_type').verbose_name.title(),
+                        'title': str(meta.get_field('landing_type').verbose_name.capitalize()),
                         'enum': list(LandingType.objects.values_list('label', flat=True))
                     }
             },
@@ -90,7 +90,7 @@ def get_excessive_cutting_riparian_forest(choices, meta):
                     {
                         'type': "number",
                         'title': str(meta.get_field(
-                            'excessive_cutting_length').verbose_name.title()),
+                            'excessive_cutting_length').verbose_name.capitalize()),
                     }
             },
         }
@@ -111,7 +111,7 @@ def get_disruptive_jam(choices, meta):
                     {
                         'type': "string",
                         'title': str(meta.get_field(
-                            'jam_type').verbose_name.title()),
+                            'jam_type').verbose_name.capitalize()),
                     }
             },
         }
@@ -132,7 +132,7 @@ def get_bank_erosion(choices, meta):
                     {
                         'type': "string",
                         'title': str(meta.get_field(
-                            'length_bank_erosion').verbose_name.title()),
+                            'length_bank_erosion').verbose_name.capitalize()),
                     }
             },
         }
@@ -153,7 +153,7 @@ def get_river_bed_incision(choices, meta):
                     {
                         'type': "string",
                         'title': str(meta.get_field(
-                            'bank_height').verbose_name.title()),
+                            'bank_height').verbose_name.capitalize()),
                     }
             },
         }
@@ -174,7 +174,7 @@ def get_fish_diseases(choices, meta):
                     {
                         'type': "string",
                         'title': str(meta.get_field(
-                            'disease_type').verbose_name.title()),
+                            'disease_type').verbose_name.capitalize()),
                         'enum': list(DiseaseType.objects.values_list('label', flat=True))
                     }
             },
@@ -189,14 +189,14 @@ def get_fish_mortality(choices, meta):
             {
                 'type': "number",
                 'title': str(meta.get_field(
-                    'number_death').verbose_name.title())
+                    'number_death').verbose_name.capitalize())
             },
     }
     if DeadSpecies.objects.exists():
         fish_mortality_property['dead_species'] = {
             'type': "string",
             'title': str(meta.get_field(
-                'dead_species').verbose_name.title()),
+                'dead_species').verbose_name.capitalize()),
             'enum': list(DeadSpecies.objects.values_list('label', flat=True))
         }
     fish_mortality = {
@@ -258,14 +258,14 @@ def get_invasive_species(choices, meta):
             {
                 'type': "string",
                 'title': str(meta.get_field(
-                    'home_area').verbose_name.title())
+                    'home_area').verbose_name.capitalize())
             },
     }
     if InvasiveSpecies.objects.exists():
         invasive_species_property['invasive_species'] = {
             'type': "string",
             'title': str(meta.get_field(
-                'invasive_species').verbose_name.title()),
+                'invasive_species').verbose_name.capitalize()),
             'enum': list(InvasiveSpecies.objects.values_list('label', flat=True))
         }
     invasive_species = {
@@ -287,21 +287,21 @@ def get_heritage_species(choices, meta):
             {
                 'type': "number",
                 'title': str(meta.get_field(
-                    'number_heritage_species').verbose_name.title())
+                    'number_heritage_species').verbose_name.capitalize())
             },
     }
     if HeritageSpecies.objects.exists():
         heritage_species_property['heritage_species'] = {
             'type': "string",
             'title': str(meta.get_field(
-                'heritage_species').verbose_name.title()),
+                'heritage_species').verbose_name.capitalize()),
             'enum': list(HeritageSpecies.objects.values_list('label', flat=True))
         }
     if HeritageObservation.objects.exists():
         heritage_species_property['heritage_observation'] = {
             'type': "string",
             'title': str(meta.get_field(
-                'heritage_observation').verbose_name.title()),
+                'heritage_observation').verbose_name.capitalize()),
             'enum': list(HeritageObservation.objects.values_list('label', flat=True))
         }
     heritage_species = {
@@ -323,14 +323,14 @@ def get_fish_species(choices, meta):
             {
                 'type': "number",
                 'title': str(meta.get_field(
-                    'number_fish_species').verbose_name.title())
+                    'number_fish_species').verbose_name.capitalize())
             },
     }
     if FishSpecies.objects.exists():
         fish_species_property['fish_species'] = {
             'type': "string",
             'title': str(meta.get_field(
-                'fish_species').verbose_name.title()),
+                'fish_species').verbose_name.capitalize()),
             'enum': list(FishSpecies.objects.values_list('label', flat=True))
         }
     fish_species = {
@@ -388,7 +388,7 @@ def get_overflow(choices, meta):
                     {
                         'type': "string",
                         'title': str(meta.get_field(
-                            'landmark').verbose_name.title())
+                            'landmark').verbose_name.capitalize())
                     },
             }
         }
@@ -408,7 +408,7 @@ def get_quantity_condition():
             'properties': {
                 'type': {
                     'type': "string",
-                    'title': str(meta_quantity.get_field('type').verbose_name.title()),
+                    'title': str(meta_quantity.get_field('type').verbose_name.capitalize()),
                     'enum': list(quantity_choices.labels)
                 }
             },
@@ -429,14 +429,14 @@ def get_pollution(choices, meta):
         pollution_property['nature_pollution'] = {
             'type': "string",
             'title': str(meta.get_field(
-                'nature_pollution').verbose_name.title()),
+                'nature_pollution').verbose_name.capitalize()),
             'enum': list(NaturePollution.objects.values_list('label', flat=True))
         }
     if TypePollution.objects.exists():
         pollution_property['type_pollution'] = {
             'type': "string",
             'title': str(meta.get_field(
-                'type_pollution').verbose_name.title()),
+                'type_pollution').verbose_name.capitalize()),
             'enum': list(TypePollution.objects.values_list('label', flat=True))
         }
     pollution = {

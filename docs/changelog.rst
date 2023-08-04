@@ -23,6 +23,7 @@ CHANGELOG
 * Add linked objects on contributions
 * Add portal SEO informations
 * Add min zoom, max zoom extent portal
+* Add public portals on watershed types allowing to publish them
 
 
 1.1.0        (2023-13-06)

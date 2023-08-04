@@ -86,7 +86,7 @@
         "properties": {
           "excessive_cutting_length": {
             "type": "number",
-            "title": "Excessive Cutting Length In Meters"
+            "title": "Excessive cutting length (in meters)"
           }
         }
       }
@@ -103,7 +103,7 @@
         "properties": {
           "length_bank_erosion": {
             "type": "string",
-            "title": "Length Bank Erosion"
+            "title": "Length bank erosion (in meters)"
           }
         }
       }
@@ -120,7 +120,7 @@
         "properties": {
           "bank_height": {
             "type": "string",
-            "title": "Bank Height"
+            "title": "Bank height (in meters)"
           }
         }
       }
@@ -137,7 +137,7 @@
         "properties": {
           "number_death": {
             "type": "number",
-            "title": "Number Death"
+            "title": "Number death"
           }
         }
       }
@@ -179,7 +179,7 @@
         "properties": {
           "home_area": {
             "type": "string",
-            "title": "Home Area"
+            "title": "Home area (in square meters)"
           }
         }
       }
@@ -196,7 +196,7 @@
         "properties": {
           "number_heritage_species": {
             "type": "number",
-            "title": "Number Heritage Species"
+            "title": "Number heritage species"
           }
         }
       }
@@ -213,7 +213,7 @@
         "properties": {
           "number_fish_species": {
             "type": "number",
-            "title": "Number Fish Species"
+            "title": "Number fish species"
           }
         }
       }
@@ -230,7 +230,7 @@
         "properties": {
           "type": {
             "type": "string",
-            "title": "Water Level Type",
+            "title": "Water level type",
             "enum": [
               "Dry",
               "In the process of drying out",

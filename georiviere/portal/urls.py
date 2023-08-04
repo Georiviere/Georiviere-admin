@@ -25,11 +25,11 @@ router.register(r'(?P<lang>[a-z]{2})/(?P<portal_pk>\d+)/streams', StreamViewSet,
 
 router.register(r'(?P<lang>[a-z]{2})/(?P<portal_pk>\d+)/flatpages', FlatPageViewSet, basename='flatpages')
 router.register(r'(?P<lang>[a-z]{2})/(?P<portal_pk>\d+)/contributions', ContributionViewSet, basename='contributions')
+router.register(r'(?P<lang>[a-z]{2})/(?P<portal_pk>\d+)/watersheds', WatershedViewSet, basename='watersheds')
 
 router.register(r'(?P<lang>[a-z]{2})/portal', PortalViewSet, basename='portal')
 router.register(r'(?P<lang>[a-z]{2})/cities', CityViewSet, basename='cities')
 router.register(r'(?P<lang>[a-z]{2})/districts', DistrictViewSet, basename='districts')
-router.register(r'(?P<lang>[a-z]{2})/watersheds', WatershedViewSet, basename='watersheds')
 router.register(r'(?P<lang>[a-z]{2})/sensitivities', SensitivityViewSet, basename='sensitivities')
 
 app_name = 'api_portal'

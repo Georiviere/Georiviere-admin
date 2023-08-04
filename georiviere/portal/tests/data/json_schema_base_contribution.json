@@ -95,7 +95,7 @@
         "properties": {
           "excessive_cutting_length": {
             "type": "number",
-            "title": "Excessive Cutting Length In Meters"
+            "title": "Excessive cutting length (in meters)"
           }
         }
       }
@@ -112,7 +112,7 @@
         "properties": {
           "length_bank_erosion": {
             "type": "string",
-            "title": "Length Bank Erosion"
+            "title": "Length bank erosion (in meters)"
           }
         }
       }
@@ -129,7 +129,7 @@
         "properties": {
           "bank_height": {
             "type": "string",
-            "title": "Bank Height"
+            "title": "Bank height (in meters)"
           }
         }
       }
@@ -146,11 +146,11 @@
         "properties": {
           "number_death": {
             "type": "number",
-            "title": "Number Death"
+            "title": "Number death"
           },
           "dead_species": {
             "type": "string",
-            "title": "Dead Species",
+            "title": "Dead species",
             "enum": [
               "Dead species 0",
               "Dead species 1",
@@ -172,7 +172,7 @@
         "properties": {
           "landing_type": {
             "type": "string",
-            "title": "Landing Type",
+            "title": "Landing type",
             "enum": [
               "Landing type 0",
               "Landing type 1",
@@ -194,7 +194,7 @@
         "properties": {
           "jam_type": {
             "type": "string",
-            "title": "Jam Type"
+            "title": "Jam type"
           }
         }
       }
@@ -211,7 +211,7 @@
         "properties": {
           "disease_type": {
             "type": "string",
-            "title": "Disease Type",
+            "title": "Disease type",
             "enum": [
               "Disease type 0",
               "Disease type 1",
@@ -258,11 +258,11 @@
         "properties": {
           "home_area": {
             "type": "string",
-            "title": "Home Area"
+            "title": "Home area (in square meters)"
           },
           "invasive_species": {
             "type": "string",
-            "title": "Invasive Species",
+            "title": "Invasive species",
             "enum": [
               "Invasive species 0",
               "Invasive species 1",
@@ -284,11 +284,11 @@
         "properties": {
           "number_heritage_species": {
             "type": "number",
-            "title": "Number Heritage Species"
+            "title": "Number heritage species"
           },
           "heritage_species": {
             "type": "string",
-            "title": "Heritage Species",
+            "title": "Heritage species",
             "enum": [
               "Heritage species 0",
               "Heritage species 1",
@@ -297,7 +297,7 @@
           },
           "heritage_observation": {
             "type": "string",
-            "title": "Heritage Observation",
+            "title": "Heritage observation",
             "enum": [
               "Heritage observation 0",
               "Heritage observation 1",
@@ -319,11 +319,11 @@
         "properties": {
           "number_fish_species": {
             "type": "number",
-            "title": "Number Fish Species"
+            "title": "Number fish species"
           },
           "fish_species": {
             "type": "string",
-            "title": "Fish Species",
+            "title": "Fish species",
             "enum": [
               "Fish species 0",
               "Fish species 1",
@@ -345,7 +345,7 @@
         "properties": {
           "type": {
             "type": "string",
-            "title": "Water Level Type",
+            "title": "Water level type",
             "enum": [
               "Dry",
               "In the process of drying out",
@@ -412,7 +412,7 @@
         "properties": {
           "nature_pollution": {
             "type": "string",
-            "title": "Nature Pollution",
+            "title": "Nature pollution",
             "enum": [
               "Nature pollution 0",
               "Nature pollution 1",
@@ -421,7 +421,7 @@
           },
           "type_pollution": {
             "type": "string",
-            "title": "Type Pollution",
+            "title": "Type pollution",
             "enum": [
               "Type pollution 0",
               "Type pollution 1",
