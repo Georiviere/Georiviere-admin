@@ -2,7 +2,7 @@
 CHANGELOG
 =========
 
-1.1.0+dev    (XXXX-XX-XX)
+1.2.0        (2023-08-04)
 -------------------------
 
 **Documentation**
@@ -26,7 +26,7 @@ CHANGELOG
 * Add public portals on watershed types allowing to publish them
 
 
-1.1.0        (2023-13-06)
+1.1.0        (2023-06-13)
 -------------------------
 
 **Enhancement**
