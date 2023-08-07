@@ -46,8 +46,9 @@ class ContributionViewSet(mixins.CreateModelMixin, mixins.RetrieveModelMixin, mi
     pagination_class = LimitOffsetPagination
     renderer_classes = [CamelCaseJSONRenderer, GeoJSONRenderer, ]
     filter_backends = [filters.OrderingFilter, filters.SearchFilter]
-    search_fields = ['potential_damage__type', 'fauna_flora__type', 'quality__type', 'quantity__type',
-                     'landscape_element__type']
+    # TODO: Fix search filter with IntegerField (choices). It might be possible using an annotate on this view.
+    # search_fields = ['potential_damage__type', 'fauna_flora__type', 'quality__type', 'quantity__type',
+    #                  'landscape_element__type']
 
     @action(detail=False, url_name="json_schema", methods=['get'],
             renderer_classes=[renderers.JSONRenderer],
