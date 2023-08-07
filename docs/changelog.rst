@@ -5,6 +5,10 @@ CHANGELOG
 1.2.0+dev    (XXXX-XX-XX)
 -------------------------
 
+**Enhancement**
+
+* Filter api portal elements without accents and uppercase
+
 
 1.2.0        (2023-08-04)
 -------------------------
