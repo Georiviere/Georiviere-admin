@@ -111,7 +111,11 @@ class Contribution(BasePublishableMixin, TimeStampedModelMixin, WatershedPropert
 
     @classproperty
     def category_verbose_name(cls):
-        return _("Name")
+        return _("Category")
+
+    @classproperty
+    def type_verbose_name(cls):
+        return _("Type")
 
     @classproperty
     def linked_object_verbose_name(cls):
@@ -160,6 +164,12 @@ class Contribution(BasePublishableMixin, TimeStampedModelMixin, WatershedPropert
         elif hasattr(self, 'landscape_element'):
             return self.landscape_element
         return _('No category')
+
+    @property
+    def type(self):
+        if hasattr(self.category, 'get_type_display'):
+            return self.category.get_type_display()
+        return _('No type')
 
     @property
     def category_display(self):

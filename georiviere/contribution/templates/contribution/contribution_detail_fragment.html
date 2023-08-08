@@ -1,0 +1,12 @@
+{% load i18n mapentity_tags %}
+
+{% if modelname != "contribution" %}
+<h3>{% trans "Contributions" %}</h3>
+<div class="fragment-wrapper">
+    <strong>{% trans "Related contributions" %}</strong>
+
+    {% with columns="category,type,severity" %}
+        {% valuetable object.contributions.all columns=columns %}
+    {% endwith %}
+</div>
+{% endif %}

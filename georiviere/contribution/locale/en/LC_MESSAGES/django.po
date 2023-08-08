@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-07-31 13:06+0000\n"
+"POT-Creation-Date: 2023-08-08 12:49+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -99,10 +99,10 @@ msgstr ""
 msgid "Contributions"
 msgstr ""
 
-msgid "Name"
+msgid "No category"
 msgstr ""
 
-msgid "No category"
+msgid "No type"
 msgstr ""
 
 #, python-brace-format
@@ -319,6 +319,9 @@ msgid "Knowledge"
 msgstr ""
 
 msgid "None"
+msgstr ""
+
+msgid "Related contributions"
 msgstr ""
 
 #, python-format
