@@ -3,6 +3,7 @@ from django.conf import settings
 from django.db.models import F
 from django.contrib.gis.db.models.functions import Centroid, Transform
 
+from georiviere.portal.filters import SearchNoAccentFilter
 from georiviere.portal.serializers.river import StreamGeojsonSerializer, StreamSerializer
 from georiviere.main.renderers import GeoJSONRenderer
 
@@ -20,10 +21,10 @@ class StreamViewSet(viewsets.ReadOnlyModelViewSet):
     serializer_class = StreamSerializer
     renderer_classes = (CamelCaseJSONRenderer, GeoJSONRenderer, )
     permission_classes = [rest_permissions.DjangoModelPermissionsOrAnonReadOnly]
-    filter_backends = [filters.OrderingFilter, filters.SearchFilter]
+    filter_backends = [filters.OrderingFilter, SearchNoAccentFilter]
     pagination_class = LimitOffsetPagination
     ordering_fields = ['name', 'date_insert']
-    search_fields = ['name']
+    search_fields = ['&name']
 
     def get_queryset(self):
         portal_pk = self.kwargs['portal_pk']
