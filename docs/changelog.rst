@@ -8,7 +8,7 @@ CHANGELOG
 **Enhancement**
 
 * Filter api portal elements without accents and uppercase
-
+* Add detail sentivities portal
 
 1.2.0        (2023-08-04)
 -------------------------
