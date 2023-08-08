@@ -5,6 +5,7 @@ from django.core.exceptions import ObjectDoesNotExist
 from geotrek.authent.tests.factories import StructureFactory
 from django.utils.translation import gettext_lazy as _
 
+from georiviere.contribution.tests.factories import ContributionFactory, ContributionQuantityFactory
 from georiviere.finances_administration.tests.factories import AdministrativeFileFactory
 from georiviere.tests import CommonRiverTest
 from . import factories
@@ -47,6 +48,20 @@ class KnowledgeViewTestCase(CommonRiverTest):
             'name': 'test',
             'description': 'This is a description',
         }
+
+    def test_detail_knowledge_with_contributions(self):
+        if self.model is None:
+            return  # Abstract test should not run
+
+        self.login()
+
+        obj = self.modelfactory()
+        ContributionFactory.create(linked_object=obj)
+        ContributionQuantityFactory.create(contribution__linked_object=obj)
+        response = self.client.get(obj.get_detail_url())
+        self.assertEqual(response.status_code, 200)
+        self.assertContains(response, "No category")
+        self.assertContains(response, "Quantity")
 
     def test_whatevertype_knowledge_create(self):
         """Create a knowledge whatever type, and another vegetation type"""
@@ -152,7 +167,7 @@ class KnowledgeViewTestCase(CommonRiverTest):
         self.login()
         station = self.modelfactory.create()
 
-        with self.assertNumQueries(44):
+        with self.assertNumQueries(45):
             self.client.get(station.get_detail_url())
 
 
@@ -229,5 +244,5 @@ class FollowUpViewsTest(CommonRiverTest):
         self.login()
         station = self.modelfactory.create()
 
-        with self.assertNumQueries(43):
+        with self.assertNumQueries(44):
             self.client.get(station.get_detail_url())

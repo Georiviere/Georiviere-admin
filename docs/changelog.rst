@@ -5,8 +5,13 @@ CHANGELOG
 1.2.0+dev    (XXXX-XX-XX)
 -------------------------
 
+**Documentation**
+
+* Add documentation api swagger / doc
+
 **Enhancement**
 
+* Add contributions linked on details of knowledge / interventions / followups
 * Filter api portal elements without accents and uppercase
 * Add detail sentivities portal
 

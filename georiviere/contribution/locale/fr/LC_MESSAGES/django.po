@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-07-31 13:06+0000\n"
+"POT-Creation-Date: 2023-08-08 12:49+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -99,11 +99,11 @@ msgstr "Valider la contribution"
 msgid "Contributions"
 msgstr "Contributions"
 
-msgid "Name"
-msgstr "Nom"
-
 msgid "No category"
 msgstr "Aucune catégorie"
+
+msgid "No type"
+msgstr "Aucun type"
 
 #, python-brace-format
 msgid "Feedback from {email}"
@@ -321,12 +321,14 @@ msgstr "Connaissance"
 msgid "None"
 msgstr "Aucun"
 
+msgid "Related contributions"
+msgstr "Contributions connectées"
+
 #, python-format
 msgid "%(email)s has sent a contribution."
 msgstr "%(email)s has sent a contribution."
 
 #, python-format
-#| msgid "Severity types"
 msgid "Severity : %(severity)s"
 msgstr "Sévérité : %(severity)s"
 

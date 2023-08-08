@@ -37,7 +37,7 @@
         </tr>
         <tr>
             <th>{{ object|verbose:"linked_object" }}</th>
-            <td>{% if object.linked_object_model_name %}{{ object.linked_object_model_name }} : {% endif %}{{ object.linked_object|default:"" }}</td>
+            <td>{% if object.linked_object_model_name %}{{ object.linked_object_model_name }} : {% endif %}{{ object.linked_object.name_display|safe|default:"" }}</td>
         </tr>
         {# Depending on the json schema / https://github.com/Georiviere/Georiviere-admin/issues/139 : some field are available for some type of contributions #}
         {% if object.potential_damage %}

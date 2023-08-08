@@ -102,6 +102,35 @@ change this setting in ``var/conf/custom.py``:
 API GeoRiviere Portal
 ---------------------
 
-For accessing the api of georiviere of portals you can go to :
+To enable the schema of your api you need to modify the settings :
+
+::
+
+    API_SCHEMA = True
+
+It will allow to get the schema with the xml format :
+
+http://domain.com/api/portal/schema/
+
+
+
+For accessing the api as a swagger, you need to modify the settings :
+
+::
+
+    API_SWAGGER = True
+
+Then, you can access the swagger of portals (https://swagger.io/\):
 
 http://domain.com/api/portal/schema/swagger/
+
+
+Last settings allow you to show the api as redoc (https://redocly.com/redoc/\)
+
+::
+
+    API_REDOC = True
+
+you can access this version of the schema with :
+
+http://domain.com/api/portal/schema/redoc/
