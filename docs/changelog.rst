@@ -2,7 +2,7 @@
 CHANGELOG
 =========
 
-1.2.0+dev    (XXXX-XX-XX)
+1.2.1        (2023-08-08)
 -------------------------
 
 **Documentation**
@@ -14,6 +14,7 @@ CHANGELOG
 * Add contributions linked on details of knowledge / interventions / followups
 * Filter api portal elements without accents and uppercase
 * Add detail sentivities portal
+
 
 1.2.0        (2023-08-04)
 -------------------------
