@@ -13,6 +13,7 @@ class SpeciesGeojsonSerializer(serializers.ModelSerializer):
 
 class SensitivityGeojsonSerializer(GeoFeatureModelSerializer):
     geometry = GeometryField(read_only=True, precision=7, source='geom_transformed')
+    name = serializers.CharField(source='species.name')
     species = SpeciesGeojsonSerializer(many=False)
     attachments = AttachmentSerializer(many=True)
 
@@ -20,7 +21,7 @@ class SensitivityGeojsonSerializer(GeoFeatureModelSerializer):
         model = SensitiveArea
         geo_field = 'geometry'
         id_field = False
-        fields = ('id', 'attachments', 'description', 'species')
+        fields = ('id', 'attachments', 'description', 'species', 'name')
 
 
 class SpeciesSerializer(serializers.ModelSerializer):
