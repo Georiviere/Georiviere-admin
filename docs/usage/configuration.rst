@@ -97,3 +97,11 @@ change this setting in ``var/conf/custom.py``:
 ::
 
     SEND_REPORT_ACK = False
+
+
+API GeoRiviere Portal
+---------------------
+
+For accessing the api of georiviere of portals you can go to :
+
+http://domain.com/api/portal/schema/swagger/
