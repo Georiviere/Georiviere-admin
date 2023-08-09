@@ -5,6 +5,10 @@ CHANGELOG
 1.2.1+dev    (XXXX-XX-XX)
 -------------------------
 
+**Enhancement**
+
+* Remove api color for watershed
+
 
 1.2.1        (2023-08-08)
 -------------------------

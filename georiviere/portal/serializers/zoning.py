@@ -44,7 +44,7 @@ class DistrictSerializer(serializers.ModelSerializer):
 class WatershedTypeSerializer(serializers.ModelSerializer):
     class Meta:
         model = WatershedType
-        fields = ("name", "color")
+        fields = ("name", )
 
 
 class WatershedGeojsonSerializer(GeoFeatureModelSerializer):
