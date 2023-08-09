@@ -8,7 +8,8 @@ from django.utils.translation import gettext_lazy as _
 
 class WatershedType(models.Model):
     name = models.CharField(max_length=200, verbose_name=_("Name"))
-    color = ColorField(verbose_name=_("Color"), default='#444444', help_text=_("Color shown on map"))
+    color = ColorField(verbose_name=_("Color"), default='#444444',
+                       help_text=_("Color shown on map of Georiviere-admin"))
     portals = models.ManyToManyField('portal.Portal',
                                      blank=True, related_name='watersheds',
                                      verbose_name=_("Published portals"))
