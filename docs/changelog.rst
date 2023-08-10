@@ -5,6 +5,9 @@ CHANGELOG
 1.2.2+dev    (XXXX-XX-XX)
 -------------------------
 
+**Bug fixes**
+
+* Use url lang for sensitivity datas
 
 
 1.2.2        (2023-08-09)
