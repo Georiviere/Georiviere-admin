@@ -1,7 +1,7 @@
 from django.conf import settings
 from django.db.models import F, Case, Prefetch, When
 from django.contrib.gis.db.models.functions import Transform
-
+from django.utils import translation
 from djangorestframework_camel_case.render import CamelCaseJSONRenderer
 
 from georiviere.functions import Area, Buffer, GeometryType
@@ -28,6 +28,8 @@ class SensitivityViewSet(viewsets.ReadOnlyModelViewSet):
     search_fields = ['species__name', ]
 
     def get_queryset(self):
+        # TODO: when contributions etc... are in english copy this line to the other files
+        translation.activate(self.kwargs.get('lang', settings.LANGUAGE_CODE))
         queryset = (
             SensitiveArea.objects.existing()
             .filter(published=True)
