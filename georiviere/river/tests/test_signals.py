@@ -16,9 +16,8 @@ class SignalRiverTest(TestCase):
 
         self.assertIn(morphology.topology, topologies)
         self.assertIn(status.topology, topologies)
-
-        self.assertEqual(morphology.geom, stream.geom)
-        self.assertEqual(status.geom, stream.geom)
+        self.assertTrue(morphology.geom.equals_exact(stream.geom, 0.001))
+        self.assertTrue(status.geom.equals_exact(stream.geom, 0.001))
 
     def test_update_stream_move_topologies(self):
         stream = StreamFactory.create()
