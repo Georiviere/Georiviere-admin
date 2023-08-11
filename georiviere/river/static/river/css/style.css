@@ -14,3 +14,12 @@
     background-position: 5px 5px, center;
     background-size: 15px;
 }
+
+#altitudegraph.colapsed {
+    width: revert !important;
+}
+
+#altitudegraph {
+    bottom: 24px !important;
+    right: 14px !important;
+}
