@@ -15,10 +15,12 @@
     background-size: 15px;
 }
 
+/* To remove when Geotrek is updated to 2.100.0 */
 #altitudegraph.colapsed {
     width: revert !important;
 }
 
+/* To remove when Geotrek is updated to 2.100.0 */
 #altitudegraph {
     bottom: 24px !important;
     right: 14px !important;
