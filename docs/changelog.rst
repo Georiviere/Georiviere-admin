@@ -10,6 +10,11 @@ CHANGELOG
 * Use url lang for sensitivity datas
 
 
+**Enhancement**
+
+- Improve CSS of the altitude profile of altimetry (#210)
+
+
 1.2.2        (2023-08-09)
 -------------------------
 
