@@ -5,14 +5,17 @@ CHANGELOG
 1.2.3        (2023-08-10)
 -------------------------
 
-**Bug fixes**
-
-* Use url lang for sensitivity datas
-
-
 **Enhancement**
 
 - Improve CSS of the altitude profile of altimetry (#210)
+
+
+1.2.3    (2023-08-10)
+-------------------------
+
+**Bug fixes**
+
+* Use url lang for sensitivity datas
 
 
 1.2.2        (2023-08-09)
