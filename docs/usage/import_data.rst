@@ -12,7 +12,7 @@ Custom your import file named import_bdtopage.py et put this file in ``georivier
 
 .. code-block :: bash
 
-	!/usr/bin/env python
+	#!/usr/bin/env python
 	import os
 	import django
 	import logging
@@ -51,7 +51,7 @@ Custom your import file named import_bdtopage.py et put this file in ``georivier
 		except Exception as exc:
 			logging.warn(exc, feat.geom.geos.ewkt)
 
-And run command : docker compose run --rm web ./import_bdtopage.py
+And run command : `docker compose run --rm web ./import_bdtopage.py`
 
 
 Import altimetry file
