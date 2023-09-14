@@ -22,7 +22,7 @@ class Command(BaseImportCommand):
             uri_station = "https://id.eaufrance.fr/StationHydro/{}".format(
                 station['code_station'],
             ) or ""
-            operations_uri = f"{self.operations_url}{station['code_station']}/series"
+            operations_uri = f"{self.operations_url}{station['code_site']}/series"
             station_obj, station_created = Station.objects.update_or_create(
                 code=station['code_station'],
                 defaults={

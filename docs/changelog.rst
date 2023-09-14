@@ -2,17 +2,24 @@
 CHANGELOG
 =========
 
+1.2.3+dev    (XXXX-XX-XX)
+-------------------------
+
+**Bug fix**
+
+- Use code_site in operation uri for hydrometric stations instead of station_code (ref #107)
+
+**Enhancement**
+
+- Improve CSS of the altitude profile of altimetry (#210)
+
+
 1.2.3        (2023-08-10)
 -------------------------
 
 **Bug fixes**
 
 * Use url lang for sensitivity datas
-
-
-**Enhancement**
-
-- Improve CSS of the altitude profile of altimetry (#210)
 
 
 1.2.2        (2023-08-09)
