@@ -2,7 +2,7 @@
 CHANGELOG
 =========
 
-1.2.3        (2023-08-10)
+1.2.3+dev    (XXXX-XX-XX)
 -------------------------
 
 **Bug fix**
@@ -14,7 +14,7 @@ CHANGELOG
 - Improve CSS of the altitude profile of altimetry (#210)
 
 
-1.2.3    (2023-08-10)
+1.2.3        (2023-08-10)
 -------------------------
 
 **Bug fixes**
