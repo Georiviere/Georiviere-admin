@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-02-07 15:38+0000\n"
+"POT-Creation-Date: 2023-09-15 17:15+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -31,6 +31,9 @@ msgid "Vegetation details"
 msgstr ""
 
 msgid "Work details"
+msgstr ""
+
+msgid "Create operation on"
 msgstr ""
 
 msgid "Label"
@@ -108,6 +111,18 @@ msgstr ""
 msgid "Work stream influences"
 msgstr ""
 
+msgid "Work water effect"
+msgstr ""
+
+msgid "Work water effects"
+msgstr ""
+
+msgid "Work bed effect"
+msgstr ""
+
+msgid "Work bed effects"
+msgstr ""
+
 msgid "Work sediment effect"
 msgstr ""
 
@@ -132,7 +147,7 @@ msgstr ""
 msgid "Thickness type"
 msgstr ""
 
-msgid "Vegetation Strata"
+msgid "Vegetation Stratas"
 msgstr ""
 
 msgid "Other information"
@@ -157,6 +172,15 @@ msgid "Upstream influence"
 msgstr ""
 
 msgid "Sediment effect"
+msgstr ""
+
+msgid "Water effect"
+msgstr ""
+
+msgid "Upstream bed effect"
+msgstr ""
+
+msgid "Downstream bed effect"
 msgstr ""
 
 msgid "Fish Continuity effect"
