@@ -90,6 +90,42 @@ msgstr ""
 msgid "An error occured"
 msgstr ""
 
+msgid "Watershed"
+msgstr ""
+
+msgid "watersheds"
+msgstr ""
+
+msgid "City"
+msgstr ""
+
+msgid "cities"
+msgstr ""
+
+msgid "Sensitivity"
+msgstr ""
+
+msgid "sensitivities"
+msgstr ""
+
+msgid "District"
+msgstr ""
+
+msgid "districts"
+msgstr ""
+
+msgid "Contribution"
+msgstr ""
+
+msgid "contributions"
+msgstr ""
+
+msgid "Stream"
+msgstr ""
+
+msgid "streams"
+msgstr ""
+
 msgid "Georiviere : Contribution"
 msgstr ""
 
