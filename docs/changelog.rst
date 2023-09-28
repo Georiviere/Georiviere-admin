@@ -2,16 +2,37 @@
 CHANGELOG
 =========
 
-1.2.3+dev    (XXXX-XX-XX)
+1.2.4+dev    (xxxx-xx-xx)
+-------------------------
+
+**Maintenance**
+
+- Add configuration file for readthedocs to build documentation
+
+
+1.2.4    (2023-09-28)
 -------------------------
 
 **Bug fix**
 
 - Use code_site in operation uri for hydrometric stations instead of station_code (ref #107)
+- Add UID/GID mapping to fix problem at installation
+- Admins are not able to delete a portal
+- Add 'validated' field in the detail view and form of a contribution
 
 **Enhancement**
 
 - Improve CSS of the altitude profile of altimetry (#210)
+
+**Documentation**
+
+* Update .env.dist
+* Update import_data.rst
+
+**Translations**
+
+* Update and add missing translations
+* Missing sections in admin portal creation page
 
 
 1.2.3        (2023-08-10)
