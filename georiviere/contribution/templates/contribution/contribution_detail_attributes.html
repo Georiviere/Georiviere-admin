@@ -36,6 +36,10 @@
             <td>{{ object.status_contribution|default:"" }}</td>
         </tr>
         <tr>
+            <th>{{ object|verbose:"validated" }}</th>
+            <td>{{ object.validated }}</td>
+        </tr>
+        <tr>
             <th>{{ object|verbose:"linked_object" }}</th>
             <td>{% if object.linked_object_model_name %}{{ object.linked_object_model_name }} : {% endif %}{{ object.linked_object.name_display|safe|default:"" }}</td>
         </tr>

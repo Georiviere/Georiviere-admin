@@ -19,7 +19,7 @@ class MapBaseLayer(models.Model):
     attribution = models.CharField(max_length=255, blank=True,
                                    help_text=_("Attribution of the baselayer. Example : © OpenStreetMap"))
     portal = models.ForeignKey('portal.Portal', verbose_name=_("Portal"), related_name='map_base_layers',
-                               on_delete=models.PROTECT)
+                               on_delete=models.CASCADE)
 
     class Meta:
         verbose_name = _("Map base layer")
@@ -60,7 +60,7 @@ class MapLayer(models.Model):
                                     verbose_name=_("Map group layer"), related_name='layers',
                                     on_delete=models.SET_NULL, null=True, blank=True)
     portal = models.ForeignKey('portal.Portal',
-                               verbose_name=_("Portal"), blank=True, related_name='layers', on_delete=models.PROTECT)
+                               verbose_name=_("Portal"), blank=True, related_name='layers', on_delete=models.CASCADE)
     default_active = models.BooleanField(default=False)
     style = models.JSONField(max_length=300, null=False, blank=True, default=dict, help_text=_("Style of the layer"))
     order = models.PositiveSmallIntegerField(default=0)

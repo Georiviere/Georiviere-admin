@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-04-19 13:35+0000\n"
+"POT-Creation-Date: 2023-09-15 17:16+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -41,6 +41,9 @@ msgstr ""
 msgid "Flow"
 msgstr ""
 
+msgid "Portals"
+msgstr ""
+
 msgid "Qualified"
 msgstr ""
 
@@ -66,6 +69,9 @@ msgid "Temporary"
 msgstr ""
 
 msgid "Stream"
+msgstr ""
+
+msgid "Description"
 msgstr ""
 
 msgid "Data source"
@@ -119,13 +125,13 @@ msgstr ""
 msgid "Knowledges"
 msgstr ""
 
-msgid "Distance to source"
-msgstr ""
-
-msgid "Followups"
+msgid "Follow-ups"
 msgstr ""
 
 msgid "Interventions"
+msgstr ""
+
+msgid "Distance to source"
 msgstr ""
 
 msgid "Cut topology"
@@ -155,7 +161,7 @@ msgstr ""
 msgid "Informations"
 msgstr ""
 
-msgid "Elevation chart"
+msgid "Altimetric profile"
 msgstr ""
 
 msgid "Characteristics"

@@ -1,6 +1,8 @@
 from django.db.models.signals import post_delete, post_save
 from django.dispatch import receiver
 
+from django.utils.translation import gettext_lazy as _
+
 from georiviere.portal.models import MapBaseLayer, MapLayer, Portal
 from georiviere.valorization.models import POICategory
 
@@ -28,15 +30,15 @@ def save_portal(sender, instance, created, **kwargs):
         MapBaseLayer.objects.create(label='OSM', order=0, url='https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',
                                     attribution='© Contributeurs OpenStreetMap', portal=instance)
         # Generate all layers
-        MapLayer.objects.create(label='Watershed', order=0, layer_type='watersheds', portal=instance)
-        MapLayer.objects.create(label='City', order=0, layer_type='cities', portal=instance)
-        MapLayer.objects.create(label='Sensitivity', order=0, layer_type='sensitivities', portal=instance)
-        MapLayer.objects.create(label='District', order=0, layer_type='districts', portal=instance)
-        MapLayer.objects.create(label='Contribution', order=0, layer_type='contributions', portal=instance)
+        MapLayer.objects.create(label=_('Watershed'), order=0, layer_type=_('watersheds'), portal=instance)
+        MapLayer.objects.create(label=_('City'), order=0, layer_type=_('cities'), portal=instance)
+        MapLayer.objects.create(label=_('Sensitivity'), order=0, layer_type=_('sensitivities'), portal=instance)
+        MapLayer.objects.create(label=_('District'), order=0, layer_type=_('districts'), portal=instance)
+        MapLayer.objects.create(label=_('Contribution'), order=0, layer_type=_('contributions'), portal=instance)
         # We generate a map layer for each category of poi with the layer type separated by a -
         # We use it after in the serializer / view to generate a geojson url for each of them
         for category in POICategory.objects.all():
             MapLayer.objects.create(label=f'{category.label}', order=0, layer_type=f'pois-{category.pk}',
                                     portal=instance)
 
-        MapLayer.objects.create(label='Stream', order=0, layer_type='streams', portal=instance)
+        MapLayer.objects.create(label=_('Stream'), order=0, layer_type=_('streams'), portal=instance)

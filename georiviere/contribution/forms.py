@@ -30,7 +30,7 @@ class ContributionForm(autocomplete.FutureModelForm, CommonForm):
             "description",
             "severity",
             "published",
-            "validated"
+            "validated",
             "portal",
             "email_author",
             "assigned_user",

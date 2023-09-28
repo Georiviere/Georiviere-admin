@@ -120,8 +120,15 @@ class MapLayerAdmin(OrderableAdmin, admin.ModelAdmin):
     ordering = ('-portal', '-group_layer',)
     form = MapLayerAdminForm
 
-    def has_delete_permission(self, request, obj=None):
-        return False
+    def render_change_form(self, request, context, add=False, change=False, form_url='', obj=None):
+        context.update({'show_delete': False})
+        return super().render_change_form(request, context, add, change, form_url, obj)
+
+    def get_actions(self, request):
+        actions = super().get_actions(request)
+        if 'delete_selected' in actions:
+            del actions['delete_selected']
+        return actions
 
 
 admin.site.register(Portal, PortalAdmin)

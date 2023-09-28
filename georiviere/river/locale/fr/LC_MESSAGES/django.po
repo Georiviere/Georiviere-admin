@@ -11,7 +11,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-04-19 13:35+0000\n"
+"POT-Creation-Date: 2023-09-15 17:05+0000\n"
 "PO-Revision-Date: 2021-11-23 15:31+0000\n"
 "Last-Translator: Jean-Etienne Castagnede <jecastagnede@vivaldi.net>, 2021\n"
 "Language-Team: French (https://www.transifex.com/georiviere/teams/128005/"
@@ -45,6 +45,9 @@ msgstr "Nom"
 msgid "Flow"
 msgstr "Écoulement"
 
+msgid "Portals"
+msgstr "Portails"
+
 msgid "Qualified"
 msgstr "Qualifié"
 
@@ -71,6 +74,9 @@ msgstr "Temporaire"
 
 msgid "Stream"
 msgstr "Cours d'eau"
+
+msgid "Description"
+msgstr "Description"
 
 msgid "Data source"
 msgstr "Source de donnée"
@@ -123,11 +129,14 @@ msgstr "Études"
 msgid "Knowledges"
 msgstr "Connaissances"
 
-msgid "Distance to source"
-msgstr "Distance à la source"
+msgid "Follow-ups"
+msgstr "Suivis"
 
 msgid "Interventions"
 msgstr "Interventions"
+
+msgid "Distance to source"
+msgstr "Distance à la source"
 
 msgid "Cut topology"
 msgstr "Découper la topologie"

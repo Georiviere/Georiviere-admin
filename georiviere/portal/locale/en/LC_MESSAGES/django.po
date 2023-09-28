@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-07-24 14:23+0000\n"
+"POT-Creation-Date: 2023-09-15 17:40+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -88,6 +88,42 @@ msgid "Category is not valid"
 msgstr ""
 
 msgid "An error occured"
+msgstr ""
+
+msgid "Watershed"
+msgstr ""
+
+msgid "watersheds"
+msgstr ""
+
+msgid "City"
+msgstr ""
+
+msgid "cities"
+msgstr ""
+
+msgid "Sensitivity"
+msgstr ""
+
+msgid "sensitivities"
+msgstr ""
+
+msgid "District"
+msgstr ""
+
+msgid "districts"
+msgstr ""
+
+msgid "Contribution"
+msgstr ""
+
+msgid "contributions"
+msgstr ""
+
+msgid "Stream"
+msgstr ""
+
+msgid "streams"
 msgstr ""
 
 msgid "Georiviere : Contribution"

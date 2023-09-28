@@ -11,7 +11,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-03-22 09:10+0000\n"
+"POT-Creation-Date: 2023-09-15 17:04+0000\n"
 "PO-Revision-Date: 2021-11-23 14:22+0000\n"
 "Last-Translator: Jean-Etienne Castagnede <jecastagnede@vivaldi.net>, 2021\n"
 "Language-Team: French (https://www.transifex.com/georiviere/teams/128005/"
@@ -27,9 +27,6 @@ msgstr "Finances et administratif"
 
 msgid "Name"
 msgstr "Nom"
-
-msgid "Create operation on"
-msgstr "Créer une opération sur"
 
 msgid "Estimated budget"
 msgstr "Budget estimé"
@@ -285,3 +282,6 @@ msgstr "Ajouter un dossier administratif"
 
 msgid "Edit phase for"
 msgstr "Éditer les phases pour"
+
+#~ msgid "Create operation on"
+#~ msgstr "Créer une opération sur"
