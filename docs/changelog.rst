@@ -2,7 +2,15 @@
 CHANGELOG
 =========
 
-1.2.3+dev    (XXXX-XX-XX)
+1.2.4+dev    (xxxx-xx-xx)
+-------------------------
+
+**Maintenance**
+
+- Add configuration file for readthedocs to build documentation
+
+
+1.2.4    (2023-09-28)
 -------------------------
 
 **Bug fix**
