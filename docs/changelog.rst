@@ -5,12 +5,9 @@ CHANGELOG
 1.2.4+dev    (xxxx-xx-xx)
 -------------------------
 
-**Maintenance**
-
-- Add configuration file for readthedocs to build documentation
 
 
-1.2.4    (2023-09-28)
+1.2.4    (2023-10-09)
 -------------------------
 
 **Bug fix**
@@ -33,6 +30,10 @@ CHANGELOG
 
 * Update and add missing translations
 * Missing sections in admin portal creation page
+
+**Maintenance**
+
+- Add configuration file for readthedocs to build documentation
 
 
 1.2.3        (2023-08-10)
