@@ -5,6 +5,9 @@ CHANGELOG
 1.2.4+dev    (xxxx-xx-xx)
 -------------------------
 
+**Enhancement**
+
+* Hide Work and Vegetation from admin
 
 
 1.2.4    (2023-10-09)
