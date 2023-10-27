@@ -43,8 +43,8 @@ RUN apt-get update -qq && apt-get install -y -qq \
     libgdk-pixbuf2.0 \
     libpango1.0-0 \
     libpangocairo-1.0-0 \
-    libpq5  \
-    libpq-dev postgresql-client && \
+    libpq5 \
+    postgresql-client && \
     apt-get install -y -qq --no-install-recommends postgis && \
     apt-get clean all && rm -rf /var/lib/apt/lists/* && rm -rf /var/cache/apt/*
 
