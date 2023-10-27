@@ -4,7 +4,7 @@ Requirements
 * You need docker installed. Docker-compose is recommended in the configuration below.
     See `Docker <https://docs.docker.com/engine/install/>`_ and `Docker compose <https://docs.docker.com/compose/install/>`_ install documentations.
 
-* **Optional** : if you want to use external database, prepare a postgresql 10+ postgis2.5+ database with postgis and postgis_raster enabled, and a dedicated user.
+* **Optional** : if you want to use external database, prepare a postgresql 10+ postgis2.5+ database with postgis, postgis_raster and unaccent enabled, and a dedicated user.
 
     You can use external database by commenting postgres container and volume references in docker-compose.yml, and set variables :
         * POSTGRES_HOST

@@ -5,6 +5,15 @@ CHANGELOG
 1.2.4+dev    (xxxx-xx-xx)
 -------------------------
 
+**Breaking changes**
+
+- If you use external database (not docker) you must install unaccent postgres extension with a superuser.
+  You can do it with this command : `CREATE EXTENSION unaccent; on your database. For docker user, this is made by django migration
+
+**Enhancement**
+
+- Unaccent extension is now installed from django migrations for docker user.
+
 
 
 1.2.4    (2023-10-09)
