@@ -37,7 +37,5 @@ while ! nc -z $POSTGRES_HOST $PGPORT; do
 done
 echo "PostgreSQL started"
 
-PGPASSWORD="$POSTGRES_PASSWORD" psql -h "$POSTGRES_HOST" -U "$POSTGRES_USER" -p "$POSTGRES_PORT" -d "$POSTGRES_DB" -c 'CREATE EXTENSION POSTGIS_RASTER' && echo "Extension POSTGIS RASTER installed"
-PGPASSWORD="$POSTGRES_PASSWORD" psql -h "$POSTGRES_HOST" -U "$POSTGRES_USER" -p "$POSTGRES_PORT" -d "$POSTGRES_DB" -c 'CREATE EXTENSION UNACCENT' && echo "Extension UNACCENT installed"
 # exec
 exec "$@"
