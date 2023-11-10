@@ -109,11 +109,11 @@ msgstr "Aucun type"
 msgid "Feedback from {email}"
 msgstr "Retour utilisateur depuis {email}"
 
-msgid "Contribution potential damage type"
-msgstr "Type de contibution dégats potentiels"
+msgid "Landing type"
+msgstr "Type d'atterrissement"
 
-msgid "Contribution potential damage types"
-msgstr "Contribution Dégats potentiels"
+msgid "Landing types"
+msgstr "Types d'atterrissement"
 
 msgid "Jam type"
 msgstr "Type d'embâcle"
@@ -156,9 +156,6 @@ msgstr "Mortalité piscicole"
 
 msgid "Trampling by livestock (impacting)"
 msgstr "Piétinement par le bétail (impactant)"
-
-msgid "Landing type"
-msgstr "Type d'atterrissement"
 
 msgid "Excessive cutting length (in meters)"
 msgstr "Longueur coupe abusive (en mètres)"

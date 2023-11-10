@@ -224,8 +224,8 @@ class LandingType(models.Model):
     label = models.CharField(max_length=128, verbose_name=_("Label"), unique=True)
 
     class Meta:
-        verbose_name = _("Contribution potential damage type")
-        verbose_name_plural = _("Contribution potential damage types")
+        verbose_name = _("Landing type")
+        verbose_name_plural = _("Landing types")
 
     def __str__(self):
         return self.label
