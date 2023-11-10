@@ -103,5 +103,11 @@ class ContributionViewTestCase(CommonRiverTest):
         response = self.client.get(obj.get_update_url())
         self.assertEqual(response.status_code, 302)
 
+        # Test to delete object
+        self.login()
+
+        response = self.client.get(obj.get_update_url())
+        self.assertEqual(response.status_code, 200)
+
     def test_document_export(self):
         pass
