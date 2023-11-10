@@ -69,7 +69,7 @@ def get_landing(choices, meta):
                 'landing_type':
                     {
                         'type': "string",
-                        'title': str(meta.get_field('landing_type').verbose_name.capitalize()),
+                        'title': str(meta.get_field('landing_type').related_model._meta.verbose_name.capitalize()),
                         'enum': list(LandingType.objects.values_list('label', flat=True))
                     }
             },
@@ -111,7 +111,7 @@ def get_disruptive_jam(choices, meta):
                     {
                         'type': "string",
                         'title': str(meta.get_field(
-                            'jam_type').verbose_name.capitalize()),
+                            'jam_type').related_model._meta.verbose_name.capitalize()),
                         'enum': list(JamType.objects.values_list('label', flat=True))
                     }
             },
@@ -175,7 +175,7 @@ def get_fish_diseases(choices, meta):
                     {
                         'type': "string",
                         'title': str(meta.get_field(
-                            'disease_type').verbose_name.capitalize()),
+                            'disease_type').related_model._meta.verbose_name.capitalize()),
                         'enum': list(DiseaseType.objects.values_list('label', flat=True))
                     }
             },
@@ -196,8 +196,7 @@ def get_fish_mortality(choices, meta):
     if DeadSpecies.objects.exists():
         fish_mortality_property['dead_species'] = {
             'type': "string",
-            'title': str(meta.get_field(
-                'dead_species').verbose_name.capitalize()),
+            'title': _("Observed species"),
             'enum': list(DeadSpecies.objects.values_list('label', flat=True))
         }
     fish_mortality = {
@@ -265,8 +264,7 @@ def get_invasive_species(choices, meta):
     if InvasiveSpecies.objects.exists():
         invasive_species_property['invasive_species'] = {
             'type': "string",
-            'title': str(meta.get_field(
-                'invasive_species').verbose_name.capitalize()),
+            'title': _("Observed species"),
             'enum': list(InvasiveSpecies.objects.values_list('label', flat=True))
         }
     invasive_species = {
@@ -294,15 +292,13 @@ def get_heritage_species(choices, meta):
     if HeritageSpecies.objects.exists():
         heritage_species_property['heritage_species'] = {
             'type': "string",
-            'title': str(meta.get_field(
-                'heritage_species').verbose_name.capitalize()),
+            'title': _("Observed species"),
             'enum': list(HeritageSpecies.objects.values_list('label', flat=True))
         }
     if HeritageObservation.objects.exists():
         heritage_species_property['heritage_observation'] = {
             'type': "string",
-            'title': str(meta.get_field(
-                'heritage_observation').verbose_name.capitalize()),
+            'title': _("Observation type"),
             'enum': list(HeritageObservation.objects.values_list('label', flat=True))
         }
     heritage_species = {
@@ -330,8 +326,7 @@ def get_fish_species(choices, meta):
     if FishSpecies.objects.exists():
         fish_species_property['fish_species'] = {
             'type': "string",
-            'title': str(meta.get_field(
-                'fish_species').verbose_name.capitalize()),
+            'title': _("Observed species"),
             'enum': list(FishSpecies.objects.values_list('label', flat=True))
         }
     fish_species = {
@@ -430,14 +425,14 @@ def get_pollution(choices, meta):
         pollution_property['nature_pollution'] = {
             'type': "string",
             'title': str(meta.get_field(
-                'nature_pollution').verbose_name.capitalize()),
+                'nature_pollution').related_model._meta.verbose_name.capitalize()),
             'enum': list(NaturePollution.objects.values_list('label', flat=True))
         }
     if TypePollution.objects.exists():
         pollution_property['type_pollution'] = {
             'type': "string",
             'title': str(meta.get_field(
-                'type_pollution').verbose_name.capitalize()),
+                'type_pollution').related_model._meta.verbose_name.capitalize()),
             'enum': list(TypePollution.objects.values_list('label', flat=True))
         }
     pollution = {

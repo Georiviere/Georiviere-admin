@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-09-15 17:01+0000\n"
+"POT-Creation-Date: 2023-11-10 12:01+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -238,16 +238,16 @@ msgid "contributions quantity"
 msgstr "Contributions quantité"
 
 msgid "Nature pollution"
-msgstr "Nature pollution"
+msgstr "Nature de la pollution"
 
 msgid "Natures pollution"
-msgstr "Natures pollution"
+msgstr "Natures des pollutions"
 
 msgid "Type pollution"
-msgstr "Type pollution"
+msgstr "Type de pollution"
 
 msgid "Types pollution"
-msgstr "Types pollution"
+msgstr "Types de pollution"
 
 msgid "Algal development"
 msgstr "Développement algal"
@@ -314,6 +314,12 @@ msgstr "Contentieux"
 
 msgid "Knowledge"
 msgstr "Connaissance"
+
+msgid "Observed species"
+msgstr "Espèce observée"
+
+msgid "Observation type"
+msgstr "Type d'observation"
 
 msgid "None"
 msgstr "Aucun"

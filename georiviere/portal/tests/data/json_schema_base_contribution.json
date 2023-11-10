@@ -150,7 +150,7 @@
           },
           "dead_species": {
             "type": "string",
-            "title": "Dead species",
+            "title": "Observed species",
             "enum": [
               "Dead species 0",
               "Dead species 1",
@@ -194,7 +194,12 @@
         "properties": {
           "jam_type": {
             "type": "string",
-            "title": "Jam type"
+            "title": "Jam type",
+            "enum": [
+              "Jam type 0",
+              "Jam type 1",
+              "Jam type 2"
+            ]
           }
         }
       }
@@ -262,7 +267,7 @@
           },
           "invasive_species": {
             "type": "string",
-            "title": "Invasive species",
+            "title": "Observed species",
             "enum": [
               "Invasive species 0",
               "Invasive species 1",
@@ -288,7 +293,7 @@
           },
           "heritage_species": {
             "type": "string",
-            "title": "Heritage species",
+            "title": "Observed species",
             "enum": [
               "Heritage species 0",
               "Heritage species 1",
@@ -297,7 +302,7 @@
           },
           "heritage_observation": {
             "type": "string",
-            "title": "Heritage observation",
+            "title": "Observation type",
             "enum": [
               "Heritage observation 0",
               "Heritage observation 1",
@@ -323,7 +328,7 @@
           },
           "fish_species": {
             "type": "string",
-            "title": "Fish species",
+            "title": "Observed species",
             "enum": [
               "Fish species 0",
               "Fish species 1",
