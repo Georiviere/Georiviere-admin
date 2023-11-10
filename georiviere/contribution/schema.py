@@ -112,6 +112,7 @@ def get_disruptive_jam(choices, meta):
                         'type': "string",
                         'title': str(meta.get_field(
                             'jam_type').verbose_name.capitalize()),
+                        'enum': list(JamType.objects.values_list('label', flat=True))
                     }
             },
         }
