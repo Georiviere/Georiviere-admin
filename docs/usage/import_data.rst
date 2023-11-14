@@ -178,3 +178,21 @@ Example:
 Import watershed
 ''''''''''''''''
 To import, use QGIS and edit watershed_watershed layer and specify "name" and  "watershed_type_id" in attributes
+
+Import sensibility areas from https://biodiv-sports.fr
+'''''''''''''''''''''''''''''''''''''''''''''''''''''
+Configure parser.py in /georiviere/var/conf like 
+
+.. code-block :: bash
+    
+    from geotrek.sensitivity.parsers import BiodivParser
+
+    class PNRHJBiodivParser(BiodivParser):
+        url = 'https://biodiv-sports.fr/api/v2/sensitivearea/?format=json&bubble&period=ignore&practice=5'
+        label = "Biodiv'Sports PNRHJ"
+
+Mors informations  : https://geotrek.ecrins-parcnational.fr/ressources/gt/01-zones-sensibilite/doc-import.pdf
+
+.. code-block :: bash
+
+    docker-compose run --rm web ./manage.py import_parser -v 2 BiodivParser
