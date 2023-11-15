@@ -1,38 +1,486 @@
 [
-{
-    "model": "contribution.contributionstatus",
-    "pk": 1,
-    "fields": {
-        "label": "Informé",
+    {
+      "model": "contribution.severitytype",
+      "pk": 1,
+      "fields": {
+        "label": "Faible"
+      }
+    },
+    {
+      "model": "contribution.severitytype",
+      "pk": 2,
+      "fields": {
+        "label": "Modéré"
+      }
+    },
+    {
+      "model": "contribution.severitytype",
+      "pk": 3,
+      "fields": {
+        "label": "Fort"
+      }
+    },
+    {
+      "model": "contribution.contributionstatus",
+      "pk": 1,
+      "fields": {
         "date_insert": "2023-05-09T15:15:30.143Z",
-        "date_update": "2022-03-09T15:15:30.143Z"
-    }
-},
-{
-    "model": "contribution.contributionstatus",
-    "pk": 2,
-    "fields": {
-        "label": "En cours de traitement",
+        "date_update": "2022-03-09T15:15:30.143Z",
+        "label": "Informé"
+      }
+    },
+    {
+      "model": "contribution.contributionstatus",
+      "pk": 2,
+      "fields": {
         "date_insert": "2023-05-09T15:15:30.143Z",
-        "date_update": "2022-03-09T15:15:30.143Z"
-    }
-},
-{
-    "model": "contribution.contributionstatus",
-    "pk": 3,
-    "fields": {
-        "label": "Traité",
+        "date_update": "2022-03-09T15:15:30.143Z",
+        "label": "En cours de traitement"
+      }
+    },
+    {
+      "model": "contribution.contributionstatus",
+      "pk": 3,
+      "fields": {
         "date_insert": "2023-05-09T15:15:30.143Z",
-        "date_update": "2022-03-09T15:15:30.143Z"
-    }
-},
-{
-    "model": "contribution.contributionstatus",
-    "pk": 4,
-    "fields": {
-        "label": "Retour au contributeur",
+        "date_update": "2022-03-09T15:15:30.143Z",
+        "label": "Traité"
+      }
+    },
+    {
+      "model": "contribution.contributionstatus",
+      "pk": 4,
+      "fields": {
         "date_insert": "2023-05-09T15:15:30.143Z",
-        "date_update": "2022-03-09T15:15:30.143Z"
+        "date_update": "2022-03-09T15:15:30.143Z",
+        "label": "Retour au contributeur"
+      }
+    },
+    {
+      "model": "contribution.landingtype",
+      "pk": 1,
+      "fields": {
+        "label": "Partiel en berge"
+      }
+    },
+    {
+      "model": "contribution.landingtype",
+      "pk": 2,
+      "fields": {
+        "label": "Partiel au milieu du lit"
+      }
+    },
+    {
+      "model": "contribution.landingtype",
+      "pk": 3,
+      "fields": {
+        "label": "Total"
+      }
+    },
+    {
+      "model": "contribution.jamtype",
+      "pk": 1,
+      "fields": {
+        "label": "Partiel en berge"
+      }
+    },
+    {
+      "model": "contribution.jamtype",
+      "pk": 2,
+      "fields": {
+        "label": "Partiel au milieu du lit"
+      }
+    },
+    {
+      "model": "contribution.jamtype",
+      "pk": 3,
+      "fields": {
+        "label": "Total"
+      }
+    },
+    {
+      "model": "contribution.diseasetype",
+      "pk": 1,
+      "fields": {
+        "label": "Excroissances blanchâtres"
+      }
+    },
+    {
+      "model": "contribution.diseasetype",
+      "pk": 2,
+      "fields": {
+        "label": "Léthargie"
+      }
+    },
+    {
+      "model": "contribution.diseasetype",
+      "pk": 3,
+      "fields": {
+        "label": "Points blancs"
+      }
+    },
+    {
+      "model": "contribution.diseasetype",
+      "pk": 4,
+      "fields": {
+        "label": "Ulcérations"
+      }
+    },
+    {
+      "model": "contribution.deadspecies",
+      "pk": 1,
+      "fields": {
+        "label": "Barbeau"
+      }
+    },
+    {
+      "model": "contribution.deadspecies",
+      "pk": 2,
+      "fields": {
+        "label": "Blageon"
+      }
+    },
+    {
+      "model": "contribution.deadspecies",
+      "pk": 3,
+      "fields": {
+        "label": "Brochet"
+      }
+    },
+    {
+      "model": "contribution.deadspecies",
+      "pk": 4,
+      "fields": {
+        "label": "Chabot"
+      }
+    },
+    {
+      "model": "contribution.deadspecies",
+      "pk": 5,
+      "fields": {
+        "label": "Chevesne"
+      }
+    },
+    {
+      "model": "contribution.deadspecies",
+      "pk": 6,
+      "fields": {
+        "label": "Goujon"
+      }
+    },
+    {
+      "model": "contribution.deadspecies",
+      "pk": 7,
+      "fields": {
+        "label": "Lamproie"
+      }
+    },
+    {
+      "model": "contribution.deadspecies",
+      "pk": 8,
+      "fields": {
+        "label": "Loche franche"
+      }
+    },
+    {
+      "model": "contribution.deadspecies",
+      "pk": 9,
+      "fields": {
+        "label": "Lotte"
+      }
+    },
+    {
+      "model": "contribution.deadspecies",
+      "pk": 10,
+      "fields": {
+        "label": "Ombre commun"
+      }
+    },
+    {
+      "model": "contribution.deadspecies",
+      "pk": 11,
+      "fields": {
+        "label": "Spirlin"
+      }
+    },
+    {
+      "model": "contribution.deadspecies",
+      "pk": 12,
+      "fields": {
+        "label": "Toxostome"
+      }
+    },
+    {
+      "model": "contribution.deadspecies",
+      "pk": 13,
+      "fields": {
+        "label": "Truite fario"
+      }
+    },
+    {
+      "model": "contribution.deadspecies",
+      "pk": 14,
+      "fields": {
+        "label": "Vairon"
+      }
+    },
+    {
+      "model": "contribution.deadspecies",
+      "pk": 15,
+      "fields": {
+        "label": "Vandoise"
+      }
+    },
+    {
+      "model": "contribution.invasivespecies",
+      "pk": 1,
+      "fields": {
+        "label": "Ecrevisse américaine"
+      }
+    },
+    {
+      "model": "contribution.invasivespecies",
+      "pk": 2,
+      "fields": {
+        "label": "Ambroisie à feuille d'armoise"
+      }
+    },
+    {
+      "model": "contribution.invasivespecies",
+      "pk": 3,
+      "fields": {
+        "label": "Balsamine de l'Himalaya"
+      }
+    },
+    {
+      "model": "contribution.invasivespecies",
+      "pk": 4,
+      "fields": {
+        "label": "Berce du caucase"
+      }
+    },
+    {
+      "model": "contribution.invasivespecies",
+      "pk": 5,
+      "fields": {
+        "label": "Buddleia (ou arbre à papillons)"
+      }
+    },
+    {
+      "model": "contribution.invasivespecies",
+      "pk": 6,
+      "fields": {
+        "label": "Elodée du canada"
+      }
+    },
+    {
+      "model": "contribution.invasivespecies",
+      "pk": 7,
+      "fields": {
+        "label": "Renouées asiatiques"
+      }
+    },
+    {
+      "model": "contribution.invasivespecies",
+      "pk": 8,
+      "fields": {
+        "label": "Solidage (ou verge d'or)"
+      }
+    },
+    {
+      "model": "contribution.heritagespecies",
+      "pk": 1,
+      "fields": {
+        "label": "Écrevisse à pattes blanches"
+      }
+    },
+    {
+      "model": "contribution.heritagespecies",
+      "pk": 2,
+      "fields": {
+        "label": "Salamandre tachetée"
+      }
+    },
+    {
+      "model": "contribution.heritagespecies",
+      "pk": 3,
+      "fields": {
+        "label": "Sonneur à ventre jaune"
+      }
+    },
+    {
+      "model": "contribution.heritagespecies",
+      "pk": 4,
+      "fields": {
+        "label": "Castor"
+      }
+    },
+    {
+      "model": "contribution.heritagespecies",
+      "pk": 5,
+      "fields": {
+        "label": "Loutre"
+      }
+    },
+    {
+      "model": "contribution.heritageobservation",
+      "pk": 1,
+      "fields": {
+        "label": "Visuel"
+      }
+    },
+    {
+      "model": "contribution.heritageobservation",
+      "pk": 2,
+      "fields": {
+        "label": "Indice de présence"
+      }
+    },
+    {
+      "model": "contribution.fishspecies",
+      "pk": 1,
+      "fields": {
+        "label": "Barbeau"
+      }
+    },
+    {
+      "model": "contribution.fishspecies",
+      "pk": 2,
+      "fields": {
+        "label": "Blageon"
+      }
+    },
+    {
+      "model": "contribution.fishspecies",
+      "pk": 3,
+      "fields": {
+        "label": "Brochet"
+      }
+    },
+    {
+      "model": "contribution.fishspecies",
+      "pk": 4,
+      "fields": {
+        "label": "Chabot"
+      }
+    },
+    {
+      "model": "contribution.fishspecies",
+      "pk": 5,
+      "fields": {
+        "label": "Chevesne"
+      }
+    },
+    {
+      "model": "contribution.fishspecies",
+      "pk": 6,
+      "fields": {
+        "label": "Goujon"
+      }
+    },
+    {
+      "model": "contribution.fishspecies",
+      "pk": 7,
+      "fields": {
+        "label": "Lamproie"
+      }
+    },
+    {
+      "model": "contribution.fishspecies",
+      "pk": 8,
+      "fields": {
+        "label": "Loche franche"
+      }
+    },
+    {
+      "model": "contribution.fishspecies",
+      "pk": 9,
+      "fields": {
+        "label": "Lotte"
+      }
+    },
+    {
+      "model": "contribution.fishspecies",
+      "pk": 10,
+      "fields": {
+        "label": "Ombre commun"
+      }
+    },
+    {
+      "model": "contribution.fishspecies",
+      "pk": 11,
+      "fields": {
+        "label": "Spirlin"
+      }
+    },
+    {
+      "model": "contribution.fishspecies",
+      "pk": 12,
+      "fields": {
+        "label": "Toxostome"
+      }
+    },
+    {
+      "model": "contribution.fishspecies",
+      "pk": 13,
+      "fields": {
+        "label": "Truite fario"
+      }
+    },
+    {
+      "model": "contribution.fishspecies",
+      "pk": 14,
+      "fields": {
+        "label": "Vairon"
+      }
+    },
+    {
+      "model": "contribution.fishspecies",
+      "pk": 15,
+      "fields": {
+        "label": "Vandoise"
+      }
+    },
+    {
+      "model": "contribution.naturepollution",
+      "pk": 1,
+      "fields": {
+        "label": "Déchets"
+      }
+    },
+    {
+      "model": "contribution.naturepollution",
+      "pk": 2,
+      "fields": {
+        "label": "Effluents d'élevage"
+      }
+    },
+    {
+      "model": "contribution.naturepollution",
+      "pk": 3,
+      "fields": {
+        "label": "Hydrocarbures"
+      }
+    },
+    {
+      "model": "contribution.naturepollution",
+      "pk": 4,
+      "fields": {
+        "label": "Présence abondante de mousse"
+      }
+    },
+    {
+      "model": "contribution.typepollution",
+      "pk": 1,
+      "fields": {
+        "label": "Visible"
+      }
+    },
+    {
+      "model": "contribution.typepollution",
+      "pk": 2,
+      "fields": {
+        "label": "Olfactive"
+      }
     }
-}
-]
+    ]

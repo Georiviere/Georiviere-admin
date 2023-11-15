@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-09-15 17:01+0000\n"
+"POT-Creation-Date: 2023-11-10 12:01+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -109,11 +109,11 @@ msgstr "Aucun type"
 msgid "Feedback from {email}"
 msgstr "Retour utilisateur depuis {email}"
 
-msgid "Contribution potential damage type"
-msgstr "Type de contibution dégats potentiels"
+msgid "Landing type"
+msgstr "Type d'atterrissement"
 
-msgid "Contribution potential damage types"
-msgstr "Contribution Dégats potentiels"
+msgid "Landing types"
+msgstr "Types d'atterrissement"
 
 msgid "Jam type"
 msgstr "Type d'embâcle"
@@ -156,9 +156,6 @@ msgstr "Mortalité piscicole"
 
 msgid "Trampling by livestock (impacting)"
 msgstr "Piétinement par le bétail (impactant)"
-
-msgid "Landing type"
-msgstr "Type d'atterrissement"
 
 msgid "Excessive cutting length (in meters)"
 msgstr "Longueur coupe abusive (en mètres)"
@@ -241,16 +238,16 @@ msgid "contributions quantity"
 msgstr "Contributions quantité"
 
 msgid "Nature pollution"
-msgstr "Nature pollution"
+msgstr "Nature de la pollution"
 
 msgid "Natures pollution"
-msgstr "Natures pollution"
+msgstr "Natures des pollutions"
 
 msgid "Type pollution"
-msgstr "Type pollution"
+msgstr "Type de pollution"
 
 msgid "Types pollution"
-msgstr "Types pollution"
+msgstr "Types de pollution"
 
 msgid "Algal development"
 msgstr "Développement algal"
@@ -317,6 +314,12 @@ msgstr "Contentieux"
 
 msgid "Knowledge"
 msgstr "Connaissance"
+
+msgid "Observed species"
+msgstr "Espèce observée"
+
+msgid "Observation type"
+msgstr "Type d'observation"
 
 msgid "None"
 msgstr "Aucun"

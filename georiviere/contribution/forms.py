@@ -10,7 +10,6 @@ from georiviere.maintenance.models import Intervention
 
 
 class ContributionForm(autocomplete.FutureModelForm, CommonForm):
-    can_delete = False
     geomfields = ['geom']
 
     linked_object = autocomplete.Select2GenericForeignKeyModelField(

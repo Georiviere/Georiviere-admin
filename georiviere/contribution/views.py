@@ -1,5 +1,5 @@
 from mapentity.views import (MapEntityList, MapEntityDetail, MapEntityFormat, MapEntityLayer, MapEntityJsonList,
-                             MapEntityUpdate)
+                             MapEntityUpdate, MapEntityDelete)
 
 
 from georiviere.contribution.filters import ContributionFilterSet
@@ -36,8 +36,6 @@ class ContributionUpdate(MapEntityUpdate):
     model = Contribution
     form_class = ContributionForm
 
-    def get_form_kwargs(self):
-        kwargs = super().get_form_kwargs()
-        # We don't want to allow to delete contributions
-        kwargs['can_delete'] = False
-        return kwargs
+
+class ContributionDelete(MapEntityDelete):
+    model = Contribution
