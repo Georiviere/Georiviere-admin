@@ -2,18 +2,32 @@
 CHANGELOG
 =========
 
-1.2.4+dev    (xxxx-xx-xx)
+1.3.0    (2023-11-17)
 -------------------------
 
 **Breaking changes**
 
 - If you use external database (not docker) you must install unaccent postgres extension with a superuser.
-  You can do it with this command : `CREATE EXTENSION unaccent; on your database. For docker user, this is made by django migration
+  You can do it with this command : `CREATE EXTENSION unaccent;` on your database. For docker user, this is made by django migration
 
 **Enhancement**
 
 - Unaccent extension is now installed from django migrations for docker user.
+- Allow user to delete Contribution (fix #217)
+- Add fixtures to contributions in order to pre-fill values for forms
 
+**Bug fix**
+
+- Return JamType list instead of text field (fix #199)
+
+**Documentation**
+
+- Update import_data.rst
+
+**Translations**
+
+- Fix translations for fields that were in English in fr mode
+- Change name and translation of Landing Type object
 
 
 1.2.4    (2023-10-09)
