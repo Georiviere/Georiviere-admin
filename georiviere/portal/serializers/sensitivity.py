@@ -8,37 +8,23 @@ from geotrek.sensitivity.models import SensitiveArea, Species
 class SpeciesGeojsonSerializer(serializers.ModelSerializer):
     class Meta:
         model = Species
-        fields = ('id', 'pictogram', 'name')
+        fields = ('id', 'pictogram', 'name', 'url')
 
 
 class SensitivityGeojsonSerializer(GeoFeatureModelSerializer):
     geometry = GeometryField(read_only=True, precision=7, source='geom_transformed')
     name = serializers.CharField(source='species.name')
-    species = SpeciesGeojsonSerializer(many=False)
+    species = SpeciesGeojsonSerializer()
     attachments = AttachmentSerializer(many=True)
 
     class Meta:
         model = SensitiveArea
         geo_field = 'geometry'
         id_field = False
-        fields = ('id', 'attachments', 'description', 'species', 'name')
+        fields = ('id', 'attachments', 'description', 'species', 'name', 'contact')
 
 
 class SpeciesSerializer(serializers.ModelSerializer):
-    period01 = serializers.BooleanField(read_only=True)
-    period02 = serializers.BooleanField(read_only=True)
-    period03 = serializers.BooleanField(read_only=True)
-    period04 = serializers.BooleanField(read_only=True)
-    period05 = serializers.BooleanField(read_only=True)
-    period06 = serializers.BooleanField(read_only=True)
-    period07 = serializers.BooleanField(read_only=True)
-    period08 = serializers.BooleanField(read_only=True)
-    period09 = serializers.BooleanField(read_only=True)
-    period10 = serializers.BooleanField(read_only=True)
-    period11 = serializers.BooleanField(read_only=True)
-    period12 = serializers.BooleanField(read_only=True)
-    url = serializers.URLField(read_only=True)
-
     class Meta:
         model = Species
         fields = (
@@ -54,4 +40,4 @@ class SensitivitySerializer(serializers.ModelSerializer):
 
     class Meta:
         model = SensitiveArea
-        fields = ('id', 'name', 'species', 'description', 'attachments')
+        fields = ('id', 'name', 'species', 'description', 'attachments', 'contact')
