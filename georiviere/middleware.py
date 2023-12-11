@@ -23,7 +23,6 @@ class APILocaleMiddleware:
 
     def __call__(self, request):
         language = get_language_from_path(request.path_info)
-        print(request.path_info, language)
         if language:
             translation.activate(language)
             request.LANGUAGE_CODE = translation.get_language()
