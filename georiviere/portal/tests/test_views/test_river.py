@@ -43,3 +43,12 @@ class StreamViewTest(TestCase):
         self.assertEqual(len(response.json()), 1)
         self.assertSetEqual(set(response.json()[0].keys()), {'attachments', 'flow', 'descent', 'length',
                                                              'name', 'id', 'description', 'geometryCenter'})
+
+    def test_stream_ranslation_according_url(self):
+        for lang in ['en', 'fr']:
+            url = reverse('api_portal:streams-detail',
+                          kwargs={'portal_pk': self.portal.pk, 'pk': self.stream.pk, 'lang': lang, 'format': 'json'})
+            response = self.client.get(url)
+            self.assertEqual(response.status_code, 200)
+            data = response.json()
+            self.assertEqual(data['flow'], 'To be defined' if lang == 'en' else 'À définir')
