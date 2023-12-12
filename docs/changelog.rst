@@ -9,6 +9,10 @@ CHANGELOG
 
 - Force translation defined in API url /api/portal/<lang> (fix #222)
 
+**Enhancement**
+
+- Add sensitivity contact and URL for species in portal API.
+
 
 1.3.0    (2023-11-17)
 -------------------------
