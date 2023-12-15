@@ -538,3 +538,53 @@ class FollowUpMeasure(models.Model):
 
     date = models.DateField(default=datetime.now, verbose_name=_("Date"))
     results = models.TextField(verbose_name=_("Results"))
+
+
+class OfflineKnowledgeAttrs(models.Model):
+    uuid = models.TextField(primary_key=True)
+    gra_id = models.IntegerField(null=True)
+    name = models.TextField(null=True)
+    knowledge_type = models.IntegerField(null=True)  # FK on 'knowledge.KnowledgeType'
+    code = models.TextField(null=True)
+    description = models.TextField(null=True)
+    date_insert = models.DateTimeField(null=True)
+    date_update = models.DateTimeField(null=True)
+    structure = models.IntegerField(null=True)  # ForeignKey on Structure
+    # Fields from vegetation 1-to-1
+    vegetation_type = models.IntegerField(null=True)  # FK on 'knowledge.VegetationType'
+    vegetation_state = models.IntegerField(null=True)  # FK on 'knowledge.VegetationState'
+    thickness = models.IntegerField(null=True)  # FK on 'knowledge.VegetationThicknessType'
+    age_class_diversity = models.IntegerField(null=True)  # FK on 'knowledge.VegetationAgeClassDiversity'
+    specific_diversity = models.IntegerField(null=True)  # FK on 'knowledge.VegetationSpecificDiversity'
+    other_information = models.TextField(null=True)
+    # Fields from work 1-to-1
+    work_type = models.IntegerField(null=True)  # FK on 'knowledge.WorkType'
+    material = models.IntegerField(null=True)  # FK on 'knowledge.WorkMaterial'
+    work_state = models.IntegerField(null=True)  # FK on 'knowledge.WorkState'
+    downstream_bank_effect = models.IntegerField(null=True)  # FK on 'knowledge.WorkBankEffect'
+    upstream_bank_effect = models.IntegerField(null=True)  # FK on 'knowledge.WorkBankEffect'
+    downstream_influence = models.IntegerField(null=True)  # FK on 'knowledge.WorkStreamInfluence'
+    upstream_influence = models.IntegerField(null=True)  # FK on 'knowledge.WorkStreamInfluence'
+    sediment_effect = models.IntegerField(null=True)  # FK on 'knowledge.WorkSedimentEffect'
+    water_effect = models.IntegerField(null=True)  # FK on 'knowledge.WorkWaterEffect'
+    upstream_bed_effect = models.IntegerField(null=True)  # FK on 'knowledge.WorkBedEffect'
+    downstream_bed_effect = models.IntegerField(null=True)  # FK on 'knowledge.WorkBedEffect'
+    fish_continuity_effect = models.IntegerField(null=True)  # FK on 'knowledge.WorkFishContinuityEffect'
+    usage = models.TextField(null=True)
+    width = models.FloatField(null=True)
+    height = models.FloatField(null=True)
+    length = models.FloatField(null=True)
+    drop_height = models.FloatField(null=True)
+    filling = models.FloatField(null=True)
+
+
+class OfflineKnowledgeGeom(models.Model):
+    uuid = models.TextField(primary_key=True)
+    knowledge_attrs_uuid = models.TextField()  # FK on OfflineKnowledgeAttrs
+    geom = models.GeometryField(srid=settings.SRID, spatial_index=True)
+
+
+class OfflineKnowledgeVegetationStrata(models.Model):
+    uuid = models.TextField(primary_key=True)
+    vegetation_strata_id = models.IntegerField()
+    knowledge_attrs_uuid = models.TextField()  # FK on OfflineKnowledgeAttrs
