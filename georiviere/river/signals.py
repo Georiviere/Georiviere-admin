@@ -3,33 +3,18 @@ from django.conf import settings
 from django.contrib.contenttypes.models import ContentType
 from django.contrib.gis.db.models.functions import Distance, Length, LineLocatePoint
 from django.db.models.signals import post_save
-from django.db.models.fields.reverse_related import OneToOneRel
 from django.db.models import F, FloatField, Case, When
 from django.dispatch import receiver
 
 from georiviere.functions import ClosestPoint, LineSubString
 from georiviere.main.models import DistanceToSource
-from georiviere.river.models import Stream, Topology, TopologyMixin
+from georiviere.river.models import Stream, TopologyMixin
 
 from mapentity.models import MapEntityMixin
 
 
 @receiver(post_save, sender=Stream)
-def save_stream(sender, instance, **kwargs):
-    if kwargs['created']:
-        class_topos = [field.related_model for field in instance.topologies.model._meta.get_fields()
-                       if isinstance(field, OneToOneRel)]
-        for class_topo in class_topos:
-            topology = Topology.objects.create(start_position=0, end_position=1, stream=instance)
-            class_topo.objects.create(topology=topology, geom=instance.geom)
-    else:
-        for topology in instance.topologies.all():
-            topology.save()
-
-
-@receiver(post_save, sender=Stream)
 def save_stream_generate_distance_to_source(sender, instance, **kwargs):
-
     for model in apps.get_models():
         if issubclass(model, MapEntityMixin) and not issubclass(model, TopologyMixin) and model != Stream and 'geom' in [field.name for field in model._meta.get_fields()]:
             distances_to_sources = []

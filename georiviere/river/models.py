@@ -1,3 +1,4 @@
+import pgtrigger
 from django.conf import settings
 from django.contrib.contenttypes.models import ContentType
 from django.contrib.gis.db import models
@@ -19,7 +20,7 @@ from mapentity.models import MapEntityMixin
 from georiviere.main.models import AddPropertyBufferMixin
 from georiviere.altimetry import AltimetryMixin
 from georiviere.finances_administration.models import AdministrativeFile
-from georiviere.functions import ClosestPoint, LineSubString
+from georiviere.functions import ClosestPoint
 from georiviere.knowledge.models import Knowledge, FollowUp
 from georiviere.main.models import DistanceToSource
 from georiviere.observations.models import Station
@@ -96,6 +97,37 @@ class Stream(AddPropertyBufferMixin, TimeStampedModelMixin, WatershedPropertiesM
     class Meta:
         verbose_name = _("Stream")
         verbose_name_plural = _("Streams")
+        triggers = AltimetryMixin.Meta.triggers + [
+            pgtrigger.Trigger(
+                name="create_topologies",
+                operation=pgtrigger.Insert,
+                declare=[
+                    ('topology_morphology', 'integer'),
+                    ('topology_status', 'integer')
+                ],
+                when=pgtrigger.After,
+                func="""
+                        INSERT INTO river_topology (stream_id, start_position, end_position, qualified)
+                        VALUES (NEW.id, 0, 1, FALSE)  RETURNING id INTO topology_morphology;
+                        INSERT INTO description_morphology (topology_id, geom, description, date_insert, date_update)
+                                                    VALUES (topology_morphology, NEW.geom, '', NOW(), NOW());
+                        INSERT INTO river_topology (stream_id, start_position, end_position, qualified)
+                        VALUES (NEW.id, 0, 1, FALSE)  RETURNING id INTO topology_status;
+                        INSERT INTO description_status (topology_id, geom, regulation, referencial, description, date_insert, date_update)
+                                                    VALUES (topology_status, NEW.geom, FALSE, FALSE, '', NOW(), NOW());
+                        RETURN NEW;
+                    """
+            ),
+            pgtrigger.Trigger(
+                name="update_topologies",
+                operation=pgtrigger.UpdateOf('geom'),
+                when=pgtrigger.After,
+                func="""
+                                UPDATE river_topology SET id=id WHERE stream_id=NEW.id;
+                                RETURN NEW;
+                            """
+            )
+        ]
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
@@ -216,21 +248,26 @@ class Topology(models.Model):
         else:
             return _("Topology {}").format(self.pk)
 
-    def save(self, *args, **kwargs):
-        super().save(*args, **kwargs)
-        geom_topology = self._meta.model.objects.filter(pk=self.pk) \
-            .annotate(substring=LineSubString(self.stream.geom, self.start_position, self.end_position)).first().substring
-        if hasattr(self, 'status'):
-            self.status.geom = geom_topology
-            self.status.save()
-        elif hasattr(self, 'morphology'):
-            self.morphology.geom = geom_topology
-            self.morphology.save()
-        super().save(force_insert=False)
-
     class Meta:
         verbose_name = _("Topology")
         verbose_name_plural = _("Topologies")
+        triggers = [
+            pgtrigger.Trigger(
+                name="update_topology_geom",
+                operation=pgtrigger.Update | pgtrigger.Insert,
+                when=pgtrigger.After,
+                declare=[('stream_geom', 'geometry')],
+                func="""
+                    SELECT r.geom FROM river_stream r WHERE NEW.stream_id = r.id INTO stream_geom;
+                    UPDATE description_morphology
+                    SET geom = ST_LINESUBSTRING(stream_geom, NEW.start_position, NEW.end_position)
+                    WHERE topology_id = NEW.id;
+                    UPDATE description_status
+                    SET geom = ST_LINESUBSTRING(stream_geom, NEW.start_position, NEW.end_position)
+                    WHERE topology_id = NEW.id;
+                    RETURN NEW;
+                """
+            )]
 
 
 Study.add_property('stations', Station.within_buffer, _("Stations"))
