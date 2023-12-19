@@ -5,6 +5,10 @@ CHANGELOG
 1.3.0+dev    (XXXX-XX-XX)
 ---------------------
 
+**New features**
+
+- add load_rivers command
+
 **Bug fix**
 
 - Force translation defined in API url /api/portal/<lang> (fix #222)
