@@ -20,16 +20,10 @@ def check_srid_has_meter_unit():
 class Command(BaseCommand):
     def handle(self, *args, **options):
         check_srid_has_meter_unit()
-        # set_search_path()
-        # for app in apps.get_app_configs():
-        #     # move_models_to_schemas(app)
-        #     load_sql_files(app, 'pre')
+        for app in apps.get_app_configs():
+             load_sql_files(app, 'pre')
         super().handle(*args, **options)
         for app in apps.get_app_configs():
-            # move_models_to_schemas(app)
-            try:
-                load_sql_files(app, 'post')
-            except Exception:
-                pass
+            load_sql_files(app, 'post')
         call_command('sync_translation_fields', '--noinput')
         call_command('update_translation_fields')
