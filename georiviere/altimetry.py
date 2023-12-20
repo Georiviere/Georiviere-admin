@@ -11,7 +11,7 @@ class AltimetryMixin(BaseAltimetryMixin):
 
     def save(self, *args, **kwargs):
         super().save(*args, **kwargs)
-        self.reload()
+        self.reload(self)
 
     class Meta:
         abstract = True
