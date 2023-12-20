@@ -6,11 +6,17 @@ import django
 from django.contrib.gis.geos import Point, LineString, Polygon
 from faker import Faker
 
-os.environ.setdefault('DJANGO_SETTINGS_MODULE','georiviere.settings')
+os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'georiviere.settings')
 django.setup()
 faker = Faker('fr_FR')
 
-from georiviere.knowledge.models import OfflineKnowledgeAttrs, OfflineKnowledgeGeom  # after django.setup()
+from georiviere.knowledge.models import (  # after django.setup()
+    OfflineKnowledgeAttrs,
+    OfflineKnowledgeGeom,
+    OfflineFollowupAttrs,
+    OfflineFollowupGeom,
+)
+
 
 def get_random_point():
     min_lon = 840_000
@@ -45,6 +51,7 @@ def get_random_polygon():
     print(coords)
     return Polygon(coords)
 
+# Création connaissances
 
 for i in range(100):
     print(f"Création connaissance ponctuelle #{i}")
@@ -61,7 +68,6 @@ for i in range(100):
     geom.save()
     print("Fait")
 
-
 for i in range(100):
     print(f"Création connaissance linéaire #{i}")
     k = OfflineKnowledgeAttrs(
@@ -77,7 +83,6 @@ for i in range(100):
     geom.save()
     print("Fait")
 
-
 for i in range(100):
     print(f"Création connaissance polygone #{i}")
     k = OfflineKnowledgeAttrs(
@@ -89,6 +94,54 @@ for i in range(100):
         uuid=uuid4(),
         geom=get_random_polygon(),
         knowledge_attrs_uuid=k.uuid
+    )
+    geom.save()
+    print("Fait")
+
+
+# Création suivis
+
+for i in range(100):
+    print(f"Création suivi ponctuel #{i}")
+    k = OfflineFollowupAttrs(
+        uuid=uuid4(),
+        name=faker.text(max_nb_chars=20)
+    )
+    k.save()
+    geom = OfflineFollowupGeom(
+        uuid=uuid4(),
+        geom=get_random_point(),
+        followup_attrs_uuid=k.uuid
+    )
+    geom.save()
+    print("Fait")
+
+for i in range(100):
+    print(f"Création suivi linéaire #{i}")
+    k = OfflineFollowupAttrs(
+        uuid=uuid4(),
+        name=faker.text(max_nb_chars=20)
+    )
+    k.save()
+    geom = OfflineFollowupGeom(
+        uuid=uuid4(),
+        geom=get_random_linestring(),
+        followup_attrs_uuid=k.uuid
+    )
+    geom.save()
+    print("Fait")
+
+for i in range(100):
+    print(f"Création suivi polygone #{i}")
+    k = OfflineFollowupAttrs(
+        uuid=uuid4(),
+        name=faker.text(max_nb_chars=20)
+    )
+    k.save()
+    geom = OfflineFollowupGeom(
+        uuid=uuid4(),
+        geom=get_random_polygon(),
+        followup_attrs_uuid=k.uuid
     )
     geom.save()
     print("Fait")
