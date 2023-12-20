@@ -2,16 +2,16 @@ from geotrek.altimetry.models import AltimetryMixin as BaseAltimetryMixin
 
 
 class AltimetryMixin(BaseAltimetryMixin):
-    def refresh(self):
+    def reload(self):
         # Update object's computed values (reload from database)
         if self.pk:
             fromdb = self.__class__.objects.get(pk=self.pk)
-            BaseAltimetryMixin.reload(fromdb)
+            BaseAltimetryMixin.reload(self, fromdb)
         return self
 
     def save(self, *args, **kwargs):
         super().save(*args, **kwargs)
-        self.refresh()
+        self.reload()
 
     class Meta:
         abstract = True
