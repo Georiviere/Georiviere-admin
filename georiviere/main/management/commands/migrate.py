@@ -22,8 +22,11 @@ class Command(BaseCommand):
         check_srid_has_meter_unit()
         for app in apps.get_app_configs():
             load_sql_files(app, 'pre')
-            load_sql_files(app, 'post')
         super().handle(*args, **options)
-
+        for app in apps.get_app_configs():
+            try:
+                load_sql_files(app, 'post')
+            except Exception:
+                pass
         call_command('sync_translation_fields', '--noinput')
         call_command('update_translation_fields')

@@ -199,7 +199,7 @@ class Morphology(AddPropertyBufferMixin, TopologyMixin, TimeStampedModelMixin,
     class Meta:
         verbose_name = _("Morphology")
         verbose_name_plural = _("Morphologies")
-        triggers = AltimetryMixin.Meta.triggers
+        # triggers = AltimetryMixin.Meta.triggers
 
     def __str__(self):
         if self.main_flow:
@@ -269,7 +269,6 @@ class Land(AddPropertyBufferMixin, TimeStampedModelMixin, WatershedPropertiesMix
     class Meta:
         verbose_name = _("Land")
         verbose_name_plural = _("Lands")
-        triggers = AltimetryMixin.Meta.triggers
 
     def __str__(self):
         return f"{self.land_type}"
@@ -308,7 +307,6 @@ class Usage(AddPropertyBufferMixin, TimeStampedModelMixin, WatershedPropertiesMi
     class Meta:
         verbose_name = _("Usage")
         verbose_name_plural = _("Usages")
-        triggers = AltimetryMixin.Meta.triggers
 
     def __str__(self):
         return ', '.join(self.usage_types.values_list("label", flat=True))
@@ -357,7 +355,7 @@ class Status(TopologyMixin, AddPropertyBufferMixin, TimeStampedModelMixin, Water
     class Meta:
         verbose_name = _("Status")
         verbose_name_plural = _("Statuses")
-        triggers = AltimetryMixin.Meta.triggers
+        # triggers = AltimetryMixin.Meta.triggers
 
     def __str__(self):
         if self.status_types.count():

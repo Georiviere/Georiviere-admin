@@ -34,7 +34,7 @@ class Command(BaseCommand):
             Stream.objects.all().delete()
             self.stdout.write(self.style.SUCCESS("done!"))
 
-        batch_size = 100
+        batch_size = 50
 
         objs = (Stream(geom=feat.geom.geos,
                        source_location=Point(feat.geom.geos[0]),
