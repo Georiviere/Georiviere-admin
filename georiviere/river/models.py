@@ -96,37 +96,6 @@ class Stream(AddPropertyBufferMixin, TimeStampedModelMixin, WatershedPropertiesM
     class Meta:
         verbose_name = _("Stream")
         verbose_name_plural = _("Streams")
-        # triggers = AltimetryMixin.Meta.triggers + [
-        #     pgtrigger.Trigger(
-        #         name="create_topologies",
-        #         operation=pgtrigger.Insert,
-        #         declare=[
-        #             ('topology_morphology', 'integer'),
-        #             ('topology_status', 'integer')
-        #         ],
-        #         when=pgtrigger.After,
-        #         func="""
-        #                 INSERT INTO river_topology (stream_id, start_position, end_position, qualified)
-        #                 VALUES (NEW.id, 0, 1, FALSE)  RETURNING id INTO topology_morphology;
-        #                 INSERT INTO description_morphology (topology_id, geom, description, date_insert, date_update)
-        #                                             VALUES (topology_morphology, NEW.geom, '', NOW(), NOW());
-        #                 INSERT INTO river_topology (stream_id, start_position, end_position, qualified)
-        #                 VALUES (NEW.id, 0, 1, FALSE)  RETURNING id INTO topology_status;
-        #                 INSERT INTO description_status (topology_id, geom, regulation, referencial, description, date_insert, date_update)
-        #                                             VALUES (topology_status, NEW.geom, FALSE, FALSE, '', NOW(), NOW());
-        #                 RETURN NEW;
-        #             """
-        #     ),
-        #     pgtrigger.Trigger(
-        #         name="update_topologies",
-        #         operation=pgtrigger.UpdateOf('geom'),
-        #         when=pgtrigger.After,
-        #         func="""
-        #                         UPDATE river_topology SET id=id WHERE stream_id=NEW.id;
-        #                         RETURN NEW;
-        #                     """
-        #     )
-        # ]
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
