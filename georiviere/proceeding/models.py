@@ -49,7 +49,6 @@ class Proceeding(AltimetryMixin, TimeStampedModelMixin, WatershedPropertiesMixin
     class Meta:
         verbose_name = _("Proceeding")
         verbose_name_plural = _("Proceedings")
-        triggers = AltimetryMixin.Meta.triggers
 
 
 class Event(models.Model):
