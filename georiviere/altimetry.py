@@ -2,7 +2,7 @@ from geotrek.altimetry.models import AltimetryMixin as BaseAltimetryMixin
 
 
 class AltimetryMixin(BaseAltimetryMixin):
-    def reload(self):
+    def reload(self, *args, **kwargs):
         # Update object's computed values (reload from database)
         if self.pk:
             fromdb = self.__class__.objects.get(pk=self.pk)
