@@ -8,10 +8,10 @@ class AltimetryMixin(BaseAltimetryMixin):
             fromdb = self.__class__.objects.get(pk=self.pk)
             BaseAltimetryMixin.reload(self, fromdb)
         return self
-    
+
     def save(self, *args, **kwargs):
         super().save(*args, **kwargs)
         self.reload()
-    
+
     class Meta:
         abstract = True
