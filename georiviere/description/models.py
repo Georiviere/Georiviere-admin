@@ -199,7 +199,6 @@ class Morphology(AddPropertyBufferMixin, TopologyMixin, TimeStampedModelMixin,
     class Meta:
         verbose_name = _("Morphology")
         verbose_name_plural = _("Morphologies")
-        # triggers = AltimetryMixin.Meta.triggers
 
     def __str__(self):
         if self.main_flow:
@@ -355,7 +354,6 @@ class Status(TopologyMixin, AddPropertyBufferMixin, TimeStampedModelMixin, Water
     class Meta:
         verbose_name = _("Status")
         verbose_name_plural = _("Statuses")
-        # triggers = AltimetryMixin.Meta.triggers
 
     def __str__(self):
         if self.status_types.count():
