@@ -200,3 +200,28 @@ class InterventionDisorder(StructureOrNoneRelated):
         if self.structure:
             return "{} ({})".format(self.label, self.structure.name)
         return self.label
+
+
+class OfflineIntervention(models.Model):
+    uuid = models.TextField(primary_key=True)
+    gra_id = models.IntegerField(null=True)  # FK on 'maintenance.Intervention'
+    geom = models.GeometryField(srid=settings.SRID, spatial_index=True, null=True)
+    knowledge_uuid = models.TextField(null=True)  # FK on 'OfflineKnowledge'
+    name = models.CharField(max_length=128, null=True)
+    date = models.DateField(null=True)
+    intervention_status = models.IntegerField(null=True)  # FK on 'InterventionStatus'
+    intervention_type = models.IntegerField(null=True)  # FK on 'InterventionType'
+    stake = models.IntegerField(null=True)  # FK on 'InterventionStake'
+    description = models.TextField(null=True)
+    length = models.FloatField(default=0.0, null=True)
+    width = models.FloatField(default=0.0, null=True)
+    height = models.FloatField(default=0.0, null=True)
+    date_insert = models.DateTimeField(null=True)
+    date_update = models.DateTimeField(null=True)
+    username = models.TextField(null=True)
+
+
+class OfflineInterventionDisorder(models.Model):
+    uuid = models.TextField(primary_key=True)
+    disorder_id = models.IntegerField(null=True)  # FK on InterventionDisorder
+    intervention_uuid = models.TextField(null=True)  # FK on OfflineIntervention

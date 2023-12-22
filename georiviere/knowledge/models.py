@@ -540,16 +540,16 @@ class FollowUpMeasure(models.Model):
     results = models.TextField(verbose_name=_("Results"))
 
 
-class OfflineKnowledgeAttrs(models.Model):
+class OfflineKnowledge(models.Model):
     uuid = models.TextField(primary_key=True)
-    gra_id = models.IntegerField(null=True)
+    gra_id = models.IntegerField(null=True)  # FK on 'knowledge.Knowledge'
+    geom = models.GeometryField(srid=settings.SRID, spatial_index=True, null=True)
     name = models.TextField(null=True)
-    knowledge_type = models.IntegerField(null=True)  # FK on 'knowledge.KnowledgeType'
     code = models.TextField(null=True)
     description = models.TextField(null=True)
     date_insert = models.DateTimeField(null=True)
     date_update = models.DateTimeField(null=True)
-    structure = models.IntegerField(null=True)  # ForeignKey on Structure
+    knowledge_type = models.IntegerField(null=True)  # FK on 'knowledge.KnowledgeType'
     # Fields from vegetation 1-to-1
     vegetation_type = models.IntegerField(null=True)  # FK on 'knowledge.VegetationType'
     vegetation_state = models.IntegerField(null=True)  # FK on 'knowledge.VegetationState'
@@ -576,53 +576,27 @@ class OfflineKnowledgeAttrs(models.Model):
     length = models.FloatField(null=True)
     drop_height = models.FloatField(null=True)
     filling = models.FloatField(null=True)
-
-
-class OfflineKnowledgeGeom(models.Model):
-    uuid = models.TextField(primary_key=True)
-    knowledge_attrs_uuid = models.TextField()  # FK on OfflineKnowledgeAttrs
-    geom = models.GeometryField(srid=settings.SRID, spatial_index=True)
+    username = models.TextField(null=True)
 
 
 class OfflineKnowledgeVegetationStrata(models.Model):
     uuid = models.TextField(primary_key=True)
-    vegetation_strata_id = models.IntegerField()
-    knowledge_attrs_uuid = models.TextField()  # FK on OfflineKnowledgeAttrs
+    vegetation_strata_id = models.IntegerField(null=True)  # FK on VegetationStrata
+    knowledge_uuid = models.TextField(null=True)  # FK on OfflineKnowledge
 
-class OfflineFollowupAttrs(models.Model):
+class OfflineFollowup(models.Model):
     uuid = models.TextField(primary_key=True)
+    gra_id = models.IntegerField(null=True)  # FK on 'knowledge.FollowUp'
+    geom = models.GeometryField(srid=settings.SRID, spatial_index=True, null=True)
+    knowledge_uuid = models.TextField(null=True)  # FK on 'OfflineKnowledge'
     name = models.CharField(max_length=128, null=True)
     date = models.DateField(null=True)
-
-
-    followup_type = models.IntegerField(null=True)  # FK on 'FollowUpType'
     measure_frequency = models.CharField(max_length=200, null=True)
-
-    knowledge_attrs_uuid = models.TextField()  # FK on 'OfflineKnowledgeAttrs'
-    description = models.TextField()
-
-    # Technical information
+    description = models.TextField(null=True)
     length = models.FloatField(default=0.0, null=True)
     width = models.FloatField(default=0.0, null=True)
     height = models.FloatField(default=0.0, null=True)
-
-    # mdu: pas pris en compte pour le mode hors-ligne
-    # contributions = GenericRelation(
-    #     'contribution.Contribution',
-    #     content_type_field='linked_object_type',
-    #     object_id_field='linked_object_id',
-    # )
-    # generic relations
-    # administrative_operations = GenericRelation(AdministrativeOperation)
-
     date_insert = models.DateTimeField(null=True)
     date_update = models.DateTimeField(null=True)
-
-    # mdu: pas pris en compte -> sera déterminé par la structure auquel le technicien est attaché
-    # structure = models.ForeignKey(Structure, default=default_structure_pk, on_delete=models.CASCADE,
-    #                               verbose_name=_("Related structure"))
-
-class OfflineFollowupGeom(models.Model):
-    uuid = models.TextField(primary_key=True)
-    followup_attrs_uuid = models.TextField(null=True)  # FK on OfflineFollowupAttrs
-    geom = models.GeometryField(srid=settings.SRID, spatial_index=True)
+    followup_type = models.IntegerField(null=True)  # FK on 'FollowUpType'
+    username = models.TextField(null=True)

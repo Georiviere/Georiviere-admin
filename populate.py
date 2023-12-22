@@ -1,3 +1,18 @@
+"""
+script pour générer des objets pour les tables tampons de GRA :
+
+- knowledge_offlineknowledge
+- knowledge_offlinefollowup
+- maintenance_offlineintervention
+
+Pour les 3 types de géométrie, pour 2 utilisateurs. Seuls certains champs reçoivent une valeur, le but
+est de tester l'UI de QGIS/QField avec beaucoup d'objets. Ou de vérifier certaines hypothèses.
+
+Pour exécuter :
+
+    docker compose run --rm web /opt/venv/bin/python /opt/georiviere-admin/populate.py
+"""
+
 import os
 from random import randint
 from uuid import uuid4
@@ -11,10 +26,11 @@ django.setup()
 faker = Faker('fr_FR')
 
 from georiviere.knowledge.models import (  # after django.setup()
-    OfflineKnowledgeAttrs,
-    OfflineKnowledgeGeom,
-    OfflineFollowupAttrs,
-    OfflineFollowupGeom,
+    OfflineKnowledge,
+    OfflineFollowup
+)
+from georiviere.maintenance.models import (
+    OfflineIntervention,
 )
 
 
@@ -51,97 +67,79 @@ def get_random_polygon():
     print(coords)
     return Polygon(coords)
 
-# Création connaissances
 
-for i in range(100):
-    print(f"Création connaissance ponctuelle #{i}")
-    k = OfflineKnowledgeAttrs(
-        uuid=uuid4(),
-        name=faker.text(max_nb_chars=20)
-    )
-    k.save()
-    geom = OfflineKnowledgeGeom(
-        uuid=uuid4(),
-        geom=get_random_point(),
-        knowledge_attrs_uuid=k.uuid
-    )
-    geom.save()
-    print("Fait")
+map = {
+    "connaissance": OfflineKnowledge,
+    "suivi": OfflineFollowup,
+    "intervention": OfflineIntervention,
+}
 
-for i in range(100):
-    print(f"Création connaissance linéaire #{i}")
-    k = OfflineKnowledgeAttrs(
-        uuid=uuid4(),
-        name=faker.text(max_nb_chars=20)
-    )
-    k.save()
-    geom = OfflineKnowledgeGeom(
-        uuid=uuid4(),
-        geom=get_random_linestring(),
-        knowledge_attrs_uuid=k.uuid
-    )
-    geom.save()
-    print("Fait")
+serial_counters = {
+    "connaissance": 0,
+    "suivi": 0,
+    "intervention": 0,
+}
 
-for i in range(100):
-    print(f"Création connaissance polygone #{i}")
-    k = OfflineKnowledgeAttrs(
-        uuid=uuid4(),
-        name=faker.text(max_nb_chars=20)
-    )
-    k.save()
-    geom = OfflineKnowledgeGeom(
-        uuid=uuid4(),
-        geom=get_random_polygon(),
-        knowledge_attrs_uuid=k.uuid
-    )
-    geom.save()
-    print("Fait")
+def get_next_id(model_name):
+    next_id = serial_counters[model_name]
+    serial_counters[model_name] += 1
+    return next_id
 
 
-# Création suivis
+for model_name, model in map.items():
 
-for i in range(100):
-    print(f"Création suivi ponctuel #{i}")
-    k = OfflineFollowupAttrs(
-        uuid=uuid4(),
-        name=faker.text(max_nb_chars=20)
-    )
-    k.save()
-    geom = OfflineFollowupGeom(
-        uuid=uuid4(),
-        geom=get_random_point(),
-        followup_attrs_uuid=k.uuid
-    )
-    geom.save()
-    print("Fait")
+    for i in range(100):
+        print(f"Création {model_name} ponctuelle #{i}")
 
-for i in range(100):
-    print(f"Création suivi linéaire #{i}")
-    k = OfflineFollowupAttrs(
-        uuid=uuid4(),
-        name=faker.text(max_nb_chars=20)
-    )
-    k.save()
-    geom = OfflineFollowupGeom(
-        uuid=uuid4(),
-        geom=get_random_linestring(),
-        followup_attrs_uuid=k.uuid
-    )
-    geom.save()
-    print("Fait")
+        # Field values from GRA (common to all users)
+        gra_id = get_next_id(model_name)
+        geom = get_random_point()
+        name = f"{model_name[:4]}. {faker.text(max_nb_chars=20)}"
 
-for i in range(100):
-    print(f"Création suivi polygone #{i}")
-    k = OfflineFollowupAttrs(
-        uuid=uuid4(),
-        name=faker.text(max_nb_chars=20)
-    )
-    k.save()
-    geom = OfflineFollowupGeom(
-        uuid=uuid4(),
-        geom=get_random_polygon(),
-        followup_attrs_uuid=k.uuid
-    )
-    geom.save()
-    print("Fait")
+        for username in ("Alice", "Bob"):
+            k = model(
+                uuid=uuid4(),  # uuid is user-specific,
+                gra_id=gra_id,
+                geom=geom,
+                name=name,
+                username=username,
+            )
+            k.save()
+        print("Fait")
+
+    for i in range(100):
+        print(f"Création {model_name} linéaire #{i}")
+
+        # Field values from GRA (common to all users)
+        gra_id = get_next_id(model_name)
+        geom = get_random_linestring()
+        name = f"{model_name[:4]}. {faker.text(max_nb_chars=20)}"
+
+        for username in ("Alice", "Bob"):
+            k = model(
+                uuid=uuid4(),  # uuid is user-specific,
+                gra_id=gra_id,
+                geom=geom,
+                name=name,
+                username=username,
+            )
+            k.save()
+        print("Fait")
+
+    for i in range(100):
+        print(f"Création {model_name} polygone #{i}")
+
+        # Field values from GRA (common to all users)
+        gra_id = get_next_id(model_name)
+        geom = get_random_polygon()
+        name = f"{model_name[:4]}. {faker.text(max_nb_chars=20)}"
+
+        for username in ("Alice", "Bob"):
+            k = model(
+                uuid=uuid4(),  # uuid is user-specific,
+                geom=geom,
+                name=name,
+                username=username,
+            )
+            k.save()
+        print("Fait")
