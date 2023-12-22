@@ -80,6 +80,9 @@ serial_counters = {
     "intervention": 0,
 }
 
+usernames = ("Bob", )
+object_quantity = 1000  # for each geom type and each model
+
 def get_next_id(model_name):
     next_id = serial_counters[model_name]
     serial_counters[model_name] += 1
@@ -88,7 +91,7 @@ def get_next_id(model_name):
 
 for model_name, model in map.items():
 
-    for i in range(100):
+    for i in range(object_quantity):
         print(f"Création {model_name} ponctuelle #{i}")
 
         # Field values from GRA (common to all users)
@@ -96,7 +99,7 @@ for model_name, model in map.items():
         geom = get_random_point()
         name = f"{model_name[:4]}. {faker.text(max_nb_chars=20)}"
 
-        for username in ("Alice", "Bob"):
+        for username in usernames:
             k = model(
                 uuid=uuid4(),  # uuid is user-specific,
                 gra_id=gra_id,
@@ -107,7 +110,7 @@ for model_name, model in map.items():
             k.save()
         print("Fait")
 
-    for i in range(100):
+    for i in range(object_quantity):
         print(f"Création {model_name} linéaire #{i}")
 
         # Field values from GRA (common to all users)
@@ -115,7 +118,7 @@ for model_name, model in map.items():
         geom = get_random_linestring()
         name = f"{model_name[:4]}. {faker.text(max_nb_chars=20)}"
 
-        for username in ("Alice", "Bob"):
+        for username in usernames:
             k = model(
                 uuid=uuid4(),  # uuid is user-specific,
                 gra_id=gra_id,
@@ -126,7 +129,7 @@ for model_name, model in map.items():
             k.save()
         print("Fait")
 
-    for i in range(100):
+    for i in range(object_quantity):
         print(f"Création {model_name} polygone #{i}")
 
         # Field values from GRA (common to all users)
@@ -134,7 +137,7 @@ for model_name, model in map.items():
         geom = get_random_polygon()
         name = f"{model_name[:4]}. {faker.text(max_nb_chars=20)}"
 
-        for username in ("Alice", "Bob"):
+        for username in usernames:
             k = model(
                 uuid=uuid4(),  # uuid is user-specific,
                 geom=geom,

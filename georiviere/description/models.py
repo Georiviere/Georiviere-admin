@@ -391,6 +391,43 @@ class Status(TopologyMixin, AddPropertyBufferMixin, TimeStampedModelMixin, Water
         return _("Add a new status")
 
 
+class OfflineMorphology(models.Model):
+    uuid = models.TextField(primary_key=True)
+    gra_id = models.IntegerField(null=True)  # FK on Morphology
+    stream_name = models.TextField(null=True)
+    geom = models.LineStringField(srid=settings.SRID, spatial_index=True)
+    qualified = models.BooleanField(null=True)
+    good_working_space_left = models.IntegerField(null=True)  # FK on WorkingSpaceType
+    good_working_space_right = models.IntegerField(null=True)  # FK on WorkingSpaceType
+    facies_diversity = models.IntegerField(null=True)  # FK on FaciesDiversity
+    main_flow = models.IntegerField(null=True)  # FK on FlowType
+    granulometric_diversity = models.IntegerField(null=True)  # FK on GranulometricDiversity
+    full_edge_height = models.FloatField(default=0.0, null=True)
+    full_edge_width = models.FloatField(default=0.0, null=True)
+    sediment_dynamic = models.IntegerField(null=True)  # FK on SedimentDynamic
+    bank_state_left = models.IntegerField(null=True)  # FK on BankState
+    bank_state_right = models.IntegerField(null=True)  # FK on BankState
+    habitats_diversity = models.IntegerField(null=True)  # FK on HabitatsDiversity
+    main_habitat = models.IntegerField(null=True)  # FK on HabitatType
+    plan_layout = models.IntegerField(null=True)  # FK on PlanLayoutType
+    description = models.TextField(null=True)
+    date_insert = models.DateTimeField(null=True)
+    date_update = models.DateTimeField(null=True)
+    username = models.TextField(null=True)
+
+
+class OfflineSecondaryFlow(models.Model):
+    uuid = models.TextField(primary_key=True)
+    morphology_uuid = models.TextField(null=True)  # FK on Morphology
+    flow_type_id = models.IntegerField(null=True)  # FK on FlowType
+
+
+class OfflineSecondaryHabitat(models.Model):
+    uuid = models.TextField(primary_key=True)
+    morphology_uuid = models.TextField(null=True)  # FK on Morphology
+    habitat_type_id = models.IntegerField(null=True)  # FK on HabitatType
+
+
 Land.add_property('streams', Stream.within_buffer, _("Stream"))
 Land.add_property('status', Status.within_buffer, _("Status"))
 Land.add_property('morphologies', Morphology.within_buffer, _("Morphologies"))
