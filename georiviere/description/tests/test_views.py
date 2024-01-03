@@ -105,8 +105,8 @@ class SatusViewTestCase(TopologyTestCase):
     def get_expected_json_attrs(self):
         return {
             'id': self.obj.pk,
-            'date_update': '2020-03-17T00:00:00Z',
-            'date_insert': '2020-03-17T00:00:00Z',
+            'date_update': self.obj.date_update.isoformat().replace('+00:00', 'Z'),
+            'date_insert': self.obj.date_insert.isoformat().replace('+00:00', 'Z'),
             'description': '',
             'length': self.obj.length,
             'geom_3d': self.obj.geom_3d.ewkt,
@@ -147,8 +147,8 @@ class MorphologyViewTestCase(TopologyTestCase):
     def get_expected_json_attrs(self):
         return {
             'id': self.obj.pk,
-            'date_update': '2020-03-17T00:00:00Z',
-            'date_insert': '2020-03-17T00:00:00Z',
+            'date_update': self.obj.date_update.isoformat().replace('+00:00', 'Z'),
+            'date_insert': self.obj.date_insert.isoformat().replace('+00:00', 'Z'),
             'description': '',
             'bank_state_left': None,
             'bank_state_right': None,

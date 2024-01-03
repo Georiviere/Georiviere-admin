@@ -1,4 +1,5 @@
 from geotrek.altimetry.models import AltimetryMixin as BaseAltimetryMixin
+from geotrek.common.mixins import TimeStampedModelMixin
 
 
 class AltimetryMixin(BaseAltimetryMixin):
@@ -7,6 +8,7 @@ class AltimetryMixin(BaseAltimetryMixin):
         if self.pk:
             fromdb = self.__class__.objects.get(pk=self.pk)
             BaseAltimetryMixin.reload(self, fromdb)
+            TimeStampedModelMixin.reload(self, fromdb)
         return self
 
     def save(self, *args, **kwargs):
