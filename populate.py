@@ -110,7 +110,7 @@ serial_counters = {
     "intervention": 0,
 }
 
-usernames = ("Bob",)
+usernames = ("User1", "User2", "User3", "User4", "User5")
 object_quantity = 1000  # for each geom type and each model
 
 
@@ -128,7 +128,7 @@ for model_name, model in map.items():
         # Field values from GRA (common to all users)
         gra_id = get_next_id(model_name)
         geom = get_random_point()
-        name = f"{model_name[:4]}. {faker.text(max_nb_chars=20)}"
+        name = f"{faker.text(max_nb_chars=20)} ({model_name})"
 
         for username in usernames:
             k = model(
@@ -147,7 +147,7 @@ for model_name, model in map.items():
         # Field values from GRA (common to all users)
         gra_id = get_next_id(model_name)
         geom = get_random_linestring()
-        name = f"{model_name[:4]}. {faker.text(max_nb_chars=20)}"
+        name = f"{faker.text(max_nb_chars=20)} ({model_name})"
 
         for username in usernames:
             k = model(
@@ -166,7 +166,7 @@ for model_name, model in map.items():
         # Field values from GRA (common to all users)
         gra_id = get_next_id(model_name)
         geom = get_random_polygon()
-        name = f"{model_name[:4]}. {faker.text(max_nb_chars=20)}"
+        name = f"{faker.text(max_nb_chars=20)} ({model_name})"
 
         for username in usernames:
             k = model(
