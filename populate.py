@@ -33,6 +33,14 @@ from georiviere.maintenance.models import (
     OfflineIntervention,
 )
 
+linestring_relative_coords = [
+    [-28, 5],
+    [-55, -6],
+    [-70, -20],
+    [-73, -35],
+    [-76, -62],
+]
+
 polygon_relative_coords = [
     [118, 229],
     [303, 266],
@@ -58,19 +66,19 @@ def get_random_point():
     return Point(float(lon), float(lat), srid=2154)
 
 
-def get_random_linestring(delta=(-50, 50)):
-    first_point = get_random_point()
-    next_point = Point(
-        first_point.x + randint(*delta),
-        first_point.y + randint(*delta),
-        srid=2154
-    )
-    last_point = Point(
-        next_point.x + randint(*delta),
-        next_point.y + randint(*delta),
-        srid=2154
-    )
-    return LineString(first_point, next_point, last_point)
+def get_random_linestring():
+    from copy import copy
+    origin = get_random_point()
+    coords = []
+    coords.append(copy(origin))
+    prev = origin  # previous
+    for rel_coord in linestring_relative_coords:
+        next_point = Point(prev.x + rel_coord[0],
+                           prev.y + rel_coord[1],
+                           srid=2154)
+        coords.append(next_point)
+        prev = next_point
+    return LineString(coords)
 
 
 def get_random_polygon():
@@ -80,7 +88,9 @@ def get_random_polygon():
     coords.append(copy(origin))
     prev = origin  # previous
     for rel_coord in polygon_relative_coords:
-        next_point = Point(prev.x + rel_coord[0], prev.y + rel_coord[1], srid=2154)
+        next_point = Point(prev.x + rel_coord[0],
+                           prev.y + rel_coord[1],
+                           srid=2154)
         coords.append(next_point)
         prev = next_point
     coords.append(copy(origin))
@@ -99,8 +109,9 @@ serial_counters = {
     "intervention": 0,
 }
 
-usernames = ("Bob", )
+usernames = ("Bob",)
 object_quantity = 1000  # for each geom type and each model
+
 
 def get_next_id(model_name):
     next_id = serial_counters[model_name]
