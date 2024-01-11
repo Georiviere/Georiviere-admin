@@ -33,6 +33,20 @@ from georiviere.maintenance.models import (
     OfflineIntervention,
 )
 
+polygon_relative_coords = [
+    [118, 229],
+    [303, 266],
+    [422, 222],
+    [493, 156],
+    [567, 42],
+    [655, 35],
+    [661, -121],
+    [561, -329],
+    [358, -377],
+    [177, -266],
+    [-13, -176],
+]
+
 
 def get_random_point():
     min_lon = 840_000
@@ -60,11 +74,16 @@ def get_random_linestring(delta=(-50, 50)):
 
 
 def get_random_polygon():
-    linestring = get_random_linestring(delta=(0, 500))
-    coords = list(linestring.coords)
-    print(coords)
-    coords.append(coords[0])
-    print(coords)
+    from copy import copy
+    origin = get_random_point()
+    coords = []
+    coords.append(copy(origin))
+    prev = origin  # previous
+    for rel_coord in polygon_relative_coords:
+        next_point = Point(prev.x + rel_coord[0], prev.y + rel_coord[1], srid=2154)
+        coords.append(next_point)
+        prev = next_point
+    coords.append(copy(origin))
     return Polygon(coords)
 
 
