@@ -135,7 +135,6 @@ INSTALLED_APPS = PROJECT_APPS + [
     'embed_video',
     'djgeojson',
     'django_filters',
-    #'pgtrigger',
     'compressor',
     'mapentity',  # mapentity should be placed after app declaring paperclip models
     'leaflet',
