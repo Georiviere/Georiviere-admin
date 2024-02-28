@@ -45,7 +45,7 @@ def save_objects_generate_distance_to_source(sender, instance, **kwargs):
                                             ).exclude(stream__in=streams).delete()
 
     elif hasattr(instance, 'topology'):
-        stream = annotate_distance_to_source(Stream.objects.all(), instance).get(pk=instance.topology.stream.pk)
+        stream = annotate_distance_to_source(Stream.objects.all(), instance).get(pk=instance.topology.stream_id)
         DistanceToSource.objects.update_or_create(
             object_id=instance.pk,
             content_type=ContentType.objects.get_for_model(instance._meta.model),

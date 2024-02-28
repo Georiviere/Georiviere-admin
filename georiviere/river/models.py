@@ -19,7 +19,7 @@ from mapentity.models import MapEntityMixin
 from georiviere.main.models import AddPropertyBufferMixin
 from georiviere.altimetry import AltimetryMixin
 from georiviere.finances_administration.models import AdministrativeFile
-from georiviere.functions import ClosestPoint, LineSubString
+from georiviere.functions import ClosestPoint
 from georiviere.knowledge.models import Knowledge, FollowUp
 from georiviere.main.models import DistanceToSource
 from georiviere.observations.models import Station
@@ -216,21 +216,26 @@ class Topology(models.Model):
         else:
             return _("Topology {}").format(self.pk)
 
-    def save(self, *args, **kwargs):
-        super().save(*args, **kwargs)
-        geom_topology = self._meta.model.objects.filter(pk=self.pk) \
-            .annotate(substring=LineSubString(self.stream.geom, self.start_position, self.end_position)).first().substring
-        if hasattr(self, 'status'):
-            self.status.geom = geom_topology
-            self.status.save()
-        elif hasattr(self, 'morphology'):
-            self.morphology.geom = geom_topology
-            self.morphology.save()
-        super().save(force_insert=False)
-
     class Meta:
         verbose_name = _("Topology")
         verbose_name_plural = _("Topologies")
+        # triggers = [
+        #     pgtrigger.Trigger(
+        #         name="update_topology_geom",
+        #         operation=pgtrigger.Update | pgtrigger.Insert,
+        #         when=pgtrigger.After,
+        #         declare=[('stream_geom', 'geometry')],
+        #         func="""
+        #             SELECT r.geom FROM river_stream r WHERE NEW.stream_id = r.id INTO stream_geom;
+        #             UPDATE description_morphology
+        #             SET geom = ST_LINESUBSTRING(stream_geom, NEW.start_position, NEW.end_position)
+        #             WHERE topology_id = NEW.id;
+        #             UPDATE description_status
+        #             SET geom = ST_LINESUBSTRING(stream_geom, NEW.start_position, NEW.end_position)
+        #             WHERE topology_id = NEW.id;
+        #             RETURN NEW;
+        #         """
+        #     )]
 
 
 Study.add_property('stations', Station.within_buffer, _("Stations"))
