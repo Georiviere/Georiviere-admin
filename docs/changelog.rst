@@ -13,6 +13,10 @@ CHANGELOG
 
 - Add sensitivity contact and URL for species in portal API.
 
+**Documentation**
+
+- Update install documentation
+
 
 1.3.0    (2023-11-17)
 -------------------------
