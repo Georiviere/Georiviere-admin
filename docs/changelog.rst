@@ -17,6 +17,7 @@ CHANGELOG
 **Documentation**
 
 - Update install documentation
+- Update IGN URL in custom.py
 
 
 1.3.0    (2023-11-17)
