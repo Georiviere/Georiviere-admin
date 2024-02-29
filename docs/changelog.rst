@@ -8,6 +8,7 @@ CHANGELOG
 **Bug fix**
 
 - Force translation defined in API url /api/portal/<lang> (fix #222)
+- Add UID/GID mapping to fix problem at installation
 
 **Enhancement**
 
