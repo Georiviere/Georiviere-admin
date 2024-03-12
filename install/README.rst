@@ -37,7 +37,7 @@ Install
 
       mv .env.dist .env
 
-  **-> Set all required values**
+  **-> Set all required values in this file. SERVER_NAME should match IP address or domain used by web browsers.**
 
 * Pull images
 
