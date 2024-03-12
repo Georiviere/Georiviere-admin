@@ -9,9 +9,15 @@ DEFAULT_STRUCTURE_NAME = "My structure"
 
 
 LEAFLET_CONFIG['TILES'].append(
-    ('Ortho',
-     '//wxs.ign.fr/choisirgeoportail/wmts?LAYER=ORTHOIMAGERY.ORTHOPHOTOS&EXCEPTIONS=image/jpeg&FORMAT=image/jpeg&SERVICE=WMTS&VERSION=1.0.0&REQUEST=GetTile&STYLE=normal&TILEMATRIXSET=PM&TILEMATRIX={z}&TILEROW={y}&TILECOL={x}',
-     '&copy; IGN - GeoPortail')
+    (
+        'Ortho',
+        '//data.geopf.fr/wmts?SERVICE=WMTS&REQUEST=GetTile&VERSION=1.0.0&LAYER=ORTHOIMAGERY.ORTHOPHOTOS&STYLE=normal&FORMAT=image/jpeg&TILEMATRIXSET=PM&TILEMATRIX={z}&TILEROW={y}&TILECOL={x}',
+        {
+            'attribution': 'Orthophotos - Carte © IGN/Geoportail',
+            'maxNativeZoom': 19,
+            'maxZoom': 22
+        }
+    )
 )
 
 # BASE_INTERSECTION_MARGIN = 2000

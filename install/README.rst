@@ -1,8 +1,8 @@
 Requirements
 ============
 
-* You need docker installed. Docker-compose is recommended in the configuration below.
-    See `Docker <https://docs.docker.com/engine/install/>`_ and `Docker compose <https://docs.docker.com/compose/install/>`_ install documentations.
+* You need docker installed on your system.
+    See `Docker <https://docs.docker.com/engine/install/>`_ install documentations.
 
 * **Optional** : if you want to use external database, prepare a postgresql 10+ postgis2.5+ database with postgis, postgis_raster and unaccent enabled, and a dedicated user.
 
@@ -22,6 +22,11 @@ Install
 =======
 
 * Download `zip package <https://github.com/Georiviere/Georiviere-admin/releases/latest/download/install.zip>`_
+
+  .. code-block :: bash
+
+      wget https://github.com/Georiviere/Georiviere-admin/releases/latest/download/install.zip
+
 
 * Unzip it where you want
 
@@ -43,15 +48,14 @@ Install
 
   .. code-block :: bash
 
-      docker-compose pull
+      docker compose pull
 
-    (Use `docker compose` if docker-compose version is >=2.4.x)
 
 * Init default var folder
 
   .. code-block :: bash
 
-      docker-compose run --rm web bash -c "exit"
+      docker compose run --rm web bash -c "exit"
 
 * Set at least these variables in ``var/conf/custom.py``:
     * ``SRID``
@@ -65,25 +69,25 @@ Install
 
   .. code-block :: bash
 
-      docker-compose run --rm web update.sh
+      docker compose run --rm web update.sh
 
 * Create your super user
 
   .. code-block :: bash
 
-      docker-compose run --rm web ./manage.py createsuperuser
+      docker compose run --rm web ./manage.py createsuperuser
 
 * Load initial data
 
   .. code-block :: bash
 
-      docker-compose run --rm web ./manage.py loaddata georiviere/**/fixtures/basic.json
+      docker compose run --rm web ./manage.py loaddata georiviere/contribution/fixtures/basic.json georiviere/description/fixtures/basic.json georiviere/finances_administration/fixtures/basic.json georiviere/knowledge/fixtures/basic.json georiviere/main/fixtures/basic.json georiviere/maintenance/fixtures/basic.json georiviere/observations/fixtures/basic.json georiviere/proceeding/fixtures/basic.json georiviere/river/fixtures/basic.json georiviere/studies/fixtures/basic.json georiviere/valorization/fixtures/basic.json
 
 * Launch stack
 
   .. code-block :: bash
 
-      docker-compose up -d
+      docker compose up -d
 
 
 Update
@@ -97,19 +101,19 @@ Update
 
   .. code-block :: bash
 
-      docker-compose pull
+      docker compose pull
 
 
 * Run post update script
 
   .. code-block :: bash
 
-      docker-compose run --rm web update.sh
+      docker compose run --rm web update.sh
 
 
 * Relaunch you docker-compose stack
 
   .. code-block :: bash
 
-      docker-compose down
-      docker-compose up -d
+      docker compose down
+      docker compose up -d

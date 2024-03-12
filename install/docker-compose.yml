@@ -22,6 +22,7 @@ services:
 
   web:
     image: ghcr.io/georiviere/georiviere-admin:latest
+    user: $UID:$GID
     restart: on-failure
     depends_on:
       - screamshotter
