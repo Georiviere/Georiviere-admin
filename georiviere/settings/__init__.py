@@ -97,7 +97,7 @@ VAR_DIR = BASE_DIR / 'var'
 TMP_DIR = os.path.join(VAR_DIR, 'tmp')
 
 ROOT_URL = ""
-TITLE = "Georivière"
+TITLE = "GeoRivière"
 
 VERSION = f"{__version__} based on geotrek {__geotrek_version__}"
 
