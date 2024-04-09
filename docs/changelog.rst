@@ -8,6 +8,7 @@ CHANGELOG
 **Bug fix**
 
 - Force translation defined in API url /api/portal/<lang> (fix #222)
+- Revert type translation cause bug in portal creation
 
 **Enhancement**
 
