@@ -81,11 +81,12 @@ jobs:
       - name: Run tests
         run: |
           docker-compose run --rm web ./manage.py compilemessages
-          docker-compose run --rm web coverage run ./manage.py test
-          docker-compose run --rm web coverage xml
+          docker-compose run --rm web bash -c "coverage run ./manage.py test && coverage xml -o var/coverage.xml"
 
       - uses: codecov/codecov-action@v2
         with:
+          token: ${{ secrets.CODECOV_TOKEN }}
+          files: var/coverage.xml
           verbose: true
           fail_ci_if_error: true # optional (default = false)
 
