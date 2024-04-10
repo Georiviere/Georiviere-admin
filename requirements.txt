@@ -67,7 +67,7 @@ coreschema==0.0.4
     # via
     #   coreapi
     #   drf-yasg
-coverage==6.1.2
+coverage==7.4.4
     # via geotrek
 cssselect2==0.4.1
     # via
