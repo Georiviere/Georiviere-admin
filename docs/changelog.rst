@@ -9,6 +9,7 @@ CHANGELOG
 
 - Force translation defined in API url /api/portal/<lang> (fix #222)
 - Add UID/GID mapping to fix problem at installation
+- Revert type translation cause bug in portal creation
 
 **Enhancement**
 
