@@ -19,7 +19,6 @@ CHANGELOG
 
 - Update install documentation
 - Update IGN URL in custom.py
-- Remove duplicate line in .env (refs #227)
 
 
 1.3.0    (2023-11-17)
