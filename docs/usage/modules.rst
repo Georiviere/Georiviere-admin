@@ -1,7 +1,7 @@
 Modules
 =======
 
-Several modules are available in Georiviere, to display and edit professional content:
+Several modules are available in GeoRivière, to display and edit professional content:
 
 * Streams
 * Descriptions (usage, land, morphology, status)
@@ -79,7 +79,7 @@ Finance and administrative files
 
 Estimated or actual costs, fundings, or organisations involved in a project can be filled in an administrative file.
 
-Every content in georiviere can be linked to an administrative file with operation,
+Every content in GeoRivière can be linked to an administrative file with operation,
 and for each you can edit its estimated, material, sub-contracting or man-days costs.
 
 Proceedings

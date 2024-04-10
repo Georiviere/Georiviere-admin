@@ -1,7 +1,7 @@
 Common features
 ===============
 
-Since Georiviere is based on Geotrek-admin, it has the same features:
+Since GeoRivière is based on Geotrek-admin, it has the same features:
 
 * display and edit contents with theirs geom
 * export contents in ODT/DOC, PDF, GPX or shape files
