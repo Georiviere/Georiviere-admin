@@ -24,7 +24,7 @@ click==7.1.2
     # via
     #   -c requirements.txt
     #   pip-tools
-coverage==6.1.2
+coverage==7.4.4
     # via
     #   -c requirements.txt
     #   -r dev-requirements.in
