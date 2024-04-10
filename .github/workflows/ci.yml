@@ -83,7 +83,7 @@ jobs:
           docker-compose run --rm web ./manage.py compilemessages
           docker-compose run --rm web bash -c "coverage run ./manage.py test && coverage xml -o var/coverage.xml"
 
-      - uses: codecov/codecov-action@v2
+      - uses: codecov/codecov-action@v4
         with:
           token: ${{ secrets.CODECOV_TOKEN }}
           files: var/coverage.xml
