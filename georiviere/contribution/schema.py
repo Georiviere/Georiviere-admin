@@ -7,9 +7,9 @@ from georiviere.contribution.models import (ContributionQuantity, ContributionQu
                                             InvasiveSpecies, HeritageSpecies, HeritageObservation, FishSpecies,
                                             NaturePollution, TypePollution)
 
-# The json schema is summarize on :
+# The json schema is summarized on :
 # https://github.com/Georiviere/Georiviere-admin/issues/139
-# Depending of the category and type of the contributions, some fields are available or not.
+# Depending on the category and type of the contributions, some fields are available or not.
 # Here is the generation of the json schema used by the website portal.
 # The fields available depending on the type of contributions follow the documentation of jsonschema :
 # https://json-schema.org/understanding-json-schema/reference/conditionals.html
@@ -18,37 +18,43 @@ from georiviere.contribution.models import (ContributionQuantity, ContributionQu
 def get_contribution_properties():
     """ Feature properties as form initial data format (name / value) """
     # TODO: Use directly field definition for type / title / max length
-    results = {'name_author': {
-        'type': "string",
-        'title': _("Name author"),
-        "maxLength": 128
-    }, 'first_name_author': {
-        'type': "string",
-        'title': _("First name author"),
-        "maxLength": 128
-    }, 'email_author': {
-        'type': "string",
-        'title': _("Email"),
-        'format': "email"
-    }, 'date_observation': {
-        'type': "string",
-        'title': _("Observation's date"),
-        'format': 'date'
-    }, 'description': {
-        'type': "string",
-        'title': _('Description')
-    }, 'category': {
-        "type": "string",
-        "title": _("Category"),
-        # TODO: Loop on contribution one to one field to get all possibilities
-        "enum": [
-            str(ContributionQuantity._meta.verbose_name.title()),
-            str(ContributionQuality._meta.verbose_name.title()),
-            str(ContributionFaunaFlora._meta.verbose_name.title()),
-            str(ContributionLandscapeElements._meta.verbose_name.title()),
-            str(ContributionPotentialDamage._meta.verbose_name.title())
-        ],
-    }
+    results = {
+        'name_author': {
+            'type': "string",
+            'title': _("Name author"),
+            "maxLength": 128
+        },
+        'first_name_author': {
+            'type': "string",
+            'title': _("First name author"),
+            "maxLength": 128
+        },
+        'email_author': {
+            'type': "string",
+            'title': _("Email"),
+            'format': "email"
+        },
+        'date_observation': {
+            'type': "string",
+            'title': _("Observation's date"),
+            'format': 'date'
+        },
+        'description': {
+            'type': "string",
+            'title': _('Description')
+        },
+        'category': {
+            "type": "string",
+            "title": _("Category"),
+            # TODO: Loop on contribution one to one field to get all possibilities
+            "enum": [
+                str(ContributionQuantity._meta.verbose_name.title()),
+                str(ContributionQuality._meta.verbose_name.title()),
+                str(ContributionFaunaFlora._meta.verbose_name.title()),
+                str(ContributionLandscapeElements._meta.verbose_name.title()),
+                str(ContributionPotentialDamage._meta.verbose_name.title())
+            ],
+        }
     }
     if SeverityType.objects.exists():
         results['severity'] = {
@@ -110,8 +116,7 @@ def get_disruptive_jam(choices, meta):
                 'jam_type':
                     {
                         'type': "string",
-                        'title': str(meta.get_field(
-                            'jam_type').related_model._meta.verbose_name.capitalize()),
+                        'title': str(meta.get_field('jam_type').related_model._meta.verbose_name.capitalize()),
                         'enum': list(JamType.objects.values_list('label', flat=True))
                     }
             },
@@ -125,7 +130,9 @@ def get_bank_erosion(choices, meta):
         'if': {
             'properties': {
                 'type': {
-                    'const': str(choices.BANK_EROSION.label)}}
+                    'const': str(choices.BANK_EROSION.label)
+                }
+            }
         },
         'then': {
             'properties': {
