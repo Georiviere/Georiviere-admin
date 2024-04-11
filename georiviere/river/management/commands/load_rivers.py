@@ -51,7 +51,7 @@ class Command(BaseCommand):
             try:
                 Stream.objects.bulk_create(batch, batch_size)
                 self.stdout.write(self.style.SUCCESS(" ok!"))
-            except Exception as e:
+            except Exception:
                 self.stdout.write(self.style.ERROR(" error!"))
 
         self.stdout.write(self.style.SUCCESS(f"Successfully import {total_count} rivers and associated morphologies / status"))
