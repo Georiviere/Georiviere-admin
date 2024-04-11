@@ -14,6 +14,7 @@ sentry-sdk
 django-admin-ordering
 djangorestframework-camel-case
 jsonschema
+django-jsonform
 
 # Use until latest version of geotrek (> 2.99.0)
 drf-spectacular

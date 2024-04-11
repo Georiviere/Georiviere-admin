@@ -27,11 +27,12 @@ jobs:
         uses: actions/setup-python@v5
         with:
           python-version: 3.9
+
       - name: Install dependencies
         run: |
           echo "${{ github.event_name }}! ${{ github.event.action }}"
-          python -m pip install --upgrade pip
-          python -m pip install flake8
+          python -m pip install flake8 -c dev-requirements.txt
+
       - name: Lint with flake8
         run: |
           flake8 georiviere

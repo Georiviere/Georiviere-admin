@@ -1,12 +1,13 @@
 from crispy_forms.layout import Div, Field
 from dal import autocomplete
+from django import forms
 from django.utils.translation import gettext_lazy as _
-
 from geotrek.common.forms import CommonForm
 
-from georiviere.contribution.models import Contribution
 from georiviere.knowledge.models import FollowUp, Knowledge
 from georiviere.maintenance.models import Intervention
+
+from . import models
 
 
 class ContributionForm(autocomplete.FutureModelForm, CommonForm):
@@ -41,7 +42,7 @@ class ContributionForm(autocomplete.FutureModelForm, CommonForm):
     class Meta(CommonForm):
         fields = ["description", "severity", "published", "portal", "email_author", "geom", "assigned_user",
                   "status_contribution", "validated", "linked_object"]
-        model = Contribution
+        model = models.Contribution
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
@@ -57,3 +58,21 @@ class ContributionForm(autocomplete.FutureModelForm, CommonForm):
         if linked_object == "":
             return None
         return linked_object
+
+
+class CustomContributionForm(forms.ModelForm):
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        if self.instance.pk:
+            for field in self.instance.custom_type.fields.all():
+                initials = {}
+                if field.key in self.instance.properties:
+                    initials = {'initial': self.instance.properties.get(field.key)}
+                form_field = field.get_form_field(**initials)
+                self.fields[field.key] = form_field
+                self.base_fields[field.key] = form_field
+                print(form_field.__dict__)
+
+    class Meta:
+        model = models.CustomContribution
+        fields = '__all__'

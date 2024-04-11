@@ -7,23 +7,23 @@ from django.contrib.contenttypes.models import ContentType
 from django.contrib.gis.db import models
 from django.core.mail import mail_managers
 from django.template.loader import render_to_string
+from django.utils.text import slugify
 from django.utils.translation import gettext_lazy as _
-
-from mapentity.models import MapEntityMixin
-
-from geotrek.common.mixins import TimeStampedModelMixin, BasePublishableMixin
+from geotrek.common.mixins import BasePublishableMixin, TimeStampedModelMixin
 from geotrek.common.utils import classproperty
 from geotrek.zoning.mixins import ZoningPropertiesMixin
+from mapentity.models import MapEntityMixin
 
-from georiviere.contribution.managers import SelectableUserManager
-from georiviere.description.models import Status, Morphology, Usage
-from georiviere.river.models import Stream
+from georiviere.description.models import Morphology, Status, Usage
 from georiviere.knowledge.models import Knowledge
 from georiviere.main.models import AddPropertyBufferMixin
 from georiviere.observations.models import Station
 from georiviere.proceeding.models import Proceeding
+from georiviere.river.models import Stream
 from georiviere.studies.models import Study
 from georiviere.watershed.mixins import WatershedPropertiesMixin
+
+from .managers import SelectableUserManager
 
 logger = logging.getLogger(__name__)
 
@@ -51,7 +51,6 @@ class ContributionStatus(TimeStampedModelMixin, models.Model):
 
 
 class SelectableUser(User):
-
     objects = SelectableUserManager()
 
     class Meta:
@@ -265,7 +264,6 @@ class DeadSpecies(models.Model):
 
 
 class ContributionPotentialDamage(models.Model):
-
     class TypeChoice(models.IntegerChoices):
         """Choices for local influence"""
         LANDING = 1, _('Landing')
@@ -358,7 +356,6 @@ class FishSpecies(models.Model):
 
 
 class ContributionFaunaFlora(models.Model):
-
     class TypeChoice(models.IntegerChoices):
         """Choices for local influence"""
         INVASIVE_SPECIES = 1, _('Invasive species')
@@ -502,3 +499,100 @@ Contribution.add_property('stations', Station.within_buffer, _("Station"))
 Contribution.add_property('studies', Study.within_buffer, _("Study"))
 Contribution.add_property('proceedings', Proceeding.within_buffer, _("Proceeding"))
 Contribution.add_property('knowledges', Knowledge.within_buffer, _("Knowledge"))
+
+
+## Custom Contribution
+
+class CustomContributionType(models.Model):
+    label = models.CharField(max_length=128, verbose_name=_("Label"), unique=True)
+    linked_to_station = models.BooleanField(default=False, verbose_name=_("Linked to station"))
+
+    class Meta:
+        verbose_name = _("Custom contribution type")
+        verbose_name_plural = _("Custom contribution types")
+
+    def __str__(self):
+        return self.label
+
+
+class CustomContributionTypeField(models.Model):
+    class FieldTypeChoices(models.TextChoices):
+        """Choices for field type"""
+        TEXT = 'text', _('Text')
+        INTEGER = 'integer', _('Integer')
+        FLOAT = 'float', _('Float')
+        DATE = 'date', _('Date')
+        DATETIME = 'datetime', _('Datetime')
+        BOOLEAN = 'boolean', _('Boolean')
+
+        @classmethod
+        def get_model_field(self, field_type):
+            if field_type == self.TEXT:
+                return models.CharField
+            if field_type == self.INTEGER:
+                return models.IntegerField
+            if field_type == self.FLOAT:
+                return models.FloatField
+            if field_type == self.DATE:
+                return models.DateField
+            if field_type == self.DATETIME:
+                return models.DateTimeField
+            if field_type == self.BOOLEAN:
+                return models.BooleanField
+
+
+    label = models.CharField(max_length=128, verbose_name=_("Label"))
+    key = models.SlugField(max_length=150, verbose_name=_("Key"), help_text="Key used in JSON field", editable=False)
+    value_type = models.CharField(max_length=16, verbose_name=_("Type"),
+                                  choices=FieldTypeChoices.choices, default=FieldTypeChoices.TEXT)
+    required = models.BooleanField(default=False, verbose_name=_("Required"))
+    options = models.JSONField(null=False, blank=True, default=dict)
+    order = models.PositiveSmallIntegerField(default=0, verbose_name=_("Order"))
+    custom_type = models.ForeignKey(CustomContributionType, on_delete=models.CASCADE, related_name='fields')
+
+    def __str__(self):
+        return f"{self.label}: ({self.value_type})"
+
+    def get_slug_as_field_name(self, label):
+        return slugify(label).replace('-', '_')
+
+    def save(self, *args, **kwargs):
+        if not self.pk:
+            self.key = self.get_slug_as_field_name(self.label)
+        return super().save(*args, **kwargs)
+
+    def get_form_field(self, initial=None):
+        options = self.options.copy()
+        if initial:
+            options.update(initial)
+        return self.FieldTypeChoices.get_model_field(self.value_type)().formfield(label=self.label, required=self.required, **self.options)
+
+    class Meta:
+        verbose_name = _("Custom contribution type field")
+        verbose_name_plural = _("Custom contribution type fields")
+        unique_together = (
+            ('label', 'custom_type'),  # label by type should be unique
+        )
+
+
+class CustomContribution(TimeStampedModelMixin, models.Model):
+    geom = models.GeometryField(srid=settings.SRID, spatial_index=True)
+    custom_type = models.ForeignKey(CustomContributionType, on_delete=models.PROTECT,
+                                    related_name='contributions')
+    properties = models.JSONField(null=False, blank=True, default=dict)
+    portal = models.ForeignKey('portal.Portal', verbose_name=_("Portal"), blank=True, null=True, related_name='custom_contributions',
+                               on_delete=models.PROTECT)
+    validated = models.BooleanField(default=False, verbose_name=_("Validated"))
+
+    class Meta:
+        verbose_name = _("Custom contribution")
+        verbose_name_plural = _("Custom contributions")
+
+    def __str__(self):
+        return f"{self.custom_type.label} - {self.pk}"
+
+    def get_properties(self):
+        return self.properties
+
+    def set_properties(self, properties):
+        self.properties = properties
