@@ -25,6 +25,7 @@ from georiviere.main.models import DistanceToSource
 from georiviere.observations.models import Station
 from georiviere.proceeding.models import Proceeding
 from georiviere.maintenance.models import Intervention
+from georiviere.river.managers import RiverManager
 from georiviere.studies.models import Study
 from georiviere.watershed.mixins import WatershedPropertiesMixin
 
@@ -90,7 +91,7 @@ class Stream(AddPropertyBufferMixin, TimeStampedModelMixin, WatershedPropertiesM
     portals = models.ManyToManyField('portal.Portal',
                                      blank=True, related_name='streams',
                                      verbose_name=_("Published portals"))
-
+    objects = RiverManager()
     capture_map_image_waitfor = '.other_object_enum_loaded'
 
     class Meta:
@@ -219,23 +220,6 @@ class Topology(models.Model):
     class Meta:
         verbose_name = _("Topology")
         verbose_name_plural = _("Topologies")
-        # triggers = [
-        #     pgtrigger.Trigger(
-        #         name="update_topology_geom",
-        #         operation=pgtrigger.Update | pgtrigger.Insert,
-        #         when=pgtrigger.After,
-        #         declare=[('stream_geom', 'geometry')],
-        #         func="""
-        #             SELECT r.geom FROM river_stream r WHERE NEW.stream_id = r.id INTO stream_geom;
-        #             UPDATE description_morphology
-        #             SET geom = ST_LINESUBSTRING(stream_geom, NEW.start_position, NEW.end_position)
-        #             WHERE topology_id = NEW.id;
-        #             UPDATE description_status
-        #             SET geom = ST_LINESUBSTRING(stream_geom, NEW.start_position, NEW.end_position)
-        #             WHERE topology_id = NEW.id;
-        #             RETURN NEW;
-        #         """
-        #     )]
 
 
 Study.add_property('stations', Station.within_buffer, _("Stations"))
