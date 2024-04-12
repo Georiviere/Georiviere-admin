@@ -630,6 +630,10 @@ class CustomContributionType(models.Model):
             "required": [field.key for field in linked_fields if field.required],
         }
 
+    @property
+    def json_schema_form(self):
+        return self.get_json_schema_form()
+
     class Meta:
         verbose_name = _("Custom contribution type")
         verbose_name_plural = _("Custom contribution types")

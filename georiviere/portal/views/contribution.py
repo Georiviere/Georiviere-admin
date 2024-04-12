@@ -23,6 +23,7 @@ from georiviere.portal.serializers.contribution import (
     ContributionSchemaSerializer,
     ContributionSerializer,
     ContributionGeojsonSerializer,
+    CustomContributionTypeSerializer,
 )
 
 from rest_framework import filters, viewsets, mixins, renderers
@@ -172,8 +173,8 @@ class CustomContributionTypeViewSet(
     mixins.ListModelMixin,
     viewsets.GenericViewSet,
 ):
-    model = CustomContributionType
+    queryset = CustomContributionType.objects.all().prefetch_related("stations", "fields")
     permission_classes = [
         AllowAny,
     ]
-    #serializer_class = ContributionTypeSerializer
+    serializer_class = CustomContributionTypeSerializer
