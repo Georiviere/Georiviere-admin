@@ -104,4 +104,5 @@ class CustomContributionFieldForm(forms.ModelForm):
             "required",
             "help_text",
             "customization",
+            "order"
         )
