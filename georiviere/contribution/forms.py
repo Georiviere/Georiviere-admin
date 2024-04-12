@@ -91,8 +91,8 @@ class CustomContributionFieldForm(forms.ModelForm):
             self.fields["customization"] = JSONFormField(
                 schema=schema, required=False, label=_("Customization")
             )
-            self.fields["value_type"].required = False
-            self.fields["value_type"].widget.attrs.update({"disabled": "disabled"})
+            self.fields["value_type"].disabled = False
+            #self.fields["value_type"].widget.attrs.update({"disabled": "disabled"})
             self.fields["value_type"].help_text = _("You can't change value type after creation. Delete and/or create another one.")
 
     def clean(self):
