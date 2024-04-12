@@ -25,16 +25,11 @@ class CustomFieldInline(OrderableAdmin, admin.TabularInline):
     model = models.CustomContributionTypeField
     ordering_field = "order"
     ordering = ('order', 'label')
+    form = forms.CustomContributionFieldForm
     fields = ('label', 'value_type', 'required', 'help_text',  'order')
     extra = 0
     show_change_link = True
     popup_link = 'change'
-
-    def get_readonly_fields(self, request, obj=None):
-        if obj and obj.pk:
-            return ['value_type']  # don't allow to change defined type to prevent data corruption
-        return []
-
 
 
 @admin.register(models.CustomContributionType)

@@ -91,10 +91,15 @@ class CustomContributionFieldForm(forms.ModelForm):
             self.fields["customization"] = JSONFormField(
                 schema=schema, required=False, label=_("Customization")
             )
+            self.fields["value_type"].widget.attrs.update({"disabled": "disabled"})
 
     class Meta:
         model = models.CustomContributionTypeField
-        fields = ('custom_type', 'label', 'value_type', 'required', 'help_text',  'customization')
-        widgets = {
-            'required': forms.RadioSelect(choices=[(True, _('Yes')), (False, _('No'))])
-        }
+        fields = (
+            "custom_type",
+            "label",
+            "value_type",
+            "required",
+            "help_text",
+            "customization",
+        )
