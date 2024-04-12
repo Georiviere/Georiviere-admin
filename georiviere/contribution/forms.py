@@ -95,6 +95,11 @@ class CustomContributionFieldForm(forms.ModelForm):
             self.fields["value_type"].widget.attrs.update({"disabled": "disabled"})
             self.fields["value_type"].help_text = _("You can't change value type after creation. Delete and/or create another one.")
 
+    def clean_value_type(self):
+        if self.instance.value_type:
+            return self.instance.value_type
+        return self.cleaned_data["value_type"]
+
     class Meta:
         model = models.CustomContributionTypeField
         fields = (
