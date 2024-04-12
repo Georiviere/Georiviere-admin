@@ -22,7 +22,7 @@ from georiviere.proceeding.models import Proceeding
 from georiviere.river.models import Stream
 from georiviere.studies.models import Study
 from georiviere.watershed.mixins import WatershedPropertiesMixin
-from .managers import SelectableUserManager
+from .managers import SelectableUserManager, CustomContributionManager
 
 logger = logging.getLogger(__name__)
 
@@ -637,6 +637,7 @@ class CustomContributionType(models.Model):
     class Meta:
         verbose_name = _("Custom contribution type")
         verbose_name_plural = _("Custom contribution types")
+        ordering = ("label",)
 
 
 class CustomContributionTypeField(models.Model):
@@ -842,6 +843,7 @@ class CustomContribution(TimeStampedModelMixin, models.Model):
         on_delete=models.PROTECT,
     )
     validated = models.BooleanField(default=False, verbose_name=_("Validated"))
+    objects = CustomContributionManager()
 
     class Meta:
         verbose_name = _("Custom contribution")

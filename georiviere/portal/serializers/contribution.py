@@ -21,7 +21,8 @@ from georiviere.contribution.models import (
     ContributionFaunaFlora,
     ContributionPotentialDamage,
     SeverityType,
-    CustomContributionType
+    CustomContributionType,
+    CustomContribution,
 )
 from georiviere.portal.validators import validate_json_schema_data
 from georiviere.portal.serializers.main import AttachmentSerializer
@@ -178,4 +179,29 @@ class ContributionSchemaSerializer(serializers.Serializer):
 class CustomContributionTypeSerializer(serializers.ModelSerializer):
     class Meta:
         model = CustomContributionType
-        fields = ('id', 'label', 'json_schema_form', 'stations')
+        fields = ("id", "label", "json_schema_form", "stations")
+
+
+class CustomContributionSerializer(serializers.ModelSerializer):
+    def __init__(self, *args, **kwargs):
+        custom_type = kwargs.pop("custom_type")
+        super().__init__(*args, **kwargs)
+        schema = custom_type.get_json_schema_form()
+        for key in schema.get('properties', {}).keys():
+            field = schema.get('properties', {}).get(key)
+            output_field = serializers.CharField
+            if field.get('type') == 'number':
+                output_field = serializers.FloatField
+            elif field.get('type') == 'integer':
+                output_field = serializers.IntegerField
+            elif field.get('type') == 'boolean':
+                output_field = serializers.BooleanField
+            elif field.get('type') == 'date':
+                output_field = serializers.DateField
+            elif field.get('type') == 'datetime':
+                output_field = serializers.DateTimeField
+            self.fields[key] = output_field(label=field.get('title'))
+
+    class Meta:
+        model = CustomContribution
+        exclude = ("data", "custom_type")

@@ -16,7 +16,11 @@ from django.utils.translation import gettext_lazy as _
 
 from djangorestframework_camel_case.render import CamelCaseJSONRenderer
 
-from georiviere.contribution.models import Contribution, CustomContributionType
+from georiviere.contribution.models import (
+    Contribution,
+    CustomContributionType,
+    CustomContribution,
+)
 from georiviere.main.models import Attachment, FileType
 from georiviere.main.renderers import GeoJSONRenderer
 from georiviere.portal.serializers.contribution import (
@@ -24,6 +28,7 @@ from georiviere.portal.serializers.contribution import (
     ContributionSerializer,
     ContributionGeojsonSerializer,
     CustomContributionTypeSerializer,
+    CustomContributionSerializer,
 )
 
 from rest_framework import filters, viewsets, mixins, renderers
@@ -173,8 +178,64 @@ class CustomContributionTypeViewSet(
     mixins.ListModelMixin,
     viewsets.GenericViewSet,
 ):
-    queryset = CustomContributionType.objects.all().prefetch_related("stations", "fields")
+    queryset = CustomContributionType.objects.all().prefetch_related(
+        "stations", "fields"
+    )
     permission_classes = [
         AllowAny,
     ]
     serializer_class = CustomContributionTypeSerializer
+
+    @action(
+        detail=True,
+        url_name="contributions",
+        methods=["post"],
+        renderer_classes=[renderers.JSONRenderer],
+        serializer_class=CustomContributionSerializer,
+    )
+    def create_contribution(self, request, *args, **kwargs):
+        serializer = self.get_serializer(data=request.data)
+        serializer.is_valid(raise_exception=True)
+        contribution = serializer.save()
+        return Response(
+            ContributionSerializer(
+                contribution, context=self.get_serializer_context()
+            ).data
+        )
+
+    @action(
+        detail=True,
+        url_name="contribution-list",
+        url_path="contributions",
+        methods=["get"],
+        renderer_classes=[renderers.JSONRenderer],
+        serializer_class=CustomContributionSerializer,
+    )
+    def list_contributions(self, request, *args, **kwargs):
+        custom_type = self.get_object()
+        serializer = self.get_serializer(CustomContribution.objects.with_type_values(custom_type),
+                                         custom_type=custom_type, many=True)
+
+        return Response(
+            serializer.data
+        )
+
+
+class CustomContributionViewSet(
+    mixins.CreateModelMixin,
+    mixins.RetrieveModelMixin,
+    mixins.ListModelMixin,
+    viewsets.GenericViewSet,
+):
+    queryset = CustomContribution.objects.all()
+    permission_classes = [
+        AllowAny,
+    ]
+    serializer_class = ContributionSerializer
+    parser_classes = (MultiPartParser, FormParser, JSONParser)
+    pagination_class = LimitOffsetPagination
+    renderer_classes = [
+        CamelCaseJSONRenderer,
+        GeoJSONRenderer,
+    ]
+    filter_backends = [filters.OrderingFilter, filters.SearchFilter]
