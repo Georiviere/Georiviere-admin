@@ -816,6 +816,8 @@ class CustomContributionTypeField(models.Model):
 
 class CustomContribution(TimeStampedModelMixin, models.Model):
     geom = models.GeometryField(srid=settings.SRID, spatial_index=True)
+    station = models.ForeignKey('observations.Station', on_delete=models.PROTECT,
+                                related_name='custom_contributions', verbose_name=_('Station'), blank=True, null=True)
     custom_type = models.ForeignKey(
         CustomContributionType, on_delete=models.PROTECT, related_name="contributions",
         verbose_name=_("Custom contribution type")

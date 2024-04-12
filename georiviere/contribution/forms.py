@@ -77,6 +77,9 @@ class CustomContributionForm(forms.ModelForm):
         if self.instance.pk:
             schema = self.instance.custom_type.get_json_schema_form()
             self.fields["data"] = JSONFormField(schema=schema, label=_("Data"))
+            self.fields["station"].queryset = self.custom_type.stations.all()
+        else:
+            self.fields["station"].disable = True
 
     class Meta:
         model = models.CustomContribution
@@ -112,7 +115,9 @@ class CustomContributionFieldInlineForm(forms.ModelForm):
         super().__init__(*args, **kwargs)
         if self.instance.pk:
             self.fields["value_type"].disabled = True
-            self.fields["value_type"].help_text = _("You can't change value type after creation. Delete and/or create another one.")
+            self.fields["value_type"].help_text = _(
+                "You can't change value type after creation. Delete and/or create another one."
+            )
 
     class Meta:
         model = models.CustomContributionTypeField
