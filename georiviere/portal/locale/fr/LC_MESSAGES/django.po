@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-09-15 17:39+0000\n"
+"POT-Creation-Date: 2024-04-12 14:35+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -93,38 +93,20 @@ msgstr "Une erreur s'es produite"
 msgid "Watershed"
 msgstr "Bassin versant"
 
-msgid "watersheds"
-msgstr "bassins versants"
-
 msgid "City"
 msgstr "Ville"
-
-msgid "cities"
-msgstr "villes"
 
 msgid "Sensitivity"
 msgstr "Zone sensible"
 
-msgid "sensitivities"
-msgstr "zones sensibles"
-
 msgid "District"
 msgstr "Secteur"
-
-msgid "districts"
-msgstr "secteurs"
 
 msgid "Contribution"
 msgstr "Contribution"
 
-msgid "contributions"
-msgstr "contributions"
-
 msgid "Stream"
 msgstr "Rivière"
-
-msgid "streams"
-msgstr "rivières"
 
 msgid "Georiviere : Contribution"
 msgstr "Georiviere : Contribution"
@@ -149,3 +131,21 @@ msgstr ""
 "\n"
 "L'équipe Georiviere\n"
 "http://georiviere.fr"
+
+#~ msgid "watersheds"
+#~ msgstr "bassins versants"
+
+#~ msgid "cities"
+#~ msgstr "villes"
+
+#~ msgid "sensitivities"
+#~ msgstr "zones sensibles"
+
+#~ msgid "districts"
+#~ msgstr "secteurs"
+
+#~ msgid "contributions"
+#~ msgstr "contributions"
+
+#~ msgid "streams"
+#~ msgstr "rivières"

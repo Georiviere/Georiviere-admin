@@ -3,8 +3,7 @@ from django.contrib import admin
 from django.utils.translation import gettext_lazy as _
 from leaflet.admin import LeafletGeoAdmin
 
-from . import models
-from .forms import CustomContributionForm
+from . import models, forms
 
 admin.site.register(models.ContributionStatus, admin.ModelAdmin)
 admin.site.register(models.SeverityType, admin.ModelAdmin)
@@ -26,31 +25,61 @@ class CustomFieldInline(OrderableAdmin, admin.TabularInline):
     model = models.CustomContributionTypeField
     ordering_field = "order"
     ordering = ('order', 'label')
+    fields = ('label', 'value_type', 'required', 'help_text',  'order')
     extra = 0
+    show_change_link = True
+    popup_link = 'change'
+
+    def get_readonly_fields(self, request, obj=None):
+        if obj and obj.pk:
+            return ['value_type']  # don't allow to change defined type to prevent data corruption
+        return []
+
 
 
 @admin.register(models.CustomContributionType)
 class CustomContributionTypeAdmin(admin.ModelAdmin):
     list_display = ('label', )
     search_fields = ('label', )
+    filter_horizontal = ('stations', )
     inlines = [CustomFieldInline, ]
 
+
+@admin.register(models.CustomContributionTypeField)
+class CustomContributionTypeFieldAdmin(admin.ModelAdmin):
+    list_display = ('label', 'key', 'value_type', 'required', 'custom_type')
+    list_filter = ('custom_type', 'value_type', 'required')
+    search_fields = ('label', 'key', 'custom_type__label')
+    form = forms.CustomContributionFieldForm
+    fieldsets = (
+        (None, {
+            'fields': ('custom_type', 'label', 'key', 'value_type', 'required', 'help_text', 'order')
+        }),
+        (_('Customization'), {
+            'fields': ('customization', 'options'),
+        }),
+    )
+
+    def get_readonly_fields(self, request, obj=None):
+        if obj and obj.pk:
+            return ['custom_type', 'value_type', 'key', 'options']
+        return []
+
+    def has_add_permission(self, request):
+        """ Disable addition in list view """
+        return False
+
+    def has_delete_permission(self, request, obj=None):
+        """ Disable deletion in list view """
+        return False
 
 @admin.register(models.CustomContribution)
 class CustomContributionAdmin(LeafletGeoAdmin, admin.ModelAdmin):
     list_display = ('custom_type', 'portal', 'validated', 'date_insert', 'date_update')
     list_filter = ('custom_type', 'portal', 'validated')
-    form = CustomContributionForm
+    form = forms.CustomContributionForm
 
-    def get_form(self, request, obj=None, change=False, **kwargs):
-        extra_fields = {}
-        if obj and obj.pk:
-            for field in obj.custom_type.fields.all():
-                initials = {}
-                if field.key in obj.properties:
-                    initials = {'initial': obj.properties.get(field.key)}
-                form_field = field.get_form_field(**initials)
-                extra_fields[field.key] = form_field
-        form = super().get_form(request, obj, change, fields=extra_fields)
-        return form
-
+    def get_readonly_fields(self, request, obj=None):
+        if not obj or not obj.pk:
+            return ('data', )
+        return []
