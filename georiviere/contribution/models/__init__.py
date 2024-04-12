@@ -802,6 +802,10 @@ class CustomContributionTypeField(models.Model):
         elif self.value_type == self.FieldTypeChoices.DATETIME:
             base_schema["format"] = "date-time"
 
+        # drop empty choices
+        customization = self.customization
+        if not customization.get("choices"):
+            customization.pop('choices')
         base_schema.update(self.customization)
 
         return base_schema
