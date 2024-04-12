@@ -104,5 +104,21 @@ class CustomContributionFieldForm(forms.ModelForm):
             "required",
             "help_text",
             "customization",
+        )
+
+
+class CustomContributionFieldInlineForm(forms.ModelForm):
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        if self.instance.pk:
+            self.fields["value_type"].disabled = True
+
+    class Meta:
+        model = models.CustomContributionTypeField
+        fields = (
+            "label",
+            "value_type",
+            "required",
+            "help_text",
             "order"
         )

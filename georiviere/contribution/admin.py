@@ -25,7 +25,7 @@ class CustomFieldInline(OrderableAdmin, admin.TabularInline):
     model = models.CustomContributionTypeField
     ordering_field = "order"
     ordering = ('order', 'label')
-    form = forms.CustomContributionFieldForm
+    form = forms.CustomContributionFieldInlineForm
     fields = ('label', 'value_type', 'required', 'help_text',  'order')
     extra = 0
     show_change_link = True
