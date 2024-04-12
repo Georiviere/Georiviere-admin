@@ -91,9 +91,9 @@ class CustomContributionFieldForm(forms.ModelForm):
             self.fields["customization"] = JSONFormField(
                 schema=schema, required=False, label=_("Customization")
             )
-            self.fields["value_type"].choices = [
-                (self.instance.value_type, self.instance.get_value_type_display())
-            ]
+            #self.fields["value_type"].choices = [
+            #    (self.instance.value_type, self.instance.get_value_type_display())
+            #]
 
     class Meta:
         model = models.CustomContributionTypeField
