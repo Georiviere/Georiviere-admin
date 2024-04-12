@@ -48,7 +48,7 @@ class CustomContributionTypeFieldAdmin(admin.ModelAdmin):
     form = forms.CustomContributionFieldForm
     fieldsets = (
         (None, {
-            'fields': ('custom_type', 'label', 'key', 'value_type', 'required', 'help_text', 'order')
+            'fields': ('custom_type', 'label', 'key', 'value_type', 'required', 'help_text',)
         }),
         (_('Customization'), {
             'fields': ('customization', 'options'),
@@ -57,7 +57,7 @@ class CustomContributionTypeFieldAdmin(admin.ModelAdmin):
 
     def get_readonly_fields(self, request, obj=None):
         if obj and obj.pk:
-            return ['custom_type', 'value_type', 'key', 'options']
+            return ['custom_type', 'key', 'options']
         return []
 
     def has_add_permission(self, request):
