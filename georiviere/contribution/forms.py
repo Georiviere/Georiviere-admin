@@ -74,15 +74,18 @@ class ContributionForm(autocomplete.FutureModelForm, CommonForm):
 class CustomContributionForm(forms.ModelForm):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
+        self.fields["station"].disabled = True
+
         if self.instance.pk:
             schema = self.instance.custom_type.get_json_schema_form()
             self.fields["data"] = JSONFormField(schema=schema, label=_("Data"))
+
             stations = self.instance.custom_type.stations.all()
             self.fields["station"].queryset = stations
+
             if stations.exists():
+                self.fields["station"].disabled = False
                 self.fields["station"].required = True
-        else:
-            self.fields["station"].disabled = True
 
     class Meta:
         model = models.CustomContribution
