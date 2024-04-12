@@ -658,7 +658,7 @@ class CustomContributionTypeField(models.Model):
         max_length=16,
         verbose_name=_("Type"),
         choices=FieldTypeChoices.choices,
-        default=FieldTypeChoices.TEXT,
+        default=FieldTypeChoices.STRING,
     )
     required = models.BooleanField(default=False, verbose_name=_("Required"), help_text=_("Set if field is required to validate form."))
     help_text = models.CharField(
