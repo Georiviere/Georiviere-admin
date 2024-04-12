@@ -79,7 +79,7 @@ class CustomContributionForm(forms.ModelForm):
             self.fields["data"] = JSONFormField(schema=schema, label=_("Data"))
             self.fields["station"].queryset = self.custom_type.stations.all()
         else:
-            self.fields["station"].disable = True
+            self.fields["station"].disabled = True
 
     class Meta:
         model = models.CustomContribution
