@@ -77,7 +77,7 @@ class CustomContributionForm(forms.ModelForm):
         if self.instance.pk:
             schema = self.instance.custom_type.get_json_schema_form()
             self.fields["data"] = JSONFormField(schema=schema, label=_("Data"))
-            self.fields["station"].queryset = self.custom_type.stations.all()
+            self.fields["station"].queryset = self.instance.custom_type.stations.all()
         else:
             self.fields["station"].disabled = True
 
