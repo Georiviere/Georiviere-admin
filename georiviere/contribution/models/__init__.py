@@ -804,7 +804,7 @@ class CustomContributionTypeField(models.Model):
 
         # drop empty choices
         customization = self.customization
-        if not customization.get("choices"):
+        if "choices" in customization and not customization.get("choices"):
             customization.pop('choices')
         base_schema.update(self.customization)
 
