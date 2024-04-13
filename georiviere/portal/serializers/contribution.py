@@ -187,21 +187,34 @@ class CustomContributionSerializer(serializers.ModelSerializer):
         custom_type = kwargs.pop("custom_type")
         super().__init__(*args, **kwargs)
         schema = custom_type.get_json_schema_form()
-        for key in schema.get('properties', {}).keys():
-            field = schema.get('properties', {}).get(key)
+        for key in schema.get("properties", {}).keys():
+            field = schema.get("properties", {}).get(key)
             output_field = serializers.CharField
-            if field.get('type') == 'number':
+            if field.get("type") == "number":
                 output_field = serializers.FloatField
-            elif field.get('type') == 'integer':
+            elif field.get("type") == "integer":
                 output_field = serializers.IntegerField
-            elif field.get('type') == 'boolean':
+            elif field.get("type") == "boolean":
                 output_field = serializers.BooleanField
-            elif field.get('type') == 'date':
+            elif field.get("type") == "date":
                 output_field = serializers.DateField
-            elif field.get('type') == 'datetime':
+            elif field.get("type") == "datetime":
                 output_field = serializers.DateTimeField
-            self.fields[key] = output_field(label=field.get('title'))
+            self.fields[key] = output_field(label=field.get("title"))
 
     class Meta:
         model = CustomContribution
         exclude = ("data", "custom_type")
+
+
+class CustomContributionSerializerGeoJSONSerializer(geo_serializers.GeoFeatureModelSerializer,
+    CustomContributionSerializer,
+
+):
+    geometry = geo_serializers.GeometryField(
+        read_only=True, precision=7
+    )
+
+    class Meta(CustomContributionSerializer.Meta):
+        geo_field = "geometry"
+        exclude = ("geom", "data", "custom_type")

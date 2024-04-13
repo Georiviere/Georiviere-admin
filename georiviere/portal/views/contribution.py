@@ -29,6 +29,7 @@ from georiviere.portal.serializers.contribution import (
     ContributionGeojsonSerializer,
     CustomContributionTypeSerializer,
     CustomContributionSerializer,
+    CustomContributionSerializerGeoJSONSerializer,
 )
 
 from rest_framework import filters, viewsets, mixins, renderers
@@ -205,37 +206,16 @@ class CustomContributionTypeViewSet(
 
     @action(
         detail=True,
-        url_name="contribution-list",
+        url_name="custom-contribution-list",
         url_path="contributions",
         methods=["get"],
         renderer_classes=[renderers.JSONRenderer],
-        serializer_class=CustomContributionSerializer,
+        serializer_class=CustomContributionSerializerGeoJSONSerializer,
     )
     def list_contributions(self, request, *args, **kwargs):
         custom_type = self.get_object()
-        serializer = self.get_serializer(CustomContribution.objects.with_type_values(custom_type),
-                                         custom_type=custom_type, many=True)
+        qs = CustomContribution.objects.with_type_values(custom_type)
+        qs = qs.annotate(geometry=Transform(F("geom"), settings.API_SRID))
+        serializer = self.get_serializer(qs, custom_type=custom_type, many=True)
 
-        return Response(
-            serializer.data
-        )
-
-
-class CustomContributionViewSet(
-    mixins.CreateModelMixin,
-    mixins.RetrieveModelMixin,
-    mixins.ListModelMixin,
-    viewsets.GenericViewSet,
-):
-    queryset = CustomContribution.objects.all()
-    permission_classes = [
-        AllowAny,
-    ]
-    serializer_class = ContributionSerializer
-    parser_classes = (MultiPartParser, FormParser, JSONParser)
-    pagination_class = LimitOffsetPagination
-    renderer_classes = [
-        CamelCaseJSONRenderer,
-        GeoJSONRenderer,
-    ]
-    filter_backends = [filters.OrderingFilter, filters.SearchFilter]
+        return Response(serializer.data)
