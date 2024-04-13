@@ -189,7 +189,8 @@ class CustomContributionTypeViewSet(
 
     @action(
         detail=True,
-        url_name="contributions",
+        url_name="custom-contribution-create",
+        url_path="contributions",
         methods=["post"],
         renderer_classes=[renderers.JSONRenderer],
         serializer_class=CustomContributionSerializer,
@@ -209,13 +210,18 @@ class CustomContributionTypeViewSet(
         url_name="custom-contribution-list",
         url_path="contributions",
         methods=["get"],
-        renderer_classes=[renderers.JSONRenderer],
-        serializer_class=CustomContributionSerializerGeoJSONSerializer,
+        renderer_classes=[renderers.JSONRenderer, GeoJSONRenderer],
+        serializer_class=CustomContributionSerializer,
     )
     def list_contributions(self, request, *args, **kwargs):
         custom_type = self.get_object()
         qs = CustomContribution.objects.with_type_values(custom_type)
-        qs = qs.annotate(geometry=Transform(F("geom"), settings.API_SRID))
+
+        renderer, media_type = self.perform_content_negotiation(self.request)
+        if getattr(renderer, "format") == "geojson":
+            self.serializer_class = CustomContributionSerializerGeoJSONSerializer
+            qs = qs.annotate(geometry=Transform(F("geom"), settings.API_SRID))
+
         serializer = self.get_serializer(qs, custom_type=custom_type, many=True)
 
         return Response(serializer.data)
