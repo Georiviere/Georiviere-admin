@@ -76,7 +76,7 @@ RUN apt-get update -qq && apt-get install -y -qq \
 USER django
 
 RUN python3.9 -m venv /opt/venv
-RUN  /opt/venv/bin/pip install --no-cache-dir pip setuptools wheel -U
+RUN /opt/venv/bin/pip install --no-cache-dir pip setuptools wheel -U
 # geotrek setup fix : it required django before being installed... TODO: fix it in geotrek setup.py
 RUN  /opt/venv/bin/pip install --no-cache-dir django==2.2.*
 

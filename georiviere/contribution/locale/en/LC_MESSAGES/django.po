@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-09-15 17:15+0000\n"
+"POT-Creation-Date: 2024-04-12 19:23+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -17,6 +17,15 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+msgid "Field"
+msgstr ""
+
+msgid "Fields"
+msgstr ""
+
+msgid "Customization"
+msgstr ""
 
 msgid "Contribution"
 msgstr ""
@@ -43,6 +52,13 @@ msgid "Type"
 msgstr ""
 
 msgid "Linked object"
+msgstr ""
+
+msgid "Data"
+msgstr ""
+
+msgid ""
+"You can't change value type after creation. Delete and/or create another one."
 msgstr ""
 
 msgid "Label"
@@ -109,10 +125,10 @@ msgstr ""
 msgid "Feedback from {email}"
 msgstr ""
 
-msgid "Contribution potential damage type"
+msgid "Landing type"
 msgstr ""
 
-msgid "Contribution potential damage types"
+msgid "Landing types"
 msgstr ""
 
 msgid "Jam type"
@@ -155,9 +171,6 @@ msgid "Fish mortality"
 msgstr ""
 
 msgid "Trampling by livestock (impacting)"
-msgstr ""
-
-msgid "Landing type"
 msgstr ""
 
 msgid "Excessive cutting length (in meters)"
@@ -316,6 +329,111 @@ msgid "Proceeding"
 msgstr ""
 
 msgid "Knowledge"
+msgstr ""
+
+msgid "Stations"
+msgstr ""
+
+msgid "Custom contribution type"
+msgstr ""
+
+msgid "Custom contribution types"
+msgstr ""
+
+msgid "String"
+msgstr ""
+
+msgid "Text"
+msgstr ""
+
+msgid "Integer"
+msgstr ""
+
+msgid "Float"
+msgstr ""
+
+msgid "Date"
+msgstr ""
+
+msgid "Datetime"
+msgstr ""
+
+msgid "Boolean"
+msgstr ""
+
+msgid "Field label."
+msgstr ""
+
+msgid "Key"
+msgstr ""
+
+msgid "Key used in JSON data field."
+msgstr ""
+
+msgid "Required"
+msgstr ""
+
+msgid "Set if field is required to validate form."
+msgstr ""
+
+msgid "Help text"
+msgstr ""
+
+msgid "Set a help text for the field."
+msgstr ""
+
+msgid "Options"
+msgstr ""
+
+msgid "Internal options for type JSON schema."
+msgstr ""
+
+msgid "Field customization."
+msgstr ""
+
+msgid "Order"
+msgstr ""
+
+msgid "Order of field in form."
+msgstr ""
+
+msgid "Custom contribution type."
+msgstr ""
+
+msgid "Values"
+msgstr ""
+
+msgid "Placeholder"
+msgstr ""
+
+msgid "Min. length"
+msgstr ""
+
+msgid "Max. length"
+msgstr ""
+
+msgid "Min. value"
+msgstr ""
+
+msgid "Max. value"
+msgstr ""
+
+msgid "Custom contribution type field"
+msgstr ""
+
+msgid "Custom contribution type fields"
+msgstr ""
+
+msgid "Custom contribution"
+msgstr ""
+
+msgid "Custom contributions"
+msgstr ""
+
+msgid "Observed species"
+msgstr ""
+
+msgid "Observation type"
 msgstr ""
 
 msgid "None"
