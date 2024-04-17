@@ -41,7 +41,7 @@
         </tr>
         <tr>
             <th>{{ object|verbose:"description" }}</th>
-            <td>{{ object.description }}</td>
+            <td>{{ object.description | safe | linebreaksbr }}</td>
         </tr>
         <tr>
             <th>{{ object|verbose:"operations_uri" }}</th>
