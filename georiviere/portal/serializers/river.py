@@ -1,3 +1,5 @@
+from rest_framework import serializers
+
 from georiviere.river.models import Stream
 from georiviere.portal.serializers.main import AttachmentSerializer
 

@@ -223,5 +223,4 @@ class CustomContributionTypeViewSet(
             qs = qs.annotate(geometry=Transform(F("geom"), settings.API_SRID))
 
         serializer = self.get_serializer(qs, custom_type=custom_type, many=True)
-
         return Response(serializer.data)

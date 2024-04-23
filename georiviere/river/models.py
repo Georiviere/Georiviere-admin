@@ -98,16 +98,19 @@ class Stream(AddPropertyBufferMixin, TimeStampedModelMixin, WatershedPropertiesM
         verbose_name = _("Stream")
         verbose_name_plural = _("Streams")
 
-    def __init__(self, *args, **kwargs):
-        super().__init__(*args, **kwargs)
-        for model_topology in self.model_topologies:
-            setattr(self, model_topology._meta.model_name, self.get_topology(model_topology._meta.model_name))
-
     def __str__(self):
         return self.name
 
     def is_public(self):
         return self.portals.exists()
+
+    @property
+    def statuses(self):
+        return self.get_topologies('status')
+
+    @property
+    def morphologies(self):
+        return self.get_topologies('morphology')
 
     def get_printcontext_with_other_objects(self, modelnames):
         maplayers = [
@@ -167,7 +170,7 @@ class Stream(AddPropertyBufferMixin, TimeStampedModelMixin, WatershedPropertiesM
                                                                  self,
                                                                  self)
 
-    def get_topology(self, value):
+    def get_topologies(self, value):
         topologies = self.topologies.filter(**{f'{value}__isnull': False})
         topologies = [getattr(topology, value) for topology in topologies]
         return topologies
