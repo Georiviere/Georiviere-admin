@@ -17,6 +17,7 @@ class StationMixin:
             "label",
             "description",
             "custom_contribution_types",
+            "geometry"
         )
 
 
