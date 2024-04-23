@@ -5,9 +5,14 @@ from django.shortcuts import redirect
 from django.urls import reverse
 from mapentity.registry import registry
 from mapentity import views as mapentity_views
+import logging
 
 
-def handler500(request, *args, **kwargs):
+logger = logging.getLogger(__name__)
+
+
+def handler500(request, exception, *args, **kwargs):
+    logger.error('Internal Server Error: %s', str(exception))
     return HttpResponse(status=500)
 
 
