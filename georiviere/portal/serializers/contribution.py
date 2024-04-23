@@ -179,7 +179,7 @@ class ContributionSchemaSerializer(serializers.Serializer):
 class CustomContributionTypeSerializer(serializers.ModelSerializer):
     class Meta:
         model = CustomContributionType
-        fields = ("id", "label", "json_schema_form", "stations")
+        fields = ("id", "label", "description", "json_schema_form", "stations")
 
 
 class CustomContributionSerializer(serializers.ModelSerializer):
