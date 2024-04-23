@@ -197,7 +197,7 @@ geotrek @ git+https://github.com/GeotrekCE/Geotrek-admin.git@2.75.0
     # via -r requirements.in
 gpxpy==1.5.0
     # via mapentity
-gunicorn==20.1.0
+gunicorn==22.0.0
     # via
     #   -r requirements.in
     #   geotrek
@@ -236,7 +236,9 @@ munch==2.5.0
 netifaces==0.11.0
     # via mapentity
 packaging==20.9
-    # via drf-yasg
+    # via
+    #   drf-yasg
+    #   gunicorn
 paperclip==2.4.2
     # via
     #   -r requirements.in
