@@ -1,9 +1,14 @@
 from django.contrib.auth.decorators import login_required
 from django.conf import settings
+from django.http import HttpResponse
 from django.shortcuts import redirect
 from django.urls import reverse
 from mapentity.registry import registry
 from mapentity import views as mapentity_views
+
+
+def handler500(request, *args, **kwargs):
+    return HttpResponse(status=500)
 
 
 @login_required(login_url='login')
