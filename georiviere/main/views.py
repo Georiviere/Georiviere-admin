@@ -1,6 +1,6 @@
 from django.contrib.auth.decorators import login_required
 from django.conf import settings
-from django.http import HttpResponse
+from django.http import HttpResponse, HttpResponseServerError
 from django.shortcuts import redirect
 from django.urls import reverse
 from mapentity.registry import registry
@@ -10,30 +10,30 @@ import logging
 
 logger = logging.getLogger(__name__)
 
-
-def handler500(request, exception, *args, **kwargs):
-    logger.error('Internal Server Error: %s', str(exception))
-    return HttpResponse(status=500)
+def handler500(request, *args, **kwargs):
+    return HttpResponseServerError()
 
 
-@login_required(login_url='login')
+@login_required(login_url="login")
 def home(request):
-    last = request.session.get('last_list')  # set in MapEntityList
+    last = request.session.get("last_list")  # set in MapEntityList
     for entity in registry.entities:
-        if reverse(entity.url_list) == last and request.user.has_perm(entity.model.get_permission_codename('list')):
+        if reverse(entity.url_list) == last and request.user.has_perm(
+            entity.model.get_permission_codename("list")
+        ):
             return redirect(entity.url_list)
     for entity in registry.entities:
-        if entity.menu and request.user.has_perm(entity.model.get_permission_codename('list')):
+        if entity.menu and request.user.has_perm(
+            entity.model.get_permission_codename("list")
+        ):
             return redirect(entity.url_list)
-    return redirect('river:river_list')
+    return redirect("river:river_list")
 
 
 class JSSettings(mapentity_views.JSSettings):
     def get_context_data(self):
         dictsettings = super().get_context_data()
-        dictsettings['map'].update(
-            snap_distance=settings.SNAP_DISTANCE
-        )
+        dictsettings["map"].update(snap_distance=settings.SNAP_DISTANCE)
         return dictsettings
 
 
@@ -42,6 +42,7 @@ class FormsetMixin:
     WARNING: this will only work for a single formset in form
     TODO: move this to Mapentity
     """
+
     context_name = None
     formset_class = None
 
@@ -61,8 +62,8 @@ class FormsetMixin:
         context = super().get_context_data(**kwargs)
         if self.request.POST:
             context[self.context_name] = self.formset_class(
-                self.request.POST, instance=self.object)
+                self.request.POST, instance=self.object
+            )
         else:
-            context[self.context_name] = self.formset_class(
-                instance=self.object)
+            context[self.context_name] = self.formset_class(instance=self.object)
         return context
