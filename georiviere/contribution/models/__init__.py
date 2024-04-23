@@ -614,7 +614,7 @@ Contribution.add_property("knowledges", Knowledge.within_buffer, _("Knowledge"))
 class CustomContributionType(models.Model):
     label = models.CharField(max_length=128, verbose_name=_("Label"), unique=True)
     description = models.CharField(max_length=512, verbose_name=_("Description"), blank=True, default="")
-    stations = models.ManyToManyField('observations.Station', verbose_name=_("Stations"), blank=True)
+    stations = models.ManyToManyField('observations.Station', verbose_name=_("Stations"), related_name='custom_contribution_types', blank=True)
 
     def __str__(self):
         return self.label

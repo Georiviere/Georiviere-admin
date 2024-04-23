@@ -8,6 +8,7 @@ from georiviere.portal.views.contribution import (
     ContributionViewSet,
     CustomContributionTypeViewSet,
 )
+from georiviere.portal.views.observations import StationViewSet
 from georiviere.portal.views.portal import PortalViewSet
 from georiviere.portal.views.river import StreamViewSet
 from georiviere.portal.views.sensitivity import SensitivityViewSet
@@ -32,6 +33,10 @@ router.register(
 
 router.register(
     r"(?P<lang>[a-z]{2})/(?P<portal_pk>\d+)/streams", StreamViewSet, basename="streams"
+)
+
+router.register(
+    r"(?P<lang>[a-z]{2})/(?P<portal_pk>\d+)/stations", StationViewSet, basename="stations"
 )
 
 router.register(
