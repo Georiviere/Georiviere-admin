@@ -17,9 +17,5 @@ class StationViewSet(GeoriviereAPIMixin, viewsets.ReadOnlyModelViewSet):
 
     def get_queryset(self):
         # portal_pk = self.kwargs["portal_pk"]
-        return (
-            # Station.objects.filter(custom_contribution_types__portal__id=portal_pk)
-            Station.objects.all()
-            .distinct()
-            .annotate(geom_transformed=Transform(F("geom"), settings.API_SRID))
-        )
+        # Station.objects.filter(custom_contribution_types__portal__id=portal_pk)
+        return Station.objects.all().annotate(geom_transformed=Transform(F("geom"), settings.API_SRID))
