@@ -17,13 +17,17 @@ class StationMixin:
             "label",
             "description",
             "custom_contribution_types",
-            "geometry"
+            "geometry",
         )
 
 
 class StationGeojsonSerializer(StationMixin, geo_serializers.GeoFeatureModelSerializer):
+    geom_transformed = geo_serializers.GeometryField(
+        read_only=True, precision=7
+    )
+
     class Meta(StationMixin.Meta):
-        geo_field = "geometry"
+        geo_field = "geom_transformed"
         id_field = False
 
 
