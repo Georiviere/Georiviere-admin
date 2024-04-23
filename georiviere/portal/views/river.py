@@ -5,7 +5,7 @@ from djangorestframework_camel_case.render import CamelCaseJSONRenderer
 from rest_framework import filters, viewsets, permissions as rest_permissions
 from rest_framework.renderers import BrowsableAPIRenderer
 
-from georiviere.decorators import view_cache_response_content, view_cache_latest
+#from georiviere.decorators import view_cache_response_content, view_cache_latest
 from georiviere.main.models import Attachment
 from georiviere.main.renderers import GeoJSONRenderer
 from georiviere.portal.filters import SearchNoAccentFilter
@@ -32,8 +32,8 @@ class StreamViewSet(GeoriviereAPIMixin, viewsets.ReadOnlyModelViewSet):
     ordering_fields = ["name", "date_insert"]
     search_fields = ["&name"]
 
-    #def get_model(self):
-    #    return self.model
+    def get_model(self):
+        return self.model
 
     def get_queryset(self):
         portal_pk = self.kwargs["portal_pk"]
