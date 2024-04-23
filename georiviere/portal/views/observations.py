@@ -1,5 +1,6 @@
 from django.conf import settings
-from django.db.models import Transform, F
+from django.contrib.gis.db.models.functions import Transform
+from django.db.models import F
 from rest_framework import viewsets
 
 from georiviere.observations.models import Station
