@@ -22,12 +22,8 @@ class StationMixin:
 
 
 class StationGeojsonSerializer(StationMixin, geo_serializers.GeoFeatureModelSerializer):
-    geom_transformed = geo_serializers.GeometryField(
-        read_only=True, precision=7
-    )
-
     class Meta(StationMixin.Meta):
-        geo_field = "geom_transformed"
+        geo_field = "geometry"
         id_field = False
 
 
