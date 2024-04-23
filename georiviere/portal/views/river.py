@@ -6,7 +6,7 @@ from rest_framework import filters, viewsets, permissions as rest_permissions
 from rest_framework.pagination import LimitOffsetPagination
 from rest_framework.renderers import BrowsableAPIRenderer
 
-from georiviere.decorators import view_cache_response_content, view_cache_latest
+#from georiviere.decorators import view_cache_response_content, view_cache_latest
 from georiviere.main.models import Attachment
 from georiviere.main.renderers import GeoJSONRenderer
 from georiviere.portal.filters import SearchNoAccentFilter
@@ -32,6 +32,9 @@ class StreamViewSet(viewsets.ReadOnlyModelViewSet):
     ordering_fields = ["name", "date_insert"]
     search_fields = ["&name"]
 
+    #def get_model(self):
+    #    return self.model
+
     def get_queryset(self):
         portal_pk = self.kwargs["portal_pk"]
         queryset = Stream.objects.filter(portals__id=portal_pk).prefetch_related(
@@ -52,7 +55,7 @@ class StreamViewSet(viewsets.ReadOnlyModelViewSet):
     def view_cache_key(self):
         return f"stream-{self.kwargs['portal_pk']}"
 
-    @view_cache_latest()
-    @view_cache_response_content()
+    #@view_cache_latest()
+    #@view_cache_response_content()
     def list(self, request, *args, **kwargs):
         return super().list(request, *args, **kwargs)
