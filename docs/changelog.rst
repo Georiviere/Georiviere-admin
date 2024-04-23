@@ -14,6 +14,7 @@ CHANGELOG
 **Enhancement**
 
 - Add sensitivity contact and URL for species in portal API.
+- Improve TinyMCE configuration for flatpages
 
 **Documentation**
 
