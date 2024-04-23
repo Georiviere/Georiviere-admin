@@ -22,9 +22,17 @@ class StationMixin:
 
 
 class StationGeojsonSerializer(StationMixin, geo_serializers.GeoFeatureModelSerializer):
-    class Meta(StationMixin.Meta):
+    class Meta:
         geo_field = "geometry"
         id_field = False
+        fields = (
+            "id",
+            "code",
+            "label",
+            "description",
+            "custom_contribution_types",
+            "geometry",
+        )
 
 
 class StationSerializer(StationMixin, ModelSerializer):
