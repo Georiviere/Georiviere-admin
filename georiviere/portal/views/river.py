@@ -29,13 +29,8 @@ class StreamViewSet(viewsets.ReadOnlyModelViewSet):
     permission_classes = [rest_permissions.DjangoModelPermissionsOrAnonReadOnly]
     filter_backends = [filters.OrderingFilter, SearchNoAccentFilter]
     pagination_class = LimitOffsetPagination
-    ordering_fields = ['name', 'date_insert']
-    search_fields = ['&name']
     ordering_fields = ["name", "date_insert"]
     search_fields = ["&name"]
-
-        return self.model
-
 
     def get_queryset(self):
         portal_pk = self.kwargs["portal_pk"]
@@ -54,8 +49,10 @@ class StreamViewSet(viewsets.ReadOnlyModelViewSet):
             return self.geojson_serializer_class
         return self.serializer_class
 
+    def view_cache_key(self):
         return f"stream-{self.kwargs['portal_pk']}"
 
     @view_cache_latest()
+    @view_cache_response_content()
     def list(self, request, *args, **kwargs):
         return super().list(request, *args, **kwargs)
