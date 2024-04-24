@@ -40,7 +40,7 @@ class Command(BaseCommand):
 
         objs = (Stream(geom=feat.geom.geos,
                        source_location=Point(feat.geom.geos[0]),
-                       name=feat.get(name_column) or default_name) for feat in layer)
+                       name=feat.get(name_column) or default_name) for feat in layer if feat.geom.geos.geom_typeid == 1)
         count = 0
         while True:
             batch = list(islice(objs, batch_size))
