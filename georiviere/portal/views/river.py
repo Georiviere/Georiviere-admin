@@ -1,13 +1,10 @@
 from django.conf import settings
 from django.contrib.gis.db.models.functions import Centroid, Transform
 from django.db.models import F, Prefetch
-from djangorestframework_camel_case.render import CamelCaseJSONRenderer
 from rest_framework import filters, viewsets, permissions as rest_permissions
-from rest_framework.renderers import BrowsableAPIRenderer
 
-from georiviere.decorators import view_cache_response_content, view_cache_latest
+#from georiviere.decorators import view_cache_response_content, view_cache_latest
 from georiviere.main.models import Attachment
-from georiviere.main.renderers import GeoJSONRenderer
 from georiviere.portal.filters import SearchNoAccentFilter
 from georiviere.portal.serializers.river import (
     StreamGeojsonSerializer,
