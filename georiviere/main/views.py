@@ -1,6 +1,5 @@
 from django.contrib.auth.decorators import login_required
 from django.conf import settings
-from django.http import HttpResponse, HttpResponseServerError
 from django.shortcuts import redirect
 from django.urls import reverse
 from mapentity.registry import registry
@@ -9,9 +8,6 @@ import logging
 
 
 logger = logging.getLogger(__name__)
-
-def handler500(request, *args, **kwargs):
-    return HttpResponseServerError()
 
 
 @login_required(login_url="login")

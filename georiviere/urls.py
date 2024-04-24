@@ -12,7 +12,6 @@ from paperclip import views as paperclip_views
 
 admin.autodiscover()
 
-#handler500 = 'georiviere.main.views.handler500'
 
 urlpatterns = [
     path('', home, name='home'),

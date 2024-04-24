@@ -60,7 +60,7 @@ def get_landing(choices, meta):
                         "landing_type"
                     ).related_model._meta.verbose_name.capitalize(),
                     "enum": list(
-                        Lmodels.andingType.objects.values_list("label", flat=True)
+                        models.LandingType.objects.values_list("label", flat=True)
                     ),
                 }
             },
@@ -390,13 +390,13 @@ def get_pollution(choices, meta):
                 models.NaturePollution.objects.values_list("label", flat=True)
             ),
         }
-    if TypePollution.objects.exists():
+    if models.TypePollution.objects.exists():
         pollution_property["type_pollution"] = {
             "type": "string",
             "title": meta.get_field(
                 "type_pollution"
             ).related_model._meta.verbose_name.capitalize(),
-            "enum": list(TypePollution.objects.values_list("label", flat=True)),
+            "enum": list(models.TypePollution.objects.values_list("label", flat=True)),
         }
     pollution = {
         "if": {"properties": {"type": {"const": choices.POLLUTION.label}}},

@@ -608,8 +608,7 @@ Contribution.add_property("proceedings", Proceeding.within_buffer, _("Proceeding
 Contribution.add_property("knowledges", Knowledge.within_buffer, _("Knowledge"))
 
 
-## Custom Contribution
-
+# Custom Contribution
 
 class CustomContributionType(models.Model):
     label = models.CharField(max_length=128, verbose_name=_("Label"), unique=True)

@@ -26,7 +26,7 @@ class CustomFieldInline(OrderableAdmin, admin.TabularInline):
     ordering_field = "order"
     ordering = ('order', 'label')
     form = forms.CustomContributionFieldInlineForm
-    fields = ('label', 'value_type', 'required', 'help_text',  'order')
+    fields = ('label', 'value_type', 'required', 'help_text', 'order')
     extra = 0
     show_change_link = True
     popup_link = 'change'
@@ -67,6 +67,7 @@ class CustomContributionTypeFieldAdmin(admin.ModelAdmin):
     def has_delete_permission(self, request, obj=None):
         """ Disable deletion in list view """
         return False
+
 
 @admin.register(models.CustomContribution)
 class CustomContributionAdmin(LeafletGeoAdmin, admin.ModelAdmin):
