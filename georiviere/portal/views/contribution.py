@@ -12,7 +12,7 @@ from django.core.mail import send_mail
 from django.db.models import F, Q
 from django.utils import translation
 from django.utils.translation import gettext_lazy as _
-from rest_framework import filters, viewsets, mixins, renderers, permissions
+from rest_framework import filters, viewsets, mixins, renderers, permissions, status
 from rest_framework.decorators import action
 from rest_framework.pagination import LimitOffsetPagination
 from rest_framework.parsers import JSONParser, MultiPartParser, FormParser
@@ -173,7 +173,7 @@ class CustomContributionTypeViewSet(
         if settings.DEBUG
         else (JSONRenderer,)
     )
-    permission_classes = [permissions.DjangoModelPermissionsOrAnonReadOnly]
+    permission_classes = [permissions.AllowAny]
     pagination_class = LimitOffsetPagination
 
     def create_contribution(self, request, *args, **kwargs):
@@ -187,9 +187,11 @@ class CustomContributionTypeViewSet(
         if "station" in serializer.validated_data:
             extra_save_params["geom"] = serializer.validated_data["station"].geom
         contribution = serializer.save(custom_type=custom_type, **extra_save_params)
-
+        # reload with extra fields
+        contribution = CustomContribution.objects.with_type_values(custom_type).get(pk=contribution.pk)
         return Response(
-            CustomContributionSerializer(contribution, context=context).data
+            CustomContributionSerializer(contribution, context=context).data,
+            status=status.HTTP_201_CREATED
         )
 
     def list_contributions(self, request, *args, **kwargs):

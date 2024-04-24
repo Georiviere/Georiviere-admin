@@ -214,6 +214,18 @@ class CustomContributionSerializer(serializers.ModelSerializer):
             )
             self.fields["geom"].required = False
 
+    def create(self, validated_data):
+        custom_type = self.context.get("custom_type")
+        # add and customize fields from json schema
+        schema = custom_type.get_json_schema_form()
+
+        data = {}
+        for key, value in schema.get("properties").items():
+            if key in validated_data:
+                data[key] = validated_data.pop(key)
+        validated_data["data"] = data
+        return super().create(validated_data)
+
     class Meta:
         model = CustomContribution
         exclude = ("data", "custom_type")
