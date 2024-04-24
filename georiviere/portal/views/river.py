@@ -25,7 +25,7 @@ class StreamViewSet(GeoriviereAPIMixin, viewsets.ReadOnlyModelViewSet):
         BrowsableAPIRenderer,
         CamelCaseJSONRenderer,
         GeoJSONRenderer,
-    )
+    ) if settings.DEBUG else (CamelCaseJSONRenderer, GeoJSONRenderer)
     permission_classes = [rest_permissions.DjangoModelPermissionsOrAnonReadOnly]
     filter_backends = [filters.OrderingFilter, SearchNoAccentFilter]
 
