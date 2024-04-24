@@ -1,7 +1,7 @@
 from django.conf import settings
 from django.contrib.gis.db.models.functions import Centroid, Transform
 from django.db.models import F, Prefetch
-from rest_framework import filters, viewsets, permissions as rest_permissions
+from rest_framework import filters, viewsets
 
 # from georiviere.decorators import view_cache_response_content, view_cache_latest
 from georiviere.main.models import Attachment
