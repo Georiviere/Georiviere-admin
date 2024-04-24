@@ -184,8 +184,10 @@ class CustomContributionTypeSerializer(serializers.ModelSerializer):
 
 class CustomContributionSerializer(serializers.ModelSerializer):
     def __init__(self, *args, **kwargs):
-        custom_type = kwargs.pop("custom_type")
         super().__init__(*args, **kwargs)
+        custom_type = self.context.get("custom_type")
+
+        # add and customize fields from json schema
         schema = custom_type.get_json_schema_form()
         for key in schema.get("properties", {}).keys():
             field = schema.get("properties", {}).get(key)
@@ -200,20 +202,28 @@ class CustomContributionSerializer(serializers.ModelSerializer):
                 output_field = serializers.DateField
             elif field.get("type") == "datetime":
                 output_field = serializers.DateTimeField
-            self.fields[key] = output_field(label=field.get("title"))
+            # make field required or not
+            self.fields[key] = output_field(
+                label=field.get("title"), required=key in schema.get("required", [])
+            )
+
+        # station is required if defined at custom_type level. Geom is not required because replace by station geom
+        if custom_type.stations.exists():
+            self.fields["station"] = serializers.PrimaryKeyRelatedField(
+                queryset=custom_type.stations.all(), required=True
+            )
+            self.fields["geom"].required = False
 
     class Meta:
         model = CustomContribution
         exclude = ("data", "custom_type")
 
 
-class CustomContributionSerializerGeoJSONSerializer(geo_serializers.GeoFeatureModelSerializer,
+class CustomContributionSerializerGeoJSONSerializer(
+    geo_serializers.GeoFeatureModelSerializer,
     CustomContributionSerializer,
-
 ):
-    geometry = geo_serializers.GeometryField(
-        read_only=True, precision=7
-    )
+    geometry = geo_serializers.GeometryField(read_only=True, precision=7)
 
     class Meta(CustomContributionSerializer.Meta):
         geo_field = "geometry"

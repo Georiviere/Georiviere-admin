@@ -1,20 +1,23 @@
 import json
+import logging
 import os
+
 from PIL import Image
-
-from rest_framework.permissions import AllowAny
-
 from django.conf import settings
 from django.contrib.contenttypes.models import ContentType
+from django.contrib.gis.db.models.functions import Transform
 from django.core.exceptions import ValidationError
 from django.core.files import File
 from django.core.mail import send_mail
 from django.db.models import F, Q
-from django.contrib.gis.db.models.functions import Transform
 from django.utils import translation
 from django.utils.translation import gettext_lazy as _
-
-from djangorestframework_camel_case.render import CamelCaseJSONRenderer
+from rest_framework import filters, viewsets, mixins, renderers, permissions
+from rest_framework.decorators import action
+from rest_framework.pagination import LimitOffsetPagination
+from rest_framework.parsers import JSONParser, MultiPartParser, FormParser
+from rest_framework.renderers import JSONRenderer
+from rest_framework.response import Response
 
 from georiviere.contribution.models import (
     Contribution,
@@ -31,36 +34,22 @@ from georiviere.portal.serializers.contribution import (
     CustomContributionSerializer,
     CustomContributionSerializerGeoJSONSerializer,
 )
-
-from rest_framework import filters, viewsets, mixins, renderers
-from rest_framework.decorators import action
-from rest_framework.response import Response
-from rest_framework.pagination import LimitOffsetPagination
-from rest_framework.parsers import JSONParser, MultiPartParser, FormParser
-
-import logging
+from georiviere.portal.views.mixins import GeoriviereAPIMixin
 
 logger = logging.getLogger(__name__)
 
 
 class ContributionViewSet(
+    GeoriviereAPIMixin,
     mixins.CreateModelMixin,
     mixins.RetrieveModelMixin,
     mixins.ListModelMixin,
     viewsets.GenericViewSet,
 ):
     model = Contribution
-    permission_classes = [
-        AllowAny,
-    ]
     geojson_serializer_class = ContributionGeojsonSerializer
     serializer_class = ContributionSerializer
     parser_classes = (MultiPartParser, FormParser, JSONParser)
-    pagination_class = LimitOffsetPagination
-    renderer_classes = [
-        CamelCaseJSONRenderer,
-        GeoJSONRenderer,
-    ]
     filter_backends = [filters.OrderingFilter, filters.SearchFilter]
     # TODO: Fix search filter with IntegerField (choices). It might be possible using an annotate on this view.
     # search_fields = ['potential_damage__type', 'fauna_flora__type', 'quality__type', 'quantity__type',
@@ -82,7 +71,6 @@ class ContributionViewSet(
         Extra context provided to the serializer class.
         """
         context = super().get_serializer_context()
-        context["portal_pk"] = self.kwargs["portal_pk"]
         translation.activate(self.kwargs["lang"])
         return context
 
@@ -100,13 +88,6 @@ class ContributionViewSet(
             geom_transformed=Transform(F("geom"), settings.API_SRID)
         )
         return queryset
-
-    def get_serializer_class(self):
-        """Use specific Serializer for GeoJSON"""
-        renderer, media_type = self.perform_content_negotiation(self.request)
-        if getattr(renderer, "format") == "geojson":
-            return self.geojson_serializer_class
-        return self.serializer_class
 
     def create(self, request, *args, **kwargs):
         response = super().create(request)
@@ -175,6 +156,7 @@ class ContributionViewSet(
 
 
 class CustomContributionTypeViewSet(
+    GeoriviereAPIMixin,
     mixins.RetrieveModelMixin,
     mixins.ListModelMixin,
     viewsets.GenericViewSet,
@@ -182,45 +164,60 @@ class CustomContributionTypeViewSet(
     queryset = CustomContributionType.objects.all().prefetch_related(
         "stations", "fields"
     )
-    permission_classes = [
-        AllowAny,
-    ]
     serializer_class = CustomContributionTypeSerializer
-
-    @action(
-        detail=True,
-        url_name="custom-contribution-create",
-        url_path="contributions",
-        methods=["post"],
-        renderer_classes=[renderers.JSONRenderer],
-        serializer_class=CustomContributionSerializer,
+    renderer_classes = (
+        (
+            renderers.BrowsableAPIRenderer,
+            JSONRenderer,
+        )
+        if settings.DEBUG
+        else (JSONRenderer,)
     )
+    permission_classes = [permissions.DjangoModelPermissionsOrAnonReadOnly]
+    pagination_class = LimitOffsetPagination
+
     def create_contribution(self, request, *args, **kwargs):
-        serializer = self.get_serializer(data=request.data)
+        context = self.get_serializer_context()
+        custom_type = self.get_object()
+        context["custom_type"] = custom_type
+        serializer = self.get_serializer(data=request.data, context=context)
         serializer.is_valid(raise_exception=True)
-        contribution = serializer.save()
+        extra_save_params = {}
+        # if station selected, save its geom
+        if "station" in serializer.validated_data:
+            extra_save_params["geom"] = serializer.validated_data["station"].geom
+        contribution = serializer.save(custom_type=custom_type, **extra_save_params)
+
         return Response(
-            ContributionSerializer(
-                contribution, context=self.get_serializer_context()
-            ).data
+            CustomContributionSerializer(contribution, context=context).data
         )
 
-    @action(
-        detail=True,
-        url_name="custom-contribution-list",
-        url_path="contributions",
-        methods=["get"],
-        renderer_classes=[renderers.JSONRenderer, GeoJSONRenderer],
-        serializer_class=CustomContributionSerializer,
-    )
     def list_contributions(self, request, *args, **kwargs):
         custom_type = self.get_object()
+        context = self.get_serializer_context()
+        context["custom_type"] = custom_type
         qs = CustomContribution.objects.with_type_values(custom_type)
 
         renderer, media_type = self.perform_content_negotiation(self.request)
         if getattr(renderer, "format") == "geojson":
-            self.serializer_class = CustomContributionSerializerGeoJSONSerializer
+            self.geojson_serializer_class = (
+                CustomContributionSerializerGeoJSONSerializer
+            )
             qs = qs.annotate(geometry=Transform(F("geom"), settings.API_SRID))
 
-        serializer = self.get_serializer(qs, custom_type=custom_type, many=True)
+        serializer = self.get_serializer(qs, context=context, many=True)
         return Response(serializer.data)
+
+    @action(
+        detail=True,
+        url_name="custom-contributions",
+        url_path="contributions",
+        methods=["get", "post"],
+        renderer_classes=[renderers.JSONRenderer, GeoJSONRenderer],
+        serializer_class=CustomContributionSerializer,
+    )
+    def contributions(self, request, *args, **kwargs):
+        if request.method == "GET":
+            return self.list_contributions(request, *args, **kwargs)
+        elif request.method == "POST":
+            return self.create_contribution(request, *args, **kwargs)

@@ -37,13 +37,6 @@ class StreamViewSet(GeoriviereAPIMixin, viewsets.ReadOnlyModelViewSet):
         ).annotate(centroid=Centroid("geom_transformed"))
         return queryset
 
-    def get_serializer_class(self):
-        """Use specific Serializer for GeoJSON"""
-        renderer, media_type = self.perform_content_negotiation(self.request)
-        if getattr(renderer, "format") == "geojson":
-            return self.geojson_serializer_class
-        return self.serializer_class
-
     def view_cache_key(self):
         return f"stream-{self.kwargs['portal_pk']}"
 

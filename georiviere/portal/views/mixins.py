@@ -21,3 +21,9 @@ class GeoriviereAPIMixin:
         if getattr(renderer, "format") == "geojson":
             return self.geojson_serializer_class
         return self.serializer_class
+
+    def get_serializer_context(self):
+        context = super().get_serializer_context()
+        context["lang"] = self.kwargs["lang"]
+        context["portal_pk"] = self.kwargs["portal_pk"]
+        return context

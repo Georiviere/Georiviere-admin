@@ -21,7 +21,7 @@ class POIViewSet(GeoriviereAPIMixin, viewsets.ReadOnlyModelViewSet):
 
     def get_queryset(self):
         portal_pk = self.kwargs['portal_pk']
-        queryset = POI.objects.select_related('type')
+        queryset = POI.objects.select_related('type__category')
         queryset = queryset.filter(portals__id=portal_pk).annotate(geom_transformed=Transform(F('geom'), settings.API_SRID))
         return queryset
 
@@ -30,7 +30,6 @@ class POIViewSet(GeoriviereAPIMixin, viewsets.ReadOnlyModelViewSet):
     def category(self, request, *args, **kwargs):
         category_pk = self.kwargs['category_pk']
         category = get_object_or_404(POICategory.objects.all(), pk=category_pk)
-        qs = self.filter_queryset(POI.objects.filter(type__in=category.types.all()).annotate(
-            geom_transformed=Transform(F('geom'), settings.API_SRID)))
+        qs = self.filter_queryset(self.get_queryset().filter(type__in=category.types.all()))
         serializer = self.get_serializer(qs, many=True)
         return Response(serializer.data)
