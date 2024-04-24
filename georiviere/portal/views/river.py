@@ -30,8 +30,11 @@ class StreamViewSet(GeoriviereAPIMixin, viewsets.ReadOnlyModelViewSet):
     def get_queryset(self):
         portal_pk = self.kwargs["portal_pk"]
         queryset = Stream.objects.filter(portals__id=portal_pk).prefetch_related(
-            Prefetch("attachments",
-                     queryset=Attachment.objects.all().select_related('filetype')))
+            Prefetch(
+                "attachments",
+                queryset=Attachment.objects.all().select_related("filetype"),
+            )
+        )
         queryset = queryset.annotate(
             geom_transformed=Transform(F("geom"), settings.API_SRID)
         ).annotate(centroid=Centroid("geom_transformed"))
