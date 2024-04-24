@@ -1,4 +1,4 @@
-tinymce.init({
+tinyMCE.init({
         selector: ".tiny-class",
         editor_selector : ".tiny-class",
         height: 600,
