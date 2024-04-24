@@ -1,3 +1,4 @@
+from django.conf import settings
 from djangorestframework_camel_case.render import CamelCaseJSONRenderer
 from rest_framework import renderers, permissions
 from rest_framework.pagination import LimitOffsetPagination
@@ -10,7 +11,7 @@ class GeoriviereAPIMixin:
         renderers.BrowsableAPIRenderer,
         CamelCaseJSONRenderer,
         GeoJSONRenderer,
-    )
+    ) if settings.DEBUG else (CamelCaseJSONRenderer, GeoJSONRenderer)
     permission_classes = [permissions.DjangoModelPermissionsOrAnonReadOnly]
     pagination_class = LimitOffsetPagination
 
