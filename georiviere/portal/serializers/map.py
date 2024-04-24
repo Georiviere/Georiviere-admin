@@ -58,7 +58,7 @@ class MapLayerSerializer(ModelSerializer):
         if layer_type[0] not in ['pois', 'streams', 'contributions', 'sensitivities']:
             return None
         # TODO: Make lang dynamic
-        reverse_kwargs = {'lang': 'fr'}
+        reverse_kwargs = {'lang': 'fr', 'format': 'json' }
         if layer_type[0] in ['watersheds', 'pois', 'streams', 'contributions']:
             reverse_kwargs['portal_pk'] = obj.portal.pk
         return reverse(f'api_portal:{layer_type[0]}-list', kwargs=reverse_kwargs)

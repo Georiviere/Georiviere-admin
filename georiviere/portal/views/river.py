@@ -5,7 +5,7 @@ from djangorestframework_camel_case.render import CamelCaseJSONRenderer
 from rest_framework import filters, viewsets, permissions as rest_permissions
 from rest_framework.renderers import BrowsableAPIRenderer
 
-#from georiviere.decorators import view_cache_response_content, view_cache_latest
+from georiviere.decorators import view_cache_response_content, view_cache_latest
 from georiviere.main.models import Attachment
 from georiviere.main.renderers import GeoJSONRenderer
 from georiviere.portal.filters import SearchNoAccentFilter
@@ -21,11 +21,6 @@ class StreamViewSet(GeoriviereAPIMixin, viewsets.ReadOnlyModelViewSet):
     model = Stream
     geojson_serializer_class = StreamGeojsonSerializer
     serializer_class = StreamSerializer
-    renderer_classes = (
-        BrowsableAPIRenderer,
-        CamelCaseJSONRenderer,
-        GeoJSONRenderer,
-    ) if settings.DEBUG else (CamelCaseJSONRenderer, GeoJSONRenderer)
     permission_classes = [rest_permissions.DjangoModelPermissionsOrAnonReadOnly]
     filter_backends = [filters.OrderingFilter, SearchNoAccentFilter]
 
