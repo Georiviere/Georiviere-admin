@@ -27,8 +27,14 @@ class SignalRiverTest(TestCase):
 
         self.assertEqual(str(stream), stream.name)
 
-        morphologies = Morphology.objects.values_list('geom', flat=True)
-        status = Status.objects.values_list('geom', flat=True)
+        stream_1_morpho_geom = stream.morphologies.first().geom.ewkt
+        stream_2_morpho_geom = stream_2.morphologies.first().geom.ewkt
 
-        self.assertEqual(morphologies[0], morphologies[1], f"{morphologies[0].ewkt} - {morphologies[1].ewkt}", )
+        status = Status.objects.values_list("geom", flat=True)
+
+        self.assertEqual(
+            stream_1_morpho_geom,
+            stream_2_morpho_geom,
+            f"{stream_1_morpho_geom} - {stream_2_morpho_geom}",
+        )
         self.assertEqual(status[0], status[1])

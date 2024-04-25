@@ -183,6 +183,8 @@ class CustomContributionTypeSerializer(serializers.ModelSerializer):
 
 
 class CustomContributionSerializer(serializers.ModelSerializer):
+    contributed_at = serializers.DateTimeField(required=True)
+
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
         custom_type = self.context.get("custom_type")
@@ -228,15 +230,15 @@ class CustomContributionSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = CustomContribution
-        exclude = ("data", "custom_type")
+        exclude = ("data", "custom_type", "validated")
 
 
 class CustomContributionSerializerGeoJSONSerializer(
-    geo_serializers.GeoFeatureModelSerializer,
     CustomContributionSerializer,
+    geo_serializers.GeoFeatureModelSerializer,
 ):
     geometry = geo_serializers.GeometryField(read_only=True, precision=7)
 
     class Meta(CustomContributionSerializer.Meta):
         geo_field = "geometry"
-        exclude = ("geom", "data", "custom_type")
+        exclude = ("geom", "data", "custom_type", "validated")
