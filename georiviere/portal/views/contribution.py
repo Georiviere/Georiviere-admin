@@ -16,6 +16,7 @@ from rest_framework import filters, viewsets, mixins, renderers, permissions, st
 from rest_framework.decorators import action
 from rest_framework.pagination import LimitOffsetPagination
 from rest_framework.parsers import JSONParser, MultiPartParser, FormParser
+from rest_framework.permissions import AllowAny
 from rest_framework.renderers import JSONRenderer
 from rest_framework.response import Response
 
@@ -49,6 +50,9 @@ class ContributionViewSet(
     model = Contribution
     geojson_serializer_class = ContributionGeojsonSerializer
     serializer_class = ContributionSerializer
+    permission_classes = [
+        AllowAny,
+    ]
     parser_classes = (MultiPartParser, FormParser, JSONParser)
     filter_backends = [filters.OrderingFilter, filters.SearchFilter]
     # TODO: Fix search filter with IntegerField (choices). It might be possible using an annotate on this view.
@@ -188,10 +192,12 @@ class CustomContributionTypeViewSet(
             extra_save_params["geom"] = serializer.validated_data["station"].geom
         contribution = serializer.save(custom_type=custom_type, **extra_save_params)
         # reload with extra fields
-        contribution = CustomContribution.objects.with_type_values(custom_type).get(pk=contribution.pk)
+        contribution = CustomContribution.objects.with_type_values(custom_type).get(
+            pk=contribution.pk
+        )
         return Response(
             CustomContributionSerializer(contribution, context=context).data,
-            status=status.HTTP_201_CREATED
+            status=status.HTTP_201_CREATED,
         )
 
     def list_contributions(self, request, *args, **kwargs):
