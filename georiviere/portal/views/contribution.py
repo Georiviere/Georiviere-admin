@@ -33,7 +33,7 @@ from georiviere.portal.serializers.contribution import (
     ContributionGeojsonSerializer,
     CustomContributionTypeSerializer,
     CustomContributionSerializer,
-    CustomContributionSerializerGeoJSONSerializer,
+    CustomContributionGeoJSONSerializer,
 )
 from georiviere.portal.views.mixins import GeoriviereAPIMixin
 
@@ -209,7 +209,7 @@ class CustomContributionTypeViewSet(
         renderer, media_type = self.perform_content_negotiation(self.request)
         if getattr(renderer, "format") == "geojson":
             self.geojson_serializer_class = (
-                CustomContributionSerializerGeoJSONSerializer
+                CustomContributionGeoJSONSerializer
             )
             qs = qs.annotate(geometry=Transform(F("geom"), settings.API_SRID))
 
