@@ -8,6 +8,7 @@ from django.contrib.gis.db import models
 from django.core.mail import mail_managers
 from django.template.loader import render_to_string
 from django.utils.text import slugify
+from django.utils.timezone import now
 from django.utils.translation import gettext_lazy as _
 from geotrek.common.mixins import BasePublishableMixin, TimeStampedModelMixin
 from geotrek.common.utils import classproperty
@@ -842,12 +843,14 @@ class CustomContribution(TimeStampedModelMixin, models.Model):
         related_name="custom_contributions",
         on_delete=models.PROTECT,
     )
+    contributed_at = models.DateTimeField(verbose_name=_("Contributed at"), default=now)
     validated = models.BooleanField(default=False, verbose_name=_("Validated"))
     objects = CustomContributionManager()
 
     class Meta:
         verbose_name = _("Custom contribution")
         verbose_name_plural = _("Custom contributions")
+        ordering = ('-contributed_at',)
 
     def __str__(self):
         return f"{self.custom_type.label} - {self.pk}"
