@@ -12,8 +12,8 @@ def add_station_map_layer_to_portals(apps, schema_editor):
         MapLayer.objects.create(
             portal=portal,
             layer_type="stations",
-            name=_("Stations"),
-            visible=False,
+            label=_("Stations"),
+            hidden=True,
         )
 
 
