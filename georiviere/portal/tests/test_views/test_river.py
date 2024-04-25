@@ -42,8 +42,8 @@ class StreamViewTest(TestCase):
         response = self.client.get(url)
         self.assertEqual(response.status_code, 200)
         self.assertListEqual(
-            response.json().keys(),
-            [
+            sorted(list(response.json().keys())),
+            sorted([
                 "attachments",
                 "length",
                 "flow",
@@ -54,7 +54,7 @@ class StreamViewTest(TestCase):
                 "geometryCenter",
                 "geojsonUrl",
                 "jsonUrl",
-            ],
+            ]),
         )
 
     def test_stream_list_geojson_structure(self):
@@ -75,8 +75,8 @@ class StreamViewTest(TestCase):
         self.assertEqual(response.status_code, 200)
         self.assertEqual(len(response.json()), 1)
         self.assertListEqual(
-            response.json().keys(),
-            [
+            sorted(list(response.json()[0].keys())),
+            sorted([
                 "attachments",
                 "length",
                 "flow",
@@ -87,7 +87,7 @@ class StreamViewTest(TestCase):
                 "geometryCenter",
                 "geojsonUrl",
                 "jsonUrl",
-            ],
+            ]),
         )
 
     def test_stream_ranslation_according_url(self):
