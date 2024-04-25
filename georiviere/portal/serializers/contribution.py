@@ -245,15 +245,17 @@ class CustomContributionGeoJSONSerializer(
         exclude = ("data", "custom_type", "validated")
 
 
-class CustomContributionByStationSerializer(CustomContributionSerializer):
+class CustomContributionByStationSerializer(serializers.ModelSerializer):
     class Meta(CustomContributionSerializer.Meta):
         model = CustomContribution
-        exclude = ("data", "validated")
+        exclude = ("data", "validated", "station")
 
 
 class CustomContributionByStationGeoJSONSerializer(
-    CustomContributionGeoJSONSerializer,
+    CustomContributionByStationSerializer,
+    geo_serializers.GeoFeatureModelSerializer
 ):
-    class Meta(CustomContributionGeoJSONSerializer.Meta):
+    geometry = geo_serializers.GeometryField(read_only=True, precision=7)
+
+    class Meta(CustomContributionByStationSerializer.Meta):
         geo_field = "geometry"
-        exclude = ("data", "validated")

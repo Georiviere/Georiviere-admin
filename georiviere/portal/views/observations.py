@@ -28,18 +28,15 @@ class StationViewSet(GeoriviereAPIMixin, viewsets.ReadOnlyModelViewSet):
         return qs.annotate(geom_transformed=Transform(F("geom"), settings.API_SRID))
 
     @action(detail=True, methods=["get"],
-            url_path=r"type/(?P<type_pk>\d+)/custom-contributions", url_name='custom-contributions',
+            url_name='custom-contributions',
             serializer_class=CustomContributionByStationSerializer)
     def custom_contributions(self, request, *args, **kwargs):
         station = self.get_object()
-        custom_type = get_object_or_404(station.custom_contribution_types.all(), pk=kwargs["type_pk"])
-        context = self.get_serializer_context()
-        context["custom_type"] = custom_type
-        qs = CustomContribution.objects.with_type_values(custom_type).filter(station=station, validated=True)
+        qs = station.custom_contributions.filter(validated=True)
         renderer, media_type = self.perform_content_negotiation(self.request)
         if getattr(renderer, "format") == "geojson":
             self.geojson_serializer_class = CustomContributionByStationGeoJSONSerializer
             qs = qs.annotate(geometry=Transform(F("geom"), settings.API_SRID))
 
-        serializer = self.get_serializer(qs, context=context, many=True)
+        serializer = self.get_serializer(qs, many=True)
         return Response(serializer.data)
