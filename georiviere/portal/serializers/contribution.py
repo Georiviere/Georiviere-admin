@@ -248,7 +248,7 @@ class CustomContributionGeoJSONSerializer(
 class CustomContributionByStationSerializer(serializers.ModelSerializer):
     class Meta(CustomContributionSerializer.Meta):
         model = CustomContribution
-        exclude = ("data", "validated", "station")
+        exclude = ("data", "validated", "station", "portal")
 
 
 class CustomContributionByStationGeoJSONSerializer(
