@@ -611,10 +611,18 @@ Contribution.add_property("knowledges", Knowledge.within_buffer, _("Knowledge"))
 
 # Custom Contribution
 
+
 class CustomContributionType(models.Model):
     label = models.CharField(max_length=128, verbose_name=_("Label"), unique=True)
-    description = models.CharField(max_length=512, verbose_name=_("Description"), blank=True, default="")
-    stations = models.ManyToManyField('observations.Station', verbose_name=_("Stations"), related_name='custom_contribution_types', blank=True)
+    description = models.CharField(
+        max_length=512, verbose_name=_("Description"), blank=True, default=""
+    )
+    stations = models.ManyToManyField(
+        "observations.Station",
+        verbose_name=_("Stations"),
+        related_name="custom_contribution_types",
+        blank=True,
+    )
 
     def __str__(self):
         return self.label
@@ -641,6 +649,7 @@ class CustomContributionType(models.Model):
         ordering = ("label",)
 
 
+# noinspection PyTypedDict
 class CustomContributionTypeField(models.Model):
     class FieldTypeChoices(models.TextChoices):
         """Choices for field type"""
@@ -653,7 +662,19 @@ class CustomContributionTypeField(models.Model):
         DATETIME = "datetime", _("Datetime")
         BOOLEAN = "boolean", _("Boolean")
 
-    label = models.CharField(max_length=128, verbose_name=_("Label"), help_text=_("Field label."))
+    label = models.CharField(
+        max_length=128,
+        verbose_name=_("Label"),
+        help_text=_("Field label in forms and public portal."),
+    )
+    internal_identifier = models.CharField(
+        max_length=128,
+        verbose_name=_("Internal identifier"),
+        help_text=_("Internal identifier for field."),
+        unique=True,
+        blank=True,
+        null=True,  # allow null because it is not mandatory but unique if valued
+    )
     key = models.SlugField(
         max_length=150,
         verbose_name=_("Key"),
@@ -666,17 +687,41 @@ class CustomContributionTypeField(models.Model):
         choices=FieldTypeChoices.choices,
         default=FieldTypeChoices.STRING,
     )
-    required = models.BooleanField(default=False, verbose_name=_("Required"), help_text=_("Set if field is required to validate form."))
+    required = models.BooleanField(
+        default=False,
+        verbose_name=_("Required"),
+        help_text=_("Set if field is required to validate form."),
+    )
     help_text = models.CharField(
-        max_length=256, verbose_name=_("Help text"), blank=True, default="", help_text=_("Set a help text for the field.")
+        max_length=256,
+        verbose_name=_("Help text"),
+        blank=True,
+        default="",
+        help_text=_("Set a help text for the field."),
     )
-    options = models.JSONField(null=False, blank=True, editable=False, verbose_name=_("Options"), default=dict, help_text=_("Internal options for type JSON schema."))
+    options = models.JSONField(
+        null=False,
+        blank=True,
+        editable=False,
+        verbose_name=_("Options"),
+        default=dict,
+        help_text=_("Internal options for type JSON schema."),
+    )
     customization = models.JSONField(
-        null=False, blank=True, default=dict, verbose_name=_("Customization"), help_text=_("Field customization.")
+        null=False,
+        blank=True,
+        default=dict,
+        verbose_name=_("Customization"),
+        help_text=_("Field customization."),
     )
-    order = models.PositiveSmallIntegerField(default=0, verbose_name=_("Order"), help_text=_("Order of field in form."))
+    order = models.PositiveSmallIntegerField(
+        default=0, verbose_name=_("Order"), help_text=_("Order of field in form.")
+    )
     custom_type = models.ForeignKey(
-        CustomContributionType, on_delete=models.CASCADE, related_name="fields", verbose_name=_("Custom contribution type.")
+        CustomContributionType,
+        on_delete=models.CASCADE,
+        related_name="fields",
+        verbose_name=_("Custom contribution type."),
     )
 
     def __str__(self):
@@ -811,7 +856,7 @@ class CustomContributionTypeField(models.Model):
         # drop empty choices
         customization = self.customization
         if "choices" in customization and not customization.get("choices"):
-            customization.pop('choices')
+            customization.pop("choices")
         base_schema.update(self.customization)
 
         return base_schema
@@ -819,18 +864,32 @@ class CustomContributionTypeField(models.Model):
     class Meta:
         verbose_name = _("Custom contribution type field")
         verbose_name_plural = _("Custom contribution type fields")
-        unique_together = (("label", "custom_type"),)  # label by type should be unique
+        unique_together = (
+            ("label", "custom_type"),  # label by type should be unique
+            (
+                "internal_identifier",
+                "custom_type",
+            ),  # internal_identifier by type should be unique
+        )
         index_together = (("order", "custom_type"),)
         ordering = ("order", "custom_type")
 
 
 class CustomContribution(TimeStampedModelMixin, models.Model):
     geom = models.GeometryField(srid=settings.SRID, spatial_index=True)
-    station = models.ForeignKey('observations.Station', on_delete=models.PROTECT,
-                                related_name='custom_contributions', verbose_name=_('Station'), blank=True, null=True)
+    station = models.ForeignKey(
+        "observations.Station",
+        on_delete=models.PROTECT,
+        related_name="custom_contributions",
+        verbose_name=_("Station"),
+        blank=True,
+        null=True,
+    )
     custom_type = models.ForeignKey(
-        CustomContributionType, on_delete=models.PROTECT, related_name="contributions",
-        verbose_name=_("Custom contribution type")
+        CustomContributionType,
+        on_delete=models.PROTECT,
+        related_name="contributions",
+        verbose_name=_("Custom contribution type"),
     )
     data = models.JSONField(
         verbose_name=_("Data"), null=False, blank=True, default=dict
@@ -850,7 +909,7 @@ class CustomContribution(TimeStampedModelMixin, models.Model):
     class Meta:
         verbose_name = _("Custom contribution")
         verbose_name_plural = _("Custom contributions")
-        ordering = ('-contributed_at',)
+        ordering = ("-contributed_at",)
 
     def __str__(self):
         return f"{self.custom_type.label} - {self.pk}"
