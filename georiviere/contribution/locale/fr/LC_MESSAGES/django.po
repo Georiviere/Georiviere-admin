@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-04-12 19:23+0000\n"
+"POT-Creation-Date: 2024-04-26 15:38+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -82,7 +82,7 @@ msgid "First name author"
 msgstr "Prénom auteur"
 
 msgid "Email"
-msgstr "Mail"
+msgstr "Courriel"
 
 msgid "Observation's date"
 msgstr "Date de l'observation"
@@ -363,8 +363,14 @@ msgstr "Date / Heure"
 msgid "Boolean"
 msgstr "Booléen"
 
-msgid "Field label."
-msgstr "Libellé du champ."
+msgid "Field label in forms and public portal."
+msgstr "Libellé du champ dans les formulaires et sur les portails publics."
+
+msgid "Internal identifier"
+msgstr "Identifiant interne"
+
+msgid "Internal identifier for field."
+msgstr "Identifiant interne du champ."
 
 msgid "Key"
 msgstr "Clé"
@@ -425,6 +431,9 @@ msgstr "Champ de type de contribution personnalisée"
 
 msgid "Custom contribution type fields"
 msgstr "Champs de types de contributions personnalisées"
+
+msgid "Contributed at"
+msgstr "Contribué le"
 
 msgid "Custom contribution"
 msgstr "Contribution personnalisée"
