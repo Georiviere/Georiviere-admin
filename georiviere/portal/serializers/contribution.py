@@ -187,7 +187,9 @@ class CustomContributionSerializer(serializers.ModelSerializer):
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
-        custom_type = self.context.get("custom_type")
+        custom_type = self.context.get("custom_type", None)
+        if not custom_type:
+            return
 
         # add and customize fields from json schema
         schema = custom_type.get_json_schema_form()
