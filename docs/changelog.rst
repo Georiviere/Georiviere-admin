@@ -7,7 +7,8 @@ CHANGELOG
 
 **New features**
 
-- add load_rivers command
+- Add load_rivers command
+- Create custom contribution types from the admin with specific field schema
 
 **Bug fix**
 
