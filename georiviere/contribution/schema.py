@@ -2,6 +2,7 @@ from django.utils.translation import gettext as _
 
 from . import models
 
+
 # The json schema is summarized on :
 # https://github.com/Georiviere/Georiviere-admin/issues/139
 # Depending on the category and type of the contributions, some fields are available or not.

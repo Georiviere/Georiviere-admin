@@ -15,5 +15,6 @@ class MainConfig(AppConfig):
         from georiviere.river.models import Stream
         for model in apps.get_models():
             if issubclass(model, MapEntityMixin) and model != Stream:
+                print("signal for model {}".format(model))
                 post_save.connect(signals.save_objects_generate_distance_to_source, sender=model)
                 post_delete.connect(signals.delete_objects_remove_distance_to_source, sender=model)
