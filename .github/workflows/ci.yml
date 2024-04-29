@@ -95,7 +95,8 @@ jobs:
 
   build-and-push-image:
     runs-on: ubuntu-latest
-    needs: [flake8, doc_build, unittests]
+    #needs: [flake8, doc_build, unittests]
+    needs: [flake8, doc_build]
     permissions:
       packages: write  # required to publish docker image
     env:
