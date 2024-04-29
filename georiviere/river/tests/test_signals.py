@@ -24,17 +24,20 @@ class SignalRiverTest(TestCase):
         stream_2 = StreamFactory.create()
         stream.geom = stream_2.geom
         stream.save()
+        stream.refresh_from_db()
 
         self.assertEqual(str(stream), stream.name)
 
-        stream_1_morpho_geom = stream.morphologies[0].geom.ewkt
-        stream_2_morpho_geom = stream_2.morphologies[0].geom.ewkt
+        stream_1_morpho_geom = stream.morphologies[0].geom
+        stream_2_morpho_geom = stream_2.morphologies[0].geom
 
+        self.assertEqual(len(stream.morphologies), 1)
+        self.assertEqual(len(stream_2.morphologies), 1)
         status = Status.objects.values_list("geom", flat=True)
-
+        self.assertEqual(stream_1_morpho_geom.length, stream_1_morpho_geom.length)
         self.assertEqual(
-            stream_1_morpho_geom,
-            stream_2_morpho_geom,
-            f"{stream_1_morpho_geom} - {stream_2_morpho_geom}",
+            stream_1_morpho_geom.ewkt,
+            stream_2_morpho_geom.ewkt,
+            f"{stream_1_morpho_geom.ewkt} - {stream_2_morpho_geom.ewkt}",
         )
         self.assertEqual(status[0], status[1])
