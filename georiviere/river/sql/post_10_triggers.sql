@@ -41,3 +41,22 @@ $$ LANGUAGE plpgsql;
 CREATE TRIGGER core_path_10_elevation_iu_tgr
 AFTER INSERT ON river_stream
 FOR EACH ROW EXECUTE PROCEDURE create_topologies();
+
+CREATE FUNCTION update_topologies() RETURNS trigger SECURITY DEFINER AS $$
+BEGIN
+    UPDATE description_morphology m
+    SET geom = ST_LINESUBSTRING(NEW.geom, t.start_position, t.end_position)
+    FROM river_topology t
+    WHERE m.topology_id = t.id AND t.stream_id = NEW.id;
+
+    UPDATE description_status s
+    SET geom = ST_LINESUBSTRING(NEW.geom, t.start_position, t.end_position)
+    FROM river_topology t
+    WHERE s.topology_id = t.id AND t.stream_id = NEW.id;
+    RETURN NEW;
+END;
+$$ LANGUAGE plpgsql;
+
+CREATE TRIGGER river_change_geom_update_topology_tgr
+BEFORE UPDATE OF geom ON river_stream
+FOR EACH ROW EXECUTE PROCEDURE update_topologies();

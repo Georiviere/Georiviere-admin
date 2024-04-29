@@ -4,12 +4,21 @@ from rest_framework import routers
 
 from georiviere.portal.views import GeoriviereVersionAPIView
 from georiviere.portal.views.flatpage import FlatPageViewSet
-from georiviere.portal.views.contribution import ContributionViewSet
+from georiviere.portal.views.contribution import (
+    ContributionViewSet,
+    CustomContributionTypeViewSet,
+    CustomContributionViewSet,
+)
+from georiviere.portal.views.observations import StationViewSet
 from georiviere.portal.views.portal import PortalViewSet
 from georiviere.portal.views.river import StreamViewSet
 from georiviere.portal.views.sensitivity import SensitivityViewSet
 from georiviere.portal.views.valorization import POIViewSet
-from georiviere.portal.views.zoning import CityViewSet, DistrictViewSet, WatershedViewSet
+from georiviere.portal.views.zoning import (
+    CityViewSet,
+    DistrictViewSet,
+    WatershedViewSet,
+)
 
 from drf_spectacular.views import (
     SpectacularAPIView,
@@ -18,21 +27,53 @@ from drf_spectacular.views import (
 )
 
 router = routers.DefaultRouter()
+
 # Datas are available depending on portal or not.
-router.register(r'(?P<lang>[a-z]{2})/(?P<portal_pk>\d+)/pois', POIViewSet, basename='pois')
+router.register(
+    r"(?P<lang>[a-z]{2})/(?P<portal_pk>\d+)/pois", POIViewSet, basename="pois"
+)
+router.register(
+    r"(?P<lang>[a-z]{2})/(?P<portal_pk>\d+)/streams", StreamViewSet, basename="streams"
+)
+router.register(
+    r"(?P<lang>[a-z]{2})/(?P<portal_pk>\d+)/custom-contributions",
+    CustomContributionViewSet,
+    basename="custom-contributions",
+)
+router.register(
+    r"(?P<lang>[a-z]{2})/(?P<portal_pk>\d+)/stations",
+    StationViewSet,
+    basename="stations",
+)
+router.register(
+    r"(?P<lang>[a-z]{2})/(?P<portal_pk>\d+)/flatpages",
+    FlatPageViewSet,
+    basename="flatpages",
+)
+router.register(
+    r"(?P<lang>[a-z]{2})/(?P<portal_pk>\d+)/contributions",
+    ContributionViewSet,
+    basename="contributions",
+)
+router.register(
+    r"(?P<lang>[a-z]{2})/(?P<portal_pk>\d+)/custom-contribution-types",
+    CustomContributionTypeViewSet,
+    basename="custom_contribution_types",
+)
+router.register(
+    r"(?P<lang>[a-z]{2})/(?P<portal_pk>\d+)/watersheds",
+    WatershedViewSet,
+    basename="watersheds",
+)
 
-router.register(r'(?P<lang>[a-z]{2})/(?P<portal_pk>\d+)/streams', StreamViewSet, basename='streams')
+router.register(r"(?P<lang>[a-z]{2})/portal", PortalViewSet, basename="portal")
+router.register(r"(?P<lang>[a-z]{2})/cities", CityViewSet, basename="cities")
+router.register(r"(?P<lang>[a-z]{2})/districts", DistrictViewSet, basename="districts")
+router.register(
+    r"(?P<lang>[a-z]{2})/sensitivities", SensitivityViewSet, basename="sensitivities"
+)
 
-router.register(r'(?P<lang>[a-z]{2})/(?P<portal_pk>\d+)/flatpages', FlatPageViewSet, basename='flatpages')
-router.register(r'(?P<lang>[a-z]{2})/(?P<portal_pk>\d+)/contributions', ContributionViewSet, basename='contributions')
-router.register(r'(?P<lang>[a-z]{2})/(?P<portal_pk>\d+)/watersheds', WatershedViewSet, basename='watersheds')
-
-router.register(r'(?P<lang>[a-z]{2})/portal', PortalViewSet, basename='portal')
-router.register(r'(?P<lang>[a-z]{2})/cities', CityViewSet, basename='cities')
-router.register(r'(?P<lang>[a-z]{2})/districts', DistrictViewSet, basename='districts')
-router.register(r'(?P<lang>[a-z]{2})/sensitivities', SensitivityViewSet, basename='sensitivities')
-
-app_name = 'api_portal'
+app_name = "api_portal"
 
 _urlpatterns = []
 if settings.API_SCHEMA:  # pragma: no cover
@@ -54,7 +95,7 @@ if settings.API_SCHEMA:  # pragma: no cover
             )
         ]
 _urlpatterns += [
-    path('version', GeoriviereVersionAPIView.as_view(), name='version'),
-    path('', include(router.urls)),
+    path("version", GeoriviereVersionAPIView.as_view(), name="version"),
+    path("", include(router.urls)),
 ]
-urlpatterns = [path('api/portal/', include(_urlpatterns))]
+urlpatterns = [path("api/portal/", include(_urlpatterns))]

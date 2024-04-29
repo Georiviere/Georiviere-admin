@@ -45,9 +45,9 @@
 
     {% if modelname != "status" %}
         <tr>
-            <th>{% trans "Status" %}</th>
+            <th>{% trans "Statuses" %}</th>
             <td>
-            {% if object.status %}
+            {% if object.statuses %}
                 {% valuelist object.status field="status_types" %}
             {% else %}
                 {% valuelist object.statuses field="status_types" %}
@@ -58,10 +58,10 @@
 
     {% if modelname != "morphology" %}
         <tr>
-            <th>{% trans "Morphology" %}</th>
+            <th>{% trans "Morphologies" %}</th>
             <td>
-            {% if object.morphology %}
-                {% valuelist object.morphology field="name" %}
+            {% if object.morphologies %}
+                {% valuelist object.morphologies field="name" %}
             {% else %}
                 {% valuelist object.morphologies field="name" %}
             {% endif %}

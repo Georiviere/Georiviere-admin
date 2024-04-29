@@ -12,6 +12,7 @@ from paperclip import views as paperclip_views
 
 admin.autodiscover()
 
+
 urlpatterns = [
     path('', home, name='home'),
     path('login/', views.LoginView.as_view(), name='login'),

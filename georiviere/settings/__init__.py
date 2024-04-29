@@ -139,6 +139,7 @@ INSTALLED_APPS = PROJECT_APPS + [
     'mapentity',  # mapentity should be placed after app declaring paperclip models
     'leaflet',
     'paperclip',
+    'django_jsonform',
     'crispy_forms',
     'rest_framework',
     'geotrek.altimetry',
@@ -205,6 +206,11 @@ MIDDLEWARE = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
     'mapentity.middleware.AutoLoginMiddleware',
 ]
+
+LOCALE_PATHS = (
+    # override locale
+    os.path.join(PROJECT_DIR, 'locales'),
+)
 
 ROOT_URLCONF = 'georiviere.urls'
 

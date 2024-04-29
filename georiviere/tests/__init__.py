@@ -120,4 +120,4 @@ class CommonRiverTest(MapEntityTest):
             object_id=obj.pk,
             content_type=ContentType.objects.get_for_model(obj)
         ).distance
-        self.assertContains(response, f'''({round(distance , 1 ) if distance else 0}&nbsp;m)''')
+        self.assertContains(response, f'''({round(distance, 1) if distance else 0}&nbsp;m)''')

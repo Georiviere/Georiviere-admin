@@ -88,6 +88,7 @@ django==3.1.14
     #   django-filter
     #   django-geojson
     #   django-js-asset
+    #   django-jsonform
     #   django-leaflet
     #   django-modeltranslation
     #   django-mptt
@@ -136,6 +137,8 @@ django-js-asset==2.0.0
     # via
     #   django-admin-ordering
     #   django-mptt
+django-jsonform==2.22.0
+    # via -r requirements.in
 django-leaflet==0.19.post9
     # via mapentity
 django-modelcluster==5.2
@@ -251,7 +254,7 @@ persistent==4.7.0
     # via
     #   btrees
     #   zodb
-pillow==10.3.0
+pillow==9.5.0
     # via
     #   cairosvg
     #   easy-thumbnails
