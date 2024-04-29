@@ -44,9 +44,9 @@ class MapLayerSerializer(ModelSerializer):
         layer_type = obj.layer_type.split('-')
         # TODO: Make lang dynamic
         reverse_kwargs = {'lang': 'fr', 'format': 'geojson'}
-        if layer_type[0] in ['watersheds', 'pois', 'streams', 'contributions', 'stations', 'contributions-custom']:
+        if layer_type[0] in ['watersheds', 'pois', 'streams', 'contributions', 'stations', ]:
             reverse_kwargs['portal_pk'] = obj.portal.pk
-        if len(layer_type) == 2:
+        if layer_type[0] == 'pois':
             # If the layer type is poi, it's separated by category.
             filter_type = layer_type[-1]
             reverse_kwargs['category_pk'] = filter_type
@@ -55,7 +55,7 @@ class MapLayerSerializer(ModelSerializer):
 
     def get_url(self, obj):
         layer_type = obj.layer_type.split('-')
-        if layer_type[0] not in ['pois', 'streams', 'contributions', 'sensitivities', 'stations', 'contributions-custom']:
+        if layer_type[0] not in ['pois', 'streams', 'contributions', 'sensitivities', 'stations', ]:
             return None
         # TODO: Make lang dynamic
         reverse_kwargs = {'lang': 'fr', 'format': 'json'}
