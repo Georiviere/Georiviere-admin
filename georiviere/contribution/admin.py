@@ -74,6 +74,7 @@ class CustomContributionTypeFieldAdmin(admin.ModelAdmin):
 class CustomContribAttachmentInline(GenericTabularInline):
     model = Attachment
     extra = 0
+    exclude = ('attachment_video', 'attachment_link', )
 
 
 @admin.register(models.CustomContribution)
