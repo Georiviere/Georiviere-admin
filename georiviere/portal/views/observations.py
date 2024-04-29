@@ -29,6 +29,6 @@ class StationViewSet(GeoriviereAPIMixin, viewsets.ReadOnlyModelViewSet):
             serializer_class=CustomContributionByStationSerializer)
     def custom_contributions(self, request, *args, **kwargs):
         station = self.get_object()
-        qs = station.custom_contributions.filter(validated=True).defer(*CustomContributionByStationSerializer.Meta.exclude)
+        qs = station.custom_contributions.filter(validated=True).prefetch_related("attachments").defer(*CustomContributionByStationSerializer.Meta.exclude)
         serializer = self.get_serializer(qs, many=True)
         return Response(serializer.data)

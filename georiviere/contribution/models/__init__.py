@@ -2,7 +2,7 @@ import logging
 
 from django.conf import settings
 from django.contrib.auth.models import User
-from django.contrib.contenttypes.fields import GenericForeignKey
+from django.contrib.contenttypes.fields import GenericForeignKey, GenericRelation
 from django.contrib.contenttypes.models import ContentType
 from django.contrib.gis.db import models
 from django.core.mail import mail_managers
@@ -623,8 +623,13 @@ class CustomContributionType(models.Model):
         related_name="custom_contribution_types",
         blank=True,
     )
-    password = models.CharField(max_length=128, verbose_name=_("Password"), blank=True, default="",
-                                help_text=_("Define if password is required to send the form"))
+    password = models.CharField(
+        max_length=128,
+        verbose_name=_("Password"),
+        blank=True,
+        default="",
+        help_text=_("Define if password is required to send the form"),
+    )
 
     def __str__(self):
         return self.label
@@ -879,6 +884,7 @@ class CustomContributionTypeField(models.Model):
 
 class CustomContribution(TimeStampedModelMixin, models.Model):
     geom = models.GeometryField(srid=settings.SRID, spatial_index=True)
+    attachments = GenericRelation(settings.PAPERCLIP_ATTACHMENT_MODEL)
     station = models.ForeignKey(
         "observations.Station",
         on_delete=models.PROTECT,

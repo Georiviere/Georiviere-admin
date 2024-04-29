@@ -202,6 +202,7 @@ class CustomContributionSerializer(SerializerAPIMixin, serializers.ModelSerializ
     contributed_at = serializers.DateTimeField(required=True)
     json_url = serializers.SerializerMethodField()
     geojson_url = serializers.SerializerMethodField()
+    attachments = AttachmentSerializer(many=True, read_only=True)
 
     def get_json_url(self, obj):
         return reverse(
@@ -291,10 +292,16 @@ class CustomContributionGeoJSONSerializer(
 
     class Meta(CustomContributionSerializer.Meta):
         geo_field = "geometry"
-        exclude = ("data", "custom_type", "validated",)
+        exclude = (
+            "data",
+            "custom_type",
+            "validated",
+        )
 
 
 class CustomContributionByStationSerializer(serializers.ModelSerializer):
+    attachments = AttachmentSerializer(many=True, read_only=True)
+
     class Meta(CustomContributionSerializer.Meta):
         model = CustomContribution
         exclude = (
