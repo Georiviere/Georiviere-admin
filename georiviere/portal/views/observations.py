@@ -6,8 +6,7 @@ from rest_framework.decorators import action
 from rest_framework.response import Response
 
 from georiviere.observations.models import Station
-from georiviere.portal.serializers.contribution import CustomContributionByStationSerializer, \
-    CustomContributionByStationGeoJSONSerializer
+from georiviere.portal.serializers.contribution import CustomContributionByStationSerializer
 from georiviere.portal.serializers.observations import (
     StationGeojsonSerializer,
     StationSerializer,
@@ -30,11 +29,6 @@ class StationViewSet(GeoriviereAPIMixin, viewsets.ReadOnlyModelViewSet):
             serializer_class=CustomContributionByStationSerializer)
     def custom_contributions(self, request, *args, **kwargs):
         station = self.get_object()
-        qs = station.custom_contributions.filter(validated=True)
-        renderer, media_type = self.perform_content_negotiation(self.request)
-        if getattr(renderer, "format") == "geojson":
-            self.geojson_serializer_class = CustomContributionByStationGeoJSONSerializer
-            qs = qs.annotate(geometry=Transform(F("geom"), settings.API_SRID))
-
+        qs = station.custom_contributions.filter(validated=True).defer(*CustomContributionByStationSerializer.Meta.exclude)
         serializer = self.get_serializer(qs, many=True)
         return Response(serializer.data)
