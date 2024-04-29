@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-04-12 19:23+0000\n"
+"POT-Creation-Date: 2024-04-29 07:30+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -334,6 +334,12 @@ msgstr ""
 msgid "Stations"
 msgstr ""
 
+msgid "Password"
+msgstr ""
+
+msgid "Define if password is required to send the form"
+msgstr ""
+
 msgid "Custom contribution type"
 msgstr ""
 
@@ -361,7 +367,13 @@ msgstr ""
 msgid "Boolean"
 msgstr ""
 
-msgid "Field label."
+msgid "Field label in forms and public portal."
+msgstr ""
+
+msgid "Internal identifier"
+msgstr ""
+
+msgid "Internal identifier for field."
 msgstr ""
 
 msgid "Key"
@@ -422,6 +434,9 @@ msgid "Custom contribution type field"
 msgstr ""
 
 msgid "Custom contribution type fields"
+msgstr ""
+
+msgid "Contributed at"
 msgstr ""
 
 msgid "Custom contribution"

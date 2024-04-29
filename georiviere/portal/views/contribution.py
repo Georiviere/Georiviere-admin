@@ -9,6 +9,7 @@ from django.contrib.gis.db.models.functions import Transform
 from django.core.exceptions import ValidationError
 from django.core.files import File
 from django.core.mail import send_mail
+from django.db import transaction
 from django.db.models import F, Q
 from django.utils import translation
 from django.utils.translation import gettext_lazy as _
@@ -135,7 +136,7 @@ class ContributionViewSet(
                     os.remove(tmp_jpeg_path)
                 except Exception as e:
                     logger.error(
-                        f"Failed to convert attachment {name}{extension} for report {response.data.get('id')}: "
+                        f"Failed to convert attachment {name}{extension} for contribution {response.data.get('id')}: "
                         + str(e)
                     )
         if settings.SEND_REPORT_ACK and response.status_code == 201:
@@ -181,24 +182,80 @@ class CustomContributionTypeViewSet(
     pagination_class = LimitOffsetPagination
 
     def create_contribution(self, request, *args, **kwargs):
-        context = self.get_serializer_context()
-        custom_type = self.get_object()
-        context["custom_type"] = custom_type
-        serializer = self.get_serializer(data=request.data, context=context)
-        serializer.is_valid(raise_exception=True)
-        extra_save_params = {}
-        # if station selected, save its geom
-        if "station" in serializer.validated_data:
-            extra_save_params["geom"] = serializer.validated_data["station"].geom
-        contribution = serializer.save(custom_type=custom_type, **extra_save_params)
-        # reload with extra fields
-        contribution = CustomContribution.objects.with_type_values(custom_type).get(
-            pk=contribution.pk
-        )
-        return Response(
-            CustomContributionSerializer(contribution, context=context).data,
-            status=status.HTTP_201_CREATED,
-        )
+        sid = transaction.savepoint()
+
+        try:
+            context = self.get_serializer_context()
+            custom_type = self.get_object()
+            context["custom_type"] = custom_type
+            serializer = self.get_serializer(data=request.data, context=context)
+            serializer.is_valid(raise_exception=True)
+            extra_save_params = {}
+            # if station selected, save its geom
+            if "station" in serializer.validated_data:
+                extra_save_params["geom"] = serializer.validated_data["station"].geom
+            contribution = serializer.save(custom_type=custom_type, **extra_save_params)
+            # reload with extra fields
+            contribution = CustomContribution.objects.with_type_values(custom_type).get(
+                pk=contribution.pk
+            )
+
+            for file in request._request.FILES.values():
+                attachment = Attachment(
+                    filetype=FileType.objects.get_or_create(
+                        type=settings.CONTRIBUTION_FILETYPE
+                    )[0],
+                    content_type=ContentType.objects.get_for_model(CustomContribution),
+                    object_id=contribution.pk,
+                    attachment_file=file,
+                )
+                name, extension = os.path.splitext(file.name)
+                try:
+                    attachment.full_clean()  # Check that file extension and mimetypes are allowed
+                except ValidationError as e:
+                    logger.error(
+                        f"Invalid attachment {name}{extension} for contribution {contribution.pk} : "
+                        + str(e)
+                    )
+                else:
+                    try:
+                        # Re-encode file to bitmap then back to jpeg for safety
+                        if not os.path.exists(f"{settings.TMP_DIR}/contribution_file/"):
+                            os.mkdir(f"{settings.TMP_DIR}/contribution_file/")
+                        tmp_bmp_path = os.path.join(
+                            f"{settings.TMP_DIR}/contribution_file/", f"{name}.bmp"
+                        )
+                        tmp_jpeg_path = os.path.join(
+                            f"{settings.TMP_DIR}/contribution_file/", f"{name}.jpeg"
+                        )
+                        Image.open(file).save(tmp_bmp_path)
+                        Image.open(tmp_bmp_path).save(tmp_jpeg_path)
+                        with open(tmp_jpeg_path, "rb") as converted_file:
+                            attachment.attachment_file = File(
+                                converted_file, name=f"{name}.jpeg"
+                            )
+                            attachment.save()
+                        os.remove(tmp_bmp_path)
+                        os.remove(tmp_jpeg_path)
+                    except Exception as e:
+                        logger.error(
+                            f"Failed to convert attachment {name}{extension} for contribution {contribution.pk}: "
+                            + str(e)
+                        )
+            transaction.savepoint_commit(sid)
+
+            return Response(
+                CustomContributionSerializer(contribution, context=context).data,
+                status=status.HTTP_201_CREATED,
+            )
+
+        except Exception as e:
+            transaction.savepoint_rollback(sid)
+            logger.error(f"Error {str(e)}")
+            return Response(
+                str(e),
+                status=status.HTTP_500_INTERNAL_SERVER_ERROR,
+            )
 
     def list_contributions(self, request, *args, **kwargs):
         custom_type = self.get_object()
@@ -208,9 +265,7 @@ class CustomContributionTypeViewSet(
 
         renderer, media_type = self.perform_content_negotiation(self.request)
         if getattr(renderer, "format") == "geojson":
-            self.geojson_serializer_class = (
-                CustomContributionGeoJSONSerializer
-            )
+            self.geojson_serializer_class = CustomContributionGeoJSONSerializer
             qs = qs.annotate(geometry=Transform(F("geom"), settings.API_SRID))
 
         serializer = self.get_serializer(qs, context=context, many=True)
@@ -221,7 +276,8 @@ class CustomContributionTypeViewSet(
         url_name="custom-contributions",
         url_path="contributions",
         methods=["get", "post"],
-        renderer_classes=[renderers.JSONRenderer, GeoJSONRenderer],
+        renderer_classes=(renderers.JSONRenderer, GeoJSONRenderer),
+        parser_classes=(MultiPartParser, FormParser, JSONParser),
         serializer_class=CustomContributionSerializer,
     )
     def contributions(self, request, *args, **kwargs):

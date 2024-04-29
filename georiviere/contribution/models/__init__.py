@@ -623,6 +623,8 @@ class CustomContributionType(models.Model):
         related_name="custom_contribution_types",
         blank=True,
     )
+    password = models.CharField(max_length=128, verbose_name=_("Password"), blank=True, default="",
+                                help_text=_("Define if password is required to send the form"))
 
     def __str__(self):
         return self.label

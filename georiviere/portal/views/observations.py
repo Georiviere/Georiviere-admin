@@ -3,10 +3,8 @@ from django.contrib.gis.db.models.functions import Transform
 from django.db.models import F
 from rest_framework import viewsets
 from rest_framework.decorators import action
-from rest_framework.generics import get_object_or_404
 from rest_framework.response import Response
 
-from georiviere.contribution.models import CustomContribution
 from georiviere.observations.models import Station
 from georiviere.portal.serializers.contribution import CustomContributionByStationSerializer, \
     CustomContributionByStationGeoJSONSerializer

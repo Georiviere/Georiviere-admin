@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-04-26 15:38+0000\n"
+"POT-Creation-Date: 2024-04-29 07:30+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -335,6 +335,14 @@ msgstr "Connaissance"
 
 msgid "Stations"
 msgstr "Stations"
+
+msgid "Password"
+msgstr "Mot de passe"
+
+msgid "Define if password is required to send the form"
+msgstr ""
+"Définir si un mot de passe est nécessaire pour envoyer / valider le "
+"formulaire."
 
 msgid "Custom contribution type"
 msgstr "Type de Contribution personnalisée"

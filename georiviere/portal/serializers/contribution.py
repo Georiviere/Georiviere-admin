@@ -177,9 +177,14 @@ class ContributionSchemaSerializer(serializers.Serializer):
 
 
 class CustomContributionTypeSerializer(serializers.ModelSerializer):
+    password_required = serializers.SerializerMethodField()
+
+    def get_password_required(self, obj):
+        return bool(obj.password)
+
     class Meta:
         model = CustomContributionType
-        fields = ("id", "label", "description", "json_schema_form", "stations")
+        fields = ("id", "label", "description", "json_schema_form", "stations", "password_required")
 
 
 class CustomContributionSerializer(serializers.ModelSerializer):
@@ -218,6 +223,10 @@ class CustomContributionSerializer(serializers.ModelSerializer):
             )
             self.fields["geom"].required = False
 
+        # add password field if required
+        if custom_type.password:
+            self.fields["password"] = serializers.CharField(required=True, write_only=True)
+
     def create(self, validated_data):
         custom_type = self.context.get("custom_type")
         # add and customize fields from json schema
@@ -229,6 +238,17 @@ class CustomContributionSerializer(serializers.ModelSerializer):
                 data[key] = validated_data.pop(key)
         validated_data["data"] = data
         return super().create(validated_data)
+
+    def validate(self, data):
+        # check password if required
+        custom_type = self.context.get("custom_type")
+        if (
+            custom_type
+            and custom_type.password
+            and data.get("password", "") != custom_type.password
+        ):
+            raise serializers.ValidationError(_("Password mismatch."))
+        return data
 
     class Meta:
         model = CustomContribution
@@ -254,8 +274,7 @@ class CustomContributionByStationSerializer(serializers.ModelSerializer):
 
 
 class CustomContributionByStationGeoJSONSerializer(
-    CustomContributionByStationSerializer,
-    geo_serializers.GeoFeatureModelSerializer
+    CustomContributionByStationSerializer, geo_serializers.GeoFeatureModelSerializer
 ):
     geometry = geo_serializers.GeometryField(read_only=True, precision=7)
 
