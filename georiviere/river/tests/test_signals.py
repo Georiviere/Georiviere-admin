@@ -27,8 +27,8 @@ class SignalRiverTest(TestCase):
 
         self.assertEqual(str(stream), stream.name)
 
-        stream_1_morpho_geom = stream.morphologies.first().geom.ewkt
-        stream_2_morpho_geom = stream_2.morphologies.first().geom.ewkt
+        stream_1_morpho_geom = stream.morphologies[0].geom.ewkt
+        stream_2_morpho_geom = stream_2.morphologies[0].geom.ewkt
 
         status = Status.objects.values_list("geom", flat=True)
 
