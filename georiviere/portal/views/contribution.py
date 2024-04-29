@@ -189,7 +189,8 @@ class CustomContributionTypeViewSet(
             custom_type = self.get_object()
             context["custom_type"] = custom_type
             serializer = self.get_serializer(data=request.data, context=context)
-            serializer.is_valid(raise_exception=True)
+            if not serializer.is_valid():
+                return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
             extra_save_params = {}
             # if station selected, save its geom
             if "station" in serializer.validated_data:

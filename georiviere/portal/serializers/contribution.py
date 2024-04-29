@@ -6,7 +6,7 @@ from django.conf import settings
 from django.contrib.gis.geos import GEOSGeometry
 from django.db import transaction
 from django.db.models import ForeignKey
-from django.utils.translation import gettext_lazy as _
+from django.utils.translation import gettext as _
 
 from georiviere.contribution.schema import (
     get_contribution_properties,
@@ -228,6 +228,7 @@ class CustomContributionSerializer(serializers.ModelSerializer):
             self.fields["password"] = serializers.CharField(required=True, write_only=True)
 
     def create(self, validated_data):
+        validated_data.pop("password", None)
         custom_type = self.context.get("custom_type")
         # add and customize fields from json schema
         schema = custom_type.get_json_schema_form()
@@ -239,16 +240,11 @@ class CustomContributionSerializer(serializers.ModelSerializer):
         validated_data["data"] = data
         return super().create(validated_data)
 
-    def validate(self, data):
-        # check password if required
+    def validate_password(self, value):
         custom_type = self.context.get("custom_type")
-        if (
-            custom_type
-            and custom_type.password
-            and data.get("password", "") != custom_type.password
-        ):
+        if custom_type and custom_type.password and value != custom_type.password:
             raise serializers.ValidationError(_("Password mismatch."))
-        return data
+        return value
 
     class Meta:
         model = CustomContribution
