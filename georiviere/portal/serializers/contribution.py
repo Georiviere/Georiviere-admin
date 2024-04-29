@@ -1,5 +1,6 @@
 from copy import deepcopy
 from rest_framework import serializers
+from rest_framework.reverse import reverse
 from rest_framework_gis import serializers as geo_serializers
 
 from django.conf import settings
@@ -24,6 +25,7 @@ from georiviere.contribution.models import (
     CustomContributionType,
     CustomContribution,
 )
+from georiviere.portal.serializers.mixins import SerializerAPIMixin
 from georiviere.portal.validators import validate_json_schema_data
 from georiviere.portal.serializers.main import AttachmentSerializer
 
@@ -149,7 +151,7 @@ class ContributionSerializer(serializers.ModelSerializer):
             transaction.savepoint_rollback(sid)
             if not msg:
                 msg = f"{e.__class__.__name__} {e}"
-            raise serializers.ValidationError({"Error": msg or _("An error occured")})
+            raise serializers.ValidationError({"Error": msg or _("An error occurred")})
         return main_contribution
 
 
@@ -184,11 +186,34 @@ class CustomContributionTypeSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = CustomContributionType
-        fields = ("id", "label", "description", "json_schema_form", "stations", "password_required")
+        fields = (
+            "id",
+            "label",
+            "description",
+            "json_schema_form",
+            "stations",
+            "password_required",
+        )
 
 
-class CustomContributionSerializer(serializers.ModelSerializer):
+class CustomContributionSerializer(SerializerAPIMixin, serializers.ModelSerializer):
+    geometry = geo_serializers.GeometryField(read_only=True, precision=7)
+    geom = geo_serializers.GeometryField(write_only=True)
     contributed_at = serializers.DateTimeField(required=True)
+    json_url = serializers.SerializerMethodField()
+    geojson_url = serializers.SerializerMethodField()
+
+    def get_json_url(self, obj):
+        return reverse(
+            "api_portal:custom-contributions-detail",
+            kwargs=self._get_url_detail_kwargs(pk=obj.pk, format="json"),
+        )
+
+    def get_geojson_url(self, obj):
+        return reverse(
+            "api_portal:custom-contributions-detail",
+            kwargs=self._get_url_detail_kwargs(pk=obj.pk, format="geojson"),
+        )
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
@@ -225,7 +250,9 @@ class CustomContributionSerializer(serializers.ModelSerializer):
 
         # add password field if required
         if custom_type.password:
-            self.fields["password"] = serializers.CharField(required=True, write_only=True)
+            self.fields["password"] = serializers.CharField(
+                required=True, write_only=True
+            )
 
     def create(self, validated_data):
         validated_data.pop("password", None)
@@ -248,7 +275,11 @@ class CustomContributionSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = CustomContribution
-        exclude = ("data", "custom_type", "validated")
+        exclude = (
+            "data",
+            "custom_type",
+            "validated",
+        )
 
 
 class CustomContributionGeoJSONSerializer(
@@ -260,10 +291,16 @@ class CustomContributionGeoJSONSerializer(
 
     class Meta(CustomContributionSerializer.Meta):
         geo_field = "geometry"
-        exclude = ("data", "custom_type", "validated")
+        exclude = ("data", "custom_type", "validated",)
 
 
 class CustomContributionByStationSerializer(serializers.ModelSerializer):
     class Meta(CustomContributionSerializer.Meta):
         model = CustomContribution
-        exclude = ("data", "validated", "station", "portal", "geom")
+        exclude = (
+            "data",
+            "validated",
+            "station",
+            "portal",
+        )
+        write_only_fields = ("geom",)

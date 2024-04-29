@@ -286,3 +286,38 @@ class CustomContributionTypeViewSet(
             return self.list_contributions(request, *args, **kwargs)
         elif request.method == "POST":
             return self.create_contribution(request, *args, **kwargs)
+
+
+class CustomContributionViewSet(
+    GeoriviereAPIMixin,
+    mixins.RetrieveModelMixin,
+    mixins.ListModelMixin,
+    viewsets.GenericViewSet,
+):
+    queryset = CustomContribution.objects.filter(validated=True).annotate(
+        geometry=Transform(F("geom"), settings.API_SRID)
+    )
+    serializer_class = CustomContributionSerializer
+    geojson_serializer_class = CustomContributionGeoJSONSerializer
+    renderer_classes = (
+        (
+            renderers.BrowsableAPIRenderer,
+            JSONRenderer,
+            GeoJSONRenderer,
+        )
+        if settings.DEBUG
+        else (JSONRenderer,)
+    )
+    permission_classes = [permissions.AllowAny]
+    pagination_class = LimitOffsetPagination
+
+    def retrieve(self, request, *args, **kwargs):
+        """ Customize retrieve method to add custom type values to the response"""
+        object = self.get_object()
+        object = CustomContribution.objects.with_type_values(object.custom_type).annotate(
+            geometry=Transform(F("geom"), settings.API_SRID)
+        ).get(pk=object.pk)
+        context = self.get_serializer_context()
+        context['custom_type'] = object.custom_type
+        serializer = self.get_serializer(object, context=context)
+        return Response(serializer.data)

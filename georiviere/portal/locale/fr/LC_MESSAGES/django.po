@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-04-12 19:23+0000\n"
+"POT-Creation-Date: 2024-04-29 13:13+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -38,6 +38,12 @@ msgstr "Fonds de cartes"
 
 msgid "Portal"
 msgstr "Portail"
+
+msgid "Stations"
+msgstr "Stations"
+
+msgid "Custom contributions"
+msgstr "Contributions personnalisées"
 
 msgid "URL"
 msgstr "URL"
@@ -87,8 +93,11 @@ msgstr "Portails"
 msgid "Category is not valid"
 msgstr "La catégorie n'est pas valide"
 
-msgid "An error occured"
-msgstr "Une erreur s'es produite"
+msgid "An error occurred"
+msgstr "Une erreur s'est produite"
+
+msgid "Password mismatch."
+msgstr "Le mot de passe ne correspond pas."
 
 msgid "Watershed"
 msgstr "Bassin versant"
@@ -107,6 +116,9 @@ msgstr "Contribution"
 
 msgid "Stream"
 msgstr "Rivière"
+
+msgid "Station"
+msgstr "Station"
 
 msgid "Georiviere : Contribution"
 msgstr "Georiviere : Contribution"
@@ -131,21 +143,3 @@ msgstr ""
 "\n"
 "L'équipe Georiviere\n"
 "http://georiviere.fr"
-
-#~ msgid "watersheds"
-#~ msgstr "bassins versants"
-
-#~ msgid "cities"
-#~ msgstr "villes"
-
-#~ msgid "sensitivities"
-#~ msgstr "zones sensibles"
-
-#~ msgid "districts"
-#~ msgstr "secteurs"
-
-#~ msgid "contributions"
-#~ msgstr "contributions"
-
-#~ msgid "streams"
-#~ msgstr "rivières"

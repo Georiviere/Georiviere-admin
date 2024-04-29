@@ -7,6 +7,7 @@ from georiviere.portal.views.flatpage import FlatPageViewSet
 from georiviere.portal.views.contribution import (
     ContributionViewSet,
     CustomContributionTypeViewSet,
+    CustomContributionViewSet,
 )
 from georiviere.portal.views.observations import StationViewSet
 from georiviere.portal.views.portal import PortalViewSet
@@ -26,19 +27,24 @@ from drf_spectacular.views import (
 )
 
 router = routers.DefaultRouter()
+
 # Datas are available depending on portal or not.
 router.register(
     r"(?P<lang>[a-z]{2})/(?P<portal_pk>\d+)/pois", POIViewSet, basename="pois"
 )
-
 router.register(
     r"(?P<lang>[a-z]{2})/(?P<portal_pk>\d+)/streams", StreamViewSet, basename="streams"
 )
-
 router.register(
-    r"(?P<lang>[a-z]{2})/(?P<portal_pk>\d+)/stations", StationViewSet, basename="stations"
+    r"(?P<lang>[a-z]{2})/(?P<portal_pk>\d+)/custom-contributions",
+    CustomContributionViewSet,
+    basename="custom-contributions",
 )
-
+router.register(
+    r"(?P<lang>[a-z]{2})/(?P<portal_pk>\d+)/stations",
+    StationViewSet,
+    basename="stations",
+)
 router.register(
     r"(?P<lang>[a-z]{2})/(?P<portal_pk>\d+)/flatpages",
     FlatPageViewSet,

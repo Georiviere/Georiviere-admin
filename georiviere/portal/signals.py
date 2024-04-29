@@ -74,3 +74,6 @@ def save_portal(sender, instance, created, **kwargs):
         MapLayer.objects.create(
             label=_("Station"), order=0, layer_type="stations", portal=instance
         )
+        MapLayer.objects.create(
+            label=_("Custom contributions"), order=0, layer_type="'contributions-custom", portal=instance
+        )
