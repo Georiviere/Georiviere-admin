@@ -1,9 +1,11 @@
 from admin_ordering.admin import OrderableAdmin
 from django.contrib import admin
+from django.contrib.contenttypes.admin import GenericTabularInline
 from django.utils.translation import gettext_lazy as _
 from leaflet.admin import LeafletGeoAdmin
 
 from . import models, forms
+from ..main.models import Attachment
 
 admin.site.register(models.ContributionStatus, admin.ModelAdmin)
 admin.site.register(models.SeverityType, admin.ModelAdmin)
@@ -69,11 +71,17 @@ class CustomContributionTypeFieldAdmin(admin.ModelAdmin):
         return False
 
 
+class CustomContribAttachmentInline(GenericTabularInline):
+    model = Attachment
+    extra = 0
+
+
 @admin.register(models.CustomContribution)
 class CustomContributionAdmin(LeafletGeoAdmin, admin.ModelAdmin):
     list_display = ('custom_type', 'portal', 'validated', 'date_insert', 'date_update')
     list_filter = ('custom_type', 'portal', 'validated')
     form = forms.CustomContributionForm
+    inlines = [CustomContribAttachmentInline]
 
     def get_readonly_fields(self, request, obj=None):
         if not obj or not obj.pk:
