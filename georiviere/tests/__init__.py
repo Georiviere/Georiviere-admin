@@ -116,8 +116,9 @@ class CommonRiverTest(MapEntityTest):
         self.assertEqual(response.status_code, 200)
         self.assertContains(response,
                             f'''<a data-pk="{Stream.objects.first().pk}" href="/stream/{Stream.objects.first().pk}/"''')
-        distance = DistanceToSource.objects.get(
+        distance_to_source = DistanceToSource.objects.filter(
             object_id=obj.pk,
             content_type=ContentType.objects.get_for_model(obj)
-        ).distance
-        self.assertContains(response, f'''({round(distance, 1) if distance else 0}&nbsp;m)''')
+        ).first()
+        self.assertIsNotNone(distance_to_source)
+        self.assertContains(response, f'''({round(distance_to_source.distance, 1) if distance_to_source.distance else 0}&nbsp;m)''')
