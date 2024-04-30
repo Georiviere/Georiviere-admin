@@ -3,7 +3,6 @@ from django.contrib.gis.db.models.functions import Centroid, Transform
 from django.db.models import F, Prefetch
 from rest_framework import filters, viewsets
 
-# from georiviere.decorators import view_cache_response_content, view_cache_latest
 from georiviere.main.models import Attachment
 from georiviere.portal.filters import SearchNoAccentFilter
 from georiviere.portal.serializers.river import (
@@ -41,8 +40,3 @@ class StreamViewSet(GeoriviereAPIMixin, viewsets.ReadOnlyModelViewSet):
 
     def view_cache_key(self):
         return f"stream-{self.kwargs['portal_pk']}"
-
-    # @view_cache_latest()
-    # @view_cache_response_content()
-    def list(self, request, *args, **kwargs):
-        return super().list(request, *args, **kwargs)
