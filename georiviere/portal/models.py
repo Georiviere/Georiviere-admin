@@ -24,7 +24,7 @@ class MapBaseLayer(models.Model):
     class Meta:
         verbose_name = _("Map base layer")
         verbose_name_plural = _("Map base layers")
-        ordering = ('label',)
+        ordering = ('order',)
         unique_together = ('label', 'portal')
 
     def __str__(self):
