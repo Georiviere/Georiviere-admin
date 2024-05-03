@@ -120,7 +120,7 @@ class CustomContribAttachmentInline(GenericTabularInline):
 
 @admin.register(models.CustomContribution)
 class CustomContributionAdmin(LeafletGeoAdmin, admin.ModelAdmin):
-    list_display = ("custom_type", "portal", "validated", "date_insert", "date_update")
+    list_display = ("custom_type", "portal", "validated", "contributed_at", "date_insert", "date_update")
     list_filter = ("custom_type", "portal", "validated")
     form = forms.CustomContributionForm
     inlines = [CustomContribAttachmentInline]
