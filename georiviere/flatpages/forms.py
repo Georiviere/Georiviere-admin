@@ -23,7 +23,7 @@ class FlatPagePictureFormSet(forms.BaseInlineFormSet):
         self.request = kwargs.pop('request', None)
         super().__init__(*args, **kwargs)
         for form in self.forms:
-            rooturl = self.request.build_absolute_uri('/')
+            rooturl = self.request.build_absolute_uri('/')[:-1]
             form.fields['picture'].widget = AdminFileWidget(attrs={'rooturl': rooturl})
 
 
