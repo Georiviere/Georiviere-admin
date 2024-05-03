@@ -294,9 +294,6 @@ class CustomContributionViewSet(
     mixins.ListModelMixin,
     viewsets.GenericViewSet,
 ):
-    queryset = CustomContribution.objects.filter(validated=True).annotate(
-        geometry=Transform(F("geom"), settings.API_SRID)
-    ).prefetch_related("attachments")
     serializer_class = CustomContributionSerializer
     geojson_serializer_class = CustomContributionGeoJSONSerializer
     renderer_classes = (
@@ -310,6 +307,13 @@ class CustomContributionViewSet(
     )
     permission_classes = [permissions.AllowAny]
     pagination_class = LimitOffsetPagination
+
+    def get_queryset(self):
+        portal_pk = self.kwargs["portal_pk"]
+        queryset = CustomContribution.objects.filter(portal_id=portal_pk, validated=True).annotate(
+            geometry=Transform(F("geom"), settings.API_SRID)
+        ).prefetch_related("attachments")
+        return queryset
 
     def retrieve(self, request, *args, **kwargs):
         """ Customize retrieve method to add custom type values to the response"""
