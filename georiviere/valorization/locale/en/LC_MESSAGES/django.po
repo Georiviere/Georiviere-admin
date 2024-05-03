@@ -51,6 +51,9 @@ msgstr ""
 msgid "History, details,  ..."
 msgstr ""
 
+msgid "POI link"
+msgstr "External link"
+
 msgid "Type"
 msgstr ""
 

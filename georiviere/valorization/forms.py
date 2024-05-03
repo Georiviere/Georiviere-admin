@@ -19,6 +19,7 @@ class POIForm(CommonForm):
         Div(
             'name',
             'description',
+            'external_uri',
             Field('portals', css_class="chzn-select"),
             'category',
             'type',
@@ -27,7 +28,7 @@ class POIForm(CommonForm):
 
     class Meta:
         model = POI
-        fields = ['name', 'description', 'type', 'category', 'portals', 'geom']
+        fields = ['name', 'description', 'external_uri', 'type', 'category', 'portals', 'geom']
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)

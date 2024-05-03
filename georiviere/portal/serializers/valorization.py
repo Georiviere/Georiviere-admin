@@ -25,6 +25,7 @@ class POITypeSerializer(ModelSerializer):
 
 class POIMixin(SerializerAPIMixin, ModelSerializer):
     attachments = AttachmentSerializer(many=True)
+    url = serializers.CharField(source='external_uri')
     type = POITypeSerializer()
     json_url = serializers.SerializerMethodField()
     geojson_url = serializers.SerializerMethodField()
@@ -47,6 +48,7 @@ class POIMixin(SerializerAPIMixin, ModelSerializer):
             "id",
             "name",
             "description",
+            "url",
             "type",
             "attachments",
             "json_url",

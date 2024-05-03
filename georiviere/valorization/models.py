@@ -62,6 +62,7 @@ class POIType(TimeStampedModelMixin, StructureOrNoneRelated):
 class POI(AddPropertyBufferMixin, TimeStampedModelMixin, StructureRelated, MapEntityMixin):
     name = models.CharField(max_length=128, verbose_name=_("Name"))
     description = models.TextField(verbose_name=_("Description"), blank=True, help_text=_("History, details,  ..."))
+    external_uri = models.URLField(blank=True, default="", verbose_name=_("POI link"))
     geom = models.PointField(srid=settings.SRID, spatial_index=True)
     type = models.ForeignKey(POIType, related_name='pois',
                              verbose_name=_("Type"),

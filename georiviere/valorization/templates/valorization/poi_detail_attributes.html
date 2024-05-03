@@ -12,6 +12,10 @@
             <td>{{ object.description|linebreaks }}</td>
         </tr>
         <tr>
+            <th>{{ object|verbose:"external_uri" }}</th>
+            <td><a href={{ object.external_uri }}>{{ object.external_uri }}</a></td>
+        </tr>
+        <tr>
             <th>{% trans "Category" %}</th>
             <td>{{ object.type.category }}</td>
         </tr>
