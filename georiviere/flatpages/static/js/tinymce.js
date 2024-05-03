@@ -5,13 +5,13 @@ tinyMCE.init({
         relative_urls : false,
         remove_script_host : false,
         plugins: [
-          'autolink lists link image',
+          'autolink lists link image code',
           'media table paste wordcount',
           'visualblocks preview anchor'
         ],
         menubar: false,
         image_caption: true,
-        toolbar: 'undo redo | styleselect | blockquote | bold italic | alignleft aligncenter alignright alignjustify | bullist numlist | link image media | indent outdent | visualblocks',
+        toolbar: 'undo redo | styleselect | blockquote | bold italic | alignleft aligncenter alignright alignjustify | bullist numlist | link image media | indent outdent | visualblocks | code',
         formats: {
           informationFormat: {
             block: 'div', classes: 'information'
