@@ -8,6 +8,7 @@ from georiviere.portal.serializers.mixins import SerializerAPIMixin
 
 
 class StationMixin(SerializerAPIMixin, ModelSerializer):
+    url = serializers.CharField(source="annex_uri")
     json_url = serializers.SerializerMethodField()
     geojson_url = serializers.SerializerMethodField()
     geometry = geo_serializers.GeometryField(
@@ -35,6 +36,7 @@ class StationMixin(SerializerAPIMixin, ModelSerializer):
             "description",
             "custom_contribution_types",
             "geometry",
+            "url",
         )
 
 

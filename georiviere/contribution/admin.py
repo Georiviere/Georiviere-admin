@@ -120,10 +120,14 @@ class CustomContribAttachmentInline(GenericTabularInline):
 
 @admin.register(models.CustomContribution)
 class CustomContributionAdmin(LeafletGeoAdmin, admin.ModelAdmin):
-    list_display = ("custom_type", "portal", "validated", "contributed_at", "date_insert", "date_update")
+    list_display = ("custom_type", "station", "portal", "validated", "contributed_at", "date_insert", "date_update")
     list_filter = ("custom_type", "portal", "validated")
     form = forms.CustomContributionForm
     inlines = [CustomContribAttachmentInline]
+
+    def station(self, obj):
+        return obj.station.label
+    station.admin_order_field = 'label'
 
     def get_readonly_fields(self, request, obj=None):
         if not obj or not obj.pk:
