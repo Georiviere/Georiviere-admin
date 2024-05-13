@@ -1,7 +1,8 @@
-from factory import django, fuzzy, SubFactory, Sequence
+from factory import django, fuzzy, SubFactory, Sequence, post_generation
 from mapentity.tests.factories import PointFactory
 
 from georiviere.contribution import models
+from georiviere.observations.tests.factories import StationFactory
 from georiviere.portal.tests.factories import PortalFactory
 
 
@@ -132,3 +133,32 @@ class TypePollutionFactory(django.DjangoModelFactory):
         model = models.TypePollution
 
     label = Sequence(lambda n: f'Type pollution {n}')
+
+
+class CustomContributionTypeFactory(django.DjangoModelFactory):
+    class Meta:
+        model = models.CustomContributionType
+
+    label = Sequence(lambda n: f'Custom contribution type {n}')
+
+    @post_generation
+    def add_stations(obj, create, extracted, **kwargs):
+        stations = kwargs.get('stations', [])
+        with_station = kwargs.get('with_station', False)
+
+        if not stations and with_station:
+            stations = [StationFactory.create()]
+
+        if stations:
+            obj.stations.set(stations)
+
+
+class CustomContributionTypeFieldFactory(django.DjangoModelFactory):
+    class Meta:
+        model = models.CustomContributionTypeField
+
+    label = Sequence(lambda n: f'Custom contribution type field {n}')
+    internal_identifier = Sequence(lambda n: f'custom_contribution_type_field_{n}')
+    value_type = models.CustomContributionTypeField.FieldTypeChoices.STRING
+    required = False
+    custom_type = SubFactory(CustomContributionTypeFactory)

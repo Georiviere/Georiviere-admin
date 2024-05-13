@@ -656,7 +656,6 @@ class CustomContributionType(models.Model):
         ordering = ("label",)
 
 
-# noinspection PyTypedDict
 class CustomContributionTypeField(models.Model):
     class FieldTypeChoices(models.TextChoices):
         """Choices for field type"""
