@@ -60,6 +60,7 @@ class CustomContributionTypeFieldAdmin(admin.ModelAdmin):
     list_filter = ("custom_type", "value_type", "required")
     search_fields = ("label", "key", "custom_type__label")
     form = forms.CustomContributionFieldForm
+    readonly_fields = ["custom_type", "key", "options"]
     fieldsets = (
         (
             None,
@@ -82,11 +83,6 @@ class CustomContributionTypeFieldAdmin(admin.ModelAdmin):
             },
         ),
     )
-
-    def get_readonly_fields(self, request, obj=None):
-        if obj and obj.pk:
-            return ["custom_type", "key", "options"]
-        return []
 
     def has_add_permission(self, request):
         """Disable addition in list view"""

@@ -162,3 +162,10 @@ class CustomContributionTypeFieldFactory(django.DjangoModelFactory):
     value_type = models.CustomContributionTypeField.FieldTypeChoices.STRING
     required = False
     custom_type = SubFactory(CustomContributionTypeFactory)
+
+
+class CustomContributionFactory(django.DjangoModelFactory):
+    class Meta:
+        model = models.CustomContribution
+
+    custom_type = SubFactory(CustomContributionTypeFactory)

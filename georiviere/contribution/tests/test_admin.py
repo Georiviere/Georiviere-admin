@@ -3,7 +3,9 @@ from django.urls import reverse
 
 from mapentity.tests.factories import SuperUserFactory
 
-from georiviere.contribution.tests.factories import CustomContributionTypeFactory, CustomContributionTypeFieldFactory
+from georiviere.contribution.tests.factories import CustomContributionTypeFactory, CustomContributionTypeFieldFactory, \
+    CustomContributionFactory
+from georiviere.main.tests.factories import AttachmentFactory
 
 
 class ContributionAdminTest(TestCase):
@@ -123,3 +125,26 @@ class CustomContributionTypeFieldAdminTest(TestCase):
         url_add = reverse('admin:contribution_customcontributiontypefield_add')
         response = self.client.get(url_add)
         self.assertEqual(response.status_code, 403)
+
+
+class CustomContributionAdminTestCase(TestCase):
+    @classmethod
+    def setUpTestData(cls):
+        cls.super_user = SuperUserFactory.create()
+        cls.simple_contrib = CustomContributionFactory(geom='SRID=2154;POINT(700000 6600000)')
+        cls.contrib_with_attachments = CustomContributionFactory(geom='SRID=2154;POINT(700000 6600000)')
+        AttachmentFactory.create_batch(2, content_object=cls.contrib_with_attachments)
+
+    def setUp(self):
+        self.client.force_login(self.super_user)
+
+    def test_list_custom_contribution_admin_view(self):
+        url_list = reverse('admin:contribution_customcontribution_changelist')
+        response = self.client.get(url_list)
+        self.assertEqual(response.status_code, 200)
+
+    def test_detail_custom_contribution_admin_view(self):
+        url_detail = reverse('admin:contribution_customcontribution_change',
+                             args=[self.contrib_with_attachments.pk])
+        response = self.client.get(url_detail)
+        self.assertEqual(response.status_code, 200)
