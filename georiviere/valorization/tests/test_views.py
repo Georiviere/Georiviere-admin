@@ -27,6 +27,7 @@ class POIViewTestCase(CommonRiverTest):
             'date_update': '2020-03-17T00:00:00Z',
             'date_insert': '2020-03-17T00:00:00Z',
             'description': self.obj.description,
+            'external_uri': '',
             'geom': self.obj.geom.ewkt,
             'type': self.obj.type.pk,
             'name': self.obj.name,

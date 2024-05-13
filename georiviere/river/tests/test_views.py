@@ -237,15 +237,15 @@ class StreamDocumentReportTestCase(TestCase):
                                 template_name='river/stream_report_pdf.html')
         self.assertEqual(response.context['status_types'][self.status_type.label]['percentage'], 75.0)
         self.assertEqual(response.context['status_types'][self.status_type_2.label]['percentage'], 25.0)
-        self.assertEqual(os.path.join(settings.VAR_DIR, 'media', 'maps', f'stream-{self.stream.pk}-usages.png'),
+        self.assertEqual(os.path.join(settings.MEDIA_ROOT, 'maps', f'stream-{self.stream.pk}-usages.png'),
                          response.context['map_path_usage'])
-        self.assertEqual(os.path.join(settings.VAR_DIR, 'media', 'maps', f'stream-{self.stream.pk}-studies.png'),
+        self.assertEqual(os.path.join(settings.MEDIA_ROOT, 'maps', f'stream-{self.stream.pk}-studies.png'),
                          response.context['map_path_study'])
-        self.assertEqual(os.path.join(settings.VAR_DIR, 'media', 'maps', f'stream-{self.stream.pk}-followups.png'),
+        self.assertEqual(os.path.join(settings.MEDIA_ROOT, 'maps', f'stream-{self.stream.pk}-followups.png'),
                          response.context['map_path_other_followups'])
-        self.assertEqual(os.path.join(settings.VAR_DIR, 'media', 'maps', f'stream-{self.stream.pk}-interventions.png'),
+        self.assertEqual(os.path.join(settings.MEDIA_ROOT, 'maps', f'stream-{self.stream.pk}-interventions.png'),
                          response.context['map_path_other_interventions'])
-        self.assertEqual(os.path.join(settings.VAR_DIR, 'media', 'maps', f'knowledge-{self.knowledge.pk}.png'),
+        self.assertEqual(os.path.join(settings.MEDIA_ROOT, 'maps', f'knowledge-{self.knowledge.pk}.png'),
                          response.context['map_path_knowledge'][self.knowledge.pk])
 
     @mock.patch('georiviere.river.models.Stream.prepare_map_image_with_other_objects')

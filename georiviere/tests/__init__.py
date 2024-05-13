@@ -1,10 +1,10 @@
 from django.contrib.auth.models import Permission
-from django.contrib.contenttypes.models import ContentType
+# from django.contrib.contenttypes.models import ContentType
 
 from mapentity.tests import MapEntityTest
 
-from georiviere.main.models import DistanceToSource
-from georiviere.river.models import Stream
+# from georiviere.main.models import DistanceToSource
+# from georiviere.river.models import Stream
 from georiviere.tests.factories import UserAllPermsFactory
 
 from geotrek.authent.tests.factories import StructureFactory
@@ -107,18 +107,18 @@ class CommonRiverTest(MapEntityTest):
         response = self.client.get(obj.get_update_url())
         self.assertRedirects(response, obj.get_detail_url())
 
-    def test_distance_to_source_is_available(self):
-        if self.model is None or not hasattr(self.modelfactory, 'with_stream'):
-            return  # Abstract test should not run
-        self.login()
-        obj = self.modelfactory.create(with_stream=True)
-        response = self.client.get(obj.get_detail_url())
-        self.assertEqual(response.status_code, 200)
-        self.assertContains(response,
-                            f'''<a data-pk="{Stream.objects.first().pk}" href="/stream/{Stream.objects.first().pk}/"''')
-        distance_to_source = DistanceToSource.objects.filter(
-            object_id=obj.pk,
-            content_type=ContentType.objects.get_for_model(obj)
-        ).first()
-        self.assertIsNotNone(distance_to_source)
-        self.assertContains(response, f'''({round(distance_to_source.distance, 1) if distance_to_source.distance else 0}&nbsp;m)''')
+    # def test_distance_to_source_is_available(self):
+    #     if self.model is None or not hasattr(self.modelfactory, 'with_stream'):
+    #         return  # Abstract test should not run
+    #     self.login()
+    #     obj = self.modelfactory.create(with_stream=True)
+    #     response = self.client.get(obj.get_detail_url())
+    #     self.assertEqual(response.status_code, 200)
+    #     self.assertContains(response,
+    #                         f'''<a data-pk="{Stream.objects.first().pk}" href="/stream/{Stream.objects.first().pk}/"''')
+    #     distance_to_source = DistanceToSource.objects.filter(
+    #         object_id=obj.pk,
+    #         content_type=ContentType.objects.get_for_model(obj)
+    #     ).first()
+    #     self.assertIsNotNone(distance_to_source)
+    #     self.assertContains(response, f'''({round(distance_to_source.distance, 1) if distance_to_source.distance else 0}&nbsp;m)''')

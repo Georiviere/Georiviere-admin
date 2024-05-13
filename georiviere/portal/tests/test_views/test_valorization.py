@@ -25,8 +25,8 @@ class POIViewTest(TestCase):
                       kwargs={'portal_pk': self.portal.pk, 'pk': self.poi.pk, 'lang': 'fr', 'format': 'json'})
         response = self.client.get(url)
         self.assertEqual(response.status_code, 200)
-        self.assertSetEqual(set(response.json().keys()), {'attachments', 'name', 'type', 'id', 'description',
-                                                          'geojsonUrl', 'jsonUrl'})
+        self.assertListEqual(sorted(list(response.json().keys())), sorted(['url', 'attachments', 'name', 'type', 'id',
+                                                                           'description', 'geojsonUrl', 'jsonUrl']))
 
     def test_poi_list_geojson_structure(self):
         url = reverse('api_portal:pois-list',
@@ -41,7 +41,9 @@ class POIViewTest(TestCase):
         response = self.client.get(url)
         self.assertEqual(response.status_code, 200)
         self.assertEqual(len(response.json()), 1)
-        self.assertSetEqual(set(response.json()[0].keys()), {'attachments', 'name', 'type', 'id', 'description', 'geojsonUrl', 'jsonUrl'})
+        self.assertListEqual(sorted(list(response.json()[0].keys())),
+                             sorted(['url', 'attachments', 'name', 'type', 'id',
+                                     'description', 'geojsonUrl', 'jsonUrl']))
 
     def test_poi_category_list_json_structure(self):
         url = reverse('api_portal:pois-category',
@@ -50,8 +52,9 @@ class POIViewTest(TestCase):
         response = self.client.get(url)
         self.assertEqual(response.status_code, 200)
         self.assertEqual(len(response.json()), 1)
-        self.assertSetEqual(set(response.json()[0].keys()),
-                            {'attachments', 'name', 'type', 'id', 'description', 'geojsonUrl', 'jsonUrl'})
+        self.assertListEqual(sorted(list(response.json()[0].keys())),
+                             sorted(['url', 'attachments', 'name', 'type', 'id',
+                                     'description', 'geojsonUrl', 'jsonUrl']))
 
     def test_poi_category_list_geojson_structure(self):
         url = reverse('api_portal:pois-category',
