@@ -121,10 +121,6 @@ class CustomContributionAdmin(LeafletGeoAdmin, admin.ModelAdmin):
     form = forms.CustomContributionForm
     inlines = [CustomContribAttachmentInline]
 
-    def station(self, obj):
-        return obj.station.label
-    station.admin_order_field = 'label'
-
     def get_readonly_fields(self, request, obj=None):
         if not obj or not obj.pk:
             return ("data",)
