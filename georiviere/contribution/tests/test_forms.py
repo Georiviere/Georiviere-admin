@@ -5,7 +5,6 @@ from georiviere.tests.factories import UserAllPermsFactory
 
 from ...observations.tests.factories import StationFactory
 from ..forms import ContributionForm, CustomContributionForm
-from ..models import CustomContribution, CustomContributionType
 from . import factories
 from .factories import CustomContributionFactory, CustomContributionTypeFactory
 
