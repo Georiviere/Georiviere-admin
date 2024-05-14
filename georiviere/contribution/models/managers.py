@@ -23,7 +23,7 @@ class CustomContributionManager(models.Manager):
             elif field.value_type == 'date':
                 output_field = models.DateField()
             elif field.value_type == 'datetime':
-                output_field = models.DateField()
+                output_field = models.DateTimeField()
             annotations[field.key] = Cast(KeyTextTransform(field.key, 'data'), output_field=output_field)
         if annotations:
             qs = qs.annotate(**annotations)
