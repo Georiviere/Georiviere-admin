@@ -159,9 +159,36 @@ class CustomContributionTypeFieldFactory(django.DjangoModelFactory):
 
     label = Sequence(lambda n: f"Custom contribution type field {n}")
     internal_identifier = Sequence(lambda n: f"custom_contribution_type_field_{n}")
-    value_type = models.CustomContributionTypeField.FieldTypeChoices.STRING
     required = False
     custom_type = SubFactory(CustomContributionTypeFactory)
+
+
+class CustomContributionTypeStringFieldFactory(CustomContributionTypeFieldFactory):
+    value_type = models.CustomContributionTypeField.FieldTypeChoices.STRING
+
+
+class CustomContributionTypeTextFieldFactory(CustomContributionTypeFieldFactory):
+    value_type = models.CustomContributionTypeField.FieldTypeChoices.TEXT
+
+
+class CustomContributionTypeIntegerFieldFactory(CustomContributionTypeFieldFactory):
+    value_type = models.CustomContributionTypeField.FieldTypeChoices.INTEGER
+
+
+class CustomContributionTypeBooleanFieldFactory(CustomContributionTypeFieldFactory):
+    value_type = models.CustomContributionTypeField.FieldTypeChoices.BOOLEAN
+
+
+class CustomContributionTypeFloatFieldFactory(CustomContributionTypeFieldFactory):
+    value_type = models.CustomContributionTypeField.FieldTypeChoices.FLOAT
+
+
+class CustomContributionTypeDateFieldFactory(CustomContributionTypeFieldFactory):
+    value_type = models.CustomContributionTypeField.FieldTypeChoices.DATE
+
+
+class CustomContributionTypeDatetimeFieldFactory(CustomContributionTypeFieldFactory):
+    value_type = models.CustomContributionTypeField.FieldTypeChoices.DATETIME
 
 
 class CustomContributionFactory(django.DjangoModelFactory):
