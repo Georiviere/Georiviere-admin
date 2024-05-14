@@ -148,3 +148,9 @@ class CustomContributionAdminTestCase(TestCase):
                              args=[self.contrib_with_attachments.pk])
         response = self.client.get(url_detail)
         self.assertEqual(response.status_code, 200)
+
+    def test_add_custom_contribution_admin_view(self):
+        """ Unable to add custom type field directly by admin """
+        url_add = reverse('admin:contribution_customcontribution_add')
+        response = self.client.get(url_add)
+        self.assertEqual(response.status_code, 200)
