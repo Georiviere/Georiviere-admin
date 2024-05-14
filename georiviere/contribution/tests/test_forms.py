@@ -19,7 +19,8 @@ from .factories import (
     CustomContributionTypeFactory,
     CustomContributionTypeFieldFactory,
     CustomContributionTypeFloatFieldFactory,
-    CustomContributionTypeIntegerFieldFactory,
+    CustomContributionTypeIntegerFieldFactory, CustomContributionTypeStringFieldFactory,
+    CustomContributionTypeTextFieldFactory,
 )
 
 
@@ -99,7 +100,12 @@ class CustomContributionFieldInlineFormTest(TestCase):
 
 class CustomContributionFieldFormTest(TestCase):
     def test_schema_string(self):
-        field = CustomContributionTypeFieldFactory(value_type="string")
+        field = CustomContributionTypeStringFieldFactory()
+        form = CustomContributionFieldForm(instance=field)
+        self.assertIsInstance(form.fields["customization"], JSONFormField)
+
+    def test_schema_text(self):
+        field = CustomContributionTypeTextFieldFactory()
         form = CustomContributionFieldForm(instance=field)
         self.assertIsInstance(form.fields["customization"], JSONFormField)
 

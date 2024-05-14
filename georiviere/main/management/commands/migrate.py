@@ -26,7 +26,7 @@ class Command(BaseCommand):
         for app in apps.get_app_configs():
             try:
                 load_sql_files(app, 'post')
-            except Exception:
+            except Exception:  # NOQA
                 pass
         call_command('sync_translation_fields', '--noinput')
         call_command('update_translation_fields')

@@ -401,3 +401,16 @@ class CustomContributionTypeFieldTestCase(TestCase):
             field.get_field_schema(),
             {"type": "string", "format": "date-time", "helpText": "", "title": field.label},
         )
+
+    def test_dropped_choices_empty(self):
+        """ If choices is defined but empty, it should not be included in the schema """
+        field = CustomContributionTypeFieldFactory.create(
+            value_type=CustomContributionTypeField.FieldTypeChoices.STRING,
+            customization={
+                "choices": [],
+            },
+        )
+        self.assertNotIn(
+            'choices',
+            field.get_field_schema()["properties"],
+        )
