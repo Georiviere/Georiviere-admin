@@ -262,7 +262,7 @@ class CustomContributionTypeViewSet(
         custom_type = self.get_object()
         context = self.get_serializer_context()
         context["custom_type"] = custom_type
-        qs = CustomContribution.objects.with_type_values(custom_type).prefetch_related("attachments")
+        qs = CustomContribution.objects.with_type_values(custom_type).filter(validated=True).prefetch_related("attachments")
 
         renderer, media_type = self.perform_content_negotiation(self.request)
         if getattr(renderer, "format") == "geojson":
@@ -317,11 +317,11 @@ class CustomContributionViewSet(
 
     def retrieve(self, request, *args, **kwargs):
         """ Customize retrieve method to add custom type values to the response"""
-        object = self.get_object()
-        object = CustomContribution.objects.with_type_values(object.custom_type).annotate(
+        instance = self.get_object()
+        instance = CustomContribution.objects.with_type_values(instance.custom_type).annotate(
             geometry=Transform(F("geom"), settings.API_SRID)
-        ).prefetch_related("attachments").get(pk=object.pk)
+        ).prefetch_related("attachments").get(pk=instance.pk)
         context = self.get_serializer_context()
-        context['custom_type'] = object.custom_type
-        serializer = self.get_serializer(object, context=context)
+        context['custom_type'] = instance.custom_type
+        serializer = self.get_serializer(instance, context=context)
         return Response(serializer.data)

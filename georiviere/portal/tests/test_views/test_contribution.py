@@ -9,8 +9,13 @@ from geotrek.common.utils.testdata import get_dummy_uploaded_image, get_dummy_up
 from georiviere.contribution.models import (Contribution, ContributionQuality, ContributionLandscapeElements,
                                             ContributionQuantity, ContributionFaunaFlora, ContributionPotentialDamage,)
 from georiviere.contribution.tests.factories import (ContributionFactory, ContributionQuantityFactory,
-                                                     NaturePollutionFactory, SeverityTypeTypeFactory,)
+                                                     NaturePollutionFactory, SeverityTypeTypeFactory,
+                                                     CustomContributionTypeFactory,
+                                                     CustomContributionTypeStringFieldFactory,
+                                                     CustomContributionTypeBooleanFieldFactory,
+                                                     CustomContributionFactory, )
 from georiviere.main.models import Attachment
+from georiviere.observations.tests.factories import StationFactory
 from georiviere.portal.tests.factories import PortalFactory
 
 from rest_framework.test import APITestCase
@@ -312,3 +317,68 @@ class ContributionViewTest(TestCase):
 
         self.assertSetEqual(set(response.json().keys()), {'id', 'type', 'geometry', 'properties'})
         self.assertSetEqual(set(response.json()['properties']), {'category', })
+
+
+class CustomContributionTypeVIewSetAPITestCase(APITestCase):
+    @classmethod
+    def setUpTestData(cls):
+        cls.portal = PortalFactory.create()
+        cls.station = StationFactory()
+        cls.custom_contribution_type = CustomContributionTypeFactory()
+        cls.custom_contribution_type.stations.add(cls.station)
+        CustomContributionTypeStringFieldFactory(
+            custom_type=cls.custom_contribution_type,
+            label="Field string",
+        )
+        CustomContributionTypeBooleanFieldFactory(
+            custom_type=cls.custom_contribution_type,
+            label="Field boolean",
+        )
+        cls.contribution_validated = CustomContributionFactory(custom_type=cls.custom_contribution_type,
+                                                               station=cls.station, validated=True, portal=cls.portal)
+        cls.contribution_unvalidated = CustomContributionFactory(custom_type=cls.custom_contribution_type,
+                                                                 station=cls.station, validated=False, portal=cls.portal)
+
+    def get_list_url(self):
+        return reverse('api_portal:custom_contribution_types-list',
+                       kwargs={'portal_pk': self.portal.pk, 'lang': 'fr', })
+
+    def get_contribution_url(self):
+        return reverse('api_portal:custom_contribution_types-custom-contributions',
+                       kwargs={'portal_pk': self.portal.pk, 'lang': 'fr', 'pk': self.custom_contribution_type.pk})
+
+    def get_detail_url(self, pk):
+        return reverse('api_portal:custom_contribution_types-detail',
+                       kwargs={'portal_pk': self.portal.pk, 'lang': 'fr', 'pk': pk, })
+
+    def test_list(self):
+        response = self.client.get(self.get_list_url())
+        self.assertEqual(response.status_code, 200)
+        self.assertEqual(len(response.json()), 1)
+
+    def test_detail(self):
+        response = self.client.get(self.get_detail_url(self.custom_contribution_type.pk))
+        self.assertEqual(response.status_code, 200)
+
+    def test_create(self):
+        data = {
+            "station": self.station.pk,
+            "field_string": "string",
+            "field_boolean": True,
+            "contributed_at": "2020-01-01T00:00"
+        }
+        response = self.client.post(self.get_contribution_url(), data=data)
+        data = response.json()
+        self.assertEqual(response.status_code, 201, data)
+
+    def test_validated_not_in_list(self):
+        response = self.client.get(self.get_contribution_url())
+        self.assertEqual(response.status_code, 200)
+        data = response.json()
+        self.assertIn(self.contribution_validated.pk, [c['id'] for c in data])
+
+    def test_unvalidated_not_in_list(self):
+        response = self.client.get(self.get_contribution_url())
+        self.assertEqual(response.status_code, 200)
+        data = response.json()
+        self.assertNotIn(self.contribution_unvalidated.pk, [c['id'] for c in data])
