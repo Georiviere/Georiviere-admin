@@ -412,5 +412,5 @@ class CustomContributionTypeFieldTestCase(TestCase):
         )
         self.assertNotIn(
             'choices',
-            field.get_field_schema()["properties"],
+            field.get_field_schema(),
         )
