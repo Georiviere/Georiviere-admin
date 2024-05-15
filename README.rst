@@ -49,7 +49,7 @@ Maintainers
 
 |logo-pnrhj| |logo-makina|
 
-.. |logo-pnrhj| image:: http://images.parc-haut-jura.fr/upload/images/Logos/2017-02-01_LogoPNR_(JPG).jpg
+.. |logo-pnrhj| image:: https://www.parcs-naturels-regionaux.fr/sites/federationpnr/files/styles/contenu/public/image/parc/logo_haut-jura_2.jpg
    :target: https://www.parc-haut-jura.fr/
    :height: 200
 
