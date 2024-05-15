@@ -37,6 +37,8 @@ class StationMixin(SerializerAPIMixin, ModelSerializer):
             "custom_contribution_types",
             "geometry",
             "url",
+            "json_url",
+            "geojson_url"
         )
 
 
