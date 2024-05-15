@@ -154,4 +154,3 @@ class CustomContributionSerializerTestCase(TestCase):
     def test_with_no_custom_type_in_context(self):
         serializer = CustomContributionSerializer(self.custom_contrib, context={"lang": "fr", "portal_pk": 1})
         self.assertNotIn(self.bool_field.key, serializer.data)
-
