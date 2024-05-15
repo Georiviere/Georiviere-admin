@@ -233,9 +233,9 @@ class CustomContributionSerializer(SerializerAPIMixin, serializers.ModelSerializ
                 output_field = serializers.IntegerField
             elif field.get("type") == "boolean":
                 output_field = serializers.BooleanField
-            elif field.get("type") == "date":
+            elif field.get("type") == "string" and field.get("format") == "date":
                 output_field = serializers.DateField
-            elif field.get("type") == "datetime":
+            elif field.get("type") == "string" and field.get("format") == "date-time":
                 output_field = serializers.DateTimeField
             # make field required or not
             self.fields[key] = output_field(
