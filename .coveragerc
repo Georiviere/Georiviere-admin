@@ -1,8 +1,8 @@
 [run]
 omit =
-    */tests*
-    */migrations*
-    */settings*
+    */tests/*
+    */migrations/*
+    */settings/*
     */venv*
     manage.py
 

@@ -39,7 +39,7 @@ class PortalSerializerTest(TestCase):
         data = self.serializer_portal.data
         self.assertSetEqual(set(data.keys()), {'id', 'map', 'name', 'flatpages', 'title', 'description', 'extent',
                                                'max_zoom', 'min_zoom', 'main_color'})
-        self.assertEqual(len(data['map']['group'][0]['layers']), 5)
+        self.assertEqual(len(data['map']['group'][0]['layers']), 7)
 
     def test_portal_all_layers_grouped_content(self):
         data = self.serializer_portal_layers_all_group.data
@@ -47,7 +47,7 @@ class PortalSerializerTest(TestCase):
         self.assertEqual(data['map']['group'][0]['label'], 'Bar')
         self.assertSetEqual(set(data.keys()), {'id', 'map', 'name', 'flatpages', 'title', 'description', 'extent',
                                                'max_zoom', 'min_zoom', 'main_color'})
-        self.assertEqual(len(data['map']['group'][0]['layers']), 5)
+        self.assertEqual(len(data['map']['group'][0]['layers']), 7)
 
     def test_portal_without_se_content(self):
         data = self.serializer_portal_without_spatial_extent.data

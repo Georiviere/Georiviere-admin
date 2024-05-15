@@ -3,59 +3,10 @@ Import data
 
 To import data, you have to run these commands from the server where GeoRiviere-admin is hosted.
 
-Import data
----------------------
-
-Put your data file named CoursEau_FXX.shp in ``var/`` folder, and run command
-
-Custom your import file named import_bdtopage.py et put this file in ``georiviere/``
-
-.. code-block :: bash
-
-	#!/usr/bin/env python
-	import os
-	import django
-	import logging
-	from django.contrib.gis.gdal import DataSource
-
-	os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'georiviere.settings')
-	django.setup()
-	from geotrek.authent.models import Structure
-	from django.contrib.gis.geos.collections import MultiLineString
-	from georiviere.river.models import Stream
-
-	# get first structure, adapt with correct structure
-	structure = Structure.objects.first()
-
-	ds = DataSource('var/CoursEau_FXX.shp')
-
-	for feat in ds[0][4:]:
-		try:
-			# get geos object
-			geom = feat.geom.geos
-			# force 2D
-			geom.dim = 2
-			name = feat.get('name') or 'No name'
-			flow = feat.get('flow')
-			if flow == 1:
-				flow = 1
-			elif flow == 2:
-				flow = 2
-			else:
-				flow = 0
-			stream = Stream.objects.create(structure=structure,
-										geom=feat.geom.geos,
-										name=name,
-										flow=flow)
-
-		except Exception as exc:
-			logging.warn(exc, feat.geom.geos.ewkt)
-
-And run command : `docker compose run --rm web ./import_bdtopage.py`
-
-
 Import altimetry file
 ---------------------
+
+Altimetry should be imported first in GeoRiviere, in order for other imported objects to use DEM to compute altitude.
 
 Put your altimetry file in ``var/`` folder, and run command
 
@@ -63,7 +14,30 @@ Put your altimetry file in ``var/`` folder, and run command
 
     docker-compose run --rm web ./manage.py loaddem <dem_path>
 
-where ``<dem_path>`` is ``/opt/georiviere-admin/var/my_dem_file.tiff``
+where ``<dem_path>`` is ``/opt/georiviere-admin/var/my_dem_file.tif``
+
+If you want to replace an existing DEM, you can add the argument ``--replace`` to the command.
+
+
+Import rivers / stream
+----------------------
+
+Put your data file (in .shp or .gpkg format) in ``var/`` folder, and run command
+
+.. code-block :: bash
+
+    docker-compose run --rm web ./manage.py load_rivers <file_path>
+
+where ``<file_path>`` is ``/opt/georiviere-admin/var/my_stream_file.tif``
+
+Several optional arguments can be used with this command :
+
+.. code-block :: bash
+
+    --flush : to delete all existing rivers in the database before import
+    --name-attribute <string> : allow to change the column name used to find the name attribute of the river (default is 'nom')
+    --default-name-attribute <string> : when there is no content in the designated column, this value will be used for the name of the object (default is 'River')
+    --batch-size <integer> : the rivers are imported by batch, this size can be changed if needed (default is 50)
 
 
 Import stations from Hub'Eau

@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-09-15 17:06+0000\n"
+"POT-Creation-Date: 2024-05-03 12:50+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -31,7 +31,7 @@ msgid "POI Category"
 msgstr "Catégorie POI"
 
 msgid "POI Categories"
-msgstr "Catgéories POI"
+msgstr "Catégories POI"
 
 msgid "Category"
 msgstr "Catégorie"
@@ -50,6 +50,9 @@ msgstr "Description"
 
 msgid "History, details,  ..."
 msgstr "Historique, détails, ..."
+
+msgid "POI link"
+msgstr "Lien externe"
 
 msgid "Type"
 msgstr "Type "

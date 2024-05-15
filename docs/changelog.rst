@@ -5,6 +5,11 @@ CHANGELOG
 1.3.0+dev    (XXXX-XX-XX)
 ---------------------
 
+**New features**
+
+- Add load_rivers command
+- Create custom contribution types from the admin with specific field schema
+
 **Bug fix**
 
 - Force translation defined in API url /api/portal/<lang> (fix #222)

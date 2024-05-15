@@ -1,17 +1,18 @@
-from georiviere.valorization.models import POI, POICategory, POIType
-from georiviere.portal.serializers.main import AttachmentSerializer
-
+from rest_framework import serializers
+from rest_framework.reverse import reverse
 from rest_framework.serializers import ModelSerializer
 from rest_framework_gis import serializers as geo_serializers
 from rest_framework_gis.serializers import GeoFeatureModelSerializer
+
+from georiviere.portal.serializers.main import AttachmentSerializer
+from georiviere.portal.serializers.mixins import SerializerAPIMixin
+from georiviere.valorization.models import POI, POICategory, POIType
 
 
 class POICategorySerializer(ModelSerializer):
     class Meta:
         model = POICategory
-        fields = (
-            'id', 'label'
-        )
+        fields = ("id", "label")
 
 
 class POITypeSerializer(ModelSerializer):
@@ -19,31 +20,55 @@ class POITypeSerializer(ModelSerializer):
 
     class Meta:
         model = POIType
-        fields = (
-            'id', 'label', 'category', 'pictogram'
+        fields = ("id", "label", "category", "pictogram")
+
+
+class POIMixin(SerializerAPIMixin, ModelSerializer):
+    attachments = AttachmentSerializer(many=True)
+    url = serializers.CharField(source='external_uri')
+    type = POITypeSerializer()
+    json_url = serializers.SerializerMethodField()
+    geojson_url = serializers.SerializerMethodField()
+
+    def get_json_url(self, obj):
+        return reverse(
+            "api_portal:pois-detail",
+            kwargs=self._get_url_detail_kwargs(pk=obj.pk, format="json"),
         )
 
-
-class POIGeojsonSerializer(GeoFeatureModelSerializer):
-    type = POITypeSerializer()
-    geometry = geo_serializers.GeometryField(read_only=True, precision=7, source="geom_transformed")
-    attachments = AttachmentSerializer(many=True)
+    def get_geojson_url(self, obj):
+        return reverse(
+            "api_portal:pois-detail",
+            kwargs=self._get_url_detail_kwargs(pk=obj.pk, format="geojson"),
+        )
 
     class Meta:
         model = POI
-        geo_field = 'geometry'
+        fields = (
+            "id",
+            "name",
+            "description",
+            "url",
+            "type",
+            "attachments",
+            "json_url",
+            "geojson_url",
+        )
+
+
+class POIGeojsonSerializer(POIMixin, GeoFeatureModelSerializer):
+    geometry = geo_serializers.GeometryField(
+        read_only=True, precision=7, source="geom_transformed"
+    )
+
+    class Meta(POIMixin.Meta):
+        geo_field = "geometry"
         id_field = False
-        fields = (
-            'id', 'name', 'description', 'type', 'attachments', 'geometry'
+        fields = POIMixin.Meta.fields + (
+            "geometry",
         )
 
 
-class POISerializer(ModelSerializer):
-    type = POITypeSerializer()
-    attachments = AttachmentSerializer(many=True)
-
-    class Meta:
-        model = POI
-        fields = (
-            'id', 'name', 'description', 'type', 'attachments'
-        )
+class POISerializer(POIMixin, ModelSerializer):
+    class Meta(POIMixin.Meta):
+        pass

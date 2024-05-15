@@ -90,16 +90,16 @@ class StreamSourceLocationTest(TestCase):
         self.assertAlmostEqual(lat_max, -5.655019875165679)
 
     def test_distance_to_source(self):
-        """Test distance from a given object to stream source according to differents geom"""
+        """Test distance from a given object to stream source according to different geom"""
         self.assertAlmostEqual(self.stream1.distance_to_source(self.usage_point), 28.2842712)
         self.assertEqual(self.stream1.distance_to_source(self.administrative_file), None)
-        self.assertEqual(DistanceToSource.objects.count(), 6)
+        self.assertEqual(DistanceToSource.objects.count(), 2)
         usage_point = UsageFactory.create(
             geom=Point(10000, 10010)
         )
-        self.assertEqual(DistanceToSource.objects.count(), 8)
+        self.assertEqual(DistanceToSource.objects.count(), 4)
         usage_point.delete()
-        self.assertEqual(DistanceToSource.objects.count(), 6)
+        self.assertEqual(DistanceToSource.objects.count(), 2)
 
 
 class SnapTest(TestCase):

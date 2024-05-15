@@ -13,8 +13,11 @@ class BaseLineStringFactory(factory.django.DjangoModelFactory):
     @factory.lazy_attribute
     def geom(self):
         origin_lat = 0
+        origin_lon = 0
+        middle_lon = 0
         destination_lat = 0
         middle_lat = 0
+        destination_lon = 0
         while origin_lat == destination_lat or middle_lat == origin_lat or destination_lat == middle_lat:
             origin_lat, origin_lon, *other = fake.local_latlng(country_code='FR')
             middle_lat, middle_lon, *other = fake.local_latlng(country_code='FR')

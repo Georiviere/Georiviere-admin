@@ -139,6 +139,7 @@ INSTALLED_APPS = PROJECT_APPS + [
     'mapentity',  # mapentity should be placed after app declaring paperclip models
     'leaflet',
     'paperclip',
+    'django_jsonform',
     'crispy_forms',
     'rest_framework',
     'geotrek.altimetry',
@@ -205,6 +206,11 @@ MIDDLEWARE = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
     'mapentity.middleware.AutoLoginMiddleware',
 ]
+
+LOCALE_PATHS = (
+    # override locale
+    os.path.join(PROJECT_DIR, 'locales'),
+)
 
 ROOT_URLCONF = 'georiviere.urls'
 
@@ -476,8 +482,9 @@ if SSL_ENABLED:
     SESSION_COOKIE_SECURE = True
     SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
 
-# Override with custom settings
-custom_settings_file = os.getenv('CUSTOM_SETTINGS_FILE')
-if custom_settings_file and os.path.exists(custom_settings_file) and not TEST:
-    with open(custom_settings_file, 'r') as f:
-        exec(f.read())
+if 'test' not in sys.argv:
+    # Override with custom settings
+    custom_settings_file = os.getenv('CUSTOM_SETTINGS_FILE')
+    if custom_settings_file and os.path.exists(custom_settings_file) and not TEST:
+        with open(custom_settings_file, 'r') as f:
+            exec(f.read())

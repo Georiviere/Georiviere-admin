@@ -89,6 +89,7 @@ class Station(TimeStampedModelMixin, WatershedPropertiesMixin, ZoningPropertiesM
     class Meta:
         verbose_name = _("Station")
         verbose_name_plural = _("Stations")
+        ordering = ('label', 'pk')
 
     def __str__(self):
         return "{1} ({0})".format(self.code, self.label)

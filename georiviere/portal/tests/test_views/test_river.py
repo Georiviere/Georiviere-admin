@@ -13,42 +13,97 @@ class StreamViewTest(TestCase):
         cls.stream.portals.add(cls.portal)
 
     def test_stream_detail_geojson_structure(self):
-        url = reverse('api_portal:streams-detail',
-                      kwargs={'portal_pk': self.portal.pk, 'pk': self.stream.pk, 'lang': 'fr', 'format': 'geojson'})
+        url = reverse(
+            "api_portal:streams-detail",
+            kwargs={
+                "portal_pk": self.portal.pk,
+                "pk": self.stream.pk,
+                "lang": "fr",
+                "format": "geojson",
+            },
+        )
         response = self.client.get(url)
         self.assertEqual(response.status_code, 200)
 
-        self.assertSetEqual(set(response.json().keys()), {'geometry', 'properties', 'type'})
+        self.assertSetEqual(
+            set(response.json().keys()), {"geometry", "properties", "type"}
+        )
 
     def test_stream_detail_json_structure(self):
-        url = reverse('api_portal:streams-detail',
-                      kwargs={'portal_pk': self.portal.pk, 'pk': self.stream.pk, 'lang': 'fr', 'format': 'json'})
+        url = reverse(
+            "api_portal:streams-detail",
+            kwargs={
+                "portal_pk": self.portal.pk,
+                "pk": self.stream.pk,
+                "lang": "fr",
+                "format": "json",
+            },
+        )
         response = self.client.get(url)
         self.assertEqual(response.status_code, 200)
-        self.assertSetEqual(set(response.json().keys()), {'attachments', 'length', 'flow', 'descent', 'name',
-                                                          'id', 'description', 'geometryCenter'})
+        self.assertListEqual(
+            sorted(list(response.json().keys())),
+            sorted([
+                "attachments",
+                "length",
+                "flow",
+                "descent",
+                "name",
+                "id",
+                "description",
+                "geometryCenter",
+                "geojsonUrl",
+                "jsonUrl",
+            ]),
+        )
 
     def test_stream_list_geojson_structure(self):
-        url = reverse('api_portal:streams-list',
-                      kwargs={'portal_pk': self.portal.pk, 'lang': 'fr', 'format': 'geojson'})
+        url = reverse(
+            "api_portal:streams-list",
+            kwargs={"portal_pk": self.portal.pk, "lang": "fr", "format": "geojson"},
+        )
         response = self.client.get(url)
         self.assertEqual(response.status_code, 200)
-        self.assertSetEqual(set(response.json().keys()), {'type', 'features'})
+        self.assertSetEqual(set(response.json().keys()), {"type", "features"})
 
     def test_stream_list_json_structure(self):
-        url = reverse('api_portal:streams-list',
-                      kwargs={'portal_pk': self.portal.pk, 'lang': 'fr', 'format': 'json'})
+        url = reverse(
+            "api_portal:streams-list",
+            kwargs={"portal_pk": self.portal.pk, "lang": "fr", "format": "json"},
+        )
         response = self.client.get(url)
         self.assertEqual(response.status_code, 200)
         self.assertEqual(len(response.json()), 1)
-        self.assertSetEqual(set(response.json()[0].keys()), {'attachments', 'flow', 'descent', 'length',
-                                                             'name', 'id', 'description', 'geometryCenter'})
+        self.assertListEqual(
+            sorted(list(response.json()[0].keys())),
+            sorted([
+                "attachments",
+                "length",
+                "flow",
+                "descent",
+                "name",
+                "id",
+                "description",
+                "geometryCenter",
+                "geojsonUrl",
+                "jsonUrl",
+            ]),
+        )
 
     def test_stream_ranslation_according_url(self):
-        for lang in ['en', 'fr']:
-            url = reverse('api_portal:streams-detail',
-                          kwargs={'portal_pk': self.portal.pk, 'pk': self.stream.pk, 'lang': lang, 'format': 'json'})
+        for lang in ["en", "fr"]:
+            url = reverse(
+                "api_portal:streams-detail",
+                kwargs={
+                    "portal_pk": self.portal.pk,
+                    "pk": self.stream.pk,
+                    "lang": lang,
+                    "format": "json",
+                },
+            )
             response = self.client.get(url)
             self.assertEqual(response.status_code, 200)
             data = response.json()
-            self.assertEqual(data['flow'], 'To be defined' if lang == 'en' else 'À définir')
+            self.assertEqual(
+                data["flow"], "To be defined" if lang == "en" else "À définir"
+            )
