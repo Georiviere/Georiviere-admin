@@ -53,9 +53,10 @@ Maintainers
    :target: https://www.parc-haut-jura.fr/
    :height: 200
 
-.. |logo-makina| image:: https://geotrek.fr/assets/img/logo_makina.svg"
+.. |logo-makina| image:: https://geotrek.fr/assets/img/logo_makina.svg
    :target: https://territoires.makina-corpus.com/
    :height: 210
+
 
 Status of sub-projects
 ----------------------
