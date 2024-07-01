@@ -2,17 +2,17 @@ FROM ubuntu:focal as base
 # stage with general requirements
 ARG UID=1000
 
-ENV DEBIAN_FRONTEND noninteractive
-ENV PYTHONUNBUFFERED 1
-ENV LANG C.UTF-8
-ENV TZ UTC
+ENV DEBIAN_FRONTEND=noninteractive
+ENV PYTHONUNBUFFERED=1
+ENV LANG=C.UTF-8
+ENV TZ=UTC
 
-ENV SERVER_NAME localhost
-ENV CONVERSION_HOST convertit
-ENV CAPTURE_HOST screamshotter
-ENV POSTGRES_HOST postgres
-ENV PGPORT 5432
-ENV CUSTOM_SETTINGS_FILE /opt/georiviere-admin/var/conf/custom.py
+ENV SERVER_NAME=localhost
+ENV CONVERSION_HOST=convertit
+ENV CAPTURE_HOST=screamshotter
+ENV POSTGRES_HOST=postgres
+ENV PGPORT=5432
+ENV CUSTOM_SETTINGS_FILE=/opt/georiviere-admin/var/conf/custom.py
 
 RUN mkdir -p /opt/georiviere-admin/var
 
@@ -76,7 +76,7 @@ RUN apt-get update -qq && apt-get install -y -qq \
 USER django
 
 RUN python3.9 -m venv /opt/venv
-RUN /opt/venv/bin/pip install --no-cache-dir pip setuptools wheel -U
+RUN /opt/venv/bin/pip install --no-cache-dir pip==24.0 setuptools wheel -U
 # geotrek setup fix : it required django before being installed... TODO: fix it in geotrek setup.py
 RUN  /opt/venv/bin/pip install --no-cache-dir django==2.2.*
 
@@ -92,7 +92,7 @@ CMD ./manage.py runserver 0.0.0.0:8000
 
 FROM base as prod
 # stage with prod requirements only
-ENV GUNICORN_CMD_ARGS "--workers 1 --timeout 3600 --bind 0.0.0.0:8000 --timeout 3600"
+ENV GUNICORN_CMD_ARGS="--workers 1 --timeout 3600 --bind 0.0.0.0:8000 --timeout 3600"
 
 USER root
 
