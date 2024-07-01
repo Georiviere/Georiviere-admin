@@ -188,7 +188,9 @@ class CustomContributionTypeViewSet(
             context = self.get_serializer_context()
             custom_type = self.get_object()
             context["custom_type"] = custom_type
-            serializer = self.get_serializer(data=request.data, context=context)
+            # as data come from form, we need to clean None values in creation mode
+            data = {k: v for k, v in request.data.items() if v is not None}
+            serializer = self.get_serializer(data=data, context=context)
             if not serializer.is_valid():
                 return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
             extra_save_params = {}

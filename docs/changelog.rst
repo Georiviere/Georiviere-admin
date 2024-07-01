@@ -2,6 +2,14 @@
 CHANGELOG
 =========
 
+1.4.1    (2024-07-01)
+---------------------
+
+**Bug fix**
+
+- Fix null values send on non required fields in custom contribution API
+
+
 1.4.0    (2024-06-17)
 ---------------------
 
