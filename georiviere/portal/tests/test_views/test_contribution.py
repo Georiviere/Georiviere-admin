@@ -372,7 +372,7 @@ class CustomContributionTypeVIewSetAPITestCase(APITestCase):
             "field_boolean": True,
             "contributed_at": "2020-01-01T00:00"
         }
-        response = self.client.post(self.get_contribution_url(), data=data)
+        response = self.client.post(self.get_contribution_url(), data=data, format='json')
         data = response.json()
         self.assertEqual(response.status_code, 201, data)
 
@@ -385,7 +385,7 @@ class CustomContributionTypeVIewSetAPITestCase(APITestCase):
             "field_float": 1.1,
             "contributed_at": "2020-01-01T00:00"
         }
-        response = self.client.post(self.get_contribution_url(), data=data)
+        response = self.client.post(self.get_contribution_url(), data=data, format='json')
         data = response.json()
         self.assertEqual(response.status_code, 201, data)
         self.assertEqual(data['field_float'], 1.1)
