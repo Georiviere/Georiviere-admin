@@ -13,7 +13,8 @@ from georiviere.contribution.tests.factories import (ContributionFactory, Contri
                                                      CustomContributionTypeFactory,
                                                      CustomContributionTypeStringFieldFactory,
                                                      CustomContributionTypeBooleanFieldFactory,
-                                                     CustomContributionFactory, )
+                                                     CustomContributionFactory,
+                                                     CustomContributionTypeFloatFieldFactory, )
 from georiviere.main.models import Attachment
 from georiviere.observations.tests.factories import StationFactory
 from georiviere.portal.tests.factories import PortalFactory
@@ -334,6 +335,10 @@ class CustomContributionTypeVIewSetAPITestCase(APITestCase):
             custom_type=cls.custom_contribution_type,
             label="Field boolean",
         )
+        CustomContributionTypeFloatFieldFactory(
+            custom_type=cls.custom_contribution_type,
+            label="Field float",
+        )
         cls.contribution_validated = CustomContributionFactory(custom_type=cls.custom_contribution_type,
                                                                station=cls.station, validated=True, portal=cls.portal)
         cls.contribution_unvalidated = CustomContributionFactory(custom_type=cls.custom_contribution_type,
@@ -370,6 +375,20 @@ class CustomContributionTypeVIewSetAPITestCase(APITestCase):
         response = self.client.post(self.get_contribution_url(), data=data)
         data = response.json()
         self.assertEqual(response.status_code, 201, data)
+
+    def test_null_values_on_not_required(self):
+        """Null values should be accepted on non required fields"""
+        data = {
+            "station": self.station.pk,
+            "field_string": "string",
+            "field_boolean": None,
+            "field_float": 1.1,
+            "contributed_at": "2020-01-01T00:00"
+        }
+        response = self.client.post(self.get_contribution_url(), data=data)
+        data = response.json()
+        self.assertEqual(response.status_code, 201, data)
+        self.assertEqual(data['field_float'], 1.1)
 
     def test_validated_not_in_list(self):
         response = self.client.get(self.get_contribution_url())
