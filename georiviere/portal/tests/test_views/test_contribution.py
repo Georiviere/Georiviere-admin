@@ -327,9 +327,13 @@ class CustomContributionTypeVIewSetAPITestCase(APITestCase):
         cls.station = StationFactory()
         cls.custom_contribution_type = CustomContributionTypeFactory()
         cls.custom_contribution_type.stations.add(cls.station)
-        CustomContributionTypeStringFieldFactory(
+        cls.string_field = CustomContributionTypeStringFieldFactory(
             custom_type=cls.custom_contribution_type,
             label="Field string",
+        )
+        cls.string_field_blank = CustomContributionTypeStringFieldFactory(
+            custom_type=cls.custom_contribution_type,
+            label="Field string empty",
         )
         CustomContributionTypeBooleanFieldFactory(
             custom_type=cls.custom_contribution_type,
@@ -376,11 +380,12 @@ class CustomContributionTypeVIewSetAPITestCase(APITestCase):
         data = response.json()
         self.assertEqual(response.status_code, 201, data)
 
-    def test_null_values_on_not_required(self):
-        """Null values should be accepted on non required fields"""
+    def test_no_values_on_not_required(self):
+        """Null and empty values should be accepted on non required fields"""
         data = {
             "station": self.station.pk,
-            "field_string": "string",
+            self.string_field.key: None,
+            self.string_field_blank.key: "",
             "field_boolean": None,
             "field_float": 1.1,
             "contributed_at": "2020-01-01T00:00"
