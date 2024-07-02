@@ -239,8 +239,11 @@ class CustomContributionSerializer(SerializerAPIMixin, serializers.ModelSerializ
                 output_field = serializers.DateTimeField
             required = key in schema.get("required", [])
             # make field required or not
+            kwargs = {"label": field.get("title"), "required": required}
+            if output_field == serializers.CharField:
+                kwargs["allow_blank"] = not required
             self.fields[key] = output_field(
-                label=field.get("title"), required=required, allow_blank=not required
+                **kwargs
             )
 
         # station is required if defined at custom_type level. Geom is not required because replace by station geom
