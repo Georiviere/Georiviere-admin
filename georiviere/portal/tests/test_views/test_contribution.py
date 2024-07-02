@@ -384,9 +384,9 @@ class CustomContributionTypeVIewSetAPITestCase(APITestCase):
         """Null and empty values should be accepted on non required fields"""
         data = {
             "station": self.station.pk,
-            self.string_field.key: None,
+            self.string_field.key: "",
             self.string_field_blank.key: "",
-            "field_boolean": None,
+            "field_boolean": "",
             "field_float": 1.1,
             "contributed_at": "2020-01-01T00:00"
         }

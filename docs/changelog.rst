@@ -7,6 +7,14 @@ CHANGELOG
 
 **Bug fix**
 
+- Fix to give multipart data as JSON data in custom contribution API
+
+
+1.4.2    (2024-07-02)
+---------------------
+
+**Bug fix**
+
 - Allow send empty string on not required in custom contribution API
 
 
