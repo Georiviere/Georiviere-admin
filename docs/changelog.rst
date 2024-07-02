@@ -5,6 +5,9 @@ CHANGELOG
 1.4.1+dev (XXXX-XX-XX)
 ----------------------
 
+**Bug fix**
+
+- Allow send empty string on not required in custom contribution API
 
 
 1.4.1    (2024-07-02)
