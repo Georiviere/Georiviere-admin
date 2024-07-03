@@ -2,6 +2,14 @@
 CHANGELOG
 =========
 
+1.4.3    (2024-07-02)
+---------------------
+
+**Bug fix**
+
+- Fix to give multipart data as JSON data in custom contribution API
+
+
 1.4.2    (2024-07-02)
 ---------------------
 
