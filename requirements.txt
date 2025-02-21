@@ -180,8 +180,6 @@ easy-thumbnails==2.7.1
     # via
     #   mapentity
     #   paperclip
-env-file==2020.12.3
-    # via geotrek
 factory-boy==3.2.1
     # via geotrek
 faker==9.7.1
@@ -285,6 +283,8 @@ python-dateutil==2.8.1
     #   freezegun
 python-decouple==3.8
     # via -r requirements.in
+python-dotenv==1.0.0
+    # via -r requirements.in
 python-memcached==1.59
     # via
     #   -r requirements.in
@@ -360,8 +360,6 @@ urllib3==1.26.3
     # via
     #   requests
     #   sentry-sdk
-values==2020.12.3
-    # via env-file
 vine==5.0.0
     # via
     #   amqp

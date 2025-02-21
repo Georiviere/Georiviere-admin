@@ -75,16 +75,16 @@ jobs:
 
       - name: Build Docker image
         run: |
-          docker-compose build --build-arg UID=$UID
+          docker compose build --build-arg UID=$UID
 
       - name: Check no pending migrations
         run: |
-          docker-compose run --rm web ./manage.py makemigrations --check
+          docker compose run --rm web ./manage.py makemigrations --check
 
       - name: Run tests
         run: |
-          docker-compose run --rm web ./manage.py compilemessages
-          docker-compose run --rm web bash -c "coverage run ./manage.py test && coverage xml -o var/coverage.xml"
+          docker compose run --rm web ./manage.py compilemessages
+          docker compose run --rm web bash -c "coverage run ./manage.py test && coverage xml -o var/coverage.xml"
 
       - uses: codecov/codecov-action@v4
         with:

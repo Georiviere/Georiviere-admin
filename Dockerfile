@@ -1,4 +1,4 @@
-FROM ubuntu:focal as base
+FROM ubuntu:focal AS base
 # stage with general requirements
 ARG UID=1000
 
@@ -52,7 +52,7 @@ USER django
 ENTRYPOINT ["entrypoint.sh"]
 EXPOSE 8000
 
-FROM base as build
+FROM base AS build
 # stage with build requirements
 USER root
 
@@ -76,21 +76,21 @@ RUN apt-get update -qq && apt-get install -y -qq \
 USER django
 
 RUN python3.9 -m venv /opt/venv
-RUN /opt/venv/bin/pip install --no-cache-dir pip==24.0 setuptools wheel -U
+RUN /opt/venv/bin/pip install --no-cache-dir pip==24.0 setuptools==70.2.0 wheel -U  # some dependencies dont like newer setuptools versions
 # geotrek setup fix : it required django before being installed... TODO: fix it in geotrek setup.py
 RUN  /opt/venv/bin/pip install --no-cache-dir django==2.2.*
 
 COPY requirements.txt /opt/requirements.txt
-RUN  /opt/venv/bin/pip install --no-cache-dir -r /opt/requirements.txt
+RUN  /opt/venv/bin/pip install --no-deps --no-cache-dir -r /opt/requirements.txt  # use no deps to dont install env-file removed subdependencies (values)
 
-FROM build as dev
+FROM build AS dev
 # stage with dev requirements
 COPY dev-requirements.txt /opt/dev-requirements.txt
 RUN  /opt/venv/bin/pip install --no-cache-dir -r /opt/dev-requirements.txt
 
 CMD ./manage.py runserver 0.0.0.0:8000
 
-FROM base as prod
+FROM base AS prod
 # stage with prod requirements only
 ENV GUNICORN_CMD_ARGS="--workers 1 --timeout 3600 --bind 0.0.0.0:8000 --timeout 3600"
 
