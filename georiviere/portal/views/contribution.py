@@ -221,30 +221,33 @@ class CustomContributionTypeViewSet(
                         + str(e)
                     )
                 else:
-                    try:
-                        # Re-encode file to bitmap then back to jpeg for safety
-                        if not os.path.exists(f"{settings.TMP_DIR}/contribution_file/"):
-                            os.mkdir(f"{settings.TMP_DIR}/contribution_file/")
-                        tmp_bmp_path = os.path.join(
-                            f"{settings.TMP_DIR}/contribution_file/", f"{name}.bmp"
-                        )
-                        tmp_jpeg_path = os.path.join(
-                            f"{settings.TMP_DIR}/contribution_file/", f"{name}.jpeg"
-                        )
-                        Image.open(file).save(tmp_bmp_path)
-                        Image.open(tmp_bmp_path).save(tmp_jpeg_path)
-                        with open(tmp_jpeg_path, "rb") as converted_file:
-                            attachment.attachment_file = File(
-                                converted_file, name=f"{name}.jpeg"
+                    if file.content_type.startswith("image/"):
+                        try:
+                            # Re-encode file to bitmap then back to jpeg for safety
+                            if not os.path.exists(f"{settings.TMP_DIR}/contribution_file/"):
+                                os.mkdir(f"{settings.TMP_DIR}/contribution_file/")
+                            tmp_bmp_path = os.path.join(
+                                f"{settings.TMP_DIR}/contribution_file/", f"{name}.bmp"
                             )
-                            attachment.save()
-                        os.remove(tmp_bmp_path)
-                        os.remove(tmp_jpeg_path)
-                    except Exception as e:
-                        logger.error(
-                            f"Failed to convert attachment {name}{extension} for contribution {contribution.pk}: "
-                            + str(e)
-                        )
+                            tmp_jpeg_path = os.path.join(
+                                f"{settings.TMP_DIR}/contribution_file/", f"{name}.jpeg"
+                            )
+                            Image.open(file).save(tmp_bmp_path)
+                            Image.open(tmp_bmp_path).save(tmp_jpeg_path)
+                            with open(tmp_jpeg_path, "rb") as converted_file:
+                                attachment.attachment_file = File(
+                                    converted_file, name=f"{name}.jpeg"
+                                )
+                                attachment.save()
+                            os.remove(tmp_bmp_path)
+                            os.remove(tmp_jpeg_path)
+                        except Exception as e:
+                            logger.error(
+                                f"Failed to convert attachment {name}{extension} for contribution {contribution.pk}: "
+                                + str(e)
+                            )
+                    else:
+                        attachment.save()
             transaction.savepoint_commit(sid)
 
             return Response(
