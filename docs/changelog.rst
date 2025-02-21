@@ -2,6 +2,14 @@
 CHANGELOG
 =========
 
+1.4.3+dev   (XXXX-XX-XX)
+------------------------
+
+**Bug fix**
+
+- Disable security re-encoding on contribution attachments tat are not pictures.
+
+
 1.4.3    (2024-07-02)
 ---------------------
 
