@@ -2,6 +2,14 @@
 CHANGELOG
 =========
 
+1.4.4+dev   (XXXX-XX-XX)
+------------------------
+
+**Improvement**
+
+- Update Hub'Eau hydrometry APi to v2
+
+
 1.4.4       (2025-02-23)
 ------------------------
 

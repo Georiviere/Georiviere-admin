@@ -5,7 +5,7 @@ from . import BaseImportCommand
 
 class Command(BaseImportCommand):
     help = "Import hydrometry stations from Hub'Eau API"
-    api_url = "https://hubeau.eaufrance.fr/api/v1/hydrometrie/referentiel/stations"
+    api_url = "https://hubeau.eaufrance.fr/api/v2/hydrometrie/referentiel/stations"
     operations_url = " https://www.hydro.eaufrance.fr/sitehydro/"
 
     def create_or_update_stations(self, results, verbosity, with_parameters=False):
