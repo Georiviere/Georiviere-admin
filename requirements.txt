@@ -180,6 +180,8 @@ easy-thumbnails==2.7.1
     # via
     #   mapentity
     #   paperclip
+env-file==2020.12.3
+    # via geotrek
 factory-boy==3.2.1
     # via geotrek
 faker==9.7.1
@@ -198,7 +200,7 @@ geotrek @ git+https://github.com/GeotrekCE/Geotrek-admin.git@2.75.0
     # via -r requirements.in
 gpxpy==1.5.0
     # via mapentity
-gunicorn==22.0.0
+gunicorn==23.0.0
     # via
     #   -r requirements.in
     #   geotrek
@@ -283,8 +285,6 @@ python-dateutil==2.8.1
     #   freezegun
 python-decouple==3.8
     # via -r requirements.in
-python-dotenv==1.0.0
-    # via -r requirements.in
 python-memcached==1.59
     # via
     #   -r requirements.in
@@ -360,6 +360,8 @@ urllib3==1.26.3
     # via
     #   requests
     #   sentry-sdk
+values==66.0.3
+    # via env-file
 vine==5.0.0
     # via
     #   amqp
