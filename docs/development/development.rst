@@ -22,21 +22,21 @@ Set required values, for postgres database access
 
 .. code-block :: bash
 
-    docker-compose run --rm web ./manage.py migrate
+    docker compose run --rm web ./manage.py migrate
 
 
 * Create user:
 
 .. code-block :: bash
 
-    docker-compose run --rm web ./manage.py createsuperuser
+    docker compose run --rm web ./manage.py createsuperuser
 
 
 * Run:
 
 .. code-block :: bash
 
-    docker-compose up
+    docker compose up
 
 
 Tests
@@ -46,15 +46,15 @@ Tests
 
 .. code-block :: bash
 
-    docker-compose run --rm web ./manage.py test
+    docker compose run --rm web ./manage.py test
 
 
 * With coverage :
 
 .. code-block :: bash
 
-    docker-compose run --rm web coverage run ./manage.py test
-    docker-compose run --rm web coverage report -m
+    docker compose run --rm web coverage run ./manage.py test
+    docker compose run --rm web coverage report -m
 
 
 Dependencies
@@ -70,7 +70,7 @@ Set global dependency in requirements.in
 
 .. code-block :: bash
 
-    docker-compose run --rm web pip-compile
+    docker compose run --rm web pip-compile
 
 **pip-tools** does not upgrade any package by default. Package is upgrade only if new dependency require another version that already fixed in requirements.txt file.
 
@@ -78,13 +78,13 @@ To upgrade a package, run:
 
 .. code-block :: bash
 
-    docker-compose run --rm web pip-compile --upgrade-package django==3.1.*
+    docker compose run --rm web pip-compile --upgrade-package django==3.1.*
 
 Development packages are separated in dev-requirements.in. dev-requirements.txt depends on requirements.txt.
 
 .. code-block :: bash
 
-    docker-compose run --rm web pip-compile dev-requirements.in
+    docker compose run --rm web pip-compile dev-requirements.in
 
 .. warning::
     Geotrek is used as main library of this project. Sub-dependencies are not yet managed in geotrek setup.py.

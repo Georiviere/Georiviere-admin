@@ -111,7 +111,7 @@ Update
       docker compose run --rm web update.sh
 
 
-* Relaunch you docker-compose stack
+* Relaunch you docker compose stack
 
   .. code-block :: bash
 

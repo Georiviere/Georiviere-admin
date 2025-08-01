@@ -89,7 +89,7 @@ be sent to the managers:
 
 ::
 
-    docker-compose run --rm web ./manage.py sendtestemail --managers
+    docker compose run --rm web ./manage.py sendtestemail --managers
 
 If you don't want to send an email to contributors when they create a contribution on portal website,
 change this setting in ``var/conf/custom.py``:
