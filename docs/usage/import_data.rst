@@ -12,7 +12,7 @@ Put your altimetry file in ``var/`` folder, and run command
 
 .. code-block :: bash
 
-    docker-compose run --rm web ./manage.py loaddem <dem_path>
+    docker compose run --rm web ./manage.py loaddem <dem_path>
 
 where ``<dem_path>`` is ``/opt/georiviere-admin/var/my_dem_file.tif``
 
@@ -26,7 +26,7 @@ Put your data file (in .shp or .gpkg format) in ``var/`` folder, and run command
 
 .. code-block :: bash
 
-    docker-compose run --rm web ./manage.py load_rivers <file_path>
+    docker compose run --rm web ./manage.py load_rivers <file_path>
 
 where ``<file_path>`` is ``/opt/georiviere-admin/var/my_stream_file.tif``
 
@@ -62,7 +62,7 @@ Example:
 
 .. code-block :: bash
 
-    docker-compose run --rm web ./manage.py import_pcquality_stations --department 39,25
+    docker compose run --rm web ./manage.py import_pcquality_stations --department 39,25
 
 
 Import data references from Sandre
@@ -74,7 +74,7 @@ Usage:
 
 .. code-block :: bash
 
-    docker-compose run --rm web ./manage.py import_reference_data
+    docker compose run --rm web ./manage.py import_reference_data
 
 
 Import zoning data from file
@@ -169,4 +169,4 @@ Mors informations  : https://geotrek.ecrins-parcnational.fr/ressources/gt/01-zon
 
 .. code-block :: bash
 
-    docker-compose run --rm web ./manage.py import_parser -v 2 BiodivParser
+    docker compose run --rm web ./manage.py import_parser -v 2 BiodivParser

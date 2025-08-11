@@ -24,11 +24,12 @@ Based on Geotrek or Mapentity settings
 
 Some settings come from Geotrek-admin or Mapentity, on which GeoRivière is based:
 
-* `Email settings <https://geotrek.readthedocs.io/en/master/advanced-configuration.html#email-settings>`_
-* `Change or add WMTS tiles layers <https://geotrek.readthedocs.io/en/master/advanced-configuration.html#change-or-add-wmts-tiles-layers-ign-osm-mapbox>`_
-* `Map layers colors and style <https://geotrek.readthedocs.io/en/master/advanced-configuration.html#map-layers-colors-and-style>`_
+* `Email settings <https://geotrek.readthedocs.io/en/stable/advanced-configuration/application-settings.html#email-settings>`_
+* `Change or add WMTS tiles layers <https://geotrek.readthedocs.io/en/stable/advanced-configuration/map-settings.html#leaflet-configuration>`_
+* `Map layers colors and style <https://geotrek.readthedocs.io/en/stable/advanced-configuration/map-settings.html#map-layers-colors-and-style>`_
+* `Attachments settings <https://geotrek.readthedocs.io/en/stable/advanced-configuration/attachments.html>`_
 
-See `Geotrek-admin documentation <https://geotrek.readthedocs.io/en/master/advanced-configuration.html>`_ for further information.
+See `Geotrek-admin documentation <https://geotrek.readthedocs.io/en/stable/advanced-configuration/application-settings.html>`_ for further information.
 
 
 Override translations
@@ -80,4 +81,4 @@ Apply changes (French translation in this example) :
 
 ::
 
-    sudo docker-compose run --rm web update.sh
+    sudo docker compose run --rm web update.sh
