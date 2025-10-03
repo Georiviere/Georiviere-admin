@@ -15,11 +15,17 @@ from .widgets import SnappedGeometryWidget
 logger = logging.getLogger(__name__)
 
 
-class SnappedFieldMixin(object):
+class SnappedFieldMixin:
     """
     It's a Geometry field, with additional information about snapped vertices.
     """
     widget = SnappedGeometryWidget
+
+
+class ForceSnapFieldMixin(SnappedFieldMixin):
+    """
+    It's a Geometry field, with additional information about snapped vertices, and force snap on validation
+    """
 
     default_error_messages = {
         'invalid_snap_line': _('Geometry invalid snapping.'),
